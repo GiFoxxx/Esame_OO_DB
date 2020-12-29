@@ -1,5 +1,6 @@
 package ImplementazioniPostrgresDAO;
+import ClassiDAO.TrattaDAO;
 
-public class TrattaImplementazionePostgresDAO {
+public class TrattaImplementazionePostgresDAO implements TrattaDAO{
 
 }
