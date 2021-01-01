@@ -57,6 +57,8 @@ public class Accesso extends JFrame {
 	private Image imgPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgPassword.png")).getImage().getScaledInstance(16, 19, Image.SCALE_SMOOTH);
 	private Image imgfrecciaIndietro = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgfrecciaIndietro.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
 	private Image imgsfondoAccesso = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgsfondoAccesso.jpg")).getImage().getScaledInstance(423, 313,Image.SCALE_SMOOTH);
+	private Image imgCasa = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgCasa.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+
 
 	
 	private JPanel contentPane;
@@ -115,16 +117,6 @@ public class Accesso extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				controllerAccesso.tornaAdAvvioDaAccesso();
 			}
-
-			@Override // Su BACK passo sopra e metto il rosso
-			public void mouseEntered(MouseEvent e) {
-				lblimgfrecciaIndietro.setForeground(Color.RED);
-			}
-
-			@Override // DA BACK tolgo da sopra e rimuovo il rosso
-			public void mouseExited(MouseEvent e) {
-				lblimgfrecciaIndietro.setForeground(Color.BLACK);
-			}
 		});
 		
 		JLabel lblX = new JLabel("X");
@@ -142,6 +134,19 @@ public class Accesso extends JFrame {
 				Accesso.this.dispose();
 			}
 		});
+		
+		JLabel lblimgCasa = new JLabel("");
+		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblimgCasa.addMouseListener(new MouseAdapter() {
+			@Override // clicco sulla casa e torno ad avvio
+			public void mouseClicked(MouseEvent e) {
+				controllerAccesso.tornaAdAvvioDaAccesso();
+			}
+		});
+		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblimgCasa.setIcon(new ImageIcon(imgCasa));
+		lblimgCasa.setBounds(383, 46, 30, 23);
+		contentPane.add(lblimgCasa);
 		lblX.setForeground(Color.WHITE);
 		lblX.setFont(new Font("Arial", Font.BOLD, 15));
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
@@ -177,7 +182,7 @@ public class Accesso extends JFrame {
 		btnAvanti.setBackground(new Color(70, 130, 180));
 		btnAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAvanti.setForeground(new Color(255, 255, 255));
-		btnAvanti.setFont(new Font("Arial", Font.BOLD, 14));
+		btnAvanti.setFont(new Font("Arial", Font.BOLD, 12));
 
 		btnAvanti.setBounds(238, 201, 78, 32);
 		contentPane.add(btnAvanti);
@@ -272,7 +277,7 @@ public class Accesso extends JFrame {
 		
 		btnCreaAccount.setBackground(new Color(70, 130, 180));
 		btnCreaAccount.setBorder(null);
-		btnCreaAccount.setFont(new Font("Arial", Font.BOLD, 11));
+		btnCreaAccount.setFont(new Font("Arial", Font.BOLD, 12));
 		btnCreaAccount.setBounds(107, 201, 121, 32);
 		contentPane.add(btnCreaAccount);
 

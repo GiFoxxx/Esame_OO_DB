@@ -76,6 +76,11 @@ public class Controller {
 		accesso.setVisible(false);
 		menuGestione.setVisible(true);
 	}
+	
+	public void tornaAdAvvioDaMenuGestione() { // torno ad avvio da menu gestione
+		menuGestione.setVisible(false);
+		avvio.setVisible(true);
+	}
 
 	public void menuGestioneDaRegistrazione() { // entro in menu gestione da registrazione
 		menuGestione = new MenuGestione(this);

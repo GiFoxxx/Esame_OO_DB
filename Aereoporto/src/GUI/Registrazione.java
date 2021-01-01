@@ -54,6 +54,7 @@ public class Registrazione extends JFrame {
 
 	private Image imgfrecciaIndietro = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 	private Image imgsfondoRegistrazione = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage().getScaledInstance(500, 340, Image.SCALE_SMOOTH);
+	private Image imgCasa = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
 
 	
 	private JPanel contentPane;
@@ -96,6 +97,19 @@ public class Registrazione extends JFrame {
 				Registrazione.this.dispose();
 			}
 		});
+		
+		JLabel lblimgCasa = new JLabel("");
+		lblimgCasa.addMouseListener(new MouseAdapter() {
+			@Override // clicco sulla casa e torno ad avvio
+			public void mouseClicked(MouseEvent e) {
+				controllerRegistrazione.tornaAdAvvioDaRegistrazione();
+			}
+		});
+		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblimgCasa.setIcon(new ImageIcon(imgCasa));
+		lblimgCasa.setBounds(460, 58, 30, 23);
+		contentPane.add(lblimgCasa);
 		lblX.setForeground(Color.WHITE);
 		lblX.setFont(new Font("Arial", Font.BOLD, 15));
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
@@ -107,7 +121,7 @@ public class Registrazione extends JFrame {
 		txtfldNome.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtfldNome.setBorder(null);
 		txtfldNome.setBackground(new Color(211, 211, 211));
-		txtfldNome.setBounds(165, 105, 170, 23);
+		txtfldNome.setBounds(161, 105, 178, 23);
 		contentPane.add(txtfldNome);
 		txtfldNome.setColumns(10);
 
@@ -148,7 +162,7 @@ public class Registrazione extends JFrame {
 		btnAvanti.setBackground(new Color(70, 130, 180));
 		btnAvanti.setForeground(Color.WHITE);
 		btnAvanti.setFont(new Font("Arial", Font.BOLD, 14));
-		btnAvanti.setBounds(257, 257, 78, 32);
+		btnAvanti.setBounds(257, 257, 82, 32);
 		contentPane.add(btnAvanti);
 
 		txtfldCognome = new JTextField();
@@ -156,7 +170,7 @@ public class Registrazione extends JFrame {
 		txtfldCognome.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtfldCognome.setBackground(new Color(211, 211, 211));
 		txtfldCognome.setBorder(null);
-		txtfldCognome.setBounds(165, 139, 170, 23);
+		txtfldCognome.setBounds(161, 139, 178, 23);
 		contentPane.add(txtfldCognome);
 		txtfldCognome.setColumns(10);
 
@@ -165,36 +179,36 @@ public class Registrazione extends JFrame {
 		txtfldEmail.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtfldEmail.setBackground(new Color(211, 211, 211));
 		txtfldEmail.setBorder(null);
-		txtfldEmail.setBounds(165, 173, 170, 23);
+		txtfldEmail.setBounds(161, 173, 178, 23);
 		contentPane.add(txtfldEmail);
 		txtfldEmail.setColumns(10);
 
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblNome.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNome.setForeground(new Color(70, 130, 180));
-		lblNome.setBounds(104, 105, 53, 23);
+		lblNome.setBounds(97, 105, 53, 23);
 		contentPane.add(lblNome);
 
 		JLabel lblCognome = new JLabel("Cognome");
-		lblCognome.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblCognome.setFont(new Font("Arial", Font.BOLD, 12));
 		lblCognome.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCognome.setForeground(new Color(70, 130, 180));
-		lblCognome.setBounds(91, 139, 67, 23);
+		lblCognome.setBounds(84, 139, 67, 23);
 		contentPane.add(lblCognome);
 
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblEmail.setFont(new Font("Arial", Font.BOLD, 12));
 		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEmail.setForeground(new Color(70, 130, 180));
-		lblEmail.setBounds(101, 173, 57, 23);
+		lblEmail.setBounds(94, 173, 57, 23);
 		contentPane.add(lblEmail);
 
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblPassword.setFont(new Font("Arial", Font.BOLD, 12));
 		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPassword.setForeground(new Color(70, 130, 180));
-		lblPassword.setBounds(91, 208, 67, 23);
+		lblPassword.setBounds(84, 208, 67, 23);
 		contentPane.add(lblPassword);
 
 		JButton btnTornaAllaHome = new JButton("Annulla");
@@ -220,7 +234,7 @@ public class Registrazione extends JFrame {
 		btnTornaAllaHome.setForeground(Color.WHITE);
 		btnTornaAllaHome.setFont(new Font("Arial", Font.BOLD, 12));
 
-		btnTornaAllaHome.setBounds(165, 257, 78, 32);
+		btnTornaAllaHome.setBounds(161, 257, 82, 32);
 		contentPane.add(btnTornaAllaHome);
 
 		JLabel lblimgfrecciaIndietro = new JLabel("");
@@ -240,7 +254,7 @@ public class Registrazione extends JFrame {
 		txtfldPassword = new JPasswordField();
 		txtfldPassword.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtfldPassword.setBackground(new Color(211, 211, 211));
-		txtfldPassword.setBounds(165, 208, 170, 23);
+		txtfldPassword.setBounds(161, 208, 178, 23);
 		contentPane.add(txtfldPassword);
 		
 		JLabel lblimgsfondoRegistrazione = new JLabel("");
