@@ -36,11 +36,20 @@ public class Utente {
 		
 		//COSTRUTTORE
 		public Utente(String nome, String cognome, String email, String password) {
-			super();
 			this.nome = nome;
 			this.cognome = cognome;
 			this.email = email;
 			this.password = password;
+		}
+		
+		public Utente() {
+			
+		}
+		
+		@Override
+		public String toString() {
+			return "Utente [nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", password=" + password
+					+ "]";
 		}
 
 }

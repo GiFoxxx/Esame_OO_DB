@@ -1,5 +1,4 @@
 package GUI;
-
 import java.awt.BorderLayout;
 
 import Amministrazione.Utente;
@@ -29,8 +28,6 @@ import java.awt.Dimension;
 import java.awt.Point;
 import Database.ConnessioneDatabase;
 
-import Amministrazione.UtenteDAO;
-
 import java.sql.*;
 import java.util.List;
 import java.util.logging.Level;
@@ -49,8 +46,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.JPasswordField;
 import javax.swing.border.BevelBorder;
+import Amministrazione.*;
 
 public class Registrazione extends JFrame {
+	
+	
 
 	private Image imgfrecciaIndietro = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 	private Image imgsfondoRegistrazione = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage().getScaledInstance(500, 340, Image.SCALE_SMOOTH);
@@ -66,6 +66,7 @@ public class Registrazione extends JFrame {
 	private JPasswordField txtfldPassword;
 
 	Controller controllerRegistrazione;
+
 
 	public Registrazione(Controller controller) {
 		controllerRegistrazione = controller;
@@ -137,8 +138,6 @@ public class Registrazione extends JFrame {
 		txtRegistrati.setColumns(10);
 
 		JButton btnAvanti = new JButton("Avanti");
-
-
 		btnAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		btnAvanti.addMouseListener(new MouseAdapter() {

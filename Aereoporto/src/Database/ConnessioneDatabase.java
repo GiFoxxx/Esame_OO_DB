@@ -2,24 +2,53 @@ package Database;
 
 import java.sql.*;
 
-
 public class ConnessioneDatabase {
-public static Connection connessioneDatabase() throws SQLException {
-	 Connection conn = null;	
-	 String NOME = "postgres";
-	 String PASSWORD = "Mb.120200";
-	 String NOMEDATABASE = "Amministrazione_Aereoporto";
-	 String IP = "localhost";
-	 String PORTA = "5432";
 
-	        try{
-	            Class.forName("org.postgresql.Driver");
-	            conn = DriverManager.getConnection("jdbc:postgresql://"+IP+":"+PORTA+"/"+NOMEDATABASE+"", ""+NOME+"", ""+PASSWORD+"");
-	            System.out.println("Connessione al database riuscita");	
-	            return conn;
-	        }catch (ClassNotFoundException ex) {
-	            System.out.println("Connessione al database fallita: " + ex.getMessage());
-	        }
-			return null;
-	    }
+	// ATTRIBUTI
+	String Nome;
+	String Password;
+	String Url;
+	String Driver;
+
+	// COSTRUTTORE
+	public ConnessioneDatabase() {
+		this.Url = ("jdbc:postgresql://localhost:5432/Aereoporto");
+		this.Driver = "org.postgresql.Driver";
+		this.Nome = "postgres";
+		this.Password = "admin";
+	}
+
+	// GETTER E SETTER
+	public String getNome() {
+		return Nome;
+	}
+
+	public void setNome(String nome) {
+		Nome = nome;
+	}
+
+	public String getPassword() {
+		return Password;
+	}
+
+	public void setPassword(String password) {
+		Password = password;
+	}
+
+	public String getUrl() {
+		return Url;
+	}
+
+	public void setUrl(String url) {
+		Url = url;
+	}
+
+	public String getDriver() {
+		return Driver;
+	}
+
+	public void setDriver(String driver) {
+		Driver = driver;
+	}
+
 }

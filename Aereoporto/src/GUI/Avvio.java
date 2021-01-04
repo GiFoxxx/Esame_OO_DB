@@ -33,6 +33,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.JSlider;
 import javax.swing.JSplitPane;
 import javax.swing.JInternalFrame;
+import javax.swing.JTable;
 
 public class Avvio extends JFrame {
 
@@ -55,7 +56,6 @@ public class Avvio extends JFrame {
 		setContentPane(contentPane);
 		setUndecorated(true); // togliamo l'interfaccia prefedefinita di java
 		JButton btnAccesso = new JButton("Accedi");
-		btnAccesso.setBorder(null);
 		btnAccesso.setBounds(418, 286, 119, 47);
 		btnAccesso.setBackground(new Color(51, 102, 153));
 		btnAccesso.addActionListener(new ActionListener() {

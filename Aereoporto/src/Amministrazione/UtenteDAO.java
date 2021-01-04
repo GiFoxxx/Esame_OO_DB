@@ -1,14 +1,15 @@
 package Amministrazione;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UtenteDAO {
-	
-public List<Utente> stampaUtenti();
-	
-	public int aggiungiUtente(Utente utente) throws SQLException;
 
-    public int cancellaStudente(Utente utente);
+	public ArrayList<Object[]> stampaUtenti();
+	public boolean aggiungiUtente(Object utente);
+	public boolean cancellaUtente(Object utente);
+	public boolean modificaUtente(Object utente);
+
 
 }

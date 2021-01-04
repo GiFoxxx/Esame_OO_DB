@@ -25,6 +25,8 @@ public class Controller {
 		Controller controller = new Controller();
 
 	}
+	
+	
 
 	public Controller() { // prima schermata
 		launcher = new Launcher(this);

@@ -53,32 +53,32 @@ public class ModificaInformazioniVolo extends JFrame {
 		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_3.setFont(new Font("Arial", Font.BOLD, 12));
 		textField_3.setColumns(10);
-		textField_3.setBounds(142, 418, 178, 30);
+		textField_3.setBounds(142, 413, 178, 30);
 		contentPane.add(textField_3);
 		
 		textField_2 = new JTextField();
 		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_2.setFont(new Font("Arial", Font.BOLD, 12));
 		textField_2.setColumns(10);
-		textField_2.setBounds(142, 344, 178, 30);
+		textField_2.setBounds(142, 350, 178, 30);
 		contentPane.add(textField_2);
 		
 		textField_1 = new JTextField();
 		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_1.setFont(new Font("Arial", Font.BOLD, 12));
 		textField_1.setColumns(10);
-		textField_1.setBounds(146, 285, 178, 30);
+		textField_1.setBounds(142, 292, 178, 30);
 		contentPane.add(textField_1);
 		
 		textField_4 = new JTextField();
 		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_4.setFont(new Font("Arial", Font.BOLD, 12));
 		textField_4.setColumns(10);
-		textField_4.setBounds(146, 481, 178, 30);
+		textField_4.setBounds(142, 476, 178, 30);
 		contentPane.add(textField_4);
 		
 		textField = new JTextField();
-		textField.setBounds(146, 234, 178, 30);
+		textField.setBounds(142, 229, 178, 30);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
