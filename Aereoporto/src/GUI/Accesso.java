@@ -1,4 +1,4 @@
-package GUI;
+	package GUI;
 import Controller.Controller;
 
 import Database.ConnessioneDatabase;
@@ -93,7 +93,7 @@ public class Accesso extends JFrame {
 		setForeground(new Color(240, 240, 240));
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(600, 600, 423, 313);
+		setBounds(300, 300, 423, 313);
 		contentPane = new JPanel();
 		contentPane.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(70, 130, 180)));
 		contentPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -143,6 +143,29 @@ public class Accesso extends JFrame {
 				controllerAccesso.tornaAdAvvioDaAccesso();
 			}
 		});
+		
+		JLabel lblGestisciUtenti = new JLabel("Gestione utenti");
+		lblGestisciUtenti.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerAccesso.gestioneUtentiDaAccesso();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblGestisciUtenti.setForeground(new Color(32, 178, 170));
+			}			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblGestisciUtenti.setForeground(new Color(70, 130, 180));
+
+			}
+		});
+		lblGestisciUtenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblGestisciUtenti.setForeground(new Color(70, 130, 180));
+		lblGestisciUtenti.setFont(new Font("Arial", Font.BOLD, 12));
+		lblGestisciUtenti.setBounds(10, 271, 93, 32);
+		contentPane.add(lblGestisciUtenti);
+		
 		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgCasa.setIcon(new ImageIcon(imgCasa));
 		lblimgCasa.setBounds(383, 46, 30, 23);
@@ -161,10 +184,10 @@ public class Accesso extends JFrame {
 		JButton btnAvanti = new JButton("Avanti");
 	
 		btnAvanti.addMouseListener(new MouseAdapter() {
-//			@Override // clicco su avanti
-//			public void mouseClicked(MouseEvent e) {
+			@Override // clicco su avanti
+			public void mouseClicked(MouseEvent e) {
 //				controllerAccesso.Accedi();
-//			}
+			}
 
 			@Override // passo su avanti e cambio colore
 			public void mouseEntered(MouseEvent e) {
@@ -266,12 +289,12 @@ public class Accesso extends JFrame {
 			
 			@Override // su "crea nuovo account" passo sopra e metto il blu scuro
 			public void mouseEntered(MouseEvent e) {
-				btnCreaAccount.setForeground(new Color(70, 130, 180));
+				btnCreaAccount.setBackground(new Color(51, 102, 153));
 			}
 
 			@Override // da "crea nuovo account" tolgo da sopra e rimetto il bianco
 			public void mouseExited(MouseEvent e) {
-				btnCreaAccount.setForeground(Color.WHITE);
+				btnCreaAccount.setBackground(new Color(70, 130, 180));
 			}
 		});
 		

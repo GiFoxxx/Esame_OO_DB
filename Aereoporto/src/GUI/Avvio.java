@@ -49,7 +49,7 @@ public class Avvio extends JFrame {
 		setResizable(true);
 		setTitle("Avvio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(600, 600, 1000, 600);
+		setBounds(300, 300, 1000, 600);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(51, 102, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,8 +64,6 @@ public class Avvio extends JFrame {
 			}
 		});
 		contentPane.setLayout(null);
-
-		
 
 		btnAccesso.setForeground(Color.BLACK);
 		btnAccesso.setFont(new Font("Calibri", Font.BOLD, 14));
@@ -107,18 +105,20 @@ public class Avvio extends JFrame {
 		btnRiconoscimenti.setForeground(Color.WHITE);
 		btnRiconoscimenti.setFont(new Font("Calibri", Font.BOLD, 14));
 		contentPane.add(btnRiconoscimenti);
-		
+
 		JLabel lblX = new JLabel("X");
 		lblX.addMouseListener(new MouseAdapter() {
 			@Override // sulla x per chiudere il programma passo sopra e metto il rosso
 			public void mouseEntered(MouseEvent e) {
 				lblX.setForeground(Color.RED);
 			}
+
 			@Override // dalla x per chiudere il programma tolgo da sopra e rimetto il bianco
 			public void mouseExited(MouseEvent e) {
 				lblX.setForeground(Color.WHITE);
 			}
-			@Override //clicco sulla X e chiudo il programma
+
+			@Override // clicco sulla X e chiudo il programma
 			public void mouseClicked(MouseEvent e) {
 				Avvio.this.dispose();
 			}
@@ -128,8 +128,6 @@ public class Avvio extends JFrame {
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
 		lblX.setBounds(976, 0, 24, 23);
 		contentPane.add(lblX);
-	
-		
-		
+
 	}
 }

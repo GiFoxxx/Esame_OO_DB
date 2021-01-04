@@ -1,4 +1,5 @@
 package GUI;
+
 import java.awt.BorderLayout;
 
 import Amministrazione.Utente;
@@ -22,6 +23,7 @@ import java.awt.Image;
 import javax.swing.SwingConstants;
 import javax.swing.JInternalFrame;
 import javax.swing.JDesktopPane;
+import javax.swing.JDialog;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import java.awt.Dimension;
@@ -29,6 +31,7 @@ import java.awt.Point;
 import Database.ConnessioneDatabase;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,16 +50,23 @@ import javax.swing.UIManager;
 import javax.swing.JPasswordField;
 import javax.swing.border.BevelBorder;
 import Amministrazione.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Registrazione extends JFrame {
-	
-	
 
-	private Image imgfrecciaIndietro = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgsfondoRegistrazione = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage().getScaledInstance(500, 340, Image.SCALE_SMOOTH);
-	private Image imgCasa = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
+	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
 
-	
+	private Image imgfrecciaIndietro = new ImageIcon(
+			Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro.png")).getImage()
+					.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgsfondoRegistrazione = new ImageIcon(
+			Registrazione.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage()
+					.getScaledInstance(500, 340, Image.SCALE_SMOOTH);
+	private Image imgCasa = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa.png")).getImage()
+			.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+
 	private JPanel contentPane;
 	private JTextField txtfldNome;
 	private JTextField txtRegistrati;
@@ -65,8 +75,40 @@ public class Registrazione extends JFrame {
 	private JTextField txtfldEmail;
 	private JPasswordField txtfldPassword;
 
-	Controller controllerRegistrazione;
+	// GETTER E SETTER
+	public JTextField getTxtfldNome() {
+		return txtfldNome;
+	}
 
+	public void setTxtfldNome(JTextField txtfldNome) {
+		this.txtfldNome = txtfldNome;
+	}
+
+	public JTextField getTxtfldCognome() {
+		return txtfldCognome;
+	}
+
+	public void setTxtfldCognome(JTextField txtfldCognome) {
+		this.txtfldCognome = txtfldCognome;
+	}
+
+	public JTextField getTxtfldEmail() {
+		return txtfldEmail;
+	}
+
+	public void setTxtfldEmail(JTextField txtfldEmail) {
+		this.txtfldEmail = txtfldEmail;
+	}
+
+	public JPasswordField getTxtfldPassword() {
+		return txtfldPassword;
+	}
+
+	public void setTxtfldPassword(JPasswordField txtfldPassword) {
+		this.txtfldPassword = txtfldPassword;
+	}
+
+	Controller controllerRegistrazione;
 
 	public Registrazione(Controller controller) {
 		controllerRegistrazione = controller;
@@ -98,7 +140,7 @@ public class Registrazione extends JFrame {
 				Registrazione.this.dispose();
 			}
 		});
-		
+
 		JLabel lblimgCasa = new JLabel("");
 		lblimgCasa.addMouseListener(new MouseAdapter() {
 			@Override // clicco sulla casa e torno ad avvio
@@ -118,6 +160,18 @@ public class Registrazione extends JFrame {
 		contentPane.add(lblX);
 
 		txtfldNome = new JTextField();
+		txtfldNome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (formatoEmailInseritaErrato()) {
+						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
+								txtfldPassword.getText());
+						dao.aggiungiUtente(utn);
+					}
+				}
+			}
+		});
 		txtfldNome.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtfldNome.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtfldNome.setBorder(null);
@@ -137,14 +191,19 @@ public class Registrazione extends JFrame {
 		contentPane.add(txtRegistrati);
 		txtRegistrati.setColumns(10);
 
-		JButton btnAvanti = new JButton("Avanti");
+		JButton btnAvanti = new JButton("Registrati");
 		btnAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		btnAvanti.addMouseListener(new MouseAdapter() {
-//			@Override // clicco su avanti
-//			public void mouseClicked(MouseEvent e) {
-//				controllerRegistrazione.menuGestioneDaRegistrazione();
-//			}
+			@Override // clicco su avanti
+			public void mouseClicked(MouseEvent e) {
+				if (formatoEmailInseritaErrato()) {
+					Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
+							txtfldPassword.getText());
+					dao.aggiungiUtente(utn);
+				}
+
+			}
 
 			@Override // passo su avanti e cambio colore
 			public void mouseEntered(MouseEvent e) {
@@ -165,6 +224,18 @@ public class Registrazione extends JFrame {
 		contentPane.add(btnAvanti);
 
 		txtfldCognome = new JTextField();
+		txtfldCognome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (formatoEmailInseritaErrato()) {
+						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
+								txtfldPassword.getText());
+						dao.aggiungiUtente(utn);
+					}
+				}
+			}
+		});
 		txtfldCognome.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtfldCognome.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtfldCognome.setBackground(new Color(211, 211, 211));
@@ -174,6 +245,18 @@ public class Registrazione extends JFrame {
 		txtfldCognome.setColumns(10);
 
 		txtfldEmail = new JTextField();
+		txtfldEmail.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (formatoEmailInseritaErrato()) {
+						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
+								txtfldPassword.getText());
+						dao.aggiungiUtente(utn);
+					}
+				}
+			}
+		});
 		txtfldEmail.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtfldEmail.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		txtfldEmail.setBackground(new Color(211, 211, 211));
@@ -231,31 +314,29 @@ public class Registrazione extends JFrame {
 		});
 		btnTornaAllaHome.setBackground(new Color(70, 130, 180));
 		btnTornaAllaHome.setForeground(Color.WHITE);
-		btnTornaAllaHome.setFont(new Font("Arial", Font.BOLD, 12));
+		btnTornaAllaHome.setFont(new Font("Arial", Font.BOLD, 14));
 
 		btnTornaAllaHome.setBounds(161, 257, 82, 32);
 		contentPane.add(btnTornaAllaHome);
 
-		JLabel lblimgfrecciaIndietro = new JLabel("");
-		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
+		txtfldPassword = new JPasswordField();
+		txtfldPassword.addKeyListener(new KeyAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerRegistrazione.tornaAdAccessoDaRegistrazione();
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (formatoEmailInseritaErrato()) {
+						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
+								txtfldPassword.getText());
+						dao.aggiungiUtente(utn);
+					}
+				}
 			}
 		});
-		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgfrecciaIndietro.setBounds(10, 62, 46, 14);
-		lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro));
-
-		contentPane.add(lblimgfrecciaIndietro);
-
-		txtfldPassword = new JPasswordField();
 		txtfldPassword.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtfldPassword.setBackground(new Color(211, 211, 211));
 		txtfldPassword.setBounds(161, 208, 178, 23);
 		contentPane.add(txtfldPassword);
-		
+
 		JLabel lblimgsfondoRegistrazione = new JLabel("");
 		lblimgsfondoRegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgsfondoRegistrazione.setIcon(new ImageIcon(imgsfondoRegistrazione));
@@ -263,4 +344,21 @@ public class Registrazione extends JFrame {
 		contentPane.add(lblimgsfondoRegistrazione);
 
 	}
+
+	// METODI
+
+	public boolean formatoEmailInseritaErrato() {
+		boolean emailCorretta = controllerRegistrazione
+				.controlloInserimentoEmailCorrettamenteRegistrazione(getTxtfldEmail().getText());
+
+		if (emailCorretta) {
+			controllerRegistrazione.tornaAdAccessoDaRegistrazione();
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"Formato email inserito non valido!\n" + "Inserire l'email dal formato tipo: example@example.com");
+			return false;
+		}
+	}
+
 }

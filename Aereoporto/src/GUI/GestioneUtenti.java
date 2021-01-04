@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Amministrazione.*;
-
+import Controller.Controller;
 
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -24,34 +24,12 @@ import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Prova extends JFrame {
+public class GestioneUtenti extends JFrame {
 
 	String colonne[] = {"Nome", "Cognome", "Email", "Password"};
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -70,34 +48,12 @@ public class Prova extends JFrame {
 	private JButton btnAggiungi;
 	private JScrollPane scrollPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Prova frame = new Prova();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	Controller controllerGestioneUtenti;
 	
-	
-	
-
-	
-	public Prova() {
+	public GestioneUtenti(Controller controller) {
 			
+		controllerGestioneUtenti=controller;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
