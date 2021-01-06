@@ -17,6 +17,7 @@ public class Controller {
 	Accesso accesso;
 	Avvio avvio;
 	Registrazione registrazione;
+	RegistrazioneDaAccesso registrazioneAccesso;
 	Riconoscimenti riconoscimenti;
 	MenuGestione menuGestione;
 	Voli voli;
@@ -30,20 +31,21 @@ public class Controller {
 
 	// COSTRUTTORE
 	public Controller() { // prima schermata
-		avvio = new Avvio(this);
-		accesso = new Accesso(this);
-		registrazione = new Registrazione(this);
-		menuGestione = new MenuGestione(this);
-		voli = new Voli(this);
-		riconoscimenti = new Riconoscimenti(this);
-		prenotazioni = new Prenotazione(this);
-		gestioneUtenti = new GestioneUtenti(this);
 		launcher = new Launcher(this);
 		launcher.setVisible(true);
 	}
 
 	// METODI DI AVVIO
 	public void Avvio() {
+		avvio = new Avvio(this);
+		accesso = new Accesso(this);
+		registrazione = new Registrazione(this);
+		registrazioneAccesso = new RegistrazioneDaAccesso(this);
+		menuGestione = new MenuGestione(this);
+		voli = new Voli(this);
+		riconoscimenti = new Riconoscimenti(this);
+		prenotazioni = new Prenotazione(this);
+		gestioneUtenti = new GestioneUtenti(this);
 		launcher.setVisible(false);
 		avvio.setVisible(true);
 	}
@@ -69,7 +71,7 @@ public class Controller {
 
 	public void registrazioneDaAccesso() { // entro in registrazione da accesso tramite crea un nuovo account
 		accesso.setVisible(false);
-		registrazione.setVisible(true);
+		registrazioneAccesso.setVisible(true);
 	}
 
 	public void menuGestioneDaAccesso() { // entro in menu gestione da accesso
@@ -92,8 +94,8 @@ public class Controller {
 		registrazione.setVisible(false);
 		avvio.setVisible(true);
 	}
-
-	public void tornaAdAccessoDaRegistrazione() { // torno ad accesso da registrazione
+	
+	public void vaiAdAccessoDopoRegistrazione(){
 		registrazione.setVisible(false);
 		accesso.setVisible(true);
 	}
@@ -109,7 +111,19 @@ public class Controller {
 
 		return matchFound && matchFoundPlus;
 	}
+	
+	//METODI DI REGISTRAZIONE DA ACCESSO
+	
+	public void tornaAdAvvioDaRegistrazioneAccesso() { // torno ad avvio da registrazione
+		registrazioneAccesso.setVisible(false);
+		avvio.setVisible(true);
+	}
 
+	public void tornaAdAccessoDaRegistrazioneAccesso() { // torno ad accesso da registrazione
+		registrazioneAccesso.setVisible(false);
+		accesso.setVisible(true);
+	}
+	
 	// METODI DI MENU' GESTIONE
 
 	public void tornaAdAvvioDaMenuGestione() { // torno ad avvio da menu gestione

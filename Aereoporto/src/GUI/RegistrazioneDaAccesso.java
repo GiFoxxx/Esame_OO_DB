@@ -53,14 +53,24 @@ import Amministrazione.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class Registrazione extends JFrame {
+public class RegistrazioneDaAccesso extends JFrame {
 
 	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
 
-	private Image imgsfondoRegistrazione = new ImageIcon(RegistrazioneDaAccesso.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage().getScaledInstance(500, 288, Image.SCALE_SMOOTH);
-	private Image imgCasa1 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgCasa2 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgsfondoRegistrazione = new ImageIcon(
+			Registrazione.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage()
+					.getScaledInstance(500, 288, Image.SCALE_SMOOTH);
+	private Image imgfrecciaIndietro1 = new ImageIcon(
+			Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage()
+					.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgfrecciaIndietro2 = new ImageIcon(
+			Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro2.png")).getImage()
+					.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgCasa1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa1.png"))
+			.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgCasa2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa2.png"))
+			.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
 	private JPanel contentPane;
 	private JTextField txtfldNome;
@@ -105,7 +115,7 @@ public class Registrazione extends JFrame {
 
 	Controller controllerRegistrazione;
 
-	public Registrazione(Controller controller) {
+	public RegistrazioneDaAccesso(Controller controller) {
 		controllerRegistrazione = controller;
 
 		setTitle("Schermata di registrazione");
@@ -118,29 +128,44 @@ public class Registrazione extends JFrame {
 		contentPane.setBackground(new Color(0, 52, 75));
 		setUndecorated(true);
 
-		JLabel lblimgCasa = new JLabel("");
-		lblimgCasa.addMouseListener(new MouseAdapter() {
-			@Override // clicco sulla casa e torno ad avvio
+		JLabel lblimgfrecciaIndietro = new JLabel("");
+		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
+			// Click sulla freccia in alto a sinistra
+			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
+						// campi pieni
 			public void mouseClicked(MouseEvent e) {
-				controllerRegistrazione.tornaAdAvvioDaRegistrazione();
+				controllerRegistrazione.tornaAdAccessoDaRegistrazioneAccesso();
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa2));
+				lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro2));
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
+				lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
+
 			}
 		});
+		lblimgfrecciaIndietro.setBorder(null);
+		lblimgfrecciaIndietro.setBackground(new Color(70, 130, 180));
+		lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
+		lblimgfrecciaIndietro.setForeground(new Color(0, 0, 0));
+		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblimgfrecciaIndietro.setFont(new Font("Arial", Font.BOLD, 11));
+		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblimgfrecciaIndietro.setBounds(10, 62, 37, 14);
+		contentPane.add(lblimgfrecciaIndietro);
+
+		JLabel lblimgCasa = new JLabel("");
 		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
 		lblimgCasa.setBounds(460, 58, 30, 23);
 		contentPane.add(lblimgCasa);
-		
+
 		JLabel lblX = new JLabel("X");
 		lblX.addMouseListener(new MouseAdapter() {
 			@Override // sulla x per chiudere il programma passo sopra e metto il rosso
@@ -155,7 +180,7 @@ public class Registrazione extends JFrame {
 
 			@Override // clicco sulla X e chiudo il programma
 			public void mouseClicked(MouseEvent e) {
-				Registrazione.this.dispose();
+				RegistrazioneDaAccesso.this.dispose();
 			}
 		});
 		lblX.setForeground(Color.WHITE);
@@ -203,7 +228,8 @@ public class Registrazione extends JFrame {
 			@Override // clicco su avanti
 			public void mouseClicked(MouseEvent e) {
 				if (formatoEmailInseritaErrato()) {
-					Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),txtfldPassword.getText());
+					Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
+							txtfldPassword.getText());
 					dao.aggiungiUtente(utn);
 				}
 
@@ -297,10 +323,9 @@ public class Registrazione extends JFrame {
 		lblPassword.setBounds(84, 208, 67, 23);
 		contentPane.add(lblPassword);
 
-
+		
 
 		txtfldPassword = new JPasswordField();
-		txtfldPassword.setBorder(null);
 		txtfldPassword.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -313,6 +338,7 @@ public class Registrazione extends JFrame {
 				}
 			}
 		});
+		txtfldPassword.setBorder(null);
 		txtfldPassword.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtfldPassword.setBackground(new Color(211, 211, 211));
 		txtfldPassword.setBounds(161, 208, 178, 23);
@@ -333,7 +359,7 @@ public class Registrazione extends JFrame {
 				.controlloInserimentoEmailCorrettamenteRegistrazione(getTxtfldEmail().getText());
 
 		if (emailCorretta) {
-			controllerRegistrazione.vaiAdAccessoDopoRegistrazione();
+			controllerRegistrazione.tornaAdAccessoDaRegistrazioneAccesso();
 			return true;
 		} else {
 			JOptionPane.showMessageDialog(null,
@@ -341,7 +367,6 @@ public class Registrazione extends JFrame {
 			return false;
 		}
 	}
-
 }
 
 //JButton btnTornaAllaHome = new JButton("Annulla");
