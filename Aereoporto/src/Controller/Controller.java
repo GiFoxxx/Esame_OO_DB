@@ -20,14 +20,12 @@ public class Controller {
 	Riconoscimenti riconoscimenti;
 	MenuGestione menuGestione;
 	Voli voli;
-	Prenotazioni prenotazioni;
+	Prenotazione prenotazioni;
 	GestioneUtenti gestioneUtenti;
 	Launcher launcher;
 
 	public static void main(String[] args) {
-
 		Controller controller = new Controller();
-
 	}
 
 	// COSTRUTTORE
@@ -38,21 +36,19 @@ public class Controller {
 		menuGestione = new MenuGestione(this);
 		voli = new Voli(this);
 		riconoscimenti = new Riconoscimenti(this);
-		prenotazioni = new Prenotazioni(this);
+		prenotazioni = new Prenotazione(this);
 		gestioneUtenti = new GestioneUtenti(this);
 		launcher = new Launcher(this);
 		launcher.setVisible(true);
 	}
 
 	// METODI DI AVVIO
-
 	public void Avvio() {
 		launcher.setVisible(false);
 		avvio.setVisible(true);
 	}
 
 	// METODI DI ACCESSO
-
 	public boolean controlloCampiSeVuotiAccesso() {
 		if (accesso.getTxtUtente().getText().length() <= 0 && accesso.getTxtPassword().getText().length() <= 0) {
 			return true;
@@ -103,7 +99,6 @@ public class Controller {
 	}
 
 	public boolean controlloInserimentoEmailCorrettamenteRegistrazione(String mail) {
-
 		Pattern p = Pattern.compile(".+@.+\\.[a-z]+", Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(mail);
 		boolean matchFound = m.matches();
@@ -113,7 +108,6 @@ public class Controller {
 		boolean matchFoundPlus = mPlus.matches();
 
 		return matchFound && matchFoundPlus;
-
 	}
 
 	// METODI DI MENU' GESTIONE
@@ -121,6 +115,14 @@ public class Controller {
 	public void tornaAdAvvioDaMenuGestione() { // torno ad avvio da menu gestione
 		menuGestione.setVisible(false);
 		avvio.setVisible(true);
+	}
+	public void tornaAdAccessoDaMenuGestione() { // torno ad accesso da menu gestione
+		menuGestione.setVisible(false);
+		accesso.setVisible(true);
+	}
+	public void tornaARegistrazioneDaMenuGestione() { // torno a registrazione da menu gestione
+		menuGestione.setVisible(false);
+		registrazione.setVisible(true);
 	}
 
 	// METODI DI PROVA

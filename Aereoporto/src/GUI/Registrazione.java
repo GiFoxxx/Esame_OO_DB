@@ -58,14 +58,9 @@ public class Registrazione extends JFrame {
 	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
 
-	private Image imgfrecciaIndietro = new ImageIcon(
-			Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro.png")).getImage()
-					.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgsfondoRegistrazione = new ImageIcon(
-			Registrazione.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage()
-					.getScaledInstance(500, 340, Image.SCALE_SMOOTH);
-	private Image imgCasa = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa.png")).getImage()
-			.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgsfondoRegistrazione = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage().getScaledInstance(500, 288, Image.SCALE_SMOOTH);
+	private Image imgCasa1 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgCasa2 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
 	private JPanel contentPane;
 	private JTextField txtfldNome;
@@ -147,10 +142,20 @@ public class Registrazione extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				controllerRegistrazione.tornaAdAvvioDaRegistrazione();
 			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblimgCasa.setIcon(new ImageIcon(imgCasa2));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
+			}
 		});
 		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgCasa.setIcon(new ImageIcon(imgCasa));
+		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
 		lblimgCasa.setBounds(460, 58, 30, 23);
 		contentPane.add(lblimgCasa);
 		lblX.setForeground(Color.WHITE);
@@ -191,15 +196,14 @@ public class Registrazione extends JFrame {
 		contentPane.add(txtRegistrati);
 		txtRegistrati.setColumns(10);
 
-		JButton btnAvanti = new JButton("Registrati");
+		JButton btnAvanti = new JButton("Avanti");
 		btnAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		btnAvanti.addMouseListener(new MouseAdapter() {
 			@Override // clicco su avanti
 			public void mouseClicked(MouseEvent e) {
 				if (formatoEmailInseritaErrato()) {
-					Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
-							txtfldPassword.getText());
+					Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),txtfldPassword.getText());
 					dao.aggiungiUtente(utn);
 				}
 
@@ -320,6 +324,7 @@ public class Registrazione extends JFrame {
 		contentPane.add(btnTornaAllaHome);
 
 		txtfldPassword = new JPasswordField();
+		txtfldPassword.setBorder(null);
 		txtfldPassword.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {

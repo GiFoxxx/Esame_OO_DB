@@ -23,10 +23,13 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.print.PrinterException;
+import java.awt.Font;
 
 public class GestioneUtenti extends JFrame {
 
 	String colonne[] = {"Nome", "Cognome", "Email", "Password"};
+	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
@@ -35,7 +38,6 @@ public class GestioneUtenti extends JFrame {
 	
 
 	private JPanel contentPane;
-	private JTable table;
 	private final JLabel lblCognome = new JLabel("cognome");
 	private JLabel lblEmail;
 	private JLabel lblPassword;
@@ -46,127 +48,142 @@ public class GestioneUtenti extends JFrame {
 	private JButton btnModifica;
 	private JButton btnElimina;
 	private JButton btnAggiungi;
-	private JScrollPane scrollPane;
 
 	Controller controllerGestioneUtenti;
+	private JTable table;
+	private JScrollPane scrollPane;
+	private JButton btnNewButton;
 	
 	public GestioneUtenti(Controller controller) {
 			
 		controllerGestioneUtenti=controller;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 900, 650);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 14, 223, 196);
-		contentPane.add(scrollPane);
-		
-		table = new JTable();
-//		table.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				this.txtNome.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
-//				this.txtCognome.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
-//				this.txtEmail.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
-//				this.txtPassword.setText(table.getValueAt(table.getSelectedRow(), 0).toString());			
-//			}
-//		});
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Nome", "Cognome", "Email", "Password"
-			}
-		));
-		
 		JLabel lblNome = new JLabel("nome");
-		lblNome.setBounds(266, 21, 46, 14);
+		lblNome.setBounds(131, 231, 46, 14);
 		contentPane.add(lblNome);
-		lblCognome.setBounds(262, 46, 60, 27);
+		lblCognome.setBounds(127, 256, 60, 27);
 		contentPane.add(lblCognome);
 		
 		lblEmail = new JLabel("email");
-		lblEmail.setBounds(266, 84, 46, 14);
+		lblEmail.setBounds(131, 294, 46, 14);
 		contentPane.add(lblEmail);
 		
 		lblPassword = new JLabel("password");
-		lblPassword.setBounds(262, 116, 46, 14);
+		lblPassword.setBounds(127, 326, 46, 14);
 		contentPane.add(lblPassword);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(346, 18, 78, 20);
+		txtNome.setBounds(221, 217, 133, 20);
 		contentPane.add(txtNome);
 		txtNome.setColumns(10);
-		txtCognome.setBounds(332, 46, 92, 20);
+		txtCognome.setBounds(221, 248, 157, 20);
 		contentPane.add(txtCognome);
 		txtCognome.setColumns(10);
 		
 		txtEmail = new JTextField();
+		txtEmail.setBounds(210, 291, 144, 20);
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(342, 72, 78, 20);
 		contentPane.add(txtEmail);
 		
 		txtPassword = new JTextField();
+		txtPassword.setBounds(221, 320, 133, 20);
 		txtPassword.setColumns(10);
-		txtPassword.setBounds(346, 116, 78, 20);
 		contentPane.add(txtPassword);
 		
 		btnModifica = new JButton("modifica");
+		btnModifica.setBounds(32, 124, 89, 23);
 		btnModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Utente utn = new Utente(txtNome.getText(), txtCognome.getText(), txtEmail.getText(), txtPassword.getText());
-				dao.modificaUtente(utn);
+				int t = table.getSelectedRow();
+				
+				modello.setValueAt(txtNome.getText(), t, 0);
+				modello.setValueAt(txtCognome.getText(), t, 1);
+				modello.setValueAt(txtEmail.getText(), t, 2);
+				modello.setValueAt(txtPassword.getText(), t, 3);
 
-				BOH();
+				dao.modificaUtente(utn);
+				caricamento();
 			}
 		});
-		btnModifica.setBounds(253, 172, 89, 23);
 		contentPane.add(btnModifica);
 		
 		btnElimina = new JButton("elimina");
+		btnElimina.setBounds(44, 80, 89, 23);
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Utente utn = new Utente(txtNome.getText(), txtCognome.getText(), txtEmail.getText(), txtPassword.getText());
+				int t = table.getSelectedRow();
+				modello.removeRow(t);
 				dao.cancellaUtente(utn);
-
-				BOH();
+				caricamento();
 			}
 		});
-		btnElimina.setBounds(253, 194, 89, 23);
 		contentPane.add(btnElimina);
 		
 		btnAggiungi = new JButton("aggiungi");
+		btnAggiungi.setBounds(156, 80, 89, 23);
 		btnAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Utente utn = new Utente(txtNome.getText(), txtCognome.getText(), txtEmail.getText(), txtPassword.getText());
 				dao.aggiungiUtente(utn);
-
-				BOH();
+				modello.addRow(row);
+				caricamento();
 			
 			}
 		});
-		btnAggiungi.setBounds(253, 227, 89, 23);
 		contentPane.add(btnAggiungi);
 		
-		BOH();
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(486, 61, 362, 382);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int t = table.getSelectedRow();
+				txtNome.setText(modello.getValueAt(t, 0).toString());
+				txtCognome.setText(modello.getValueAt(t, 1).toString());
+				txtEmail.setText(modello.getValueAt(t, 2).toString());
+				txtPassword.setText(modello.getValueAt(t, 3).toString());			
+			}
+		});
+		
+		modello.setColumnIdentifiers(colonne);
+		table.setModel(modello);
+
+		scrollPane.setViewportView(table);
+		
+		btnNewButton = new JButton("svuota");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtNome.setText("");
+				txtCognome.setText("");
+				txtEmail.setText("");
+				txtPassword.setText("");
+
+			}
+		});
+		btnNewButton.setBounds(181, 116, 78, 39);
+		contentPane.add(btnNewButton);
+		
+		caricamento();
 		
 	}
 	
-	private void  BOH() {
+	private void  caricamento() {
 		this.ListaUtenti = dao.stampaUtenti();
 		modello.setNumRows(0);
 		for(Object [] dato : this.ListaUtenti) {

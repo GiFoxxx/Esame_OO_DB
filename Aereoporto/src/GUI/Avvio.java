@@ -37,7 +37,7 @@ import javax.swing.JTable;
 
 public class Avvio extends JFrame {
 
-//	private Image imgsfondoAvvio = new ImageIcon(Avvio.class.getResource("immaginiAvvio/imgsfondoAvvio.jpg")).getImage().getScaledInstance(1200, 735, Image.SCALE_SMOOTH);
+	private Image imgsfondoAvvio = new ImageIcon(Avvio.class.getResource("immaginiAvvio/imgsfondoAvvio.jpg")).getImage().getScaledInstance(695, 445, Image.SCALE_SMOOTH);
 
 	private JPanel contentPane;
 
@@ -49,14 +49,15 @@ public class Avvio extends JFrame {
 		setResizable(true);
 		setTitle("Avvio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 300, 1000, 600);
+		setBounds(300, 300, 695, 445);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(51, 102, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setUndecorated(true); // togliamo l'interfaccia prefedefinita di java
+		
 		JButton btnAccesso = new JButton("Accedi");
-		btnAccesso.setBounds(418, 286, 119, 47);
+		btnAccesso.setBounds(291, 159, 119, 47);
 		btnAccesso.setBackground(new Color(51, 102, 153));
 		btnAccesso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -70,6 +71,7 @@ public class Avvio extends JFrame {
 		contentPane.add(btnAccesso);
 
 		JButton btnUscita = new JButton("Esci");
+		btnUscita.setBounds(291, 286, 119, 47);
 		btnUscita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -81,14 +83,13 @@ public class Avvio extends JFrame {
 			}
 
 		});
-		btnUscita.setBounds(418, 413, 119, 47);
 		btnUscita.setBackground(Color.DARK_GRAY);
 
 		btnUscita.setForeground(Color.WHITE);
 		btnUscita.setFont(new Font("Calibri", Font.BOLD, 14));
 		contentPane.add(btnUscita);
 		JButton btnRegistrazione = new JButton("Registrati");
-		btnRegistrazione.setBounds(418, 344, 119, 47);
+		btnRegistrazione.setBounds(291, 217, 119, 47);
 		btnRegistrazione.setBackground(Color.DARK_GRAY);
 		btnRegistrazione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -100,13 +101,14 @@ public class Avvio extends JFrame {
 		contentPane.add(btnRegistrazione);
 
 		JButton btnRiconoscimenti = new JButton("Riconoscimenti");
-		btnRiconoscimenti.setBounds(853, 555, 137, 34);
+		btnRiconoscimenti.setBounds(532, 341, 137, 34);
 		btnRiconoscimenti.setBackground(Color.DARK_GRAY);
 		btnRiconoscimenti.setForeground(Color.WHITE);
 		btnRiconoscimenti.setFont(new Font("Calibri", Font.BOLD, 14));
 		contentPane.add(btnRiconoscimenti);
 
 		JLabel lblX = new JLabel("X");
+		lblX.setBounds(671, 0, 24, 23);
 		lblX.addMouseListener(new MouseAdapter() {
 			@Override // sulla x per chiudere il programma passo sopra e metto il rosso
 			public void mouseEntered(MouseEvent e) {
@@ -126,8 +128,13 @@ public class Avvio extends JFrame {
 		lblX.setForeground(Color.WHITE);
 		lblX.setFont(new Font("Arial", Font.BOLD, 15));
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
-		lblX.setBounds(976, 0, 24, 23);
 		contentPane.add(lblX);
+		
+		JLabel lblimgsfondoAvvio = new JLabel("");
+		lblimgsfondoAvvio.setHorizontalAlignment(SwingConstants.CENTER);
+		lblimgsfondoAvvio.setIcon(new ImageIcon(imgsfondoAvvio));
+		lblimgsfondoAvvio.setBounds(0, 0, 695, 445);
+		contentPane.add(lblimgsfondoAvvio);
 
 	}
 }

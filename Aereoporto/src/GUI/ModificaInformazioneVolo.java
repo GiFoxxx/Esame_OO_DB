@@ -21,10 +21,12 @@ import java.awt.Cursor;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class ModificaInformazioniVolo extends JFrame {
+public class ModificaInformazioneVolo extends JFrame {
 	
-	private Image imgsfondoMenuGestione = new ImageIcon(Accesso.class.getResource("immaginiMenuGestione/imgsfondoMenuGestione.jpg")).getImage().getScaledInstance(900, 650,Image.SCALE_SMOOTH);
+	private Image imgsfondoModificaInformazioneVolo = new ImageIcon(Accesso.class.getResource("immaginiModificaInformazioneVolo/imgsfondoModificaInformazioneVolo.jpg")).getImage().getScaledInstance(900, 585,Image.SCALE_SMOOTH);
 
 
 	private JPanel contentPane;
@@ -37,8 +39,9 @@ public class ModificaInformazioniVolo extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JTextField textField_5;
 
-	public ModificaInformazioniVolo(Controller controller) {
+	public ModificaInformazioneVolo(Controller controller) {
 		controllerModInfoVolo = controller;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,6 +51,42 @@ public class ModificaInformazioniVolo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setUndecorated(true);
+		
+		JLabel lblX = new JLabel("X");
+		lblX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblX.setForeground(Color.WHITE);
+		lblX.setFont(new Font("Arial", Font.BOLD, 15));
+		lblX.setHorizontalAlignment(SwingConstants.CENTER);
+		lblX.addMouseListener(new MouseAdapter() {
+			@Override // sulla x per chiudere il programma passo sopra e metto il rosso
+			public void mouseEntered(MouseEvent e) {
+				lblX.setForeground(Color.RED);
+			}
+			@Override // dalla x per chiudere il programma tolgo da sopra e rimetto il bianco
+			public void mouseExited(MouseEvent e) {
+				lblX.setForeground(Color.WHITE);
+			}
+
+			@Override // clicco sulla X e chiudo il programma
+			public void mouseClicked(MouseEvent e) {
+				ModificaInformazioneVolo.this.dispose();
+			}
+		});
+		lblX.setBounds(868, 0, 32, 30);
+		contentPane.add(lblX);
+		
+		textField_5 = new JTextField();
+		textField_5.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_5.setFont(new Font("Arial", Font.BOLD, 12));
+		textField_5.setColumns(10);
+		textField_5.setBounds(142, 532, 178, 30);
+		contentPane.add(textField_5);
+		
+		JLabel lblCodiceVolo = new JLabel("Codice volo");
+		lblCodiceVolo.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCodiceVolo.setFont(new Font("Arial", Font.BOLD, 12));
+		lblCodiceVolo.setBounds(28, 540, 93, 14);
+		contentPane.add(lblCodiceVolo);
 		
 		textField_3 = new JTextField();
 		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -138,34 +177,34 @@ public class ModificaInformazioniVolo extends JFrame {
 		table.setBounds(330, 77, 560, 562);
 		contentPane.add(table);
 		
-		JButton btnNewButton = new JButton("Aggiungi volo");
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnNewButton.setBounds(170, 77, 150, 40);
-		contentPane.add(btnNewButton);
+		JButton btnAggiungiVolo = new JButton("Aggiungi volo");
+		btnAggiungiVolo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnAggiungiVolo.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnAggiungiVolo.setBounds(170, 77, 150, 40);
+		contentPane.add(btnAggiungiVolo);
 		
-		JButton btnNewButton_1 = new JButton("Modifica volo");
-		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnNewButton_1.setBounds(10, 119, 150, 40);
-		contentPane.add(btnNewButton_1);
+		JButton btnModificaVolo = new JButton("Modifica volo");
+		btnModificaVolo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnModificaVolo.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnModificaVolo.setBounds(10, 119, 150, 40);
+		contentPane.add(btnModificaVolo);
 		
-		JButton btnNewButton_2 = new JButton("Elimina volo");
-		btnNewButton_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_2.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnNewButton_2.setBounds(170, 119, 150, 40);
-		contentPane.add(btnNewButton_2);
+		JButton btnEliminaVolo = new JButton("Elimina volo");
+		btnEliminaVolo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEliminaVolo.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnEliminaVolo.setBounds(170, 119, 150, 40);
+		contentPane.add(btnEliminaVolo);
 		
-		JButton btnNewButton_3 = new JButton("Stampa volo");
-		btnNewButton_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_3.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnNewButton_3.setBounds(10, 77, 150, 40);
-		contentPane.add(btnNewButton_3);
+		JButton btnStampaVolo = new JButton("Stampa volo");
+		btnStampaVolo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnStampaVolo.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnStampaVolo.setBounds(10, 77, 150, 40);
+		contentPane.add(btnStampaVolo);
 		
-		JLabel lblimgsfondoMenuGestione = new JLabel("");
-		lblimgsfondoMenuGestione.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgsfondoMenuGestione.setIcon(new ImageIcon(imgsfondoMenuGestione));
-		lblimgsfondoMenuGestione.setBounds(0, 0, 900, 650);
-		contentPane.add(lblimgsfondoMenuGestione);
+		JLabel lblimgsfondoModificaInformazioneVolo = new JLabel("");
+		lblimgsfondoModificaInformazioneVolo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblimgsfondoModificaInformazioneVolo.setIcon(new ImageIcon(imgsfondoModificaInformazioneVolo));
+		lblimgsfondoModificaInformazioneVolo.setBounds(0, 65, 900, 585);
+		contentPane.add(lblimgsfondoModificaInformazioneVolo);
 	}
 }

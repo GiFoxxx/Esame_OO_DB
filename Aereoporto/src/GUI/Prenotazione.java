@@ -15,13 +15,13 @@ import java.awt.ScrollPane;
 import java.awt.Choice;
 import javax.swing.JComboBox;
 
-public class Prenotazioni extends JFrame {
+public class Prenotazione extends JFrame {
 
 	private JPanel contentPane;
 	
 	Controller controllerPrenotazioni;
 
-	public Prenotazioni(Controller controller) {
+	public Prenotazione(Controller controller) {
 		
 		controllerPrenotazioni=controller;
 		

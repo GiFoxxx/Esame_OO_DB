@@ -53,11 +53,14 @@ import javax.swing.border.MatteBorder;
 
 public class Accesso extends JFrame {
 
-	private Image imgUtente = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgUtente.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH); // ridimensionamento immagine
+	// ridimensionamento immagine
+	private Image imgUtente = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgUtente.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH); 
 	private Image imgPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgPassword.png")).getImage().getScaledInstance(16, 19, Image.SCALE_SMOOTH);
-	private Image imgfrecciaIndietro = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgfrecciaIndietro.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
-	private Image imgsfondoAccesso = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgsfondoAccesso.jpg")).getImage().getScaledInstance(423, 313,Image.SCALE_SMOOTH);
-	private Image imgCasa = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgCasa.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+	private Image imgfrecciaIndietro1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+	private Image imgfrecciaIndietro2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgfrecciaIndietro2.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+	private Image imgsfondoAccesso = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgsfondoAccesso.jpg")).getImage().getScaledInstance(423, 275,Image.SCALE_SMOOTH);
+	private Image imgCasa1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgCasa1.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+	private Image imgCasa2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgCasa2.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
 
 
 	
@@ -107,7 +110,7 @@ public class Accesso extends JFrame {
 		JLabel lblimgfrecciaIndietro = new JLabel("");
 		lblimgfrecciaIndietro.setBorder(null);
 		lblimgfrecciaIndietro.setBackground(new Color(70, 130, 180));
-		lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro));
+		lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
 		lblimgfrecciaIndietro.setForeground(new Color(0, 0, 0));
 		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -116,6 +119,16 @@ public class Accesso extends JFrame {
 			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se campi pieni
 			public void mouseClicked(MouseEvent e) {
 				controllerAccesso.tornaAdAvvioDaAccesso();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro2));
+
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
+
 			}
 		});
 		
@@ -142,9 +155,18 @@ public class Accesso extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				controllerAccesso.tornaAdAvvioDaAccesso();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblimgCasa.setIcon(new ImageIcon(imgCasa2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {		
+				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
+			}
 		});
 		
 		JLabel lblGestisciUtenti = new JLabel("Gestione utenti");
+		lblGestisciUtenti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGestisciUtenti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -152,22 +174,21 @@ public class Accesso extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblGestisciUtenti.setForeground(new Color(32, 178, 170));
+				lblGestisciUtenti.setForeground(new Color(70, 130, 180));
 			}			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblGestisciUtenti.setForeground(new Color(70, 130, 180));
-
+				lblGestisciUtenti.setForeground(Color.WHITE);
 			}
 		});
 		lblGestisciUtenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblGestisciUtenti.setForeground(new Color(70, 130, 180));
+		lblGestisciUtenti.setForeground(Color.WHITE);
 		lblGestisciUtenti.setFont(new Font("Arial", Font.BOLD, 12));
-		lblGestisciUtenti.setBounds(10, 271, 93, 32);
+		lblGestisciUtenti.setBounds(10, 271, 85, 32);
 		contentPane.add(lblGestisciUtenti);
 		
 		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgCasa.setIcon(new ImageIcon(imgCasa));
+		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
 		lblimgCasa.setBounds(383, 46, 30, 23);
 		contentPane.add(lblimgCasa);
 		lblX.setForeground(Color.WHITE);
@@ -311,11 +332,11 @@ public class Accesso extends JFrame {
 		contentPane.add(lblMessaggioCredenziali);
 		
 		txtAccedi = new JTextField();
+		txtAccedi.setEditable(false);
 		txtAccedi.setForeground(Color.WHITE);
 		txtAccedi.setText("ACCEDI");
 		txtAccedi.setHorizontalAlignment(SwingConstants.CENTER);
 		txtAccedi.setFont(new Font("Arial", Font.BOLD, 14));
-		txtAccedi.setEditable(false);
 		txtAccedi.setBackground(new Color (70, 130, 180));
 		txtAccedi.setBounds(0, 0, 423, 39);
 		contentPane.add(txtAccedi);
@@ -324,7 +345,7 @@ public class Accesso extends JFrame {
 		JLabel lblimgsfondoAccesso = new JLabel("");
 		lblimgsfondoAccesso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgsfondoAccesso.setIcon(new ImageIcon(imgsfondoAccesso));
-		lblimgsfondoAccesso.setBounds(0, 34, 423, 279);
+		lblimgsfondoAccesso.setBounds(0, 38, 423, 275);
 		contentPane.add(lblimgsfondoAccesso);
 		
 		
