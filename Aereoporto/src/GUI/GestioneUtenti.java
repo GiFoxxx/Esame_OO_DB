@@ -136,7 +136,7 @@ public class GestioneUtenti extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Utente utn = new Utente(txtNome.getText(), txtCognome.getText(), txtEmail.getText(), txtPassword.getText());
-				dao.aggiungiUtente(utn);
+				dao.registrazioneUtente(utn);
 				modello.addRow(row);
 				caricamento();
 			

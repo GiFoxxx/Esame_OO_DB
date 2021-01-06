@@ -1,6 +1,7 @@
 	package GUI;
 import Controller.Controller;
 
+
 import Database.ConnessioneDatabase;
 
 import java.awt.BorderLayout;
@@ -29,6 +30,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Cursor;
@@ -38,6 +40,9 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import Amministrazione.Utente;
+import Amministrazione.UtenteImplementazionePostgresDAO;
 
 import javax.swing.UIManager;
 import javax.swing.DebugGraphics;
@@ -53,6 +58,9 @@ import javax.swing.border.MatteBorder;
 
 public class Accesso extends JFrame {
 
+	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
+	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
+	
 	// ridimensionamento immagine
 	private Image imgUtente = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgUtente.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH); 
 	private Image imgPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgPassword.png")).getImage().getScaledInstance(16, 19, Image.SCALE_SMOOTH);
@@ -184,7 +192,7 @@ public class Accesso extends JFrame {
 		lblGestisciUtenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblGestisciUtenti.setForeground(Color.WHITE);
 		lblGestisciUtenti.setFont(new Font("Arial", Font.BOLD, 12));
-		lblGestisciUtenti.setBounds(10, 271, 85, 32);
+		lblGestisciUtenti.setBounds(10, 271, 95, 32);
 		contentPane.add(lblGestisciUtenti);
 		
 		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
@@ -207,7 +215,13 @@ public class Accesso extends JFrame {
 		btnAvanti.addMouseListener(new MouseAdapter() {
 			@Override // clicco su avanti
 			public void mouseClicked(MouseEvent e) {
-//				controllerAccesso.Accedi();
+				
+				String email = txtfldEmail.getText();
+				String password = txtfldPassword.getText();
+
+				dao.accessoUtente(email, password);
+
+				controllerAccesso.Accedi();
 			}
 
 			@Override // passo su avanti e cambio colore
@@ -246,14 +260,14 @@ public class Accesso extends JFrame {
 		lblimgUtente.setIcon(new ImageIcon(imgUtente));
 
 		txtfldEmail = new JTextField();
-//		txtNomeUtente.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyPressed(KeyEvent EventoInvio) {
-//				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-//					controllerAccesso.Accedi();
-//				}
-//			}
-//		});
+		txtfldEmail.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerAccesso.Accedi();
+				}
+			}
+		});
 		
 		txtfldEmail.setToolTipText("");
 		txtfldEmail.setHorizontalAlignment(SwingConstants.LEFT);
@@ -281,14 +295,14 @@ public class Accesso extends JFrame {
 		lblimgPassword.setIcon(new ImageIcon(imgPassword));
 
 		txtfldPassword = new JPasswordField();
-//		txtPassword.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyPressed(KeyEvent EventoInvio) {
-//				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-//					controllerAccesso.Accedi();
-//				}
-//			}
-//		});
+		txtfldPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerAccesso.Accedi();
+				}
+			}
+		});
 		
 		txtfldPassword.setForeground(new Color(169, 169, 169));
 		txtfldPassword.setHorizontalAlignment(SwingConstants.LEFT);
@@ -328,7 +342,7 @@ public class Accesso extends JFrame {
 
 		lblMessaggioCredenziali.setForeground(new Color(139, 69, 19));
 		lblMessaggioCredenziali.setFont(new Font("Arial", Font.PLAIN, 10));
-		lblMessaggioCredenziali.setBounds(99, 166, 209, 14);
+		lblMessaggioCredenziali.setBounds(107, 165, 209, 14);
 		contentPane.add(lblMessaggioCredenziali);
 		
 		txtAccedi = new JTextField();

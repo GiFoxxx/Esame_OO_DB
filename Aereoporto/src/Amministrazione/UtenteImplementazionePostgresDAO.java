@@ -54,7 +54,7 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 	}
 
 	@Override
-	public boolean aggiungiUtente(Object utente) {
+	public boolean registrazioneUtente(Object utente) {
 		utn = (Utente) utente;
 		Connection con;
 		PreparedStatement pst;
@@ -159,6 +159,41 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 			JOptionPane.showMessageDialog(null, "Errore: "+ e.getMessage());
 			return false;
 		}
+	}
+
+	@Override
+	public boolean accessoUtente(String email, String password) {
+		Connection con;
+		PreparedStatement pst;
+		String sql = "SELECT email, password FROM utente WHERE email='"+email+"' and password='"+password+"'";
+		try {
+			Class.forName(db.getDriver());
+			con=DriverManager.getConnection(
+					db.getUrl(),
+					db.getNome(),
+					db.getPassword()
+			);
+			
+			pst = con.prepareStatement(sql);
+			
+			pst.setString(1, utn.getEmail());
+			pst.setString(2, utn.getPassword());
+			
+			ResultSet res = pst.executeQuery(sql);
+			
+//			if(res>0) {
+//				con.close();
+//				return true;
+//			}else {
+//				con.close();
+//				return false;
+//			}
+
+		}catch(SQLException | ClassNotFoundException e){
+			JOptionPane.showMessageDialog(null, "Errore: "+ e.getMessage());
+			return false;
+		}
+		return false;
 	}
 
 }

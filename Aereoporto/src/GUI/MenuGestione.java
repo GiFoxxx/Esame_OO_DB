@@ -102,6 +102,12 @@ public class MenuGestione extends JFrame {
 				MenuGestione.this.dispose();
 			}
 		});
+		lblX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblX.setHorizontalAlignment(SwingConstants.CENTER);
+		lblX.setForeground(Color.WHITE);
+		lblX.setFont(new Font("Arial", Font.BOLD, 15));
+		lblX.setBounds(560, 3, 30, 28);
+		contentPane.add(lblX);
 		
 		txtGestione = new JTextField();
 		txtGestione.setBackground(Color.DARK_GRAY);
@@ -113,12 +119,6 @@ public class MenuGestione extends JFrame {
 		txtGestione.setBounds(0, 0, 590, 52);
 		contentPane.add(txtGestione);
 		txtGestione.setColumns(10);
-		lblX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblX.setHorizontalAlignment(SwingConstants.CENTER);
-		lblX.setForeground(Color.WHITE);
-		lblX.setFont(new Font("Arial", Font.BOLD, 15));
-		lblX.setBounds(560, 3, 30, 28);
-		contentPane.add(lblX);
 		lblTornaARegistrazione.setForeground(Color.WHITE);
 		lblTornaARegistrazione.setFont(new Font("Arial", Font.BOLD, 12));
 		lblTornaARegistrazione.setHorizontalAlignment(SwingConstants.CENTER);

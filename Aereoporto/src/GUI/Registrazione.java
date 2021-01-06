@@ -170,9 +170,8 @@ public class Registrazione extends JFrame {
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
-								txtfldPassword.getText());
-						dao.aggiungiUtente(utn);
+						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),txtfldPassword.getText());
+						dao.registrazioneUtente(utn);
 					}
 				}
 			}
@@ -204,7 +203,7 @@ public class Registrazione extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (formatoEmailInseritaErrato()) {
 					Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),txtfldPassword.getText());
-					dao.aggiungiUtente(utn);
+					dao.registrazioneUtente(utn);
 				}
 
 			}
@@ -235,7 +234,7 @@ public class Registrazione extends JFrame {
 					if (formatoEmailInseritaErrato()) {
 						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
 								txtfldPassword.getText());
-						dao.aggiungiUtente(utn);
+						dao.registrazioneUtente(utn);
 					}
 				}
 			}
@@ -256,7 +255,7 @@ public class Registrazione extends JFrame {
 					if (formatoEmailInseritaErrato()) {
 						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
 								txtfldPassword.getText());
-						dao.aggiungiUtente(utn);
+						dao.registrazioneUtente(utn);
 					}
 				}
 			}
@@ -332,7 +331,7 @@ public class Registrazione extends JFrame {
 					if (formatoEmailInseritaErrato()) {
 						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
 								txtfldPassword.getText());
-						dao.aggiungiUtente(utn);
+						dao.registrazioneUtente(utn);
 					}
 				}
 			}

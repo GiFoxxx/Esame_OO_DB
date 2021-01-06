@@ -49,7 +49,7 @@ public class Controller {
 	}
 
 	// METODI DI ACCESSO
-	public boolean controlloCampiSeVuotiAccesso() {
+	public boolean controlloCampiSeVuotiAccesso() { 
 		if (accesso.getTxtUtente().getText().length() <= 0 && accesso.getTxtPassword().getText().length() <= 0) {
 			return true;
 		} else {
@@ -147,4 +147,11 @@ public class Controller {
 //			accesso.MostraErroreAccesso();
 //		}
 //	}
+	
+	
+	public void Accedi() {
+		accesso.setVisible(false);
+		menuGestione.setVisible(true);
+	}
+	
 }
