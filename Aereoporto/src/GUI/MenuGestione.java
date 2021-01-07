@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.SystemColor;
 
 
 
@@ -53,7 +54,7 @@ public class MenuGestione extends JFrame {
 
 		
 		JLabel lblimgCasa = new JLabel("");
-		lblimgCasa.setBounds(10, 335, 30, 23);
+		lblimgCasa.setBounds(550, 63, 30, 23);
 		lblimgCasa.addMouseListener(new MouseAdapter() {
 			@Override // clicco sulla casa e torno ad avvio
 			public void mouseClicked(MouseEvent e) {
@@ -69,22 +70,6 @@ public class MenuGestione extends JFrame {
 			}
 		});
 		contentPane.setLayout(null);
-		
-		JLabel lblTornaARegistrazione = new JLabel("Torna alla registrazione");
-		lblTornaARegistrazione.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerMenuGestione.tornaARegistrazioneDaMenuGestione();
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblTornaARegistrazione.setForeground(new Color(70, 130, 180));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblTornaARegistrazione.setForeground(Color.WHITE);
-			}
-		});
 		
 		JLabel lblX = new JLabel("X");
 		lblX.addMouseListener(new MouseAdapter() {
@@ -119,12 +104,6 @@ public class MenuGestione extends JFrame {
 		txtGestione.setBounds(0, 0, 590, 52);
 		contentPane.add(txtGestione);
 		txtGestione.setColumns(10);
-		lblTornaARegistrazione.setForeground(Color.WHITE);
-		lblTornaARegistrazione.setFont(new Font("Arial", Font.BOLD, 12));
-		lblTornaARegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTornaARegistrazione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblTornaARegistrazione.setBounds(446, 344, 134, 14);
-		contentPane.add(lblTornaARegistrazione);
 		
 		JLabel lblTornaAdAccesso = new JLabel("Torna all'accesso");
 		lblTornaAdAccesso.addMouseListener(new MouseAdapter() {
@@ -145,7 +124,7 @@ public class MenuGestione extends JFrame {
 		lblTornaAdAccesso.setFont(new Font("Arial", Font.BOLD, 12));
 		lblTornaAdAccesso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTornaAdAccesso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblTornaAdAccesso.setBounds(479, 319, 101, 14);
+		lblTornaAdAccesso.setBounds(10, 63, 101, 14);
 		contentPane.add(lblTornaAdAccesso);
 		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
@@ -153,6 +132,16 @@ public class MenuGestione extends JFrame {
 		contentPane.add(lblimgCasa);
 		
 		JButton btnVoli = new JButton("Voli");
+		btnVoli.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnVoli.setBackground(SystemColor.controlDkShadow);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnVoli.setBackground(Color.DARK_GRAY);
+			}
+		});
 		btnVoli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVoli.setForeground(Color.WHITE);
 		btnVoli.setBackground(Color.DARK_GRAY);
@@ -168,12 +157,12 @@ public class MenuGestione extends JFrame {
 		btnPrenotazioni.addMouseListener(new MouseAdapter() {
 			@Override // passo su avanti e cambio colore
 			public void mouseEntered(MouseEvent e) {
-				btnPrenotazioni.setBackground(new Color(51, 102, 153));
+				btnPrenotazioni.setBackground(SystemColor.controlDkShadow);
 			}
 
 			@Override // tolgo da avanti e ritorno al colore
 			public void mouseExited(MouseEvent e) {
-				btnPrenotazioni.setBackground(new Color(70, 130, 180));
+				btnPrenotazioni.setBackground(Color.DARK_GRAY);
 			}
 		});
 		btnPrenotazioni.setBorder(null);
@@ -182,6 +171,16 @@ public class MenuGestione extends JFrame {
 		contentPane.add(btnPrenotazioni);
 		
 		JButton btnModificaVoli = new JButton("Modifica informazioni voli");
+		btnModificaVoli.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnModificaVoli.setBackground(SystemColor.controlDkShadow);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnModificaVoli.setBackground(Color.DARK_GRAY);
+			}
+		});
 		btnModificaVoli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnModificaVoli.setForeground(Color.WHITE);
 		btnModificaVoli.setBackground(Color.DARK_GRAY);
@@ -198,4 +197,5 @@ public class MenuGestione extends JFrame {
 		
 		
 	}
+	
 }

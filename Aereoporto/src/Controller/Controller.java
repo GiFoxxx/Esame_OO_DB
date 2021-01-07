@@ -51,17 +51,22 @@ public class Controller {
 	}
 
 	// METODI DI ACCESSO
-	public boolean controlloCampiSeVuotiAccesso() { 
-		if (accesso.getTxtUtente().getText().length() <= 0 && accesso.getTxtPassword().getText().length() <= 0) {
+	public void Accesso() { // entro in accesso
+		avvio.setVisible(false);
+		accesso.setVisible(true);
+	}
+
+	public boolean controlloCampiSeVuotiAccesso() {
+		if (accesso.getTxtEmail().getText().length() <= 0 && accesso.getTxtPassword().getText().length() <= 0) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public void Accesso() { // entro in accesso
-		avvio.setVisible(false);
-		accesso.setVisible(true);
+	public void vaiAMenuGestione() {
+		accesso.setVisible(false);
+		menuGestione.setVisible(true);
 	}
 
 	public void gestioneUtentiDaAccesso() {
@@ -69,9 +74,10 @@ public class Controller {
 		gestioneUtenti.setVisible(true);
 	}
 
-	public void registrazioneDaAccesso() { // entro in registrazione da accesso tramite crea un nuovo account
+	public void vaiARegistrazioneDaAccesso() { // entro in registrazione da accesso tramite crea un nuovo account
 		accesso.setVisible(false);
 		registrazioneAccesso.setVisible(true);
+		registrazioneAccesso.svuotaCampi();
 	}
 
 	public void menuGestioneDaAccesso() { // entro in menu gestione da accesso
@@ -88,16 +94,18 @@ public class Controller {
 	public void Registrazione() { // entro in registrazione da avvio
 		avvio.setVisible(false);
 		registrazione.setVisible(true);
+		registrazione.svuotaCampi();
 	}
 
 	public void tornaAdAvvioDaRegistrazione() { // torno ad avvio da registrazione
 		registrazione.setVisible(false);
 		avvio.setVisible(true);
 	}
-	
-	public void vaiAdAccessoDopoRegistrazione(){
+
+	public void vaiAdAccessoDopoRegistrazione() {
 		registrazione.setVisible(false);
 		accesso.setVisible(true);
+		accesso.svuotaCampi();
 	}
 
 	public boolean controlloInserimentoEmailCorrettamenteRegistrazione(String mail) {
@@ -111,9 +119,9 @@ public class Controller {
 
 		return matchFound && matchFoundPlus;
 	}
-	
-	//METODI DI REGISTRAZIONE DA ACCESSO
-	
+
+	// METODI DI REGISTRAZIONE DA ACCESSO
+
 	public void tornaAdAvvioDaRegistrazioneAccesso() { // torno ad avvio da registrazione
 		registrazioneAccesso.setVisible(false);
 		avvio.setVisible(true);
@@ -122,22 +130,47 @@ public class Controller {
 	public void tornaAdAccessoDaRegistrazioneAccesso() { // torno ad accesso da registrazione
 		registrazioneAccesso.setVisible(false);
 		accesso.setVisible(true);
+		accesso.svuotaCampi();
 	}
-	
+
 	// METODI DI MENU' GESTIONE
 
 	public void tornaAdAvvioDaMenuGestione() { // torno ad avvio da menu gestione
 		menuGestione.setVisible(false);
 		avvio.setVisible(true);
 	}
+
 	public void tornaAdAccessoDaMenuGestione() { // torno ad accesso da menu gestione
 		menuGestione.setVisible(false);
 		accesso.setVisible(true);
+		accesso.svuotaCampi();
 	}
+
 	public void tornaARegistrazioneDaMenuGestione() { // torno a registrazione da menu gestione
 		menuGestione.setVisible(false);
 		registrazione.setVisible(true);
+		registrazione.svuotaCampi();
 	}
+
+	// METODI GESTIONE UTENTI
+	public void svuotaCampiGestioneUtenti() {
+		gestioneUtenti.getTxtNome().setText("");
+		gestioneUtenti.getTxtCognome().setText("");
+		gestioneUtenti.getTxtEmail().setText("");
+		gestioneUtenti.getTxtPassword().setText("");
+	}
+
+	public void tornaAdAccessoDaGestioneUtenti() {
+		gestioneUtenti.setVisible(false);
+		accesso.setVisible(true);
+		accesso.svuotaCampi();
+	}
+
+	public void tornaAdAvvioDaGestioneUtenti() {
+		gestioneUtenti.setVisible(false);
+		avvio.setVisible(true);
+	}
+
 
 	// METODI DI PROVA
 //	public int tentativoAccesso() { // controllo credenziali
@@ -161,11 +194,5 @@ public class Controller {
 //			accesso.MostraErroreAccesso();
 //		}
 //	}
-	
-	
-	public void Accedi() {
-		accesso.setVisible(false);
-		menuGestione.setVisible(true);
-	}
-	
+
 }

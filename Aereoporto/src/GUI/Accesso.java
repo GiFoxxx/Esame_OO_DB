@@ -2,7 +2,6 @@ package GUI;
 
 import Controller.Controller;
 
-
 import Database.ConnessioneDatabase;
 
 import java.awt.BorderLayout;
@@ -61,19 +60,19 @@ public class Accesso extends JFrame {
 
 	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
-	
+
 	// ridimensionamento immagine
 	private Image imgUtente = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgUtente.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 	private Image imgPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgPassword.png")).getImage().getScaledInstance(16, 19, Image.SCALE_SMOOTH);
 	private Image imgfrecciaIndietro1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
-	private Image imgfrecciaIndietro2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgfrecciaIndietro2.png")).getImage().getScaledInstance(30, 30,	Image.SCALE_SMOOTH);
+	private Image imgfrecciaIndietro2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgfrecciaIndietro2.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
 	private Image imgsfondoAccesso = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgsfondoAccesso.jpg")).getImage().getScaledInstance(423, 275, Image.SCALE_SMOOTH);
 	private Image imgCasa1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgCasa1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 	private Image imgCasa2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
 	private JPanel contentPane;
 
-	public JTextField getTxtUtente() {
+	public JTextField getTxtEmail() {
 		return txtfldEmail;
 	}
 
@@ -190,13 +189,14 @@ public class Accesso extends JFrame {
 		btnAvanti.addMouseListener(new MouseAdapter() {
 			@Override // clicco su avanti
 			public void mouseClicked(MouseEvent e) {
-				
+
 				String email = txtfldEmail.getText();
 				String password = txtfldPassword.getText();
 
-				dao.accessoUtente(email, password);
+				if (dao.accessoUtente(email, password)) {
+					controllerAccesso.vaiAMenuGestione();
+				}
 
-				controllerAccesso.Accedi();
 			}
 
 			@Override // passo su avanti e cambio colore
@@ -240,16 +240,16 @@ public class Accesso extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerAccesso.Accedi();
+					controllerAccesso.vaiAMenuGestione();
 				}
 			}
 		});
-		
+
 		txtfldEmail.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerAccesso.Accedi();
+					controllerAccesso.vaiAMenuGestione();
 				}
 			}
 		});
@@ -258,7 +258,7 @@ public class Accesso extends JFrame {
 		txtfldEmail.setHorizontalAlignment(SwingConstants.LEFT);
 		txtfldEmail.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtfldEmail.setBackground(new Color(211, 211, 211));
-		txtfldEmail.setForeground(new Color(169, 169, 169));
+		txtfldEmail.setForeground(Color.BLACK);
 		txtfldEmail.setCaretColor(new Color(0, 0, 0));
 		txtfldEmail.setBorder(null);
 		txtfldEmail.setBounds(31, 0, 178, 32);
@@ -285,22 +285,21 @@ public class Accesso extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerAccesso.Accedi();
+					controllerAccesso.vaiAMenuGestione();
 				}
 			}
 		});
-		
 
 		txtfldPassword.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerAccesso.Accedi();
+					controllerAccesso.vaiAMenuGestione();
 				}
 			}
 		});
 
-		txtfldPassword.setForeground(new Color(169, 169, 169));
+		txtfldPassword.setForeground(Color.BLACK);
 		txtfldPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		txtfldPassword.setBorder(null);
 		txtfldPassword.setText("");
@@ -316,7 +315,7 @@ public class Accesso extends JFrame {
 
 			@Override // vado a registrazione da crea un nuovo account da accedi
 			public void mouseClicked(MouseEvent e) {
-				controllerAccesso.registrazioneDaAccesso();
+				controllerAccesso.vaiARegistrazioneDaAccesso();
 			}
 
 			@Override // su "crea nuovo account" passo sopra e metto il blu scuro
@@ -376,5 +375,10 @@ public class Accesso extends JFrame {
 				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 0) {
 			controllerAccesso.tornaAdAvvioDaAccesso();
 		}
+	}
+	
+	public void svuotaCampi() {
+		getTxtEmail().setText("");
+		getTxtPassword().setText("");
 	}
 }

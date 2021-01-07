@@ -340,6 +340,14 @@ public class Registrazione extends JFrame {
 			return false;
 		}
 	}
+	
+	public void svuotaCampi() {
+		getTxtfldNome().setText("");
+		getTxtfldCognome().setText("");
+		getTxtfldEmail().setText("");
+		getTxtfldPassword().setText("");
+	}
+	
 
 }
 

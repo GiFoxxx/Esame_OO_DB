@@ -152,6 +152,22 @@ public class RegistrazioneDaAccesso extends JFrame {
 		contentPane.add(lblimgfrecciaIndietro);
 
 		JLabel lblimgCasa = new JLabel("");
+		lblimgCasa.addMouseListener(new MouseAdapter() {
+			@Override // clicco sulla casa e torno ad avvio
+			public void mouseClicked(MouseEvent e) {
+				controllerRegistrazione.tornaAdAvvioDaRegistrazioneAccesso();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblimgCasa.setIcon(new ImageIcon(imgCasa2));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
+			}
+		});
 		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
@@ -215,7 +231,6 @@ public class RegistrazioneDaAccesso extends JFrame {
 
 		JButton btnAvanti = new JButton("Avanti");
 		btnAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
 		btnAvanti.addMouseListener(new MouseAdapter() {
 			@Override // clicco su avanti
 			public void mouseClicked(MouseEvent e) {
@@ -237,7 +252,6 @@ public class RegistrazioneDaAccesso extends JFrame {
 				btnAvanti.setBackground(new Color(70, 130, 180));
 			}
 		});
-
 		btnAvanti.setBorder(null);
 		btnAvanti.setBackground(new Color(70, 130, 180));
 		btnAvanti.setForeground(Color.WHITE);
@@ -358,6 +372,13 @@ public class RegistrazioneDaAccesso extends JFrame {
 					"Formato email inserito non valido!\n" + "Inserire l'email dal formato tipo: example@example.com");
 			return false;
 		}
+	}
+	
+	public void svuotaCampi() {
+		getTxtfldNome().setText("");
+		getTxtfldCognome().setText("");
+		getTxtfldEmail().setText("");
+		getTxtfldPassword().setText("");
 	}
 }
 

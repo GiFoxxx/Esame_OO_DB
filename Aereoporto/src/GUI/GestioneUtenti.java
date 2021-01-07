@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +21,15 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.print.PrinterException;
 import java.awt.Font;
+import java.awt.Image;
 
 public class GestioneUtenti extends JFrame {
 
@@ -34,8 +39,10 @@ public class GestioneUtenti extends JFrame {
 	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
 	
-	
-	
+	private Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgfrecciaIndietro2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgCasa1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgCasa2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
 	private JPanel contentPane;
 	private final JLabel lblCognome = new JLabel("cognome");
@@ -54,6 +61,36 @@ public class GestioneUtenti extends JFrame {
 	private JScrollPane scrollPane;
 	private JButton btnNewButton;
 	
+	//GETTER E SETTER
+	public JTextField getTxtNome() {
+		return txtNome;
+	}
+
+	public void setTxtNome(JTextField txtNome) {
+		this.txtNome = txtNome;
+	}
+
+	public JTextField getTxtEmail() {
+		return txtEmail;
+	}
+
+	public void setTxtEmail(JTextField txtEmail) {
+		this.txtEmail = txtEmail;
+	}
+
+	public JTextField getTxtPassword() {
+		return txtPassword;
+	}
+
+	public void setTxtPassword(JTextField txtPassword) {
+		this.txtPassword = txtPassword;
+	}
+
+	public JTextField getTxtCognome() {
+		return txtCognome;
+	}
+	
+	//CREAZIONE GUI
 	public GestioneUtenti(Controller controller) {
 			
 		controllerGestioneUtenti=controller;
@@ -64,6 +101,60 @@ public class GestioneUtenti extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JLabel lblimgfrecciaIndietro = new JLabel("");
+		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
+			// Click sulla freccia in alto a sinistra
+			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
+						// campi pieni
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneUtenti.tornaAdAccessoDaGestioneUtenti();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro2));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
+
+			}
+		});
+		lblimgfrecciaIndietro.setBorder(null);
+		lblimgfrecciaIndietro.setBackground(new Color(70, 130, 180));
+		lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
+		lblimgfrecciaIndietro.setForeground(new Color(0, 0, 0));
+		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblimgfrecciaIndietro.setFont(new Font("Arial", Font.BOLD, 11));
+		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblimgfrecciaIndietro.setBounds(10, 11, 37, 14);
+		contentPane.add(lblimgfrecciaIndietro);
+		
+		JLabel lblimgCasa = new JLabel("");
+		lblimgCasa.addMouseListener(new MouseAdapter() {
+			@Override // clicco sulla casa e torno ad avvio
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneUtenti.tornaAdAvvioDaGestioneUtenti();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblimgCasa.setIcon(new ImageIcon(imgCasa2));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
+			}
+		});
+		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
+		lblimgCasa.setBounds(818, 11, 30, 23);
+		contentPane.add(lblimgCasa);
 		
 		JLabel lblNome = new JLabel("nome");
 		lblNome.setBounds(131, 231, 46, 14);
@@ -111,6 +202,7 @@ public class GestioneUtenti extends JFrame {
 				modello.setValueAt(txtPassword.getText(), t, 3);
 
 				dao.modificaUtente(utn);
+				controllerGestioneUtenti.svuotaCampiGestioneUtenti();
 				caricamento();
 			}
 		});
@@ -123,8 +215,9 @@ public class GestioneUtenti extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				Utente utn = new Utente(txtNome.getText(), txtCognome.getText(), txtEmail.getText(), txtPassword.getText());
 				int t = table.getSelectedRow();
-				modello.removeRow(t);
 				dao.cancellaUtente(utn);
+				modello.removeRow(t);
+				controllerGestioneUtenti.svuotaCampiGestioneUtenti();
 				caricamento();
 			}
 		});
@@ -138,8 +231,8 @@ public class GestioneUtenti extends JFrame {
 				Utente utn = new Utente(txtNome.getText(), txtCognome.getText(), txtEmail.getText(), txtPassword.getText());
 				dao.registrazioneUtente(utn);
 				modello.addRow(row);
+				controllerGestioneUtenti.svuotaCampiGestioneUtenti();
 				caricamento();
-			
 			}
 		});
 		contentPane.add(btnAggiungi);
@@ -169,11 +262,7 @@ public class GestioneUtenti extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				txtNome.setText("");
-				txtCognome.setText("");
-				txtEmail.setText("");
-				txtPassword.setText("");
-
+				controllerGestioneUtenti.svuotaCampiGestioneUtenti();
 			}
 		});
 		btnNewButton.setBounds(181, 116, 78, 39);
@@ -183,6 +272,13 @@ public class GestioneUtenti extends JFrame {
 		
 	}
 	
+
+	private static class __Tmp {
+		private static void __tmp() {
+			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
+		}
+	}
+	
 	private void  caricamento() {
 		this.ListaUtenti = dao.stampaUtenti();
 		modello.setNumRows(0);
@@ -190,24 +286,5 @@ public class GestioneUtenti extends JFrame {
 			this.modello.addRow(dato);
 		}
 		table.setModel(modello);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	private static class __Tmp {
-		private static void __tmp() {
-			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
-		}
 	}
 }
