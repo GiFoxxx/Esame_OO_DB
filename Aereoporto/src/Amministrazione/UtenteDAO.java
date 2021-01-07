@@ -11,7 +11,5 @@ public interface UtenteDAO {
 	public boolean accessoUtente(String email, String password);
 	public boolean cancellaUtente(Object utente);
 	public boolean modificaUtente(Object utente);
-	
-
 
 }
