@@ -2,6 +2,8 @@ package Database;
 
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 public class ConnessioneDatabase {
 
 	// ATTRIBUTI
@@ -14,8 +16,8 @@ public class ConnessioneDatabase {
 	public ConnessioneDatabase() {
 		this.Url = ("jdbc:postgresql://localhost:5432/Aereoporto");
 		this.Driver = "org.postgresql.Driver";
-		this.Nome = "postgres";
-		this.Password = "Mb.120200";
+		this.Nome = "Admin";
+		this.Password = "Admin";
 	}
 
 	// GETTER E SETTER
@@ -50,4 +52,22 @@ public class ConnessioneDatabase {
 	public void setDriver(String driver) {
 		Driver = driver;
 	}
+	
+	//METODI
+	public Connection ConnessioneDB() {
+	Connection con = null;
+	try {
+		Class.forName(getDriver());
+		con = DriverManager.getConnection(getUrl(), getNome(), getPassword());
+
+	} catch (SQLException | ClassNotFoundException e) {
+		JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		
+	}
+	return con;
+	
+	}
+	
+	
+	
 }
