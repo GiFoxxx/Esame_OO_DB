@@ -23,16 +23,15 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 	@Override
 	public ArrayList<Object[]> stampaUtenti() {
 		ArrayList<Object[]> ListaUtenti = new ArrayList<>();
-		Connection con;
+		
 		PreparedStatement pst;
 		ResultSet rs;
 		String sql = "SELECT * FROM utente";
 
 		try {
-			Class.forName(db.getDriver());
-			con = DriverManager.getConnection(db.getUrl(), db.getNome(), db.getPassword());
+			
 
-			pst = con.prepareStatement(sql);
+			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				Object[] Lista = new Object[4];
@@ -41,9 +40,9 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 				}
 				ListaUtenti.add(Lista);
 			}
-			con.close();
+			db.ConnessioneDB().close();
 
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
 		} finally {
 			return ListaUtenti;
@@ -53,14 +52,12 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 	@Override
 	public boolean registrazioneUtente(Object utente) {
 		utn = (Utente) utente;
-		Connection con;
 		PreparedStatement pst;
 		String sql = "INSERT INTO utente VALUES (?,?,?,?)";
 		try {
-			Class.forName(db.getDriver());
-			con = DriverManager.getConnection(db.getUrl(), db.getNome(), db.getPassword());
+			db.ConnessioneDB();
 
-			pst = con.prepareStatement(sql);
+			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, utn.getNome());
 			pst.setString(2, utn.getCognome());
@@ -70,14 +67,14 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
-				con.close();
+				db.ConnessioneDB().close();
 				return true;
 			} else {
-				con.close();
+				db.ConnessioneDB().close();
 				return false;
 			}
 
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
 			return false;
 		}
@@ -86,28 +83,27 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 	@Override
 	public boolean cancellaUtente(Object utente) {
 		utn = (Utente) utente;
-		Connection con;
+		
 		PreparedStatement pst;
 		String sql = "DELETE FROM utente WHERE email = ?";
 		try {
-			Class.forName(db.getDriver());
-			con = DriverManager.getConnection(db.getUrl(), db.getNome(), db.getPassword());
+			db.ConnessioneDB();
 
-			pst = con.prepareStatement(sql);
+			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, utn.getEmail());
 
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
-				con.close();
+				db.ConnessioneDB().close();
 				return true;
 			} else {
-				con.close();
+				db.ConnessioneDB().close();
 				return false;
 			}
 
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
 			return false;
 		}
@@ -116,14 +112,12 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 	@Override
 	public boolean modificaUtente(Object utente) {
 		utn = (Utente) utente;
-		Connection con;
 		PreparedStatement pst;
 		String sql = "UPDATE utente SET nome=?, cognome=?, password=? WHERE email=?";
 		try {
-			Class.forName(db.getDriver());
-			con = DriverManager.getConnection(db.getUrl(), db.getNome(), db.getPassword());
+			db.ConnessioneDB();
 
-			pst = con.prepareStatement(sql);
+			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, utn.getNome());
 			pst.setString(2, utn.getCognome());
@@ -133,14 +127,14 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
-				con.close();
+				db.ConnessioneDB().close();
 				return true;
 			} else {
-				con.close();
+				db.ConnessioneDB().close();
 				return false;
 			}
 
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
 			return false;
 		}
@@ -155,9 +149,8 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 		String sql = "SELECT * FROM utente WHERE email = ? AND password = ?";
 		
 		try {
-			Class.forName(db.getDriver());
-			con = DriverManager.getConnection(db.getUrl(), db.getNome(), db.getPassword());
-			pst = con.prepareStatement(sql);
+			db.ConnessioneDB();
+			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, email);
 			pst.setString(2, password);
@@ -180,7 +173,7 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 //			}
 			
 			
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException e) {
 			Logger.getLogger(Accesso.class.getName()).log(Level.SEVERE, null, e);
 			return false;
 		}
