@@ -30,7 +30,6 @@ public class ModificaInformazioneVolo extends JFrame {
 
 
 	private JPanel contentPane;
-	private JTable table;
 	
 	Controller controllerModInfoVolo;
 	private JTextField txtTitolo;
@@ -155,27 +154,6 @@ public class ModificaInformazioneVolo extends JFrame {
 		txtTitolo.setBounds(0, 0, 900, 66);
 		contentPane.add(txtTitolo);
 		txtTitolo.setColumns(10);
-
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"Data partenza", "Orario partenza", "Citt\u00E0 arrivo", "Citt\u00E0 Partenza", "Volo"
-			}
-		));
-		table.setBounds(330, 77, 560, 562);
-		contentPane.add(table);
 		
 		JButton btnAggiungiVolo = new JButton("Aggiungi volo");
 		btnAggiungiVolo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

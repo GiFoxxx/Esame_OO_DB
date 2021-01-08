@@ -1,6 +1,7 @@
 package Classi;
 
 import java.sql.Time;
+import java.util.Date;
 
 public class Tratta {
 
@@ -8,8 +9,8 @@ public class Tratta {
 	private String codiceTratta;
 	private String cittaPartenza;
 	private String cittaArrivo;
-	private double dataPartenza;
-	private double dataArrivo;
+	private String dataPartenza;
+	private String dataArrivo;
 	private Time orarioPartenza;
 	private Time orarioArrivo;
 	private int numeroPrenotazioni;
@@ -39,19 +40,19 @@ public class Tratta {
 		this.cittaArrivo = cittaArrivo;
 	}
 
-	public double getDataPartenza() {
+	public String getDataPartenza() {
 		return dataPartenza;
 	}
 
-	public void setDataPartenza(double dataPartenza) {
+	public void setDataPartenza(String dataPartenza) {
 		this.dataPartenza = dataPartenza;
 	}
 
-	public double getDataArrivo() {
+	public String getDataArrivo() {
 		return dataArrivo;
 	}
 
-	public void setDataArrivo(double dataArrivo) {
+	public void setDataArrivo(String dataArrivo) {
 		this.dataArrivo = dataArrivo;
 	}
 
@@ -80,7 +81,7 @@ public class Tratta {
 	}
 
 	// COSTRUTTORE
-	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo, double dataPartenza, double dataArrivo,
+	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo, String dataPartenza, String dataArrivo,
 			Time orarioPartenza, Time orarioArrivo, int numeroPrenotazioni) {
 		super();
 		this.codiceTratta = codiceTratta;
@@ -96,5 +97,14 @@ public class Tratta {
 	public Tratta() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "Tratta [codiceTratta=" + codiceTratta + ", cittaPartenza=" + cittaPartenza + ", cittaArrivo="
+				+ cittaArrivo + ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo + ", orarioPartenza="
+				+ orarioPartenza + ", orarioArrivo=" + orarioArrivo + ", numeroPrenotazioni=" + numeroPrenotazioni
+				+ "]";
+	}
+	
 
 }

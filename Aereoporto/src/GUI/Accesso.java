@@ -64,8 +64,6 @@ public class Accesso extends JFrame {
 	// ridimensionamento immagine
 	private Image imgUtente = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgUtente.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 	private Image imgPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgPassword.png")).getImage().getScaledInstance(16, 19, Image.SCALE_SMOOTH);
-	private Image imgfrecciaIndietro1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
-	private Image imgfrecciaIndietro2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgfrecciaIndietro2.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
 	private Image imgsfondoAccesso = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgsfondoAccesso.jpg")).getImage().getScaledInstance(423, 275, Image.SCALE_SMOOTH);
 	private Image imgCasa1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgCasa1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 	private Image imgCasa2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -315,7 +313,7 @@ public class Accesso extends JFrame {
 
 			@Override // vado a registrazione da crea un nuovo account da accedi
 			public void mouseClicked(MouseEvent e) {
-				controllerAccesso.vaiARegistrazioneDaAccesso();
+				controllerAccesso.vaiARegistrazione();
 			}
 
 			@Override // su "crea nuovo account" passo sopra e metto il blu scuro

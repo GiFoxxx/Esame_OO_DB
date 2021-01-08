@@ -58,7 +58,7 @@ public class Registrazione extends JFrame {
 	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
 
-	private Image imgsfondoRegistrazione = new ImageIcon(RegistrazioneDaAccesso.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage().getScaledInstance(500, 288, Image.SCALE_SMOOTH);
+	private Image imgsfondoRegistrazione = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage().getScaledInstance(500, 288, Image.SCALE_SMOOTH);
 	private Image imgCasa1 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 	private Image imgCasa2 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
@@ -135,6 +135,31 @@ public class Registrazione extends JFrame {
 				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
 			}
 		});
+		
+		JButton btnTornaAdAccesso = new JButton("Accedi");
+		btnTornaAdAccesso.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerRegistrazione.tornaAdAccessoDaRegistrazione();
+			}
+			
+			@Override // passo su avanti e cambio colore
+			public void mouseEntered(MouseEvent e) {
+				btnTornaAdAccesso.setBackground(new Color(51, 102, 153));
+			}
+
+			@Override // tolgo da avanti e ritorno al colore
+			public void mouseExited(MouseEvent e) {
+				btnTornaAdAccesso.setBackground(new Color(70, 130, 180));
+			}
+		});
+		
+		btnTornaAdAccesso.setForeground(Color.WHITE);
+		btnTornaAdAccesso.setFont(new Font("Arial", Font.BOLD, 14));
+		btnTornaAdAccesso.setBorder(null);
+		btnTornaAdAccesso.setBackground(new Color(70, 130, 180));
+		btnTornaAdAccesso.setBounds(161, 257, 82, 32);
+		contentPane.add(btnTornaAdAccesso);
 		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
@@ -347,8 +372,6 @@ public class Registrazione extends JFrame {
 		getTxtfldEmail().setText("");
 		getTxtfldPassword().setText("");
 	}
-	
-
 }
 
 //JButton btnTornaAllaHome = new JButton("Annulla");

@@ -2,7 +2,6 @@ package Amministrazione;
 
 import Database.*;
 import GUI.Accesso;
-import GUI.RegistrazioneDaAccesso;
 import Controller.*;
 import java.sql.*;
 import java.util.ArrayList;

@@ -17,7 +17,6 @@ public class Controller {
 	Accesso accesso;
 	Avvio avvio;
 	Registrazione registrazione;
-	RegistrazioneDaAccesso registrazioneAccesso;
 	Riconoscimenti riconoscimenti;
 	MenuGestione menuGestione;
 	Voli voli;
@@ -41,7 +40,6 @@ public class Controller {
 		avvio = new Avvio(this);
 		accesso = new Accesso(this);
 		registrazione = new Registrazione(this);
-		registrazioneAccesso = new RegistrazioneDaAccesso(this);
 		menuGestione = new MenuGestione(this);
 		voli = new Voli(this);
 		riconoscimenti = new Riconoscimenti(this);
@@ -65,6 +63,12 @@ public class Controller {
 			return false;
 		}
 	}
+	
+	public void vaiARegistrazione() { // vai ad accesso da registrazione
+		accesso.setVisible(false);
+		registrazione.setVisible(true);
+		accesso.svuotaCampi();
+	}
 
 	public void vaiAMenuGestione() {
 		accesso.setVisible(false);
@@ -78,8 +82,8 @@ public class Controller {
 
 	public void vaiARegistrazioneDaAccesso() { // entro in registrazione da accesso tramite crea un nuovo account
 		accesso.setVisible(false);
-		registrazioneAccesso.setVisible(true);
-		registrazioneAccesso.svuotaCampi();
+		registrazione.setVisible(true);
+		registrazione.svuotaCampi();
 	}
 
 	public void menuGestioneDaAccesso() { // entro in menu gestione da accesso
@@ -97,6 +101,12 @@ public class Controller {
 		avvio.setVisible(false);
 		registrazione.setVisible(true);
 		registrazione.svuotaCampi();
+	}
+	
+	public void tornaAdAccessoDaRegistrazione() { // torno ad accesso da registrazione
+		registrazione.setVisible(false);
+		accesso.setVisible(true);
+		accesso.svuotaCampi();
 	}
 
 	public void tornaAdAvvioDaRegistrazione() { // torno ad avvio da registrazione
@@ -122,18 +132,6 @@ public class Controller {
 		return matchFound && matchFoundPlus;
 	}
 
-	// METODI DI REGISTRAZIONE DA ACCESSO
-
-	public void tornaAdAvvioDaRegistrazioneAccesso() { // torno ad avvio da registrazione
-		registrazioneAccesso.setVisible(false);
-		avvio.setVisible(true);
-	}
-
-	public void tornaAdAccessoDaRegistrazioneAccesso() { // torno ad accesso da registrazione
-		registrazioneAccesso.setVisible(false);
-		accesso.setVisible(true);
-		accesso.svuotaCampi();
-	}
 
 	// METODI DI MENU' GESTIONE
 
