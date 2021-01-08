@@ -23,6 +23,7 @@ public class Controller {
 	Voli voli;
 	Prenotazione prenotazioni;
 	GestioneUtenti gestioneUtenti;
+	GestioneCompagnieAeree gestioneCompagnieAeree;
 	Launcher launcher;
 
 	public static void main(String[] args) {
@@ -46,6 +47,7 @@ public class Controller {
 		riconoscimenti = new Riconoscimenti(this);
 		prenotazioni = new Prenotazione(this);
 		gestioneUtenti = new GestioneUtenti(this);
+		gestioneCompagnieAeree = new GestioneCompagnieAeree(this);
 		launcher.setVisible(false);
 		avvio.setVisible(true);
 	}
@@ -151,6 +153,11 @@ public class Controller {
 		registrazione.setVisible(true);
 		registrazione.svuotaCampi();
 	}
+	
+	public void vaiAGestioneCompagniaAereaDaMenuGestione() {
+		menuGestione.setVisible(false);
+		gestioneCompagnieAeree.setVisible(true);
+	}
 
 	// METODI GESTIONE UTENTI
 	public void svuotaCampiGestioneUtenti() {
@@ -171,7 +178,24 @@ public class Controller {
 		avvio.setVisible(true);
 	}
 
+	//METODI GESTIONE COMPAGNIA AEREA
+	
+	public void svuotaCampiCompagniaAerea() {
+		gestioneCompagnieAeree.getTxtNome().setText("");
+		gestioneCompagnieAeree.getTxtCodiceCompagniaAerea().setText("");
+	}
+	
+	public void tornaAMenuGestioneDaGestioneCompagniaAeree() {
+		gestioneCompagnieAeree.setVisible(false);
+		menuGestione.setVisible(true);
+	}
 
+	public void tornaAdAvvioDaGestioneCompagniaAeree() {
+		gestioneCompagnieAeree.setVisible(false);
+		avvio.setVisible(true);
+	}
+
+	
 	// METODI DI PROVA
 //	public int tentativoAccesso() { // controllo credenziali
 //		if (accesso.getTxtUtente().getText().equals("io") && accesso.getTxtPassword().getText().equals("io")) {

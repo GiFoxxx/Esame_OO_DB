@@ -142,9 +142,8 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 
 	@Override
 	public boolean accessoUtente(String email, String password) {
-		boolean eUtente=false;
 		
-		Connection con;
+		boolean eUtente=false;
 		PreparedStatement pst;
 		String sql = "SELECT * FROM utente WHERE email = ? AND password = ?";
 		

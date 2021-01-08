@@ -87,6 +87,20 @@ public class MenuGestione extends JFrame {
 				MenuGestione.this.dispose();
 			}
 		});
+		
+		JButton btnCompagnieAereeAffiliate = new JButton("Compagnie aeree affiliate");
+		btnCompagnieAereeAffiliate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerMenuGestione.vaiAGestioneCompagniaAereaDaMenuGestione();
+			}
+		});
+		btnCompagnieAereeAffiliate.setForeground(Color.WHITE);
+		btnCompagnieAereeAffiliate.setFont(new Font("Arial", Font.BOLD, 12));
+		btnCompagnieAereeAffiliate.setBorder(null);
+		btnCompagnieAereeAffiliate.setBackground(Color.DARK_GRAY);
+		btnCompagnieAereeAffiliate.setBounds(205, 306, 175, 52);
+		contentPane.add(btnCompagnieAereeAffiliate);
 		lblX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
 		lblX.setForeground(Color.WHITE);
@@ -197,5 +211,4 @@ public class MenuGestione extends JFrame {
 		
 		
 	}
-	
 }
