@@ -105,7 +105,7 @@ public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaD
 	public boolean modificaCompagniaAerea(Object compagniaAerea) {
 		compAerea = (CompagniaAerea) compagniaAerea;
 		PreparedStatement pst;
-		String sql = "UPDATE compagniaaerea SET nome=? WHERE codicecompagniaaerea=?";
+		String sql = "UPDATE compagniaaerea SET nome=? WHERE codicecompagniaaerea=? ";
 		try {
 			db.ConnessioneDB();
 
@@ -113,6 +113,7 @@ public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaD
 
 			pst.setString(1, compAerea.getNome());
 			pst.setString(2, compAerea.getCodiceCompagniaAerea());
+			
 
 			int res = pst.executeUpdate();
 

@@ -155,6 +155,10 @@ public class MenuGestione extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				btnVoli.setBackground(Color.DARK_GRAY);
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerMenuGestione.vaiAGestioneTrattaDaMenuGestione();
+			}
 		});
 		btnVoli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVoli.setForeground(Color.WHITE);

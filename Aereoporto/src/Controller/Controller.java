@@ -23,6 +23,7 @@ public class Controller {
 	Prenotazione prenotazioni;
 	GestioneUtenti gestioneUtenti;
 	GestioneCompagnieAeree gestioneCompagnieAeree;
+	GestioneTratte gestioneTratte;
 	Launcher launcher;
 
 	public static void main(String[] args) {
@@ -46,6 +47,7 @@ public class Controller {
 		prenotazioni = new Prenotazione(this);
 		gestioneUtenti = new GestioneUtenti(this);
 		gestioneCompagnieAeree = new GestioneCompagnieAeree(this);
+		gestioneTratte = new GestioneTratte(this);
 		launcher.setVisible(false);
 		avvio.setVisible(true);
 	}
@@ -156,6 +158,11 @@ public class Controller {
 		menuGestione.setVisible(false);
 		gestioneCompagnieAeree.setVisible(true);
 	}
+	
+	public void vaiAGestioneTrattaDaMenuGestione() {
+		menuGestione.setVisible(false);
+		gestioneTratte.setVisible(true);
+	}
 
 	// METODI GESTIONE UTENTI
 	public void svuotaCampiGestioneUtenti() {
@@ -193,6 +200,27 @@ public class Controller {
 		avvio.setVisible(true);
 	}
 
+	//METODI GESTIONE TRATTE
+	
+		public void svuotaCampiTratte() {
+			gestioneTratte.getTxtCodiceTratta().setText("");
+			gestioneTratte.getTxtCittaArrivo().setText("");
+			gestioneTratte.getTxtDataPartenza().setText("");
+			gestioneTratte.getTxtDataArrivo().setText("");
+			gestioneTratte.getTxtOrarioPartenza().setText("");
+			gestioneTratte.getTxtOrarioArrivo().setText("");
+			gestioneTratte.getTxtNumeroPrenotazioni().setText("");
+		}
+		
+		public void tornaAMenuGestioneDaGestioneTratte() {
+			gestioneTratte.setVisible(false);
+			menuGestione.setVisible(true);
+		}
+
+		public void tornaAdAvvioDaGestioneTratte() {
+			gestioneTratte.setVisible(false);
+			avvio.setVisible(true);
+		}
 	
 	// METODI DI PROVA
 //	public int tentativoAccesso() { // controllo credenziali
