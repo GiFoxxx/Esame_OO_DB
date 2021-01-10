@@ -8,15 +8,17 @@ import java.util.List;
 
 import java.awt.EventQueue;
 import java.util.List;
+import java.sql.Time;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Classi.CompagniaAerea;
+import Classi.Gate;
 import Controller.Controller;
-import ImplementazioniPostrgresDAO.CompagniaAereaImplementazionePostgresDAO;
+import ImplementazioniPostrgresDAO.GateImplementazionePostgresDAO;
 
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -32,13 +34,13 @@ import java.awt.print.PrinterException;
 import java.awt.Font;
 import java.awt.Image;
 
-public class GestioneCompagnieAeree extends JFrame {
+public class GestioneGate extends JFrame {
 
-	String colonne[] = {"Nome", "Codice Compagnia aerea"};
+	String colonne[] = {"Codice Gate", "Numero Porta", "Tempo Inizio Imbarco", "Tempo Fine Imbarco"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	CompagniaAereaImplementazionePostgresDAO dao = new CompagniaAereaImplementazionePostgresDAO();
-	ArrayList<Object[]> ListaCompagnieAeree = new ArrayList<>();
+	GateImplementazionePostgresDAO dao = new GateImplementazionePostgresDAO();
+	ArrayList<Object[]> ListaGate = new ArrayList<>();
 	
 	private Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 	private Image imgfrecciaIndietro2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -46,38 +48,64 @@ public class GestioneCompagnieAeree extends JFrame {
 	private Image imgCasa2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
 	private JPanel contentPane;
-	private final JLabel lblCodiceCompagniaAerea = new JLabel("Codice Compagnia aerea");
-	private final JTextField txtCodiceCompagniaAerea = new JTextField();
-	private JTextField txtNome;
+	private JLabel lblNumeroPorta = new JLabel("Numero Porta");
+	private JTextField txtNumeroPorta = new JTextField();
+	private JTextField txtCodiceGate;
 	private JButton btnModifica;
 	private JButton btnElimina;
 	private JButton btnAggiungi;
-
-	Controller controllerGestioneCompagnieAeree;
 	private JButton btnNewButton;
 	private JTable table;
 	private JScrollPane scrollPane;
+	private JLabel lblInizioImbarco;
+	private JTextField txtInizioImbarco;
+	private JLabel lblFineImbarco;
+	private JTextField txtFineImbarco;
+	
+	Controller controllerGestioneGate;
 	
 	//GETTER E SETTER
-	public JTextField getTxtNome() {
-		return txtNome;
+	
+	public JTextField getTxtNumeroPorta() {
+		return txtNumeroPorta;
 	}
 
-	public void setTxtNome(JTextField txtNome) {
-		this.txtNome = txtNome;
+	public void setTxtNumeroPorta(JTextField txtNumeroPorta) {
+		this.txtNumeroPorta = txtNumeroPorta;
 	}
 
-	public JTextField getTxtCodiceCompagniaAerea() {
-		return txtCodiceCompagniaAerea;
+	public JTextField getTxtCodiceGate() {
+		return txtCodiceGate;
 	}
+
+	public void setTxtCodiceGate(JTextField txtCodiceGate) {
+		this.txtCodiceGate = txtCodiceGate;
+	}
+
+	public JTextField getTxtInizioImbarco() {
+		return txtInizioImbarco;
+	}
+
+	public void setTxtInizioImbarco(JTextField txtInizioImbarco) {
+		this.txtInizioImbarco = txtInizioImbarco;
+	}
+
+	public JTextField getTxtFineImbarco() {
+		return txtFineImbarco;
+	}
+
+	public void setTxtFineImbarco(JTextField txtFineImbarco) {
+		this.txtFineImbarco = txtFineImbarco;
+	}
+
 	
 	//CREAZIONE GUI
-	public GestioneCompagnieAeree(Controller controller) {
+	public GestioneGate(Controller controller) {
 			
-		controllerGestioneCompagnieAeree=controller;
+		controllerGestioneGate=controller;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 650);
+		setBounds(100, 100, 1008, 398);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -89,7 +117,7 @@ public class GestioneCompagnieAeree extends JFrame {
 			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
 						// campi pieni
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.tornaAMenuGestioneDaGestioneCompagniaAeree();
+				controllerGestioneGate.tornaAMenuGestioneDaGestioneGate();
 			}
 
 			@Override
@@ -118,7 +146,7 @@ public class GestioneCompagnieAeree extends JFrame {
 		lblimgCasa.addMouseListener(new MouseAdapter() {
 			@Override // clicco sulla casa e torno ad avvio
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.tornaAdAvvioDaGestioneCompagniaAeree();
+				controllerGestioneGate.tornaAdAvvioDaGestioneGate();
 			}
 
 			@Override
@@ -137,33 +165,35 @@ public class GestioneCompagnieAeree extends JFrame {
 		lblimgCasa.setBounds(818, 11, 30, 23);
 		contentPane.add(lblimgCasa);
 		
-		JLabel lblNome = new JLabel("nome");
-		lblNome.setBounds(127, 220, 46, 14);
-		contentPane.add(lblNome);
-		lblCodiceCompagniaAerea.setBounds(54, 245, 133, 27);
-		contentPane.add(lblCodiceCompagniaAerea);
+		JLabel lblCodiceGate = new JLabel("Codice Gate");
+		lblCodiceGate.setBounds(32, 209, 114, 20);
+		contentPane.add(lblCodiceGate);
+		lblNumeroPorta.setBounds(32, 239, 114, 20);
+		contentPane.add(lblNumeroPorta);
 		
-		txtNome = new JTextField();
-		txtNome.setBounds(221, 217, 133, 20);
-		contentPane.add(txtNome);
-		txtNome.setColumns(10);
-		txtCodiceCompagniaAerea.setBounds(221, 248, 157, 20);
-		contentPane.add(txtCodiceCompagniaAerea);
-		txtCodiceCompagniaAerea.setColumns(10);
+		txtCodiceGate = new JTextField();
+		txtCodiceGate.setBounds(180, 209, 133, 20);
+		contentPane.add(txtCodiceGate);
+		txtCodiceGate.setColumns(10);
+		txtNumeroPorta.setBounds(180, 240, 133, 20);
+		contentPane.add(txtNumeroPorta);
+		txtNumeroPorta.setColumns(10);
 		
 		btnModifica = new JButton("modifica");
 		btnModifica.setBounds(32, 124, 89, 23);
 		btnModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CompagniaAerea compAerea = new CompagniaAerea(txtNome.getText(), txtCodiceCompagniaAerea.getText());
+				Gate gt = new Gate();
 				int t = table.getSelectedRow();
 				
-				modello.setValueAt(txtNome.getText(), t, 0);
-				modello.setValueAt(txtCodiceCompagniaAerea.getText(), t, 1);
+				modello.setValueAt(txtCodiceGate.getText(), t, 0);
+				modello.setValueAt(txtNumeroPorta.getText(), t, 1);
+				modello.setValueAt(txtInizioImbarco.getText(), t, 2);
+				modello.setValueAt(txtFineImbarco.getText(), t, 3);
 				
-				dao.modificaCompagniaAerea(compAerea);
-				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
+				dao.modificaGate(gt);
+				controllerGestioneGate.svuotaCampiGate();
 				caricamento();
 			}
 		});
@@ -174,11 +204,11 @@ public class GestioneCompagnieAeree extends JFrame {
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CompagniaAerea compAerea = new CompagniaAerea(txtNome.getText(), txtCodiceCompagniaAerea.getText());
+				Gate gt = new Gate();
 				int t = table.getSelectedRow();
-				dao.cancellaCompagniaAerea(compAerea);
+				dao.cancellaGate(gt);
 				modello.removeRow(t);
-				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
+				controllerGestioneGate.svuotaCampiGate();
 				caricamento();
 			}
 		});
@@ -189,10 +219,10 @@ public class GestioneCompagnieAeree extends JFrame {
 		btnAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CompagniaAerea compAerea = new CompagniaAerea(txtNome.getText(), txtCodiceCompagniaAerea.getText());
-				dao.aggiungiCompagniaAerea(compAerea);
+				Gate gt = new Gate();
+				dao.aggiugniGate(gt);
 				modello.addRow(row);
-				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
+				controllerGestioneGate.svuotaCampiGate();
 				caricamento();
 			}
 		});
@@ -204,14 +234,14 @@ public class GestioneCompagnieAeree extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
+				controllerGestioneGate.svuotaCampiGate();
 			}
 		});
 		btnNewButton.setBounds(181, 116, 78, 39);
 		contentPane.add(btnNewButton);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(445, 53, 429, 366);
+		scrollPane.setBounds(323, 35, 632, 297);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -219,8 +249,10 @@ public class GestioneCompagnieAeree extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int t = table.getSelectedRow();
-				txtNome.setText(modello.getValueAt(t, 0).toString());
-				txtCodiceCompagniaAerea.setText(modello.getValueAt(t, 1).toString());
+				txtCodiceGate.setText(modello.getValueAt(t, 0).toString());
+				txtNumeroPorta.setText(modello.getValueAt(t, 1).toString());
+				txtInizioImbarco.setText(modello.getValueAt(t, 2).toString());
+				txtFineImbarco.setText(modello.getValueAt(t, 3).toString());
 			}
 		});
 		
@@ -233,16 +265,34 @@ public class GestioneCompagnieAeree extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
+				controllerGestioneGate.svuotaCampiGate();
 			}
 		});
 		scrollPane.setViewportView(table);
+		
+		lblInizioImbarco = new JLabel("Inizio Imbarco");
+		lblInizioImbarco.setBounds(32, 277, 114, 20);
+		contentPane.add(lblInizioImbarco);
+		
+		txtInizioImbarco = new JTextField();
+		txtInizioImbarco.setColumns(10);
+		txtInizioImbarco.setBounds(180, 277, 133, 20);
+		contentPane.add(txtInizioImbarco);
+		
+		lblFineImbarco = new JLabel("Fine Imbarco");
+		lblFineImbarco.setBounds(32, 319, 114, 20);
+		contentPane.add(lblFineImbarco);
+		
+		txtFineImbarco = new JTextField();
+		txtFineImbarco.setColumns(10);
+		txtFineImbarco.setBounds(180, 319, 133, 20);
+		contentPane.add(txtFineImbarco);
 		
 		caricamento();
 		
 	}
 	
-
+	
 	private static class __Tmp {
 		private static void __tmp() {
 			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
@@ -250,12 +300,11 @@ public class GestioneCompagnieAeree extends JFrame {
 	}
 	
 	private void  caricamento() {
-		this.ListaCompagnieAeree = dao.stampaCompagnieAeree();
+		this.ListaGate = dao.stampaGate();
 		modello.setNumRows(0);
-		for(Object [] dato : this.ListaCompagnieAeree) {
+		for(Object [] dato : this.ListaGate) {
 			this.modello.addRow(dato);
 		}
 		table.setModel(modello);
 	}
 }
-

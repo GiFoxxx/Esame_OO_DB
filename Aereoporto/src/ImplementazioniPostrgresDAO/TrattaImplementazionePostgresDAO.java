@@ -85,8 +85,8 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 
 			pst.setString(1, trt.getCittaPartenza());
 			pst.setString(2, trt.getCittaArrivo());
-			pst.setDate(3, java.sql.Date.valueOf(trt.getDataPartenza()));
-			pst.setDate(4, java.sql.Date.valueOf(trt.getDataArrivo()));
+			pst.setDate(3, (trt.getDataPartenza()));
+			pst.setDate(4, (trt.getDataArrivo()));
 			pst.setTime(5, trt.getOrarioPartenza());
 			pst.setTime(6, trt.getOrarioArrivo());
 			pst.setInt(7, trt.getNumeroPrenotazioni());
@@ -122,8 +122,8 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 			pst.setString(1, trt.getCodiceTratta());
 			pst.setString(2, trt.getCittaPartenza());
 			pst.setString(3, trt.getCittaArrivo());
-			pst.setDate(4, java.sql.Date.valueOf(trt.getDataPartenza()));
-			pst.setDate(5, java.sql.Date.valueOf(trt.getDataArrivo()));
+			pst.setDate(4, (trt.getDataPartenza()));
+			pst.setDate(5, (trt.getDataArrivo()));
 			pst.setTime(6, trt.getOrarioPartenza());
 			pst.setTime(7, trt.getOrarioArrivo());
 			pst.setInt(8, trt.getNumeroPrenotazioni());

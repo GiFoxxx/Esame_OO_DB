@@ -9,8 +9,8 @@ public class Tratta {
 	private String codiceTratta;
 	private String cittaPartenza;
 	private String cittaArrivo;
-	private String dataPartenza;
-	private String dataArrivo;
+	private java.sql.Date dataPartenza;
+	private java.sql.Date dataArrivo;
 	private Time orarioPartenza;
 	private Time orarioArrivo;
 	private int numeroPrenotazioni;
@@ -40,19 +40,19 @@ public class Tratta {
 		this.cittaArrivo = cittaArrivo;
 	}
 
-	public String getDataPartenza() {
+	public java.sql.Date getDataPartenza() {
 		return dataPartenza;
 	}
 
-	public void setDataPartenza(String dataPartenza) {
+	public void setDataPartenza(java.sql.Date dataPartenza) {
 		this.dataPartenza = dataPartenza;
 	}
 
-	public String getDataArrivo() {
+	public java.sql.Date getDataArrivo() {
 		return dataArrivo;
 	}
 
-	public void setDataArrivo(String dataArrivo) {
+	public void setDataArrivo(java.sql.Date dataArrivo) {
 		this.dataArrivo = dataArrivo;
 	}
 
@@ -81,7 +81,7 @@ public class Tratta {
 	}
 
 	// COSTRUTTORE
-	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo, String dataPartenza, String dataArrivo,
+	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo, java.sql.Date dataPartenza, java.sql.Date dataArrivo,
 			Time orarioPartenza, Time orarioArrivo, int numeroPrenotazioni) {
 		super();
 		this.codiceTratta = codiceTratta;
