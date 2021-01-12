@@ -22,6 +22,7 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JSeparator;
+import java.awt.event.MouseMotionAdapter;
 
 public class Launcher extends JFrame {
 
@@ -30,9 +31,19 @@ public class Launcher extends JFrame {
 	private Image imgsfondoLauncher = new ImageIcon(Avvio.class.getResource("immaginiLauncher/imgsfondoLauncher.jpg")).getImage().getScaledInstance(1200, 735, Image.SCALE_SMOOTH);
 
 	Controller controllerLauncher;
+	
+	int mouseX;
+	int mouseY;
+	
 
+	
+	
 	public Launcher(Controller controller) {
+	
 		controllerLauncher = controller;
+		
+	
+	
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 735);
@@ -87,6 +98,7 @@ public class Launcher extends JFrame {
 		contentPane.add(separator);
 
 		JLabel lblTitolo = new JLabel("AMMINISTRAZIONE AEREOPORTO");
+		lblTitolo.setBackground(Color.BLACK);
 		lblTitolo.setEnabled(false);
 		lblTitolo.setForeground(Color.DARK_GRAY);
 		lblTitolo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -95,6 +107,7 @@ public class Launcher extends JFrame {
 		contentPane.add(lblTitolo);
 
 		JLabel lblimgsfondoLauncher = new JLabel("");
+	
 		lblimgsfondoLauncher.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgsfondoLauncher.setIcon(new ImageIcon(imgsfondoLauncher));
 		lblimgsfondoLauncher.setBounds(0, 0, 1200, 735);
