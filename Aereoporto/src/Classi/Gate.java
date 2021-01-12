@@ -5,12 +5,21 @@ import java.sql.Time;
 public class Gate {
 
 	// ATTRIBUTI
+	private String codiceGate;
 	private String numeroPorta;
-	private String codice;
-	private Time tempoInizioImbarco;
-	private Time tempoFineImbarco;
+	private Time inizioImbarco;
+	private Time fineImbarco;
 
 	// GETTER E SETTER
+	
+	public String getCodiceGate() {
+		return codiceGate;
+	}
+
+	public void setCodiceGate(String codiceGate) {
+		this.codiceGate = codiceGate;
+	}
+
 	public String getNumeroPorta() {
 		return numeroPorta;
 	}
@@ -19,28 +28,20 @@ public class Gate {
 		this.numeroPorta = numeroPorta;
 	}
 
-	public String getCodice() {
-		return codice;
+	public Time getInizioImbarco() {
+		return inizioImbarco;
 	}
 
-	public void setCodice(String codice) {
-		this.codice = codice;
+	public void setInizioImbarco(Time inizioImbarco) {
+		this.inizioImbarco = inizioImbarco;
 	}
 
-	public Time getTempoInizioImbarco() {
-		return tempoInizioImbarco;
+	public Time getFineImbarco() {
+		return fineImbarco;
 	}
 
-	public void setTempoInizioImbarco(Time tempoInizioImbarco) {
-		this.tempoInizioImbarco = tempoInizioImbarco;
-	}
-
-	public Time getTempoFineImbarco() {
-		return tempoFineImbarco;
-	}
-
-	public void setTempoFineImbarco(Time tempoFineImbarco) {
-		this.tempoFineImbarco = tempoFineImbarco;
+	public void setFineImbarco(Time fineImbarco) {
+		this.fineImbarco = fineImbarco;
 	}
 
 	//COSTRUTTORI
@@ -49,18 +50,18 @@ public class Gate {
 		super();
 	}
 
-	public Gate(String numeroPorta, String codice, Time tempoInizioImbarco, Time tempoFineImbarco) {
+	public Gate(String codiceGate, String numeroPorta, Time inizioImbarco, Time fineImbarco) {
 		super();
 		this.numeroPorta = numeroPorta;
-		this.codice = codice;
-		this.tempoInizioImbarco = tempoInizioImbarco;
-		this.tempoFineImbarco = tempoFineImbarco;
+		this.codiceGate = codiceGate;
+		this.inizioImbarco = inizioImbarco;
+		this.fineImbarco = fineImbarco;
 	}
 
 	@Override
 	public String toString() {
-		return "Gate [numeroPorta=" + numeroPorta + ", codice=" + codice + ", tempoInizioImbarco=" + tempoInizioImbarco
-				+ ", tempoFineImbarco=" + tempoFineImbarco + "]";
+		return "Gate [numeroPorta=" + numeroPorta + ", codiceGate=" + codiceGate + ", inizioImbarco=" + inizioImbarco
+				+ ", fineImbarco=" + fineImbarco + "]";
 	}
 	
 

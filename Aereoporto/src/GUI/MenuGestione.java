@@ -88,14 +88,48 @@ public class MenuGestione extends JFrame {
 			}
 		});
 		
+		
+		
+		JButton btnGate = new JButton("Gate");
+		btnGate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnGate.setBackground(SystemColor.controlDkShadow);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnGate.setBackground(Color.DARK_GRAY);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerMenuGestione.vaiAGestioneGateDaMenuGestione();
+			}
+		});
+		btnGate.setForeground(Color.WHITE);
+		btnGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGate.setFont(new Font("Arial", Font.BOLD, 12));
+		btnGate.setBorder(null);
+		btnGate.setBackground(Color.DARK_GRAY);
+		btnGate.setBounds(401, 305, 175, 52);
+		contentPane.add(btnGate);
+		
 		JButton btnCompagnieAereeAffiliate = new JButton("Compagnie aeree affiliate");
 		btnCompagnieAereeAffiliate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnCompagnieAereeAffiliate.setBackground(SystemColor.controlDkShadow);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnCompagnieAereeAffiliate.setBackground(Color.DARK_GRAY);
+			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerMenuGestione.vaiAGestioneCompagniaAereaDaMenuGestione();
 			}
 		});
 		btnCompagnieAereeAffiliate.setForeground(Color.WHITE);
+		btnCompagnieAereeAffiliate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCompagnieAereeAffiliate.setFont(new Font("Arial", Font.BOLD, 12));
 		btnCompagnieAereeAffiliate.setBorder(null);
 		btnCompagnieAereeAffiliate.setBackground(Color.DARK_GRAY);

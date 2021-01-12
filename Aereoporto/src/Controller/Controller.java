@@ -24,6 +24,7 @@ public class Controller {
 	GestioneUtenti gestioneUtenti;
 	GestioneCompagnieAeree gestioneCompagnieAeree;
 	GestioneTratte gestioneTratte;
+	GestioneGate gestioneGate;
 	Launcher launcher;
 
 	public static void main(String[] args) {
@@ -48,6 +49,7 @@ public class Controller {
 		gestioneUtenti = new GestioneUtenti(this);
 		gestioneCompagnieAeree = new GestioneCompagnieAeree(this);
 		gestioneTratte = new GestioneTratte(this);
+		gestioneGate = new GestioneGate(this);
 		launcher.setVisible(false);
 		avvio.setVisible(true);
 	}
@@ -65,7 +67,7 @@ public class Controller {
 			return false;
 		}
 	}
-	
+
 	public void vaiARegistrazione() { // vai ad accesso da registrazione
 		accesso.setVisible(false);
 		registrazione.setVisible(true);
@@ -104,7 +106,7 @@ public class Controller {
 		registrazione.setVisible(true);
 		registrazione.svuotaCampi();
 	}
-	
+
 	public void tornaAdAccessoDaRegistrazione() { // torno ad accesso da registrazione
 		registrazione.setVisible(false);
 		accesso.setVisible(true);
@@ -134,7 +136,6 @@ public class Controller {
 		return matchFound && matchFoundPlus;
 	}
 
-
 	// METODI DI MENU' GESTIONE
 
 	public void tornaAdAvvioDaMenuGestione() { // torno ad avvio da menu gestione
@@ -153,15 +154,20 @@ public class Controller {
 		registrazione.setVisible(true);
 		registrazione.svuotaCampi();
 	}
-	
+
 	public void vaiAGestioneCompagniaAereaDaMenuGestione() {
 		menuGestione.setVisible(false);
 		gestioneCompagnieAeree.setVisible(true);
 	}
-	
+
 	public void vaiAGestioneTrattaDaMenuGestione() {
 		menuGestione.setVisible(false);
 		gestioneTratte.setVisible(true);
+	}
+
+	public void vaiAGestioneGateDaMenuGestione() {
+		menuGestione.setVisible(false);
+		gestioneGate.setVisible(true);
 	}
 
 	// METODI GESTIONE UTENTI
@@ -183,13 +189,13 @@ public class Controller {
 		avvio.setVisible(true);
 	}
 
-	//METODI GESTIONE COMPAGNIA AEREA
-	
+	// METODI GESTIONE COMPAGNIA AEREA
+
 	public void svuotaCampiCompagniaAerea() {
 		gestioneCompagnieAeree.getTxtNome().setText("");
 		gestioneCompagnieAeree.getTxtCodiceCompagniaAerea().setText("");
 	}
-	
+
 	public void tornaAMenuGestioneDaGestioneCompagniaAeree() {
 		gestioneCompagnieAeree.setVisible(false);
 		menuGestione.setVisible(true);
@@ -200,28 +206,47 @@ public class Controller {
 		avvio.setVisible(true);
 	}
 
-	//METODI GESTIONE TRATTE
-	
-		public void svuotaCampiTratte() {
-			gestioneTratte.getTxtCodiceTratta().setText("");
-			gestioneTratte.getTxtCittaArrivo().setText("");
-			gestioneTratte.getTxtDataPartenza().setText("");
-			gestioneTratte.getTxtDataArrivo().setText("");
-			gestioneTratte.getTxtOrarioPartenza().setText("");
-			gestioneTratte.getTxtOrarioArrivo().setText("");
-			gestioneTratte.getTxtNumeroPrenotazioni().setText("");
-		}
-		
-		public void tornaAMenuGestioneDaGestioneTratte() {
-			gestioneTratte.setVisible(false);
-			menuGestione.setVisible(true);
-		}
+	// METODI GESTIONE TRATTE
 
-		public void tornaAdAvvioDaGestioneTratte() {
-			gestioneTratte.setVisible(false);
-			avvio.setVisible(true);
-		}
-	
+	public void svuotaCampiTratte() {
+		gestioneTratte.getTxtCodiceTratta().setText("");
+		gestioneTratte.getTxtCittaArrivo().setText("");
+		gestioneTratte.getDateDataPartenza().setToolTipText("");
+		gestioneTratte.getDateDataArrivo().setToolTipText("");
+		gestioneTratte.getTxtOrarioPartenza().setText("");
+		gestioneTratte.getTxtOrarioArrivo().setText("");
+		gestioneTratte.getTxtNumeroPrenotazioni().setText("");
+	}
+
+	public void tornaAMenuGestioneDaGestioneTratte() {
+		gestioneTratte.setVisible(false);
+		menuGestione.setVisible(true);
+	}
+
+	public void tornaAdAvvioDaGestioneTratte() {
+		gestioneTratte.setVisible(false);
+		avvio.setVisible(true);
+	}
+
+	// METODI GESTIONE GATE
+
+	public void svuotaCampiGate() {
+		gestioneGate.getTxtCodiceGate().setText("");
+		gestioneGate.getTxtNumeroPorta().setText("");
+		gestioneGate.getTxtInizioImbarco().setText("");
+		gestioneGate.getTxtFineImbarco().setText("");
+	}
+
+	public void tornaAMenuGestioneDaGestioneGate() {
+		gestioneGate.setVisible(false);
+		menuGestione.setVisible(true);
+	}
+
+	public void tornaAdAvvioDaGestioneGate() {
+		gestioneGate.setVisible(false);
+		avvio.setVisible(true);
+	}
+
 	// METODI DI PROVA
 //	public int tentativoAccesso() { // controllo credenziali
 //		if (accesso.getTxtUtente().getText().equals("io") && accesso.getTxtPassword().getText().equals("io")) {

@@ -34,6 +34,9 @@ import java.awt.event.MouseEvent;
 import java.awt.print.PrinterException;
 import java.awt.Font;
 import java.awt.Image;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.components.JSpinField;
 
 public class GestioneTratte extends JFrame {
 
@@ -61,9 +64,7 @@ public class GestioneTratte extends JFrame {
 	private JLabel lblCittaArrivo;
 	private JTextField txtCittaArrivo;
 	private JLabel lblDataPartenza;
-	private JTextField txtDataPartenza;
 	private JLabel lblDataArrivo;
-	private JTextField txtDataArrivo;
 	private JLabel lblOrarioPartenza;
 	private JTextField txtOrarioPartenza;
 	private JLabel lblOrarioArrivo;
@@ -72,6 +73,8 @@ public class GestioneTratte extends JFrame {
 	private JTextField txtNumeroPrenotazioni;
 	
 	Controller controllerGestioneTratte;
+	private JDateChooser dateDataPartenza;
+	private JDateChooser dateDataArrivo;
 	
 	//GETTER E SETTER
 	
@@ -91,20 +94,20 @@ public class GestioneTratte extends JFrame {
 		this.txtCittaArrivo = txtCittaArrivo;
 	}
 
-	public JTextField getTxtDataPartenza() {
-		return txtDataPartenza;
+	public JDateChooser getDateDataPartenza() {
+		return dateDataPartenza;
 	}
 
-	public void setTxtDataPartenza(JTextField txtDataPartenza) {
-		this.txtDataPartenza = txtDataPartenza;
+	public void setDateDataPartenza(JDateChooser dateDataPartenza) {
+		this.dateDataPartenza = dateDataPartenza;
 	}
 
-	public JTextField getTxtDataArrivo() {
-		return txtDataArrivo;
+	public JDateChooser getDateDataArrivo() {
+		return dateDataArrivo;
 	}
 
-	public void setTxtDataArrivo(JTextField txtDataArrivo) {
-		this.txtDataArrivo = txtDataArrivo;
+	public void setDateDataArrivo(JDateChooser dateDataArrivo) {
+		this.dateDataArrivo = dateDataArrivo;
 	}
 
 	public JTextField getTxtOrarioPartenza() {
@@ -153,7 +156,7 @@ public class GestioneTratte extends JFrame {
 			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
 						// campi pieni
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneTratte.tornaAMenuGestioneDaGestioneCompagniaAeree();
+				controllerGestioneTratte.tornaAMenuGestioneDaGestioneTratte();
 			}
 
 			@Override
@@ -182,7 +185,7 @@ public class GestioneTratte extends JFrame {
 		lblimgCasa.addMouseListener(new MouseAdapter() {
 			@Override // clicco sulla casa e torno ad avvio
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneTratte.tornaAdAvvioDaGestioneCompagniaAeree();
+				controllerGestioneTratte.tornaAdAvvioDaGestioneTratte();
 			}
 
 			@Override
@@ -226,14 +229,14 @@ public class GestioneTratte extends JFrame {
 				modello.setValueAt(txtCodiceTratta.getText(), t, 0);
 				modello.setValueAt(txtCittaPartenza.getText(), t, 1);
 				modello.setValueAt(txtCittaArrivo.getText(), t, 2);
-				modello.setValueAt(txtDataPartenza.getText(), t, 3);
-				modello.setValueAt(txtDataArrivo.getText(), t, 4);
+				modello.setValueAt(dateDataPartenza.getDate(), t, 3);
+				modello.setValueAt(dateDataArrivo.getDate(), t, 4);
 				modello.setValueAt(txtOrarioPartenza.getText(), t, 5);
 				modello.setValueAt(txtOrarioArrivo.getText(), t, 6);
 				modello.setValueAt(txtNumeroPrenotazioni.getText(), t, 7);
 				
 				dao.modificaTratta(trt);
-				controllerGestioneTratte.svuotaCampiCompagniaAerea();
+				controllerGestioneTratte.svuotaCampiTratte();
 				caricamento();
 			}
 		});
@@ -248,7 +251,7 @@ public class GestioneTratte extends JFrame {
 				int t = table.getSelectedRow();
 				dao.cancellaTratta(trt);
 				modello.removeRow(t);
-				controllerGestioneTratte.svuotaCampiCompagniaAerea();
+				controllerGestioneTratte.svuotaCampiTratte();
 				caricamento();
 			}
 		});
@@ -262,7 +265,7 @@ public class GestioneTratte extends JFrame {
 				Tratta trt = new Tratta();
 				dao.aggiungiTratta(trt);
 				modello.addRow(row);
-				controllerGestioneTratte.svuotaCampiCompagniaAerea();
+				controllerGestioneTratte.svuotaCampiTratte();
 				caricamento();
 			}
 		});
@@ -274,7 +277,7 @@ public class GestioneTratte extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneTratte.svuotaCampiCompagniaAerea();
+				controllerGestioneTratte.svuotaCampiTratte();
 			}
 		});
 		btnNewButton.setBounds(181, 116, 78, 39);
@@ -292,8 +295,8 @@ public class GestioneTratte extends JFrame {
 				txtCodiceTratta.setText(modello.getValueAt(t, 0).toString());
 				txtCittaPartenza.setText(modello.getValueAt(t, 1).toString());
 				txtCittaArrivo.setText(modello.getValueAt(t, 2).toString());
-				txtDataPartenza.setText(modello.getValueAt(t, 3).toString());
-				txtDataArrivo.setText(modello.getValueAt(t, 4).toString());
+				dateDataPartenza.setDateFormatString(modello.getValueAt(t, 3).toString());
+				dateDataArrivo.setDateFormatString(modello.getValueAt(t, 4).toString());
 				txtOrarioPartenza.setText(modello.getValueAt(t, 5).toString());
 				txtOrarioArrivo.setText(modello.getValueAt(t, 6).toString());
 				txtNumeroPrenotazioni.setText(modello.getValueAt(t, 7).toString());
@@ -309,7 +312,7 @@ public class GestioneTratte extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneTratte.svuotaCampiGestioneUtenti();
+				controllerGestioneTratte.svuotaCampiTratte();
 			}
 		});
 		scrollPane.setViewportView(table);
@@ -327,19 +330,9 @@ public class GestioneTratte extends JFrame {
 		lblDataPartenza.setBounds(32, 319, 114, 20);
 		contentPane.add(lblDataPartenza);
 		
-		txtDataPartenza = new JTextField();
-		txtDataPartenza.setColumns(10);
-		txtDataPartenza.setBounds(180, 319, 133, 20);
-		contentPane.add(txtDataPartenza);
-		
 		lblDataArrivo = new JLabel("Data Arrivo");
 		lblDataArrivo.setBounds(32, 357, 114, 20);
 		contentPane.add(lblDataArrivo);
-		
-		txtDataArrivo = new JTextField();
-		txtDataArrivo.setColumns(10);
-		txtDataArrivo.setBounds(180, 357, 133, 20);
-		contentPane.add(txtDataArrivo);
 		
 		lblOrarioPartenza = new JLabel("Orario Partenza");
 		lblOrarioPartenza.setBounds(32, 399, 114, 20);
@@ -368,11 +361,18 @@ public class GestioneTratte extends JFrame {
 		txtNumeroPrenotazioni.setBounds(180, 481, 133, 20);
 		contentPane.add(txtNumeroPrenotazioni);
 		
+		dateDataPartenza = new JDateChooser();
+		dateDataPartenza.setBounds(180, 318, 133, 23);
+		contentPane.add(dateDataPartenza);
+		
+		dateDataArrivo = new JDateChooser();
+		dateDataArrivo.setBounds(180, 356, 133, 23);
+		contentPane.add(dateDataArrivo);
+		
 		caricamento();
 		
 	}
 	
-
 	private static class __Tmp {
 		private static void __tmp() {
 			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();

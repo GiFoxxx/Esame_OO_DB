@@ -48,16 +48,16 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 	public boolean aggiugniGate(Object gate) {
 		gt = (Gate) gate;
 		PreparedStatement pst;
-		String sql = "INSERT INTO gate VALUES (?,?,?,?)";
+		String sql = "INSERT INTO gate (codiceGate, numeroPorta, inizioImbarco, fineImbarco) VALUES (?, ?, ?, ?)";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
-			pst.setString(1, gt.getNumeroPorta());
-			pst.setString(2, gt.getCodice());
-			pst.setTime(3, gt.getTempoInizioImbarco());
-			pst.setTime(4, gt.getTempoInizioImbarco());
+			pst.setString(1, gt.getCodiceGate());
+			pst.setString(2, gt.getNumeroPorta());
+			pst.setTime(3, gt.getInizioImbarco());
+			pst.setTime(4, gt.getInizioImbarco());
 
 			int res = pst.executeUpdate();
 
@@ -80,13 +80,13 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 		gt = (Gate) gate;
 
 		PreparedStatement pst;
-		String sql = "DELETE FROM gate WHERE codice = ?";
+		String sql = "DELETE FROM gate WHERE codicegate = ?";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
-			pst.setString(1, gt.getCodice());
+			pst.setString(1, gt.getCodiceGate());
 
 			int res = pst.executeUpdate();
 
@@ -108,16 +108,16 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 	public boolean modificaGate(Object gate) {
 		gt = (Gate) gate;
 		PreparedStatement pst;
-		String sql = "UPDATE utente SET numeroporta=?, tempoinizioimbarco=?, tempofineimbarco=? WHERE codice=?";
+		String sql = "UPDATE gate SET numeroporta=?, inizioimbarco=?, fineimbarco=? WHERE codicegate=?";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, gt.getNumeroPorta());
-			pst.setTime(2, gt.getTempoInizioImbarco());
-			pst.setTime(3, gt.getTempoFineImbarco());
-			pst.setString(4, gt.getCodice());
+			pst.setTime(2, gt.getInizioImbarco());
+			pst.setTime(3, gt.getFineImbarco());
+			pst.setString(4, gt.getCodiceGate());
 
 			int res = pst.executeUpdate();
 
