@@ -7,8 +7,8 @@ public class Gate {
 	// ATTRIBUTI
 	private String codiceGate;
 	private String numeroPorta;
-	private Time inizioImbarco;
-	private Time fineImbarco;
+	private String inizioImbarco;
+	private String fineImbarco;
 
 	// GETTER E SETTER
 	
@@ -28,19 +28,19 @@ public class Gate {
 		this.numeroPorta = numeroPorta;
 	}
 
-	public Time getInizioImbarco() {
+	public String getInizioImbarco() {
 		return inizioImbarco;
 	}
 
-	public void setInizioImbarco(Time inizioImbarco) {
+	public void setInizioImbarco(String inizioImbarco) {
 		this.inizioImbarco = inizioImbarco;
 	}
 
-	public Time getFineImbarco() {
+	public String getFineImbarco() {
 		return fineImbarco;
 	}
 
-	public void setFineImbarco(Time fineImbarco) {
+	public void setFineImbarco(String fineImbarco) {
 		this.fineImbarco = fineImbarco;
 	}
 
@@ -50,7 +50,7 @@ public class Gate {
 		super();
 	}
 
-	public Gate(String codiceGate, String numeroPorta, Time inizioImbarco, Time fineImbarco) {
+	public Gate(String codiceGate, String numeroPorta, String inizioImbarco, String fineImbarco) {
 		super();
 		this.numeroPorta = numeroPorta;
 		this.codiceGate = codiceGate;

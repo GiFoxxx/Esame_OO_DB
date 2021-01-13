@@ -56,8 +56,8 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 
 			pst.setString(1, gt.getCodiceGate());
 			pst.setString(2, gt.getNumeroPorta());
-			pst.setTime(3, gt.getInizioImbarco());
-			pst.setTime(4, gt.getInizioImbarco());
+			pst.setString(3, gt.getInizioImbarco());
+			pst.setString(4, gt.getInizioImbarco());
 
 			int res = pst.executeUpdate();
 
@@ -115,8 +115,8 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, gt.getNumeroPorta());
-			pst.setTime(2, gt.getInizioImbarco());
-			pst.setTime(3, gt.getFineImbarco());
+			pst.setString(2, gt.getInizioImbarco());
+			pst.setString(3, gt.getFineImbarco());
 			pst.setString(4, gt.getCodiceGate());
 
 			int res = pst.executeUpdate();

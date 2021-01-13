@@ -1,7 +1,7 @@
 package Controller;
 
 import java.sql.*;
-
+import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -210,12 +210,13 @@ public class Controller {
 
 	public void svuotaCampiTratte() {
 		gestioneTratte.getTxtCodiceTratta().setText("");
+		gestioneTratte.getTxtCittaPartenza().setText("");
 		gestioneTratte.getTxtCittaArrivo().setText("");
-		gestioneTratte.getDateDataPartenza().setToolTipText("");
-		gestioneTratte.getDateDataArrivo().setToolTipText("");
+		gestioneTratte.getDateDataPartenza().setDate(null);
+		gestioneTratte.getDateDataArrivo().setDate(null);
 		gestioneTratte.getTxtOrarioPartenza().setText("");
 		gestioneTratte.getTxtOrarioArrivo().setText("");
-		gestioneTratte.getTxtNumeroPrenotazioni().setText("");
+		gestioneTratte.getTxtNumeroPrenotazioni().setText(null);
 	}
 
 	public void tornaAMenuGestioneDaGestioneTratte() {
@@ -246,6 +247,68 @@ public class Controller {
 		gestioneGate.setVisible(false);
 		avvio.setVisible(true);
 	}
+	
+	
+	//METODI DI RITARDO
+	
+//	@SuppressWarnings("deprecation")
+//	public void calcoloRitardo() {
+//		Calendar ArrivoTeorico = Calendar.getInstance();
+//		Calendar ArrivoEffettivo = Calendar.getInstance();
+//
+//		ArrivoTeorico.set(Calendar.YEAR, gestioneTratte.getDateDataPartenza().getDate().getYear());
+//		ArrivoTeorico.set(Calendar.MONTH, gestioneTratte.getDateDataPartenza().getDate().getMonth());
+//		ArrivoTeorico.set(Calendar.DAY_OF_MONTH, gestioneTratte.getDateDataPartenza().getDate().getDay());
+//		ArrivoTeorico.set(Calendar.HOUR_OF_DAY , gestioneTratte.getDateDataPartenza().getDate().getHours());
+//		ArrivoTeorico.set(Calendar.MINUTE, gestioneTratte.getDateDataPartenza().getDate().getMinutes());
+//		ArrivoTeorico.set(Calendar.SECOND, gestioneTratte.getDateDataPartenza().getDate().getSeconds());
+//		
+//		ArrivoEffettivo.set(Calendar.YEAR, gestioneTratte.getDateDataArrivo().getDate().getYear());
+//		ArrivoEffettivo.set(Calendar.MONTH, gestioneTratte.getDateDataArrivo().getDate().getMonth());
+//		ArrivoEffettivo.set(Calendar.DAY_OF_MONTH, gestioneTratte.getDateDataArrivo().getDate().getDay());
+//		ArrivoEffettivo.set(Calendar.HOUR_OF_DAY , gestioneTratte.getDateDataArrivo().getDate().getHours());
+//		ArrivoEffettivo.set(Calendar.MINUTE, gestioneTratte.getDateDataArrivo().getDate().getMinutes());
+//		ArrivoEffettivo.set(Calendar.SECOND, gestioneTratte.getDateDataArrivo().getDate().getSeconds());
+//
+//		long Differenza_ArrivoTeorico = ArrivoTeorico.getTimeInMillis();
+//		long Differenza_ArrivoEffettivo = ArrivoEffettivo.getTimeInMillis();
+//		long ritardo_Arrivo = Differenza_ArrivoEffettivo - Differenza_ArrivoTeorico;
+//		long ritardoSecondo_Arrivo = ritardo_Arrivo / 1000;
+//		long ritardoMinuto_Arrivo = ritardoSecondo_Arrivo / 60;
+//		long ritardoOra_Arrivo = ritardoMinuto_Arrivo / 60;
+//		long ritardoGiorno_Arrivo = ritardoOra_Arrivo / 24;
+//		long ritardoMese_Arrivo = ritardoGiorno_Arrivo / 30;
+//		long ritardoAnno_Arrivo = ritardoMese_Arrivo / 12;
+//
+//		if (ritardoAnno_Arrivo == 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoAnno_Arrivo + " anno.");
+//		} else if (ritardoAnno_Arrivo > 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoAnno_Arrivo + " anni.");
+//		} else if (ritardoMese_Arrivo == 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoMese_Arrivo + " mese.");
+//		} else if (ritardoMese_Arrivo > 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoMese_Arrivo + " mesi.");
+//		} else if (ritardoGiorno_Arrivo == 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoGiorno_Arrivo + " giorno.");
+//		} else if (ritardoGiorno_Arrivo > 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoGiorno_Arrivo + " giorni.");
+//		} else if (ritardoOra_Arrivo == 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoOra_Arrivo + " ora.");
+//		} else if (ritardoOra_Arrivo > 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoOra_Arrivo + " ore.");
+//		} else if (ritardoMinuto_Arrivo == 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoMinuto_Arrivo + " minuto.");
+//		} else if (ritardoMinuto_Arrivo > 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoMinuto_Arrivo + " minuti.");
+//		} else if (ritardoSecondo_Arrivo == 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoSecondo_Arrivo + " secondo.");
+//		} else if (ritardoSecondo_Arrivo > 1) {
+//			System.out.println("Il ritardo della partenze è di: " + ritardoSecondo_Arrivo + " secondi.");
+//		}
+//	}
+	
+	
+	
 
 	// METODI DI PROVA
 //	public int tentativoAccesso() { // controllo credenziali

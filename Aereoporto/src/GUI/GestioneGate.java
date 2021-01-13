@@ -184,7 +184,7 @@ public class GestioneGate extends JFrame {
 		btnModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Gate gt = new Gate();
+				Gate gt = new Gate(txtCodiceGate.getText(), txtNumeroPorta.getText(), txtInizioImbarco.getText(), txtFineImbarco.getText());
 				int t = table.getSelectedRow();
 				
 				modello.setValueAt(txtCodiceGate.getText(), t, 0);
@@ -204,7 +204,7 @@ public class GestioneGate extends JFrame {
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Gate gt = new Gate();
+				Gate gt = new Gate(txtCodiceGate.getText(), txtNumeroPorta.getText(), txtInizioImbarco.getText(), txtFineImbarco.getText());
 				int t = table.getSelectedRow();
 				dao.cancellaGate(gt);
 				modello.removeRow(t);
@@ -219,7 +219,7 @@ public class GestioneGate extends JFrame {
 		btnAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Gate gt = new Gate();
+				Gate gt = new Gate(txtCodiceGate.getText(), txtNumeroPorta.getText(), txtInizioImbarco.getText(), txtFineImbarco.getText());
 				dao.aggiugniGate(gt);
 				modello.addRow(row);
 				controllerGestioneGate.svuotaCampiGate();

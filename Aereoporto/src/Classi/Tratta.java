@@ -9,11 +9,11 @@ public class Tratta {
 	private String codiceTratta;
 	private String cittaPartenza;
 	private String cittaArrivo;
-	private java.sql.Date dataPartenza;
-	private java.sql.Date dataArrivo;
-	private Time orarioPartenza;
-	private Time orarioArrivo;
-	private int numeroPrenotazioni;
+	private Date dataPartenza;
+	private Date dataArrivo;
+	private String orarioPartenza;
+	private String orarioArrivo;
+	private String numeroPrenotazioni;
 
 	// GETTER E SETTER
 	public String getCodiceTratta() {
@@ -40,49 +40,48 @@ public class Tratta {
 		this.cittaArrivo = cittaArrivo;
 	}
 
-	public java.sql.Date getDataPartenza() {
+	public Date getDataPartenza() {
 		return dataPartenza;
 	}
 
-	public void setDataPartenza(java.sql.Date dataPartenza) {
+	public void setDataPartenza(Date dataPartenza) {
 		this.dataPartenza = dataPartenza;
 	}
 
-	public java.sql.Date getDataArrivo() {
+	public Date getDataArrivo() {
 		return dataArrivo;
 	}
 
-	public void setDataArrivo(java.sql.Date dataArrivo) {
+	public void setDataArrivo(Date dataArrivo) {
 		this.dataArrivo = dataArrivo;
 	}
 
-	public Time getOrarioPartenza() {
+	public String getOrarioPartenza() {
 		return orarioPartenza;
 	}
 
-	public void setOrarioPartenza(Time orarioPartenza) {
+	public void setOrarioPartenza(String orarioPartenza) {
 		this.orarioPartenza = orarioPartenza;
 	}
 
-	public Time getOrarioArrivo() {
+	public String getOrarioArrivo() {
 		return orarioArrivo;
 	}
 
-	public void setOrarioArrivo(Time orarioArrivo) {
+	public void setOrarioArrivo(String orarioArrivo) {
 		this.orarioArrivo = orarioArrivo;
 	}
 
-	public int getNumeroPrenotazioni() {
+	public String getNumeroPrenotazioni() {
 		return numeroPrenotazioni;
 	}
 
-	public void setNumeroPrenotazioni(int numeroPrenotazioni) {
+	public void setNumeroPrenotazioni(String numeroPrenotazioni) {
 		this.numeroPrenotazioni = numeroPrenotazioni;
 	}
 
 	// COSTRUTTORE
-	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo, java.sql.Date dataPartenza, java.sql.Date dataArrivo,
-			Time orarioPartenza, Time orarioArrivo, int numeroPrenotazioni) {
+	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo, Date dataPartenza, Date dataArrivo, String orarioPartenza, String orarioArrivo, String numeroPrenotazioni) {
 		super();
 		this.codiceTratta = codiceTratta;
 		this.cittaPartenza = cittaPartenza;

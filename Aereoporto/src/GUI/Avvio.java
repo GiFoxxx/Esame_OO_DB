@@ -75,11 +75,7 @@ public class Avvio extends JFrame {
 		btnUscita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Object[] options = { "SI", "ANNULLA" };
-				if (JOptionPane.showOptionDialog(null, "Sei sicuro di voler uscire dal progrmamma?", "ATTENZIONE!",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 0) {
-					Avvio.this.dispose();
-				}
+				uscitaAdAvvio();
 			}
 
 		});
@@ -137,4 +133,16 @@ public class Avvio extends JFrame {
 		contentPane.add(lblimgsfondoAvvio);
 
 	}
+	
+	//METODI
+	public void uscitaAdAvvio() {
+		Object[] options = { "SI", "ANNULLA" };
+		if (JOptionPane.showOptionDialog(null, "Sei sicuro di voler uscire dal progrmamma?", "ATTENZIONE!",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 0) {
+			Avvio.this.dispose();
+		}
+	}
+	
+	
+	
 }

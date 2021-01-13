@@ -6,6 +6,7 @@ import Database.ConnessioneDatabase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -15,6 +16,8 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 
 	ConnessioneDatabase db = new ConnessioneDatabase();
 	Tratta trt = new Tratta();
+	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	
 
 	@SuppressWarnings("finally")
 	@Override // stampa tratte
@@ -77,7 +80,7 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 	public boolean modificaTratta(Object tratta) {
 		trt = (Tratta) tratta;
 		PreparedStatement pst;
-		String sql = "UPDATE tratta SET cittapartenza=?, cittaarrivo=?, datapartenza=?, dataarrivo=?, orariopartenza=?, orarioarrivo=?, numeroprenotazioni? WHERE codicetratta=?";
+		String sql = "UPDATE tratta SET cittapartenza=?, cittaarrivo=?, datapartenza=?, dataarrivo=?, orariopartenza=?, orarioarrivo=?, numeroprenotazioni=? WHERE codicetratta=?";
 		try {
 			db.ConnessioneDB();
 
@@ -85,11 +88,13 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 
 			pst.setString(1, trt.getCittaPartenza());
 			pst.setString(2, trt.getCittaArrivo());
-			pst.setDate(3, (trt.getDataPartenza()));
-			pst.setDate(4, (trt.getDataArrivo()));
-			pst.setTime(5, trt.getOrarioPartenza());
-			pst.setTime(6, trt.getOrarioArrivo());
-			pst.setInt(7, trt.getNumeroPrenotazioni());
+			String dataPartenza = sdf.format(trt.getDataPartenza());
+			pst.setString(3, dataPartenza);
+			String dataArrivo = sdf.format(trt.getDataArrivo());
+			pst.setString(4, dataArrivo);
+			pst.setString(5, trt.getOrarioPartenza());
+			pst.setString(6, trt.getOrarioArrivo());
+			pst.setString(7, trt.getNumeroPrenotazioni());
 			pst.setString(8, trt.getCodiceTratta());
 
 			
@@ -122,11 +127,13 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 			pst.setString(1, trt.getCodiceTratta());
 			pst.setString(2, trt.getCittaPartenza());
 			pst.setString(3, trt.getCittaArrivo());
-			pst.setDate(4, (trt.getDataPartenza()));
-			pst.setDate(5, (trt.getDataArrivo()));
-			pst.setTime(6, trt.getOrarioPartenza());
-			pst.setTime(7, trt.getOrarioArrivo());
-			pst.setInt(8, trt.getNumeroPrenotazioni());
+			String dataPartenza = sdf.format(trt.getDataPartenza());
+			pst.setString(4, dataPartenza);
+			String dataArrivo = sdf.format(trt.getDataArrivo());
+			pst.setString(5, dataArrivo);
+			pst.setString(6, trt.getOrarioPartenza());
+			pst.setString(7, trt.getOrarioArrivo());
+			pst.setString(8, trt.getNumeroPrenotazioni());
 
 			int res = pst.executeUpdate();
 
