@@ -42,10 +42,6 @@ public class Accesso extends JFrame {
 			.getImage().getScaledInstance(47, 47, Image.SCALE_SMOOTH);
 	private Image impostazioni2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/Impostazioni2.png"))
 			.getImage().getScaledInstance(47, 47, Image.SCALE_SMOOTH);
-	private Image casa1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/casa1.png")).getImage()
-			.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image casa2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/casa2.png")).getImage()
-			.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 	private Image avanti1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/avanti1.png")).getImage()
 			.getScaledInstance(160, 53, Image.SCALE_SMOOTH);
 	private Image layout = new ImageIcon(Accesso.class.getResource("immaginiAccesso/layout.png")).getImage()
@@ -56,16 +52,23 @@ public class Accesso extends JFrame {
 			.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 	private Image censuraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/censuraPassword.png"))
 			.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image barra = new ImageIcon(Accesso.class.getResource("immaginiAccesso/barra.png")).getImage()
-			.getScaledInstance(173, 16, Image.SCALE_SMOOTH);
-	private Image freccia1Su = new ImageIcon(Accesso.class.getResource("immaginiAccesso/freccia1Su.png")).getImage()
-			.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-	private Image freccia2Su = new ImageIcon(Accesso.class.getResource("immaginiAccesso/freccia2Su.png")).getImage()
-			.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-	private Image freccia1Giu = new ImageIcon(Accesso.class.getResource("immaginiAccesso/freccia1Giu.png")).getImage()
-			.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-	private Image freccia2Giu = new ImageIcon(Accesso.class.getResource("immaginiAccesso/freccia2Giu.png")).getImage()
-			.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+	private Image pannelloImpostazioni = new ImageIcon(
+			Accesso.class.getResource("immaginiLauncher/pannelloImpostazioni.png")).getImage().getScaledInstance(243,
+					572, Image.SCALE_SMOOTH);
+	private Image frecciaImpostazioni1 = new ImageIcon(
+			Accesso.class.getResource("immaginiLauncher/frecciaImpostazioni1.png")).getImage().getScaledInstance(35, 35,
+					Image.SCALE_SMOOTH);
+	private Image frecciaImpostazioni2 = new ImageIcon(
+			Accesso.class.getResource("immaginiLauncher/frecciaImpostazioni2.png")).getImage().getScaledInstance(35, 35,
+					Image.SCALE_SMOOTH);
+	private Image X1 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/X1.png")).getImage()
+			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+	private Image X2 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/X2.png")).getImage()
+			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+	private Image minimizza1 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/minimizza1.png")).getImage()
+			.getScaledInstance(16, 5, Image.SCALE_SMOOTH);
+	private Image minimizza2 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/minimizza2.png")).getImage()
+			.getScaledInstance(16, 5, Image.SCALE_SMOOTH);
 
 	private JPanel contentPane;
 
@@ -97,73 +100,134 @@ public class Accesso extends JFrame {
 		controllerAccesso = controller;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 971, 639);
+		setBounds(100, 100, 1200, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setUndecorated(true);
 
-		JLabel lblfrecciaSu = new JLabel("");
-		lblfrecciaSu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblfrecciaSu.setVisible(false);
-
-		JLabel lblTendina = new JLabel("");
-		JLabel lblBarra = new JLabel("");
 		JLabel lblgestioneUtenti = new JLabel("Gestione utenti");
-		JLabel lblfrecciaGiu = new JLabel("");
-
-		lblfrecciaGiu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-		lblfrecciaSu.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblfrecciaSu.setVisible(false);
-				lblTendina.setVisible(false);
-				lblgestioneUtenti.setVisible(false);
-				lblBarra.setVisible(true);
-				lblfrecciaGiu.setVisible(true);
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblfrecciaSu.setIcon(new ImageIcon(freccia2Su));
-
-			}
-
-			public void mouseExited(MouseEvent e) {
-				lblfrecciaSu.setIcon(new ImageIcon(freccia1Su));
-
-			}
-		});
-
-		lblgestioneUtenti.setVisible(false);
-
-		lblfrecciaGiu.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblfrecciaGiu.setVisible(false);
-				lblTendina.setVisible(true);
-				lblgestioneUtenti.setVisible(true);
-				lblBarra.setVisible(false);
-				lblfrecciaSu.setVisible(true);
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblfrecciaGiu.setIcon(new ImageIcon(freccia2Giu));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblfrecciaGiu.setIcon(new ImageIcon(freccia1Giu));
-			}
-		});
-
 		JLabel lblEsci = new JLabel("Esci");
-		lblEsci.setBounds(40, 186, 50, 32);
+		JLabel lblTemaScuro = new JLabel("Tema scuro");
+		JLabel lblTemaChiaro = new JLabel("Tema chiaro");
+		JLabel lblRiconoscimenti = new JLabel("Riconoscimenti");
+		JLabel lblFrecciaImpostazioni = new JLabel("");
+		lblEsci.setVisible(false);
+		lblFrecciaImpostazioni.setVisible(false);
+
+		lblFrecciaImpostazioni.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblFrecciaImpostazioni.setIcon(new ImageIcon(frecciaImpostazioni2));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblFrecciaImpostazioni.setIcon(new ImageIcon(frecciaImpostazioni1));
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblFrecciaImpostazioni.setVisible(false);
+				lblTemaScuro.setVisible(false);
+				lblTemaChiaro.setVisible(false);
+				lblRiconoscimenti.setVisible(false);
+				lblEsci.setVisible(false);
+
+			}
+		});
+
+		JLabel lblX = new JLabel("");
+		lblX.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Accesso.this.dispose();
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblX.setIcon(new ImageIcon(X2));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblX.setIcon(new ImageIcon(X1));
+
+			}
+		});
+		lblX.setHorizontalAlignment(SwingConstants.CENTER);
+		lblX.setIcon(new ImageIcon(X1));
+		lblX.setBounds(470, 51, 37, 23);
+		contentPane.add(lblX);
+
+		lblFrecciaImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFrecciaImpostazioni.setIcon(new ImageIcon(frecciaImpostazioni1));
+		lblFrecciaImpostazioni.setBounds(251, 108, 57, 68);
+		contentPane.add(lblFrecciaImpostazioni);
+
+		lblFrecciaImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFrecciaImpostazioni.setIcon(new ImageIcon(frecciaImpostazioni1));
+		lblFrecciaImpostazioni.setBounds(220, 97, 35, 35);
+		contentPane.add(lblFrecciaImpostazioni);
+		JLabel lblMinimizza = new JLabel("");
+		lblMinimizza.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblMinimizza.setIcon(new ImageIcon(minimizza2));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblMinimizza.setIcon(new ImageIcon(minimizza1));
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setState(Accesso.ICONIFIED);
+
+			}
+		});
+		lblMinimizza.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMinimizza.setIcon(new ImageIcon(minimizza1));
+		lblMinimizza.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblMinimizza.setBounds(413, 49, 37, 14);
+		contentPane.add(lblMinimizza);
+
+		JLabel lblTerminiECondizioni = new JLabel("Termini e condizioni");
+		lblTerminiECondizioni.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTerminiECondizioni.setBounds(117, 405, 92, 14);
+		contentPane.add(lblTerminiECondizioni);
+
+		lblRiconoscimenti.setFont(new Font("Arial", Font.BOLD, 15));
+		lblRiconoscimenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRiconoscimenti.setVisible(false);
+
+		lblRiconoscimenti.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRiconoscimenti.setBounds(93, 333, 116, 23);
+		contentPane.add(lblRiconoscimenti);
+		lblTemaChiaro.setFont(new Font("Arial", Font.BOLD, 15));
+		lblTemaChiaro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblTemaChiaro.setVisible(false);
+
+		lblTemaChiaro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTemaChiaro.setBounds(97, 177, 109, 23);
+		contentPane.add(lblTemaChiaro);
+		lblTemaScuro.setFont(new Font("Arial", Font.BOLD, 15));
+		lblTemaScuro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblTemaScuro.setVisible(false);
+
+		lblTemaScuro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTemaScuro.setBounds(99, 253, 105, 23);
+		contentPane.add(lblTemaScuro);
+
+		lblEsci.setBounds(117, 367, 50, 32);
 		contentPane.add(lblEsci);
 		lblEsci.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblEsci.addMouseListener(new MouseAdapter() {
@@ -177,24 +241,21 @@ public class Accesso extends JFrame {
 				lblEsci.setForeground(Color.WHITE);
 			}
 
-			@Override // chiudo il programma
+			@Override
 			public void mouseClicked(MouseEvent e) {
-				Accesso.this.dispose();
+				Object[] options = { "SI", "ANNULLA" };
+				if (JOptionPane.showOptionDialog(null, "Sei sicuro di voler uscire dal progrmamma?", "ATTENZIONE!",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 0) {
+					Accesso.this.dispose();
+				}
 			}
 		});
 		lblEsci.setForeground(Color.DARK_GRAY);
 		lblEsci.setFont(new Font("Arial", Font.BOLD, 17));
 		lblEsci.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JLabel lbltendinaImpostazioni = new JLabel("");
-		lbltendinaImpostazioni
-				.setIcon(new ImageIcon(Accesso.class.getResource("/GUI/immaginiAccesso/tendinaImpostazioni.png")));
-		lbltendinaImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
-		lbltendinaImpostazioni.setBounds(31, 55, 70, 195);
-		contentPane.add(lbltendinaImpostazioni);
-
 		JLabel lblImpostazioni = new JLabel("");
-		lblImpostazioni.setBounds(40, 52, 50, 50);
+		lblImpostazioni.setBounds(72, 49, 50, 50);
 		contentPane.add(lblImpostazioni);
 		lblImpostazioni.addMouseListener(new MouseAdapter() {
 			@Override
@@ -206,16 +267,22 @@ public class Accesso extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblImpostazioni.setIcon(new ImageIcon(impostazioni1));
 			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblFrecciaImpostazioni.setVisible(true);
+				lblTemaScuro.setVisible(true);
+				lblTemaChiaro.setVisible(true);
+				lblRiconoscimenti.setVisible(true);
+				lblEsci.setVisible(true);
+
+			}
 		});
 		lblImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
 		lblImpostazioni.setIcon(new ImageIcon(impostazioni1));
-		lblfrecciaGiu.setHorizontalAlignment(SwingConstants.CENTER);
-		lblfrecciaGiu.setIcon(new ImageIcon(freccia1Giu));
-		lblfrecciaGiu.setBounds(219, 5, 61, 20);
-		contentPane.add(lblfrecciaGiu);
 
-		lblgestioneUtenti.setBounds(189, 52, 120, 32);
+		lblgestioneUtenti.setBounds(577, 561, 120, 32);
 		contentPane.add(lblgestioneUtenti);
 		lblgestioneUtenti.addMouseListener(new MouseAdapter() {
 			@Override
@@ -237,17 +304,6 @@ public class Accesso extends JFrame {
 		lblgestioneUtenti.setForeground(new Color(112, 112, 112));
 		lblgestioneUtenti.setFont(new Font("Arial", Font.BOLD, 17));
 		lblgestioneUtenti.setHorizontalAlignment(SwingConstants.CENTER);
-		lblfrecciaSu.setHorizontalAlignment(SwingConstants.CENTER);
-		lblfrecciaSu.setIcon(new ImageIcon(freccia1Su));
-		lblfrecciaSu.setBounds(219, 139, 61, 20);
-		contentPane.add(lblfrecciaSu);
-
-		lblTendina.setIcon(new ImageIcon(Accesso.class.getResource("/GUI/immaginiAccesso/tendina.png")));
-		lblTendina.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTendina.setBounds(147, 6, 201, 169);
-		contentPane.add(lblTendina);
-
-		lblTendina.setVisible(false);
 
 		txtfldPassword = new JPasswordField();
 		txtfldPassword.addKeyListener(new KeyAdapter() {
@@ -268,12 +324,6 @@ public class Accesso extends JFrame {
 			}
 
 		});
-
-		lblBarra.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblBarra.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBarra.setIcon(new ImageIcon(barra));
-		lblBarra.setBounds(161, 5, 173, 20);
-		contentPane.add(lblBarra);
 
 		lblcensuraPassword.setToolTipText("Mostra password");
 
@@ -348,29 +398,6 @@ public class Accesso extends JFrame {
 		txtfldEmail.setBounds(569, 271, 343, 20);
 		contentPane.add(txtfldEmail);
 
-		JLabel lblCasa = new JLabel("");
-		lblCasa.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerAccesso.tornaAdAvvioDaAccesso();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblCasa.setIcon(new ImageIcon(casa2));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblCasa.setIcon(new ImageIcon(casa1));
-			}
-		});
-		lblCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblCasa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCasa.setIcon(new ImageIcon(casa1));
-		lblCasa.setBounds(709, 92, 40, 40);
-		contentPane.add(lblCasa);
-
 		JLabel lblAvanti = new JLabel("");
 		lblAvanti.addMouseListener(new MouseAdapter() {
 			@Override
@@ -425,7 +452,7 @@ public class Accesso extends JFrame {
 		JLabel lblLayout = new JLabel("");
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLayout.setIcon(new ImageIcon(layout));
-		lblLayout.setBounds(0, 0, 971, 639);
+		lblLayout.setBounds(0, 0, 1043, 683);
 		contentPane.add(lblLayout);
 
 		JLabel lblMessaggioCredenziali = new JLabel("");

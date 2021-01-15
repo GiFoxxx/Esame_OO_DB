@@ -154,6 +154,14 @@ public class Registrazione extends JFrame {
 			}
 		});
 		
+		JButton lblMin = new JButton("MIN");
+		lblMin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setState(Registrazione.ICONIFIED);			}
+		});
+		lblMin.setBounds(362, 0, 89, 23);
+		contentPane.add(lblMin);
+		
 		btnTornaAdAccesso.setForeground(Color.WHITE);
 		btnTornaAdAccesso.setFont(new Font("Arial", Font.BOLD, 14));
 		btnTornaAdAccesso.setBorder(null);
