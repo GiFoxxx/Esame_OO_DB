@@ -478,14 +478,6 @@ public class Accesso extends JFrame {
 		lblMessaggioCredenziali.setText("Nome utente o password errati. Riprova");
 	}
 
-	public void SicuroTornareIndietro() {
-		Object[] options = { "SI", "ANNULLA" };
-		if (JOptionPane.showOptionDialog(null,
-				"Sei sicuro di voler tornare indietro? Hai lasciato delle cose in sospeso!", "ATTENZIONE",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 0) {
-			controllerAccesso.tornaAdAvvioDaAccesso();
-		}
-	}
 
 	public void svuotaCampi() {
 		getTxtEmail().setText("");

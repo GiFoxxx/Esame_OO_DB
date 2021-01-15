@@ -117,24 +117,6 @@ public class Registrazione extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.setBackground(new Color(0, 52, 75));
 		setUndecorated(true);
-
-		JLabel lblimgCasa = new JLabel("");
-		lblimgCasa.addMouseListener(new MouseAdapter() {
-			@Override // clicco sulla casa e torno ad avvio
-			public void mouseClicked(MouseEvent e) {
-				controllerRegistrazione.tornaAdAvvioDaRegistrazione();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa2));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
-			}
-		});
 		
 		JButton btnTornaAdAccesso = new JButton("Accedi");
 		btnTornaAdAccesso.addMouseListener(new MouseAdapter() {
@@ -168,11 +150,6 @@ public class Registrazione extends JFrame {
 		btnTornaAdAccesso.setBackground(new Color(70, 130, 180));
 		btnTornaAdAccesso.setBounds(161, 257, 82, 32);
 		contentPane.add(btnTornaAdAccesso);
-		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
-		lblimgCasa.setBounds(460, 58, 30, 23);
-		contentPane.add(lblimgCasa);
 		
 		JLabel lblX = new JLabel("X");
 		lblX.addMouseListener(new MouseAdapter() {
