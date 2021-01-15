@@ -450,12 +450,7 @@ public class GestioneTratte extends JFrame {
 		caricamento();
 		
 	}
-	
-	private static class __Tmp {
-		private static void __tmp() {
-			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
-		}
-	}
+
 	
 	private void  caricamento() {
 		this.ListaTratte = dao.stampaTratte();

@@ -33,12 +33,6 @@ public class Controller {
 
 	// COSTRUTTORE
 	public Controller() { // prima schermata
-		launcher = new Launcher(this);
-		launcher.setVisible(true);
-	}
-
-	// METODI DI AVVIO
-	public void Avvio() {
 		avvio = new Avvio(this);
 		accesso = new Accesso(this);
 		registrazione = new Registrazione(this);
@@ -50,8 +44,14 @@ public class Controller {
 		gestioneCompagnieAeree = new GestioneCompagnieAeree(this);
 		gestioneTratte = new GestioneTratte(this);
 		gestioneGate = new GestioneGate(this);
+		launcher = new Launcher(this);
+		launcher.setVisible(true);
+	}
+
+	// METODI LAUNCHER
+	public void vaiAdAccessoDaLauncher() {
 		launcher.setVisible(false);
-		avvio.setVisible(true);
+		accesso.setVisible(true);
 	}
 
 	// METODI DI ACCESSO
@@ -247,10 +247,9 @@ public class Controller {
 		gestioneGate.setVisible(false);
 		avvio.setVisible(true);
 	}
-	
-	
-	//METODI DI RITARDO
-	
+
+	// METODI DI RITARDO
+
 //	@SuppressWarnings("deprecation")
 //	public void calcoloRitardo() {
 //		Calendar ArrivoTeorico = Calendar.getInstance();
@@ -306,9 +305,6 @@ public class Controller {
 //			System.out.println("Il ritardo della partenze è di: " + ritardoSecondo_Arrivo + " secondi.");
 //		}
 //	}
-	
-	
-	
 
 	// METODI DI PROVA
 //	public int tentativoAccesso() { // controllo credenziali
