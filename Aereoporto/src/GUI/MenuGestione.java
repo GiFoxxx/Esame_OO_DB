@@ -51,24 +51,6 @@ public class MenuGestione extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setUndecorated(true);
-
-		
-		JLabel lblimgCasa = new JLabel("");
-		lblimgCasa.setBounds(550, 63, 30, 23);
-		lblimgCasa.addMouseListener(new MouseAdapter() {
-			@Override // clicco sulla casa e torno ad avvio
-			public void mouseClicked(MouseEvent e) {
-				controllerMenuGestione.tornaAdAvvioDaMenuGestione();
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa2));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
-			}
-		});
 		contentPane.setLayout(null);
 		
 		JLabel lblX = new JLabel("X");
@@ -105,6 +87,28 @@ public class MenuGestione extends JFrame {
 				controllerMenuGestione.vaiAGestioneGateDaMenuGestione();
 			}
 		});
+		
+		JButton btnTratte = new JButton("Tratte");
+		btnTratte.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnTratte.setBackground(SystemColor.controlDkShadow);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnTratte.setBackground(Color.DARK_GRAY);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerMenuGestione.vaiAGestioneTrattaDaMenuGestione();
+			}
+		});
+		btnTratte.setForeground(Color.WHITE);
+		btnTratte.setFont(new Font("Arial", Font.BOLD, 12));
+		btnTratte.setBorder(null);
+		btnTratte.setBackground(Color.DARK_GRAY);
+		btnTratte.setBounds(25, 305, 145, 52);
+		contentPane.add(btnTratte);
 		btnGate.setForeground(Color.WHITE);
 		btnGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnGate.setFont(new Font("Arial", Font.BOLD, 12));
@@ -174,10 +178,6 @@ public class MenuGestione extends JFrame {
 		lblTornaAdAccesso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblTornaAdAccesso.setBounds(10, 63, 101, 14);
 		contentPane.add(lblTornaAdAccesso);
-		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
-		contentPane.add(lblimgCasa);
 		
 		JButton btnVoli = new JButton("Voli");
 		btnVoli.addMouseListener(new MouseAdapter() {
@@ -191,7 +191,7 @@ public class MenuGestione extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerMenuGestione.vaiAGestioneTrattaDaMenuGestione();
+				controllerMenuGestione.vaiAGestioneVoliDaMenuGestione();
 			}
 		});
 		btnVoli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

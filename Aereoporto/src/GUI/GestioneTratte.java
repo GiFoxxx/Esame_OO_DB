@@ -58,10 +58,9 @@ import javax.swing.event.ChangeEvent;
 
 public class GestioneTratte extends JFrame {
 
-	String colonne[] = {"Codice Tratta", "Citta Partenza", "Citta Arrivo", "Data Partenza", "Data Arrivo", "Orario Partenza", "Orario Arrivo", "Numero Prenotazioni"};
+	String colonne[] = {"Codice Tratta", "Citta Partenza", "Citta Arrivo"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	TrattaImplementazionePostgresDAO dao = new TrattaImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaTratte = new ArrayList<>();
 	
 	private Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -77,19 +76,11 @@ public class GestioneTratte extends JFrame {
 	private JButton btnElimina;
 	private JButton btnAggiungi;
 	private JButton btnNewButton;
+	private JButton btnSvuota;
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JLabel lblCittaArrivo;
 	private JTextField txtCittaArrivo;
-	private JLabel lblDataPartenza;
-	private JLabel lblDataArrivo;
-	private JLabel lblOrarioPartenza;
-	private JLabel lblOrarioArrivo;
-	private JLabel lblNumeroPrenotazioni;
-	
-	private JTextField txtNumeroPrenotazioni;
-	private JDateChooser dateDataPartenza;
-	private JDateChooser dateDataArrivo;
 	private JButton btnCalcolaRitardo;
 	
 //	private JSpinner spinOrarioPartenza;
@@ -104,13 +95,30 @@ public class GestioneTratte extends JFrame {
 	
 	
 	Controller controllerGestioneTratte;
-	private JTextField txtOrarioPartenza;
-	private JTextField txtOrarioArrivo;
-	private JButton btnNewButton_1;
 	
 	
 	//GETTER E SETTER
 	
+	public DefaultTableModel getModello() {
+		return modello;
+	}
+
+	public void setModello(DefaultTableModel modello) {
+		this.modello = modello;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public Object[] getRow() {
+		return row;
+	}
+
 	public JTextField getTxtCodiceTratta() {
 		return txtCodiceTratta;
 	}
@@ -127,61 +135,7 @@ public class GestioneTratte extends JFrame {
 		this.txtCittaArrivo = txtCittaArrivo;
 	}
 
-	public JDateChooser getDateDataPartenza() {
-		return dateDataPartenza;
-	}
-
-	public void setDateDataPartenza(JDateChooser dateDataPartenza) {
-		this.dateDataPartenza = dateDataPartenza;
-	}
-
-	public JDateChooser getDateDataArrivo() {
-		return dateDataArrivo;
-	}
-
-	public void setDateDataArrivo(JDateChooser dateDataArrivo) {
-		this.dateDataArrivo = dateDataArrivo;
-	}
-
-	public JTextField getTxtOrarioPartenza() {
-		return txtOrarioPartenza;
-	}
-
-	public void setTxtOrarioPartenza(JTextField txtOrarioPartenza) {
-		this.txtOrarioPartenza = txtOrarioPartenza;
-	}
-
-	public JTextField getTxtOrarioArrivo() {
-		return txtOrarioArrivo;
-	}
-
-	public void setTxtOrarioArrivo(JTextField txtOrarioArrivo) {
-		this.txtOrarioArrivo = txtOrarioArrivo;
-	}
-//	
-//	public JSpinner getSpinOrarioPartenza() {
-//		return spinOrarioPartenza;
-//	}
-//
-//	public void setSpinOrarioPartenza(JSpinner spinOrarioPartenza) {
-//		this.spinOrarioPartenza = spinOrarioPartenza;
-//	}
-//
-//	public JSpinner getSpinOrarioArrivo() {
-//		return spinOrarioArrivo;
-//	}
-//
-//	public void setSpinOrarioArrivo(JSpinner spinOrarioArrivo) {
-//		this.spinOrarioArrivo = spinOrarioArrivo;
-//	}
-
-	public JTextField getTxtNumeroPrenotazioni() {
-		return txtNumeroPrenotazioni;
-	}
-
-	public void setTxtNumeroPrenotazioni(JTextField txtNumeroPrenotazioni) {
-		this.txtNumeroPrenotazioni = txtNumeroPrenotazioni;
-	}
+	
 
 	public JTextField getTxtCittaPartenza() {
 		return txtCittaPartenza;
@@ -193,7 +147,7 @@ public class GestioneTratte extends JFrame {
 		controllerGestioneTratte=controller;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1388, 576);
+		setBounds(100, 100, 916, 479);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -230,29 +184,6 @@ public class GestioneTratte extends JFrame {
 		lblimgfrecciaIndietro.setBounds(10, 11, 37, 14);
 		contentPane.add(lblimgfrecciaIndietro);
 		
-		JLabel lblimgCasa = new JLabel("");
-		lblimgCasa.addMouseListener(new MouseAdapter() {
-			@Override // clicco sulla casa e torno ad avvio
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneTratte.tornaAdAvvioDaGestioneTratte();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa2));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
-			}
-		});
-		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
-		lblimgCasa.setBounds(818, 11, 30, 23);
-		contentPane.add(lblimgCasa);
-		
 		JLabel lblCodiceTratta = new JLabel("Codice Tratta");
 		lblCodiceTratta.setBounds(32, 209, 114, 20);
 		contentPane.add(lblCodiceTratta);
@@ -272,21 +203,7 @@ public class GestioneTratte extends JFrame {
 		btnModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Tratta trt = new Tratta(txtCodiceTratta.getText(), txtCittaPartenza.getText(), txtCittaArrivo.getText(), dateDataPartenza.getDate(), dateDataArrivo.getDate(), getTxtOrarioPartenza().getText(), getTxtOrarioArrivo().getText(), txtNumeroPrenotazioni.getText());
-				int t = table.getSelectedRow();
-				
-				modello.setValueAt(txtCodiceTratta.getText(), t, 0);
-				modello.setValueAt(txtCittaPartenza.getText(), t, 1);
-				modello.setValueAt(txtCittaArrivo.getText(), t, 2);
-				modello.setValueAt(dateDataPartenza.getDate(), t, 3);
-				modello.setValueAt(dateDataArrivo.getDate(), t, 4);
-				modello.setValueAt(getTxtOrarioPartenza().getText(), t, 5);
-				modello.setValueAt(getTxtOrarioArrivo().getText(), t, 6);
-				modello.setValueAt(txtNumeroPrenotazioni.getText(), t, 7);
-				
-				dao.modificaTratta(trt);
-				controllerGestioneTratte.svuotaCampiTratte();
-				caricamento();
+				controllerGestioneTratte.modificaTratta();
 			}
 		});
 		contentPane.add(btnModifica);
@@ -296,12 +213,7 @@ public class GestioneTratte extends JFrame {
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Tratta trt = new Tratta(txtCodiceTratta.getText(), txtCittaPartenza.getText(), txtCittaArrivo.getText(), dateDataPartenza.getDate(), dateDataArrivo.getDate(), getTxtOrarioPartenza().getText(), getTxtOrarioArrivo().getText(), txtNumeroPrenotazioni.getText());
-				int t = table.getSelectedRow();
-				dao.cancellaTratta(trt);
-				modello.removeRow(t);
-				controllerGestioneTratte.svuotaCampiTratte();
-				caricamento();
+				controllerGestioneTratte.eliminaTratta();
 			}
 		});
 		contentPane.add(btnElimina);
@@ -311,29 +223,25 @@ public class GestioneTratte extends JFrame {
 		btnAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Tratta trt = new Tratta(txtCodiceTratta.getText(), txtCittaPartenza.getText(), txtCittaArrivo.getText(), dateDataPartenza.getDate(), dateDataArrivo.getDate(), getTxtOrarioPartenza().getText(), getTxtOrarioArrivo().getText(), txtNumeroPrenotazioni.getText());
-				dao.aggiungiTratta(trt);
-				modello.addRow(row);
-				controllerGestioneTratte.svuotaCampiTratte();
-				caricamento();
+				controllerGestioneTratte.aggiungiTratta();
 			}
 		});
 		contentPane.add(btnAggiungi);
 		
 		modello.setColumnIdentifiers(colonne);
 		
-		btnNewButton = new JButton("svuota");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		btnSvuota = new JButton("svuota");
+		btnSvuota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneTratte.svuotaCampiTratte();
+				controllerGestioneTratte.svuotaCampiTratta();
 			}
 		});
-		btnNewButton.setBounds(181, 116, 78, 39);
-		contentPane.add(btnNewButton);
+		btnSvuota.setBounds(181, 116, 78, 39);
+		contentPane.add(btnSvuota);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(326, 35, 1015, 465);
+		scrollPane.setBounds(326, 35, 549, 394);
 		contentPane.add(scrollPane);
 				
 		table = new JTable();
@@ -345,36 +253,13 @@ public class GestioneTratte extends JFrame {
 				txtCodiceTratta.setText(modello.getValueAt(t, 0).toString());
 				txtCittaPartenza.setText(modello.getValueAt(t, 1).toString());
 				txtCittaArrivo.setText(modello.getValueAt(t, 2).toString());
-				try {
-					java.util.Date datePartenza = new SimpleDateFormat("dd-MM-yyyy").parse((String) modello.getValueAt(t,3));
-					dateDataPartenza.setDate(datePartenza);
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
-				try {
-					java.util.Date dateArrivo = new SimpleDateFormat("dd-MM-yyyy").parse((String) modello.getValueAt(t,4));
-					dateDataArrivo.setDate(dateArrivo);
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
-				txtOrarioArrivo.setText(modello.getValueAt(t, 5).toString());
-				txtOrarioPartenza.setText(modello.getValueAt(t, 6).toString());
-				txtNumeroPrenotazioni.setText(modello.getValueAt(t, 7).toString());
 			}
 		});
 		
 		modello.setColumnIdentifiers(colonne);
 		table.setModel(modello);
 
-		scrollPane.setViewportView(table);
 		
-		btnNewButton = new JButton("svuota");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneTratte.svuotaCampiTratte();
-			}
-		});
 		scrollPane.setViewportView(table);
 		
 		lblCittaArrivo = new JLabel("Citta Arrivo");
@@ -386,74 +271,23 @@ public class GestioneTratte extends JFrame {
 		txtCittaArrivo.setBounds(180, 277, 133, 20);
 		contentPane.add(txtCittaArrivo);
 		
-		lblDataPartenza = new JLabel("Data Partenza");
-		lblDataPartenza.setBounds(32, 319, 114, 20);
-		contentPane.add(lblDataPartenza);
-		
-		lblDataArrivo = new JLabel("Data Arrivo");
-		lblDataArrivo.setBounds(32, 357, 114, 20);
-		contentPane.add(lblDataArrivo);
-		
-		lblOrarioPartenza = new JLabel("Orario Partenza");
-		lblOrarioPartenza.setBounds(32, 399, 114, 20);
-		contentPane.add(lblOrarioPartenza);
-		
-		lblOrarioArrivo = new JLabel("Orario Arrivo");
-		lblOrarioArrivo.setBounds(32, 439, 114, 20);
-		contentPane.add(lblOrarioArrivo);
-		
-		lblNumeroPrenotazioni = new JLabel("Numero Prenotazioni");
-		lblNumeroPrenotazioni.setBounds(32, 480, 114, 20);
-		contentPane.add(lblNumeroPrenotazioni);
-		
-		txtNumeroPrenotazioni = new JTextField();
-		txtNumeroPrenotazioni.setColumns(10);
-		txtNumeroPrenotazioni.setBounds(180, 480, 133, 20);
-		contentPane.add(txtNumeroPrenotazioni);
-		
-		dateDataPartenza = new JDateChooser();
-		dateDataPartenza.getCalendarButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		dateDataPartenza.setBounds(180, 319, 133, 23);
-		contentPane.add(dateDataPartenza);
-		
-		dateDataArrivo = new JDateChooser();
-		dateDataArrivo.setBounds(180, 357, 133, 23);
-		contentPane.add(dateDataArrivo);
-		
 		btnCalcolaRitardo = new JButton("Calcola Ritardo");
 		btnCalcolaRitardo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//				controllerGestioneTratte.calcoloRitardo();
+//				controllerGestioneVoli.calcoloRitardo();
 			}
 		});
 		btnCalcolaRitardo.setBounds(95, 175, 133, 23);
 		contentPane.add(btnCalcolaRitardo);
-		
-		txtOrarioPartenza = new JTextField();
-		txtOrarioPartenza.setBounds(180, 399, 133, 20);
-		contentPane.add(txtOrarioPartenza);
-		txtOrarioPartenza.setColumns(10);
-		
-		txtOrarioArrivo = new JTextField();
-		txtOrarioArrivo.setBounds(180, 439, 133, 20);
-		contentPane.add(txtOrarioArrivo);
-		txtOrarioArrivo.setColumns(10);
-		
-		btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(285, 399, 30, 20);
-		contentPane.add(btnNewButton_1);
 		
 		caricamento();
 		
 	}
 
 	
-	private void  caricamento() {
-		this.ListaTratte = dao.stampaTratte();
+	public void  caricamento() {
+		this.ListaTratte = controllerGestioneTratte.implementazioneTrattaDAO().stampaTratte();
 		modello.setNumRows(0);
 		for(Object [] dato : this.ListaTratte) {
 			this.modello.addRow(dato);

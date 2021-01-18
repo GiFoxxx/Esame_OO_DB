@@ -39,7 +39,6 @@ public class GestioneGate extends JFrame {
 	String colonne[] = {"Codice Gate", "Numero Porta", "Tempo Inizio Imbarco", "Tempo Fine Imbarco"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	GateImplementazionePostgresDAO dao = new GateImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaGate = new ArrayList<>();
 	
 	private Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -55,6 +54,7 @@ public class GestioneGate extends JFrame {
 	private JButton btnElimina;
 	private JButton btnAggiungi;
 	private JButton btnNewButton;
+	private JButton btnSvuota;
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JLabel lblInizioImbarco;
@@ -66,6 +66,26 @@ public class GestioneGate extends JFrame {
 	
 	//GETTER E SETTER
 	
+	public DefaultTableModel getModello() {
+		return modello;
+	}
+
+	public void setModello(DefaultTableModel modello) {
+		this.modello = modello;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public Object[] getRow() {
+		return row;
+	}
+
 	public JTextField getTxtNumeroPorta() {
 		return txtNumeroPorta;
 	}
@@ -142,29 +162,6 @@ public class GestioneGate extends JFrame {
 		lblimgfrecciaIndietro.setBounds(10, 11, 37, 14);
 		contentPane.add(lblimgfrecciaIndietro);
 		
-		JLabel lblimgCasa = new JLabel("");
-		lblimgCasa.addMouseListener(new MouseAdapter() {
-			@Override // clicco sulla casa e torno ad avvio
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.tornaAdAvvioDaGestioneGate();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa2));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
-			}
-		});
-		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
-		lblimgCasa.setBounds(818, 11, 30, 23);
-		contentPane.add(lblimgCasa);
-		
 		JLabel lblCodiceGate = new JLabel("Codice Gate");
 		lblCodiceGate.setBounds(32, 209, 114, 20);
 		contentPane.add(lblCodiceGate);
@@ -184,17 +181,7 @@ public class GestioneGate extends JFrame {
 		btnModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Gate gt = new Gate(txtCodiceGate.getText(), txtNumeroPorta.getText(), txtInizioImbarco.getText(), txtFineImbarco.getText());
-				int t = table.getSelectedRow();
-				
-				modello.setValueAt(txtCodiceGate.getText(), t, 0);
-				modello.setValueAt(txtNumeroPorta.getText(), t, 1);
-				modello.setValueAt(txtInizioImbarco.getText(), t, 2);
-				modello.setValueAt(txtFineImbarco.getText(), t, 3);
-				
-				dao.modificaGate(gt);
-				controllerGestioneGate.svuotaCampiGate();
-				caricamento();
+				controllerGestioneGate.modificaGate();
 			}
 		});
 		contentPane.add(btnModifica);
@@ -204,12 +191,7 @@ public class GestioneGate extends JFrame {
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Gate gt = new Gate(txtCodiceGate.getText(), txtNumeroPorta.getText(), txtInizioImbarco.getText(), txtFineImbarco.getText());
-				int t = table.getSelectedRow();
-				dao.cancellaGate(gt);
-				modello.removeRow(t);
-				controllerGestioneGate.svuotaCampiGate();
-				caricamento();
+				controllerGestioneGate.eliminaGate();
 			}
 		});
 		contentPane.add(btnElimina);
@@ -219,26 +201,22 @@ public class GestioneGate extends JFrame {
 		btnAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Gate gt = new Gate(txtCodiceGate.getText(), txtNumeroPorta.getText(), txtInizioImbarco.getText(), txtFineImbarco.getText());
-				dao.aggiugniGate(gt);
-				modello.addRow(row);
-				controllerGestioneGate.svuotaCampiGate();
-				caricamento();
+				controllerGestioneGate.aggiungiGate();
 			}
 		});
 		contentPane.add(btnAggiungi);
 		
 		modello.setColumnIdentifiers(colonne);
 		
-		btnNewButton = new JButton("svuota");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		btnSvuota = new JButton("svuota");
+		btnSvuota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneGate.svuotaCampiGate();
 			}
 		});
-		btnNewButton.setBounds(181, 116, 78, 39);
-		contentPane.add(btnNewButton);
+		btnSvuota.setBounds(181, 116, 78, 39);
+		contentPane.add(btnSvuota);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(323, 35, 632, 297);
@@ -261,14 +239,6 @@ public class GestioneGate extends JFrame {
 
 		scrollPane.setViewportView(table);
 		
-		btnNewButton = new JButton("svuota");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.svuotaCampiGate();
-			}
-		});
-		scrollPane.setViewportView(table);
 		
 		lblInizioImbarco = new JLabel("Inizio Imbarco");
 		lblInizioImbarco.setBounds(32, 277, 114, 20);
@@ -292,15 +262,8 @@ public class GestioneGate extends JFrame {
 		
 	}
 	
-	
-	private static class __Tmp {
-		private static void __tmp() {
-			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
-		}
-	}
-	
-	private void  caricamento() {
-		this.ListaGate = dao.stampaGate();
+	public void  caricamento() {
+		this.ListaGate = controllerGestioneGate.implementazioneGateDAO().stampaGate();
 		modello.setNumRows(0);
 		for(Object [] dato : this.ListaGate) {
 			this.modello.addRow(dato);

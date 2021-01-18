@@ -8,42 +8,50 @@ import java.util.regex.Pattern;
 
 import javax.swing.*;
 
+import Amministrazione.*;
 import Classi.*;
 import Database.*;
 import GUI.*;
+import ImplementazioniPostrgresDAO.*;
 
 public class Controller {
 
 	Accesso accesso;
-	Avvio avvio;
+
 	Registrazione registrazione;
 	Riconoscimenti riconoscimenti;
 	MenuGestione menuGestione;
-	Voli voli;
+	GestioneVoli gestioneVoli;
 	Prenotazione prenotazioni;
 	GestioneUtenti gestioneUtenti;
 	GestioneCompagnieAeree gestioneCompagnieAeree;
 	GestioneTratte gestioneTratte;
 	GestioneGate gestioneGate;
 	Launcher launcher;
-
+	
+	Utente utn;
+	Volo vl;
+	Gate gt;
+	Tratta trt;
+	CompagniaAerea compAerea;
+	
 	public static void main(String[] args) {
 		Controller controller = new Controller();
 	}
 
 	// COSTRUTTORE
 	public Controller() { // prima schermata
-		avvio = new Avvio(this);
+
 		accesso = new Accesso(this);
 		registrazione = new Registrazione(this);
 		menuGestione = new MenuGestione(this);
-		voli = new Voli(this);
 		riconoscimenti = new Riconoscimenti(this);
 		prenotazioni = new Prenotazione(this);
 		gestioneUtenti = new GestioneUtenti(this);
 		gestioneCompagnieAeree = new GestioneCompagnieAeree(this);
 		gestioneTratte = new GestioneTratte(this);
 		gestioneGate = new GestioneGate(this);
+		gestioneVoli = new GestioneVoli(this);
 		launcher = new Launcher(this);
 		launcher.setVisible(true);
 	}
@@ -56,7 +64,7 @@ public class Controller {
 
 	// METODI DI ACCESSO
 	public void Accesso() { // entro in accesso
-		avvio.setVisible(false);
+		launcher.setVisible(false);
 		accesso.setVisible(true);
 	}
 
@@ -95,14 +103,9 @@ public class Controller {
 		menuGestione.setVisible(true);
 	}
 
-	public void tornaAdAvvioDaAccesso() { // torno ad avvio da accesso
-		accesso.setVisible(false);
-		avvio.setVisible(true);
-	}
-
 	// METODI DI REGISTRAZIONE
 	public void Registrazione() { // entro in registrazione da avvio
-		avvio.setVisible(false);
+		launcher.setVisible(false);
 		registrazione.setVisible(true);
 		registrazione.svuotaCampi();
 	}
@@ -111,11 +114,6 @@ public class Controller {
 		registrazione.setVisible(false);
 		accesso.setVisible(true);
 		accesso.svuotaCampi();
-	}
-
-	public void tornaAdAvvioDaRegistrazione() { // torno ad avvio da registrazione
-		registrazione.setVisible(false);
-		avvio.setVisible(true);
 	}
 
 	public void vaiAdAccessoDopoRegistrazione() {
@@ -137,12 +135,6 @@ public class Controller {
 	}
 
 	// METODI DI MENU' GESTIONE
-
-	public void tornaAdAvvioDaMenuGestione() { // torno ad avvio da menu gestione
-		menuGestione.setVisible(false);
-		avvio.setVisible(true);
-	}
-
 	public void tornaAdAccessoDaMenuGestione() { // torno ad accesso da menu gestione
 		menuGestione.setVisible(false);
 		accesso.setVisible(true);
@@ -165,6 +157,11 @@ public class Controller {
 		gestioneTratte.setVisible(true);
 	}
 
+	public void vaiAGestioneVoliDaMenuGestione() {
+		menuGestione.setVisible(false);
+		gestioneVoli.setVisible(true);
+	}
+
 	public void vaiAGestioneGateDaMenuGestione() {
 		menuGestione.setVisible(false);
 		gestioneGate.setVisible(true);
@@ -184,11 +181,6 @@ public class Controller {
 		accesso.svuotaCampi();
 	}
 
-	public void tornaAdAvvioDaGestioneUtenti() {
-		gestioneUtenti.setVisible(false);
-		avvio.setVisible(true);
-	}
-
 	// METODI GESTIONE COMPAGNIA AEREA
 
 	public void svuotaCampiCompagniaAerea() {
@@ -201,32 +193,132 @@ public class Controller {
 		menuGestione.setVisible(true);
 	}
 
-	public void tornaAdAvvioDaGestioneCompagniaAeree() {
-		gestioneCompagnieAeree.setVisible(false);
-		avvio.setVisible(true);
-	}
-
 	// METODI GESTIONE TRATTE
 
-	public void svuotaCampiTratte() {
+	public void svuotaCampiTratta() {
 		gestioneTratte.getTxtCodiceTratta().setText("");
 		gestioneTratte.getTxtCittaPartenza().setText("");
 		gestioneTratte.getTxtCittaArrivo().setText("");
-		gestioneTratte.getDateDataPartenza().setDate(null);
-		gestioneTratte.getDateDataArrivo().setDate(null);
-		gestioneTratte.getTxtOrarioPartenza().setText("");
-		gestioneTratte.getTxtOrarioArrivo().setText("");
-		gestioneTratte.getTxtNumeroPrenotazioni().setText(null);
 	}
 
 	public void tornaAMenuGestioneDaGestioneTratte() {
 		gestioneTratte.setVisible(false);
 		menuGestione.setVisible(true);
 	}
+	
+	public TrattaImplementazionePostgresDAO implementazioneTrattaDAO() {
+		TrattaImplementazionePostgresDAO dao = new TrattaImplementazionePostgresDAO();
+		return dao;
+	}
+	
+	public void aggiungiTratta() {
+		trt = new Tratta(gestioneTratte.getTxtCodiceTratta().getText(), gestioneTratte.getTxtCittaPartenza().getText(), gestioneTratte.getTxtCittaArrivo().getText());
+		implementazioneTrattaDAO().aggiungiTratta(trt);
+		gestioneTratte.getModello().addRow(gestioneGate.getRow());
+		svuotaCampiTratta();
+		gestioneTratte.caricamento();
+	}
+	
+	public void eliminaTratta() {
+		trt = new Tratta(gestioneTratte.getTxtCodiceTratta().getText(), gestioneTratte.getTxtCittaPartenza().getText(), gestioneTratte.getTxtCittaArrivo().getText());
+		
+		int t = gestioneTratte.getTable().getSelectedRow();
+		implementazioneTrattaDAO().cancellaTratta(trt);
+		gestioneTratte.getModello().removeRow(t);
+		svuotaCampiTratta();
+		gestioneTratte.caricamento();
+	}
+	
+	public void modificaTratta() {
+		trt = new Tratta(gestioneTratte.getTxtCodiceTratta().getText(), gestioneTratte.getTxtCittaPartenza().getText(), gestioneTratte.getTxtCittaArrivo().getText());
+		
+		int t = gestioneTratte.getTable().getSelectedRow();
+		
+		gestioneTratte.getModello().setValueAt(gestioneTratte.getTxtCodiceTratta().getText(), t, 0);
+		gestioneTratte.getModello().setValueAt(gestioneTratte.getTxtCittaPartenza().getText(), t, 1);
+		gestioneTratte.getModello().setValueAt(gestioneTratte.getTxtCittaArrivo().getText(), t, 2);
+		
+		implementazioneTrattaDAO().modificaTratta(trt);
+		svuotaCampiTratta();
+		gestioneTratte.caricamento();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-	public void tornaAdAvvioDaGestioneTratte() {
-		gestioneTratte.setVisible(false);
-		avvio.setVisible(true);
+	// METODI GESTIONE VOLI
+
+	public void svuotaCampiVolo() {
+		gestioneVoli.getTxtCodiceVolo().setText("");
+		gestioneVoli.getTxtCittaPartenza().setText("");
+		gestioneVoli.getTxtCittaArrivo().setText("");
+		gestioneVoli.getDateDataPartenza().setDate(null);
+		gestioneVoli.getDateDataArrivo().setDate(null);
+		gestioneVoli.getTxtOrarioPartenza().setText("");
+		gestioneVoli.getTxtOrarioArrivo().setText("");
+		gestioneVoli.getTxtNumeroPrenotazioni().setText(null);
+	}
+
+	public void tornaAMenuGestioneDaGestioneVoli() {
+		gestioneVoli.setVisible(false);
+		menuGestione.setVisible(true);
+	}
+
+	public VoloImplementazionePostgresDAO implementazioneVoloDAO() {
+		VoloImplementazionePostgresDAO dao = new VoloImplementazionePostgresDAO();
+		return dao;
+	}
+
+	public void aggiungiVolo() {
+		vl = new Volo(gestioneVoli.getTxtCodiceVolo().getText(), gestioneVoli.getTxtCittaPartenza().getText(), gestioneVoli.getTxtCittaArrivo().getText(),
+				gestioneVoli.getDateDataPartenza().getDate(), gestioneVoli.getDateDataArrivo().getDate(), gestioneVoli.getTxtOrarioPartenza().getText(),
+				gestioneVoli.getTxtOrarioArrivo().getText(), gestioneVoli.getTxtNumeroPrenotazioni().getText());
+
+		implementazioneVoloDAO().aggiungiVolo(vl);
+		gestioneVoli.getModello().addRow(gestioneVoli.getRow());
+		svuotaCampiVolo();
+		gestioneVoli.caricamento();
+	}
+	
+	public void eliminaVolo() {
+		vl = new Volo(gestioneVoli.getTxtCodiceVolo().getText(), gestioneVoli.getTxtCittaPartenza().getText(), gestioneVoli.getTxtCittaArrivo().getText(),
+				gestioneVoli.getDateDataPartenza().getDate(), gestioneVoli.getDateDataArrivo().getDate(), gestioneVoli.getTxtOrarioPartenza().getText(),
+				gestioneVoli.getTxtOrarioArrivo().getText(), gestioneVoli.getTxtNumeroPrenotazioni().getText());
+		
+		int t = gestioneVoli.getTable().getSelectedRow();
+		implementazioneVoloDAO().cancellaVolo(vl);
+		gestioneVoli.getModello().removeRow(t);
+		svuotaCampiVolo();
+		gestioneVoli.caricamento();
+	}
+	
+	public void modificaVolo() {
+		vl = new Volo(gestioneVoli.getTxtCodiceVolo().getText(), gestioneVoli.getTxtCittaPartenza().getText(), gestioneVoli.getTxtCittaArrivo().getText(),
+				gestioneVoli.getDateDataPartenza().getDate(), gestioneVoli.getDateDataArrivo().getDate(), gestioneVoli.getTxtOrarioPartenza().getText(),
+				gestioneVoli.getTxtOrarioArrivo().getText(), gestioneVoli.getTxtNumeroPrenotazioni().getText());
+		
+		int t = gestioneVoli.getTable().getSelectedRow();
+		
+		gestioneVoli.getModello().setValueAt(gestioneVoli.getTxtCodiceVolo().getText(), t, 0);
+		gestioneVoli.getModello().setValueAt(gestioneVoli.getTxtCittaPartenza().getText(), t, 1);
+		gestioneVoli.getModello().setValueAt(gestioneVoli.getTxtCittaArrivo().getText(), t, 2);
+		gestioneVoli.getModello().setValueAt(gestioneVoli.getDateDataPartenza().getDate(), t, 3);
+		gestioneVoli.getModello().setValueAt(gestioneVoli.getDateDataArrivo().getDate(), t, 4);
+		gestioneVoli.getModello().setValueAt(gestioneVoli.getTxtOrarioPartenza().getText(), t, 5);
+		gestioneVoli.getModello().setValueAt(gestioneVoli.getTxtOrarioArrivo().getText(), t, 6);
+		gestioneVoli.getModello().setValueAt(gestioneVoli.getTxtNumeroPrenotazioni().getText(), t, 7);
+		
+		implementazioneVoloDAO().modificaVolo(vl);
+		svuotaCampiVolo();
+		gestioneVoli.caricamento();
 	}
 
 	// METODI GESTIONE GATE
@@ -242,13 +334,49 @@ public class Controller {
 		gestioneGate.setVisible(false);
 		menuGestione.setVisible(true);
 	}
-
-	public void tornaAdAvvioDaGestioneGate() {
-		gestioneGate.setVisible(false);
-		avvio.setVisible(true);
+	
+	public GateImplementazionePostgresDAO implementazioneGateDAO() {
+		GateImplementazionePostgresDAO dao = new GateImplementazionePostgresDAO();
+		return dao;
 	}
+	
+	public void aggiungiGate() {
+		gt = new Gate(gestioneGate.getTxtCodiceGate().getText(), gestioneGate.getTxtNumeroPorta().getText(), gestioneGate.getTxtInizioImbarco().getText(), gestioneGate.getTxtFineImbarco().getText());
+		implementazioneGateDAO().aggiungiGate(gt);
+		gestioneGate.getModello().addRow(gestioneGate.getRow());
+		svuotaCampiVolo();
+		gestioneGate.caricamento();
+	}
+	
+	public void eliminaGate() {
+		gt = new Gate(gestioneGate.getTxtCodiceGate().getText(), gestioneGate.getTxtNumeroPorta().getText(), gestioneGate.getTxtInizioImbarco().getText(), gestioneGate.getTxtFineImbarco().getText());
+		
+		int t = gestioneGate.getTable().getSelectedRow();
+		implementazioneGateDAO().cancellaGate(gt);
+		gestioneGate.getModello().removeRow(t);
+		svuotaCampiVolo();
+		gestioneGate.caricamento();
+	}
+	
+	public void modificaGate() {
+		gt = new Gate(gestioneGate.getTxtCodiceGate().getText(), gestioneGate.getTxtNumeroPorta().getText(), gestioneGate.getTxtInizioImbarco().getText(), gestioneGate.getTxtFineImbarco().getText());
+		
+		int t = gestioneGate.getTable().getSelectedRow();
+		
+		gestioneGate.getModello().setValueAt(gestioneGate.getTxtCodiceGate().getText(), t, 0);
+		gestioneGate.getModello().setValueAt(gestioneGate.getTxtNumeroPorta().getText(), t, 1);
+		gestioneGate.getModello().setValueAt(gestioneGate.getTxtInizioImbarco().getText(), t, 2);
+		gestioneGate.getModello().setValueAt(gestioneGate.getTxtFineImbarco().getText(), t, 3);
+		
+		implementazioneGateDAO().modificaGate(gt);
+		svuotaCampiGate();
+		gestioneGate.caricamento();
+	}
+	
+	
+	
 
-	// METODI DI RITARDO
+	// METODI DI PROVA
 
 //	@SuppressWarnings("deprecation")
 //	public void calcoloRitardo() {
@@ -306,7 +434,6 @@ public class Controller {
 //		}
 //	}
 
-	// METODI DI PROVA
 //	public int tentativoAccesso() { // controllo credenziali
 //		if (accesso.getTxtUtente().getText().equals("io") && accesso.getTxtPassword().getText().equals("io")) {
 //			return 1;

@@ -114,29 +114,6 @@ public class GestioneCompagnieAeree extends JFrame {
 		lblimgfrecciaIndietro.setBounds(10, 11, 37, 14);
 		contentPane.add(lblimgfrecciaIndietro);
 		
-		JLabel lblimgCasa = new JLabel("");
-		lblimgCasa.addMouseListener(new MouseAdapter() {
-			@Override // clicco sulla casa e torno ad avvio
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.tornaAdAvvioDaGestioneCompagniaAeree();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa2));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblimgCasa.setIcon(new ImageIcon(imgCasa1));
-			}
-		});
-		lblimgCasa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblimgCasa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgCasa.setIcon(new ImageIcon(imgCasa1));
-		lblimgCasa.setBounds(818, 11, 30, 23);
-		contentPane.add(lblimgCasa);
-		
 		JLabel lblNome = new JLabel("nome");
 		lblNome.setBounds(127, 220, 46, 14);
 		contentPane.add(lblNome);

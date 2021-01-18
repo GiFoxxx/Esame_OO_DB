@@ -7,7 +7,7 @@ public interface GateDAO {
 
 	public ArrayList<Object[]> stampaGate();
 
-	public boolean aggiugniGate(Object gate);
+	public boolean aggiungiGate(Object gate);
 
 	public boolean cancellaGate(Object gate);
 

@@ -45,7 +45,7 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 	}
 
 	@Override // aggiungo un gate
-	public boolean aggiugniGate(Object gate) {
+	public boolean aggiungiGate(Object gate) {
 		gt = (Gate) gate;
 		PreparedStatement pst;
 		String sql = "INSERT INTO gate (codiceGate, numeroPorta, inizioImbarco, fineImbarco) VALUES (?, ?, ?, ?)";
