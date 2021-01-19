@@ -61,14 +61,10 @@ public class Accesso extends JFrame {
 	private Image frecciaImpostazioni2 = new ImageIcon(
 			Accesso.class.getResource("immaginiLauncher/frecciaImpostazioni2.png")).getImage().getScaledInstance(35, 35,
 					Image.SCALE_SMOOTH);
-	private Image X1 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/X1.png")).getImage()
-			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image X2 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/X2.png")).getImage()
-			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image minimizza1 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/minimizza1.png")).getImage()
-			.getScaledInstance(16, 5, Image.SCALE_SMOOTH);
-	private Image minimizza2 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/minimizza2.png")).getImage()
-			.getScaledInstance(16, 5, Image.SCALE_SMOOTH);
+	private Image X1 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/X1.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+	private Image X2 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/X2.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+	private Image minimizza1 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/minimizza1.png")).getImage().getScaledInstance(16, 5, Image.SCALE_SMOOTH);
+	private Image minimizza2 = new ImageIcon(Accesso.class.getResource("immaginiLauncher/minimizza2.png")).getImage().getScaledInstance(16, 5, Image.SCALE_SMOOTH);
 
 	private JPanel contentPane;
 

@@ -10,19 +10,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+
 import Classi.Tratta;
+import Classi.Volo;
 
 public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 
 	ConnessioneDatabase db = new ConnessioneDatabase();
 	Tratta trt = new Tratta();
-	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 
 	@SuppressWarnings("finally")
 	@Override // stampa tratte
 	public ArrayList<Object[]> stampaTratte() {
-		ArrayList<Object[]> ListaTratte = new ArrayList<>();
+		ArrayList<Object[]> ListaTratta = new ArrayList<>();
 
 		PreparedStatement pst;
 		ResultSet rs;
@@ -33,17 +34,17 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				Object[] Lista = new Object[8];
-				for (int i = 0; i <= 7; i++) {
+				for (int i = 0; i <= 2; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}
-				ListaTratte.add(Lista);
+				ListaTratta.add(Lista);
 			}
 			db.ConnessioneDB().close();
 
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
 		} finally {
-			return ListaTratte;
+			return ListaTratta;
 		}
 	}
 
@@ -79,8 +80,9 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 	@Override // modifica info tratta
 	public boolean modificaTratta(Object tratta) {
 		trt = (Tratta) tratta;
+		
 		PreparedStatement pst;
-		String sql = "UPDATE tratta SET cittapartenza=?, cittaarrivo=?, datapartenza=?, dataarrivo=?, orariopartenza=?, orarioarrivo=?, numeroprenotazioni=? WHERE codicetratta=?";
+		String sql = "UPDATE tratta SET cittapartenza=?, cittaarrivo=? WHERE codicetratta=?";
 		try {
 			db.ConnessioneDB();
 
@@ -88,14 +90,7 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 
 			pst.setString(1, trt.getCittaPartenza());
 			pst.setString(2, trt.getCittaArrivo());
-			String dataPartenza = sdf.format(trt.getDataPartenza());
-			pst.setString(3, dataPartenza);
-			String dataArrivo = sdf.format(trt.getDataArrivo());
-			pst.setString(4, dataArrivo);
-			pst.setString(5, trt.getOrarioPartenza());
-			pst.setString(6, trt.getOrarioArrivo());
-			pst.setString(7, trt.getNumeroPrenotazioni());
-			pst.setString(8, trt.getCodiceTratta());
+			pst.setString(3, trt.getCodiceTratta());
 
 			
 			int res = pst.executeUpdate();
@@ -117,8 +112,9 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 	@Override // aggiungi tratta
 	public boolean aggiungiTratta(Object tratta) {
 		trt = (Tratta) tratta;
+		
 		PreparedStatement pst;
-		String sql = "INSERT INTO tratta VALUES (?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO tratta (codiceTratta, cittaPartenza, cittaArrivo) VALUES (?,?,?)";
 		try {
 			db.ConnessioneDB();
 
@@ -127,14 +123,7 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 			pst.setString(1, trt.getCodiceTratta());
 			pst.setString(2, trt.getCittaPartenza());
 			pst.setString(3, trt.getCittaArrivo());
-			String dataPartenza = sdf.format(trt.getDataPartenza());
-			pst.setString(4, dataPartenza);
-			String dataArrivo = sdf.format(trt.getDataArrivo());
-			pst.setString(5, dataArrivo);
-			pst.setString(6, trt.getOrarioPartenza());
-			pst.setString(7, trt.getOrarioArrivo());
-			pst.setString(8, trt.getNumeroPrenotazioni());
-
+			
 			int res = pst.executeUpdate();
 
 			if (res > 0) {

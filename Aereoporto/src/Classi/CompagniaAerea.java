@@ -1,10 +1,17 @@
 package Classi;
 
+import java.util.ArrayList;
+
 public class CompagniaAerea {
 	
 	//ATTRIBUTI
 	private String nome;
 	private String codiceCompagniaAerea;
+	
+	ArrayList<ClienteBusiness[]> ClientiBusiness = new ArrayList<>();
+	ArrayList<Tratta[]> Tratte = new ArrayList<>();
+	ArrayList<Volo[]> Voli = new ArrayList<>();
+
 	
 	//GETTER E SETTER
 	public String getNome() {
@@ -38,6 +45,7 @@ public class CompagniaAerea {
 	public String toString() {
 		return "CompagniaAerea [nome=" + nome + ", codiceCompagniaAerea=" + codiceCompagniaAerea + "]";
 	}
+
 
 
 	

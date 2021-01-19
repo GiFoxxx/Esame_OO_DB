@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Component;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.List;
@@ -16,8 +17,10 @@ import ImplementazioniPostrgresDAO.*;
 
 public class Controller {
 
+	Dashboard dashboard;
+	Home home;
+	Prova prova;
 	Accesso accesso;
-
 	Registrazione registrazione;
 	Riconoscimenti riconoscimenti;
 	MenuGestione menuGestione;
@@ -41,7 +44,9 @@ public class Controller {
 
 	// COSTRUTTORE
 	public Controller() { // prima schermata
-
+		prova = new Prova(this);
+		dashboard = new Dashboard(this);
+		home = new Home(this);
 		accesso = new Accesso(this);
 		registrazione = new Registrazione(this);
 		menuGestione = new MenuGestione(this);
@@ -53,7 +58,7 @@ public class Controller {
 		gestioneGate = new GestioneGate(this);
 		gestioneVoli = new GestioneVoli(this);
 		launcher = new Launcher(this);
-		launcher.setVisible(true);
+		dashboard.setVisible(true);
 	}
 
 	// METODI LAUNCHER
@@ -442,6 +447,39 @@ public class Controller {
 		svuotaCampiGate();
 		gestioneGate.caricamento();
 	}
+	
+	//METODI DASHBOARD		
+	public JPanel prova() {
+		Prova prova = new Prova(this);
+		return prova;
+	}
+	
+//	public JPanel accesso() {
+//		Accesso accesso = new Accesso(this);
+//		return accesso;
+//	}
+//	
+//	public JPanel prova() {
+//		Prova prova = new Prova(this);
+//		return prova;
+//	}
+//	
+//	public JPanel prova() {
+//		Prova prova = new Prova(this);
+//		return prova;
+//	}
+//	
+//	public JPanel prova() {
+//		Prova prova = new Prova(this);
+//		return prova;
+//	}
+	
+	
+	public void pannelli(JPanel pane) {
+		pane.setVisible(true);
+		
+	}
+	
 
 	// METODI DI PROVA
 

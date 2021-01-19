@@ -60,7 +60,7 @@ public class VoloImplementazionePostgresDAO implements VoloDAO {
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
-			pst.setString(1, vl.getCodiceVolo());
+//			pst.setString(1, vl.getCodiceVolo());
 
 			int res = pst.executeUpdate();
 
@@ -89,16 +89,16 @@ public class VoloImplementazionePostgresDAO implements VoloDAO {
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
-			pst.setString(1, vl.getCittaPartenza());
-			pst.setString(2, vl.getCittaArrivo());
-			String dataPartenza = sdf.format(vl.getDataPartenza());
-			pst.setString(3, dataPartenza);
-			String dataArrivo = sdf.format(vl.getDataArrivo());
-			pst.setString(4, dataArrivo);
-			pst.setString(5, vl.getOrarioPartenza());
-			pst.setString(6, vl.getOrarioArrivo());
-			pst.setString(7, vl.getNumeroPrenotazioni());
-			pst.setString(8, vl.getCodiceVolo());
+//			pst.setString(1, vl.getCittaPartenza());
+//			pst.setString(2, vl.getCittaArrivo());
+//			String dataPartenza = sdf.format(vl.getDataPartenza());
+//			pst.setString(3, dataPartenza);
+//			String dataArrivo = sdf.format(vl.getDataArrivo());
+//			pst.setString(4, dataArrivo);
+//			pst.setString(5, vl.getOrarioPartenza());
+//			pst.setString(6, vl.getOrarioArrivo());
+//			pst.setString(7, vl.getNumeroPrenotazioni());
+//			pst.setString(8, vl.getCodiceVolo());
 
 			
 			int res = pst.executeUpdate();
@@ -128,16 +128,16 @@ public class VoloImplementazionePostgresDAO implements VoloDAO {
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
-			pst.setString(1, vl.getCodiceVolo());
-			pst.setString(2, vl.getCittaPartenza());
-			pst.setString(3, vl.getCittaArrivo());
-			String dataPartenza = sdf.format(vl.getDataPartenza());
-			pst.setString(4, dataPartenza);
-			String dataArrivo = sdf.format(vl.getDataArrivo());
-			pst.setString(5, dataArrivo);
-			pst.setString(6, vl.getOrarioPartenza());
-			pst.setString(7, vl.getOrarioArrivo());
-			pst.setString(8, vl.getNumeroPrenotazioni());
+//			pst.setString(1, vl.getCodiceVolo());
+//			pst.setString(2, vl.getCittaPartenza());
+//			pst.setString(3, vl.getCittaArrivo());
+//			String dataPartenza = sdf.format(vl.getDataPartenza());
+//			pst.setString(4, dataPartenza);
+//			String dataArrivo = sdf.format(vl.getDataArrivo());
+//			pst.setString(5, dataArrivo);
+//			pst.setString(6, vl.getOrarioPartenza());
+//			pst.setString(7, vl.getOrarioArrivo());
+//			pst.setString(8, vl.getNumeroPrenotazioni());
 
 			int res = pst.executeUpdate();
 

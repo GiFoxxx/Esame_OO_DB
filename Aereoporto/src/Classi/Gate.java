@@ -1,8 +1,13 @@
 package Classi;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Gate {
+
+	ArrayList<CodaDiImbarco[]> CodeDiImbarco = new ArrayList<>();
+	ArrayList<Volo[]> Voli = new ArrayList<>();
+//	Tratta trt = new Tratta();
 
 	// ATTRIBUTI
 	private String codiceGate;

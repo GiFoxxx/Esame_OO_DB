@@ -1,47 +1,48 @@
 package Classi;
 
 public class ClienteBusiness {
+
+	CompagniaAerea ca = new CompagniaAerea();
+	Volo vl = new Volo();
 	
 	// ATTRIBUTI
-		private String Nome;
-		private String Cognome;
-		private String CodiceCentoKilometri;
-		
-		
+	private String Nome;
+	private String Cognome;
+	private String CodiceCentoKilometri;
+	private String Punti;
 
-		// GETTER E SETTER
-		public String getNome() {
-			return Nome;
-		}
+	// GETTER E SETTER
+	public String getNome() {
+		return Nome;
+	}
 
-		public void setNome(String nome) {
-			Nome = nome;
-		}
+	public void setNome(String nome) {
+		Nome = nome;
+	}
 
-		public String getCognome() {
-			return Cognome;
-		}
+	public String getCognome() {
+		return Cognome;
+	}
 
-		public void setCognome(String cognome) {
-			Cognome = cognome;
-		}
+	public void setCognome(String cognome) {
+		Cognome = cognome;
+	}
 
-		public String getCodiceCentoKilometri() {
-			return CodiceCentoKilometri;
-		}
+	public String getCodiceCentoKilometri() {
+		return CodiceCentoKilometri;
+	}
 
-		public void setCodiceCentoKilometri(String codiceCentoKilometri) {
-			CodiceCentoKilometri = codiceCentoKilometri;
-		}
-
-		// COSTRUTTORE
-		public ClienteBusiness(String nome, String cognome, String codiceCentoKilometri) {
-			super();
-			setNome(nome);
-			setCognome(cognome);
-			setCodiceCentoKilometri(codiceCentoKilometri);
-			
-		}
+	public void setCodiceCentoKilometri(String codiceCentoKilometri) {
+		CodiceCentoKilometri = codiceCentoKilometri;
+	}
 	
-
+	// COSTRUTTORE
+	public ClienteBusiness(Classi.CompagniaAerea compagniaAerea, String nome, String cognome,
+			String codiceCentoKilometri, String punti) {
+		super();
+		Nome = nome;
+		Cognome = cognome;
+		CodiceCentoKilometri = codiceCentoKilometri;
+		Punti = punti;
+	}
 }

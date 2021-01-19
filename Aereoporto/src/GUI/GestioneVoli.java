@@ -240,7 +240,7 @@ public class GestioneVoli extends JFrame {
 			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
 						// campi pieni
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoli.tornaAMenuGestioneDaGestioneVoli();
+//				controllerGestioneVoli.tornaAMenuGestioneDaGestioneVoli();
 			}
 
 			@Override
@@ -296,7 +296,7 @@ public class GestioneVoli extends JFrame {
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoli.eliminaVolo();
+//				controllerGestioneVoli.eliminaVolo();
 			}
 		});
 		contentPane.add(btnElimina);
@@ -306,7 +306,7 @@ public class GestioneVoli extends JFrame {
 		btnAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoli.aggiungiVolo();
+//				controllerGestioneVoli.aggiungiVolo();
 			}
 		});
 		contentPane.add(btnAggiungi);
@@ -317,7 +317,7 @@ public class GestioneVoli extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoli.svuotaCampiVolo();
+//				controllerGestioneVoli.svuotaCampiVolo();
 			}
 		});
 		btnNewButton.setBounds(181, 116, 78, 39);
@@ -363,7 +363,7 @@ public class GestioneVoli extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoli.svuotaCampiVolo();
+//				controllerGestioneVoli.svuotaCampiVolo();
 			}
 		});
 		scrollPane.setViewportView(table);
@@ -455,7 +455,7 @@ public class GestioneVoli extends JFrame {
 	}
 	
 	public void  caricamento() {
-		this.ListaVoli = controllerGestioneVoli.implementazioneVoloDAO().stampaVoli();
+//		this.ListaVoli = controllerGestioneVoli.implementazioneVoloDAO().stampaVoli();
 		modello.setNumRows(0);
 		for(Object [] dato : this.ListaVoli) {
 			this.modello.addRow(dato);

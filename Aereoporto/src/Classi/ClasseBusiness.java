@@ -4,6 +4,8 @@ import Classi.CodaDiImbarco;
 
 public class ClasseBusiness extends CodaDiImbarco{
 	
+	
+	
 	boolean Pass;
 	
 	public ClasseBusiness(int numeroPersone, boolean pass) {
