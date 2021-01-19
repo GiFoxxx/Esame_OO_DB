@@ -37,7 +37,6 @@ public class GestioneCompagnieAeree extends JFrame {
 	String colonne[] = {"Nome", "Codice Compagnia aerea"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	CompagniaAereaImplementazionePostgresDAO dao = new CompagniaAereaImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaCompagnieAeree = new ArrayList<>();
 	
 	private Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -59,6 +58,27 @@ public class GestioneCompagnieAeree extends JFrame {
 	private JScrollPane scrollPane;
 	
 	//GETTER E SETTER
+	public DefaultTableModel getModello() {
+		return modello;
+	}
+
+	public void setModello(DefaultTableModel modello) {
+		this.modello = modello;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public Object[] getRow() {
+		return row;
+	}
+
+	
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
@@ -133,15 +153,7 @@ public class GestioneCompagnieAeree extends JFrame {
 		btnModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CompagniaAerea compAerea = new CompagniaAerea(txtNome.getText(), txtCodiceCompagniaAerea.getText());
-				int t = table.getSelectedRow();
-				
-				modello.setValueAt(txtNome.getText(), t, 0);
-				modello.setValueAt(txtCodiceCompagniaAerea.getText(), t, 1);
-				
-				dao.modificaCompagniaAerea(compAerea);
-				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
-				caricamento();
+				controllerGestioneCompagnieAeree.modificaCompagniaAerea();
 			}
 		});
 		contentPane.add(btnModifica);
@@ -151,12 +163,7 @@ public class GestioneCompagnieAeree extends JFrame {
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CompagniaAerea compAerea = new CompagniaAerea(txtNome.getText(), txtCodiceCompagniaAerea.getText());
-				int t = table.getSelectedRow();
-				dao.cancellaCompagniaAerea(compAerea);
-				modello.removeRow(t);
-				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
-				caricamento();
+				controllerGestioneCompagnieAeree.eliminaCompagniaAerea();
 			}
 		});
 		contentPane.add(btnElimina);
@@ -166,11 +173,7 @@ public class GestioneCompagnieAeree extends JFrame {
 		btnAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CompagniaAerea compAerea = new CompagniaAerea(txtNome.getText(), txtCodiceCompagniaAerea.getText());
-				dao.aggiungiCompagniaAerea(compAerea);
-				modello.addRow(row);
-				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
-				caricamento();
+				controllerGestioneCompagnieAeree.aggiungiCompagniaAerea();
 			}
 		});
 		contentPane.add(btnAggiungi);
@@ -219,15 +222,8 @@ public class GestioneCompagnieAeree extends JFrame {
 		
 	}
 	
-
-	private static class __Tmp {
-		private static void __tmp() {
-			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
-		}
-	}
-	
-	private void  caricamento() {
-		this.ListaCompagnieAeree = dao.stampaCompagnieAeree();
+	public void  caricamento() {
+		this.ListaCompagnieAeree = controllerGestioneCompagnieAeree.implementazioneCompagniaAereaDAO().stampaCompagnieAeree();
 		modello.setNumRows(0);
 		for(Object [] dato : this.ListaCompagnieAeree) {
 			this.modello.addRow(dato);

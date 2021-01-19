@@ -36,7 +36,6 @@ public class GestioneUtenti extends JFrame {
 	String colonne[] = {"Nome", "Cognome", "Email", "Password"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
 	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
 	
 	private Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -60,8 +59,27 @@ public class GestioneUtenti extends JFrame {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JButton btnNewButton;
-	
+
 	//GETTER E SETTER
+	public DefaultTableModel getModello() {
+		return modello;
+	}
+
+	public void setModello(DefaultTableModel modello) {
+		this.modello = modello;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public Object[] getRow() {
+		return row;
+	}
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
@@ -170,17 +188,7 @@ public class GestioneUtenti extends JFrame {
 		btnModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Utente utn = new Utente(txtNome.getText(), txtCognome.getText(), txtEmail.getText(), txtPassword.getText());
-				int t = table.getSelectedRow();
-				
-				modello.setValueAt(txtNome.getText(), t, 0);
-				modello.setValueAt(txtCognome.getText(), t, 1);
-				modello.setValueAt(txtEmail.getText(), t, 2);
-				modello.setValueAt(txtPassword.getText(), t, 3);
-
-				dao.modificaUtente(utn);
-				controllerGestioneUtenti.svuotaCampiGestioneUtenti();
-				caricamento();
+				controllerGestioneUtenti.modificaUtente();
 			}
 		});
 		contentPane.add(btnModifica);
@@ -190,12 +198,7 @@ public class GestioneUtenti extends JFrame {
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Utente utn = new Utente(txtNome.getText(), txtCognome.getText(), txtEmail.getText(), txtPassword.getText());
-				int t = table.getSelectedRow();
-				dao.cancellaUtente(utn);
-				modello.removeRow(t);
-				controllerGestioneUtenti.svuotaCampiGestioneUtenti();
-				caricamento();
+				controllerGestioneUtenti.eliminaUtente();
 			}
 		});
 		contentPane.add(btnElimina);
@@ -205,11 +208,7 @@ public class GestioneUtenti extends JFrame {
 		btnAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Utente utn = new Utente(txtNome.getText(), txtCognome.getText(), txtEmail.getText(), txtPassword.getText());
-				dao.registrazioneUtente(utn);
-				modello.addRow(row);
-				controllerGestioneUtenti.svuotaCampiGestioneUtenti();
-				caricamento();
+				controllerGestioneUtenti.aggiungiUtente();
 			}
 		});
 		contentPane.add(btnAggiungi);
@@ -249,15 +248,8 @@ public class GestioneUtenti extends JFrame {
 		
 	}
 	
-
-	private static class __Tmp {
-		private static void __tmp() {
-			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
-		}
-	}
-	
-	private void  caricamento() {
-		this.ListaUtenti = dao.stampaUtenti();
+	public void  caricamento() {
+		this.ListaUtenti = controllerGestioneUtenti.implementazioneUtenteDAO().stampaUtenti();
 		modello.setNumRows(0);
 		for(Object [] dato : this.ListaUtenti) {
 			this.modello.addRow(dato);
