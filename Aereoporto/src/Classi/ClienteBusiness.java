@@ -37,8 +37,7 @@ public class ClienteBusiness {
 	}
 	
 	// COSTRUTTORE
-	public ClienteBusiness(Classi.CompagniaAerea compagniaAerea, String nome, String cognome,
-			String codiceCentoKilometri, String punti) {
+	public ClienteBusiness(CompagniaAerea compagniaAerea, String nome, String cognome, String codiceCentoKilometri, String punti) {
 		super();
 		Nome = nome;
 		Cognome = cognome;

@@ -14,6 +14,11 @@ public class Tratta {
 	private String codiceTratta;
 	private String cittaPartenza;
 	private String cittaArrivo;
+	private Date dataPartenza;
+	private Date dataArrivo;
+	private String orarioPartenza;
+	private String orarioArrivo;
+	
 
 	// GETTER E SETTER
 	public String getCodiceTratta() {
@@ -40,15 +45,53 @@ public class Tratta {
 		this.cittaArrivo = cittaArrivo;
 	}
 
+	public Date getDataPartenza() {
+		return dataPartenza;
+	}
+
+	public void setDataPartenza(Date dataPartenza) {
+		this.dataPartenza = dataPartenza;
+	}
+
+	public Date getDataArrivo() {
+		return dataArrivo;
+	}
+
+	public void setDataArrivo(Date dataArrivo) {
+		this.dataArrivo = dataArrivo;
+	}
+
+	public String getOrarioPartenza() {
+		return orarioPartenza;
+	}
+
+	public void setOrarioPartenza(String orarioPartenza) {
+		this.orarioPartenza = orarioPartenza;
+	}
+
+	public String getOrarioArrivo() {
+		return orarioArrivo;
+	}
+
+	public void setOrarioArrivo(String orarioArrivo) {
+		this.orarioArrivo = orarioArrivo;
+	}
+
 	// COSTRUTTORI
-	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo) {
+	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo, Date dataPartenza, Date dataArrivo, String orarioPartenza, String orarioArrivo) {
 		super();
 		this.codiceTratta = codiceTratta;
 		this.cittaPartenza = cittaPartenza;
 		this.cittaArrivo = cittaArrivo;
+		this.dataPartenza = dataPartenza;
+		this.dataArrivo = dataArrivo;
+		this.orarioPartenza = orarioPartenza;
+		this.orarioArrivo = orarioArrivo;
 	}
 
 	public Tratta() {
 		super();
 	}
+
+	
 }

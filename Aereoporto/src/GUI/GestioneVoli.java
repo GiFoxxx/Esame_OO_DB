@@ -455,7 +455,7 @@ public class GestioneVoli extends JFrame {
 	}
 	
 	public void  caricamento() {
-//		this.ListaVoli = controllerGestioneVoli.implementazioneVoloDAO().stampaVoli();
+		this.ListaVoli = controllerGestioneVoli.implementazioneVoloDAO().stampaVoli();
 		modello.setNumRows(0);
 		for(Object [] dato : this.ListaVoli) {
 			this.modello.addRow(dato);

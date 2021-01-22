@@ -84,7 +84,7 @@ public class MenuGestione extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerMenuGestione.vaiAGestioneGateDaMenuGestione();
+				controllerMenuGestione.vaiAGateDaMenuGestione();
 			}
 		});
 		
@@ -100,7 +100,7 @@ public class MenuGestione extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerMenuGestione.vaiAGestioneTrattaDaMenuGestione();
+//				controllerMenuGestione.vaiAGestioneTrattaDaMenuGestione();
 			}
 		});
 		btnTratte.setForeground(Color.WHITE);
@@ -129,7 +129,7 @@ public class MenuGestione extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerMenuGestione.vaiAGestioneCompagniaAereaDaMenuGestione();
+//				controllerMenuGestione.vaiAGestioneCompagniaAereaDaMenuGestione();
 			}
 		});
 		btnCompagnieAereeAffiliate.setForeground(Color.WHITE);
@@ -161,7 +161,7 @@ public class MenuGestione extends JFrame {
 		lblTornaAdAccesso.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerMenuGestione.tornaAdAccessoDaMenuGestione();
+//				controllerMenuGestione.tornaAdAccessoDaMenuGestione();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -191,7 +191,7 @@ public class MenuGestione extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerMenuGestione.vaiAGestioneVoliDaMenuGestione();
+//				controllerMenuGestione.vaiAGestioneVoliDaMenuGestione();
 			}
 		});
 		btnVoli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

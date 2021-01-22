@@ -58,24 +58,21 @@ import javax.swing.event.ChangeEvent;
 
 public class GestioneTratte extends JFrame {
 
-	String colonne[] = {"Codice Tratta", "Citta Partenza", "Citta Arrivo"};
+	String colonne[] = {"Codice Tratta", "Citta Partenza", "Citta Arrivo", "Data Partenza", "Data Arrivo", "Orario Partenza", "Orario Arrivo"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaTratte = new ArrayList<>();
 	
 	private Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 	private Image imgfrecciaIndietro2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgCasa1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgCasa2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-
-	private JPanel contentPane;
+	
 	private JLabel lblCittaPartenza = new JLabel("Citta Partenza");
 	private JTextField txtCittaPartenza = new JTextField();
 	private JTextField txtCodiceTratta;
 	private JButton btnModifica;
 	private JButton btnElimina;
 	private JButton btnAggiungi;
-	private JButton btnNewButton;
+	
 	private JButton btnSvuota;
 	private JTable table;
 	private JScrollPane scrollPane;
@@ -95,6 +92,14 @@ public class GestioneTratte extends JFrame {
 	
 	
 	Controller controllerGestioneTratte;
+	private JDateChooser dateDataPartenza;
+	private JDateChooser dateDataArrivo;
+	private JTextField txtOrarioPartenza;
+	private JTextField txtOrarioArrivo;
+	private JLabel lblOrarioArrivo;
+	private JLabel lblOrarioPartenza;
+	private JLabel lblDataArrivo;
+	private JLabel lblDataPartenza;
 	
 	
 	//GETTER E SETTER
@@ -135,23 +140,54 @@ public class GestioneTratte extends JFrame {
 		this.txtCittaArrivo = txtCittaArrivo;
 	}
 
-	
-
 	public JTextField getTxtCittaPartenza() {
 		return txtCittaPartenza;
 	}
 	
+	public JDateChooser getDateDataPartenza() {
+		return dateDataPartenza;
+	}
+
+	public void setDateDataPartenza(JDateChooser dateDataPartenza) {
+		this.dateDataPartenza = dateDataPartenza;
+	}
+
+	public JDateChooser getDateDataArrivo() {
+		return dateDataArrivo;
+	}
+
+	public void setDateDataArrivo(JDateChooser dateDataArrivo) {
+		this.dateDataArrivo = dateDataArrivo;
+	}
+
+	public JTextField getTxtOrarioPartenza() {
+		return txtOrarioPartenza;
+	}
+
+	public void setTxtOrarioPartenza(JTextField txtfldOrarioPartenza) {
+		this.txtOrarioPartenza = txtfldOrarioPartenza;
+	}
+
+	public JTextField getTxtOrarioArrivo() {
+		return txtOrarioArrivo;
+	}
+
+	public void setTxtOrarioArrivo(JTextField txtfldOrarioArrivo) {
+		this.txtOrarioArrivo = txtfldOrarioArrivo;
+	}
+
+	public void setTxtCittaPartenza(JTextField txtCittaPartenza) {
+		this.txtCittaPartenza = txtCittaPartenza;
+	}
+
 	//CREAZIONE GUI
 	public GestioneTratte(Controller controller) {
 			
 		controllerGestioneTratte=controller;
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 916, 479);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBounds(0, 0, 904, 635);
+		setVisible(false);
+		getContentPane().setLayout(null);
 		
 		JLabel lblimgfrecciaIndietro = new JLabel("");
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
@@ -159,7 +195,7 @@ public class GestioneTratte extends JFrame {
 			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
 						// campi pieni
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneTratte.tornaAMenuGestioneDaGestioneTratte();
+//				controllerGestioneTratte.tornaAMenuGestioneDaGestioneTratte();
 			}
 
 			@Override
@@ -174,6 +210,39 @@ public class GestioneTratte extends JFrame {
 
 			}
 		});
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(326, 35, 544, 427);
+		getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int t = table.getSelectedRow();
+				
+				txtCodiceTratta.setText(modello.getValueAt(t, 0).toString());
+				txtCittaPartenza.setText(modello.getValueAt(t, 1).toString());
+				txtCittaArrivo.setText(modello.getValueAt(t, 2).toString());
+				try {
+					java.util.Date datePartenza = new SimpleDateFormat("dd-MM-yyyy").parse((String) modello.getValueAt(t,3));
+					dateDataPartenza.setDate(datePartenza);
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+				try {
+					java.util.Date dateArrivo = new SimpleDateFormat("dd-MM-yyyy").parse((String) modello.getValueAt(t,4));
+					dateDataArrivo.setDate(dateArrivo);
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+				txtOrarioPartenza.setText(modello.getValueAt(t, 5).toString());
+				txtOrarioArrivo.setText(modello.getValueAt(t, 6).toString());
+			}
+		});
+		table.setModel(modello);
+		
+		scrollPane.setViewportView(table);
 		lblimgfrecciaIndietro.setBorder(null);
 		lblimgfrecciaIndietro.setBackground(new Color(70, 130, 180));
 		lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
@@ -182,20 +251,22 @@ public class GestioneTratte extends JFrame {
 		lblimgfrecciaIndietro.setFont(new Font("Arial", Font.BOLD, 11));
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setBounds(10, 11, 37, 14);
-		contentPane.add(lblimgfrecciaIndietro);
+		getContentPane().add(lblimgfrecciaIndietro);
 		
 		JLabel lblCodiceTratta = new JLabel("Codice Tratta");
+		lblCodiceTratta.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceTratta.setBounds(32, 209, 114, 20);
-		contentPane.add(lblCodiceTratta);
+		getContentPane().add(lblCodiceTratta);
+		lblCittaPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCittaPartenza.setBounds(32, 239, 114, 20);
-		contentPane.add(lblCittaPartenza);
+		getContentPane().add(lblCittaPartenza);
 		
 		txtCodiceTratta = new JTextField();
 		txtCodiceTratta.setBounds(180, 209, 133, 20);
-		contentPane.add(txtCodiceTratta);
+		getContentPane().add(txtCodiceTratta);
 		txtCodiceTratta.setColumns(10);
 		txtCittaPartenza.setBounds(180, 240, 133, 20);
-		contentPane.add(txtCittaPartenza);
+		getContentPane().add(txtCittaPartenza);
 		txtCittaPartenza.setColumns(10);
 		
 		btnModifica = new JButton("modifica");
@@ -206,7 +277,7 @@ public class GestioneTratte extends JFrame {
 				controllerGestioneTratte.modificaTratta();
 			}
 		});
-		contentPane.add(btnModifica);
+		getContentPane().add(btnModifica);
 		
 		btnElimina = new JButton("elimina");
 		btnElimina.setBounds(44, 80, 89, 23);
@@ -216,7 +287,7 @@ public class GestioneTratte extends JFrame {
 				controllerGestioneTratte.eliminaTratta();
 			}
 		});
-		contentPane.add(btnElimina);
+		getContentPane().add(btnElimina);
 		
 		btnAggiungi = new JButton("aggiungi");
 		btnAggiungi.setBounds(156, 80, 89, 23);
@@ -226,7 +297,7 @@ public class GestioneTratte extends JFrame {
 				controllerGestioneTratte.aggiungiTratta();
 			}
 		});
-		contentPane.add(btnAggiungi);
+		getContentPane().add(btnAggiungi);
 		
 		modello.setColumnIdentifiers(colonne);
 		
@@ -238,38 +309,19 @@ public class GestioneTratte extends JFrame {
 			}
 		});
 		btnSvuota.setBounds(181, 116, 78, 39);
-		contentPane.add(btnSvuota);
-		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(326, 35, 549, 394);
-		contentPane.add(scrollPane);
-				
-		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int t = table.getSelectedRow();
-				
-				txtCodiceTratta.setText(modello.getValueAt(t, 0).toString());
-				txtCittaPartenza.setText(modello.getValueAt(t, 1).toString());
-				txtCittaArrivo.setText(modello.getValueAt(t, 2).toString());
-			}
-		});
+		getContentPane().add(btnSvuota);
 		
 		modello.setColumnIdentifiers(colonne);
-		table.setModel(modello);
-
-		
-		scrollPane.setViewportView(table);
 		
 		lblCittaArrivo = new JLabel("Citta Arrivo");
+		lblCittaArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCittaArrivo.setBounds(32, 277, 114, 20);
-		contentPane.add(lblCittaArrivo);
+		getContentPane().add(lblCittaArrivo);
 		
 		txtCittaArrivo = new JTextField();
 		txtCittaArrivo.setColumns(10);
 		txtCittaArrivo.setBounds(180, 277, 133, 20);
-		contentPane.add(txtCittaArrivo);
+		getContentPane().add(txtCittaArrivo);
 		
 		btnCalcolaRitardo = new JButton("Calcola Ritardo");
 		btnCalcolaRitardo.addMouseListener(new MouseAdapter() {
@@ -279,10 +331,47 @@ public class GestioneTratte extends JFrame {
 			}
 		});
 		btnCalcolaRitardo.setBounds(95, 175, 133, 23);
-		contentPane.add(btnCalcolaRitardo);
+		getContentPane().add(btnCalcolaRitardo);
+		
+		dateDataPartenza = new JDateChooser();
+		dateDataPartenza.setBounds(179, 312, 133, 23);
+		getContentPane().add(dateDataPartenza);
+		
+		dateDataArrivo = new JDateChooser();
+		dateDataArrivo.setBounds(179, 350, 133, 23);
+		getContentPane().add(dateDataArrivo);
+		
+		txtOrarioPartenza = new JTextField();
+		txtOrarioPartenza.setColumns(10);
+		txtOrarioPartenza.setBounds(179, 392, 133, 20);
+		getContentPane().add(txtOrarioPartenza);
+		
+		txtOrarioArrivo = new JTextField();
+		txtOrarioArrivo.setColumns(10);
+		txtOrarioArrivo.setBounds(179, 432, 133, 20);
+		getContentPane().add(txtOrarioArrivo);
+		
+		lblOrarioArrivo = new JLabel("Orario Arrivo");
+		lblOrarioArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblOrarioArrivo.setBounds(31, 432, 114, 20);
+		getContentPane().add(lblOrarioArrivo);
+		
+		lblOrarioPartenza = new JLabel("Orario Partenza");
+		lblOrarioPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblOrarioPartenza.setBounds(31, 392, 114, 20);
+		getContentPane().add(lblOrarioPartenza);
+		
+		lblDataArrivo = new JLabel("Data Arrivo");
+		lblDataArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDataArrivo.setBounds(31, 350, 114, 20);
+		getContentPane().add(lblDataArrivo);
+		
+		lblDataPartenza = new JLabel("Data Partenza");
+		lblDataPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDataPartenza.setBounds(31, 312, 114, 20);
+		getContentPane().add(lblDataPartenza);
 		
 		caricamento();
-		
 	}
 
 	
@@ -292,6 +381,6 @@ public class GestioneTratte extends JFrame {
 		for(Object [] dato : this.ListaTratte) {
 			this.modello.addRow(dato);
 		}
-		table.setModel(modello);
+		table.setModel(modello);		
 	}
 }

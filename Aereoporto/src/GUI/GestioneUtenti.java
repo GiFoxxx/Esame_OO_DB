@@ -3,6 +3,7 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,18 +31,25 @@ import java.awt.event.MouseEvent;
 import java.awt.print.PrinterException;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 public class GestioneUtenti extends JFrame {
 
-	String colonne[] = {"Nome", "Cognome", "Email", "Password"};
+	String colonne[] = { "Nome", "Cognome", "Email", "Password" };
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
-	
-	private Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgfrecciaIndietro2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgCasa1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgCasa2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+
+	private Image imgfrecciaIndietro1 = new ImageIcon(
+			Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage()
+					.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgfrecciaIndietro2 = new ImageIcon(
+			Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro2.png")).getImage()
+					.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgCasa1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa1.png"))
+			.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgCasa2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa2.png"))
+			.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
 	private JPanel contentPane;
 	private final JLabel lblCognome = new JLabel("cognome");
@@ -60,7 +68,7 @@ public class GestioneUtenti extends JFrame {
 	private JScrollPane scrollPane;
 	private JButton btnNewButton;
 
-	//GETTER E SETTER
+	// GETTER E SETTER
 	public DefaultTableModel getModello() {
 		return modello;
 	}
@@ -80,6 +88,7 @@ public class GestioneUtenti extends JFrame {
 	public Object[] getRow() {
 		return row;
 	}
+
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
@@ -107,26 +116,27 @@ public class GestioneUtenti extends JFrame {
 	public JTextField getTxtCognome() {
 		return txtCognome;
 	}
-	
-	//CREAZIONE GUI
+
+	// CREAZIONE GUI
 	public GestioneUtenti(Controller controller) {
-			
-		controllerGestioneUtenti=controller;
-		
+
+		controllerGestioneUtenti = controller;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 650);
+		setBounds(100, 100, 904, 635);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		setUndecorated(true);
+
 		JLabel lblimgfrecciaIndietro = new JLabel("");
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
 			// Click sulla freccia in alto a sinistra
 			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
 						// campi pieni
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneUtenti.tornaAdAccessoDaGestioneUtenti();
+//				controllerGestioneUtenti.tornaAdAccessoDaGestioneUtenti();
 			}
 
 			@Override
@@ -150,21 +160,21 @@ public class GestioneUtenti extends JFrame {
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setBounds(10, 11, 37, 14);
 		contentPane.add(lblimgfrecciaIndietro);
-		
+
 		JLabel lblNome = new JLabel("nome");
 		lblNome.setBounds(131, 231, 46, 14);
 		contentPane.add(lblNome);
 		lblCognome.setBounds(127, 256, 60, 27);
 		contentPane.add(lblCognome);
-		
+
 		lblEmail = new JLabel("email");
 		lblEmail.setBounds(131, 294, 46, 14);
 		contentPane.add(lblEmail);
-		
+
 		lblPassword = new JLabel("password");
 		lblPassword.setBounds(127, 326, 46, 14);
 		contentPane.add(lblPassword);
-		
+
 		txtNome = new JTextField();
 		txtNome.setBounds(221, 217, 133, 20);
 		contentPane.add(txtNome);
@@ -172,17 +182,17 @@ public class GestioneUtenti extends JFrame {
 		txtCognome.setBounds(221, 248, 157, 20);
 		contentPane.add(txtCognome);
 		txtCognome.setColumns(10);
-		
+
 		txtEmail = new JTextField();
 		txtEmail.setBounds(210, 291, 144, 20);
 		txtEmail.setColumns(10);
 		contentPane.add(txtEmail);
-		
+
 		txtPassword = new JTextField();
 		txtPassword.setBounds(221, 320, 133, 20);
 		txtPassword.setColumns(10);
 		contentPane.add(txtPassword);
-		
+
 		btnModifica = new JButton("modifica");
 		btnModifica.setBounds(32, 124, 89, 23);
 		btnModifica.addMouseListener(new MouseAdapter() {
@@ -192,7 +202,7 @@ public class GestioneUtenti extends JFrame {
 			}
 		});
 		contentPane.add(btnModifica);
-		
+
 		btnElimina = new JButton("elimina");
 		btnElimina.setBounds(44, 80, 89, 23);
 		btnElimina.addMouseListener(new MouseAdapter() {
@@ -202,7 +212,7 @@ public class GestioneUtenti extends JFrame {
 			}
 		});
 		contentPane.add(btnElimina);
-		
+
 		btnAggiungi = new JButton("aggiungi");
 		btnAggiungi.setBounds(156, 80, 89, 23);
 		btnAggiungi.addMouseListener(new MouseAdapter() {
@@ -212,11 +222,11 @@ public class GestioneUtenti extends JFrame {
 			}
 		});
 		contentPane.add(btnAggiungi);
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(486, 61, 362, 382);
 		contentPane.add(scrollPane);
-		
+
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
@@ -225,15 +235,15 @@ public class GestioneUtenti extends JFrame {
 				txtNome.setText(modello.getValueAt(t, 0).toString());
 				txtCognome.setText(modello.getValueAt(t, 1).toString());
 				txtEmail.setText(modello.getValueAt(t, 2).toString());
-				txtPassword.setText(modello.getValueAt(t, 3).toString());			
+				txtPassword.setText(modello.getValueAt(t, 3).toString());
 			}
 		});
-		
+
 		modello.setColumnIdentifiers(colonne);
 		table.setModel(modello);
 
 		scrollPane.setViewportView(table);
-		
+
 		btnNewButton = new JButton("svuota");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -243,15 +253,20 @@ public class GestioneUtenti extends JFrame {
 		});
 		btnNewButton.setBounds(181, 116, 78, 39);
 		contentPane.add(btnNewButton);
-		
+
 		caricamento();
-		
+
+		// rimozione background java e adattamento al centro dello schermo
+//		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+//		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+//		this.setBackground(new Color(0, 0, 0, 0));
+
 	}
-	
-	public void  caricamento() {
+
+	public void caricamento() {
 		this.ListaUtenti = controllerGestioneUtenti.implementazioneUtenteDAO().stampaUtenti();
 		modello.setNumRows(0);
-		for(Object [] dato : this.ListaUtenti) {
+		for (Object[] dato : this.ListaUtenti) {
 			this.modello.addRow(dato);
 		}
 		table.setModel(modello);

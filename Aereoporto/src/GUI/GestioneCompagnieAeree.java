@@ -109,7 +109,7 @@ public class GestioneCompagnieAeree extends JFrame {
 			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
 						// campi pieni
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.tornaAMenuGestioneDaGestioneCompagniaAeree();
+//				controllerGestioneCompagnieAeree.tornaAMenuGestioneDaGestioneCompagniaAeree();
 			}
 
 			@Override

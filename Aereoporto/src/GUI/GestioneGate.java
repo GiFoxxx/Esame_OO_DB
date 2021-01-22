@@ -36,7 +36,7 @@ import java.awt.Image;
 
 public class GestioneGate extends JFrame {
 
-	String colonne[] = {"Codice Gate", "Numero Porta", "Tempo Inizio Imbarco", "Tempo Fine Imbarco"};
+	String colonne[] = {"Numero Porta", "Tempo Inizio Imbarco", "Tempo Fine Imbarco"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaGate = new ArrayList<>();
@@ -49,7 +49,6 @@ public class GestioneGate extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblNumeroPorta = new JLabel("Numero Porta");
 	private JTextField txtNumeroPorta = new JTextField();
-	private JTextField txtCodiceGate;
 	private JButton btnModifica;
 	private JButton btnElimina;
 	private JButton btnAggiungi;
@@ -94,14 +93,6 @@ public class GestioneGate extends JFrame {
 		this.txtNumeroPorta = txtNumeroPorta;
 	}
 
-	public JTextField getTxtCodiceGate() {
-		return txtCodiceGate;
-	}
-
-	public void setTxtCodiceGate(JTextField txtCodiceGate) {
-		this.txtCodiceGate = txtCodiceGate;
-	}
-
 	public JTextField getTxtInizioImbarco() {
 		return txtInizioImbarco;
 	}
@@ -137,7 +128,7 @@ public class GestioneGate extends JFrame {
 			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
 						// campi pieni
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.tornaAMenuGestioneDaGestioneGate();
+//				controllerGestioneGate.tornaAMenuGestioneDaGestioneGate();
 			}
 
 			@Override
@@ -161,23 +152,14 @@ public class GestioneGate extends JFrame {
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setBounds(10, 11, 37, 14);
 		contentPane.add(lblimgfrecciaIndietro);
-		
-		JLabel lblCodiceGate = new JLabel("Codice Gate");
-		lblCodiceGate.setBounds(32, 209, 114, 20);
-		contentPane.add(lblCodiceGate);
-		lblNumeroPorta.setBounds(32, 239, 114, 20);
+		lblNumeroPorta.setBounds(32, 185, 114, 20);
 		contentPane.add(lblNumeroPorta);
-		
-		txtCodiceGate = new JTextField();
-		txtCodiceGate.setBounds(180, 209, 133, 20);
-		contentPane.add(txtCodiceGate);
-		txtCodiceGate.setColumns(10);
-		txtNumeroPorta.setBounds(180, 240, 133, 20);
+		txtNumeroPorta.setBounds(180, 186, 133, 20);
 		contentPane.add(txtNumeroPorta);
 		txtNumeroPorta.setColumns(10);
 		
 		btnModifica = new JButton("modifica");
-		btnModifica.setBounds(32, 124, 89, 23);
+		btnModifica.setBounds(32, 122, 89, 23);
 		btnModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -187,7 +169,7 @@ public class GestioneGate extends JFrame {
 		contentPane.add(btnModifica);
 		
 		btnElimina = new JButton("elimina");
-		btnElimina.setBounds(44, 80, 89, 23);
+		btnElimina.setBounds(44, 78, 89, 23);
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -197,7 +179,7 @@ public class GestioneGate extends JFrame {
 		contentPane.add(btnElimina);
 		
 		btnAggiungi = new JButton("aggiungi");
-		btnAggiungi.setBounds(156, 80, 89, 23);
+		btnAggiungi.setBounds(156, 78, 89, 23);
 		btnAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -215,7 +197,7 @@ public class GestioneGate extends JFrame {
 				controllerGestioneGate.svuotaCampiGate();
 			}
 		});
-		btnSvuota.setBounds(181, 116, 78, 39);
+		btnSvuota.setBounds(181, 114, 78, 39);
 		contentPane.add(btnSvuota);
 		
 		scrollPane = new JScrollPane();
@@ -227,10 +209,9 @@ public class GestioneGate extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int t = table.getSelectedRow();
-				txtCodiceGate.setText(modello.getValueAt(t, 0).toString());
-				txtNumeroPorta.setText(modello.getValueAt(t, 1).toString());
-				txtInizioImbarco.setText(modello.getValueAt(t, 2).toString());
-				txtFineImbarco.setText(modello.getValueAt(t, 3).toString());
+				txtNumeroPorta.setText(modello.getValueAt(t, 0).toString());
+				txtInizioImbarco.setText(modello.getValueAt(t, 1).toString());
+				txtFineImbarco.setText(modello.getValueAt(t, 2).toString());
 			}
 		});
 		
@@ -241,21 +222,21 @@ public class GestioneGate extends JFrame {
 		
 		
 		lblInizioImbarco = new JLabel("Inizio Imbarco");
-		lblInizioImbarco.setBounds(32, 277, 114, 20);
+		lblInizioImbarco.setBounds(32, 223, 114, 20);
 		contentPane.add(lblInizioImbarco);
 		
 		txtInizioImbarco = new JTextField();
 		txtInizioImbarco.setColumns(10);
-		txtInizioImbarco.setBounds(180, 277, 133, 20);
+		txtInizioImbarco.setBounds(180, 223, 133, 20);
 		contentPane.add(txtInizioImbarco);
 		
 		lblFineImbarco = new JLabel("Fine Imbarco");
-		lblFineImbarco.setBounds(32, 319, 114, 20);
+		lblFineImbarco.setBounds(32, 265, 114, 20);
 		contentPane.add(lblFineImbarco);
 		
 		txtFineImbarco = new JTextField();
 		txtFineImbarco.setColumns(10);
-		txtFineImbarco.setBounds(180, 319, 133, 20);
+		txtFineImbarco.setBounds(180, 265, 133, 20);
 		contentPane.add(txtFineImbarco);
 		
 		caricamento();

@@ -17,12 +17,13 @@ public class Gate {
 
 	// GETTER E SETTER
 	
+	
 	public String getCodiceGate() {
 		return codiceGate;
 	}
 
-	public void setCodiceGate(String codiceGate) {
-		this.codiceGate = codiceGate;
+	public void setCodiceGate(String condiceGate) {
+		this.codiceGate = condiceGate;
 	}
 
 	public String getNumeroPorta() {
@@ -57,17 +58,19 @@ public class Gate {
 
 	public Gate(String codiceGate, String numeroPorta, String inizioImbarco, String fineImbarco) {
 		super();
-		this.numeroPorta = numeroPorta;
 		this.codiceGate = codiceGate;
+		this.numeroPorta = numeroPorta;
 		this.inizioImbarco = inizioImbarco;
 		this.fineImbarco = fineImbarco;
 	}
 
 	@Override
 	public String toString() {
-		return "Gate [numeroPorta=" + numeroPorta + ", codiceGate=" + codiceGate + ", inizioImbarco=" + inizioImbarco
+		return "Gate [codiceGate=" + codiceGate + ", numeroPorta=" + numeroPorta + ", inizioImbarco=" + inizioImbarco
 				+ ", fineImbarco=" + fineImbarco + "]";
 	}
+
+	
 	
 
 }

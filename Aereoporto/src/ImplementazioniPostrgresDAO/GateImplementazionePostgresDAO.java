@@ -80,7 +80,7 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 		gt = (Gate) gate;
 
 		PreparedStatement pst;
-		String sql = "DELETE FROM gate WHERE codicegate = ?";
+		String sql = "DELETE FROM gate WHERE codiceGate = ?";
 		try {
 			db.ConnessioneDB();
 
@@ -108,7 +108,7 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 	public boolean modificaGate(Object gate) {
 		gt = (Gate) gate;
 		PreparedStatement pst;
-		String sql = "UPDATE gate SET numeroporta=?, inizioimbarco=?, fineimbarco=? WHERE codicegate=?";
+		String sql = "UPDATE gate SET numeroporta = ?, inizioimbarco = ?, fineimbarco = ? WHERE codiceGate = ?";
 		try {
 			db.ConnessioneDB();
 

@@ -1,345 +1,308 @@
 package GUI;
 
-import java.awt.BorderLayout;
-
-import Amministrazione.Utente;
-import Amministrazione.UtenteImplementazionePostgresDAO;
-
-import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Controller.Controller;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.Font;
-import java.awt.Image;
-
-import javax.swing.SwingConstants;
-import javax.swing.JInternalFrame;
-import javax.swing.JDesktopPane;
-import javax.swing.JDialog;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import java.awt.Dimension;
-import java.awt.Point;
-import Database.ConnessioneDatabase;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import Amministrazione.*;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Color;
 import java.awt.Cursor;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
+
+import javax.swing.SwingConstants;
+
+import Amministrazione.Utente;
+import Controller.Controller;
+
+import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import javax.swing.border.BevelBorder;
-import Amministrazione.*;
+import java.awt.SystemColor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class Registrazione extends JFrame {
+public class Registrazione extends JPanel {
 
-	UtenteImplementazionePostgresDAO dao = new UtenteImplementazionePostgresDAO();
-	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
+	private Image inserimentoCredenziali = new ImageIcon(
+			Accesso.class.getResource("immaginiRegistrazione/inserimentoCredenziali.png")).getImage()
+					.getScaledInstance(370, 470, Image.SCALE_SMOOTH);
+	private Image mostraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/mostraPassword.png"))
+			.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+	private Image censuraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/censuraPassword.png"))
+			.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+	private Image registrati1 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/registrati1.png")).getImage()
+			.getScaledInstance(160, 53, Image.SCALE_SMOOTH);
+	private Image registrati2 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/registrati2.png")).getImage()
+			.getScaledInstance(160, 53, Image.SCALE_SMOOTH);
 
-	private Image imgsfondoRegistrazione = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgsfondoRegistrazione.jpg")).getImage().getScaledInstance(500, 288, Image.SCALE_SMOOTH);
-	private Image imgCasa1 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgCasa2 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-
-	private JPanel contentPane;
-	private JTextField txtfldNome;
-	private JTextField txtRegistrati;
-
-	private JTextField txtfldCognome;
-	private JTextField txtfldEmail;
-	private JPasswordField txtfldPassword;
-
-	// GETTER E SETTER
-	public JTextField getTxtfldNome() {
-		return txtfldNome;
+	Color sfondo = new Color(54, 57, 63);
+	Color scritte = new Color(141, 142, 146);
+	
+	
+	private JTextField txtNome;
+	private JTextField txtCognome;
+	private JTextField txtEmail;
+	private JPasswordField txtPassword;
+	private JPasswordField txtRipetiPassword;
+	
+	//GETTER E SETTER
+	
+	public JTextField getTxtNome() {
+		return txtNome;
 	}
 
-	public void setTxtfldNome(JTextField txtfldNome) {
-		this.txtfldNome = txtfldNome;
+	public void setTxtNome(JTextField txtNome) {
+		this.txtNome = txtNome;
 	}
 
-	public JTextField getTxtfldCognome() {
-		return txtfldCognome;
+	public JTextField getTxtCognome() {
+		return txtCognome;
 	}
 
-	public void setTxtfldCognome(JTextField txtfldCognome) {
-		this.txtfldCognome = txtfldCognome;
+	public void setTxtCognome(JTextField txtCognome) {
+		this.txtCognome = txtCognome;
 	}
 
-	public JTextField getTxtfldEmail() {
-		return txtfldEmail;
+	public JTextField getTxtEmail() {
+		return txtEmail;
 	}
 
-	public void setTxtfldEmail(JTextField txtfldEmail) {
-		this.txtfldEmail = txtfldEmail;
+	public void setTxtEmail(JTextField txtEmail) {
+		this.txtEmail = txtEmail;
 	}
 
-	public JPasswordField getTxtfldPassword() {
-		return txtfldPassword;
+	public JPasswordField getTxtPassword() {
+		return txtPassword;
 	}
 
-	public void setTxtfldPassword(JPasswordField txtfldPassword) {
-		this.txtfldPassword = txtfldPassword;
+	public void setTxtPassword(JPasswordField txtPassword) {
+		this.txtPassword = txtPassword;
 	}
 
+	public JPasswordField getTxtRipetiPassword() {
+		return txtRipetiPassword;
+	}
+
+	public void setTxtRipetiPassword(JPasswordField txtRipetiPassword) {
+		this.txtRipetiPassword = txtRipetiPassword;
+	}
+	
 	Controller controllerRegistrazione;
-
+	
 	public Registrazione(Controller controller) {
 		controllerRegistrazione = controller;
 
-		setTitle("Schermata di registrazione");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 340);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		contentPane.setBackground(new Color(0, 52, 75));
-		setUndecorated(true);
-		
-		JButton btnTornaAdAccesso = new JButton("Accedi");
-		btnTornaAdAccesso.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerRegistrazione.tornaAdAccessoDaRegistrazione();
-			}
-			
-			@Override // passo su avanti e cambio colore
-			public void mouseEntered(MouseEvent e) {
-				btnTornaAdAccesso.setBackground(new Color(51, 102, 153));
-			}
+		setBounds(0, 0, 894, 625);
+		setBackground(sfondo);
+		setLayout(null);
 
-			@Override // tolgo da avanti e ritorno al colore
-			public void mouseExited(MouseEvent e) {
-				btnTornaAdAccesso.setBackground(new Color(70, 130, 180));
-			}
-		});
-		
-		JButton lblMin = new JButton("MIN");
-		lblMin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setState(Registrazione.ICONIFIED);			}
-		});
-		lblMin.setBounds(362, 0, 89, 23);
-		contentPane.add(lblMin);
-		
-		btnTornaAdAccesso.setForeground(Color.WHITE);
-		btnTornaAdAccesso.setFont(new Font("Arial", Font.BOLD, 14));
-		btnTornaAdAccesso.setBorder(null);
-		btnTornaAdAccesso.setBackground(new Color(70, 130, 180));
-		btnTornaAdAccesso.setBounds(161, 257, 82, 32);
-		contentPane.add(btnTornaAdAccesso);
-		
-		JLabel lblX = new JLabel("X");
-		lblX.addMouseListener(new MouseAdapter() {
-			@Override // sulla x per chiudere il programma passo sopra e metto il rosso
-			public void mouseEntered(MouseEvent e) {
-				lblX.setForeground(Color.RED);
-			}
-
-			@Override // dalla x per chiudere il programma tolgo da sopra e rimetto il bianco
-			public void mouseExited(MouseEvent e) {
-				lblX.setForeground(Color.WHITE);
-			}
-
-			@Override // clicco sulla X e chiudo il programma
-			public void mouseClicked(MouseEvent e) {
-				Registrazione.this.dispose();
-			}
-		});
-		lblX.setForeground(Color.WHITE);
-		lblX.setFont(new Font("Arial", Font.BOLD, 15));
-		lblX.setHorizontalAlignment(SwingConstants.CENTER);
-		lblX.setBounds(476, -1, 24, 23);
-		contentPane.add(lblX);
-
-		txtfldNome = new JTextField();
-		txtfldNome.addKeyListener(new KeyAdapter() {
+		txtNome = new JTextField();
+		txtNome.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),txtfldPassword.getText());
-						dao.registrazioneUtente(utn);
+						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
 					}
 				}
 			}
 		});
-		txtfldNome.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtfldNome.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-		txtfldNome.setBorder(null);
-		txtfldNome.setBackground(new Color(211, 211, 211));
-		txtfldNome.setBounds(161, 105, 178, 23);
-		contentPane.add(txtfldNome);
-		txtfldNome.setColumns(10);
+		txtNome.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtNome.setColumns(10);
+		txtNome.setBorder(null);
+		txtNome.setBackground(sfondo);
+		txtNome.setForeground(scritte);
+		txtNome.setBounds(80, 113, 340, 23);
+		add(txtNome);
 
-		txtRegistrati = new JTextField();
-		txtRegistrati.setForeground(Color.WHITE);
-		txtRegistrati.setEditable(false);
-		txtRegistrati.setHorizontalAlignment(SwingConstants.CENTER);
-		txtRegistrati.setFont(new Font("Arial", Font.BOLD, 16));
-		txtRegistrati.setText("REGISTRATI");
-		txtRegistrati.setBounds(0, -1, 500, 52);
-		txtRegistrati.setBackground(new Color(70, 130, 180));
-		contentPane.add(txtRegistrati);
-		txtRegistrati.setColumns(10);
+		txtCognome = new JTextField();
+		txtCognome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (formatoEmailInseritaErrato()) {
+						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
+					}
+				}
+			}
+		});
+		txtCognome.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtCognome.setColumns(10);
+		txtCognome.setBorder(null);
+		txtCognome.setBackground(sfondo);
+		txtCognome.setForeground(scritte);
+		txtCognome.setBounds(80, 217, 340, 23);
+		add(txtCognome);
 
-		JButton btnAvanti = new JButton("Avanti");
-		btnAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		txtEmail = new JTextField();
+		txtEmail.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (formatoEmailInseritaErrato()) {
+						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
+					}
+				}
+			}
+		});
+		txtEmail.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtEmail.setColumns(10);
+		txtEmail.setBorder(null);
+		txtEmail.setBackground(sfondo);
+		txtEmail.setForeground(scritte);
+		txtEmail.setBounds(80, 321, 340, 23);
+		add(txtEmail);
 
-		btnAvanti.addMouseListener(new MouseAdapter() {
-			@Override // clicco su avanti
+		txtPassword = new JPasswordField();
+		txtPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (formatoEmailInseritaErrato()) {
+						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
+					}
+				}
+			}
+		});
+		txtPassword.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtPassword.setBorder(null);
+		txtPassword.setBackground(sfondo);
+		txtPassword.setForeground(scritte);
+		txtPassword.setBounds(80, 425, 340, 23);
+		add(txtPassword);
+
+		txtRipetiPassword = new JPasswordField();
+		txtRipetiPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (formatoEmailInseritaErrato()) {
+						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
+					}
+				}
+			}
+		});
+		txtRipetiPassword.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtRipetiPassword.setBorder(null);
+		txtRipetiPassword.setBackground(sfondo);
+		txtRipetiPassword.setForeground(scritte);
+		txtRipetiPassword.setBounds(80, 530, 340, 23);
+		add(txtRipetiPassword);
+
+		JLabel lblmostraPassword = new JLabel("");
+		lblmostraPassword.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblmostraPassword.setVisible(false);
+				txtPassword.setEchoChar((char) 0);
+			}
+		});
+		lblmostraPassword.setToolTipText("Mostra password");
+		lblmostraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblmostraPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmostraPassword.setIcon(new ImageIcon(censuraPassword));
+		lblmostraPassword.setBounds(430, 428, 20, 20);
+		add(lblmostraPassword);
+
+		JLabel lblcensuraPassword = new JLabel("");
+		lblcensuraPassword.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblmostraPassword.setVisible(true);
+				txtPassword.setEchoChar('●');
+			}
+		});
+		lblcensuraPassword.setToolTipText("Nascondi password");
+		lblcensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblcensuraPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblcensuraPassword.setIcon(new ImageIcon(mostraPassword));
+		lblcensuraPassword.setBounds(430, 428, 20, 20);
+		add(lblcensuraPassword);
+
+		JLabel lblmostraRipetiPassword = new JLabel("");
+		lblmostraRipetiPassword.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblmostraRipetiPassword.setVisible(false);
+				txtRipetiPassword.setEchoChar((char) 0);
+			}
+		});
+		lblmostraRipetiPassword.setToolTipText("Mostra password");
+		lblmostraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblmostraRipetiPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmostraRipetiPassword.setIcon(new ImageIcon(censuraPassword));
+		lblmostraRipetiPassword.setBounds(430, 533, 20, 20);
+		add(lblmostraRipetiPassword);
+
+		JLabel lblcensuraRipetiPassword = new JLabel("");
+		lblcensuraRipetiPassword.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblmostraRipetiPassword.setVisible(true);
+				txtRipetiPassword.setEchoChar('●');
+			}
+		});
+		lblcensuraRipetiPassword.setToolTipText("Nascondi password");
+		lblcensuraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblcensuraRipetiPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblcensuraRipetiPassword.setIcon(new ImageIcon(mostraPassword));
+		lblcensuraRipetiPassword.setBounds(430, 533, 20, 20);
+		add(lblcensuraRipetiPassword);
+		
+		JLabel lblRegistrati = new JLabel("");
+		lblRegistrati.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblRegistrati.setIcon(new ImageIcon(registrati2));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblRegistrati.setIcon(new ImageIcon(registrati1));
+			}
+
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (formatoEmailInseritaErrato()) {
-					Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),txtfldPassword.getText());
-					dao.registrazioneUtente(utn);
-				}
-
-			}
-
-			@Override // passo su avanti e cambio colore
-			public void mouseEntered(MouseEvent e) {
-				btnAvanti.setBackground(new Color(51, 102, 153));
-			}
-
-			@Override // tolgo da avanti e ritorno al colore
-			public void mouseExited(MouseEvent e) {
-				btnAvanti.setBackground(new Color(70, 130, 180));
-			}
-		});
-
-		btnAvanti.setBorder(null);
-		btnAvanti.setBackground(new Color(70, 130, 180));
-		btnAvanti.setForeground(Color.WHITE);
-		btnAvanti.setFont(new Font("Arial", Font.BOLD, 14));
-		btnAvanti.setBounds(257, 257, 82, 32);
-		contentPane.add(btnAvanti);
-
-		txtfldCognome = new JTextField();
-		txtfldCognome.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
-								txtfldPassword.getText());
-						dao.registrazioneUtente(utn);
-					}
+					Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+					controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
+					controller.vaiAdAccessoDopoRegistrazione();
 				}
 			}
 		});
-		txtfldCognome.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtfldCognome.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-		txtfldCognome.setBackground(new Color(211, 211, 211));
-		txtfldCognome.setBorder(null);
-		txtfldCognome.setBounds(161, 139, 178, 23);
-		contentPane.add(txtfldCognome);
-		txtfldCognome.setColumns(10);
+		lblRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRegistrati.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegistrati.setIcon(new ImageIcon(registrati1));
+		lblRegistrati.setBackground(new Color(0, 0, 0, 0));
+		lblRegistrati.setBounds(620, 500, 160, 53);
+		add(lblRegistrati);
+		
 
-		txtfldEmail = new JTextField();
-		txtfldEmail.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
-								txtfldPassword.getText());
-						dao.registrazioneUtente(utn);
-					}
-				}
-			}
-		});
-		txtfldEmail.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtfldEmail.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-		txtfldEmail.setBackground(new Color(211, 211, 211));
-		txtfldEmail.setBorder(null);
-		txtfldEmail.setBounds(161, 173, 178, 23);
-		contentPane.add(txtfldEmail);
-		txtfldEmail.setColumns(10);
+		JLabel lblInserimentoCredenziali = new JLabel("");
+		lblInserimentoCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInserimentoCredenziali.setIcon(new ImageIcon(inserimentoCredenziali));
+		lblInserimentoCredenziali.setBounds(80, 85, 370, 470);
+		add(lblInserimentoCredenziali);
 
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNome.setForeground(new Color(70, 130, 180));
-		lblNome.setBounds(97, 105, 53, 23);
-		contentPane.add(lblNome);
-
-		JLabel lblCognome = new JLabel("Cognome");
-		lblCognome.setFont(new Font("Arial", Font.BOLD, 12));
-		lblCognome.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCognome.setForeground(new Color(70, 130, 180));
-		lblCognome.setBounds(84, 139, 67, 23);
-		contentPane.add(lblCognome);
-
-		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setFont(new Font("Arial", Font.BOLD, 12));
-		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblEmail.setForeground(new Color(70, 130, 180));
-		lblEmail.setBounds(94, 173, 57, 23);
-		contentPane.add(lblEmail);
-
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Arial", Font.BOLD, 12));
-		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPassword.setForeground(new Color(70, 130, 180));
-		lblPassword.setBounds(84, 208, 67, 23);
-		contentPane.add(lblPassword);
-
-
-
-		txtfldPassword = new JPasswordField();
-		txtfldPassword.setBorder(null);
-		txtfldPassword.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(txtfldNome.getText(), txtfldCognome.getText(), txtfldEmail.getText(),
-								txtfldPassword.getText());
-						dao.registrazioneUtente(utn);
-					}
-				}
-			}
-		});
-		txtfldPassword.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtfldPassword.setBackground(new Color(211, 211, 211));
-		txtfldPassword.setBounds(161, 208, 178, 23);
-		contentPane.add(txtfldPassword);
-
-		JLabel lblimgsfondoRegistrazione = new JLabel("");
-		lblimgsfondoRegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgsfondoRegistrazione.setIcon(new ImageIcon(imgsfondoRegistrazione));
-		lblimgsfondoRegistrazione.setBounds(0, 52, 500, 288);
-		contentPane.add(lblimgsfondoRegistrazione);
+		JLabel lblRegistrazione = new JLabel("REGISTRAZIONE");
+		lblRegistrazione.setFont(new Font("Arial", Font.BOLD, 27));
+		lblRegistrazione.setForeground(scritte);
+		lblRegistrazione.setBounds(80, 30, 233, 30);
+		add(lblRegistrazione);
 
 	}
-
+	
 	// METODI
 
 	public boolean formatoEmailInseritaErrato() {
-		boolean emailCorretta = controllerRegistrazione
-				.controlloInserimentoEmailCorrettamenteRegistrazione(getTxtfldEmail().getText());
+		boolean emailCorretta = controllerRegistrazione.controlloInserimentoEmailCorrettamenteRegistrazione(getTxtEmail().getText());
 
 		if (emailCorretta) {
 			controllerRegistrazione.vaiAdAccessoDopoRegistrazione();
@@ -350,36 +313,4 @@ public class Registrazione extends JFrame {
 			return false;
 		}
 	}
-	
-	public void svuotaCampi() {
-		getTxtfldNome().setText("");
-		getTxtfldCognome().setText("");
-		getTxtfldEmail().setText("");
-		getTxtfldPassword().setText("");
-	}
 }
-
-//JButton btnTornaAllaHome = new JButton("Annulla");
-//btnTornaAllaHome.setBorder(null);
-//btnTornaAllaHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//btnTornaAllaHome.addMouseListener(new MouseAdapter() {
-//	@Override // torno da registrazione ad accesso
-//	public void mouseClicked(MouseEvent e) {
-//		controllerRegistrazione.tornaAdAvvioDaRegistrazione();
-//	}
-//
-//	@Override // passo su indietro e cambio colore
-//	public void mouseEntered(MouseEvent e) {
-//		btnTornaAllaHome.setBackground(new Color(51, 102, 153));
-//	}
-//
-//	@Override // tolgo da indietro e ritorno al colore
-//	public void mouseExited(MouseEvent e) {
-//		btnTornaAllaHome.setBackground(new Color(70, 130, 180));
-//	}
-//});
-//btnTornaAllaHome.setBackground(new Color(70, 130, 180));
-//btnTornaAllaHome.setForeground(Color.WHITE);
-//btnTornaAllaHome.setFont(new Font("Arial", Font.BOLD, 14));
-//btnTornaAllaHome.setBounds(161, 257, 82, 32);
-//contentPane.add(btnTornaAllaHome);
