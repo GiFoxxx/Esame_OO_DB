@@ -1,70 +1,48 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.util.ArrayList;
-import java.util.List;
-
-import java.awt.EventQueue;
-import java.util.List;
-import java.sql.Time;
-
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import Classi.Gate;
-import Controller.Controller;
-import ImplementazioniPostrgresDAO.GateImplementazionePostgresDAO;
-
-import javax.swing.JTable;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.print.PrinterException;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
+import Controller.Controller;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import java.awt.Font;
-import java.awt.Image;
+import javax.swing.SwingConstants;
+import javax.swing.JTable;
 
-public class GestioneGate extends JFrame {
+public class GestioneGate extends JPanel {
 
-	String colonne[] = {"Numero Porta", "Tempo Inizio Imbarco", "Tempo Fine Imbarco"};
+	private Image imgfrecciaIndietro1 = new ImageIcon(
+			Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage()
+					.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	private Image imgfrecciaIndietro2 = new ImageIcon(
+			Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro2.png")).getImage()
+					.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+
+	Color sfondo = new Color(54, 57, 63);
+	Color scritte = new Color(141, 142, 146);
+
+	String colonne[] = { "Codice Gate", "Numero Porta", "Tempo Inizio Imbarco", "Tempo Fine Imbarco" };
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaGate = new ArrayList<>();
-	
-	private Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgfrecciaIndietro2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgCasa1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgCasa2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgCasa2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
-	private JPanel contentPane;
-	private JLabel lblNumeroPorta = new JLabel("Numero Porta");
-	private JTextField txtNumeroPorta = new JTextField();
-	private JButton btnModifica;
-	private JButton btnElimina;
-	private JButton btnAggiungi;
-	private JButton btnNewButton;
-	private JButton btnSvuota;
-	private JTable table;
-	private JScrollPane scrollPane;
-	private JLabel lblInizioImbarco;
+	private JTextField txtCodiceGate;
+	private JTextField txtNumeroPorta;
 	private JTextField txtInizioImbarco;
-	private JLabel lblFineImbarco;
 	private JTextField txtFineImbarco;
-	
-	Controller controllerGestioneGate;
-	
-	//GETTER E SETTER
-	
+	private JTable table;
+
+	// GETTER E SETTER
 	public DefaultTableModel getModello() {
 		return modello;
 	}
@@ -73,16 +51,12 @@ public class GestioneGate extends JFrame {
 		this.modello = modello;
 	}
 
-	public JTable getTable() {
-		return table;
+	public JTextField getTxtCodiceGate() {
+		return txtCodiceGate;
 	}
 
-	public void setTable(JTable table) {
-		this.table = table;
-	}
-
-	public Object[] getRow() {
-		return row;
+	public void setTxtCodiceGate(JTextField txtCodiceGate) {
+		this.txtCodiceGate = txtCodiceGate;
 	}
 
 	public JTextField getTxtNumeroPorta() {
@@ -109,26 +83,51 @@ public class GestioneGate extends JFrame {
 		this.txtFineImbarco = txtFineImbarco;
 	}
 
-	
-	//CREAZIONE GUI
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public Object[] getRow() {
+		return row;
+	}
+
+	Controller controllerGestioneGate;
+
 	public GestioneGate(Controller controller) {
-			
-		controllerGestioneGate=controller;
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1008, 398);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
+		controllerGestioneGate = controller;
+
+		setBounds(0, 0, 894, 625);
+		setBackground(sfondo);
+		setLayout(null);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(21, 46, 831, 329);
+		add(scrollPane);
+
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int t = table.getSelectedRow();
+				txtCodiceGate.setText(modello.getValueAt(t, 0).toString());
+				txtNumeroPorta.setText(modello.getValueAt(t, 1).toString());
+				txtInizioImbarco.setText(modello.getValueAt(t, 2).toString());
+				txtFineImbarco.setText(modello.getValueAt(t, 3).toString());
+			}
+		});
+		modello.setColumnIdentifiers(colonne);
+		table.setModel(modello);
+		scrollPane.setViewportView(table);
+
 		JLabel lblimgfrecciaIndietro = new JLabel("");
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
-			// Click sulla freccia in alto a sinistra
-			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
-						// campi pieni
+			@Override
 			public void mouseClicked(MouseEvent e) {
-//				controllerGestioneGate.tornaAMenuGestioneDaGestioneGate();
+				controllerGestioneGate.mostraPannelli(controllerGestioneGate.getDashboard().getHome());
 			}
 
 			@Override
@@ -143,110 +142,116 @@ public class GestioneGate extends JFrame {
 
 			}
 		});
-		lblimgfrecciaIndietro.setBorder(null);
-		lblimgfrecciaIndietro.setBackground(new Color(70, 130, 180));
-		lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
-		lblimgfrecciaIndietro.setForeground(new Color(0, 0, 0));
-		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblimgfrecciaIndietro.setFont(new Font("Arial", Font.BOLD, 11));
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgfrecciaIndietro.setBounds(10, 11, 37, 14);
-		contentPane.add(lblimgfrecciaIndietro);
-		lblNumeroPorta.setBounds(32, 185, 114, 20);
-		contentPane.add(lblNumeroPorta);
-		txtNumeroPorta.setBounds(180, 186, 133, 20);
-		contentPane.add(txtNumeroPorta);
-		txtNumeroPorta.setColumns(10);
-		
-		btnModifica = new JButton("modifica");
-		btnModifica.setBounds(32, 122, 89, 23);
-		btnModifica.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.modificaGate();
-			}
-		});
-		contentPane.add(btnModifica);
-		
-		btnElimina = new JButton("elimina");
-		btnElimina.setBounds(44, 78, 89, 23);
+		lblimgfrecciaIndietro.setForeground(Color.BLACK);
+		lblimgfrecciaIndietro.setFont(new Font("Arial", Font.BOLD, 11));
+		lblimgfrecciaIndietro.setBorder(null);
+		lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
+		lblimgfrecciaIndietro.setBackground(new Color(70, 130, 180));
+		lblimgfrecciaIndietro.setBounds(21, 21, 37, 14);
+		add(lblimgfrecciaIndietro);
+
+		JButton btnElimina = new JButton("elimina");
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneGate.eliminaGate();
 			}
 		});
-		contentPane.add(btnElimina);
-		
-		btnAggiungi = new JButton("aggiungi");
-		btnAggiungi.setBounds(156, 78, 89, 23);
+		btnElimina.setBounds(763, 493, 89, 23);
+		add(btnElimina);
+
+		JButton btnAggiungi = new JButton("aggiungi");
 		btnAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneGate.aggiungiGate();
 			}
 		});
-		contentPane.add(btnAggiungi);
-		
-		modello.setColumnIdentifiers(colonne);
-		
-		btnSvuota = new JButton("svuota");
+		btnAggiungi.setBounds(763, 425, 89, 23);
+		add(btnAggiungi);
+
+		JButton btnModifica = new JButton("modifica");
+		btnModifica.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneGate.modificaGate();
+			}
+		});
+		btnModifica.setBounds(763, 459, 89, 23);
+		add(btnModifica);
+
+		JButton btnSvuota = new JButton("svuota");
 		btnSvuota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneGate.svuotaCampiGate();
 			}
 		});
-		btnSvuota.setBounds(181, 114, 78, 39);
-		contentPane.add(btnSvuota);
-		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(323, 35, 632, 297);
-		contentPane.add(scrollPane);
-		
-		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int t = table.getSelectedRow();
-				txtNumeroPorta.setText(modello.getValueAt(t, 0).toString());
-				txtInizioImbarco.setText(modello.getValueAt(t, 1).toString());
-				txtFineImbarco.setText(modello.getValueAt(t, 2).toString());
-			}
-		});
-		
-		modello.setColumnIdentifiers(colonne);
-		table.setModel(modello);
+		btnSvuota.setBounds(763, 527, 89, 23);
+		add(btnSvuota);
 
-		scrollPane.setViewportView(table);
-		
-		
-		lblInizioImbarco = new JLabel("Inizio Imbarco");
-		lblInizioImbarco.setBounds(32, 223, 114, 20);
-		contentPane.add(lblInizioImbarco);
-		
+		JLabel lblNumeroPorta = new JLabel("Numero Porta");
+		lblNumeroPorta.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNumeroPorta.setForeground(scritte);
+		lblNumeroPorta.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNumeroPorta.setBounds(10, 427, 114, 20);
+		add(lblNumeroPorta);
+
+		txtNumeroPorta = new JTextField();
+		txtNumeroPorta.setFont(new Font("Arial", Font.BOLD, 12));
+		txtNumeroPorta.setColumns(10);
+		txtNumeroPorta.setBounds(158, 427, 133, 20);
+		add(txtNumeroPorta);
+
+		JLabel lblInizioImbarco = new JLabel("Inizio Imbarco");
+		lblInizioImbarco.setFont(new Font("Arial", Font.BOLD, 12));
+		lblInizioImbarco.setForeground(scritte);
+		lblInizioImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblInizioImbarco.setBounds(10, 460, 114, 20);
+		add(lblInizioImbarco);
+
 		txtInizioImbarco = new JTextField();
+		txtInizioImbarco.setFont(new Font("Arial", Font.BOLD, 12));
 		txtInizioImbarco.setColumns(10);
-		txtInizioImbarco.setBounds(180, 223, 133, 20);
-		contentPane.add(txtInizioImbarco);
-		
-		lblFineImbarco = new JLabel("Fine Imbarco");
-		lblFineImbarco.setBounds(32, 265, 114, 20);
-		contentPane.add(lblFineImbarco);
-		
+		txtInizioImbarco.setBounds(158, 460, 133, 20);
+		add(txtInizioImbarco);
+
+		JLabel lblFineImbarco = new JLabel("Fine Imbarco");
+		lblFineImbarco.setFont(new Font("Arial", Font.BOLD, 12));
+		lblFineImbarco.setForeground(scritte);
+		lblFineImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFineImbarco.setBounds(10, 494, 114, 20);
+		add(lblFineImbarco);
+
 		txtFineImbarco = new JTextField();
+		txtFineImbarco.setFont(new Font("Arial", Font.BOLD, 12));
 		txtFineImbarco.setColumns(10);
-		txtFineImbarco.setBounds(180, 265, 133, 20);
-		contentPane.add(txtFineImbarco);
-		
+		txtFineImbarco.setBounds(158, 494, 133, 20);
+		add(txtFineImbarco);
+
+		JLabel lblCodiceGate = new JLabel("Codice Gate");
+		lblCodiceGate.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCodiceGate.setForeground(new Color(141, 142, 146));
+		lblCodiceGate.setFont(new Font("Arial", Font.BOLD, 12));
+		lblCodiceGate.setBounds(10, 395, 114, 20);
+		add(lblCodiceGate);
+
+		txtCodiceGate = new JTextField();
+		txtCodiceGate.setFont(new Font("Arial", Font.BOLD, 12));
+		txtCodiceGate.setColumns(10);
+		txtCodiceGate.setBounds(158, 395, 133, 20);
+		add(txtCodiceGate);
+
 		caricamento();
-		
+
 	}
-	
-	public void  caricamento() {
+
+	// METODI
+	public void caricamento() {
 		this.ListaGate = controllerGestioneGate.implementazioneGateDAO().stampaGate();
 		modello.setNumRows(0);
-		for(Object [] dato : this.ListaGate) {
+		for (Object[] dato : this.ListaGate) {
 			this.modello.addRow(dato);
 		}
 		table.setModel(modello);

@@ -90,14 +90,14 @@ public class Launcher extends JFrame {
 		lblRegistrati.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerLauncher.Registrazione();
+//				controllerLauncher.Registrazione();
 			}
 		});
 		JLabel lblAccedi = new JLabel("ACCEDI");
 		lblAccedi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerLauncher.Accesso();
+//				controllerLauncher.Accesso();
 				
 			}
 		});

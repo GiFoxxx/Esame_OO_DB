@@ -51,7 +51,7 @@ public class Home extends JPanel {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneTratte());
 			}
 		});
 		lblTratte.setHorizontalAlignment(SwingConstants.CENTER);
@@ -89,7 +89,7 @@ public class Home extends JPanel {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneGate1());
+				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneGate());
 			}
 		});
 		lblGate.setHorizontalAlignment(SwingConstants.CENTER);
@@ -98,6 +98,20 @@ public class Home extends JPanel {
 		add(lblGate);
 		
 		JLabel lblVolo = new JLabel("");
+		lblVolo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblVolo.setIcon(new ImageIcon(volo2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblVolo.setIcon(new ImageIcon(volo1));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneVoli());
+			}
+		});
 		lblVolo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVolo.setIcon(new ImageIcon(volo1));
 		lblVolo.setBounds(595, 251, 272, 152);

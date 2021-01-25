@@ -7,16 +7,15 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
 
 import Controller.Controller;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
@@ -56,6 +55,7 @@ public class Dashboard extends JFrame {
 			.getScaledInstance(217, 18, Image.SCALE_SMOOTH);
 
 	Color sfondo = new Color(54, 57, 63);
+	Color scritte = new Color(141, 142, 146);
 	Color clickPannello = new Color(40, 40, 40);
 	Color entroPannello = new Color(30, 30, 30);
 	Color escoPannelloLaterale = new Color(35,39,42);
@@ -67,7 +67,10 @@ public class Dashboard extends JFrame {
 	private JPanel home;
 	private JPanel accesso;
 	private JPanel registrazione;
-	private JPanel gestioneGate1;
+	private JPanel gestioneVoli;
+	private JPanel gestioneGate;
+	private JPanel gestioneTratte;
+	private JDialog uscita;
 
 	// GETTER E SETTER
 	public JPanel getHome() {
@@ -94,12 +97,36 @@ public class Dashboard extends JFrame {
 		this.registrazione = registrazione1;
 	}
 
-	public JPanel getGestioneGate1() {
-		return gestioneGate1;
+	public JPanel getGestioneGate() {
+		return gestioneGate;
 	}
 
-	public void setGestioneGate1(JPanel gestioneGate) {
-		this.gestioneGate1 = gestioneGate;
+	public void setGestioneGate(JPanel gestioneGate) {
+		this.gestioneGate = gestioneGate;
+	}
+
+	public JPanel getGestioneVoli() {
+		return gestioneVoli;
+	}
+
+	public void setGestioneVoli(JPanel gestioneVoli) {
+		this.gestioneVoli = gestioneVoli;
+	}
+
+	public JPanel getGestioneTratte() {
+		return gestioneTratte;
+	}
+
+	public void setGestioneTratte(JPanel gestioneTratte1) {
+		this.gestioneTratte = gestioneTratte1;
+	}
+
+	public JDialog getUscita() {
+		return uscita;
+	}
+
+	public void setUscita(JDialog uscita) {
+		this.uscita = uscita;
 	}
 
 	Controller controllerDashboard;
@@ -110,7 +137,10 @@ public class Dashboard extends JFrame {
 		home = controllerDashboard.home();
 		accesso = controllerDashboard.accesso();
 		registrazione = controllerDashboard.registrazione();
-		gestioneGate1 = controllerDashboard.gestioneGate();
+		gestioneGate = controllerDashboard.gestioneGate();
+		gestioneTratte = controllerDashboard.gestioneTratte();
+		gestioneVoli = controllerDashboard.gestioneVoli();
+		uscita = controllerDashboard.uscita();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1143, 677);
@@ -178,12 +208,15 @@ public class Dashboard extends JFrame {
 		pannelloDestra.add(home);
 		pannelloDestra.add(accesso);
 		pannelloDestra.add(registrazione);
-		pannelloDestra.add(gestioneGate1);
+		pannelloDestra.add(gestioneGate);
+		pannelloDestra.add(gestioneTratte);
+		pannelloDestra.add(gestioneVoli);
 		home.setVisible(true);
 		accesso.setVisible(false);
 		registrazione.setVisible(false);
-		gestioneGate1.setVisible(false);
-
+		gestioneGate.setVisible(false);
+		gestioneTratte.setVisible(false);
+		gestioneVoli.setVisible(false);
 		pannelloDestra.setLayout(null);
 
 
@@ -416,8 +449,8 @@ public class Dashboard extends JFrame {
 		JPanel panelUscita = new JPanel();
 		panelUscita.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {				
-				uscita();
+			public void mouseClicked(MouseEvent e) {
+				controllerDashboard.mostraUscita();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -541,12 +574,12 @@ public class Dashboard extends JFrame {
 	}
 
 	// METODI
-	public void uscita() {
-		Object[] options = { "SI", "ANNULLA" };
-		if (JOptionPane.showOptionDialog(null, "Sei sicuro di voler uscire dal progrmamma?", "ATTENZIONE!",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 0) {
-			Dashboard.this.dispose();
-		}
-	}
+//	public void uscita() {
+//		Object[] options = { "SI", "ANNULLA" };
+//		if (JOptionPane.showOptionDialog(null, "Sei sicuro di voler uscire dal progrmamma?", "ATTENZIONE!",
+//				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 0) {
+//			Dashboard.this.dispose();
+//		}
+//	}
 
 }
