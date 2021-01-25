@@ -39,8 +39,7 @@ public class GestioneCompagnieAeree extends JFrame {
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaCompagnieAeree = new ArrayList<>();
 	
-	private Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgfrecciaIndietro2 = new ImageIcon(Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	
 	
 	private JPanel contentPane;
 	private final JLabel lblCodiceCompagniaAerea = new JLabel("Codice Compagnia aerea");
@@ -110,21 +109,10 @@ public class GestioneCompagnieAeree extends JFrame {
 //				controllerGestioneCompagnieAeree.tornaAMenuGestioneDaGestioneCompagniaAeree();
 			}
 
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro2));
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
-
-			}
+		
 		});
 		lblimgfrecciaIndietro.setBorder(null);
 		lblimgfrecciaIndietro.setBackground(new Color(70, 130, 180));
-		lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
 		lblimgfrecciaIndietro.setForeground(new Color(0, 0, 0));
 		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgfrecciaIndietro.setFont(new Font("Arial", Font.BOLD, 11));

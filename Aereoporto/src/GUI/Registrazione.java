@@ -25,17 +25,11 @@ import java.awt.event.MouseEvent;
 
 public class Registrazione extends JPanel {
 
-	private Image inserimentoCredenziali = new ImageIcon(
-			Accesso.class.getResource("immaginiRegistrazione/inserimentoCredenziali.png")).getImage()
-					.getScaledInstance(370, 470, Image.SCALE_SMOOTH);
-	private Image mostraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/mostraPassword.png"))
-			.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image censuraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/censuraPassword.png"))
-			.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image registrati1 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/registrati1.png")).getImage()
-			.getScaledInstance(160, 53, Image.SCALE_SMOOTH);
-	private Image registrati2 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/registrati2.png")).getImage()
-			.getScaledInstance(160, 53, Image.SCALE_SMOOTH);
+	private Image inserimentoCredenziali = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/inserimentoCredenziali.png")).getImage().getScaledInstance(370, 470, Image.SCALE_SMOOTH);
+	private Image mostraPassword = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/mostraPassword.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+	private Image censuraPassword = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/censuraPassword.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+	private Image avanti1 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/avanti1.png")).getImage().getScaledInstance(196, 50, Image.SCALE_SMOOTH);
+	private Image avanti2 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/avanti2.png")).getImage().getScaledInstance(196, 50, Image.SCALE_SMOOTH);
 
 	Color sfondo = new Color(54, 57, 63);
 	Color scritte = new Color(141, 142, 146);
@@ -260,12 +254,12 @@ public class Registrazione extends JPanel {
 		lblRegistrati.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblRegistrati.setIcon(new ImageIcon(registrati2));
+				lblRegistrati.setIcon(new ImageIcon(avanti2));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblRegistrati.setIcon(new ImageIcon(registrati1));
+				lblRegistrati.setIcon(new ImageIcon(avanti1));
 			}
 
 			@Override
@@ -279,9 +273,9 @@ public class Registrazione extends JPanel {
 		});
 		lblRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRegistrati.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegistrati.setIcon(new ImageIcon(registrati1));
+		lblRegistrati.setIcon(new ImageIcon(avanti1));
 		lblRegistrati.setBackground(new Color(0, 0, 0, 0));
-		lblRegistrati.setBounds(620, 500, 160, 53);
+		lblRegistrati.setBounds(620, 500, 196, 50);
 		add(lblRegistrati);
 		
 

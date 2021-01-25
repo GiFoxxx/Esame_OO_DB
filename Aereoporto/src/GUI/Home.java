@@ -12,32 +12,31 @@ import javax.swing.border.EmptyBorder;
 import Controller.Controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 
 public class Home extends JPanel {
 
-	private Image volo1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/volo1.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image volo2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/volo2.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image gate1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/gate1.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image gate2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/gate2.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image prenotazioni1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/prenotazioni1.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image prenotazioni2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/prenotazioni2.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image tratte1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/tratte1.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image tratte2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/tratte2.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image gestioneAccount1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/gestioneAccount1.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image gestioneAccount2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/gestioneAccount2.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image uscita1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/uscita1.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	private Image uscita2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/uscita2.png")).getImage().getScaledInstance(272, 152, Image.SCALE_SMOOTH);
-	
+	private Image voli1 = new ImageIcon(Accesso.class.getResource("immaginiHome/voli1.png")).getImage().getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+	private Image voli2 = new ImageIcon(Accesso.class.getResource("immaginiHome/voli2.png")).getImage().getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+	private Image gate1 = new ImageIcon(Accesso.class.getResource("immaginiHome/gate1.png")).getImage().getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+	private Image gate2 = new ImageIcon(Accesso.class.getResource("immaginiHome/gate2.png")).getImage().getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+	private Image prenotazioni1 = new ImageIcon(Accesso.class.getResource("immaginiHome/prenotazioni1.png")).getImage().getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+	private Image prenotazioni2 = new ImageIcon(Accesso.class.getResource("immaginiHome/prenotazioni2.png")).getImage().getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+	private Image tratte1 = new ImageIcon(Accesso.class.getResource("immaginiHome/tratte1.png")).getImage().getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+	private Image tratte2 = new ImageIcon(Accesso.class.getResource("immaginiHome/tratte2.png")).getImage().getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+	private Image compagnieAeree1 = new ImageIcon(Accesso.class.getResource("immaginiHome/compagnieAeree1.png")).getImage().getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+	private Image compagnieAeree2 = new ImageIcon(Accesso.class.getResource("immaginiHome/compagnieAeree2.png")).getImage().getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+	private Image gestioneAccount1 = new ImageIcon(Accesso.class.getResource("immaginiHome/gestioneAccount1.png")).getImage().getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+	private Image gestioneAccount2 = new ImageIcon(Accesso.class.getResource("immaginiHome/gestioneAccount2.png")).getImage().getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+
 	Controller controllerHome;
 	
 	public Home(Controller controller) {
 		controllerHome = controller;
 		
 		setBounds(0, 0, 894, 625);
-		setBackground(new Color(54,57,63));
+		setBackground(new Color(255,255,255));
 		setLayout(null);
-		
-
 		
 		JLabel lblTratte = new JLabel("");
 		lblTratte.addMouseListener(new MouseAdapter() {
@@ -56,18 +55,18 @@ public class Home extends JPanel {
 		});
 		lblTratte.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTratte.setIcon(new ImageIcon(tratte1));
-		lblTratte.setBounds(41, 94, 272, 152);
+		lblTratte.setBounds(20, 110, 276, 162);
 		add(lblTratte);
 		
 		JLabel lblUscita = new JLabel("");
 		lblUscita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblUscita.setIcon(new ImageIcon(uscita2));
+				lblUscita.setIcon(new ImageIcon(compagnieAeree2));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblUscita.setIcon(new ImageIcon(uscita1));
+				lblUscita.setIcon(new ImageIcon(compagnieAeree1));
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -75,8 +74,8 @@ public class Home extends JPanel {
 			}
 		});
 		lblUscita.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUscita.setIcon(new ImageIcon(uscita1));
-		lblUscita.setBounds(318, 94, 272, 152);
+		lblUscita.setIcon(new ImageIcon(compagnieAeree1));
+		lblUscita.setBounds(312, 110, 276, 162);
 		add(lblUscita);
 		
 		JLabel lblGestioneAccount = new JLabel("");
@@ -96,13 +95,23 @@ public class Home extends JPanel {
 		});
 		lblGestioneAccount.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGestioneAccount.setIcon(new ImageIcon(gestioneAccount1));
-		lblGestioneAccount.setBounds(595, 94, 272, 152);
+		lblGestioneAccount.setBounds(605, 110, 276, 162);
 		add(lblGestioneAccount);
 		
 		JLabel lblPrenotazioni = new JLabel("");
+		lblPrenotazioni.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblPrenotazioni.setIcon(new ImageIcon(prenotazioni2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblPrenotazioni.setIcon(new ImageIcon(prenotazioni1));
+			}
+		});
 		lblPrenotazioni.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrenotazioni.setIcon(new ImageIcon(prenotazioni1));
-		lblPrenotazioni.setBounds(41, 251, 272, 152);
+		lblPrenotazioni.setBounds(20, 320, 276, 162);
 		add(lblPrenotazioni);
 		
 		JLabel lblGate = new JLabel("");
@@ -122,18 +131,18 @@ public class Home extends JPanel {
 		});
 		lblGate.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGate.setIcon(new ImageIcon(gate1));
-		lblGate.setBounds(318, 251, 272, 152);
+		lblGate.setBounds(605, 320, 276, 162);
 		add(lblGate);
 		
 		JLabel lblVolo = new JLabel("");
 		lblVolo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblVolo.setIcon(new ImageIcon(volo2));
+				lblVolo.setIcon(new ImageIcon(voli2));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblVolo.setIcon(new ImageIcon(volo1));
+				lblVolo.setIcon(new ImageIcon(voli1));
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -141,9 +150,8 @@ public class Home extends JPanel {
 			}
 		});
 		lblVolo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVolo.setIcon(new ImageIcon(volo1));
-		lblVolo.setBounds(595, 251, 272, 152);
+		lblVolo.setIcon(new ImageIcon(voli1));
+		lblVolo.setBounds(312, 320, 276, 162);
 		add(lblVolo);
 	}
-
 }

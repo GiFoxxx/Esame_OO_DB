@@ -21,16 +21,10 @@ import javax.swing.JPasswordField;
 
 public class Accesso extends JPanel {
 
-	private Image aggiungiUtente = new ImageIcon(Accesso.class.getResource("immaginiAccesso/aggiungiUtente.png"))
-			.getImage().getScaledInstance(47, 47, Image.SCALE_SMOOTH);
-	private Image avanti1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/avanti1.png")).getImage()
-			.getScaledInstance(160, 53, Image.SCALE_SMOOTH);
-	private Image avanti2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/avanti2.png")).getImage()
-			.getScaledInstance(160, 53, Image.SCALE_SMOOTH);
-	private Image mostraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/mostraPassword.png"))
-			.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image censuraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/censuraPassword.png"))
-			.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+	private Image avanti1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/avanti1.png")).getImage().getScaledInstance(196, 50, Image.SCALE_SMOOTH);
+	private Image avanti2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/avanti2.png")).getImage().getScaledInstance(196, 50, Image.SCALE_SMOOTH);
+	private Image mostraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/mostraPassword.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+	private Image censuraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/censuraPassword.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 
 	Color sfondo = new Color(54, 57, 63);
 	Color scritte = new Color(141, 142, 146);
@@ -148,43 +142,6 @@ public class Accesso extends JPanel {
 		lblAccedi.setBounds(80, 30, 110, 30);
 		add(lblAccedi);
 
-		JLabel lblcreaAccount = new JLabel("");
-		lblcreaAccount.addMouseListener(new MouseAdapter() {
-			@Override // vado a registrazione da crea un nuovo account da accedi
-			public void mouseClicked(MouseEvent e) {
-				controllerAccesso.mostraPannelli(controllerAccesso.getRegistrazione());
-			}
-		});
-		lblcreaAccount.setHorizontalAlignment(SwingConstants.CENTER);
-		lblcreaAccount.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblcreaAccount.setIcon(new ImageIcon(aggiungiUtente));
-		lblcreaAccount.setBounds(80, 503, 47, 47);
-		add(lblcreaAccount);
-
-		JLabel lblgestioneUtenti = new JLabel("Gestione utenti");
-		lblgestioneUtenti.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerAccesso.mostraPannelli(controllerAccesso.getHome());
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblgestioneUtenti.setForeground(new Color(20, 136, 180));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblgestioneUtenti.setForeground(new Color(112, 112, 112));
-			}
-		});
-		lblgestioneUtenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblgestioneUtenti.setHorizontalAlignment(SwingConstants.CENTER);
-		lblgestioneUtenti.setForeground(new Color(112, 112, 112));
-		lblgestioneUtenti.setFont(new Font("Arial", Font.BOLD, 17));
-		lblgestioneUtenti.setBounds(137, 516, 120, 21);
-		add(lblgestioneUtenti);
-
 		JLabel lblAvanti = new JLabel("");
 		lblAvanti.addMouseListener(new MouseAdapter() {
 			@Override
@@ -212,7 +169,7 @@ public class Accesso extends JPanel {
 		lblAvanti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAvanti.setIcon(new ImageIcon(avanti1));
 		lblAvanti.setBackground(new Color(0, 0, 0, 0));
-		lblAvanti.setBounds(620, 500, 160, 53);
+		lblAvanti.setBounds(620, 500, 196, 50);
 		add(lblAvanti);
 
 	}

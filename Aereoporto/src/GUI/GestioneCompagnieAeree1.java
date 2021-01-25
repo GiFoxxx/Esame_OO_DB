@@ -21,12 +21,6 @@ import javax.swing.JButton;
 
 public class GestioneCompagnieAeree1 extends JPanel {
 
-	private Image imgfrecciaIndietro1 = new ImageIcon(
-			Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro1.png")).getImage()
-					.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image imgfrecciaIndietro2 = new ImageIcon(
-			Registrazione.class.getResource("immaginiRegistrazione/imgfrecciaIndietro2.png")).getImage()
-					.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
 	Color sfondo = new Color(54, 57, 63);
 	Color scritte = new Color(141, 142, 146);
@@ -93,24 +87,11 @@ public class GestioneCompagnieAeree1 extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneCompagnieAeree.mostraPannelli(controllerGestioneCompagnieAeree.getDashboard().getHome());
 			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro2));
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
-
-			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setForeground(Color.BLACK);
 		lblimgfrecciaIndietro.setFont(new Font("Arial", Font.BOLD, 11));
 		lblimgfrecciaIndietro.setBorder(null);
-		lblimgfrecciaIndietro.setIcon(new ImageIcon(imgfrecciaIndietro1));
 		lblimgfrecciaIndietro.setBackground(new Color(70, 130, 180));
 		lblimgfrecciaIndietro.setBounds(21, 21, 37, 14);
 		add(lblimgfrecciaIndietro);

@@ -30,8 +30,7 @@ import java.awt.SystemColor;
 
 public class MenuGestione extends JFrame {
 	
-	private Image imgCasa1 = new ImageIcon(Accesso.class.getResource("immaginiMenuGestione/imgCasa1.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
-	private Image imgCasa2 = new ImageIcon(Accesso.class.getResource("immaginiMenuGestione/imgCasa2.png")).getImage().getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+	
 	private Image imgsfondoMenuGestione = new ImageIcon(Accesso.class.getResource("immaginiMenuGestione/imgsfondoMenuGestione.jpg")).getImage().getScaledInstance(590, 317,Image.SCALE_SMOOTH);
 
 

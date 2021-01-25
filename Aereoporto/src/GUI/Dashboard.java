@@ -26,8 +26,10 @@ public class Dashboard extends JFrame {
 			.getScaledInstance(1143, 677, Image.SCALE_SMOOTH);
 	private Image tendina = new ImageIcon(Accesso.class.getResource("immaginiDashboard/TendinaDashboard.png")).getImage()
 			.getScaledInstance(238, 677, Image.SCALE_SMOOTH);
-	private Image linee = new ImageIcon(Accesso.class.getResource("immaginiDashboard/linee.png")).getImage()
-			.getScaledInstance(31, 12, Image.SCALE_SMOOTH);
+	private Image linee1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/linee1.png")).getImage()
+			.getScaledInstance(25, 15, Image.SCALE_SMOOTH);
+	private Image linee2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/linee2.png")).getImage()
+			.getScaledInstance(25, 15, Image.SCALE_SMOOTH);
 	private Image X1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/X1.png")).getImage()
 			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 	private Image X2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/X2.png")).getImage()
@@ -539,7 +541,7 @@ public class Dashboard extends JFrame {
 		});
 		lblLinee1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblLinee1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLinee1.setIcon(new ImageIcon(linee));
+		lblLinee1.setIcon(new ImageIcon(linee1));
 		lblLinee1.setBounds(188, 49, 46, 70);
 		pannelloTendina.add(lblLinee1);
 
@@ -573,7 +575,7 @@ public class Dashboard extends JFrame {
 		lblLinee2.setBounds(1, 49, 46, 70);
 		pannelloTendina.add(lblLinee2);
 		lblLinee2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLinee2.setIcon(new ImageIcon(linee));
+		lblLinee2.setIcon(new ImageIcon(linee2));
 
 		JLabel lblTendina = new JLabel("");
 		lblTendina.setBounds(0, 0, 238, 677);
