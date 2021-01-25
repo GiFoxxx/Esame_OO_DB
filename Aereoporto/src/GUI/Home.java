@@ -60,12 +60,40 @@ public class Home extends JPanel {
 		add(lblTratte);
 		
 		JLabel lblUscita = new JLabel("");
+		lblUscita.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblUscita.setIcon(new ImageIcon(uscita2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblUscita.setIcon(new ImageIcon(uscita1));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneCompagnieAeree());
+			}
+		});
 		lblUscita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUscita.setIcon(new ImageIcon(uscita1));
 		lblUscita.setBounds(318, 94, 272, 152);
 		add(lblUscita);
 		
 		JLabel lblGestioneAccount = new JLabel("");
+		lblGestioneAccount.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblGestioneAccount.setIcon(new ImageIcon(gestioneAccount2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblGestioneAccount.setIcon(new ImageIcon(gestioneAccount1));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneUtenti());
+			}
+		});
 		lblGestioneAccount.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGestioneAccount.setIcon(new ImageIcon(gestioneAccount1));
 		lblGestioneAccount.setBounds(595, 94, 272, 152);

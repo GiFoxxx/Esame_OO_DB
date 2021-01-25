@@ -105,7 +105,7 @@ public class GestioneGate extends JPanel {
 		setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 46, 831, 329);
+		scrollPane.setBounds(21, 46, 850, 330);
 		add(scrollPane);
 
 		table = new JTable();

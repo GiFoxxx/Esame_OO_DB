@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class CompagniaAerea {
 	
 	//ATTRIBUTI
-	private String nome;
 	private String codiceCompagniaAerea;
+	private String nome;
 	
 	ArrayList<ClienteBusiness[]> ClientiBusiness = new ArrayList<>();
 	ArrayList<Tratta[]> Tratte = new ArrayList<>();
@@ -31,10 +31,10 @@ public class CompagniaAerea {
 	}
 	
 	//COSTRUTTORI
-	public CompagniaAerea(String nome, String codiceCompagniaAerea) {
-		super();
-		this.nome = nome;
+	public CompagniaAerea(String codiceCompagniaAerea, String nome) {
+		super();	
 		this.codiceCompagniaAerea = codiceCompagniaAerea;
+		this.nome = nome;
 	}
 	
 	public CompagniaAerea() {
@@ -43,8 +43,12 @@ public class CompagniaAerea {
 
 	@Override
 	public String toString() {
-		return "CompagniaAerea [nome=" + nome + ", codiceCompagniaAerea=" + codiceCompagniaAerea + "]";
+		return "CompagniaAerea [codiceCompagniaAerea=" + codiceCompagniaAerea + ", nome=" + nome + "]";
 	}
+
+	
+
+	
 
 
 

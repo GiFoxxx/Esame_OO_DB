@@ -11,9 +11,6 @@ import javax.swing.*;
 
 import Controller.Controller;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.event.MouseAdapter;
@@ -67,6 +64,8 @@ public class Dashboard extends JFrame {
 	private JPanel home;
 	private JPanel accesso;
 	private JPanel registrazione;
+	private JPanel gestioneUtenti;
+	private JPanel gestioneCompagnieAeree;
 	private JPanel gestioneVoli;
 	private JPanel gestioneGate;
 	private JPanel gestioneTratte;
@@ -95,6 +94,22 @@ public class Dashboard extends JFrame {
 
 	public void setRegistrazione(JPanel registrazione1) {
 		this.registrazione = registrazione1;
+	}
+
+	public JPanel getGestioneUtenti() {
+		return gestioneUtenti;
+	}
+
+	public void setGestioneUtenti(JPanel gestioneUtenti) {
+		this.gestioneUtenti = gestioneUtenti;
+	}
+
+	public JPanel getGestioneCompagnieAeree() {
+		return gestioneCompagnieAeree;
+	}
+
+	public void setGestioneCompagnieAeree(JPanel gestioneCompagnieAeree) {
+		this.gestioneCompagnieAeree = gestioneCompagnieAeree;
 	}
 
 	public JPanel getGestioneGate() {
@@ -137,6 +152,8 @@ public class Dashboard extends JFrame {
 		home = controllerDashboard.home();
 		accesso = controllerDashboard.accesso();
 		registrazione = controllerDashboard.registrazione();
+		gestioneUtenti = controllerDashboard.gestioneUtenti();
+		gestioneCompagnieAeree = controllerDashboard.gestioneCompagnieAeree();
 		gestioneGate = controllerDashboard.gestioneGate();
 		gestioneTratte = controllerDashboard.gestioneTratte();
 		gestioneVoli = controllerDashboard.gestioneVoli();
@@ -208,12 +225,16 @@ public class Dashboard extends JFrame {
 		pannelloDestra.add(home);
 		pannelloDestra.add(accesso);
 		pannelloDestra.add(registrazione);
+		pannelloDestra.add(gestioneUtenti);
 		pannelloDestra.add(gestioneGate);
+		pannelloDestra.add(gestioneCompagnieAeree);
 		pannelloDestra.add(gestioneTratte);
 		pannelloDestra.add(gestioneVoli);
 		home.setVisible(true);
 		accesso.setVisible(false);
 		registrazione.setVisible(false);
+		gestioneUtenti.setVisible(false);
+		gestioneCompagnieAeree.setVisible(false);
 		gestioneGate.setVisible(false);
 		gestioneTratte.setVisible(false);
 		gestioneVoli.setVisible(false);

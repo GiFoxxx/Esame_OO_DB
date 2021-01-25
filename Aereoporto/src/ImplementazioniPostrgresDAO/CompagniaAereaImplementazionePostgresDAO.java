@@ -48,14 +48,14 @@ public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaD
 	public boolean aggiungiCompagniaAerea(Object compagniaAerea) {
 		compAerea = (CompagniaAerea) compagniaAerea;
 		PreparedStatement pst;
-		String sql = "INSERT INTO compagniaaerea VALUES (?,?)";
+		String sql = "INSERT INTO compagniaaerea (codiceCompagniaAerea, nome) VALUES (?,?)";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
-			pst.setString(1, compAerea.getNome());
-			pst.setString(2, compAerea.getCodiceCompagniaAerea());
+			pst.setString(1, compAerea.getCodiceCompagniaAerea());
+			pst.setString(2, compAerea.getNome());
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
@@ -77,7 +77,7 @@ public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaD
 		compAerea = (CompagniaAerea) compagniaAerea;
 		
 		PreparedStatement pst;
-		String sql = "DELETE FROM compagniaaerea WHERE codicecompagniaaerea = ?";
+		String sql = "DELETE FROM compagniaAerea WHERE codiceCompagniaAerea = ?";
 		try {
 			db.ConnessioneDB();
 
@@ -105,16 +105,15 @@ public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaD
 	public boolean modificaCompagniaAerea(Object compagniaAerea) {
 		compAerea = (CompagniaAerea) compagniaAerea;
 		PreparedStatement pst;
-		String sql = "UPDATE compagniaaerea SET nome=? WHERE codicecompagniaaerea=? ";
+		String sql = "UPDATE compagniaaerea SET nome = ? WHERE codicecompagniaaerea = ? ";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
-
+			
 			pst.setString(1, compAerea.getNome());
 			pst.setString(2, compAerea.getCodiceCompagniaAerea());
 			
-
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
