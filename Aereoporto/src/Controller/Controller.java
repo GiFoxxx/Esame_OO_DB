@@ -460,7 +460,7 @@ public class Controller {
 				((GestioneGate) getDashboard().getGestioneGate()).getTxtInizioImbarco().getText(),
 				((GestioneGate) getDashboard().getGestioneGate()).getTxtFineImbarco().getText());
 
-		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTable().getSelectedRow();
+		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
 		implementazioneGateDAO().cancellaGate(gt);
 		((GestioneGate) getDashboard().getGestioneGate()).getModello().removeRow(t);
 		svuotaCampiGate();
@@ -473,7 +473,7 @@ public class Controller {
 				((GestioneGate) getDashboard().getGestioneGate()).getTxtInizioImbarco().getText(),
 				((GestioneGate) getDashboard().getGestioneGate()).getTxtFineImbarco().getText());
 
-		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTable().getSelectedRow();
+		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
 
 		((GestioneGate) getDashboard().getGestioneGate()).getModello()
 				.setValueAt(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(), t, 0);

@@ -213,5 +213,23 @@ public class Immagini {
 						.getScaledInstance(370, 470, Image.SCALE_SMOOTH);
 		return inserimentoCredenziali;
 	}
+	
+	public Image barraRicerca() {
+		Image barraRicerca = new ImageIcon(Accesso.class.getResource("immaginiGate/barraRicerca.png"))
+				.getImage().getScaledInstance(220, 38, Image.SCALE_SMOOTH);
+		return barraRicerca;
+	}
+	
+	public Image ricerca1() {
+		Image ricerca1 = new ImageIcon(Accesso.class.getResource("immaginiGate/ricerca1.png"))
+				.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		return ricerca1;
+	}
+	
+	public Image ricerca2() {
+		Image ricerca2 = new ImageIcon(Accesso.class.getResource("immaginiGate/ricerca2.png"))
+				.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		return ricerca2;
+	}
 
 }
