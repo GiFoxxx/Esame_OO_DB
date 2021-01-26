@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 import Amministrazione.Utente;
 import Controller.Controller;
+import Immagini.Immagini;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -25,24 +26,19 @@ import java.awt.event.MouseEvent;
 
 public class Registrazione extends JPanel {
 
-	private Image inserimentoCredenziali = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/inserimentoCredenziali.png")).getImage().getScaledInstance(370, 470, Image.SCALE_SMOOTH);
-	private Image mostraPassword = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/mostraPassword.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image censuraPassword = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/censuraPassword.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image avanti1 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/avanti1.png")).getImage().getScaledInstance(196, 50, Image.SCALE_SMOOTH);
-	private Image avanti2 = new ImageIcon(Accesso.class.getResource("immaginiRegistrazione/avanti2.png")).getImage().getScaledInstance(196, 50, Image.SCALE_SMOOTH);
+	private Immagini img = new Immagini();
 
 	Color sfondo = new Color(54, 57, 63);
 	Color scritte = new Color(141, 142, 146);
-	
-	
+
 	private JTextField txtNome;
 	private JTextField txtCognome;
 	private JTextField txtEmail;
 	private JPasswordField txtPassword;
 	private JPasswordField txtRipetiPassword;
-	
-	//GETTER E SETTER
-	
+
+	// GETTER E SETTER
+
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
@@ -82,9 +78,9 @@ public class Registrazione extends JPanel {
 	public void setTxtRipetiPassword(JPasswordField txtRipetiPassword) {
 		this.txtRipetiPassword = txtRipetiPassword;
 	}
-	
+
 	Controller controllerRegistrazione;
-	
+
 	public Registrazione(Controller controller) {
 		controllerRegistrazione = controller;
 
@@ -98,13 +94,14 @@ public class Registrazione extends JPanel {
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(),
+								getTxtEmail().getText(), getTxtPassword().getText());
 						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
 					}
 				}
 			}
 		});
-		txtNome.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtNome.setFont(new Font("Arial", Font.BOLD, 20));
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
 		txtNome.setBackground(sfondo);
@@ -118,13 +115,14 @@ public class Registrazione extends JPanel {
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(),
+								getTxtEmail().getText(), getTxtPassword().getText());
 						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
 					}
 				}
 			}
 		});
-		txtCognome.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtCognome.setFont(new Font("Arial", Font.BOLD, 20));
 		txtCognome.setColumns(10);
 		txtCognome.setBorder(null);
 		txtCognome.setBackground(sfondo);
@@ -138,13 +136,14 @@ public class Registrazione extends JPanel {
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(),
+								getTxtEmail().getText(), getTxtPassword().getText());
 						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
 					}
 				}
 			}
 		});
-		txtEmail.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtEmail.setFont(new Font("Arial", Font.BOLD, 20));
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
 		txtEmail.setBackground(sfondo);
@@ -158,13 +157,14 @@ public class Registrazione extends JPanel {
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(),
+								getTxtEmail().getText(), getTxtPassword().getText());
 						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
 					}
 				}
 			}
 		});
-		txtPassword.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtPassword.setFont(new Font("Arial", Font.BOLD, 20));
 		txtPassword.setBorder(null);
 		txtPassword.setBackground(sfondo);
 		txtPassword.setForeground(scritte);
@@ -177,13 +177,14 @@ public class Registrazione extends JPanel {
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(),
+								getTxtEmail().getText(), getTxtPassword().getText());
 						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
 					}
 				}
 			}
 		});
-		txtRipetiPassword.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtRipetiPassword.setFont(new Font("Arial", Font.BOLD, 20));
 		txtRipetiPassword.setBorder(null);
 		txtRipetiPassword.setBackground(sfondo);
 		txtRipetiPassword.setForeground(scritte);
@@ -201,7 +202,7 @@ public class Registrazione extends JPanel {
 		lblmostraPassword.setToolTipText("Mostra password");
 		lblmostraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblmostraPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmostraPassword.setIcon(new ImageIcon(censuraPassword));
+		lblmostraPassword.setIcon(new ImageIcon(img.censuraPassword()));
 		lblmostraPassword.setBounds(430, 428, 20, 20);
 		add(lblmostraPassword);
 
@@ -216,7 +217,7 @@ public class Registrazione extends JPanel {
 		lblcensuraPassword.setToolTipText("Nascondi password");
 		lblcensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblcensuraPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblcensuraPassword.setIcon(new ImageIcon(mostraPassword));
+		lblcensuraPassword.setIcon(new ImageIcon(img.mostraPassword()));
 		lblcensuraPassword.setBounds(430, 428, 20, 20);
 		add(lblcensuraPassword);
 
@@ -231,7 +232,7 @@ public class Registrazione extends JPanel {
 		lblmostraRipetiPassword.setToolTipText("Mostra password");
 		lblmostraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblmostraRipetiPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmostraRipetiPassword.setIcon(new ImageIcon(censuraPassword));
+		lblmostraRipetiPassword.setIcon(new ImageIcon(img.censuraPassword()));
 		lblmostraRipetiPassword.setBounds(430, 533, 20, 20);
 		add(lblmostraRipetiPassword);
 
@@ -246,26 +247,27 @@ public class Registrazione extends JPanel {
 		lblcensuraRipetiPassword.setToolTipText("Nascondi password");
 		lblcensuraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblcensuraRipetiPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblcensuraRipetiPassword.setIcon(new ImageIcon(mostraPassword));
+		lblcensuraRipetiPassword.setIcon(new ImageIcon(img.mostraPassword()));
 		lblcensuraRipetiPassword.setBounds(430, 533, 20, 20);
 		add(lblcensuraRipetiPassword);
-		
+
 		JLabel lblRegistrati = new JLabel("");
 		lblRegistrati.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblRegistrati.setIcon(new ImageIcon(avanti2));
+				lblRegistrati.setIcon(new ImageIcon(img.avanti2()));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblRegistrati.setIcon(new ImageIcon(avanti1));
+				lblRegistrati.setIcon(new ImageIcon(img.avanti1()));
 			}
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (formatoEmailInseritaErrato()) {
-					Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(), getTxtPassword().getText());
+					Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(),
+							getTxtPassword().getText());
 					controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
 					controller.vaiAdAccessoDopoRegistrazione();
 				}
@@ -273,15 +275,14 @@ public class Registrazione extends JPanel {
 		});
 		lblRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRegistrati.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegistrati.setIcon(new ImageIcon(avanti1));
+		lblRegistrati.setIcon(new ImageIcon(img.avanti1()));
 		lblRegistrati.setBackground(new Color(0, 0, 0, 0));
-		lblRegistrati.setBounds(620, 500, 196, 50);
+		lblRegistrati.setBounds(620, 500, 206, 60);
 		add(lblRegistrati);
-		
 
 		JLabel lblInserimentoCredenziali = new JLabel("");
 		lblInserimentoCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInserimentoCredenziali.setIcon(new ImageIcon(inserimentoCredenziali));
+		lblInserimentoCredenziali.setIcon(new ImageIcon(img.inserimentoCredenziali()));
 		lblInserimentoCredenziali.setBounds(80, 85, 370, 470);
 		add(lblInserimentoCredenziali);
 
@@ -292,11 +293,12 @@ public class Registrazione extends JPanel {
 		add(lblRegistrazione);
 
 	}
-	
+
 	// METODI
 
 	public boolean formatoEmailInseritaErrato() {
-		boolean emailCorretta = controllerRegistrazione.controlloInserimentoEmailCorrettamenteRegistrazione(getTxtEmail().getText());
+		boolean emailCorretta = controllerRegistrazione
+				.controlloInserimentoEmailCorrettamenteRegistrazione(getTxtEmail().getText());
 
 		if (emailCorretta) {
 			controllerRegistrazione.vaiAdAccessoDopoRegistrazione();

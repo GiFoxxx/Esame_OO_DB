@@ -1,58 +1,39 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.util.ArrayList;
-import java.util.List;
-
-import java.awt.EventQueue;
-import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import Classi.CompagniaAerea;
-import Controller.Controller;
-import ImplementazioniPostrgresDAO.CompagniaAereaImplementazionePostgresDAO;
-
-import javax.swing.JTable;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.print.PrinterException;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
-public class GestioneCompagnieAeree extends JFrame {
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
-	String colonne[] = {"Nome", "Codice Compagnia aerea"};
+import Controller.Controller;
+import javax.swing.JButton;
+
+public class GestioneCompagnieAeree extends JPanel {
+
+
+	Color sfondo = new Color(54, 57, 63);
+	Color scritte = new Color(141, 142, 146);
+	
+	String colonne[] = {"Codice Compagnia aerea", "Nome" };
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaCompagnieAeree = new ArrayList<>();
 	
-	
-	
-	private JPanel contentPane;
-	private final JLabel lblCodiceCompagniaAerea = new JLabel("Codice Compagnia aerea");
-	private final JTextField txtCodiceCompagniaAerea = new JTextField();
+	private JTextField txtCodiceCompagniaAerea;
 	private JTextField txtNome;
-	private JButton btnModifica;
-	private JButton btnElimina;
-	private JButton btnAggiungi;
-
-	Controller controllerGestioneCompagnieAeree;
-	private JButton btnNewButton;
-	private JTable table;
 	private JScrollPane scrollPane;
+	private JTable table;
 	
 	//GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -61,6 +42,22 @@ public class GestioneCompagnieAeree extends JFrame {
 
 	public void setModello(DefaultTableModel modello) {
 		this.modello = modello;
+	}
+
+	public JTextField getTxtCodiceCompagniaAerea() {
+		return txtCodiceCompagniaAerea;
+	}
+
+	public void setTxtCodiceCompagniaAerea(JTextField txtCodiceCompagniaAerea) {
+		this.txtCodiceCompagniaAerea = txtCodiceCompagniaAerea;
+	}
+
+	public JTextField getTxtNome() {
+		return txtNome;
+	}
+
+	public void setTxtNome(JTextField txtNome) {
+		this.txtNome = txtNome;
 	}
 
 	public JTable getTable() {
@@ -74,119 +71,43 @@ public class GestioneCompagnieAeree extends JFrame {
 	public Object[] getRow() {
 		return row;
 	}
-
 	
-	public JTextField getTxtNome() {
-		return txtNome;
-	}
-
-	public void setTxtNome(JTextField txtNome) {
-		this.txtNome = txtNome;
-	}
-
-	public JTextField getTxtCodiceCompagniaAerea() {
-		return txtCodiceCompagniaAerea;
-	}
+	Controller controllerGestioneCompagnieAeree;
 	
-	//CREAZIONE GUI
 	public GestioneCompagnieAeree(Controller controller) {
-			
 		controllerGestioneCompagnieAeree=controller;
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 650);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBounds(0, 0, 894, 625);
+		setBackground(sfondo);
+		setLayout(null);
 		
 		JLabel lblimgfrecciaIndietro = new JLabel("");
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
-			// Click sulla freccia in alto a sinistra
-			@Override // chiusura finestra diretta se campi vuoti - chiusura finestra a richiesta se
-						// campi pieni
+			@Override
 			public void mouseClicked(MouseEvent e) {
-//				controllerGestioneCompagnieAeree.tornaAMenuGestioneDaGestioneCompagniaAeree();
+				controllerGestioneCompagnieAeree.mostraPannelli(controllerGestioneCompagnieAeree.getDashboard().getHome());
 			}
-
-		
 		});
+		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblimgfrecciaIndietro.setForeground(Color.BLACK);
+		lblimgfrecciaIndietro.setFont(new Font("Arial", Font.BOLD, 11));
 		lblimgfrecciaIndietro.setBorder(null);
 		lblimgfrecciaIndietro.setBackground(new Color(70, 130, 180));
-		lblimgfrecciaIndietro.setForeground(new Color(0, 0, 0));
-		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblimgfrecciaIndietro.setFont(new Font("Arial", Font.BOLD, 11));
-		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgfrecciaIndietro.setBounds(10, 11, 37, 14);
-		contentPane.add(lblimgfrecciaIndietro);
+		lblimgfrecciaIndietro.setBounds(21, 21, 37, 14);
+		add(lblimgfrecciaIndietro);
 		
-		JLabel lblNome = new JLabel("nome");
-		lblNome.setBounds(127, 220, 46, 14);
-		contentPane.add(lblNome);
-		lblCodiceCompagniaAerea.setBounds(54, 245, 133, 27);
-		contentPane.add(lblCodiceCompagniaAerea);
-		
-		txtNome = new JTextField();
-		txtNome.setBounds(221, 217, 133, 20);
-		contentPane.add(txtNome);
-		txtNome.setColumns(10);
-		txtCodiceCompagniaAerea.setBounds(221, 248, 157, 20);
-		contentPane.add(txtCodiceCompagniaAerea);
-		txtCodiceCompagniaAerea.setColumns(10);
-		
-		btnModifica = new JButton("modifica");
-		btnModifica.setBounds(32, 124, 89, 23);
-		btnModifica.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.modificaCompagniaAerea();
-			}
-		});
-		contentPane.add(btnModifica);
-		
-		btnElimina = new JButton("elimina");
-		btnElimina.setBounds(44, 80, 89, 23);
-		btnElimina.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.eliminaCompagniaAerea();
-			}
-		});
-		contentPane.add(btnElimina);
-		
-		btnAggiungi = new JButton("aggiungi");
-		btnAggiungi.setBounds(156, 80, 89, 23);
-		btnAggiungi.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.aggiungiCompagniaAerea();
-			}
-		});
-		contentPane.add(btnAggiungi);
-		
-		modello.setColumnIdentifiers(colonne);
-		
-		btnNewButton = new JButton("svuota");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
-			}
-		});
-		btnNewButton.setBounds(181, 116, 78, 39);
-		contentPane.add(btnNewButton);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(445, 53, 429, 366);
-		contentPane.add(scrollPane);
+		scrollPane.setBounds(21, 46, 850, 330);
+		add(scrollPane);
 		
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int t = table.getSelectedRow();
-				txtNome.setText(modello.getValueAt(t, 0).toString());
-				txtCodiceCompagniaAerea.setText(modello.getValueAt(t, 1).toString());
+				txtCodiceCompagniaAerea.setText(modello.getValueAt(t, 0).toString());
+				txtNome.setText(modello.getValueAt(t, 1).toString());
 			}
 		});
 		
@@ -195,17 +116,69 @@ public class GestioneCompagnieAeree extends JFrame {
 
 		scrollPane.setViewportView(table);
 		
-		btnNewButton = new JButton("svuota");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		txtCodiceCompagniaAerea = new JTextField();
+		txtCodiceCompagniaAerea.setColumns(10);
+		txtCodiceCompagniaAerea.setBounds(304, 416, 133, 20);
+		add(txtCodiceCompagniaAerea);
+		
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNome.setFont(new Font("Arial", Font.BOLD, 14));
+		lblNome.setBounds(53, 447, 221, 20);
+		add(lblNome);
+		
+		txtNome = new JTextField();
+		txtNome.setColumns(10);
+		txtNome.setBounds(304, 447, 133, 20);
+		add(txtNome);
+		
+		JLabel lblCodiceCompagniaAerea = new JLabel("Codice Compagnia Aerea");
+		lblCodiceCompagniaAerea.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCodiceCompagniaAerea.setFont(new Font("Arial", Font.BOLD, 14));
+		lblCodiceCompagniaAerea.setBounds(53, 416, 221, 20);
+		add(lblCodiceCompagniaAerea);
+		
+		JButton btnAggiungi = new JButton("aggiungi");
+		btnAggiungi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneCompagnieAeree.aggiungiCompagniaAerea();
+			}
+		});
+		btnAggiungi.setBounds(705, 416, 113, 20);
+		add(btnAggiungi);
+		
+		JButton btnModifica = new JButton("modifica");
+		btnModifica.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneCompagnieAeree.modificaCompagniaAerea();
+			}
+		});
+		btnModifica.setBounds(705, 447, 113, 20);
+		add(btnModifica);
+		
+		JButton btnElimina = new JButton("elimina");
+		btnElimina.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneCompagnieAeree.eliminaCompagniaAerea();
+			}
+		});
+		btnElimina.setBounds(705, 479, 113, 20);
+		add(btnElimina);
+		
+		JButton btnSvuota = new JButton("svuota");
+		btnSvuota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
 			}
 		});
-		scrollPane.setViewportView(table);
+		btnSvuota.setBounds(705, 511, 113, 20);
+		add(btnSvuota);
 		
 		caricamento();
-		
 	}
 	
 	public void  caricamento() {
@@ -216,5 +189,5 @@ public class GestioneCompagnieAeree extends JFrame {
 		}
 		table.setModel(modello);
 	}
-}
 
+}

@@ -1,15 +1,13 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.*;
 
 import Controller.Controller;
+import Immagini.Immagini;
 
 import javax.swing.border.EmptyBorder;
 
@@ -17,50 +15,27 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.MouseMotionAdapter;
 
 public class Dashboard extends JFrame {
 
-	int posizioneTendina = 238;
-
-	private Image imgSfondo = new ImageIcon(Accesso.class.getResource("immaginiDashboard/SfondoDashboard.png")).getImage()
-			.getScaledInstance(1143, 677, Image.SCALE_SMOOTH);
-	private Image tendina = new ImageIcon(Accesso.class.getResource("immaginiDashboard/TendinaDashboard.png")).getImage()
-			.getScaledInstance(238, 677, Image.SCALE_SMOOTH);
-	private Image linee1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/linee1.png")).getImage()
-			.getScaledInstance(25, 15, Image.SCALE_SMOOTH);
-	private Image linee2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/linee2.png")).getImage()
-			.getScaledInstance(25, 15, Image.SCALE_SMOOTH);
-	private Image X1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/X1.png")).getImage()
-			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image X2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/X2.png")).getImage()
-			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image minimizza1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/minimizza1.png")).getImage()
-			.getScaledInstance(16, 5, Image.SCALE_SMOOTH);
-	private Image minimizza2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/minimizza2.png")).getImage()
-			.getScaledInstance(16, 5, Image.SCALE_SMOOTH);
-	private Image casa = new ImageIcon(Accesso.class.getResource("immaginiDashboard/home.png")).getImage()
-			.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image accedi = new ImageIcon(Accesso.class.getResource("immaginiDashboard/accesso.png")).getImage()
-			.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image registrati = new ImageIcon(Accesso.class.getResource("immaginiDashboard/registrazione.png"))
-			.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image profilo = new ImageIcon(Accesso.class.getResource("immaginiDashboard/profilo.png")).getImage()
-			.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image impostazioni = new ImageIcon(Accesso.class.getResource("immaginiDashboard/impostazioni.png"))
-			.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image esci = new ImageIcon(Accesso.class.getResource("immaginiDashboard/esci.png")).getImage()
-			.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	private Image titolo = new ImageIcon(Accesso.class.getResource("immaginiDashboard/titolo.png")).getImage()
-			.getScaledInstance(217, 18, Image.SCALE_SMOOTH);
+	private Immagini img = new Immagini();
 
 	Color sfondo = new Color(54, 57, 63);
 	Color scritte = new Color(141, 142, 146);
 	Color clickPannello = new Color(40, 40, 40);
 	Color entroPannello = new Color(30, 30, 30);
-	Color escoPannelloLaterale = new Color(35,39,42);
+	Color escoPannelloLaterale = new Color(35, 39, 42);
 	Color trasparente = new Color(0, 0, 0, 0);
-	
-	
+
+	int posizioneTendina = 238;
+	int xMouse;
+	int yMouse;
+	int xMouseSuSchermo;
+	int yMouseSuSchermo;
+	int x;
+	int y;
+
 	private JPanel contentPane;
 
 	private JPanel home;
@@ -162,7 +137,7 @@ public class Dashboard extends JFrame {
 		uscita = controllerDashboard.uscita();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1143, 677);
+		setBounds(0, 0, 1143, 677);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -184,17 +159,17 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblX.setIcon(new ImageIcon(X2));
+				lblX.setIcon(new ImageIcon(img.X2()));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblX.setIcon(new ImageIcon(X1));
+				lblX.setIcon(new ImageIcon(img.X1()));
 			}
 		});
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
-		lblX.setIcon(new ImageIcon(X1));
-		lblX.setBounds(1096, 11, 37, 23);
+		lblX.setIcon(new ImageIcon(img.X1()));
+		lblX.setBounds(1096, 0, 37, 43);
 		pannelloBase.add(lblX);
 
 		JLabel lblMinimizza = new JLabel("");
@@ -206,23 +181,23 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblMinimizza.setIcon(new ImageIcon(minimizza2));
+				lblMinimizza.setIcon(new ImageIcon(img.minimizza2()));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblMinimizza.setIcon(new ImageIcon(minimizza1));
+				lblMinimizza.setIcon(new ImageIcon(img.minimizza1()));
 			}
 		});
 		lblMinimizza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMinimizza.setIcon(new ImageIcon(minimizza1));
-		lblMinimizza.setBounds(1069, 17, 37, 14);
+		lblMinimizza.setIcon(new ImageIcon(img.minimizza1()));
+		lblMinimizza.setBounds(1069, 0, 37, 43);
 		pannelloBase.add(lblMinimizza);
 
 		JPanel pannelloDestra = new JPanel();
-		pannelloDestra.setBounds(238, 42, 903, 635);
+		pannelloDestra.setBounds(239, 54, 903, 635);
 		pannelloDestra.setBackground(trasparente);
-		
+
 		pannelloBase.add(pannelloDestra);
 		pannelloDestra.add(home);
 		pannelloDestra.add(accesso);
@@ -242,10 +217,9 @@ public class Dashboard extends JFrame {
 		gestioneVoli.setVisible(false);
 		pannelloDestra.setLayout(null);
 
-
 		JLabel lblTitolo = new JLabel("");
 		lblTitolo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitolo.setIcon(new ImageIcon(titolo));
+		lblTitolo.setIcon(new ImageIcon(img.titolo()));
 		lblTitolo.setBounds(239, 1, 277, 49);
 		pannelloBase.add(lblTitolo);
 
@@ -259,21 +233,25 @@ public class Dashboard extends JFrame {
 		panelHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				controllerDashboard.mostraPannelli(home);
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				panelHome.setBackground(entroPannello);
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				panelHome.setBackground(escoPannelloLaterale);
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				panelHome.setBackground(clickPannello);
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				panelHome.setBackground(entroPannello);
@@ -296,28 +274,32 @@ public class Dashboard extends JFrame {
 		JLabel lblHome = new JLabel("");
 		lblHome.setBounds(0, 0, 46, 70);
 		lblHome.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHome.setIcon(new ImageIcon(casa));
+		lblHome.setIcon(new ImageIcon(img.casa()));
 		panelHome.add(lblHome);
 
 		JPanel panelAccedi = new JPanel();
 		panelAccedi.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {				
+			public void mouseClicked(MouseEvent e) {
 				controllerDashboard.mostraPannelli(accesso);
 				controllerDashboard.svuotaCampiAccesso();
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				panelAccedi.setBackground(entroPannello);
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				panelAccedi.setBackground(escoPannelloLaterale);
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				panelAccedi.setBackground(clickPannello);
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				panelAccedi.setBackground(entroPannello);
@@ -341,26 +323,31 @@ public class Dashboard extends JFrame {
 		lblAccesso.setBounds(0, 0, 46, 70);
 		panelAccedi.add(lblAccesso);
 		lblAccesso.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAccesso.setIcon(new ImageIcon(accedi));
+		lblAccesso.setIcon(new ImageIcon(img.accedi()));
 
 		JPanel panelRegistrati = new JPanel();
 		panelRegistrati.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {				
+			public void mouseClicked(MouseEvent e) {
 				controllerDashboard.mostraPannelli(registrazione);
+				controllerDashboard.svuotaCampiRegistrazione();
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				panelRegistrati.setBackground(entroPannello);
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				panelRegistrati.setBackground(escoPannelloLaterale);
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				panelRegistrati.setBackground(clickPannello);
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				panelRegistrati.setBackground(entroPannello);
@@ -378,31 +365,35 @@ public class Dashboard extends JFrame {
 		lblScrittaRegistrazione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaRegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
 		panelRegistrati.add(lblScrittaRegistrazione);
-		
+
 		JLabel lblRegistrazione = new JLabel("");
 		lblRegistrazione.setBounds(0, 0, 46, 70);
 		panelRegistrati.add(lblRegistrazione);
 		lblRegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegistrazione.setIcon(new ImageIcon(registrati));
+		lblRegistrazione.setIcon(new ImageIcon(img.registrati()));
 
 		JPanel panelProfilo = new JPanel();
 		panelProfilo.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {				
-				
+			public void mouseClicked(MouseEvent e) {
+
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				panelProfilo.setBackground(entroPannello);
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				panelProfilo.setBackground(escoPannelloLaterale);
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				panelProfilo.setBackground(clickPannello);
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				panelProfilo.setBackground(entroPannello);
@@ -425,26 +416,30 @@ public class Dashboard extends JFrame {
 		lblProfilo.setBounds(0, 0, 46, 70);
 		panelProfilo.add(lblProfilo);
 		lblProfilo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProfilo.setIcon(new ImageIcon(profilo));
-		
+		lblProfilo.setIcon(new ImageIcon(img.profilo()));
+
 		JPanel panelImpostazioni = new JPanel();
 		panelImpostazioni.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {				
-				
+			public void mouseClicked(MouseEvent e) {
+
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				panelImpostazioni.setBackground(entroPannello);
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				panelImpostazioni.setBackground(escoPannelloLaterale);
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				panelImpostazioni.setBackground(clickPannello);
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				panelImpostazioni.setBackground(entroPannello);
@@ -467,7 +462,7 @@ public class Dashboard extends JFrame {
 		lbllblImpostazioni.setBounds(0, 0, 46, 70);
 		panelImpostazioni.add(lbllblImpostazioni);
 		lbllblImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
-		lbllblImpostazioni.setIcon(new ImageIcon(impostazioni));
+		lbllblImpostazioni.setIcon(new ImageIcon(img.impostazioni()));
 
 		JPanel panelUscita = new JPanel();
 		panelUscita.addMouseListener(new MouseAdapter() {
@@ -475,18 +470,22 @@ public class Dashboard extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				controllerDashboard.mostraUscita();
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				panelUscita.setBackground(entroPannello);
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				panelUscita.setBackground(escoPannelloLaterale);
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				panelUscita.setBackground(clickPannello);
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				panelUscita.setBackground(entroPannello);
@@ -508,7 +507,7 @@ public class Dashboard extends JFrame {
 		JLabel lblEsci = new JLabel("");
 		lblEsci.setBounds(0, 0, 46, 70);
 		lblEsci.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEsci.setIcon(new ImageIcon(esci));
+		lblEsci.setIcon(new ImageIcon(img.esci()));
 		panelUscita.add(lblEsci);
 
 		JLabel lblLinee1 = new JLabel("");
@@ -541,7 +540,7 @@ public class Dashboard extends JFrame {
 		});
 		lblLinee1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblLinee1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLinee1.setIcon(new ImageIcon(linee1));
+		lblLinee1.setIcon(new ImageIcon(img.linee1()));
 		lblLinee1.setBounds(188, 49, 46, 70);
 		pannelloTendina.add(lblLinee1);
 
@@ -575,34 +574,81 @@ public class Dashboard extends JFrame {
 		lblLinee2.setBounds(1, 49, 46, 70);
 		pannelloTendina.add(lblLinee2);
 		lblLinee2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLinee2.setIcon(new ImageIcon(linee2));
+		lblLinee2.setIcon(new ImageIcon(img.linee2()));
 
 		JLabel lblTendina = new JLabel("");
 		lblTendina.setBounds(0, 0, 238, 677);
 		lblTendina.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTendina.setIcon(new ImageIcon(tendina));
+		lblTendina.setIcon(new ImageIcon(img.tendina()));
 		pannelloTendina.add(lblTendina);
 
 		JLabel lblLayout = new JLabel("");
 		lblLayout.setBounds(0, 0, 1143, 677);
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLayout.setIcon(new ImageIcon(imgSfondo));
+		lblLayout.setIcon(new ImageIcon(img.sfondo()));
 		pannelloBase.add(lblLayout);
 
-		// rimozione background java e adattamento al centro dello schermo
+		JLabel lblSpostaDaashboard = new JLabel("");
+		lblSpostaDaashboard.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent spostaDashboard) {
+				x = spostaDashboard.getXOnScreen();
+				y = spostaDashboard.getYOnScreen();
+				xMouseSuSchermo = spostaDashboard.getXOnScreen();
+				yMouseSuSchermo = spostaDashboard.getYOnScreen();
+				setLocation(x - xMouse, y - yMouse);
+
+			}
+		});
+		lblSpostaDaashboard.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent prendiPosizioneMouse) {
+
+				xMouse = prendiPosizioneMouse.getX();
+				yMouse = prendiPosizioneMouse.getY();
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+
+				if (yMouseSuSchermo < 2) {
+					contentPane.setSize(controllerDashboard.dimensioneSchermoX(),
+							controllerDashboard.dimensioneSchermoY());
+					pannelloBase.setSize(controllerDashboard.dimensioneSchermoX(),
+							controllerDashboard.dimensioneSchermoY());
+					pannelloDestra.setSize(controllerDashboard.dimensioneSchermoX(),
+							controllerDashboard.dimensioneSchermoY());
+					lblLayout.setIcon(new ImageIcon(img.imgSfondoFull()));
+
+					setExtendedState(Dashboard.MAXIMIZED_BOTH);
+				}
+
+				if (yMouseSuSchermo > 2) {
+					setBounds(0, 0, 1143, 677);
+					pannelloBase.setBounds(0, 0, 1143, 677);
+					pannelloDestra.setBounds(238, 42, 903, 635);
+					lblLayout.setIcon(new ImageIcon(img.imgSfondoFull()));
+
+				}
+
+			}
+		});
+		lblSpostaDaashboard.setEnabled(false);
+		lblSpostaDaashboard.setBounds(0, 0, 1070, 37);
+		pannelloBase.add(lblSpostaDaashboard);
+
+		dimensione();
+
+	}
+
+	// rimozione background java e adattamento al centro dello schermo
+	public Dimension dimensione() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 		this.setBackground(new Color(0, 0, 0, 0));
 
+		return dim;
 	}
-
-	// METODI
-//	public void uscita() {
-//		Object[] options = { "SI", "ANNULLA" };
-//		if (JOptionPane.showOptionDialog(null, "Sei sicuro di voler uscire dal progrmamma?", "ATTENZIONE!",
-//				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 0) {
-//			Dashboard.this.dispose();
-//		}
-//	}
 
 }

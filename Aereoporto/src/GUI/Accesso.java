@@ -3,11 +3,12 @@ package GUI;
 import javax.swing.JPanel;
 
 import Controller.Controller;
+import Immagini.Immagini;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Image;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -21,14 +22,10 @@ import javax.swing.JPasswordField;
 
 public class Accesso extends JPanel {
 
-	private Image avanti1 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/avanti1.png")).getImage().getScaledInstance(196, 50, Image.SCALE_SMOOTH);
-	private Image avanti2 = new ImageIcon(Accesso.class.getResource("immaginiAccesso/avanti2.png")).getImage().getScaledInstance(196, 50, Image.SCALE_SMOOTH);
-	private Image mostraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/mostraPassword.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-	private Image censuraPassword = new ImageIcon(Accesso.class.getResource("immaginiAccesso/censuraPassword.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-
+	private Immagini img = new Immagini();
+	
 	Color sfondo = new Color(54, 57, 63);
 	Color scritte = new Color(141, 142, 146);
-	
 	
 	Controller controllerAccesso;
 	private JTextField txtEmail;
@@ -73,7 +70,7 @@ public class Accesso extends JPanel {
 		});
 		txtEmail.setBackground(sfondo);
 		txtEmail.setForeground(scritte);
-		txtEmail.setFont(new Font("Arial", Font.BOLD, 18));
+		txtEmail.setFont(new Font("Arial", Font.BOLD, 20));
 		txtEmail.setHorizontalAlignment(SwingConstants.LEFT);
 		txtEmail.setBounds(250, 230, 320, 22);
 		txtEmail.setColumns(10);
@@ -93,7 +90,7 @@ public class Accesso extends JPanel {
 
 		txtPassword.setBackground(sfondo);
 		txtPassword.setHorizontalAlignment(SwingConstants.LEFT);
-		txtPassword.setFont(new Font("Arial", Font.BOLD, 18));
+		txtPassword.setFont(new Font("Arial", Font.BOLD, 20));
 		txtPassword.setForeground(scritte);
 		txtPassword.setBounds(250, 334, 320, 22);
 		txtPassword.setBorder(null);
@@ -110,7 +107,7 @@ public class Accesso extends JPanel {
 		lblmostraPassword.setToolTipText("Mostra password");
 		lblmostraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblmostraPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmostraPassword.setIcon(new ImageIcon(censuraPassword));
+		lblmostraPassword.setIcon(new ImageIcon(img.censuraPassword()));
 		lblmostraPassword.setBounds(574, 335, 20, 20);
 		add(lblmostraPassword);
 
@@ -125,7 +122,7 @@ public class Accesso extends JPanel {
 		lblcensuraPassword.setToolTipText("Nascondi password");
 		lblcensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblcensuraPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblcensuraPassword.setIcon(new ImageIcon(mostraPassword));
+		lblcensuraPassword.setIcon(new ImageIcon(img.mostraPassword()));
 		lblcensuraPassword.setBounds(574, 335, 20, 20);
 		add(lblcensuraPassword);
 
@@ -146,12 +143,12 @@ public class Accesso extends JPanel {
 		lblAvanti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblAvanti.setIcon(new ImageIcon(avanti2));
+				lblAvanti.setIcon(new ImageIcon(img.avanti2()));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblAvanti.setIcon(new ImageIcon(avanti1));
+				lblAvanti.setIcon(new ImageIcon(img.avanti1()));
 			}
 
 			@Override
@@ -167,9 +164,9 @@ public class Accesso extends JPanel {
 		});
 		lblAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblAvanti.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAvanti.setIcon(new ImageIcon(avanti1));
+		lblAvanti.setIcon(new ImageIcon(img.avanti1()));
 		lblAvanti.setBackground(new Color(0, 0, 0, 0));
-		lblAvanti.setBounds(620, 500, 196, 50);
+		lblAvanti.setBounds(620, 500, 206, 60);
 		add(lblAvanti);
 
 	}

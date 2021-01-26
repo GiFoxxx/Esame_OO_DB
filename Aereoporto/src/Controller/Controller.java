@@ -1,6 +1,7 @@
 package Controller;
 
 import java.awt.Component;
+import java.awt.Toolkit;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.List;
@@ -175,8 +176,8 @@ public class Controller {
 	}
 
 	public void svuotaCampiAccesso() {
-		((GUI.Accesso) getDashboard().getAccesso()).getTxtEmail().setText("");
-		((GUI.Accesso) getDashboard().getAccesso()).getTxtPassword().setText("");
+		((Accesso) getDashboard().getAccesso()).getTxtEmail().setText("");
+		((Accesso) getDashboard().getAccesso()).getTxtPassword().setText("");
 
 	}
 
@@ -190,11 +191,11 @@ public class Controller {
 
 	// METODI DI REGISTRAZIONE
 	public void svuotaCampiRegistrazione() {
-		((GUI.Registrazione) getDashboard().getAccesso()).getTxtNome().setText("");
-		((GUI.Registrazione) getDashboard().getAccesso()).getTxtCognome().setText("");
-		((GUI.Registrazione) getDashboard().getAccesso()).getTxtEmail().setText("");
-		((GUI.Registrazione) getDashboard().getAccesso()).getTxtPassword().setText("");
-		((GUI.Registrazione) getDashboard().getAccesso()).getTxtRipetiPassword().setText("");
+		((Registrazione) getDashboard().getRegistrazione()).getTxtNome().setText("");
+		((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().setText("");
+		((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().setText("");
+		((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setText("");
+		((Registrazione) getDashboard ().getRegistrazione()).getTxtRipetiPassword().setText("");
 	}
 
 	public void vaiAdAccessoDopoRegistrazione() {
@@ -263,8 +264,8 @@ public class Controller {
 	// METODI GESTIONE COMPAGNIA AEREA
 
 	public void svuotaCampiCompagniaAerea() {
-		((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().setText("");
-		((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTxtNome().setText("");
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().setText("");
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().setText("");
 	}
 
 	public CompagniaAereaImplementazionePostgresDAO implementazioneCompagniaAereaDAO() {
@@ -273,35 +274,35 @@ public class Controller {
 	}
 
 	public void aggiungiCompagniaAerea() {
-		compAerea = new CompagniaAerea(((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(),
-				((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
+		compAerea = new CompagniaAerea(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(),
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
 		implementazioneCompagniaAereaDAO().aggiungiCompagniaAerea(compAerea);
-		((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getModello().addRow(((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getRow());
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
 		svuotaCampiCompagniaAerea();
-		((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).caricamento();
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricamento();
 	}
 
 	public void eliminaCompagniaAerea() {
-		compAerea = new CompagniaAerea(((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(),
-				((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
-		int t = ((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTable().getSelectedRow();
+		compAerea = new CompagniaAerea(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(),
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
+		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTable().getSelectedRow();
 		implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
-		((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
 		svuotaCampiCompagniaAerea();
-		((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).caricamento();
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricamento();
 	}
 
 	public void modificaCompagniaAerea() {
-		compAerea = new CompagniaAerea(((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(),
-				((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
-		int t = ((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTable().getSelectedRow();
+		compAerea = new CompagniaAerea(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(),
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
+		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTable().getSelectedRow();
 
-		((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(), t, 0);
-		((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText(), t,1);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(), t, 0);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText(), t,1);
 
 		implementazioneCompagniaAereaDAO().modificaCompagniaAerea(compAerea);
 		svuotaCampiCompagniaAerea();
-		((GestioneCompagnieAeree1) getDashboard().getGestioneCompagnieAeree()).caricamento();
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricamento();
 	}
 
 	// METODI GESTIONE TRATTE
@@ -511,8 +512,8 @@ public class Controller {
 	}
 	
 	public JPanel gestioneCompagnieAeree() {
-		GestioneCompagnieAeree1 gestioneCompagnieAeree1 = new GestioneCompagnieAeree1(this);
-		return gestioneCompagnieAeree1;
+		GestioneCompagnieAeree gestioneCompagnieAeree = new GestioneCompagnieAeree(this);
+		return gestioneCompagnieAeree;
 	}
 	
 	public JPanel gestioneGate() {
@@ -544,6 +545,8 @@ public class Controller {
 		dashboard.getHome().setVisible(false);
 		dashboard.getAccesso().setVisible(false);
 		dashboard.getRegistrazione().setVisible(false);
+		dashboard.getGestioneCompagnieAeree().setVisible(false);
+		dashboard.getGestioneUtenti().setVisible(false);
 		dashboard.getGestioneGate().setVisible(false);
 		dashboard.getGestioneTratte().setVisible(false);
 		dashboard.getGestioneVoli().setVisible(false);
@@ -553,6 +556,20 @@ public class Controller {
 	
 	public void mostraUscita() {
 		dashboard.getUscita().setVisible(true);;
+	}
+	
+	
+	//METODI PER RIDIMENSIONAMENTO
+	public int dimensioneSchermoX() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int xSize = ((int) tk.getScreenSize().getWidth());
+		return xSize;
+	}
+	
+	public int dimensioneSchermoY() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int ySize = ((int) tk.getScreenSize().getHeight());
+		return ySize;
 	}
 
 	// METODI DI PROVA
