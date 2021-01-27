@@ -108,9 +108,9 @@ public class GestioneCompagnieAeree extends JPanel {
 		add(lblimgfrecciaIndietro);
 		
 		JLabel lblRicerca = new JLabel("");
-		lblRicerca.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRicerca.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblRicerca.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRicerca.setIcon(new ImageIcon(img.ricerca1()));
+		lblRicerca.setIcon(new ImageIcon(img.ricerca()));
 		lblRicerca.setBounds(840, 36, 27, 27);
 		add(lblRicerca);
 

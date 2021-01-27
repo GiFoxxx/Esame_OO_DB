@@ -72,7 +72,7 @@ public class Accesso extends JPanel {
 		txtEmail.setForeground(scritte);
 		txtEmail.setFont(new Font("Arial", Font.BOLD, 20));
 		txtEmail.setHorizontalAlignment(SwingConstants.LEFT);
-		txtEmail.setBounds(250, 230, 320, 22);
+		txtEmail.setBounds(437, 244, 320, 22);
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
 		add(txtEmail);
@@ -92,7 +92,7 @@ public class Accesso extends JPanel {
 		txtPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		txtPassword.setFont(new Font("Arial", Font.BOLD, 20));
 		txtPassword.setForeground(scritte);
-		txtPassword.setBounds(250, 334, 320, 22);
+		txtPassword.setBounds(437, 348, 320, 22);
 		txtPassword.setBorder(null);
 		add(txtPassword);
 
@@ -108,7 +108,7 @@ public class Accesso extends JPanel {
 		lblmostraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblmostraPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblmostraPassword.setIcon(new ImageIcon(img.censuraPassword()));
-		lblmostraPassword.setBounds(574, 335, 20, 20);
+		lblmostraPassword.setBounds(761, 349, 20, 20);
 		add(lblmostraPassword);
 
 		JLabel lblcensuraPassword = new JLabel("");
@@ -123,21 +123,14 @@ public class Accesso extends JPanel {
 		lblcensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblcensuraPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblcensuraPassword.setIcon(new ImageIcon(img.mostraPassword()));
-		lblcensuraPassword.setBounds(574, 335, 20, 20);
+		lblcensuraPassword.setBounds(761, 349, 20, 20);
 		add(lblcensuraPassword);
 
 		JLabel lblCredenziali = new JLabel("");
 		lblCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCredenziali.setIcon(new ImageIcon(Accesso.class.getResource("/GUI/immaginiAccesso/credenziali.png")));
-		lblCredenziali.setBounds(250, 200, 344, 159);
+		lblCredenziali.setBounds(437, 214, 344, 159);
 		add(lblCredenziali);
-
-		JLabel lblAccedi = new JLabel("ACCEDI");
-		lblAccedi.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAccedi.setForeground(scritte);
-		lblAccedi.setFont(new Font("Arial", Font.BOLD, 27));
-		lblAccedi.setBounds(80, 30, 110, 30);
-		add(lblAccedi);
 
 		JLabel lblAvanti = new JLabel("");
 		lblAvanti.addMouseListener(new MouseAdapter() {
@@ -166,8 +159,14 @@ public class Accesso extends JPanel {
 		lblAvanti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAvanti.setIcon(new ImageIcon(img.avanti1()));
 		lblAvanti.setBackground(new Color(0, 0, 0, 0));
-		lblAvanti.setBounds(620, 500, 206, 60);
+		lblAvanti.setBounds(506, 479, 206, 60);
 		add(lblAvanti);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon(img.icona()));
+		lblNewLabel.setBounds(55, 128, 320, 361);
+		add(lblNewLabel);
 
 	}
 
@@ -184,5 +183,4 @@ public class Accesso extends JPanel {
 	public void immaginiDashboard() {
 
 	}
-
 }

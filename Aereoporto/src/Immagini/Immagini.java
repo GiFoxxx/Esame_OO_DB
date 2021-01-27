@@ -20,6 +20,12 @@ public class Immagini {
 				.getScaledInstance(1143, 677, Image.SCALE_SMOOTH);
 		return imgSfondo;
 	}
+	
+	public Image icona() {
+		Image icona = new ImageIcon(Accesso.class.getResource("immaginiAccesso/icona.png")).getImage()
+				.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+		return icona;
+	}
 
 	public Image tendina() {
 		Image tendina = new ImageIcon(Accesso.class.getResource("immaginiDashboard/TendinaDashboard.png")).getImage()
@@ -220,17 +226,13 @@ public class Immagini {
 		return barraRicerca;
 	}
 	
-	public Image ricerca1() {
-		Image ricerca1 = new ImageIcon(Accesso.class.getResource("immaginiGate/ricerca1.png"))
+	public Image ricerca() {
+		Image ricerca = new ImageIcon(Accesso.class.getResource("immaginiGate/ricerca.png"))
 				.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		return ricerca1;
+		return ricerca;
 	}
 	
-	public Image ricerca2() {
-		Image ricerca2 = new ImageIcon(Accesso.class.getResource("immaginiGate/ricerca2.png"))
-				.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		return ricerca2;
-	}
+
 	
 	public Image frecciaIndietro1() {
 		Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiHome/frecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);

@@ -269,6 +269,7 @@ public class Dashboard extends JFrame {
 		panelHome.add(lblScrittaHome);
 
 		JLabel lblHome = new JLabel("");
+		lblHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblHome.setBounds(0, 0, 46, 70);
 		lblHome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHome.setIcon(new ImageIcon(img.casa()));
@@ -317,12 +318,14 @@ public class Dashboard extends JFrame {
 		panelAccedi.add(lblScrittaAccesso);
 
 		JLabel lblAccesso = new JLabel("");
+		lblAccesso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblAccesso.setBounds(0, 0, 46, 70);
 		panelAccedi.add(lblAccesso);
 		lblAccesso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAccesso.setIcon(new ImageIcon(img.accedi()));
 
 		JPanel panelRegistrati = new JPanel();
+		panelRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelRegistrati.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -364,12 +367,14 @@ public class Dashboard extends JFrame {
 		panelRegistrati.add(lblScrittaRegistrazione);
 
 		JLabel lblRegistrazione = new JLabel("");
+		lblRegistrazione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRegistrazione.setBounds(0, 0, 46, 70);
 		panelRegistrati.add(lblRegistrazione);
 		lblRegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistrazione.setIcon(new ImageIcon(img.registrati()));
 
 		JPanel panelProfilo = new JPanel();
+		panelProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelProfilo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -410,12 +415,14 @@ public class Dashboard extends JFrame {
 		lblScrittaProfilo.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel lblProfilo = new JLabel("");
+		lblProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblProfilo.setBounds(0, 0, 46, 70);
 		panelProfilo.add(lblProfilo);
 		lblProfilo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilo.setIcon(new ImageIcon(img.profilo()));
 
 		JPanel panelImpostazioni = new JPanel();
+		panelImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelImpostazioni.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -456,12 +463,14 @@ public class Dashboard extends JFrame {
 		panelImpostazioni.add(lblImpostazioni);
 
 		JLabel lbllblImpostazioni = new JLabel("");
+		lbllblImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbllblImpostazioni.setBounds(0, 0, 46, 70);
 		panelImpostazioni.add(lbllblImpostazioni);
 		lbllblImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
 		lbllblImpostazioni.setIcon(new ImageIcon(img.impostazioni()));
 
 		JPanel panelUscita = new JPanel();
+		panelUscita.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelUscita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -502,6 +511,7 @@ public class Dashboard extends JFrame {
 		panelUscita.add(lblScrittaEsci);
 
 		JLabel lblEsci = new JLabel("");
+		lblEsci.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblEsci.setBounds(0, 0, 46, 70);
 		lblEsci.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEsci.setIcon(new ImageIcon(img.esci()));
@@ -586,7 +596,7 @@ public class Dashboard extends JFrame {
 			}
 		});
 		lblSpostaDaashboard.setEnabled(false);
-		lblSpostaDaashboard.setBounds(0, 0, 1070, 43);
+		lblSpostaDaashboard.setBounds(0, 0, 1142, 43);
 		pannelloBase.add(lblSpostaDaashboard);
 
 		dimensione();

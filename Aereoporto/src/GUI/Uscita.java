@@ -19,6 +19,7 @@ import Controller.Controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import java.awt.Cursor;
 
 public class Uscita extends JDialog {
 
@@ -40,6 +41,8 @@ public class Uscita extends JDialog {
 		getContentPane().setLayout(null);
 		{
 			JButton btnAnnulla = new JButton("Annulla");
+			btnAnnulla.setBorder(null);
+			btnAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnAnnulla.setFont(new Font("Arial", Font.BOLD, 14));
 			btnAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
@@ -49,17 +52,20 @@ public class Uscita extends JDialog {
 			});
 			{
 				JLabel lblUscire = new JLabel("Sei sicuro di voler uscire dal programma?");
+				lblUscire.setHorizontalAlignment(SwingConstants.CENTER);
 				lblUscire.setFont(new Font("Arial", Font.BOLD, 20));
 				lblUscire.setForeground(scritte);
-				lblUscire.setBounds(51, 81, 447, 52);
+				lblUscire.setBounds(0, 81, 498, 52);
 				getContentPane().add(lblUscire);
 			}
-			btnAnnulla.setBounds(331, 220, 100, 30);
+			btnAnnulla.setBounds(322, 220, 100, 30);
 			getContentPane().add(btnAnnulla);
 			btnAnnulla.setActionCommand("Annulla");
 		}
 		{
 			JButton btnOk = new JButton("OK");
+			btnOk.setBorder(null);
+			btnOk.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnOk.setFont(new Font("Arial", Font.BOLD, 14));
 			btnOk.addMouseListener(new MouseAdapter() {
 				@Override
@@ -68,7 +74,7 @@ public class Uscita extends JDialog {
 					controllerUscita.getDashboard().dispose();
 				}
 			});
-			btnOk.setBounds(115, 220, 100, 30);
+			btnOk.setBounds(75, 220, 100, 30);
 			getContentPane().add(btnOk);
 			btnOk.setActionCommand("OK");
 			getRootPane().setDefaultButton(btnOk);
