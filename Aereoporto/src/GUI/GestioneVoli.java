@@ -1,8 +1,11 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
@@ -16,24 +19,23 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import com.toedter.calendar.JDateChooser;
 
 import Controller.Controller;
+import Immagini.Immagini;
 
 public class GestioneVoli extends JPanel {
 
-	
-	
-	Color sfondo = new Color(54, 57, 63);
-	Color scritte = new Color(141, 142, 146);
-	
 	String colonne[] = {"Codice Volo", "Citta Partenza", "Citta Arrivo", "Data Partenza", "Data Arrivo", "Orario Partenza", "Orario Arrivo", "Numero Prenotazioni"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaVoli = new ArrayList<>();
+	private Immagini img = new Immagini();
 	
 	private JTextField txtCodiceVolo;
 	private JTextField txtCittaPartenza;
@@ -43,7 +45,9 @@ public class GestioneVoli extends JPanel {
 	private JTextField txtOrarioPartenza;
 	private JTextField txtOrarioArrivo;
 	private JTextField txtNumeroPrenotazioni;
-	private JTable table;
+	JScrollPane scrollPane;
+	private JTable tabella;
+	private JTextField txtBarraRicerca;
 	
 	//GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -54,12 +58,12 @@ public class GestioneVoli extends JPanel {
 		this.modello = modello;
 	}
 
-	public JTable getTable() {
-		return table;
+	public JTable getTabella() {
+		return tabella;
 	}
 
-	public void setTable(JTable table) {
-		this.table = table;
+	public void setTabella(JTable table) {
+		this.tabella = table;
 	}
 
 	public Object[] getRow() {
@@ -136,7 +140,7 @@ public class GestioneVoli extends JPanel {
 		controllerGestioneVoli= controller;
 		
 		setBounds(0, 0, 894, 625);
-		setBackground(sfondo);
+		setBackground(controllerGestioneVoli.sfondo);
 		setLayout(null);
 		
 		JLabel lblimgfrecciaIndietro = new JLabel("");
@@ -145,25 +149,56 @@ public class GestioneVoli extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneVoli.mostraPannelli(controllerGestioneVoli.getDashboard().getHome());
 			}
-		
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
+			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
-		lblimgfrecciaIndietro.setForeground(Color.BLACK);
-		lblimgfrecciaIndietro.setFont(new Font("Arial", Font.BOLD, 11));
-		lblimgfrecciaIndietro.setBorder(null);
-		lblimgfrecciaIndietro.setBackground(new Color(70, 130, 180));
-		lblimgfrecciaIndietro.setBounds(21, 21, 37, 14);
+		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
+		lblimgfrecciaIndietro.setBounds(25, 35, 47, 30);
 		add(lblimgfrecciaIndietro);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 46, 850, 330);
+		JLabel lblRicerca = new JLabel("");
+		lblRicerca.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRicerca.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRicerca.setIcon(new ImageIcon(img.ricerca1()));
+		lblRicerca.setBounds(840, 36, 27, 27);
+		add(lblRicerca);
+
+		txtBarraRicerca = new JTextField();
+		txtBarraRicerca.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				ricerca();
+			}
+		});
+		txtBarraRicerca.setForeground(controllerGestioneVoli.coloreScritte);
+		txtBarraRicerca.setFont(controllerGestioneVoli.fontScritte);
+		txtBarraRicerca.setBorder(null);
+		txtBarraRicerca.setBounds(704, 40, 135, 20);
+		txtBarraRicerca.setColumns(10);
+		add(txtBarraRicerca);
+
+		JLabel lblBarraRicerca = new JLabel("");
+		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
+		lblBarraRicerca.setBounds(693, 35, 180, 30);
+		add(lblBarraRicerca);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(25, 85, 850, 330);
 		add(scrollPane);
 		
-		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
+		tabella = new JTable();
+		tabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int t = table.getSelectedRow();
+				int t = tabella.getSelectedRow();
 				txtCodiceVolo.setText(modello.getValueAt(t, 0).toString());
 				txtCittaPartenza.setText(modello.getValueAt(t, 1).toString());
 				txtCittaArrivo.setText(modello.getValueAt(t, 2).toString());
@@ -185,82 +220,103 @@ public class GestioneVoli extends JPanel {
 			}
 		});
 		modello.setColumnIdentifiers(colonne);
-		table.setModel(modello);
-		scrollPane.setViewportView(table);
+		tabella.setModel(modello);
+		scrollPane.setViewportView(tabella);
 		
 		txtCodiceVolo = new JTextField();
+		txtCodiceVolo.setForeground(controllerGestioneVoli.coloreScritte);
+		txtCodiceVolo.setFont(controllerGestioneVoli.fontScritte);
 		txtCodiceVolo.setColumns(10);
-		txtCodiceVolo.setBounds(169, 402, 133, 20);
+		txtCodiceVolo.setBounds(173, 439, 133, 20);
 		add(txtCodiceVolo);
 		
 		JLabel lblCodiceVolo = new JLabel("Codice Volo");
 		lblCodiceVolo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCodiceVolo.setForeground(scritte);
-		lblCodiceVolo.setBounds(21, 402, 114, 20);
+		lblCodiceVolo.setFont(controllerGestioneVoli.fontScritte);
+		lblCodiceVolo.setForeground(controllerGestioneVoli.coloreScritte);
+		lblCodiceVolo.setBounds(25, 439, 114, 20);
 		add(lblCodiceVolo);
 		
 		JLabel lblCittaPartenza = new JLabel("Citta Partenza");
 		lblCittaPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCittaPartenza.setForeground(scritte);
-		lblCittaPartenza.setBounds(21, 439, 114, 20);
+		lblCodiceVolo.setFont(controllerGestioneVoli.fontScritte);
+		lblCittaPartenza.setForeground(controllerGestioneVoli.coloreScritte);
+		lblCittaPartenza.setBounds(25, 476, 114, 20);
 		add(lblCittaPartenza);
 		
 		txtCittaPartenza = new JTextField();
+		txtCittaPartenza.setForeground(controllerGestioneVoli.coloreScritte);
+		txtCittaPartenza.setFont(controllerGestioneVoli.fontScritte);
 		txtCittaPartenza.setColumns(10);
-		txtCittaPartenza.setBounds(169, 440, 133, 20);
+		txtCittaPartenza.setBounds(173, 477, 133, 20);
 		add(txtCittaPartenza);
 		
 		txtCittaArrivo = new JTextField();
+		txtCittaArrivo.setForeground(controllerGestioneVoli.coloreScritte);
+		txtCittaArrivo.setFont(controllerGestioneVoli.fontScritte);
 		txtCittaArrivo.setColumns(10);
-		txtCittaArrivo.setBounds(169, 482, 133, 20);
+		txtCittaArrivo.setBounds(173, 519, 133, 20);
 		add(txtCittaArrivo);
 		
 		JLabel lblCittaArrivo = new JLabel("Citta Arrivo");
 		lblCittaArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCittaArrivo.setForeground(scritte);
-		lblCittaArrivo.setBounds(21, 481, 114, 20);
+		lblCittaArrivo.setFont(controllerGestioneVoli.fontScritte);
+		lblCittaArrivo.setForeground(controllerGestioneVoli.coloreScritte);
+		lblCittaArrivo.setBounds(25, 518, 114, 20);
 		add(lblCittaArrivo);
 		
 		JLabel lblDataPartenza = new JLabel("Data Partenza");
 		lblDataPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDataPartenza.setForeground(scritte);
-		lblDataPartenza.setBounds(340, 402, 114, 20);
+		lblDataPartenza.setFont(controllerGestioneVoli.fontScritte);
+		lblDataPartenza.setForeground(controllerGestioneVoli.coloreScritte);
+		lblDataPartenza.setBounds(344, 439, 114, 20);
 		add(lblDataPartenza);
 		
 		dateDataPartenza = new JDateChooser();
-		dateDataPartenza.setBounds(488, 402, 133, 23);
+		dateDataPartenza.setFont(controllerGestioneVoli.fontScritte);
+		dateDataPartenza.setFont(controllerGestioneVoli.fontScritte);
+		dateDataPartenza.setBounds(492, 439, 133, 23);
 		add(dateDataPartenza);
 		
 		JLabel lblDataArrivo = new JLabel("Data Arrivo");
-		lblDataArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDataArrivo.setForeground(scritte);
-		lblDataArrivo.setBounds(340, 440, 114, 20);
+		lblDataArrivo.setHorizontalAlignment(SwingConstants.RIGHT);		
+		lblDataArrivo.setFont(controllerGestioneVoli.fontScritte);
+		lblDataArrivo.setForeground(controllerGestioneVoli.coloreScritte);
+		lblDataArrivo.setBounds(344, 477, 114, 20);
 		add(lblDataArrivo);
 		
 		dateDataArrivo = new JDateChooser();
-		dateDataArrivo.setBounds(488, 440, 133, 23);
+		dateDataArrivo.setFont(controllerGestioneVoli.fontScritte);
+		dateDataArrivo.setFont(controllerGestioneVoli.fontScritte);
+		dateDataArrivo.setBounds(492, 477, 133, 23);
 		add(dateDataArrivo);
 		
 		JLabel lblOrarioPartenza = new JLabel("Orario Partenza");
 		lblOrarioPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblOrarioPartenza.setForeground(scritte);
-		lblOrarioPartenza.setBounds(340, 482, 114, 20);
+		lblOrarioPartenza.setFont(controllerGestioneVoli.fontScritte);
+		lblOrarioPartenza.setForeground(controllerGestioneVoli.coloreScritte);
+		lblOrarioPartenza.setBounds(344, 519, 114, 20);
 		add(lblOrarioPartenza);
 		
 		txtOrarioPartenza = new JTextField();
+		txtOrarioPartenza.setForeground(controllerGestioneVoli.coloreScritte);
+		txtOrarioPartenza.setFont(controllerGestioneVoli.fontScritte);
 		txtOrarioPartenza.setColumns(10);
-		txtOrarioPartenza.setBounds(488, 482, 133, 20);
+		txtOrarioPartenza.setBounds(492, 519, 133, 20);
 		add(txtOrarioPartenza);
 		
 		JLabel lblOrarioArrivo = new JLabel("Orario Arrivo");
 		lblOrarioArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblOrarioArrivo.setForeground(scritte);
-		lblOrarioArrivo.setBounds(340, 522, 114, 20);
+		lblOrarioArrivo.setFont(controllerGestioneVoli.fontScritte);
+		lblOrarioArrivo.setForeground(controllerGestioneVoli.coloreScritte);
+		lblOrarioArrivo.setBounds(344, 559, 114, 20);
 		add(lblOrarioArrivo);
 		
 		txtOrarioArrivo = new JTextField();
+		txtOrarioArrivo.setForeground(controllerGestioneVoli.coloreScritte);
+		txtOrarioArrivo.setFont(controllerGestioneVoli.fontScritte);
 		txtOrarioArrivo.setColumns(10);
-		txtOrarioArrivo.setBounds(488, 522, 133, 20);
+		txtOrarioArrivo.setBounds(492, 559, 133, 20);
 		add(txtOrarioArrivo);
 		
 		JButton btnAggiungi = new JButton("aggiungi");
@@ -270,7 +326,7 @@ public class GestioneVoli extends JPanel {
 				controllerGestioneVoli.aggiungiVolo();
 			}
 		});
-		btnAggiungi.setBounds(763, 402, 89, 23);
+		btnAggiungi.setBounds(767, 439, 89, 23);
 		add(btnAggiungi);
 		
 		JButton btnModifica = new JButton("modifica");
@@ -280,7 +336,7 @@ public class GestioneVoli extends JPanel {
 				controllerGestioneVoli.modificaVolo();
 			}
 		});
-		btnModifica.setBounds(763, 436, 89, 23);
+		btnModifica.setBounds(767, 473, 89, 23);
 		add(btnModifica);
 		
 		JButton btnElimina = new JButton("elimina");
@@ -290,7 +346,7 @@ public class GestioneVoli extends JPanel {
 				controllerGestioneVoli.eliminaVolo();
 			}
 		});
-		btnElimina.setBounds(763, 470, 89, 23);
+		btnElimina.setBounds(767, 507, 89, 23);
 		add(btnElimina);
 		
 		JButton btnSvuota = new JButton("svuota");
@@ -300,18 +356,21 @@ public class GestioneVoli extends JPanel {
 				controllerGestioneVoli.svuotaCampiVolo();
 			}
 		});
-		btnSvuota.setBounds(763, 504, 89, 23);
+		btnSvuota.setBounds(767, 541, 89, 23);
 		add(btnSvuota);
 		
 		JLabel lblNumeroPrenoazioni = new JLabel("Numero Prenoazioni");
 		lblNumeroPrenoazioni.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNumeroPrenoazioni.setForeground(scritte);
-		lblNumeroPrenoazioni.setBounds(21, 521, 114, 20);
+		lblNumeroPrenoazioni.setFont(controllerGestioneVoli.fontScritte);
+		lblNumeroPrenoazioni.setForeground(controllerGestioneVoli.coloreScritte);
+		lblNumeroPrenoazioni.setBounds(25, 558, 114, 20);
 		add(lblNumeroPrenoazioni);
 		
 		txtNumeroPrenotazioni = new JTextField();
+		txtNumeroPrenotazioni.setForeground(controllerGestioneVoli.coloreScritte);
+		txtNumeroPrenotazioni.setFont(controllerGestioneVoli.fontScritte);
 		txtNumeroPrenotazioni.setColumns(10);
-		txtNumeroPrenotazioni.setBounds(169, 522, 133, 20);
+		txtNumeroPrenotazioni.setBounds(173, 559, 133, 20);
 		add(txtNumeroPrenotazioni);
 		
 		caricamento();
@@ -323,7 +382,14 @@ public class GestioneVoli extends JPanel {
 		for(Object [] dato : this.ListaVoli) {
 			this.modello.addRow(dato);
 		}
-		table.setModel(modello);		
+		tabella.setModel(modello);		
+	}
+	private void ricerca() {
+		DefaultTableModel table = (DefaultTableModel) tabella.getModel();
+		String ricerca = txtBarraRicerca.getText();
+		TableRowSorter<DefaultTableModel> trm = new TableRowSorter<DefaultTableModel>(table);
+		tabella.setRowSorter(trm);
+		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
 
 }

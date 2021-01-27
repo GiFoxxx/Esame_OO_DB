@@ -1,6 +1,8 @@
 package Controller;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.sql.*;
 import java.util.Calendar;
@@ -9,6 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import Amministrazione.*;
 import Classi.*;
@@ -18,6 +22,16 @@ import ImplementazioniPostrgresDAO.*;
 
 public class Controller {
 
+	public Color sfondo = new Color(54, 57, 63);
+	public Color coloreScritte = new Color(141, 142, 146);
+	public Color coloreScritteSuBianco = new Color(35, 39, 42);
+	public Font fontScritte = new Font("Arial", Font.BOLD, 14);
+	public Color clickPannello = new Color(40, 40, 40);
+	public Color entroPannello = new Color(30, 30, 30);
+	public Color escoPannelloLaterale = new Color(35, 39, 42);
+	public Color trasparente = new Color(0, 0, 0, 0);
+	
+	
 	private Dashboard dashboard;
 	private Home home;
 	private Accesso accesso;
@@ -195,7 +209,7 @@ public class Controller {
 		((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().setText("");
 		((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().setText("");
 		((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setText("");
-		((Registrazione) getDashboard ().getRegistrazione()).getTxtRipetiPassword().setText("");
+		((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setText("");
 	}
 
 	public void vaiAdAccessoDopoRegistrazione() {
@@ -228,18 +242,23 @@ public class Controller {
 	}
 
 	public void aggiungiUtente() {
-		utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(), ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
-				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(), ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
+		utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(),
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(),
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
 		implementazioneUtenteDAO().registrazioneUtente(utn);
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().addRow(((GestioneUtenti) getDashboard().getGestioneUtenti()).getRow());
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
+				.addRow(((GestioneUtenti) getDashboard().getGestioneUtenti()).getRow());
 		svuotaCampiGestioneUtenti();
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricamento();
 	}
 
 	public void eliminaUtente() {
-		utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(), ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
-				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(), ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
-		int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTable().getSelectedRow();
+		utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(),
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(),
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
+		int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTabella().getSelectedRow();
 		implementazioneUtenteDAO().cancellaUtente(utn);
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().removeRow(t);
 		svuotaCampiGestioneUtenti();
@@ -247,14 +266,20 @@ public class Controller {
 	}
 
 	public void modificaUtente() {
-		utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(), ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
-				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(), ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
-		int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTable().getSelectedRow();
+		utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(),
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(),
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
+		int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTabella().getSelectedRow();
 
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(), t, 0);
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(), t, 1);
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(), t, 2);
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText(), t, 3);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
+				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(), t, 0);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
+				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(), t, 1);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
+				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(), t, 2);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
+				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText(), t, 3);
 
 		implementazioneUtenteDAO().modificaUtente(utn);
 		svuotaCampiGestioneUtenti();
@@ -274,18 +299,23 @@ public class Controller {
 	}
 
 	public void aggiungiCompagniaAerea() {
-		compAerea = new CompagniaAerea(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(),
+		compAerea = new CompagniaAerea(
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
+						.getText(),
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
 		implementazioneCompagniaAereaDAO().aggiungiCompagniaAerea(compAerea);
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
+				.addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
 		svuotaCampiCompagniaAerea();
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricamento();
 	}
 
 	public void eliminaCompagniaAerea() {
-		compAerea = new CompagniaAerea(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(),
+		compAerea = new CompagniaAerea(
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
+						.getText(),
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
-		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTable().getSelectedRow();
+		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
 		implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
 		svuotaCampiCompagniaAerea();
@@ -293,12 +323,17 @@ public class Controller {
 	}
 
 	public void modificaCompagniaAerea() {
-		compAerea = new CompagniaAerea(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(),
+		compAerea = new CompagniaAerea(
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
+						.getText(),
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
-		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTable().getSelectedRow();
+		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
 
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText(), t, 0);
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText(), t,1);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
+				.setValueAt(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree())
+						.getTxtCodiceCompagniaAerea().getText(), t, 0);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText(), t, 1);
 
 		implementazioneCompagniaAereaDAO().modificaCompagniaAerea(compAerea);
 		svuotaCampiCompagniaAerea();
@@ -323,23 +358,30 @@ public class Controller {
 	}
 
 	public void aggiungiTratta() {
-		trt = new Tratta(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(), ((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(), ((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataPartenza().getDate(),
-				((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataArrivo().getDate(), ((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOrarioPartenza().getText(),
+		trt = new Tratta(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataPartenza().getDate(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataArrivo().getDate(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOrarioPartenza().getText(),
 				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOrarioArrivo().getText());
 		implementazioneTrattaDAO().aggiungiTratta(trt);
-		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().addRow(((GestioneTratte) getDashboard().getGestioneTratte()).getRow());
+		((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
+				.addRow(((GestioneTratte) getDashboard().getGestioneTratte()).getRow());
 		svuotaCampiTratta();
 		((GestioneTratte) getDashboard().getGestioneTratte()).caricamento();
 	}
 
 	public void eliminaTratta() {
-		trt = new Tratta(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(), ((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(), ((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataPartenza().getDate(),
-				((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataArrivo().getDate(), ((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOrarioPartenza().getText(),
+		trt = new Tratta(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataPartenza().getDate(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataArrivo().getDate(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOrarioPartenza().getText(),
 				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOrarioArrivo().getText());
 
-		int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTable().getSelectedRow();
+		int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().getSelectedRow();
 		implementazioneTrattaDAO().cancellaTratta(trt);
 		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().removeRow(t);
 		svuotaCampiTratta();
@@ -347,16 +389,22 @@ public class Controller {
 	}
 
 	public void modificaTratta() {
-		trt = new Tratta(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(), ((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(), ((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataPartenza().getDate(),
-				((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataArrivo().getDate(), ((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOrarioPartenza().getText(),
+		trt = new Tratta(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataPartenza().getDate(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataArrivo().getDate(),
+				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOrarioPartenza().getText(),
 				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOrarioArrivo().getText());
 
-		int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTable().getSelectedRow();
+		int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().getSelectedRow();
 
-		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().setValueAt(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(), t, 0);
-		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().setValueAt(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(), t, 1);
-		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().setValueAt(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(), t, 2);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
+				.setValueAt(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(), t, 0);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().setValueAt(
+				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(), t, 1);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
+				.setValueAt(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(), t, 2);
 
 		implementazioneTrattaDAO().modificaTratta(trt);
 		svuotaCampiTratta();
@@ -382,24 +430,33 @@ public class Controller {
 	}
 
 	public void aggiungiVolo() {
-		vl = new Volo(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCodiceVolo().getText(), ((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaPartenza().getText(),
-				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaArrivo().getText(), ((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataPartenza().getDate(),
-				((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataArrivo().getDate(), ((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioPartenza().getText(),
-				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioArrivo().getText(), ((GestioneVoli) getDashboard().getGestioneVoli()).getTxtNumeroPrenotazioni().getText());
+		vl = new Volo(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCodiceVolo().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaPartenza().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaArrivo().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataPartenza().getDate(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataArrivo().getDate(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioPartenza().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioArrivo().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtNumeroPrenotazioni().getText());
 
 		implementazioneVoloDAO().aggiungiVolo(vl);
-		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().addRow(((GestioneVoli) getDashboard().getGestioneVoli()).getRow());
+		((GestioneVoli) getDashboard().getGestioneVoli()).getModello()
+				.addRow(((GestioneVoli) getDashboard().getGestioneVoli()).getRow());
 		svuotaCampiVolo();
 		((GestioneVoli) getDashboard().getGestioneVoli()).caricamento();
 	}
 
 	public void eliminaVolo() {
-		vl = new Volo(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCodiceVolo().getText(), ((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaPartenza().getText(),
-				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaArrivo().getText(), ((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataPartenza().getDate(),
-				((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataArrivo().getDate(), ((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioPartenza().getText(),
-				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioArrivo().getText(), ((GestioneVoli) getDashboard().getGestioneVoli()).getTxtNumeroPrenotazioni().getText());
+		vl = new Volo(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCodiceVolo().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaPartenza().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaArrivo().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataPartenza().getDate(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataArrivo().getDate(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioPartenza().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioArrivo().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtNumeroPrenotazioni().getText());
 
-		int t = ((GestioneVoli) getDashboard().getGestioneVoli()).getTable().getSelectedRow();
+		int t = ((GestioneVoli) getDashboard().getGestioneVoli()).getTabella().getSelectedRow();
 		implementazioneVoloDAO().cancellaVolo(vl);
 		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().removeRow(t);
 		svuotaCampiVolo();
@@ -407,21 +464,33 @@ public class Controller {
 	}
 
 	public void modificaVolo() {
-		vl = new Volo(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCodiceVolo().getText(), ((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaPartenza().getText(),
-				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaArrivo().getText(), ((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataPartenza().getDate(),
-				((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataArrivo().getDate(), ((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioPartenza().getText(),
-				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioArrivo().getText(), ((GestioneVoli) getDashboard().getGestioneVoli()).getTxtNumeroPrenotazioni().getText());
+		vl = new Volo(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCodiceVolo().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaPartenza().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaArrivo().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataPartenza().getDate(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataArrivo().getDate(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioPartenza().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioArrivo().getText(),
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtNumeroPrenotazioni().getText());
 
-		int t = ((GestioneVoli) getDashboard().getGestioneVoli()).getTable().getSelectedRow();
+		int t = ((GestioneVoli) getDashboard().getGestioneVoli()).getTabella().getSelectedRow();
 
-		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCodiceVolo().getText(), t, 0);
-		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaPartenza().getText(), t, 1);
-		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaArrivo().getText(), t, 2);
-		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataPartenza().getDate(), t, 3);
-		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataArrivo().getDate(), t, 4);
-		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioPartenza().getText(), t, 5);
-		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioArrivo().getText(), t, 6);
-		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtNumeroPrenotazioni().getText(), t, 7);
+		((GestioneVoli) getDashboard().getGestioneVoli()).getModello()
+				.setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCodiceVolo().getText(), t, 0);
+		((GestioneVoli) getDashboard().getGestioneVoli()).getModello()
+				.setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaPartenza().getText(), t, 1);
+		((GestioneVoli) getDashboard().getGestioneVoli()).getModello()
+				.setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtCittaArrivo().getText(), t, 2);
+		((GestioneVoli) getDashboard().getGestioneVoli()).getModello()
+				.setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataPartenza().getDate(), t, 3);
+		((GestioneVoli) getDashboard().getGestioneVoli()).getModello()
+				.setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getDateDataArrivo().getDate(), t, 4);
+		((GestioneVoli) getDashboard().getGestioneVoli()).getModello()
+				.setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioPartenza().getText(), t, 5);
+		((GestioneVoli) getDashboard().getGestioneVoli()).getModello()
+				.setValueAt(((GestioneVoli) getDashboard().getGestioneVoli()).getTxtOrarioArrivo().getText(), t, 6);
+		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().setValueAt(
+				((GestioneVoli) getDashboard().getGestioneVoli()).getTxtNumeroPrenotazioni().getText(), t, 7);
 
 		implementazioneVoloDAO().modificaVolo(vl);
 		svuotaCampiVolo();
@@ -510,27 +579,27 @@ public class Controller {
 		GestioneUtenti gestioneUtenti = new GestioneUtenti(this);
 		return gestioneUtenti;
 	}
-	
+
 	public JPanel gestioneCompagnieAeree() {
 		GestioneCompagnieAeree gestioneCompagnieAeree = new GestioneCompagnieAeree(this);
 		return gestioneCompagnieAeree;
 	}
-	
+
 	public JPanel gestioneGate() {
 		GestioneGate gestioneGate = new GestioneGate(this);
 		return gestioneGate;
 	}
-	
+
 	public JPanel gestioneTratte() {
 		GestioneTratte gestioneTratte = new GestioneTratte(this);
 		return gestioneTratte;
 	}
-	
+
 	public JPanel gestioneVoli() {
 		GestioneVoli gestioneVoli = new GestioneVoli(this);
 		return gestioneVoli;
 	}
-	
+
 	public JDialog uscita() {
 		Uscita uscita = new Uscita(this);
 		return uscita;
@@ -553,19 +622,19 @@ public class Controller {
 		pane.setVisible(true);
 
 	}
-	
+
 	public void mostraUscita() {
-		dashboard.getUscita().setVisible(true);;
+		dashboard.getUscita().setVisible(true);
+		;
 	}
-	
-	
-	//METODI PER RIDIMENSIONAMENTO
+
+	// METODI PER RIDIMENSIONAMENTO
 	public int dimensioneSchermoX() {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int xSize = ((int) tk.getScreenSize().getWidth());
 		return xSize;
 	}
-	
+
 	public int dimensioneSchermoY() {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int ySize = ((int) tk.getScreenSize().getHeight());

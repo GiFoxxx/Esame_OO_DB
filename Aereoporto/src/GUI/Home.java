@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -19,10 +20,6 @@ import javax.swing.JTextField;
 public class Home extends JPanel {
 
 	private Immagini img = new Immagini();
-	
-	Color trasparente = new Color(0, 0, 0, 0);
-	Color sfondo = new Color(54, 57, 63);
-	Color scritte = new Color(141, 142, 146);
 
 	Controller controllerHome;
 
@@ -30,7 +27,7 @@ public class Home extends JPanel {
 		controllerHome = controller;
 
 		setBounds(0, 0, 1194, 1125);
-		setBackground(sfondo);
+		setBackground(controllerHome.sfondo);
 		setLayout(null);
 
 		JLabel lblTratte = new JLabel("");

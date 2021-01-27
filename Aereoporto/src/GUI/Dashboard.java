@@ -21,13 +21,6 @@ public class Dashboard extends JFrame {
 
 	private Immagini img = new Immagini();
 
-	Color sfondo = new Color(54, 57, 63);
-	Color scritte = new Color(141, 142, 146);
-	Color clickPannello = new Color(40, 40, 40);
-	Color entroPannello = new Color(30, 30, 30);
-	Color escoPannelloLaterale = new Color(35, 39, 42);
-	Color trasparente = new Color(0, 0, 0, 0);
-
 	int posizioneTendina = 238;
 	int xMouse;
 	int yMouse;
@@ -35,9 +28,13 @@ public class Dashboard extends JFrame {
 	int yMouseSuSchermo;
 	int x;
 	int y;
-
+	
 	private JPanel contentPane;
 
+	private JLabel lblLinee1;
+	private JLabel lblLinee2;
+	private JPanel pannelloTendina;
+	
 	private JPanel home;
 	private JPanel accesso;
 	private JPanel registrazione;
@@ -195,8 +192,8 @@ public class Dashboard extends JFrame {
 		pannelloBase.add(lblMinimizza);
 
 		JPanel pannelloDestra = new JPanel();
-		pannelloDestra.setBounds(239, 54, 903, 635);
-		pannelloDestra.setBackground(trasparente);
+		pannelloDestra.setBounds(239, 43, 903, 646);
+		pannelloDestra.setBackground(controllerDashboard.trasparente);
 
 		pannelloBase.add(pannelloDestra);
 		pannelloDestra.add(home);
@@ -223,7 +220,7 @@ public class Dashboard extends JFrame {
 		lblTitolo.setBounds(239, 1, 277, 49);
 		pannelloBase.add(lblTitolo);
 
-		JPanel pannelloTendina = new JPanel();
+		pannelloTendina = new JPanel();
 		pannelloTendina.setBackground(new Color(0, 0, 0, 0));
 		pannelloTendina.setBounds(0, 0, 238, 677);
 		pannelloTendina.setLayout(null);
@@ -239,22 +236,22 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelHome.setBackground(entroPannello);
+				panelHome.setBackground(controllerDashboard.entroPannello);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelHome.setBackground(escoPannelloLaterale);
+				panelHome.setBackground(controllerDashboard.escoPannelloLaterale);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelHome.setBackground(clickPannello);
+				panelHome.setBackground(controllerDashboard.clickPannello);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelHome.setBackground(entroPannello);
+				panelHome.setBackground(controllerDashboard.entroPannello);
 			}
 		});
 		panelHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -265,7 +262,7 @@ public class Dashboard extends JFrame {
 
 		JLabel lblScrittaHome = new JLabel("HOME");
 		lblScrittaHome.setBounds(56, 0, 180, 70);
-		lblScrittaHome.setFont(new Font("Arial", Font.BOLD, 15));
+		lblScrittaHome.setFont(controllerDashboard.fontScritte);
 		lblScrittaHome.setForeground(Color.WHITE);
 		lblScrittaHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaHome.setHorizontalAlignment(SwingConstants.CENTER);
@@ -287,22 +284,22 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelAccedi.setBackground(entroPannello);
+				panelAccedi.setBackground(controllerDashboard.entroPannello);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelAccedi.setBackground(escoPannelloLaterale);
+				panelAccedi.setBackground(controllerDashboard.escoPannelloLaterale);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelAccedi.setBackground(clickPannello);
+				panelAccedi.setBackground(controllerDashboard.clickPannello);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelAccedi.setBackground(entroPannello);
+				panelAccedi.setBackground(controllerDashboard.entroPannello);
 			}
 		});
 		panelAccedi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -313,7 +310,7 @@ public class Dashboard extends JFrame {
 
 		JLabel lblScrittaAccesso = new JLabel("ACCEDI");
 		lblScrittaAccesso.setBounds(56, 0, 180, 70);
-		lblScrittaAccesso.setFont(new Font("Arial", Font.BOLD, 15));
+		lblScrittaAccesso.setFont(controllerDashboard.fontScritte);
 		lblScrittaAccesso.setForeground(Color.WHITE);
 		lblScrittaAccesso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaAccesso.setHorizontalAlignment(SwingConstants.CENTER);
@@ -335,32 +332,32 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelRegistrati.setBackground(entroPannello);
+				panelRegistrati.setBackground(controllerDashboard.entroPannello);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelRegistrati.setBackground(escoPannelloLaterale);
+				panelRegistrati.setBackground(controllerDashboard.escoPannelloLaterale);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelRegistrati.setBackground(clickPannello);
+				panelRegistrati.setBackground(controllerDashboard.clickPannello);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelRegistrati.setBackground(entroPannello);
+				panelRegistrati.setBackground(controllerDashboard.entroPannello);
 			}
 		});
 		panelRegistrati.setBounds(1, 275, 236, 70);
-		panelRegistrati.setBackground(new Color(0, 0, 0, 0));
+		panelRegistrati.setBackground(controllerDashboard.trasparente);
 		pannelloTendina.add(panelRegistrati);
 		panelRegistrati.setLayout(null);
 
 		JLabel lblScrittaRegistrazione = new JLabel("REGISTRATI");
 		lblScrittaRegistrazione.setBounds(56, 0, 180, 70);
-		lblScrittaRegistrazione.setFont(new Font("Arial", Font.BOLD, 15));
+		lblScrittaRegistrazione.setFont(controllerDashboard.fontScritte);
 		lblScrittaRegistrazione.setForeground(Color.WHITE);
 		lblScrittaRegistrazione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaRegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
@@ -381,33 +378,33 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelProfilo.setBackground(entroPannello);
+				panelProfilo.setBackground(controllerDashboard.entroPannello);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelProfilo.setBackground(escoPannelloLaterale);
+				panelProfilo.setBackground(controllerDashboard.escoPannelloLaterale);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelProfilo.setBackground(clickPannello);
+				panelProfilo.setBackground(controllerDashboard.clickPannello);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelProfilo.setBackground(entroPannello);
+				panelProfilo.setBackground(controllerDashboard.entroPannello);
 			}
 		});
 		panelProfilo.setBounds(1, 345, 236, 70);
-		panelProfilo.setBackground(new Color(0, 0, 0, 0));
+		panelProfilo.setBackground(controllerDashboard.trasparente);
 		panelProfilo.setLayout(null);
 		pannelloTendina.add(panelProfilo);
 
 		JLabel lblScrittaProfilo = new JLabel("PROFILO");
 		lblScrittaProfilo.setBounds(56, 0, 180, 70);
 		panelProfilo.add(lblScrittaProfilo);
-		lblScrittaProfilo.setFont(new Font("Arial", Font.BOLD, 15));
+		lblScrittaProfilo.setFont(controllerDashboard.fontScritte);
 		lblScrittaProfilo.setForeground(Color.WHITE);
 		lblScrittaProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaProfilo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -427,22 +424,22 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelImpostazioni.setBackground(entroPannello);
+				panelImpostazioni.setBackground(controllerDashboard.entroPannello);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelImpostazioni.setBackground(escoPannelloLaterale);
+				panelImpostazioni.setBackground(controllerDashboard.escoPannelloLaterale);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelImpostazioni.setBackground(clickPannello);
+				panelImpostazioni.setBackground(controllerDashboard.clickPannello);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelImpostazioni.setBackground(entroPannello);
+				panelImpostazioni.setBackground(controllerDashboard.entroPannello);
 			}
 		});
 		panelImpostazioni.setBounds(1, 415, 236, 70);
@@ -452,7 +449,7 @@ public class Dashboard extends JFrame {
 
 		JLabel lblImpostazioni = new JLabel("IMPOSTAZIONI");
 		lblImpostazioni.setBounds(56, 0, 180, 70);
-		lblImpostazioni.setFont(new Font("Arial", Font.BOLD, 15));
+		lblImpostazioni.setFont(controllerDashboard.fontScritte);
 		lblImpostazioni.setForeground(Color.WHITE);
 		lblImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
@@ -473,22 +470,22 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelUscita.setBackground(entroPannello);
+				panelUscita.setBackground(controllerDashboard.entroPannello);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelUscita.setBackground(escoPannelloLaterale);
+				panelUscita.setBackground(controllerDashboard.escoPannelloLaterale);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelUscita.setBackground(clickPannello);
+				panelUscita.setBackground(controllerDashboard.clickPannello);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelUscita.setBackground(entroPannello);
+				panelUscita.setBackground(controllerDashboard.entroPannello);
 			}
 		});
 		panelUscita.setBounds(1, 485, 236, 70);
@@ -498,7 +495,7 @@ public class Dashboard extends JFrame {
 
 		JLabel lblScrittaEsci = new JLabel("ESCI");
 		lblScrittaEsci.setBounds(56, 0, 180, 70);
-		lblScrittaEsci.setFont(new Font("Arial", Font.BOLD, 15));
+		lblScrittaEsci.setFont(controllerDashboard.fontScritte);
 		lblScrittaEsci.setForeground(Color.WHITE);
 		lblScrittaEsci.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaEsci.setHorizontalAlignment(SwingConstants.CENTER);
@@ -510,32 +507,13 @@ public class Dashboard extends JFrame {
 		lblEsci.setIcon(new ImageIcon(img.esci()));
 		panelUscita.add(lblEsci);
 
-		JLabel lblLinee1 = new JLabel("");
-		JLabel lblLinee2 = new JLabel("");
+		lblLinee1 = new JLabel("");
+		lblLinee2 = new JLabel("");
 		lblLinee2.setVisible(false);
 		lblLinee1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblLinee1.setVisible(false);
-				if (posizioneTendina == 238) {
-					pannelloTendina.setSize(50, 677);
-					Thread th = new Thread() {
-						@Override
-						public void run() {
-							try {
-								for (int i = 238; i >= 50; i--) {
-									Thread.sleep(0, 1);
-									pannelloTendina.setSize(i, 677);
-								}
-							} catch (Exception e) {
-								JOptionPane.showMessageDialog(null, e);
-							}
-							lblLinee2.setVisible(true);
-						}
-					};
-					th.start();
-					posizioneTendina = 50;
-				}
+				chiudiTendina();
 			}
 		});
 		lblLinee1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -547,27 +525,7 @@ public class Dashboard extends JFrame {
 		lblLinee2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblLinee2.setVisible(false);
-				if (posizioneTendina == 50) {
-					pannelloTendina.show();
-					pannelloTendina.setSize(posizioneTendina, 677);
-					Thread th = new Thread() {
-						@Override
-						public void run() {
-							try {
-								for (int i = 50; i <= posizioneTendina; i++) {
-									Thread.sleep(0, 1);
-									pannelloTendina.setSize(i, 677);
-								}
-							} catch (Exception e) {
-								JOptionPane.showMessageDialog(null, e);
-							}
-							lblLinee1.setVisible(true);
-						}
-					};
-					th.start();
-					posizioneTendina = 238;
-				}
+				apriTendina();
 			}
 		});
 		lblLinee2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -624,31 +582,74 @@ public class Dashboard extends JFrame {
 					setExtendedState(Dashboard.MAXIMIZED_BOTH);
 				}
 
-				if (yMouseSuSchermo > 2) {
-					setBounds(0, 0, 1143, 677);
-					pannelloBase.setBounds(0, 0, 1143, 677);
-					pannelloDestra.setBounds(238, 42, 903, 635);
-					lblLayout.setIcon(new ImageIcon(img.imgSfondoFull()));
-
-				}
 
 			}
 		});
 		lblSpostaDaashboard.setEnabled(false);
-		lblSpostaDaashboard.setBounds(0, 0, 1070, 37);
+		lblSpostaDaashboard.setBounds(0, 0, 1070, 43);
 		pannelloBase.add(lblSpostaDaashboard);
 
 		dimensione();
 
 	}
 
+	//METODI
+	
 	// rimozione background java e adattamento al centro dello schermo
 	public Dimension dimensione() {
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-		this.setBackground(new Color(0, 0, 0, 0));
+		
+	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+	this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+	this.setBackground(new Color(0, 0, 0, 0));
 
 		return dim;
+	}
+	
+	public void apriTendina() {
+		lblLinee2.setVisible(false);
+		if (posizioneTendina == 50) {
+			pannelloTendina.show();
+			pannelloTendina.setSize(posizioneTendina, 677);
+			Thread th = new Thread() {
+				@Override
+				public void run() {
+					try {
+						for (int i = 50; i <= posizioneTendina; i++) {
+							Thread.sleep(0, 1);
+							pannelloTendina.setSize(i, 677);
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, e);
+					}
+					lblLinee1.setVisible(true);
+				}
+			};
+			th.start();
+			posizioneTendina = 238;
+		}
+	}
+	
+	public void chiudiTendina() {
+		lblLinee1.setVisible(false);
+		if (posizioneTendina == 238) {
+			pannelloTendina.setSize(50, 677);
+			Thread th = new Thread() {
+				@Override
+				public void run() {
+					try {
+						for (int i = 238; i >= 50; i--) {
+							Thread.sleep(0, 1);
+							pannelloTendina.setSize(i, 677);
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, e);
+					}
+					lblLinee2.setVisible(true);
+				}
+			};
+			th.start();
+			posizioneTendina = 50;
+		}
 	}
 
 }

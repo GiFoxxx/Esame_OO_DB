@@ -4,7 +4,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import GUI.Accesso;
+import GUI.*;
 
 public class Immagini {
 
@@ -216,20 +216,39 @@ public class Immagini {
 	
 	public Image barraRicerca() {
 		Image barraRicerca = new ImageIcon(Accesso.class.getResource("immaginiGate/barraRicerca.png"))
-				.getImage().getScaledInstance(220, 38, Image.SCALE_SMOOTH);
+				.getImage().getScaledInstance(180, 30, Image.SCALE_SMOOTH);
 		return barraRicerca;
 	}
 	
 	public Image ricerca1() {
 		Image ricerca1 = new ImageIcon(Accesso.class.getResource("immaginiGate/ricerca1.png"))
-				.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+				.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		return ricerca1;
 	}
 	
 	public Image ricerca2() {
 		Image ricerca2 = new ImageIcon(Accesso.class.getResource("immaginiGate/ricerca2.png"))
-				.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+				.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		return ricerca2;
 	}
+	
+	public Image frecciaIndietro1() {
+		Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiHome/frecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		return imgfrecciaIndietro1;
+	}
+	
+	public Image frecciaIndietro2() {
+		Image frecciaIndietro2 = new ImageIcon(Registrazione.class.getResource("immaginiHome/frecciaIndietro2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		return frecciaIndietro2;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
