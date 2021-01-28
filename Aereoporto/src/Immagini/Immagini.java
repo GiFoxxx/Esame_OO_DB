@@ -21,6 +21,12 @@ public class Immagini {
 		return imgSfondo;
 	}
 	
+	public Image sfondoUscita() {
+		Image imgSfondo = new ImageIcon(Accesso.class.getResource("immaginiDashboard/SfondoUscita.png")).getImage()
+				.getScaledInstance(500, 300, Image.SCALE_SMOOTH);
+		return imgSfondo;
+	}
+	
 	public Image icona() {
 		Image icona = new ImageIcon(Accesso.class.getResource("immaginiAccesso/icona.png")).getImage()
 				.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
@@ -149,7 +155,7 @@ public class Immagini {
 
 	public Image voli2() {
 		Image voli2 = new ImageIcon(Accesso.class.getResource("immaginiHome/voli2.png")).getImage()
-				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+				.getScaledInstance(292, 177, Image.SCALE_SMOOTH);
 		return voli2;
 	}
 
@@ -161,7 +167,7 @@ public class Immagini {
 
 	public Image gate2() {
 		Image gate2 = new ImageIcon(Accesso.class.getResource("immaginiHome/gate2.png")).getImage()
-				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+				.getScaledInstance(292, 177, Image.SCALE_SMOOTH);
 		return gate2;
 	}
 
@@ -173,7 +179,7 @@ public class Immagini {
 
 	public Image prenotazioni2() {
 		Image prenotazioni2 = new ImageIcon(Accesso.class.getResource("immaginiHome/prenotazioni2.png")).getImage()
-				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+				.getScaledInstance(292, 177, Image.SCALE_SMOOTH);
 		return prenotazioni2;
 	}
 
@@ -185,7 +191,7 @@ public class Immagini {
 
 	public Image tratte2() {
 		Image tratte2 = new ImageIcon(Accesso.class.getResource("immaginiHome/tratte2.png")).getImage()
-				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+				.getScaledInstance(292, 177, Image.SCALE_SMOOTH);
 		return tratte2;
 	}
 
@@ -197,7 +203,7 @@ public class Immagini {
 
 	public Image compagnieAeree2() {
 		Image compagnieAeree2 = new ImageIcon(Accesso.class.getResource("immaginiHome/compagnieAeree2.png")).getImage()
-				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+				.getScaledInstance(292, 177, Image.SCALE_SMOOTH);
 		return compagnieAeree2;
 	}
 
@@ -209,7 +215,7 @@ public class Immagini {
 
 	public Image gestioneAccount2() {
 		Image gestioneAccount2 = new ImageIcon(Accesso.class.getResource("immaginiHome/gestioneAccount2.png"))
-				.getImage().getScaledInstance(276, 162, Image.SCALE_SMOOTH);
+				.getImage().getScaledInstance(292, 177, Image.SCALE_SMOOTH);
 		return gestioneAccount2;
 	}
 

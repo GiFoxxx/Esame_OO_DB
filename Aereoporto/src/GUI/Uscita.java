@@ -1,60 +1,82 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.RootPaneContainer;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-
 import Controller.Controller;
+import Immagini.Immagini;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.Font;
 import java.awt.Cursor;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
 
 public class Uscita extends JDialog {
+	
+	int xMouse;
+	int yMouse;
+	int xMouseSuSchermo;
+	int yMouseSuSchermo;
+	int x;
+	int y;
 
-	private Image imgSfondo = new ImageIcon(Accesso.class.getResource("immaginiDashboard/SfondoDashboard.png"))
-			.getImage().getScaledInstance(500, 300, Image.SCALE_SMOOTH);
-
-	Color sfondo = new Color(54, 57, 63);
-	Color scritte = new Color(141, 142, 146);
-	
-	
-	
+	Immagini img = new Immagini();
 	Controller controllerUscita;
 
 	public Uscita(Controller controller) {
 		controllerUscita = controller;
 
-		setUndecorated(true);
+		
 		setBounds(100, 100, 500, 300);
+		setFocusable(true);
+		setUndecorated(true);
 		getContentPane().setLayout(null);
 		{
 			JButton btnAnnulla = new JButton("Annulla");
 			btnAnnulla.setBorder(null);
 			btnAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnAnnulla.setFont(new Font("Arial", Font.BOLD, 14));
+			btnAnnulla.setFont(controllerUscita.fontScritte);
 			btnAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					Uscita.this.dispose();
+					controllerUscita.annullaUscita();
 				}
 			});
+
+			JLabel lblX = new JLabel("");
+			lblX.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					Uscita.this.dispose();
+					controllerUscita.getDashboard().dispose();
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X2()));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X1()));
+				}
+			});
+			lblX.setHorizontalAlignment(SwingConstants.CENTER);
+			lblX.setIcon(new ImageIcon(img.X1()));
+			lblX.setBounds(463, 0, 37, 30);
+			getContentPane().add(lblX);
+
 			{
 				JLabel lblUscire = new JLabel("Sei sicuro di voler uscire dal programma?");
 				lblUscire.setHorizontalAlignment(SwingConstants.CENTER);
-				lblUscire.setFont(new Font("Arial", Font.BOLD, 20));
-				lblUscire.setForeground(scritte);
+				lblUscire.setFont(controllerUscita.fontScritteUscita);
+				lblUscire.setForeground(controllerUscita.coloreScritte);
 				lblUscire.setBounds(0, 81, 498, 52);
 				getContentPane().add(lblUscire);
 			}
@@ -66,30 +88,50 @@ public class Uscita extends JDialog {
 			JButton btnOk = new JButton("OK");
 			btnOk.setBorder(null);
 			btnOk.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnOk.setFont(new Font("Arial", Font.BOLD, 14));
+			btnOk.setFont(controllerUscita.fontScritte);
 			btnOk.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					Uscita.this.dispose();
-					controllerUscita.getDashboard().dispose();
+					controllerUscita.esci();
+					
 				}
 			});
 			btnOk.setBounds(75, 220, 100, 30);
 			getContentPane().add(btnOk);
 			btnOk.setActionCommand("OK");
-			getRootPane().setDefaultButton(btnOk);
 		}
 
 		JLabel lblLayout = new JLabel("");
 		lblLayout.setBounds(0, 0, 500, 300);
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLayout.setIcon(new ImageIcon(imgSfondo));
+		lblLayout.setIcon(new ImageIcon(img.sfondoUscita()));
 		getContentPane().add(lblLayout);
 
-		// rimozione background java e adattamento al centro dello schermo
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-		this.setBackground(new Color(0, 0, 0, 0));
-	}
+		JLabel lblSpostaDaashboard = new JLabel("");
+		lblSpostaDaashboard.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent spostaDashboard) {
+				x = spostaDashboard.getXOnScreen();
+				y = spostaDashboard.getYOnScreen();
+				xMouseSuSchermo = spostaDashboard.getXOnScreen();
+				yMouseSuSchermo = spostaDashboard.getYOnScreen();
+				setLocation(x - xMouse, y - yMouse);
 
+			}
+		});
+		lblSpostaDaashboard.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent prendiPosizioneMouse) {
+
+				xMouse = prendiPosizioneMouse.getX();
+				yMouse = prendiPosizioneMouse.getY();
+
+			}
+		});
+		lblSpostaDaashboard.setEnabled(false);
+		lblSpostaDaashboard.setBounds(0, 0, 500, 30);
+		getContentPane().add(lblSpostaDaashboard);
+
+		controllerUscita.centramentoJDialog(this);
+	}
 }

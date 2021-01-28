@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.sql.*;
@@ -18,20 +19,23 @@ import Amministrazione.*;
 import Classi.*;
 import Database.*;
 import GUI.*;
+import Immagini.Immagini;
 import ImplementazioniPostrgresDAO.*;
 
 public class Controller {
 
+	Immagini img = new Immagini();
+
 	public Color sfondo = new Color(54, 57, 63);
 	public Color coloreScritte = new Color(141, 142, 146);
 	public Color coloreScritteSuBianco = new Color(35, 39, 42);
-	public Font fontScritte = new Font("Arial", Font.BOLD, 14);
 	public Color clickPannello = new Color(40, 40, 40);
 	public Color entroPannello = new Color(30, 30, 30);
 	public Color escoPannelloLaterale = new Color(35, 39, 42);
 	public Color trasparente = new Color(0, 0, 0, 0);
-	
-	
+	public Font fontScritte = new Font("Arial", Font.BOLD, 14);
+	public Font fontScritteUscita = new Font("Arial", Font.BOLD, 20);
+
 	private Dashboard dashboard;
 	private Home home;
 	private Accesso accesso;
@@ -604,11 +608,6 @@ public class Controller {
 		Uscita uscita = new Uscita(this);
 		return uscita;
 	}
-//	
-//	public JPanel home() {
-//		Home home = new Home(this);
-//		return home;
-//	}
 
 	public void mostraPannelli(JPanel pane) {
 		dashboard.getHome().setVisible(false);
@@ -624,8 +623,21 @@ public class Controller {
 	}
 
 	public void mostraUscita() {
+		dashboard.disable();
 		dashboard.getUscita().setVisible(true);
-		;
+	}
+
+	// METODI DI USCITA
+	
+	public void esci() {
+		dashboard.getUscita().dispose();
+		getDashboard().dispose();
+	}
+	
+	public void annullaUscita() {
+		dashboard.getUscita().dispose();
+		getDashboard().enable();
+		getDashboard().setVisible(true);
 	}
 
 	// METODI PER RIDIMENSIONAMENTO
@@ -639,6 +651,23 @@ public class Controller {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int ySize = ((int) tk.getScreenSize().getHeight());
 		return ySize;
+	}
+
+	// rimozione background java e adattamento al centro dello schermo
+	public Dimension centramentoJFrame(JFrame frame) {
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
+		frame.setBackground(new Color(0, 0, 0, 0));
+
+		return dim;
+	}
+
+	public Dimension centramentoJDialog(JDialog option) {
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		option.setLocation(dim.width / 2 - option.getSize().width / 2, dim.height / 2 - option.getSize().height / 2);
+		option.setUndecorated(true);
+
+		return dim;
 	}
 
 	// METODI DI PROVA

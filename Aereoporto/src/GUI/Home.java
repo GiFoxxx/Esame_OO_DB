@@ -71,7 +71,7 @@ public class Home extends JPanel {
 		});
 		lblCompagniaAerea.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCompagniaAerea.setIcon(new ImageIcon(img.compagnieAeree1()));
-		lblCompagniaAerea.setBounds(312, 110, 276, 162);
+		lblCompagniaAerea.setBounds(312, 110, 282, 167);
 		add(lblCompagniaAerea);
 
 		JLabel lblGestioneAccount = new JLabel("");
@@ -93,7 +93,7 @@ public class Home extends JPanel {
 		});
 		lblGestioneAccount.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGestioneAccount.setIcon(new ImageIcon(img.gestioneAccount1()));
-		lblGestioneAccount.setBounds(605, 110, 276, 162);
+		lblGestioneAccount.setBounds(605, 110, 282, 167);
 		add(lblGestioneAccount);
 
 		JLabel lblPrenotazioni = new JLabel("");
@@ -110,7 +110,7 @@ public class Home extends JPanel {
 		});
 		lblPrenotazioni.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrenotazioni.setIcon(new ImageIcon(img.prenotazioni1()));
-		lblPrenotazioni.setBounds(20, 320, 276, 162);
+		lblPrenotazioni.setBounds(20, 320, 282, 167);
 		add(lblPrenotazioni);
 
 		JLabel lblGate = new JLabel("");
@@ -132,7 +132,7 @@ public class Home extends JPanel {
 		});
 		lblGate.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGate.setIcon(new ImageIcon(img.gate1()));
-		lblGate.setBounds(605, 320, 276, 162);
+		lblGate.setBounds(605, 320, 282, 167);
 		add(lblGate);
 
 		JLabel lblVolo = new JLabel("");
@@ -154,7 +154,7 @@ public class Home extends JPanel {
 		});
 		lblVolo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVolo.setIcon(new ImageIcon(img.voli1()));
-		lblVolo.setBounds(312, 320, 276, 162);
+		lblVolo.setBounds(312, 320, 282, 167);
 		add(lblVolo);
 	}
 }

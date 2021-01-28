@@ -166,7 +166,7 @@ public class Dashboard extends JFrame {
 		});
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
 		lblX.setIcon(new ImageIcon(img.X1()));
-		lblX.setBounds(1096, 0, 37, 43);
+		lblX.setBounds(1105, 0, 37, 43);
 		pannelloBase.add(lblX);
 
 		JLabel lblMinimizza = new JLabel("");
@@ -591,29 +591,21 @@ public class Dashboard extends JFrame {
 
 					setExtendedState(Dashboard.MAXIMIZED_BOTH);
 				}
-
-
 			}
 		});
 		lblSpostaDaashboard.setEnabled(false);
 		lblSpostaDaashboard.setBounds(0, 0, 1142, 43);
 		pannelloBase.add(lblSpostaDaashboard);
 
-		dimensione();
+		
+		controllerDashboard.centramentoJFrame(this);
 
 	}
 
 	//METODI
 	
-	// rimozione background java e adattamento al centro dello schermo
-	public Dimension dimensione() {
-		
-	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-	this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-	this.setBackground(new Color(0, 0, 0, 0));
+	
 
-		return dim;
-	}
 	
 	public void apriTendina() {
 		lblLinee2.setVisible(false);
