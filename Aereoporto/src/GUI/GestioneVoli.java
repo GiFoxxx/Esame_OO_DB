@@ -178,10 +178,10 @@ public class GestioneVoli extends JPanel {
 				ricerca();
 			}
 		});
-		txtBarraRicerca.setForeground(controllerGestioneVoli.coloreScritte);
+		txtBarraRicerca.setForeground(controllerGestioneVoli.coloreScritteSuBianco);
 		txtBarraRicerca.setFont(controllerGestioneVoli.fontScritte);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(704, 40, 135, 20);
+		txtBarraRicerca.setBounds(704, 42, 135, 20);
 		txtBarraRicerca.setColumns(10);
 		add(txtBarraRicerca);
 

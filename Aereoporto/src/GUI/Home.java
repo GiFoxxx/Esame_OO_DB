@@ -21,6 +21,24 @@ public class Home extends JPanel {
 
 	private Immagini img = new Immagini();
 
+	private JLabel lblTratte;
+	private JLabel lblCompagniaAerea;
+	private JLabel lblGestioneAccount;
+	private JLabel lblPrenotazioni;
+	private JLabel lblGate;
+	private JLabel lblVolo;
+	private JLabel lblFareAccesso;
+
+	// GETTER E SETTER
+
+	public JLabel getLblFareAccesso() {
+		return lblFareAccesso;
+	}
+
+	public void setLblFareAccesso(JLabel lblFareAccesso) {
+		this.lblFareAccesso = lblFareAccesso;
+	}
+
 	Controller controllerHome;
 
 	public Home(Controller controller) {
@@ -30,7 +48,7 @@ public class Home extends JPanel {
 		setBackground(controllerHome.sfondo);
 		setLayout(null);
 
-		JLabel lblTratte = new JLabel("");
+		lblTratte = new JLabel("");
 		lblTratte.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -44,7 +62,11 @@ public class Home extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneTratte());
+				if (controllerHome.sbloccaGestione()) {
+					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneTratte());
+				} else {
+					lblFareAccesso.setText("Per poter accedere alla gestione delle tratte, accedere al proprio account.");
+				}
 			}
 		});
 		lblTratte.setHorizontalAlignment(SwingConstants.CENTER);
@@ -52,7 +74,7 @@ public class Home extends JPanel {
 		lblTratte.setBounds(20, 110, 276, 162);
 		add(lblTratte);
 
-		JLabel lblCompagniaAerea = new JLabel("");
+		lblCompagniaAerea = new JLabel("");
 		lblCompagniaAerea.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -66,7 +88,11 @@ public class Home extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneCompagnieAeree());
+				if (controllerHome.sbloccaGestione()) {
+					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneCompagnieAeree());
+				} else {
+					lblFareAccesso.setText("Per poter accedere alla gestione delle compagnie aeree, accedere al proprio account.");
+				}
 			}
 		});
 		lblCompagniaAerea.setHorizontalAlignment(SwingConstants.CENTER);
@@ -74,7 +100,7 @@ public class Home extends JPanel {
 		lblCompagniaAerea.setBounds(312, 110, 282, 167);
 		add(lblCompagniaAerea);
 
-		JLabel lblGestioneAccount = new JLabel("");
+		lblGestioneAccount = new JLabel("");
 		lblGestioneAccount.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -88,7 +114,11 @@ public class Home extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneUtenti());
+				if (controllerHome.sbloccaGestione()) {
+					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneUtenti());
+				} else {
+					lblFareAccesso.setText("Per poter accedere alla gestione degli account, accedere al proprio account.");
+				}
 			}
 		});
 		lblGestioneAccount.setHorizontalAlignment(SwingConstants.CENTER);
@@ -96,7 +126,7 @@ public class Home extends JPanel {
 		lblGestioneAccount.setBounds(605, 110, 282, 167);
 		add(lblGestioneAccount);
 
-		JLabel lblPrenotazioni = new JLabel("");
+		lblPrenotazioni = new JLabel("");
 		lblPrenotazioni.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -113,7 +143,7 @@ public class Home extends JPanel {
 		lblPrenotazioni.setBounds(20, 320, 282, 167);
 		add(lblPrenotazioni);
 
-		JLabel lblGate = new JLabel("");
+		lblGate = new JLabel("");
 		lblGate.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -127,7 +157,11 @@ public class Home extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneGate());
+				if (controllerHome.sbloccaGestione()) {
+					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneGate());
+				} else {
+					lblFareAccesso.setText("Per poter accedere alla gestione dei gate, accedere al proprio account.");
+				}
 			}
 		});
 		lblGate.setHorizontalAlignment(SwingConstants.CENTER);
@@ -135,7 +169,7 @@ public class Home extends JPanel {
 		lblGate.setBounds(605, 320, 282, 167);
 		add(lblGate);
 
-		JLabel lblVolo = new JLabel("");
+		lblVolo = new JLabel("");
 		lblVolo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -149,12 +183,23 @@ public class Home extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneVoli());
+				if (controllerHome.sbloccaGestione()) {
+					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneVoli());
+				} else {
+					lblFareAccesso.setText("Per poter accedere alla gestione dei voli, accedere al proprio account.");
+				}
 			}
 		});
 		lblVolo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVolo.setIcon(new ImageIcon(img.voli1()));
 		lblVolo.setBounds(312, 320, 282, 167);
 		add(lblVolo);
+
+		lblFareAccesso = new JLabel("");
+		lblFareAccesso.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFareAccesso.setFont(controllerHome.fontScritte);
+		lblFareAccesso.setForeground(controllerHome.coloreScritturaAllerta);
+		lblFareAccesso.setBounds(20, 520, 867, 28);
+		add(lblFareAccesso);
 	}
 }

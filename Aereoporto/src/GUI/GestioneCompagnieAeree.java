@@ -124,7 +124,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		txtBarraRicerca.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBianco);
 		txtBarraRicerca.setFont(controllerGestioneCompagnieAeree.fontScritte);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(704, 40, 135, 20);
+		txtBarraRicerca.setBounds(704, 42, 135, 20);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 

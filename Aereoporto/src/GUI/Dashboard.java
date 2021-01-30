@@ -617,7 +617,7 @@ public class Dashboard extends JFrame {
 				public void run() {
 					try {
 						for (int i = 50; i <= posizioneTendina; i++) {
-							Thread.sleep(0, 1);
+							Thread.sleep(1, 01);
 							pannelloTendina.setSize(i, 677);
 						}
 					} catch (Exception e) {
@@ -640,7 +640,7 @@ public class Dashboard extends JFrame {
 				public void run() {
 					try {
 						for (int i = 238; i >= 50; i--) {
-							Thread.sleep(0, 1);
+							Thread.sleep(1, 01);
 							pannelloTendina.setSize(i, 677);
 						}
 					} catch (Exception e) {

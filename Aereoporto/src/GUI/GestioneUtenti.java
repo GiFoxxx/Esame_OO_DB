@@ -143,7 +143,7 @@ public class GestioneUtenti extends JPanel {
 		txtBarraRicerca.setForeground(controllerGestioneUtenti.coloreScritteSuBianco);
 		txtBarraRicerca.setFont(controllerGestioneUtenti.fontScritte);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(704, 40, 135, 20);
+		txtBarraRicerca.setBounds(704, 42, 135, 20);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 

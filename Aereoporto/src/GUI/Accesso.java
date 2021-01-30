@@ -7,13 +7,10 @@ import Immagini.Immagini;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import java.awt.Font;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Color;
 import java.awt.Cursor;
 
 import javax.swing.SwingConstants;
@@ -23,14 +20,11 @@ import javax.swing.JPasswordField;
 public class Accesso extends JPanel {
 
 	private Immagini img = new Immagini();
-	
-	Color sfondo = new Color(54, 57, 63);
-	Color scritte = new Color(141, 142, 146);
-	
-	Controller controllerAccesso;
+
 	private JTextField txtEmail;
 	private JPasswordField txtPassword;
-	private JLabel lblMessaggioCredenziali = new JLabel("");
+	private JLabel lblMessaggioCredenziali;
+	private boolean sbloccaHome = false;
 
 	// GETTER E SETTER
 
@@ -50,13 +44,29 @@ public class Accesso extends JPanel {
 		this.txtPassword = txtFieldPassword;
 	}
 
+	public JLabel getLblMessaggioCredenziali() {
+		return lblMessaggioCredenziali;
+	}
+
+	public void setLblMessaggioCredenziali(JLabel lblMessaggioCredenziali) {
+		this.lblMessaggioCredenziali = lblMessaggioCredenziali;
+	}
+
+	public boolean isSbloccaHome() {
+		return sbloccaHome;
+	}
+
+	public void setSbloccaHome(boolean sbloccaHome) {
+		this.sbloccaHome = sbloccaHome;
+	}
+
+	Controller controllerAccesso;
+
 	public Accesso(Controller controller) {
 		controllerAccesso = controller;
 
-		
-		
 		setBounds(0, 0, 894, 625);
-		setBackground(sfondo);
+		setBackground(controllerAccesso.sfondo);
 		setLayout(null);
 
 		txtEmail = new JTextField();
@@ -64,13 +74,13 @@ public class Accesso extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerAccesso.mostraPannelli(controllerAccesso.home());
+					controllerAccesso.accedi();
 				}
 			}
 		});
-		txtEmail.setBackground(sfondo);
-		txtEmail.setForeground(scritte);
-		txtEmail.setFont(new Font("Arial", Font.BOLD, 20));
+		txtEmail.setBackground(controllerAccesso.sfondo);
+		txtEmail.setForeground(controllerAccesso.coloreScritte);
+		txtEmail.setFont(controllerAccesso.fontScritteUscita);
 		txtEmail.setHorizontalAlignment(SwingConstants.LEFT);
 		txtEmail.setBounds(437, 244, 320, 22);
 		txtEmail.setColumns(10);
@@ -82,16 +92,15 @@ public class Accesso extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-//					controllerAccesso.mostraPannelli(controllerAccesso.getHome());
-					controllerAccesso.vaiAMenuGestioneDaAccesso();
+					controllerAccesso.accedi();
 				}
 			}
 		});
 
-		txtPassword.setBackground(sfondo);
+		txtPassword.setBackground(controllerAccesso.sfondo);
 		txtPassword.setHorizontalAlignment(SwingConstants.LEFT);
-		txtPassword.setFont(new Font("Arial", Font.BOLD, 20));
-		txtPassword.setForeground(scritte);
+		txtPassword.setFont(controllerAccesso.fontScritteUscita);
+		txtPassword.setForeground(controllerAccesso.coloreScritte);
 		txtPassword.setBounds(437, 348, 320, 22);
 		txtPassword.setBorder(null);
 		add(txtPassword);
@@ -146,41 +155,39 @@ public class Accesso extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				String email = getTxtEmail().getText();
-				String password = getTxtPassword().getText();
-
-				if (controllerAccesso.implementazioneUtenteDAO().accessoUtente(email, password)) {
-					controllerAccesso.mostraPannelli(controllerAccesso.getHome());
-				}
+				controllerAccesso.accedi();
 			}
 		});
 		lblAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblAvanti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAvanti.setIcon(new ImageIcon(img.avanti1()));
-		lblAvanti.setBackground(new Color(0, 0, 0, 0));
+		lblAvanti.setBackground(controllerAccesso.trasparente);
 		lblAvanti.setBounds(506, 479, 206, 60);
 		add(lblAvanti);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(img.icona()));
-		lblNewLabel.setBounds(55, 128, 320, 361);
-		add(lblNewLabel);
+
+		lblMessaggioCredenziali = new JLabel("");
+		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessaggioCredenziali.setFont(controllerAccesso.fontScritte);
+		lblMessaggioCredenziali.setForeground(controllerAccesso.coloreScritturaAllerta);
+		lblMessaggioCredenziali.setBounds(437, 401, 344, 28);
+		add(lblMessaggioCredenziali);
+
+		JLabel lblImgAccount = new JLabel("");
+		lblImgAccount.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImgAccount.setIcon(new ImageIcon(img.icona()));
+		lblImgAccount.setBounds(55, 121, 320, 361);
+		add(lblImgAccount);
 
 	}
 
 	// METODI
-
-	public void MostraInserimentoCredenziali() {
+	
+	public void mostraInserimentoCredenziali() {
 		lblMessaggioCredenziali.setText("Perfavore, inserisci le credenziali!");
 	}
 
-	public void MostraErroreAccesso() {
+	public void mostraErroreAccesso() {
 		lblMessaggioCredenziali.setText("Nome utente o password errati. Riprova");
 	}
 
-	public void immaginiDashboard() {
-
-	}
 }

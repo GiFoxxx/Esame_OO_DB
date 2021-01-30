@@ -171,7 +171,7 @@ public class GestioneTratte extends JPanel {
 		txtBarraRicerca.setForeground(controllerGestioneTratte.coloreScritteSuBianco);
 		txtBarraRicerca.setFont(controllerGestioneTratte.fontScritte);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(704, 40, 135, 20);
+		txtBarraRicerca.setBounds(704, 42, 135, 20);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 

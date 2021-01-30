@@ -153,18 +153,10 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 			
 			if (res.next()) {
                 eUtente = true;
-                System.out.println("Autenticazione utente riuscita");
+//                System.out.println("Autenticazione utente riuscita");
             } else {
-                System.out.println("Email o password non valido!!!");
+//                System.out.println("Email o password non valido!!!");
             }
-
-//			if (res > 0) {
-//				con.close();
-//				return true;
-//			} else {
-//				con.close();
-//				return false;
-//			}
 			
 			
 		} catch (SQLException e) {

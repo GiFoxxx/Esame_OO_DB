@@ -6,19 +6,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Color;
 import java.awt.Cursor;
 
 import javax.swing.SwingConstants;
 
-import Amministrazione.Utente;
 import Controller.Controller;
 import Immagini.Immagini;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import java.awt.SystemColor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -28,14 +25,12 @@ public class Registrazione extends JPanel {
 
 	private Immagini img = new Immagini();
 
-	Color sfondo = new Color(54, 57, 63);
-	Color scritte = new Color(141, 142, 146);
-
 	private JTextField txtNome;
 	private JTextField txtCognome;
 	private JTextField txtEmail;
 	private JPasswordField txtPassword;
 	private JPasswordField txtRipetiPassword;
+	private JLabel lblMessaggioCredenziali;
 
 	// GETTER E SETTER
 
@@ -79,13 +74,21 @@ public class Registrazione extends JPanel {
 		this.txtRipetiPassword = txtRipetiPassword;
 	}
 
+	public JLabel getLblMessaggioCredenziali() {
+		return lblMessaggioCredenziali;
+	}
+
+	public void setLblMessaggioCredenziali(JLabel lblMessaggioCredenziali) {
+		this.lblMessaggioCredenziali = lblMessaggioCredenziali;
+	}
+
 	Controller controllerRegistrazione;
 
 	public Registrazione(Controller controller) {
 		controllerRegistrazione = controller;
 
 		setBounds(0, 0, 894, 625);
-		setBackground(sfondo);
+		setBackground(controllerRegistrazione.sfondo);
 		setLayout(null);
 
 		txtNome = new JTextField();
@@ -93,19 +96,15 @@ public class Registrazione extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(),
-								getTxtEmail().getText(), getTxtPassword().getText());
-						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
-					}
+					controllerRegistrazione.registrati();
 				}
 			}
 		});
-		txtNome.setFont(new Font("Arial", Font.BOLD, 20));
+		txtNome.setFont(controllerRegistrazione.fontScritteUscita);
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
-		txtNome.setBackground(sfondo);
-		txtNome.setForeground(scritte);
+		txtNome.setBackground(controllerRegistrazione.sfondo);
+		txtNome.setForeground(controllerRegistrazione.coloreScritte);
 		txtNome.setBounds(80, 113, 340, 23);
 		add(txtNome);
 
@@ -114,19 +113,15 @@ public class Registrazione extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(),
-								getTxtEmail().getText(), getTxtPassword().getText());
-						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
-					}
+					controllerRegistrazione.registrati();
 				}
 			}
 		});
-		txtCognome.setFont(new Font("Arial", Font.BOLD, 20));
+		txtCognome.setFont(controllerRegistrazione.fontScritteUscita);
 		txtCognome.setColumns(10);
 		txtCognome.setBorder(null);
-		txtCognome.setBackground(sfondo);
-		txtCognome.setForeground(scritte);
+		txtCognome.setBackground(controllerRegistrazione.sfondo);
+		txtCognome.setForeground(controllerRegistrazione.coloreScritte);
 		txtCognome.setBounds(80, 217, 340, 23);
 		add(txtCognome);
 
@@ -135,19 +130,15 @@ public class Registrazione extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(),
-								getTxtEmail().getText(), getTxtPassword().getText());
-						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
-					}
+					controllerRegistrazione.registrati();
 				}
 			}
 		});
-		txtEmail.setFont(new Font("Arial", Font.BOLD, 20));
+		txtEmail.setFont(controllerRegistrazione.fontScritteUscita);
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
-		txtEmail.setBackground(sfondo);
-		txtEmail.setForeground(scritte);
+		txtEmail.setBackground(controllerRegistrazione.sfondo);
+		txtEmail.setForeground(controllerRegistrazione.coloreScritte);
 		txtEmail.setBounds(80, 321, 340, 23);
 		add(txtEmail);
 
@@ -156,18 +147,14 @@ public class Registrazione extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(),
-								getTxtEmail().getText(), getTxtPassword().getText());
-						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
-					}
+					controllerRegistrazione.registrati();
 				}
 			}
 		});
-		txtPassword.setFont(new Font("Arial", Font.BOLD, 20));
+		txtPassword.setFont(controllerRegistrazione.fontScritteUscita);
 		txtPassword.setBorder(null);
-		txtPassword.setBackground(sfondo);
-		txtPassword.setForeground(scritte);
+		txtPassword.setBackground(controllerRegistrazione.sfondo);
+		txtPassword.setForeground(controllerRegistrazione.coloreScritte);
 		txtPassword.setBounds(80, 425, 340, 23);
 		add(txtPassword);
 
@@ -176,18 +163,14 @@ public class Registrazione extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (formatoEmailInseritaErrato()) {
-						Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(),
-								getTxtEmail().getText(), getTxtPassword().getText());
-						controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
-					}
+					controllerRegistrazione.registrati();
 				}
 			}
 		});
-		txtRipetiPassword.setFont(new Font("Arial", Font.BOLD, 20));
+		txtRipetiPassword.setFont(controllerRegistrazione.fontScritteUscita);
 		txtRipetiPassword.setBorder(null);
-		txtRipetiPassword.setBackground(sfondo);
-		txtRipetiPassword.setForeground(scritte);
+		txtRipetiPassword.setBackground(controllerRegistrazione.sfondo);
+		txtRipetiPassword.setForeground(controllerRegistrazione.coloreScritte);
 		txtRipetiPassword.setBounds(80, 530, 340, 23);
 		add(txtRipetiPassword);
 
@@ -265,18 +248,13 @@ public class Registrazione extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (formatoEmailInseritaErrato()) {
-					Utente utn = new Utente(getTxtNome().getText(), getTxtCognome().getText(), getTxtEmail().getText(),
-							getTxtPassword().getText());
-					controllerRegistrazione.implementazioneUtenteDAO().registrazioneUtente(utn);
-					controller.vaiAdAccessoDopoRegistrazione();
-				}
+				controllerRegistrazione.registrati();
 			}
 		});
 		lblRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRegistrati.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistrati.setIcon(new ImageIcon(img.avanti1()));
-		lblRegistrati.setBackground(new Color(0, 0, 0, 0));
+		lblRegistrati.setBackground(controllerRegistrazione.trasparente);
 		lblRegistrati.setBounds(620, 500, 206, 60);
 		add(lblRegistrati);
 
@@ -288,24 +266,28 @@ public class Registrazione extends JPanel {
 
 		JLabel lblRegistrazione = new JLabel("REGISTRAZIONE");
 		lblRegistrazione.setFont(new Font("Arial", Font.BOLD, 27));
-		lblRegistrazione.setForeground(scritte);
+		lblRegistrazione.setForeground(controllerRegistrazione.coloreScritte);
 		lblRegistrazione.setBounds(80, 30, 233, 30);
 		add(lblRegistrazione);
 
+		lblMessaggioCredenziali = new JLabel("");
+		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessaggioCredenziali.setFont(controllerRegistrazione.fontScritte);
+		lblMessaggioCredenziali.setForeground(controllerRegistrazione.coloreScritturaAllerta);
+		lblMessaggioCredenziali.setBounds(510, 400, 344, 60);
+		add(lblMessaggioCredenziali);
 	}
 
 	// METODI
 
+	
+
 	public boolean formatoEmailInseritaErrato() {
-		boolean emailCorretta = controllerRegistrazione
-				.controlloInserimentoEmailCorrettamenteRegistrazione(getTxtEmail().getText());
+		boolean emailCorretta = controllerRegistrazione.controlloInserimentoEmailCorrettamenteRegistrazione(getTxtEmail().getText());
 
 		if (emailCorretta) {
-			controllerRegistrazione.vaiAdAccessoDopoRegistrazione();
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null,
-					"Formato email inserito non valido!\n" + "Inserire l'email dal formato tipo: example@example.com");
 			return false;
 		}
 	}

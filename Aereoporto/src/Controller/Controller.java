@@ -1,23 +1,16 @@
 package Controller;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.sql.*;
 import java.util.Calendar;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
-
 import Amministrazione.*;
 import Classi.*;
-import Database.*;
 import GUI.*;
 import Immagini.Immagini;
 import ImplementazioniPostrgresDAO.*;
@@ -32,6 +25,7 @@ public class Controller {
 	public Color clickPannello = new Color(40, 40, 40);
 	public Color entroPannello = new Color(30, 30, 30);
 	public Color escoPannelloLaterale = new Color(35, 39, 42);
+	public Color coloreScritturaAllerta = new Color(250, 45, 45);
 	public Color trasparente = new Color(0, 0, 0, 0);
 	public Font fontScritte = new Font("Arial", Font.BOLD, 14);
 	public Font fontScritteUscita = new Font("Arial", Font.BOLD, 20);
@@ -199,8 +193,23 @@ public class Controller {
 
 	}
 
+	public void accedi() {
+		String email = ((Accesso) getDashboard().getAccesso()).getTxtEmail().getText();
+		String password = ((Accesso) getDashboard().getAccesso()).getTxtPassword().getText();
+
+		if (implementazioneUtenteDAO().accessoUtente(email, password)) {
+			mostraPannelli(getDashboard().getHome());
+			((Accesso) getDashboard().getAccesso()).setSbloccaHome(true);
+		} else if (controlloCampiSeVuotiAccesso()) {
+			((Accesso) getDashboard().getAccesso()).mostraInserimentoCredenziali();
+		} else {
+			((Accesso) getDashboard().getAccesso()).mostraErroreAccesso();
+		}
+	}
+
 	public boolean controlloCampiSeVuotiAccesso() {
-		if (accesso.getTxtEmail().getText().length() <= 0 && accesso.getTxtPassword().getText().length() <= 0) {
+		if (((Accesso) getDashboard().getAccesso()).getTxtEmail().getText().length() <= 0
+				|| ((Accesso) getDashboard().getAccesso()).getTxtPassword().getText().length() <= 0) {
 			return true;
 		} else {
 			return false;
@@ -214,6 +223,53 @@ public class Controller {
 		((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().setText("");
 		((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setText("");
 		((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setText("");
+	}
+
+	public boolean ripetiPassword() {
+		if (((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().getText()
+				.equals(((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void registrati() {
+		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");;
+		if (((Registrazione) getDashboard().getRegistrazione()).formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto()) {
+			Utente utn = new Utente(((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText(),
+					((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText(),
+					((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText(),
+					((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText());
+			implementazioneUtenteDAO().registrazioneUtente(utn);
+			vaiAdAccessoDopoRegistrazione();
+			
+		} else if ((!((Registrazione) getDashboard().getRegistrazione()).formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuoto()){
+			
+			JOptionPane.showMessageDialog(null, "Formato email inserito non valido!\n" + "Inserire l'email dal formato tipo: example@example.com");
+			
+		} else if (((Registrazione) getDashboard().getRegistrazione()).formatoEmailInseritaErrato() && !ripetiPassword() && nessunCampoVuoto()) {
+			
+			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("La password ripetuta non � corretta.");
+			((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setText("");
+			((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setText("");
+		
+		}  else {
+			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("Ci sono campi vuoti, riempirli tutti per la registrazione.");
+		}
+	}
+
+	public boolean nessunCampoVuoto() {
+		if(	((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText().length() <= 0 ||
+			((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText().length() <= 0 ||
+			((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText().length() <= 0 ||
+			((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText().length() <= 0 ||
+			((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().getText().length() <= 0 ) {
+			
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public void vaiAdAccessoDopoRegistrazione() {
@@ -610,6 +666,9 @@ public class Controller {
 	}
 
 	public void mostraPannelli(JPanel pane) {
+		((Home) getDashboard().getHome()).getLblFareAccesso().setText("");
+		((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setText("");
+		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
 		dashboard.getHome().setVisible(false);
 		dashboard.getAccesso().setVisible(false);
 		dashboard.getRegistrazione().setVisible(false);
@@ -622,18 +681,30 @@ public class Controller {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public void mostraUscita() {
 		dashboard.disable();
 		dashboard.getUscita().setVisible(true);
 	}
 
+	// METODI DI HOME
+
+	public boolean sbloccaGestione() {
+		if (((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	// METODI DI USCITA
-	
+
 	public void esci() {
 		dashboard.getUscita().dispose();
 		getDashboard().dispose();
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	public void annullaUscita() {
 		dashboard.getUscita().dispose();
 		getDashboard().enable();
@@ -672,61 +743,61 @@ public class Controller {
 
 	// METODI DI PROVA
 
-//	@SuppressWarnings("deprecation")
-//	public void calcoloRitardo() {
-//		Calendar ArrivoTeorico = Calendar.getInstance();
-//		Calendar ArrivoEffettivo = Calendar.getInstance();
-//
-//		ArrivoTeorico.set(Calendar.YEAR, gestioneTratte.getDateDataPartenza().getDate().getYear());
-//		ArrivoTeorico.set(Calendar.MONTH, gestioneTratte.getDateDataPartenza().getDate().getMonth());
-//		ArrivoTeorico.set(Calendar.DAY_OF_MONTH, gestioneTratte.getDateDataPartenza().getDate().getDay());
-//		ArrivoTeorico.set(Calendar.HOUR_OF_DAY , gestioneTratte.getDateDataPartenza().getDate().getHours());
-//		ArrivoTeorico.set(Calendar.MINUTE, gestioneTratte.getDateDataPartenza().getDate().getMinutes());
-//		ArrivoTeorico.set(Calendar.SECOND, gestioneTratte.getDateDataPartenza().getDate().getSeconds());
-//		
-//		ArrivoEffettivo.set(Calendar.YEAR, gestioneTratte.getDateDataArrivo().getDate().getYear());
-//		ArrivoEffettivo.set(Calendar.MONTH, gestioneTratte.getDateDataArrivo().getDate().getMonth());
-//		ArrivoEffettivo.set(Calendar.DAY_OF_MONTH, gestioneTratte.getDateDataArrivo().getDate().getDay());
-//		ArrivoEffettivo.set(Calendar.HOUR_OF_DAY , gestioneTratte.getDateDataArrivo().getDate().getHours());
-//		ArrivoEffettivo.set(Calendar.MINUTE, gestioneTratte.getDateDataArrivo().getDate().getMinutes());
-//		ArrivoEffettivo.set(Calendar.SECOND, gestioneTratte.getDateDataArrivo().getDate().getSeconds());
-//
-//		long Differenza_ArrivoTeorico = ArrivoTeorico.getTimeInMillis();
-//		long Differenza_ArrivoEffettivo = ArrivoEffettivo.getTimeInMillis();
-//		long ritardo_Arrivo = Differenza_ArrivoEffettivo - Differenza_ArrivoTeorico;
-//		long ritardoSecondo_Arrivo = ritardo_Arrivo / 1000;
-//		long ritardoMinuto_Arrivo = ritardoSecondo_Arrivo / 60;
-//		long ritardoOra_Arrivo = ritardoMinuto_Arrivo / 60;
-//		long ritardoGiorno_Arrivo = ritardoOra_Arrivo / 24;
-//		long ritardoMese_Arrivo = ritardoGiorno_Arrivo / 30;
-//		long ritardoAnno_Arrivo = ritardoMese_Arrivo / 12;
-//
-//		if (ritardoAnno_Arrivo == 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoAnno_Arrivo + " anno.");
-//		} else if (ritardoAnno_Arrivo > 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoAnno_Arrivo + " anni.");
-//		} else if (ritardoMese_Arrivo == 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoMese_Arrivo + " mese.");
-//		} else if (ritardoMese_Arrivo > 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoMese_Arrivo + " mesi.");
-//		} else if (ritardoGiorno_Arrivo == 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoGiorno_Arrivo + " giorno.");
-//		} else if (ritardoGiorno_Arrivo > 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoGiorno_Arrivo + " giorni.");
-//		} else if (ritardoOra_Arrivo == 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoOra_Arrivo + " ora.");
-//		} else if (ritardoOra_Arrivo > 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoOra_Arrivo + " ore.");
-//		} else if (ritardoMinuto_Arrivo == 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoMinuto_Arrivo + " minuto.");
-//		} else if (ritardoMinuto_Arrivo > 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoMinuto_Arrivo + " minuti.");
-//		} else if (ritardoSecondo_Arrivo == 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoSecondo_Arrivo + " secondo.");
-//		} else if (ritardoSecondo_Arrivo > 1) {
-//			System.out.println("Il ritardo della partenze è di: " + ritardoSecondo_Arrivo + " secondi.");
-//		}
-//	}
+	@SuppressWarnings("deprecation")
+	public void calcoloRitardo() {
+		Calendar ArrivoTeorico = Calendar.getInstance();
+		Calendar ArrivoEffettivo = Calendar.getInstance();
+
+		ArrivoTeorico.set(Calendar.YEAR, gestioneTratte.getDateDataPartenza().getDate().getYear());
+		ArrivoTeorico.set(Calendar.MONTH, gestioneTratte.getDateDataPartenza().getDate().getMonth());
+		ArrivoTeorico.set(Calendar.DAY_OF_MONTH, gestioneTratte.getDateDataPartenza().getDate().getDay());
+		ArrivoTeorico.set(Calendar.HOUR_OF_DAY, gestioneTratte.getDateDataPartenza().getDate().getHours());
+		ArrivoTeorico.set(Calendar.MINUTE, gestioneTratte.getDateDataPartenza().getDate().getMinutes());
+		ArrivoTeorico.set(Calendar.SECOND, gestioneTratte.getDateDataPartenza().getDate().getSeconds());
+
+		ArrivoEffettivo.set(Calendar.YEAR, gestioneTratte.getDateDataArrivo().getDate().getYear());
+		ArrivoEffettivo.set(Calendar.MONTH, gestioneTratte.getDateDataArrivo().getDate().getMonth());
+		ArrivoEffettivo.set(Calendar.DAY_OF_MONTH, gestioneTratte.getDateDataArrivo().getDate().getDay());
+		ArrivoEffettivo.set(Calendar.HOUR_OF_DAY, gestioneTratte.getDateDataArrivo().getDate().getHours());
+		ArrivoEffettivo.set(Calendar.MINUTE, gestioneTratte.getDateDataArrivo().getDate().getMinutes());
+		ArrivoEffettivo.set(Calendar.SECOND, gestioneTratte.getDateDataArrivo().getDate().getSeconds());
+
+		long Differenza_ArrivoTeorico = ArrivoTeorico.getTimeInMillis();
+		long Differenza_ArrivoEffettivo = ArrivoEffettivo.getTimeInMillis();
+		long ritardo_Arrivo = Differenza_ArrivoEffettivo - Differenza_ArrivoTeorico;
+		long ritardoSecondo_Arrivo = ritardo_Arrivo / 1000;
+		long ritardoMinuto_Arrivo = ritardoSecondo_Arrivo / 60;
+		long ritardoOra_Arrivo = ritardoMinuto_Arrivo / 60;
+		long ritardoGiorno_Arrivo = ritardoOra_Arrivo / 24;
+		long ritardoMese_Arrivo = ritardoGiorno_Arrivo / 30;
+		long ritardoAnno_Arrivo = ritardoMese_Arrivo / 12;
+
+		if (ritardoAnno_Arrivo == 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoAnno_Arrivo + " anno.");
+		} else if (ritardoAnno_Arrivo > 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoAnno_Arrivo + " anni.");
+		} else if (ritardoMese_Arrivo == 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoMese_Arrivo + " mese.");
+		} else if (ritardoMese_Arrivo > 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoMese_Arrivo + " mesi.");
+		} else if (ritardoGiorno_Arrivo == 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoGiorno_Arrivo + " giorno.");
+		} else if (ritardoGiorno_Arrivo > 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoGiorno_Arrivo + " giorni.");
+		} else if (ritardoOra_Arrivo == 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoOra_Arrivo + " ora.");
+		} else if (ritardoOra_Arrivo > 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoOra_Arrivo + " ore.");
+		} else if (ritardoMinuto_Arrivo == 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoMinuto_Arrivo + " minuto.");
+		} else if (ritardoMinuto_Arrivo > 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoMinuto_Arrivo + " minuti.");
+		} else if (ritardoSecondo_Arrivo == 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoSecondo_Arrivo + " secondo.");
+		} else if (ritardoSecondo_Arrivo > 1) {
+			System.out.println("Il ritardo della partenze è di: " + ritardoSecondo_Arrivo + " secondi.");
+		}
+	}
 
 //	public int tentativoAccesso() { // controllo credenziali
 //		if (accesso.getTxtUtente().getText().equals("io") && accesso.getTxtPassword().getText().equals("io")) {
