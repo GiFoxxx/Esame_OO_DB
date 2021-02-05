@@ -88,6 +88,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		setLayout(null);
 
 		JLabel lblimgfrecciaIndietro = new JLabel("");
+		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -221,10 +222,10 @@ public class GestioneCompagnieAeree extends JPanel {
 		btnSvuota.setBounds(705, 554, 113, 20);
 		add(btnSvuota);
 
-		caricamento();
+		caricaTabella();
 	}
 
-	public void caricamento() {
+	public void caricaTabella() {
 		this.ListaCompagnieAeree = controllerGestioneCompagnieAeree.implementazioneCompagniaAereaDAO()
 				.stampaCompagnieAeree();
 		modello.setNumRows(0);

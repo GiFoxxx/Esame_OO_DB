@@ -353,10 +353,10 @@ public class GestioneTratte extends JPanel {
 		btnSvuota.setBounds(767, 546, 89, 23);
 		add(btnSvuota);
 		
-		caricamento();
+		caricaTabella();
 	}
 	
-	public void  caricamento() {
+	public void  caricaTabella() {
 		this.ListaTratte = controllerGestioneTratte.implementazioneTrattaDAO().stampaTratte();
 		modello.setNumRows(0);
 		for(Object [] dato : this.ListaTratte) {

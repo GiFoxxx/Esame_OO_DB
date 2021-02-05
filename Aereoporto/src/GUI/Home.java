@@ -1,21 +1,14 @@
 package GUI;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-
 import Controller.Controller;
 import Immagini.Immagini;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JTextField;
 
 public class Home extends JPanel {
 
@@ -37,6 +30,54 @@ public class Home extends JPanel {
 
 	public void setLblFareAccesso(JLabel lblFareAccesso) {
 		this.lblFareAccesso = lblFareAccesso;
+	}
+	
+	public JLabel getLblTratte() {
+		return lblTratte;
+	}
+
+	public void setLblTratte(JLabel lblTratte) {
+		this.lblTratte = lblTratte;
+	}
+
+	public JLabel getLblCompagniaAerea() {
+		return lblCompagniaAerea;
+	}
+
+	public void setLblCompagniaAerea(JLabel lblCompagniaAerea) {
+		this.lblCompagniaAerea = lblCompagniaAerea;
+	}
+
+	public JLabel getLblGestioneAccount() {
+		return lblGestioneAccount;
+	}
+
+	public void setLblGestioneAccount(JLabel lblGestioneAccount) {
+		this.lblGestioneAccount = lblGestioneAccount;
+	}
+
+	public JLabel getLblPrenotazioni() {
+		return lblPrenotazioni;
+	}
+
+	public void setLblPrenotazioni(JLabel lblPrenotazioni) {
+		this.lblPrenotazioni = lblPrenotazioni;
+	}
+
+	public JLabel getLblGate() {
+		return lblGate;
+	}
+
+	public void setLblGate(JLabel lblGate) {
+		this.lblGate = lblGate;
+	}
+
+	public JLabel getLblVolo() {
+		return lblVolo;
+	}
+
+	public void setLblVolo(JLabel lblVolo) {
+		this.lblVolo = lblVolo;
 	}
 
 	Controller controllerHome;
@@ -202,4 +243,5 @@ public class Home extends JPanel {
 		lblFareAccesso.setBounds(20, 520, 867, 28);
 		add(lblFareAccesso);
 	}
+
 }

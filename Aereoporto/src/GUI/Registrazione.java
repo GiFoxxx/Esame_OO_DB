@@ -282,13 +282,5 @@ public class Registrazione extends JPanel {
 
 	
 
-	public boolean formatoEmailInseritaErrato() {
-		boolean emailCorretta = controllerRegistrazione.controlloInserimentoEmailCorrettamenteRegistrazione(getTxtEmail().getText());
-
-		if (emailCorretta) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	
 }

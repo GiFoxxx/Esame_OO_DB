@@ -273,10 +273,10 @@ public class GestioneUtenti extends JPanel {
 		btnSvuota.setBounds(693, 546, 113, 20);
 		add(btnSvuota);
 		
-		caricamento();
+		caricaTabella();
 	}
 
-	public void caricamento() {
+	public void caricaTabella() {
 		this.ListaUtenti = controllerGestioneUtenti.implementazioneUtenteDAO().stampaUtenti();
 		modello.setNumRows(0);
 		for (Object[] dato : this.ListaUtenti) {

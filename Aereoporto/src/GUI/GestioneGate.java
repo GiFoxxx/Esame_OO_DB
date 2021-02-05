@@ -277,12 +277,12 @@ public class GestioneGate extends JPanel {
 		txtCodiceGate.setBounds(168, 462, 133, 20);
 		add(txtCodiceGate);
 
-		caricamento();
+		caricaTabella();
 
 	}
 
 	// METODI
-	public void caricamento() {
+	public void caricaTabella() {
 		this.ListaGate = controllerGestioneGate.implementazioneGateDAO().stampaGate();
 		modello.setNumRows(0);
 		for (Object[] dato : this.ListaGate) {

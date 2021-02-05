@@ -1,9 +1,11 @@
 package Immagini;
 
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 
+import Controller.Controller;
 import GUI.*;
 
 public class Immagini {
@@ -14,19 +16,39 @@ public class Immagini {
 
 	}
 
+	// METODI PER RIDIMENSIONAMENTO
+	public int dimensioneSchermoX() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int xSize = ((int) tk.getScreenSize().getWidth());
+		return xSize;
+	}
+
+	public int dimensioneSchermoY() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int ySize = ((int) tk.getScreenSize().getHeight());
+		return ySize;
+	}
+
 	// METODI
+
 	public Image sfondo() {
 		Image imgSfondo = new ImageIcon(Accesso.class.getResource("immaginiDashboard/SfondoDashboard.png")).getImage()
 				.getScaledInstance(1143, 677, Image.SCALE_SMOOTH);
 		return imgSfondo;
 	}
-	
+
 	public Image sfondoUscita() {
 		Image imgSfondo = new ImageIcon(Accesso.class.getResource("immaginiDashboard/SfondoUscita.png")).getImage()
 				.getScaledInstance(500, 300, Image.SCALE_SMOOTH);
 		return imgSfondo;
 	}
 	
+	public Image sfondoUscita2() {
+		Image imgSfondo2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/SfondoUscita2.png")).getImage()
+				.getScaledInstance(500, 300, Image.SCALE_SMOOTH);
+		return imgSfondo2;
+	}
+
 	public Image icona() {
 		Image icona = new ImageIcon(Accesso.class.getResource("immaginiAccesso/icona.png")).getImage()
 				.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
@@ -35,20 +57,27 @@ public class Immagini {
 
 	public Image tendina() {
 		Image tendina = new ImageIcon(Accesso.class.getResource("immaginiDashboard/TendinaDashboard.png")).getImage()
-				.getScaledInstance(238, 677, Image.SCALE_SMOOTH);
+				.getScaledInstance(238, 634, Image.SCALE_SMOOTH);
 		return tendina;
 	}
+	
+	public Image spostaDashboard() {
+		Image spostaDashboard = new ImageIcon(Accesso.class.getResource("immaginiDashboard/SpostaDashboard.png")).getImage()
+				.getScaledInstance(1143, 43, Image.SCALE_SMOOTH);
+		return spostaDashboard;
+	}
+	
 
-	public Image linee1() {
-		Image linee1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/linee1.png")).getImage()
+	public Image lineeChiusura() {
+		Image lineeChiusura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/linee1.png")).getImage()
 				.getScaledInstance(25, 15, Image.SCALE_SMOOTH);
-		return linee1;
+		return lineeChiusura;
 	}
 
-	public Image linee2() {
-		Image linee2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/linee2.png")).getImage()
+	public Image lineeApertura() {
+		Image lineeApertura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/linee2.png")).getImage()
 				.getScaledInstance(25, 15, Image.SCALE_SMOOTH);
-		return linee2;
+		return lineeApertura;
 	}
 
 	public Image X1() {
@@ -119,7 +148,7 @@ public class Immagini {
 
 	public Image imgSfondoFull() {
 		Image imgSfondoFull = new ImageIcon(Accesso.class.getResource("immaginiDashboard/SfondoDashboard.png"))
-				.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
+				.getImage().getScaledInstance(dimensioneSchermoX(), dimensioneSchermoY(), Image.SCALE_SMOOTH);
 		return imgSfondoFull;
 	}
 
@@ -225,38 +254,29 @@ public class Immagini {
 						.getScaledInstance(370, 470, Image.SCALE_SMOOTH);
 		return inserimentoCredenziali;
 	}
-	
+
 	public Image barraRicerca() {
-		Image barraRicerca = new ImageIcon(Accesso.class.getResource("immaginiGate/barraRicerca.png"))
-				.getImage().getScaledInstance(180, 30, Image.SCALE_SMOOTH);
+		Image barraRicerca = new ImageIcon(Accesso.class.getResource("immaginiGate/barraRicerca.png")).getImage()
+				.getScaledInstance(180, 30, Image.SCALE_SMOOTH);
 		return barraRicerca;
 	}
-	
+
 	public Image ricerca() {
-		Image ricerca = new ImageIcon(Accesso.class.getResource("immaginiGate/ricerca.png"))
-				.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		Image ricerca = new ImageIcon(Accesso.class.getResource("immaginiGate/ricerca.png")).getImage()
+				.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		return ricerca;
 	}
-	
 
-	
 	public Image frecciaIndietro1() {
-		Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiHome/frecciaIndietro1.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		Image imgfrecciaIndietro1 = new ImageIcon(Registrazione.class.getResource("immaginiHome/frecciaIndietro1.png"))
+				.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		return imgfrecciaIndietro1;
 	}
-	
+
 	public Image frecciaIndietro2() {
-		Image frecciaIndietro2 = new ImageIcon(Registrazione.class.getResource("immaginiHome/frecciaIndietro2.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		Image frecciaIndietro2 = new ImageIcon(Registrazione.class.getResource("immaginiHome/frecciaIndietro2.png"))
+				.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		return frecciaIndietro2;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

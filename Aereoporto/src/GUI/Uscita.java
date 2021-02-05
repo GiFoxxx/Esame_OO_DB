@@ -4,21 +4,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.RootPaneContainer;
 import javax.swing.SwingConstants;
 import Controller.Controller;
 import Immagini.Immagini;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.Font;
 import java.awt.Cursor;
-import java.awt.event.WindowFocusListener;
-import java.awt.event.WindowEvent;
 
 public class Uscita extends JDialog {
-	
+
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -26,16 +24,21 @@ public class Uscita extends JDialog {
 	int x;
 	int y;
 
+	JLabel lblLayout;
+	private boolean flag = true;
+
 	Immagini img = new Immagini();
 	Controller controllerUscita;
 
 	public Uscita(Controller controller) {
 		controllerUscita = controller;
 
-		
+		setModal(true);
+
 		setBounds(100, 100, 500, 300);
 		setFocusable(true);
 		setUndecorated(true);
+
 		getContentPane().setLayout(null);
 		{
 			JButton btnAnnulla = new JButton("Annulla");
@@ -48,6 +51,9 @@ public class Uscita extends JDialog {
 					controllerUscita.annullaUscita();
 				}
 			});
+			btnAnnulla.setBounds(322, 220, 100, 30);
+			getContentPane().add(btnAnnulla);
+			btnAnnulla.setActionCommand("Annulla");
 
 			JLabel lblX = new JLabel("");
 			lblX.addMouseListener(new MouseAdapter() {
@@ -69,7 +75,7 @@ public class Uscita extends JDialog {
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
 			lblX.setIcon(new ImageIcon(img.X1()));
-			lblX.setBounds(463, 0, 37, 30);
+			lblX.setBounds(461, 0, 37, 43);
 			getContentPane().add(lblX);
 
 			{
@@ -80,9 +86,7 @@ public class Uscita extends JDialog {
 				lblUscire.setBounds(0, 81, 498, 52);
 				getContentPane().add(lblUscire);
 			}
-			btnAnnulla.setBounds(322, 220, 100, 30);
-			getContentPane().add(btnAnnulla);
-			btnAnnulla.setActionCommand("Annulla");
+
 		}
 		{
 			JButton btnOk = new JButton("OK");
@@ -90,10 +94,11 @@ public class Uscita extends JDialog {
 			btnOk.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnOk.setFont(controllerUscita.fontScritte);
 			btnOk.addMouseListener(new MouseAdapter() {
+
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerUscita.esci();
-					
+
 				}
 			});
 			btnOk.setBounds(75, 220, 100, 30);
@@ -101,7 +106,8 @@ public class Uscita extends JDialog {
 			btnOk.setActionCommand("OK");
 		}
 
-		JLabel lblLayout = new JLabel("");
+		lblLayout = new JLabel("");
+
 		lblLayout.setBounds(0, 0, 500, 300);
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLayout.setIcon(new ImageIcon(img.sfondoUscita()));

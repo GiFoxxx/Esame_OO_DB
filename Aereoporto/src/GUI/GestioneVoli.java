@@ -378,10 +378,10 @@ public class GestioneVoli extends JPanel {
 		txtNumeroPrenotazioni.setBounds(173, 559, 133, 20);
 		add(txtNumeroPrenotazioni);
 		
-		caricamento();
+		caricaTabella();
 	}
 	
-	public void  caricamento() {
+	public void  caricaTabella() {
 		this.ListaVoli = controllerGestioneVoli.implementazioneVoloDAO().stampaVoli();
 		modello.setNumRows(0);
 		for(Object [] dato : this.ListaVoli) {

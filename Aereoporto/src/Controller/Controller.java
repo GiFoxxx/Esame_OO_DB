@@ -28,6 +28,7 @@ public class Controller {
 	public Color coloreScritturaAllerta = new Color(250, 45, 45);
 	public Color trasparente = new Color(0, 0, 0, 0);
 	public Font fontScritte = new Font("Arial", Font.BOLD, 14);
+	public Font fontTitolo = new Font("Arial", Font.BOLD, 18);
 	public Font fontScritteUscita = new Font("Arial", Font.BOLD, 20);
 
 	private Dashboard dashboard;
@@ -35,6 +36,7 @@ public class Controller {
 	private Accesso accesso;
 	private Registrazione registrazione;
 	private Riconoscimenti riconoscimenti;
+	private Profilo profilo;
 	private MenuGestione menuGestione;
 	private GestioneVoli gestioneVoli;
 	private Prenotazione prenotazioni;
@@ -81,6 +83,14 @@ public class Controller {
 
 	public void setRegistrazione(Registrazione registrazione) {
 		this.registrazione = registrazione;
+	}
+
+	public Profilo getProfilo() {
+		return profilo;
+	}
+
+	public void setProfilo(Profilo profilo) {
+		this.profilo = profilo;
 	}
 
 	public Riconoscimenti getRiconoscimenti() {
@@ -224,6 +234,16 @@ public class Controller {
 		((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setText("");
 		((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setText("");
 	}
+	
+	public boolean formatoEmailInseritaErrato() {
+		boolean emailCorretta = controlloInserimentoEmailCorrettamenteRegistrazione(((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText());
+
+		if (emailCorretta) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	public boolean ripetiPassword() {
 		if (((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().getText()
@@ -236,21 +256,21 @@ public class Controller {
 
 	public void registrati() {
 		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");;
-		if (((Registrazione) getDashboard().getRegistrazione()).formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto()) {
+		if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto()) {
 			Utente utn = new Utente(((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText());
 			implementazioneUtenteDAO().registrazioneUtente(utn);
-			vaiAdAccessoDopoRegistrazione();
+			mostraPannelli(getDashboard().getAccesso());
 			
-		} else if ((!((Registrazione) getDashboard().getRegistrazione()).formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuoto()){
+		} else if ((!formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuoto()){
 			
 			JOptionPane.showMessageDialog(null, "Formato email inserito non valido!\n" + "Inserire l'email dal formato tipo: example@example.com");
 			
-		} else if (((Registrazione) getDashboard().getRegistrazione()).formatoEmailInseritaErrato() && !ripetiPassword() && nessunCampoVuoto()) {
+		} else if (formatoEmailInseritaErrato() && !ripetiPassword() && nessunCampoVuoto()) {
 			
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("La password ripetuta non è corretta.");
+			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("La password ripetuta non ï¿½ corretta.");
 			((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setText("");
 			((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setText("");
 		
@@ -270,10 +290,6 @@ public class Controller {
 		} else {
 			return true;
 		}
-	}
-
-	public void vaiAdAccessoDopoRegistrazione() {
-		mostraPannelli(accesso);
 	}
 
 	public boolean controlloInserimentoEmailCorrettamenteRegistrazione(String mail) {
@@ -310,7 +326,7 @@ public class Controller {
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
 				.addRow(((GestioneUtenti) getDashboard().getGestioneUtenti()).getRow());
 		svuotaCampiGestioneUtenti();
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricamento();
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 	}
 
 	public void eliminaUtente() {
@@ -322,7 +338,7 @@ public class Controller {
 		implementazioneUtenteDAO().cancellaUtente(utn);
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().removeRow(t);
 		svuotaCampiGestioneUtenti();
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricamento();
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 	}
 
 	public void modificaUtente() {
@@ -343,7 +359,7 @@ public class Controller {
 
 		implementazioneUtenteDAO().modificaUtente(utn);
 		svuotaCampiGestioneUtenti();
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricamento();
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 	}
 
 	// METODI GESTIONE COMPAGNIA AEREA
@@ -367,7 +383,7 @@ public class Controller {
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
 				.addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
 		svuotaCampiCompagniaAerea();
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricamento();
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 	}
 
 	public void eliminaCompagniaAerea() {
@@ -379,7 +395,7 @@ public class Controller {
 		implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
 		svuotaCampiCompagniaAerea();
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricamento();
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 	}
 
 	public void modificaCompagniaAerea() {
@@ -397,7 +413,7 @@ public class Controller {
 
 		implementazioneCompagniaAereaDAO().modificaCompagniaAerea(compAerea);
 		svuotaCampiCompagniaAerea();
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricamento();
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 	}
 
 	// METODI GESTIONE TRATTE
@@ -429,7 +445,7 @@ public class Controller {
 		((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
 				.addRow(((GestioneTratte) getDashboard().getGestioneTratte()).getRow());
 		svuotaCampiTratta();
-		((GestioneTratte) getDashboard().getGestioneTratte()).caricamento();
+		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 	}
 
 	public void eliminaTratta() {
@@ -445,7 +461,7 @@ public class Controller {
 		implementazioneTrattaDAO().cancellaTratta(trt);
 		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().removeRow(t);
 		svuotaCampiTratta();
-		((GestioneTratte) getDashboard().getGestioneTratte()).caricamento();
+		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 	}
 
 	public void modificaTratta() {
@@ -468,7 +484,7 @@ public class Controller {
 
 		implementazioneTrattaDAO().modificaTratta(trt);
 		svuotaCampiTratta();
-		((GestioneTratte) getDashboard().getGestioneTratte()).caricamento();
+		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 	}
 
 	// METODI GESTIONE VOLI
@@ -503,7 +519,7 @@ public class Controller {
 		((GestioneVoli) getDashboard().getGestioneVoli()).getModello()
 				.addRow(((GestioneVoli) getDashboard().getGestioneVoli()).getRow());
 		svuotaCampiVolo();
-		((GestioneVoli) getDashboard().getGestioneVoli()).caricamento();
+		((GestioneVoli) getDashboard().getGestioneVoli()).caricaTabella();
 	}
 
 	public void eliminaVolo() {
@@ -520,7 +536,7 @@ public class Controller {
 		implementazioneVoloDAO().cancellaVolo(vl);
 		((GestioneVoli) getDashboard().getGestioneVoli()).getModello().removeRow(t);
 		svuotaCampiVolo();
-		((GestioneVoli) getDashboard().getGestioneVoli()).caricamento();
+		((GestioneVoli) getDashboard().getGestioneVoli()).caricaTabella();
 	}
 
 	public void modificaVolo() {
@@ -554,7 +570,7 @@ public class Controller {
 
 		implementazioneVoloDAO().modificaVolo(vl);
 		svuotaCampiVolo();
-		((GestioneVoli) getDashboard().getGestioneVoli()).caricamento();
+		((GestioneVoli) getDashboard().getGestioneVoli()).caricaTabella();
 	}
 
 	// METODI GESTIONE GATE
@@ -580,7 +596,7 @@ public class Controller {
 		((GestioneGate) getDashboard().getGestioneGate()).getModello()
 				.addRow(((GestioneGate) getDashboard().getGestioneGate()).getRow());
 		svuotaCampiGate();
-		((GestioneGate) getDashboard().getGestioneGate()).caricamento();
+		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
 	public void eliminaGate() {
@@ -593,7 +609,7 @@ public class Controller {
 		implementazioneGateDAO().cancellaGate(gt);
 		((GestioneGate) getDashboard().getGestioneGate()).getModello().removeRow(t);
 		svuotaCampiGate();
-		((GestioneGate) getDashboard().getGestioneGate()).caricamento();
+		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
 	public void modificaGate() {
@@ -615,11 +631,83 @@ public class Controller {
 
 		implementazioneGateDAO().modificaGate(gt);
 		svuotaCampiGate();
-		((GestioneGate) getDashboard().getGestioneGate()).caricamento();
+		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
 	// METODI DASHBOARD
+	
+	@SuppressWarnings("deprecation")
+	public void apriTendina() {
+		getDashboard().getLineeApertura().setVisible(false);		
+		if (getDashboard().getPosizioneTendina() == 50) {
+			getDashboard().getPannelloTendina().show();
+			getDashboard().getPannelloTendina().setSize(getDashboard().getPosizioneTendina(), 634);
+			Thread th = new Thread() {
+				@Override
+				public void run() {
+					try {
+						for (int i = 50; i <= getDashboard().getPosizioneTendina(); i++) {
+							Thread.sleep(1, 01);
+							getDashboard().getPannelloTendina().setSize(i, 634);
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, e);
+					}					
+					getDashboard().getLineeChiusura().setVisible(true);
+				}
+			};
+			th.start();
+			getDashboard().setPosizioneTendina(238);
+		}
+	}
 
+	public void chiudiTendina() {
+		getDashboard().getLineeChiusura().setVisible(false);
+		if (getDashboard().getPosizioneTendina() == 238) {
+			getDashboard().getPannelloTendina().setSize(50, 634);
+			Thread th = new Thread() {
+				@Override
+				public void run() {
+					try {
+						for (int i = 238; i >= 50; i--) {
+							Thread.sleep(1, 01);
+							getDashboard().getPannelloTendina().setSize(i, 634);
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, e);
+					}
+					getDashboard().getLineeApertura().setVisible(true);
+				}
+			};
+			th.start();
+			getDashboard().setPosizioneTendina(50);
+		}
+		
+	}
+	
+	public void chiudiTendinaIstantanea() {
+		getDashboard().getLineeChiusura().setVisible(false);
+		if (getDashboard().getPosizioneTendina() == 238) {
+			getDashboard().getPannelloTendina().setSize(50, 634);
+			Thread th = new Thread() {
+				@Override
+				public void run() {
+					try {
+						for (int i = 238; i >= 50; i--) {
+							Thread.sleep(0, 0);
+							getDashboard().getPannelloTendina().setSize(i, 634);
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, e);
+					}
+					getDashboard().getLineeApertura().setVisible(true);
+				}
+			};
+			th.start();
+			getDashboard().setPosizioneTendina(50);
+		}
+	}
+	
 	public JPanel home() {
 		Home home = new Home(this);
 		return home;
@@ -633,6 +721,16 @@ public class Controller {
 	public JPanel registrazione() {
 		Registrazione registrazione = new Registrazione(this);
 		return registrazione;
+	}
+	
+	public JPanel profilo() {
+		Profilo profilo = new Profilo(this);
+		return profilo;
+	}
+	
+	public JPanel impostazioni() {
+		Impostazioni impostazioni = new Impostazioni(this);
+		return impostazioni;
 	}
 
 	public JPanel gestioneUtenti() {
@@ -665,25 +763,50 @@ public class Controller {
 		return uscita;
 	}
 
+	public void mostraNoClick() {
+		
+		if(getDashboard().getHome().isVisible()) {
+			getDashboard().getHome().setVisible(true);
+		} else if(getDashboard().getAccesso().isVisible()) {
+			getDashboard().getAccesso().setVisible(true);
+		} else if (getDashboard().getRegistrazione().isVisible()) {
+			getDashboard().getRegistrazione().setVisible(true);
+		} else if (getDashboard().getProfilo().isVisible()) {
+			getDashboard().getProfilo().setVisible(true);
+		} else if (getDashboard().getImpostazioni().isVisible()) {
+			getDashboard().getImpostazioni().setVisible(true);
+		}
+		getDashboard().getNoClickDestra().setVisible(true);
+	}	
+	
+	public void mostraPannelloNoClick() {
+		getDashboard().getNoClickDestra().setVisible(true);
+	}	
+	
+	
 	public void mostraPannelli(JPanel pane) {
 		((Home) getDashboard().getHome()).getLblFareAccesso().setText("");
 		((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setText("");
 		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
-		dashboard.getHome().setVisible(false);
-		dashboard.getAccesso().setVisible(false);
-		dashboard.getRegistrazione().setVisible(false);
-		dashboard.getGestioneCompagnieAeree().setVisible(false);
-		dashboard.getGestioneUtenti().setVisible(false);
-		dashboard.getGestioneGate().setVisible(false);
-		dashboard.getGestioneTratte().setVisible(false);
-		dashboard.getGestioneVoli().setVisible(false);
+		getDashboard().getNoClickDestra().setVisible(false);
+		getDashboard().getHome().setVisible(false);
+		getDashboard().getAccesso().setVisible(false);
+		svuotaCampiAccesso();
+		getDashboard().getRegistrazione().setVisible(false);
+		svuotaCampiRegistrazione();
+		getDashboard().getProfilo().setVisible(false);
+		getDashboard().getImpostazioni().setVisible(false);
+		getDashboard().getGestioneCompagnieAeree().setVisible(false);
+		getDashboard().getGestioneUtenti().setVisible(false);
+		getDashboard().getGestioneGate().setVisible(false);
+		getDashboard().getGestioneTratte().setVisible(false);
+		getDashboard().getGestioneVoli().setVisible(false);
 		pane.setVisible(true);
 
 	}
 
-	@SuppressWarnings("deprecation")
 	public void mostraUscita() {
-		dashboard.disable();
+		dashboard.setEnabled(false);
 		dashboard.getUscita().setVisible(true);
 	}
 
@@ -696,6 +819,12 @@ public class Controller {
 			return false;
 		}
 	}
+	
+	// METODI DI LOGOUT
+	public void logout() {
+		((Accesso) getDashboard().getAccesso()).setSbloccaHome(false);
+		mostraPannelli(getDashboard().getAccesso());
+	}
 
 	// METODI DI USCITA
 
@@ -704,23 +833,22 @@ public class Controller {
 		getDashboard().dispose();
 	}
 
-	@SuppressWarnings("deprecation")
 	public void annullaUscita() {
 		dashboard.getUscita().dispose();
-		getDashboard().enable();
+		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 	}
 
 	// METODI PER RIDIMENSIONAMENTO
 	public int dimensioneSchermoX() {
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		int xSize = ((int) tk.getScreenSize().getWidth());
+		int xSize = ((int) tk.getScreenSize().getHeight());
 		return xSize;
 	}
 
 	public int dimensioneSchermoY() {
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		int ySize = ((int) tk.getScreenSize().getHeight());
+		int ySize = ((int) tk.getScreenSize().getWidth());
 		return ySize;
 	}
 
