@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+
 import javax.swing.*;
 
 import Controller.Controller;
@@ -70,7 +71,12 @@ public class Dashboard extends JFrame {
 	private JPanel gestioneVoli;
 	private JPanel gestioneGate;
 	private JPanel gestioneTratte;
+	private JPanel cambioPassword;
+
+	private JDialog Recensione;
+	private JDialog JDialogProfilo;
 	private JDialog uscita;
+	
 
 	
 	
@@ -188,6 +194,14 @@ public class Dashboard extends JFrame {
 		this.uscita = uscita;
 	}
 
+	public JDialog getRecensione() {
+		return Recensione;
+	}
+
+	public void setRecensione(JDialog recensione) {
+		Recensione = recensione;
+	}
+
 	public JPanel getPannelloTendina() {
 		return pannelloTendina;
 	}
@@ -260,6 +274,14 @@ public class Dashboard extends JFrame {
 		this.panelImpostazioni = panelImpostazioni;
 	}
 
+	public JDialog getJDialogProfilo() {
+		return JDialogProfilo;
+	}
+
+	public void setJDialogProfilo(JDialog jDialogProfilo) {
+		JDialogProfilo = jDialogProfilo;
+	}
+
 	public JPanel getPanelUscita() {
 		return panelUscita;
 	}
@@ -267,6 +289,17 @@ public class Dashboard extends JFrame {
 	public void setPanelUscita(JPanel panelUscita) {
 		this.panelUscita = panelUscita;
 	}
+
+	public JPanel getCambioPassword() {
+		return cambioPassword;
+	}
+
+	public void setCambioPassword(JPanel cambioPassword) {
+		this.cambioPassword = cambioPassword;
+	}
+
+
+
 
 
 	Controller controllerDashboard;
@@ -276,6 +309,7 @@ public class Dashboard extends JFrame {
 
 		home = controllerDashboard.home();
 		accesso = controllerDashboard.accesso();
+		cambioPassword = controllerDashboard.cambioPassword();
 		registrazione = controllerDashboard.registrazione();
 		profilo = controllerDashboard.profilo();
 		impostazioni = controllerDashboard.impostazioni();
@@ -284,7 +318,10 @@ public class Dashboard extends JFrame {
 		gestioneGate = controllerDashboard.gestioneGate();
 		gestioneTratte = controllerDashboard.gestioneTratte();
 		gestioneVoli = controllerDashboard.gestioneVoli();
+		JDialogProfilo = controllerDashboard.jdialogProfilo();
+		Recensione = controllerDashboard.recensione();
 		uscita = controllerDashboard.uscita();
+		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1143, 677);
@@ -295,7 +332,7 @@ public class Dashboard extends JFrame {
 		contentPane.setLayout(null);
 		
 		lblTitolo = new JLabel("AIRPORT MANAGEMENT");
-		lblTitolo.setBounds(0, 0, 238, 43);
+		lblTitolo.setBounds(0, 0, 238, 37);
 		lblTitolo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitolo.setForeground(controllerDashboard.coloreScritte);
 		lblTitolo.setFont(controllerDashboard.fontTitolo);
@@ -317,10 +354,18 @@ public class Dashboard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblX.setIcon(new ImageIcon(img.X1()));
 			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblX.setIcon(new ImageIcon(img.X3()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblX.setIcon(new ImageIcon(img.X1()));
+			}
 		});
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
 		lblX.setIcon(new ImageIcon(img.X1()));
-		lblX.setBounds(1105, 0, 37, 43);
+		lblX.setBounds(1092, 0, 51, 37);
 		contentPane.add(lblX);
 
 		lblMinimizza = new JLabel("");
@@ -339,11 +384,19 @@ public class Dashboard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblMinimizza.setIcon(new ImageIcon(img.minimizza1()));
 			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblMinimizza.setIcon(new ImageIcon(img.minimizza3()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblMinimizza.setIcon(new ImageIcon(img.minimizza1()));
+			}
 		});
 
 		lblMinimizza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMinimizza.setIcon(new ImageIcon(img.minimizza1()));
-		lblMinimizza.setBounds(1069, 0, 37, 43);
+		lblMinimizza.setBounds(1040, 0, 51, 37);
 		contentPane.add(lblMinimizza);
 
 		lblSpostaDaashboard = new JLabel("");
@@ -390,7 +443,7 @@ public class Dashboard extends JFrame {
 			}
 		});
 		lblSpostaDaashboard.setIcon(new ImageIcon(img.spostaDashboard()));
-		lblSpostaDaashboard.setBounds(0, 0, 1143, 43);
+		lblSpostaDaashboard.setBounds(0, 0, 1143, 37);
 		contentPane.add(lblSpostaDaashboard);
 
 		pannelloBase = new JPanel();
@@ -563,7 +616,7 @@ public class Dashboard extends JFrame {
 					controllerDashboard.mostraPannelli(profilo);
 					controllerDashboard.chiudiTendinaIstantanea();
 				} else {
-					controllerDashboard.mostraUscita();
+					controllerDashboard.mostraJDialogProfilo();
 				}
 			}
 
@@ -747,6 +800,7 @@ public class Dashboard extends JFrame {
 		pannelloBase.add(pannelloDestra);
 		pannelloDestra.add(home);
 		pannelloDestra.add(accesso);
+		pannelloDestra.add(cambioPassword);
 		pannelloDestra.add(registrazione);
 		pannelloDestra.add(profilo);
 		pannelloDestra.add(impostazioni);
@@ -765,6 +819,7 @@ public class Dashboard extends JFrame {
 		gestioneGate.setVisible(false);
 		gestioneTratte.setVisible(false);
 		gestioneVoli.setVisible(false);
+		cambioPassword.setVisible(false);
 		pannelloDestra.setLayout(null);
 		
 		

@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
@@ -101,7 +102,7 @@ public class GestioneUtenti extends JPanel {
 	public GestioneUtenti(Controller controller) {
 		controllerGestioneUtenti = controller;
 
-		setBounds(0, 0, 894, 625);
+		setBounds(0, 0, 1090, 634);
 		setBackground(controllerGestioneUtenti.sfondo);
 		setLayout(null);
 

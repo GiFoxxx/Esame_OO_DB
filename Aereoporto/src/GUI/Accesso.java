@@ -65,7 +65,7 @@ public class Accesso extends JPanel {
 	public Accesso(Controller controller) {
 		controllerAccesso = controller;
 
-		setBounds(0, 0, 894, 625);
+		setBounds(0, 0, 1090, 634);
 		setBackground(controllerAccesso.sfondo);
 		setLayout(null);
 
@@ -82,7 +82,7 @@ public class Accesso extends JPanel {
 		txtEmail.setForeground(controllerAccesso.coloreScritte);
 		txtEmail.setFont(controllerAccesso.fontScritteUscita);
 		txtEmail.setHorizontalAlignment(SwingConstants.LEFT);
-		txtEmail.setBounds(437, 244, 320, 22);
+		txtEmail.setBounds(478, 251, 320, 22);
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
 		add(txtEmail);
@@ -101,7 +101,7 @@ public class Accesso extends JPanel {
 		txtPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		txtPassword.setFont(controllerAccesso.fontScritteUscita);
 		txtPassword.setForeground(controllerAccesso.coloreScritte);
-		txtPassword.setBounds(437, 348, 320, 22);
+		txtPassword.setBounds(478, 355, 320, 22);
 		txtPassword.setBorder(null);
 		add(txtPassword);
 
@@ -117,7 +117,7 @@ public class Accesso extends JPanel {
 		lblmostraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblmostraPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblmostraPassword.setIcon(new ImageIcon(img.censuraPassword()));
-		lblmostraPassword.setBounds(761, 349, 20, 20);
+		lblmostraPassword.setBounds(802, 356, 20, 20);
 		add(lblmostraPassword);
 
 		JLabel lblcensuraPassword = new JLabel("");
@@ -132,13 +132,13 @@ public class Accesso extends JPanel {
 		lblcensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblcensuraPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblcensuraPassword.setIcon(new ImageIcon(img.mostraPassword()));
-		lblcensuraPassword.setBounds(761, 349, 20, 20);
+		lblcensuraPassword.setBounds(802, 356, 20, 20);
 		add(lblcensuraPassword);
 
 		JLabel lblCredenziali = new JLabel("");
 		lblCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCredenziali.setIcon(new ImageIcon(Accesso.class.getResource("/GUI/immaginiAccesso/credenziali.png")));
-		lblCredenziali.setBounds(437, 214, 344, 159);
+		lblCredenziali.setBounds(478, 221, 344, 159);
 		add(lblCredenziali);
 
 		JLabel lblAvanti = new JLabel("");
@@ -157,24 +157,31 @@ public class Accesso extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				controllerAccesso.accedi();
 			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblAvanti.setIcon(new ImageIcon(img.avanti3()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			lblAvanti.setIcon(new ImageIcon(img.avanti1()));
+			}
 		});
 		lblAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblAvanti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAvanti.setIcon(new ImageIcon(img.avanti1()));
 		lblAvanti.setBackground(controllerAccesso.trasparente);
-		lblAvanti.setBounds(506, 479, 206, 60);
+		lblAvanti.setBounds(563, 479, 174, 47);
 		add(lblAvanti);
 
 		lblMessaggioCredenziali = new JLabel("");
 		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessaggioCredenziali.setFont(controllerAccesso.fontScritte);
 		lblMessaggioCredenziali.setForeground(controllerAccesso.coloreScritturaAllerta);
-		lblMessaggioCredenziali.setBounds(437, 401, 344, 28);
+		lblMessaggioCredenziali.setBounds(478, 388, 344, 28);
 		add(lblMessaggioCredenziali);
 
 		JLabel lblImgAccount = new JLabel("");
 		lblImgAccount.setHorizontalAlignment(SwingConstants.CENTER);
-		lblImgAccount.setIcon(new ImageIcon(img.icona()));
 		lblImgAccount.setBounds(55, 121, 320, 361);
 		add(lblImgAccount);
 

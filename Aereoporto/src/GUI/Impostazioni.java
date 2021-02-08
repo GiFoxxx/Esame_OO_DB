@@ -15,14 +15,33 @@ public class Impostazioni extends JPanel {
 	public Impostazioni(Controller controller) {
 		controllerImpostazioni = controller;
 
-		setBounds(0, 0, 894, 625);
+		setBounds(0, 0, 1090, 634);
 		setBackground(controllerImpostazioni.sfondo);
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Impostazioni");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 96));
-		lblNewLabel.setBounds(154, 147, 656, 277);
+		JLabel lblNewLabel_1 = new JLabel("Tema");
+		lblNewLabel_1.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_1.setBounds(69, 180, 88, 22);
+		add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Informazioni");
+		lblNewLabel_1_1.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_1_1.setBounds(69, 230, 88, 22);
+		add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Riconoscimenti");
+		lblNewLabel_1_2.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_1_2.setBounds(69, 271, 88, 22);
+		add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Termini e condizioni");
+		lblNewLabel_1_1_1.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_1_1_1.setBounds(69, 314, 101, 22);
+		add(lblNewLabel_1_1_1);
+		
+		JLabel lblNewLabel = new JLabel("Lascia una recensione");
+		lblNewLabel.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel.setBounds(69, 363, 117, 14);
 		add(lblNewLabel);
 	}
 

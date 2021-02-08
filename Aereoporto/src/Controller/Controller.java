@@ -34,6 +34,7 @@ public class Controller {
 	private Dashboard dashboard;
 	private Home home;
 	private Accesso accesso;
+	private CambioPassword cambioPassword;
 	private Registrazione registrazione;
 	private Riconoscimenti riconoscimenti;
 	private Profilo profilo;
@@ -44,8 +45,10 @@ public class Controller {
 	private GestioneCompagnieAeree gestioneCompagnieAeree;
 	private GestioneTratte gestioneTratte;
 	private GestioneGate gestioneGate;
+	private JDialogProfilo jdialogProfilo;
+	private Recensione recensione;
 	private Uscita uscita;
-
+	
 	Utente utn;
 	Volo vl;
 	Gate gt;
@@ -61,12 +64,28 @@ public class Controller {
 		this.dashboard = dashboard;
 	}
 
+	public CambioPassword getCambioPassword() {
+		return cambioPassword;
+	}
+
+	public void setCambioPassword(CambioPassword cambioPassword) {
+		this.cambioPassword = cambioPassword;
+	}
+
 	public Home getHome() {
 		return home;
 	}
 
 	public void setHome(Home home) {
 		this.home = home;
+	}
+
+	public JDialogProfilo getJdialogProfilo() {
+		return jdialogProfilo;
+	}
+
+	public void setJdialogProfilo(JDialogProfilo jdialogProfilo) {
+		this.jdialogProfilo = jdialogProfilo;
 	}
 
 	public Accesso getAccesso() {
@@ -165,6 +184,14 @@ public class Controller {
 		this.uscita = uscita;
 	}
 
+	public Recensione getRecensione() {
+		return recensione;
+	}
+
+	public void setRecensione(Recensione recensione) {
+		this.recensione = recensione;
+	}
+
 	public static void main(String[] args) {
 		Controller controller = new Controller();
 	}
@@ -183,8 +210,13 @@ public class Controller {
 		gestioneTratte = new GestioneTratte(this);
 		gestioneGate = new GestioneGate(this);
 		gestioneVoli = new GestioneVoli(this);
+		cambioPassword = new CambioPassword(this);
+		jdialogProfilo = new JDialogProfilo(this);
+		recensione = new Recensione(this);
 		dashboard.setVisible(true);
 	}
+
+	
 
 	// METODI DI ACCESSO
 	public void vaiAMenuGestioneDaAccesso() {
@@ -717,6 +749,13 @@ public class Controller {
 		Accesso accesso = new Accesso(this);
 		return accesso;
 	}
+	
+
+	public JPanel cambioPassword() {
+		CambioPassword cambioPassword = new CambioPassword(this);
+		return cambioPassword;
+		
+	}
 
 	public JPanel registrazione() {
 		Registrazione registrazione = new Registrazione(this);
@@ -757,7 +796,17 @@ public class Controller {
 		GestioneVoli gestioneVoli = new GestioneVoli(this);
 		return gestioneVoli;
 	}
-
+	
+	public JDialog jdialogProfilo() {
+		JDialogProfilo jdialogProfilo = new JDialogProfilo(this);
+		return jdialogProfilo;
+	}
+	
+	public JDialog recensione() {
+		Recensione recensione = new Recensione(this);
+		return recensione;
+	}
+	
 	public JDialog uscita() {
 		Uscita uscita = new Uscita(this);
 		return uscita;
@@ -801,6 +850,7 @@ public class Controller {
 		getDashboard().getGestioneGate().setVisible(false);
 		getDashboard().getGestioneTratte().setVisible(false);
 		getDashboard().getGestioneVoli().setVisible(false);
+		getDashboard().getCambioPassword().setVisible(false);
 		pane.setVisible(true);
 
 	}
@@ -809,6 +859,12 @@ public class Controller {
 		dashboard.setEnabled(false);
 		dashboard.getUscita().setVisible(true);
 	}
+	
+	public void mostraJDialogProfilo() {
+		dashboard.setEnabled(false);
+		dashboard.getJDialogProfilo().setVisible(true);
+	}
+	
 
 	// METODI DI HOME
 
@@ -820,6 +876,7 @@ public class Controller {
 		}
 	}
 	
+	
 	// METODI DI LOGOUT
 	public void logout() {
 		((Accesso) getDashboard().getAccesso()).setSbloccaHome(false);
@@ -828,6 +885,12 @@ public class Controller {
 
 	// METODI DI USCITA
 
+	public void vaiAdAccediDaJDialogProfilo() {
+		jdialogProfilo.setVisible(false);
+		dashboard.getAccesso();
+		
+	}
+	
 	public void esci() {
 		dashboard.getUscita().dispose();
 		getDashboard().dispose();

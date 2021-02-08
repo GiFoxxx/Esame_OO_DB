@@ -85,7 +85,7 @@ public class Home extends JPanel {
 	public Home(Controller controller) {
 		controllerHome = controller;
 
-		setBounds(0, 0, 1194, 1125);
+		setBounds(0, 0, 1090, 634);
 		setBackground(controllerHome.sfondo);
 		setLayout(null);
 
@@ -112,7 +112,7 @@ public class Home extends JPanel {
 		});
 		lblTratte.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTratte.setIcon(new ImageIcon(img.tratte1()));
-		lblTratte.setBounds(20, 110, 276, 162);
+		lblTratte.setBounds(82, 110, 276, 162);
 		add(lblTratte);
 
 		lblCompagniaAerea = new JLabel("");
@@ -138,7 +138,7 @@ public class Home extends JPanel {
 		});
 		lblCompagniaAerea.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCompagniaAerea.setIcon(new ImageIcon(img.compagnieAeree1()));
-		lblCompagniaAerea.setBounds(312, 110, 282, 167);
+		lblCompagniaAerea.setBounds(399, 110, 282, 167);
 		add(lblCompagniaAerea);
 
 		lblGestioneAccount = new JLabel("");
@@ -164,7 +164,7 @@ public class Home extends JPanel {
 		});
 		lblGestioneAccount.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGestioneAccount.setIcon(new ImageIcon(img.gestioneAccount1()));
-		lblGestioneAccount.setBounds(605, 110, 282, 167);
+		lblGestioneAccount.setBounds(708, 110, 282, 167);
 		add(lblGestioneAccount);
 
 		lblPrenotazioni = new JLabel("");
@@ -181,7 +181,7 @@ public class Home extends JPanel {
 		});
 		lblPrenotazioni.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrenotazioni.setIcon(new ImageIcon(img.prenotazioni1()));
-		lblPrenotazioni.setBounds(20, 320, 282, 167);
+		lblPrenotazioni.setBounds(76, 320, 282, 167);
 		add(lblPrenotazioni);
 
 		lblGate = new JLabel("");
@@ -207,7 +207,7 @@ public class Home extends JPanel {
 		});
 		lblGate.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGate.setIcon(new ImageIcon(img.gate1()));
-		lblGate.setBounds(605, 320, 282, 167);
+		lblGate.setBounds(708, 320, 282, 167);
 		add(lblGate);
 
 		lblVolo = new JLabel("");
@@ -227,20 +227,20 @@ public class Home extends JPanel {
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneVoli());
 				} else {
-					lblFareAccesso.setText("Per poter accedere alla gestione dei voli, accedere al proprio account.");
+					lblFareAccesso.setText("Per poter accedere alla gestione dei voli devi prima accedere al tuo account.");
 				}
 			}
 		});
 		lblVolo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVolo.setIcon(new ImageIcon(img.voli1()));
-		lblVolo.setBounds(312, 320, 282, 167);
+		lblVolo.setBounds(399, 320, 282, 167);
 		add(lblVolo);
 
 		lblFareAccesso = new JLabel("");
 		lblFareAccesso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFareAccesso.setFont(controllerHome.fontScritte);
 		lblFareAccesso.setForeground(controllerHome.coloreScritturaAllerta);
-		lblFareAccesso.setBounds(20, 520, 867, 28);
+		lblFareAccesso.setBounds(80, 522, 867, 28);
 		add(lblFareAccesso);
 	}
 

@@ -100,7 +100,7 @@ public class GestioneGate extends JPanel {
 	public GestioneGate(Controller controller) {
 		controllerGestioneGate = controller;
 
-		setBounds(0, 0, 894, 625);
+		setBounds(0, 0, 1090, 634);
 		setBackground(controllerGestioneGate.sfondo);
 		setLayout(null);
 
