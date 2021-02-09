@@ -87,19 +87,19 @@ public class Immagini {
 
 	public Image tendina() {
 		Image tendina = new ImageIcon(Accesso.class.getResource("immaginiDashboard/TendinaDashboard.png")).getImage()
-				.getScaledInstance(238, 634, Image.SCALE_SMOOTH);
+				.getScaledInstance(238, 642, Image.SCALE_SMOOTH);
 		return tendina;
 	}
 	
 	public Image spostaDashboard() {
 		Image spostaDashboard = new ImageIcon(Accesso.class.getResource("immaginiDashboard/SpostaDashboard.png")).getImage()
-				.getScaledInstance(1143, 37, Image.SCALE_SMOOTH);
+				.getScaledInstance(1143, 35, Image.SCALE_SMOOTH);
 		return spostaDashboard;
 	}
 	
 	public Image spostaUscita() {
-		Image spostaUscita = new ImageIcon(Uscita.class.getResource("immaginiUscita/spostaUscita.png")).getImage()
-				.getScaledInstance(500, 37, Image.SCALE_SMOOTH);
+		Image spostaUscita = new ImageIcon(Uscita.class.getResource("immaginiDashboard/SpostaDashboard.png")).getImage()
+				.getScaledInstance(499, 35, Image.SCALE_SMOOTH);
 		return spostaUscita;
 	}
 	
@@ -118,37 +118,37 @@ public class Immagini {
 
 	public Image X1() {
 		Image x1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/x1.png")).getImage().getScaledInstance(51,
-				37, Image.SCALE_SMOOTH);
+				34, Image.SCALE_SMOOTH);
 		return x1;
 	}
 
 	public Image X2() {
 		Image x2 = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/x2.png")).getImage().getScaledInstance(51,
-				37, Image.SCALE_SMOOTH);
+				34, Image.SCALE_SMOOTH);
 		return x2;
 	}
 	
 	public Image X3() {
 		Image x3 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/x3.png")).getImage().getScaledInstance(51,
-				37, Image.SCALE_SMOOTH);
+				34, Image.SCALE_SMOOTH);
 		return x3;
 	}
 
 	public Image minimizza1() {
 		Image _1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/_1.png")).getImage()
-				.getScaledInstance(51, 37, Image.SCALE_SMOOTH);
+				.getScaledInstance(51, 34, Image.SCALE_SMOOTH);
 		return _1;
 	}
 
 	public Image minimizza2() {
 		Image _2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/_2.png")).getImage()
-				.getScaledInstance(51, 37, Image.SCALE_SMOOTH);
+				.getScaledInstance(51, 34, Image.SCALE_SMOOTH);
 		return _2;
 	}
 	
 	public Image minimizza3() {
 		Image _3 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/_3.png")).getImage()
-				.getScaledInstance(51, 37, Image.SCALE_SMOOTH);
+				.getScaledInstance(51, 34, Image.SCALE_SMOOTH);
 		return _3;
 	}
 	

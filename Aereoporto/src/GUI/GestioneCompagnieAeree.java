@@ -83,7 +83,7 @@ public class GestioneCompagnieAeree extends JPanel {
 	public GestioneCompagnieAeree(Controller controller) {
 		controllerGestioneCompagnieAeree = controller;
 
-		setBounds(0, 0, 1090, 634);
+		setBounds(0, 0, 1090, 642);
 		setBackground(controllerGestioneCompagnieAeree.sfondo);
 		setLayout(null);
 

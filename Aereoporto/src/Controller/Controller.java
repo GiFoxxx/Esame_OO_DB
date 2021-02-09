@@ -29,8 +29,8 @@ public class Controller {
 	public Color trasparente = new Color(0, 0, 0, 0);
 	public Font fontScritte = new Font("Arial", Font.BOLD, 14);
 	public Font fontTitolo = new Font("Arial", Font.BOLD, 18);
-	public Font fontScritteUscita = new Font("Arial", Font.BOLD, 20);
-
+	public Font fontScritteJDialog = new Font("Arial", Font.BOLD, 20);
+	
 	private Dashboard dashboard;
 	private Home home;
 	private Accesso accesso;
@@ -38,7 +38,6 @@ public class Controller {
 	private Registrazione registrazione;
 	private Riconoscimenti riconoscimenti;
 	private Profilo profilo;
-	private MenuGestione menuGestione;
 	private GestioneVoli gestioneVoli;
 	private Prenotazione prenotazioni;
 	private GestioneUtenti gestioneUtenti;
@@ -46,9 +45,9 @@ public class Controller {
 	private GestioneTratte gestioneTratte;
 	private GestioneGate gestioneGate;
 	private JDialogProfilo jdialogProfilo;
-	private Recensione recensione;
+	private Recensione recensioni;
 	private Uscita uscita;
-	
+
 	Utente utn;
 	Volo vl;
 	Gate gt;
@@ -120,14 +119,6 @@ public class Controller {
 		this.riconoscimenti = riconoscimenti;
 	}
 
-	public MenuGestione getMenuGestione() {
-		return menuGestione;
-	}
-
-	public void setMenuGestione(MenuGestione menuGestione) {
-		this.menuGestione = menuGestione;
-	}
-
 	public GestioneVoli getGestioneVoli() {
 		return gestioneVoli;
 	}
@@ -176,6 +167,14 @@ public class Controller {
 		this.gestioneGate = gestioneGate;
 	}
 
+	public Recensione getRecensioni() {
+		return recensioni;
+	}
+
+	public void setRecensioni(Recensione recensioni) {
+		this.recensioni = recensioni;
+	}
+
 	public Uscita getUscita() {
 		return uscita;
 	}
@@ -185,11 +184,11 @@ public class Controller {
 	}
 
 	public Recensione getRecensione() {
-		return recensione;
+		return recensioni;
 	}
 
 	public void setRecensione(Recensione recensione) {
-		this.recensione = recensione;
+		this.recensioni = recensione;
 	}
 
 	public static void main(String[] args) {
@@ -202,7 +201,6 @@ public class Controller {
 		dashboard = new Dashboard(this);
 		accesso = new Accesso(this);
 		registrazione = new Registrazione(this);
-		menuGestione = new MenuGestione(this);
 		riconoscimenti = new Riconoscimenti(this);
 		prenotazioni = new Prenotazione(this);
 		gestioneUtenti = new GestioneUtenti(this);
@@ -212,31 +210,21 @@ public class Controller {
 		gestioneVoli = new GestioneVoli(this);
 		cambioPassword = new CambioPassword(this);
 		jdialogProfilo = new JDialogProfilo(this);
-		recensione = new Recensione(this);
+		recensioni = new Recensione(this);
 		dashboard.setVisible(true);
 	}
 
-	
-
 	// METODI DI ACCESSO
-	public void vaiAMenuGestioneDaAccesso() {
-		accesso.setVisible(false);
-		menuGestione.setVisible(true);
-	}
-
-	public void vaiAGateDaMenuGestione() {
-		menuGestione.setVisible(false);
-		gestioneCompagnieAeree.setVisible(true);
-	}
-
 	public void svuotaCampiAccesso() {
 		((Accesso) getDashboard().getAccesso()).getTxtEmail().setText("");
 		((Accesso) getDashboard().getAccesso()).getTxtPassword().setText("");
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public void accedi() {
 		String email = ((Accesso) getDashboard().getAccesso()).getTxtEmail().getText();
+
 		String password = ((Accesso) getDashboard().getAccesso()).getTxtPassword().getText();
 
 		if (implementazioneUtenteDAO().accessoUtente(email, password)) {
@@ -249,6 +237,7 @@ public class Controller {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean controlloCampiSeVuotiAccesso() {
 		if (((Accesso) getDashboard().getAccesso()).getTxtEmail().getText().length() <= 0
 				|| ((Accesso) getDashboard().getAccesso()).getTxtPassword().getText().length() <= 0) {
@@ -266,9 +255,10 @@ public class Controller {
 		((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setText("");
 		((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setText("");
 	}
-	
+
 	public boolean formatoEmailInseritaErrato() {
-		boolean emailCorretta = controlloInserimentoEmailCorrettamenteRegistrazione(((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText());
+		boolean emailCorretta = controlloInserimentoEmailCorrettamenteRegistrazione(
+				((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText());
 
 		if (emailCorretta) {
 			return true;
@@ -277,6 +267,7 @@ public class Controller {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean ripetiPassword() {
 		if (((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().getText()
 				.equals(((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText())) {
@@ -286,8 +277,9 @@ public class Controller {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void registrati() {
-		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");;
+		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
 		if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto()) {
 			Utente utn = new Utente(((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText(),
@@ -295,29 +287,33 @@ public class Controller {
 					((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText());
 			implementazioneUtenteDAO().registrazioneUtente(utn);
 			mostraPannelli(getDashboard().getAccesso());
-			
-		} else if ((!formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuoto()){
-			
-			JOptionPane.showMessageDialog(null, "Formato email inserito non valido!\n" + "Inserire l'email dal formato tipo: example@example.com");
-			
+
+		} else if ((!formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuoto()) {
+
+			JOptionPane.showMessageDialog(null,
+					"Formato email inserito non valido!\n" + "Inserire l'email dal formato tipo: example@example.com");
+
 		} else if (formatoEmailInseritaErrato() && !ripetiPassword() && nessunCampoVuoto()) {
-			
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("La password ripetuta non � corretta.");
+
+			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
+					.setText("La password ripetuta non � corretta.");
 			((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setText("");
 			((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setText("");
-		
-		}  else {
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("Ci sono campi vuoti, riempirli tutti per la registrazione.");
+
+		} else {
+			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
+					.setText("Ci sono campi vuoti, riempirli tutti per la registrazione.");
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean nessunCampoVuoto() {
-		if(	((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText().length() <= 0 ||
-			((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText().length() <= 0 ||
-			((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText().length() <= 0 ||
-			((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText().length() <= 0 ||
-			((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().getText().length() <= 0 ) {
-			
+		if (((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText().length() <= 0
+				|| ((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText().length() <= 0
+				|| ((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText().length() <= 0
+				|| ((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText().length() <= 0
+				|| ((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().getText().length() <= 0) {
+
 			return false;
 		} else {
 			return true;
@@ -667,10 +663,10 @@ public class Controller {
 	}
 
 	// METODI DASHBOARD
-	
+
 	@SuppressWarnings("deprecation")
 	public void apriTendina() {
-		getDashboard().getLineeApertura().setVisible(false);		
+		getDashboard().getLineeApertura().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 50) {
 			getDashboard().getPannelloTendina().show();
 			getDashboard().getPannelloTendina().setSize(getDashboard().getPosizioneTendina(), 634);
@@ -684,7 +680,7 @@ public class Controller {
 						}
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e);
-					}					
+					}
 					getDashboard().getLineeChiusura().setVisible(true);
 				}
 			};
@@ -714,9 +710,9 @@ public class Controller {
 			th.start();
 			getDashboard().setPosizioneTendina(50);
 		}
-		
+
 	}
-	
+
 	public void chiudiTendinaIstantanea() {
 		getDashboard().getLineeChiusura().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 238) {
@@ -739,7 +735,7 @@ public class Controller {
 			getDashboard().setPosizioneTendina(50);
 		}
 	}
-	
+
 	public JPanel home() {
 		Home home = new Home(this);
 		return home;
@@ -749,24 +745,23 @@ public class Controller {
 		Accesso accesso = new Accesso(this);
 		return accesso;
 	}
-	
 
 	public JPanel cambioPassword() {
 		CambioPassword cambioPassword = new CambioPassword(this);
 		return cambioPassword;
-		
+
 	}
 
 	public JPanel registrazione() {
 		Registrazione registrazione = new Registrazione(this);
 		return registrazione;
 	}
-	
+
 	public JPanel profilo() {
 		Profilo profilo = new Profilo(this);
 		return profilo;
 	}
-	
+
 	public JPanel impostazioni() {
 		Impostazioni impostazioni = new Impostazioni(this);
 		return impostazioni;
@@ -796,27 +791,27 @@ public class Controller {
 		GestioneVoli gestioneVoli = new GestioneVoli(this);
 		return gestioneVoli;
 	}
-	
+
 	public JDialog jdialogProfilo() {
 		JDialogProfilo jdialogProfilo = new JDialogProfilo(this);
 		return jdialogProfilo;
 	}
-	
-	public JDialog recensione() {
-		Recensione recensione = new Recensione(this);
-		return recensione;
+
+	public JPanel recensione() {
+		Recensione recensioni = new Recensione(this);
+		return recensioni;
 	}
-	
+
 	public JDialog uscita() {
 		Uscita uscita = new Uscita(this);
 		return uscita;
 	}
 
 	public void mostraNoClick() {
-		
-		if(getDashboard().getHome().isVisible()) {
+
+		if (getDashboard().getHome().isVisible()) {
 			getDashboard().getHome().setVisible(true);
-		} else if(getDashboard().getAccesso().isVisible()) {
+		} else if (getDashboard().getAccesso().isVisible()) {
 			getDashboard().getAccesso().setVisible(true);
 		} else if (getDashboard().getRegistrazione().isVisible()) {
 			getDashboard().getRegistrazione().setVisible(true);
@@ -826,13 +821,12 @@ public class Controller {
 			getDashboard().getImpostazioni().setVisible(true);
 		}
 		getDashboard().getNoClickDestra().setVisible(true);
-	}	
-	
+	}
+
 	public void mostraPannelloNoClick() {
 		getDashboard().getNoClickDestra().setVisible(true);
-	}	
-	
-	
+	}
+
 	public void mostraPannelli(JPanel pane) {
 		((Home) getDashboard().getHome()).getLblFareAccesso().setText("");
 		((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setText("");
@@ -851,20 +845,35 @@ public class Controller {
 		getDashboard().getGestioneTratte().setVisible(false);
 		getDashboard().getGestioneVoli().setVisible(false);
 		getDashboard().getCambioPassword().setVisible(false);
+		getDashboard().getRecensione().setVisible(false);
 		pane.setVisible(true);
-
 	}
 
-	public void mostraUscita() {
-		dashboard.setEnabled(false);
-		dashboard.getUscita().setVisible(true);
-	}
-	
+	// METODI DI JDIALOGPROFILO
 	public void mostraJDialogProfilo() {
-		dashboard.setEnabled(false);
-		dashboard.getJDialogProfilo().setVisible(true);
+		getDashboard().setEnabled(false);
+		getDashboard().getJDialogProfilo().setVisible(true);
 	}
-	
+
+	public void vaiAdAccediDaJDialogProfilo() {
+		getDashboard().getJDialogProfilo().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true);
+		mostraPannelli(getDashboard().getAccesso());
+	}
+
+	public void vaiARegistrazioneDaJDialogProfilo() {
+		getDashboard().getJDialogProfilo().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true);
+		mostraPannelli(getDashboard().getRegistrazione());
+	}
+
+	public void annullaJDialogProfilo() {
+		getDashboard().getJDialogProfilo().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true);
+	}
 
 	// METODI DI HOME
 
@@ -875,8 +884,7 @@ public class Controller {
 			return false;
 		}
 	}
-	
-	
+
 	// METODI DI LOGOUT
 	public void logout() {
 		((Accesso) getDashboard().getAccesso()).setSbloccaHome(false);
@@ -885,14 +893,13 @@ public class Controller {
 
 	// METODI DI USCITA
 
-	public void vaiAdAccediDaJDialogProfilo() {
-		jdialogProfilo.setVisible(false);
-		dashboard.getAccesso();
-		
+	public void mostraUscita() {
+		dashboard.setEnabled(false);
+		dashboard.getUscita().setVisible(true);
 	}
-	
+
 	public void esci() {
-		dashboard.getUscita().dispose();
+		getDashboard().getUscita().dispose();
 		getDashboard().dispose();
 	}
 

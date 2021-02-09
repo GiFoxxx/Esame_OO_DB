@@ -28,6 +28,12 @@ public class JDialogProfilo extends JDialog {
 	int y;
 
 	JLabel lblLayout;
+	JLabel lblSpostaUscita;
+	JLabel lblX;
+	JLabel lblAnnulla;
+	JLabel lblRegistrati;
+	JLabel lblAccedi;
+	JLabel lblContinuare;
 	private boolean flag = true;
 
 	Immagini img = new Immagini();
@@ -45,64 +51,11 @@ public class JDialogProfilo extends JDialog {
 		getContentPane().setLayout(null);
 		{
 
-			JLabel lblSpostaUscita = new JLabel("");
-			lblSpostaUscita.setHorizontalAlignment(SwingConstants.CENTER);
-			lblSpostaUscita.setIcon(new ImageIcon(img.spostaUscita()));
-			lblSpostaUscita.addMouseMotionListener(new MouseMotionAdapter() {
-				@Override
-				public void mouseDragged(MouseEvent spostaDashboard) {
-					x = spostaDashboard.getXOnScreen();
-					y = spostaDashboard.getYOnScreen();
-					xMouseSuSchermo = spostaDashboard.getXOnScreen();
-					yMouseSuSchermo = spostaDashboard.getYOnScreen();
-					setLocation(x - xMouse, y - yMouse);
-
-				}
-			});
-			lblSpostaUscita.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mousePressed(MouseEvent prendiPosizioneMouse) {
-
-					xMouse = prendiPosizioneMouse.getX();
-					yMouse = prendiPosizioneMouse.getY();
-
-				}
-			});
-
-			JLabel lblX = new JLabel("");
-			lblX.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					JDialogProfilo.this.dispose();
-					controllerJDialogProfilo.getDashboard().dispose();
-				}
-
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X2()));
-				}
-
-				@Override
-				public void mouseExited(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X1()));
-				}
-
-				@Override
-				public void mousePressed(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X3()));
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X1()));
-				}
-			});
-
-			JLabel lblAnnulla = new JLabel("");
+			lblAnnulla = new JLabel("");
 			lblAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					controllerJDialogProfilo.annullaUscita();
+					controllerJDialogProfilo.annullaJDialogProfilo();
 				}
 
 				@Override
@@ -125,85 +78,145 @@ public class JDialogProfilo extends JDialog {
 					lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
 				}
 			});
-			
-			JLabel lblRegistrati = new JLabel("");
+			lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
+			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
+			lblAnnulla.setBounds(164, 222, 174, 47);
+			getContentPane().add(lblAnnulla);
+
+			lblRegistrati = new JLabel("");
 			lblRegistrati.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					controllerJDialogProfilo.vaiARegistrazioneDaJDialogProfilo();
 				}
+
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					lblRegistrati.setIcon(new ImageIcon(img.registrati2()));
 				}
+
 				@Override
 				public void mouseExited(MouseEvent e) {
 					lblRegistrati.setIcon(new ImageIcon(img.registrati1()));
 				}
+
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblRegistrati.setIcon(new ImageIcon(img.registrati3()));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblRegistrati.setIcon(new ImageIcon(img.registrati1()));
 				}
 			});
+			lblRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblRegistrati.setHorizontalAlignment(SwingConstants.CENTER);
 			lblRegistrati.setIcon(new ImageIcon(img.registrati1()));
 			lblRegistrati.setBounds(164, 163, 174, 47);
 			getContentPane().add(lblRegistrati);
-			
-			JLabel lblAccedi = new JLabel("");
+
+			lblX = new JLabel("");
+			lblX.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					controllerJDialogProfilo.annullaJDialogProfilo();
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X2()));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X1()));
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X3()));
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X1()));
+				}
+			});
+			lblX.setHorizontalAlignment(SwingConstants.CENTER);
+			lblX.setIcon(new ImageIcon(img.X1()));
+			lblX.setBounds(448, 1, 51, 36);
+			getContentPane().add(lblX);
+
+			lblSpostaUscita = new JLabel("");
+			lblSpostaUscita.setHorizontalAlignment(SwingConstants.CENTER);
+			lblSpostaUscita.setIcon(new ImageIcon(img.spostaUscita()));
+			lblSpostaUscita.addMouseMotionListener(new MouseMotionAdapter() {
+				@Override
+				public void mouseDragged(MouseEvent spostaDashboard) {
+					x = spostaDashboard.getXOnScreen();
+					y = spostaDashboard.getYOnScreen();
+					xMouseSuSchermo = spostaDashboard.getXOnScreen();
+					yMouseSuSchermo = spostaDashboard.getYOnScreen();
+					setLocation(x - xMouse, y - yMouse);
+				}
+			});
+			lblSpostaUscita.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent prendiPosizioneMouse) {
+
+					xMouse = prendiPosizioneMouse.getX();
+					yMouse = prendiPosizioneMouse.getY();
+
+				}
+			});
+			lblSpostaUscita.setBounds(1, 0, 498, 37);
+			getContentPane().add(lblSpostaUscita);
+
+			lblAccedi = new JLabel("");
 			lblAccedi.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerJDialogProfilo.vaiAdAccediDaJDialogProfilo();
 				}
+
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					lblAccedi.setIcon(new ImageIcon(img.accedi2()));
 				}
+
 				@Override
 				public void mouseExited(MouseEvent e) {
 					lblAccedi.setIcon(new ImageIcon(img.accedi1()));
 				}
+
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblAccedi.setIcon(new ImageIcon(img.accedi3()));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblAccedi.setIcon(new ImageIcon(img.accedi1()));
 				}
 			});
+			lblAccedi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblAccedi.setHorizontalAlignment(SwingConstants.CENTER);
 			lblAccedi.setIcon(new ImageIcon(img.accedi1()));
 			lblAccedi.setBounds(163, 100, 177, 52);
 			getContentPane().add(lblAccedi);
-			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
-			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-			lblAnnulla.setBounds(164, 222, 174, 47);
-			getContentPane().add(lblAnnulla);
-			lblX.setHorizontalAlignment(SwingConstants.CENTER);
-			lblX.setIcon(new ImageIcon(img.X1()));
-			lblX.setBounds(449, 0, 51, 37);
-			getContentPane().add(lblX);
-			lblSpostaUscita.setEnabled(false);
-			lblSpostaUscita.setBounds(0, 0, 500, 37);
-			getContentPane().add(lblSpostaUscita);
 
 			{
-				JLabel lblUscire = new JLabel("Accedi o registrati per proseguire");
-				lblUscire.setHorizontalAlignment(SwingConstants.CENTER);
-				lblUscire.setFont(new Font("Arial", Font.PLAIN, 17));
-				lblUscire.setForeground(controllerJDialogProfilo.coloreScritte);
-				lblUscire.setBounds(2, 48, 498, 37);
-				getContentPane().add(lblUscire);
+				lblContinuare = new JLabel("Accedi o registrati per proseguire");
+				lblContinuare.setHorizontalAlignment(SwingConstants.CENTER);
+				lblContinuare.setFont(controllerJDialogProfilo.fontScritteJDialog);
+				lblContinuare.setForeground(controllerJDialogProfilo.coloreScritte);
+				lblContinuare.setBounds(2, 48, 498, 37);
+				getContentPane().add(lblContinuare);
 			}
 
 		}
-		
-		
 
 		lblLayout = new JLabel("");
 		lblLayout.setBorder(null);

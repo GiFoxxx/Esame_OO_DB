@@ -102,7 +102,7 @@ public class GestioneUtenti extends JPanel {
 	public GestioneUtenti(Controller controller) {
 		controllerGestioneUtenti = controller;
 
-		setBounds(0, 0, 1090, 634);
+		setBounds(0, 0, 1090, 642);
 		setBackground(controllerGestioneUtenti.sfondo);
 		setLayout(null);
 

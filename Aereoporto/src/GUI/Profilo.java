@@ -57,7 +57,7 @@ public class Profilo extends JPanel {
 	public Profilo(Controller controller) {
 		controllerProfilo = controller;
 
-		setBounds(0, 0, 1090, 634);
+		setBounds(0, 0, 1090, 642);
 		setBackground(controllerProfilo.sfondo);
 		setLayout(null);
 		

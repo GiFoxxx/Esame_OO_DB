@@ -129,7 +129,7 @@ public class GestioneTratte extends JPanel {
 	public GestioneTratte(Controller controller) {
 		controllerGestioneTratte = controller;
 		
-		setBounds(0, 0, 1090, 634);
+		setBounds(0, 0, 1090, 642);
 		setBackground(controllerGestioneTratte.sfondo);
 		setLayout(null);
 		

@@ -139,7 +139,7 @@ public class GestioneVoli extends JPanel {
 	public GestioneVoli(Controller controller) {
 		controllerGestioneVoli= controller;
 		
-		setBounds(0, 0, 1090, 634);
+		setBounds(0, 0, 1090, 642);
 		setBackground(controllerGestioneVoli.sfondo);
 		setLayout(null);
 		

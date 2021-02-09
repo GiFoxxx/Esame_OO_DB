@@ -87,7 +87,7 @@ public class Registrazione extends JPanel {
 	public Registrazione(Controller controller) {
 		controllerRegistrazione = controller;
 
-		setBounds(0, 0, 1090, 634);
+		setBounds(0, 0, 1090, 642);
 		setBackground(controllerRegistrazione.sfondo);
 		setLayout(null);
 
@@ -100,7 +100,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtNome.setFont(controllerRegistrazione.fontScritteUscita);
+		txtNome.setFont(controllerRegistrazione.fontScritteJDialog);
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
 		txtNome.setBackground(controllerRegistrazione.sfondo);
@@ -117,7 +117,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtCognome.setFont(controllerRegistrazione.fontScritteUscita);
+		txtCognome.setFont(controllerRegistrazione.fontScritteJDialog);
 		txtCognome.setColumns(10);
 		txtCognome.setBorder(null);
 		txtCognome.setBackground(controllerRegistrazione.sfondo);
@@ -134,7 +134,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtEmail.setFont(controllerRegistrazione.fontScritteUscita);
+		txtEmail.setFont(controllerRegistrazione.fontScritteJDialog);
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
 		txtEmail.setBackground(controllerRegistrazione.sfondo);
@@ -151,7 +151,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtPassword.setFont(controllerRegistrazione.fontScritteUscita);
+		txtPassword.setFont(controllerRegistrazione.fontScritteJDialog);
 		txtPassword.setBorder(null);
 		txtPassword.setBackground(controllerRegistrazione.sfondo);
 		txtPassword.setForeground(controllerRegistrazione.coloreScritte);
@@ -167,7 +167,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtRipetiPassword.setFont(controllerRegistrazione.fontScritteUscita);
+		txtRipetiPassword.setFont(controllerRegistrazione.fontScritteJDialog);
 		txtRipetiPassword.setBorder(null);
 		txtRipetiPassword.setBackground(controllerRegistrazione.sfondo);
 		txtRipetiPassword.setForeground(controllerRegistrazione.coloreScritte);

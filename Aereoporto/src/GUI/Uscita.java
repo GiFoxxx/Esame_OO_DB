@@ -28,6 +28,11 @@ public class Uscita extends JDialog {
 	int y;
 
 	JLabel lblLayout;
+	JLabel lblSpostaUscita;
+	JLabel lblX;
+	JLabel lblAnnulla;
+	JLabel lblSi;
+	JLabel lblUscire;
 	private boolean flag = true;
 
 	Immagini img = new Immagini();
@@ -45,9 +50,7 @@ public class Uscita extends JDialog {
 		getContentPane().setLayout(null);
 		{
 
-			JLabel lblSpostaUscita = new JLabel("");
-			lblSpostaUscita.setHorizontalAlignment(SwingConstants.CENTER);
-			lblSpostaUscita.setIcon(new ImageIcon(img.spostaUscita()));
+			lblSpostaUscita = new JLabel("");
 			lblSpostaUscita.addMouseMotionListener(new MouseMotionAdapter() {
 				@Override
 				public void mouseDragged(MouseEvent spostaDashboard) {
@@ -68,37 +71,46 @@ public class Uscita extends JDialog {
 
 				}
 			});
+			
+						lblX = new JLabel("");
+						lblX.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								controllerUscita.annullaUscita();
+							}
 
-			JLabel lblX = new JLabel("");
-			lblX.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					Uscita.this.dispose();
-					controllerUscita.getDashboard().dispose();
-				}
+							@Override
+							public void mouseEntered(MouseEvent e) {
+								lblX.setIcon(new ImageIcon(img.X2()));
+							}
 
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X2()));
-				}
+							@Override
+							public void mouseExited(MouseEvent e) {
+								lblX.setIcon(new ImageIcon(img.X1()));
+							}
 
-				@Override
-				public void mouseExited(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X1()));
-				}
+							@Override
+							public void mousePressed(MouseEvent e) {
+								lblX.setIcon(new ImageIcon(img.X3()));
+							}
 
-				@Override
-				public void mousePressed(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X3()));
-				}
+							@Override
+							public void mouseReleased(MouseEvent e) {
+								lblX.setIcon(new ImageIcon(img.X1()));
+							}
+						});
+						lblX.setHorizontalAlignment(SwingConstants.CENTER);
+						lblX.setIcon(new ImageIcon(img.X1()));
+						lblX.setBounds(448, 1, 51, 36);
+						getContentPane().add(lblX);
+			lblSpostaUscita.setHorizontalAlignment(SwingConstants.CENTER);
+			lblSpostaUscita.setIcon(new ImageIcon(img.spostaUscita()));
+			lblSpostaUscita.setBounds(1, 0, 498, 37);
+			getContentPane().add(lblSpostaUscita);
 
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X1()));
-				}
-			});
+			
 
-			JLabel lblAnnulla = new JLabel("");
+			lblAnnulla = new JLabel("");
 			lblAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -130,7 +142,7 @@ public class Uscita extends JDialog {
 			lblAnnulla.setBounds(267, 213, 174, 47);
 			getContentPane().add(lblAnnulla);
 
-			JLabel lblSi = new JLabel("");
+			lblSi = new JLabel("");
 			lblSi.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -163,29 +175,19 @@ public class Uscita extends JDialog {
 			});
 			lblSi.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSi.setIcon(new ImageIcon(img.si1()));
-
 			lblSi.setBounds(64, 213, 174, 47);
 			getContentPane().add(lblSi);
-			lblX.setHorizontalAlignment(SwingConstants.CENTER);
-			lblX.setIcon(new ImageIcon(img.X1()));
-			lblX.setBounds(449, 0, 51, 37);
-			getContentPane().add(lblX);
-			lblSpostaUscita.setEnabled(false);
-			lblSpostaUscita.setBounds(0, 0, 500, 37);
-			getContentPane().add(lblSpostaUscita);
 
 			{
-				JLabel lblUscire = new JLabel("Sei sicuro di voler uscire dal programma?");
+				lblUscire = new JLabel("Sei sicuro di voler uscire dal programma?");
 				lblUscire.setHorizontalAlignment(SwingConstants.CENTER);
-				lblUscire.setFont(new Font("Arial", Font.PLAIN, 17));
+				lblUscire.setFont(controllerUscita.fontScritteJDialog);
 				lblUscire.setForeground(controllerUscita.coloreScritte);
 				lblUscire.setBounds(0, 81, 498, 52);
 				getContentPane().add(lblUscire);
 			}
 
 		}
-		
-		
 
 		lblLayout = new JLabel("");
 		lblLayout.setBorder(null);
