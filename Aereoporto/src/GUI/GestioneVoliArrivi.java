@@ -307,7 +307,7 @@ public class GestioneVoliArrivi extends JPanel {
 		btnSvuota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoliArrivi.svuotaCampiVoloPartenze();
+				controllerGestioneVoliArrivi.svuotaCampiVoloArrivi();
 			}
 		});
 		btnSvuota.setBounds(684, 532, 100, 23);

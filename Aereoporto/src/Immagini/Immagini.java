@@ -213,37 +213,37 @@ public class Immagini {
 	}
 	
 	public Image accedi1() {
-		Image accedi1 = new ImageIcon(JDialogProfilo.class.getResource("immaginiJDialogProfilo/accedi1.png")).getImage()
+		Image accedi1 = new ImageIcon(SceltaProfiloSenzaAccesso.class.getResource("immaginiJDialogProfilo/accedi1.png")).getImage()
 				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return accedi1;
 	}
 	
 	public Image accedi2() {
-		Image accedi2 = new ImageIcon(JDialogProfilo.class.getResource("immaginiJDialogProfilo/accedi2.png")).getImage()
+		Image accedi2 = new ImageIcon(SceltaProfiloSenzaAccesso.class.getResource("immaginiJDialogProfilo/accedi2.png")).getImage()
 				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return accedi2;
 	}
 	
 	public Image accedi3() {
-		Image accedi3 = new ImageIcon(JDialogProfilo.class.getResource("immaginiJDialogProfilo/accedi3.png")).getImage()
+		Image accedi3 = new ImageIcon(SceltaProfiloSenzaAccesso.class.getResource("immaginiJDialogProfilo/accedi3.png")).getImage()
 				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return accedi3;
 	}
 	
 	public Image registrati1() {
-		Image registrati1 = new ImageIcon(JDialogProfilo.class.getResource("immaginiJDialogProfilo/registrati1.png")).getImage()
+		Image registrati1 = new ImageIcon(SceltaProfiloSenzaAccesso.class.getResource("immaginiJDialogProfilo/registrati1.png")).getImage()
 				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return registrati1;
 	}
 	
 	public Image registrati2() {
-		Image registrati2 = new ImageIcon(JDialogProfilo.class.getResource("immaginiJDialogProfilo/registrati2.png")).getImage()
+		Image registrati2 = new ImageIcon(SceltaProfiloSenzaAccesso.class.getResource("immaginiJDialogProfilo/registrati2.png")).getImage()
 				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return registrati2;
 	}
 	
 	public Image registrati3() {
-		Image registrati3 = new ImageIcon(JDialogProfilo.class.getResource("immaginiJDialogProfilo/registrati3.png")).getImage()
+		Image registrati3 = new ImageIcon(SceltaProfiloSenzaAccesso.class.getResource("immaginiJDialogProfilo/registrati3.png")).getImage()
 				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return registrati3;
 	}

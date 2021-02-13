@@ -61,8 +61,6 @@ public class Dashboard extends JFrame {
 	private JPanel panelImpostazioni;
 	private JPanel panelUscita;
 
-	private JPanel prenotazioniFalsa;
-
 	private JPanel home;
 	private JPanel accesso;
 	private JPanel registrazione;
@@ -77,8 +75,7 @@ public class Dashboard extends JFrame {
 	private JPanel recensioni;
 	private JPanel cambioPassword;
 
-	private JDialog jDialogProfilo;
-	private JDialog PasswordDimenticata;
+	private JDialog sceltaProfiloSenzaAccesso;
 	private JDialog sceltaVolo;
 	private JDialog uscita;
 
@@ -212,19 +209,11 @@ public class Dashboard extends JFrame {
 	}
 
 	public JDialog getJDialogProfilo() {
-		return jDialogProfilo;
+		return sceltaProfiloSenzaAccesso;
 	}
 
-	public void setJDialogProfilo(JDialog jDialogProfilo) {
-		this.jDialogProfilo = jDialogProfilo;
-	}
-
-	public JDialog getPasswordDimenticata() {
-		return PasswordDimenticata;
-	}
-
-	public void setPasswordDimenticata(JDialog passwordDimenticata) {
-		PasswordDimenticata = passwordDimenticata;
+	public void setJDialogProfilo(JDialog sceltaProfiloSenzaAccesso) {
+		this.sceltaProfiloSenzaAccesso = sceltaProfiloSenzaAccesso;
 	}
 
 	public JDialog getSceltaVolo() {
@@ -323,14 +312,6 @@ public class Dashboard extends JFrame {
 		this.cambioPassword = cambioPassword;
 	}
 
-	public JPanel getPrenotazioniFalsa() {
-		return prenotazioniFalsa;
-	}
-
-	public void setPrenotazioniFalsa(JPanel prenotazioniFalsa) {
-		this.prenotazioniFalsa = prenotazioniFalsa;
-	}
-
 	Controller controllerDashboard;
 
 	public Dashboard(Controller controller) {
@@ -348,8 +329,7 @@ public class Dashboard extends JFrame {
 		gestioneTratte = controllerDashboard.gestioneTratte();
 		gestioneVoliPartenze = controllerDashboard.gestioneVoliPartenze();
 		gestioneVoliArrivi = controllerDashboard.gestioneVoliArrivi();
-		jDialogProfilo = controllerDashboard.jdialogProfilo();
-		PasswordDimenticata = controllerDashboard.passwordDimenticata();
+		sceltaProfiloSenzaAccesso = controllerDashboard.sceltaProfiloSenzaAccesso();
 		sceltaVolo = controllerDashboard.sceltaVolo();
 		recensioni = controllerDashboard.recensione();
 		uscita = controllerDashboard.uscita();
@@ -691,14 +671,15 @@ public class Dashboard extends JFrame {
 				pannelloLateraleSelezionato();
 				if (controllerDashboard.sbloccaGestione()) {
 					controllerDashboard.mostraPannelli(profilo);
-					if (profilo.isVisible() || jDialogProfilo.isVisible()) {
+					controllerDashboard.profiloUtenteAccessoEffettuato();
+					if (profilo.isVisible() || sceltaProfiloSenzaAccesso.isVisible()) {
 						panelProfilo.setBackground(controllerDashboard.pannelloScelto);
 					}
 					controllerDashboard.chiudiTendinaIstantanea();
 				} else {
-					controllerDashboard.mostraJDialogProfilo();
+					controllerDashboard.mostraSceltaProfiloSenzaAccesso();
 				}
-				if (profilo.isVisible() || jDialogProfilo.isVisible()) {
+				if (profilo.isVisible() || sceltaProfiloSenzaAccesso.isVisible()) {
 					panelProfilo.setBackground(controllerDashboard.pannelloScelto);
 				}
 			}
@@ -710,7 +691,7 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (profilo.isVisible() || jDialogProfilo.isVisible()) {
+				if (profilo.isVisible() || sceltaProfiloSenzaAccesso.isVisible()) {
 					panelProfilo.setBackground(controllerDashboard.pannelloScelto);
 				} else {
 					panelProfilo.setBackground(controllerDashboard.escoPannello);

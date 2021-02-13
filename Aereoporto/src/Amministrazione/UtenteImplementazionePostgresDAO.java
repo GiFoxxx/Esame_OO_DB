@@ -42,35 +42,93 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 		}
 	}
 	
-	@SuppressWarnings("finally")
 	@Override
-	public ArrayList<Object[]> stampaDatiAccount() {
-		ArrayList<Object[]> DatiAccount = new ArrayList<>();
+	public String stampaNomeAccount(Object utente) {
+		utn = (Utente) utente;
 		
+		String nome = null;
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT * FROM utente";
+		String sql = "SELECT nome FROM utente WHERE email=?";
 
 		try {
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
+			pst.setString(1, utn.getEmail());
 			rs = pst.executeQuery();
+			StringBuilder resultText = new StringBuilder();
+
 			while (rs.next()) {
-				Object[] Lista = new Object[3];
-				for (int i = 0; i <= 2; i++) {
-					Lista[i] = rs.getObject(i + 1);
-				}
-				DatiAccount.add(Lista);
+			    resultText.append(rs.getString(1));
 			}
-			db.ConnessioneDB().close();
+			nome = resultText.toString();
+			
 
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-		} finally {
-			return DatiAccount;
-		}
+		} 
+		return nome;
 	}
 
+	@Override
+	public String stampaCognomeAccount(Object utente) {
+		utn = (Utente) utente;
+		
+		String cognome = null;
+		PreparedStatement pst;
+		ResultSet rs;
+		String sql = "SELECT cognome FROM utente WHERE email=?";
+
+		try {
+
+			pst = db.ConnessioneDB().prepareStatement(sql);
+			
+			pst.setString(1, utn.getEmail());
+			
+			rs = pst.executeQuery();
+			
+			StringBuilder resultText = new StringBuilder();
+
+			while (rs.next()) {
+			    resultText.append(rs.getString(1));
+			}
+			cognome = resultText.toString();
+			
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		}
+		return cognome;
+	}
+
+	@Override
+	public String stampaEmailAccount(Object utente) {
+		utn = (Utente) utente;
+		
+		String email = null;
+		PreparedStatement pst;
+		ResultSet rs;
+		String sql = "SELECT email FROM utente WHERE email=?";
+
+		try {
+
+			pst = db.ConnessioneDB().prepareStatement(sql);
+			pst.setString(1, utn.getEmail());
+			rs = pst.executeQuery();
+			StringBuilder resultText = new StringBuilder();
+
+			while (rs.next()) {
+			    resultText.append(rs.getString(1));
+			}
+			email = resultText.toString();
+			
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		} 
+		return email;
+	}
+	
 	@Override
 	public boolean registrazioneUtente(Object utente) {
 		utn = (Utente) utente;
@@ -251,6 +309,8 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 		}
 		return eUtente;
 	}
+
+	
 	
 	
 	

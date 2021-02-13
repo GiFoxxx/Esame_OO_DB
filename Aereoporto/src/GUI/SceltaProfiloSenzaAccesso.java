@@ -18,7 +18,7 @@ import java.awt.Font;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 
-public class JDialogProfilo extends JDialog {
+public class SceltaProfiloSenzaAccesso extends JDialog {
 
 	int xMouse;
 	int yMouse;
@@ -38,7 +38,7 @@ public class JDialogProfilo extends JDialog {
 	Immagini img = new Immagini();
 	Controller controllerJDialogProfilo;
 
-	public JDialogProfilo(Controller controller) {
+	public SceltaProfiloSenzaAccesso(Controller controller) {
 		controllerJDialogProfilo = controller;
 
 		setModal(true);
@@ -54,12 +54,8 @@ public class JDialogProfilo extends JDialog {
 			lblAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if (controllerJDialogProfilo.getDashboard().getAccesso().isVisible()) {
-						controllerJDialogProfilo.getDashboard().getPanelAccedi().setBackground(controllerJDialogProfilo.pannelloScelto);
-					}else if(controllerJDialogProfilo.getDashboard().getRegistrazione().isVisible()) {
-						controllerJDialogProfilo.getDashboard().getPanelRegistrati().setBackground(controllerJDialogProfilo.pannelloScelto);
-					}
-					controllerJDialogProfilo.annullaJDialogProfilo();
+					pannelloSelezionatoPrecedentemente();
+					controllerJDialogProfilo.annullaSceltaProfiloSenzaAccesso();
 				}
 
 				@Override
@@ -92,7 +88,7 @@ public class JDialogProfilo extends JDialog {
 			lblRegistrati.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					controllerJDialogProfilo.vaiARegistrazioneDaJDialogProfilo();
+					controllerJDialogProfilo.vaiARegistrazioneDaSceltaProfiloSenzaAccesso();
 					controllerJDialogProfilo.getDashboard().getPanelRegistrati().setBackground(controllerJDialogProfilo.pannelloScelto);
 				}
 
@@ -126,12 +122,8 @@ public class JDialogProfilo extends JDialog {
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if (controllerJDialogProfilo.getDashboard().getAccesso().isVisible()) {
-						controllerJDialogProfilo.getDashboard().getPanelAccedi().setBackground(controllerJDialogProfilo.pannelloScelto);
-					}else if(controllerJDialogProfilo.getDashboard().getRegistrazione().isVisible()) {
-						controllerJDialogProfilo.getDashboard().getPanelRegistrati().setBackground(controllerJDialogProfilo.pannelloScelto);
-					}
-					controllerJDialogProfilo.annullaJDialogProfilo();
+					pannelloSelezionatoPrecedentemente();
+					controllerJDialogProfilo.annullaSceltaProfiloSenzaAccesso();
 				}
 
 				@Override
@@ -188,7 +180,7 @@ public class JDialogProfilo extends JDialog {
 			lblAccedi.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					controllerJDialogProfilo.vaiAdAccediDaJDialogProfilo();
+					controllerJDialogProfilo.vaiAdAccediDaSceltaProfiloSenzaAccesso();
 					controllerJDialogProfilo.getDashboard().getPanelAccedi().setBackground(controllerJDialogProfilo.pannelloScelto);
 				}
 
@@ -239,4 +231,21 @@ public class JDialogProfilo extends JDialog {
 
 		controllerJDialogProfilo.centramentoJDialog(this);
 	}
+	
+	public void pannelloSelezionatoPrecedentemente() {
+		if (controllerJDialogProfilo.getDashboard().getAccesso().isVisible()) {
+			controllerJDialogProfilo.getDashboard().getPanelAccedi().setBackground(controllerJDialogProfilo.pannelloScelto);
+		}else if(controllerJDialogProfilo.getDashboard().getRegistrazione().isVisible()) {
+			controllerJDialogProfilo.getDashboard().getPanelRegistrati().setBackground(controllerJDialogProfilo.pannelloScelto);
+		}else if(controllerJDialogProfilo.getDashboard().getHome().isVisible()) {
+			controllerJDialogProfilo.getDashboard().getPanelHome().setBackground(controllerJDialogProfilo.pannelloScelto);
+		}else if(controllerJDialogProfilo.getDashboard().getImpostazioni().isVisible()) {
+			controllerJDialogProfilo.getDashboard().getPanelImpostazioni().setBackground(controllerJDialogProfilo.pannelloScelto);
+		}
+	}
+	
+	
+	
+	
+	
 }

@@ -8,8 +8,6 @@ public interface UtenteDAO {
 
 	public ArrayList<Object[]> stampaUtenti();
 	
-	public ArrayList<Object[]> stampaDatiAccount();
-	
 	public boolean modificaDatiAccount(Object utente);
 	
 	public boolean registrazioneUtente(Object utente);
@@ -20,6 +18,11 @@ public interface UtenteDAO {
 	
 	public boolean modificaPassword(Object utente);
 
-
 	boolean accessoUtente(String email, String password);
+
+	public String stampaNomeAccount(Object utente);
+
+	public String stampaCognomeAccount(Object utente);
+
+	public String stampaEmailAccount(Object utente);
 }

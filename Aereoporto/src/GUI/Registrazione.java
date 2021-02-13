@@ -100,7 +100,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtNome.setFont(controllerRegistrazione.fontScritteJDialog);
+		txtNome.setFont(controllerRegistrazione.fontScritte);
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
 		txtNome.setBackground(controllerRegistrazione.sfondo);
@@ -117,7 +117,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtCognome.setFont(controllerRegistrazione.fontScritteJDialog);
+		txtCognome.setFont(controllerRegistrazione.fontScritte);
 		txtCognome.setColumns(10);
 		txtCognome.setBorder(null);
 		txtCognome.setBackground(controllerRegistrazione.sfondo);

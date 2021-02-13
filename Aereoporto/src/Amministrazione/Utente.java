@@ -42,14 +42,18 @@ public class Utente {
 			this.password = password;
 		}
 		
-		public Utente() {
-			super();
+		public Utente(String email) {
+			this.email = email;
 		}
 		
 		public Utente(String email, String password) {
-			super();
 			this.email = email;
 			this.password = password;
+		}
+		
+		
+		public Utente() {
+			super();
 		}
 		
 		@Override
