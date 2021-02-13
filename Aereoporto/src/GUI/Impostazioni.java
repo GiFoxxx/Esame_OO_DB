@@ -6,6 +6,7 @@ import Controller.Controller;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -48,6 +49,7 @@ public class Impostazioni extends JPanel {
 				controllerImpostazioni.mostraPannelli(controllerImpostazioni.getDashboard().getRecensione());
 			}
 		});
+		lblRecensione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRecensione.setForeground(Color.LIGHT_GRAY);
 		lblRecensione.setBounds(69, 363, 120, 22);
 		add(lblRecensione);

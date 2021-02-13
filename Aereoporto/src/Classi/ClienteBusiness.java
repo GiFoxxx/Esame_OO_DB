@@ -3,7 +3,7 @@ package Classi;
 public class ClienteBusiness {
 
 	CompagniaAerea ca = new CompagniaAerea();
-	Volo vl = new Volo();
+	VoloPartenze vlprtz = new VoloPartenze();
 	
 	// ATTRIBUTI
 	private String Nome;

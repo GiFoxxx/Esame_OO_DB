@@ -61,6 +61,8 @@ public class Dashboard extends JFrame {
 	private JPanel panelImpostazioni;
 	private JPanel panelUscita;
 
+	private JPanel prenotazioniFalsa;
+
 	private JPanel home;
 	private JPanel accesso;
 	private JPanel registrazione;
@@ -68,13 +70,15 @@ public class Dashboard extends JFrame {
 	private JPanel impostazioni;
 	private JPanel gestioneUtenti;
 	private JPanel gestioneCompagnieAeree;
-	private JPanel gestioneVoli;
+	private JPanel gestioneVoliPartenze;
+	private JPanel gestioneVoliArrivi;
 	private JPanel gestioneGate;
 	private JPanel gestioneTratte;
 	private JPanel recensioni;
 	private JPanel cambioPassword;
 
 	private JDialog jDialogProfilo;
+	private JDialog sceltaVolo;
 	private JDialog uscita;
 
 	// GETTER E SETTER
@@ -166,12 +170,20 @@ public class Dashboard extends JFrame {
 		this.gestioneGate = gestioneGate;
 	}
 
-	public JPanel getGestioneVoli() {
-		return gestioneVoli;
+	public JPanel getGestioneVoliArrivi() {
+		return gestioneVoliArrivi;
 	}
 
-	public void setGestioneVoli(JPanel gestioneVoli) {
-		this.gestioneVoli = gestioneVoli;
+	public void setGestioneVoliArrivi(JPanel gestioneVoliArrivi) {
+		this.gestioneVoliArrivi = gestioneVoliArrivi;
+	}
+
+	public JPanel getGestioneVoliPartenze() {
+		return gestioneVoliPartenze;
+	}
+
+	public void setGestioneVoliPartenze(JPanel gestioneVoliPartenze) {
+		this.gestioneVoliPartenze = gestioneVoliPartenze;
 	}
 
 	public JPanel getGestioneTratte() {
@@ -196,6 +208,22 @@ public class Dashboard extends JFrame {
 
 	public void setUscita(JDialog uscita) {
 		this.uscita = uscita;
+	}
+
+	public JDialog getJDialogProfilo() {
+		return jDialogProfilo;
+	}
+
+	public void setJDialogProfilo(JDialog jDialogProfilo) {
+		this.jDialogProfilo = jDialogProfilo;
+	}
+
+	public JDialog getSceltaVolo() {
+		return sceltaVolo;
+	}
+
+	public void setSceltaVolo(JDialog sceltaVolo) {
+		this.sceltaVolo = sceltaVolo;
 	}
 
 	public JPanel getPannelloTendina() {
@@ -270,14 +298,6 @@ public class Dashboard extends JFrame {
 		this.panelImpostazioni = panelImpostazioni;
 	}
 
-	public JDialog getJDialogProfilo() {
-		return jDialogProfilo;
-	}
-
-	public void setJDialogProfilo(JDialog jDialogProfilo) {
-		this.jDialogProfilo = jDialogProfilo;
-	}
-
 	public JPanel getPanelUscita() {
 		return panelUscita;
 	}
@@ -292,6 +312,14 @@ public class Dashboard extends JFrame {
 
 	public void setCambioPassword(JPanel cambioPassword) {
 		this.cambioPassword = cambioPassword;
+	}
+
+	public JPanel getPrenotazioniFalsa() {
+		return prenotazioniFalsa;
+	}
+
+	public void setPrenotazioniFalsa(JPanel prenotazioniFalsa) {
+		this.prenotazioniFalsa = prenotazioniFalsa;
 	}
 
 	Controller controllerDashboard;
@@ -309,8 +337,10 @@ public class Dashboard extends JFrame {
 		gestioneCompagnieAeree = controllerDashboard.gestioneCompagnieAeree();
 		gestioneGate = controllerDashboard.gestioneGate();
 		gestioneTratte = controllerDashboard.gestioneTratte();
-		gestioneVoli = controllerDashboard.gestioneVoli();
+		gestioneVoliPartenze = controllerDashboard.gestioneVoliPartenze();
+		gestioneVoliArrivi = controllerDashboard.gestioneVoliArrivi();
 		jDialogProfilo = controllerDashboard.jdialogProfilo();
+		sceltaVolo = controllerDashboard.sceltaVolo();
 		recensioni = controllerDashboard.recensione();
 		uscita = controllerDashboard.uscita();
 
@@ -442,14 +472,14 @@ public class Dashboard extends JFrame {
 		contentPane.add(lblSpostaDaashboard);
 
 		pannelloBase = new JPanel();
-		pannelloBase.setBackground(new Color(0, 0, 0, 0));
-		pannelloBase.setBounds(0, 35, 1143, 634);
+		pannelloBase.setBackground(controllerDashboard.trasparente);
+		pannelloBase.setBounds(0, 35, 1143, 642);
 		contentPane.add(pannelloBase);
 		pannelloBase.setLayout(null);
 
 		pannelloTendina = new JPanel();
 		pannelloTendina.setBackground(controllerDashboard.trasparente);
-		pannelloTendina.setBounds(0, 0, 50, 634);
+		pannelloTendina.setBounds(0, 0, 50, 642);
 		pannelloTendina.setLayout(null);
 		pannelloBase.add(pannelloTendina);
 
@@ -457,8 +487,13 @@ public class Dashboard extends JFrame {
 		panelHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(home);
+				if (home.isVisible()) {
+					panelHome.setBackground(controllerDashboard.pannelloScelto);
+				}
 				controllerDashboard.chiudiTendinaIstantanea();
+
 			}
 
 			@Override
@@ -468,12 +503,20 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelHome.setBackground(controllerDashboard.escoPannelloLaterale);
+				if (home.isVisible()) {
+					panelHome.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelHome.setBackground(controllerDashboard.escoPannello);
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelHome.setBackground(controllerDashboard.clickPannello);
+				if (home.isVisible()) {
+					panelHome.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelHome.setBackground(controllerDashboard.clickPannello);
+				}
 			}
 
 			@Override
@@ -506,24 +549,40 @@ public class Dashboard extends JFrame {
 		panelAccedi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(accesso);
-				controllerDashboard.chiudiTendinaIstantanea();
-				controllerDashboard.svuotaCampiAccesso();
+				if (accesso.isVisible()) {
+					panelAccedi.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					controllerDashboard.chiudiTendinaIstantanea();
+				}
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelAccedi.setBackground(controllerDashboard.entroPannello);
+				if (accesso.isVisible()) {
+					panelAccedi.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelAccedi.setBackground(controllerDashboard.entroPannello);
+				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelAccedi.setBackground(controllerDashboard.escoPannelloLaterale);
+				if (accesso.isVisible()) {
+					panelAccedi.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelAccedi.setBackground(controllerDashboard.escoPannello);
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelAccedi.setBackground(controllerDashboard.clickPannello);
+				if (accesso.isVisible()) {
+					panelAccedi.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelAccedi.setBackground(controllerDashboard.clickPannello);
+				}
 			}
 
 			@Override
@@ -557,9 +616,13 @@ public class Dashboard extends JFrame {
 		panelRegistrati.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(registrazione);
+				if (registrazione.isVisible()) {
+					panelRegistrati.setBackground(controllerDashboard.pannelloScelto);
+				}
 				controllerDashboard.chiudiTendinaIstantanea();
-				controllerDashboard.svuotaCampiRegistrazione();
+
 			}
 
 			@Override
@@ -569,12 +632,20 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelRegistrati.setBackground(controllerDashboard.escoPannelloLaterale);
+				if (registrazione.isVisible()) {
+					panelRegistrati.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelRegistrati.setBackground(controllerDashboard.escoPannello);
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelRegistrati.setBackground(controllerDashboard.clickPannello);
+				if (registrazione.isVisible()) {
+					panelRegistrati.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelRegistrati.setBackground(controllerDashboard.clickPannello);
+				}
 			}
 
 			@Override
@@ -607,11 +678,18 @@ public class Dashboard extends JFrame {
 		panelProfilo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				pannelloLateraleSelezionato();
 				if (controllerDashboard.sbloccaGestione()) {
 					controllerDashboard.mostraPannelli(profilo);
+					if (profilo.isVisible() || jDialogProfilo.isVisible()) {
+						panelProfilo.setBackground(controllerDashboard.pannelloScelto);
+					}
 					controllerDashboard.chiudiTendinaIstantanea();
 				} else {
 					controllerDashboard.mostraJDialogProfilo();
+				}
+				if (profilo.isVisible() || jDialogProfilo.isVisible()) {
+					panelProfilo.setBackground(controllerDashboard.pannelloScelto);
 				}
 			}
 
@@ -622,12 +700,20 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelProfilo.setBackground(controllerDashboard.escoPannelloLaterale);
+				if (profilo.isVisible() || jDialogProfilo.isVisible()) {
+					panelProfilo.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelProfilo.setBackground(controllerDashboard.escoPannello);
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelProfilo.setBackground(controllerDashboard.clickPannello);
+				if (profilo.isVisible()) {
+					panelProfilo.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelProfilo.setBackground(controllerDashboard.clickPannello);
+				}
 			}
 
 			@Override
@@ -660,8 +746,13 @@ public class Dashboard extends JFrame {
 		panelImpostazioni.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(impostazioni);
+				if (impostazioni.isVisible()) {
+					panelImpostazioni.setBackground(controllerDashboard.pannelloScelto);
+				}
 				controllerDashboard.chiudiTendinaIstantanea();
+
 			}
 
 			@Override
@@ -671,12 +762,20 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelImpostazioni.setBackground(controllerDashboard.escoPannelloLaterale);
+				if (impostazioni.isVisible()) {
+					panelImpostazioni.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelImpostazioni.setBackground(controllerDashboard.escoPannello);
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelImpostazioni.setBackground(controllerDashboard.clickPannello);
+				if (impostazioni.isVisible()) {
+					panelImpostazioni.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelImpostazioni.setBackground(controllerDashboard.clickPannello);
+				}
 			}
 
 			@Override
@@ -709,7 +808,12 @@ public class Dashboard extends JFrame {
 		panelUscita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				pannelloLateraleSelezionato();
 				controllerDashboard.mostraUscita();
+				if (uscita.isVisible()) {
+					panelUscita.setBackground(controllerDashboard.pannelloScelto);
+				}
+				controllerDashboard.chiudiTendinaIstantanea();
 			}
 
 			@Override
@@ -719,12 +823,20 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panelUscita.setBackground(controllerDashboard.escoPannelloLaterale);
+				if (uscita.isVisible()) {
+					panelUscita.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelUscita.setBackground(controllerDashboard.escoPannello);
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				panelUscita.setBackground(controllerDashboard.clickPannello);
+				if (uscita.isVisible()) {
+					panelUscita.setBackground(controllerDashboard.pannelloScelto);
+				} else {
+					panelUscita.setBackground(controllerDashboard.clickPannello);
+				}
 			}
 
 			@Override
@@ -803,10 +915,11 @@ public class Dashboard extends JFrame {
 		pannelloDestra.add(gestioneGate);
 		pannelloDestra.add(gestioneCompagnieAeree);
 		pannelloDestra.add(gestioneTratte);
-		pannelloDestra.add(gestioneVoli);
+		pannelloDestra.add(gestioneVoliPartenze);
+		pannelloDestra.add(gestioneVoliArrivi);
 		pannelloDestra.add(recensioni);
 		startVisibili();
-		
+
 		pannelloDestra.setLayout(null);
 		pannelloBase.add(pannelloDestra);
 
@@ -818,12 +931,12 @@ public class Dashboard extends JFrame {
 				controllerDashboard.mostraNoClick();
 			}
 		});
-		noClickDestra.setBounds(238, 0, 904, 634);
+		noClickDestra.setBounds(238, 0, 852, 642);
 		noClickDestra.setBackground(controllerDashboard.trasparente);
 		pannelloDestra.add(noClickDestra);
 
 		lblLayout = new JLabel("");
-		lblLayout.setBounds(0, 0, 1143, 642);
+		lblLayout.setBounds(50, 0, 1093, 642);
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLayout.setIcon(new ImageIcon(img.sfondo()));
 		pannelloBase.add(lblLayout);
@@ -844,8 +957,19 @@ public class Dashboard extends JFrame {
 		gestioneCompagnieAeree.setVisible(false);
 		gestioneGate.setVisible(false);
 		gestioneTratte.setVisible(false);
-		gestioneVoli.setVisible(false);
+		gestioneVoliPartenze.setVisible(false);
+		gestioneVoliArrivi.setVisible(false);
 		cambioPassword.setVisible(false);
 		recensioni.setVisible(false);
+		panelHome.setBackground(controllerDashboard.pannelloScelto);
+	}
+
+	private void pannelloLateraleSelezionato() {
+		panelHome.setBackground(controllerDashboard.escoPannello);
+		panelAccedi.setBackground(controllerDashboard.escoPannello);
+		panelRegistrati.setBackground(controllerDashboard.escoPannello);
+		panelProfilo.setBackground(controllerDashboard.escoPannello);
+		panelImpostazioni.setBackground(controllerDashboard.escoPannello);
+		panelUscita.setBackground(controllerDashboard.escoPannello);
 	}
 }

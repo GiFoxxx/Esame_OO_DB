@@ -7,6 +7,7 @@ import javax.swing.SwingConstants;
 import Controller.Controller;
 import Immagini.Immagini;
 
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -31,7 +32,7 @@ public class Home extends JPanel {
 	public void setLblFareAccesso(JLabel lblFareAccesso) {
 		this.lblFareAccesso = lblFareAccesso;
 	}
-	
+
 	public JLabel getLblTratte() {
 		return lblTratte;
 	}
@@ -110,6 +111,7 @@ public class Home extends JPanel {
 				}
 			}
 		});
+		lblTratte.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblTratte.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTratte.setIcon(new ImageIcon(img.tratte1()));
 		lblTratte.setBounds(82, 110, 276, 162);
@@ -136,6 +138,7 @@ public class Home extends JPanel {
 				}
 			}
 		});
+		lblCompagniaAerea.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblCompagniaAerea.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCompagniaAerea.setIcon(new ImageIcon(img.compagnieAeree1()));
 		lblCompagniaAerea.setBounds(399, 110, 282, 167);
@@ -162,6 +165,7 @@ public class Home extends JPanel {
 				}
 			}
 		});
+		lblGestioneAccount.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblGestioneAccount.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGestioneAccount.setIcon(new ImageIcon(img.gestioneAccount1()));
 		lblGestioneAccount.setBounds(708, 110, 282, 167);
@@ -178,7 +182,13 @@ public class Home extends JPanel {
 			public void mouseExited(MouseEvent e) {
 				lblPrenotazioni.setIcon(new ImageIcon(img.prenotazioni1()));
 			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
 		});
+		lblPrenotazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblPrenotazioni.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrenotazioni.setIcon(new ImageIcon(img.prenotazioni1()));
 		lblPrenotazioni.setBounds(76, 320, 282, 167);
@@ -205,6 +215,7 @@ public class Home extends JPanel {
 				}
 			}
 		});
+		lblGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblGate.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGate.setIcon(new ImageIcon(img.gate1()));
 		lblGate.setBounds(708, 320, 282, 167);
@@ -225,12 +236,13 @@ public class Home extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (controllerHome.sbloccaGestione()) {
-					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneVoli());
+					controllerHome.mostraSceltaVolo();
 				} else {
 					lblFareAccesso.setText("Per poter accedere alla gestione dei voli devi prima accedere al tuo account.");
 				}
 			}
 		});
+		lblVolo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblVolo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVolo.setIcon(new ImageIcon(img.voli1()));
 		lblVolo.setBounds(399, 320, 282, 167);

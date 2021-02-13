@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Gate {
 
 	ArrayList<CodaDiImbarco[]> CodeDiImbarco = new ArrayList<>();
-	ArrayList<Volo[]> Voli = new ArrayList<>();
-//	Tratta trt = new Tratta();
+	ArrayList<VoloPartenze[]> VoliPartenze = new ArrayList<>();
+	Tratta trt;
 
 	// ATTRIBUTI
 	private String codiceGate;

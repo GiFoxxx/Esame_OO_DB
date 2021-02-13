@@ -102,7 +102,7 @@ public class Recensione extends JPanel {
 		});
 		lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-		lblAnnulla.setBounds(716, 512, 174, 47);
+		lblAnnulla.setBounds(200, 513, 174, 47);
 		add(lblAnnulla);
 
 		lblInviaRecensione = new JLabel("");
@@ -129,7 +129,7 @@ public class Recensione extends JPanel {
 		});
 		lblInviaRecensione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInviaRecensione.setIcon(new ImageIcon(img.inviaRecensione1()));
-		lblInviaRecensione.setBounds(235, 514, 174, 47);
+		lblInviaRecensione.setBounds(720, 513, 174, 47);
 		add(lblInviaRecensione);
 		
 		lblStella1 = new JLabel("");
@@ -1367,10 +1367,12 @@ public class Recensione extends JPanel {
 
 		lblLayout = new JLabel("");
 		lblLayout.setBorder(null);
-		lblLayout.setBounds(0, 0, 1090, 634);
+		lblLayout.setBounds(0, 0, 1090, 642);
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLayout.setIcon(new ImageIcon(img.sfondo()));
 		add(lblLayout);
 
 	}
+	
+	
 }

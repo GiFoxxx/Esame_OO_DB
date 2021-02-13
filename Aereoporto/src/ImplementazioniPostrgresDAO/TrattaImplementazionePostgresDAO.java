@@ -11,8 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import Classi.Tratta;
-import Classi.Volo;
+import Classi.*;
 
 public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 

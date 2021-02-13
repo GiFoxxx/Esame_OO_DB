@@ -118,37 +118,37 @@ public class Immagini {
 
 	public Image X1() {
 		Image x1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/x1.png")).getImage().getScaledInstance(51,
-				34, Image.SCALE_SMOOTH);
+				35, Image.SCALE_SMOOTH);
 		return x1;
 	}
 
 	public Image X2() {
 		Image x2 = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/x2.png")).getImage().getScaledInstance(51,
-				34, Image.SCALE_SMOOTH);
+				35, Image.SCALE_SMOOTH);
 		return x2;
 	}
 	
 	public Image X3() {
 		Image x3 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/x3.png")).getImage().getScaledInstance(51,
-				34, Image.SCALE_SMOOTH);
+				35, Image.SCALE_SMOOTH);
 		return x3;
 	}
 
 	public Image minimizza1() {
 		Image _1 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/_1.png")).getImage()
-				.getScaledInstance(51, 34, Image.SCALE_SMOOTH);
+				.getScaledInstance(51, 35, Image.SCALE_SMOOTH);
 		return _1;
 	}
 
 	public Image minimizza2() {
 		Image _2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/_2.png")).getImage()
-				.getScaledInstance(51, 34, Image.SCALE_SMOOTH);
+				.getScaledInstance(51, 35, Image.SCALE_SMOOTH);
 		return _2;
 	}
 	
 	public Image minimizza3() {
 		Image _3 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/_3.png")).getImage()
-				.getScaledInstance(51, 34, Image.SCALE_SMOOTH);
+				.getScaledInstance(51, 35, Image.SCALE_SMOOTH);
 		return _3;
 	}
 	
@@ -223,6 +223,43 @@ public class Immagini {
 				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return registrati3;
 	}
+	
+	public Image partenze1() {
+		Image partenze1 = new ImageIcon(SceltaVolo.class.getResource("immaginiSceltaVolo/partenze1.png")).getImage()
+				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+		return partenze1;
+	}
+	
+	public Image partenze2() {
+		Image partenze2 = new ImageIcon(SceltaVolo.class.getResource("immaginiSceltaVolo/partenze2.png")).getImage()
+				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+		return partenze2;
+	}
+	
+	public Image partenze3() {
+		Image partenze3 = new ImageIcon(SceltaVolo.class.getResource("immaginiSceltaVolo/partenze3.png")).getImage()
+				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+		return partenze3;
+	}
+	
+	public Image arrivi1() {
+		Image arrivi1 = new ImageIcon(SceltaVolo.class.getResource("immaginiSceltaVolo/arrivi1.png")).getImage()
+				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+		return arrivi1;
+	}
+	
+	public Image arrivi2() {
+		Image arrivi2 = new ImageIcon(SceltaVolo.class.getResource("immaginiSceltaVolo/arrivi2.png")).getImage()
+				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+		return arrivi2;
+	}
+	
+	public Image arrivi3() {
+		Image arrivi3 = new ImageIcon(SceltaVolo.class.getResource("immaginiSceltaVolo/arrivi3.png")).getImage()
+				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+		return arrivi3;
+	}
+	
 
 	public Image casa() {
 		Image casa = new ImageIcon(Accesso.class.getResource("immaginiDashboard/home.png")).getImage()

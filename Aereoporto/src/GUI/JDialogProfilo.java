@@ -34,7 +34,6 @@ public class JDialogProfilo extends JDialog {
 	JLabel lblRegistrati;
 	JLabel lblAccedi;
 	JLabel lblContinuare;
-	private boolean flag = true;
 
 	Immagini img = new Immagini();
 	Controller controllerJDialogProfilo;
@@ -55,6 +54,11 @@ public class JDialogProfilo extends JDialog {
 			lblAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					if (controllerJDialogProfilo.getDashboard().getAccesso().isVisible()) {
+						controllerJDialogProfilo.getDashboard().getPanelAccedi().setBackground(controllerJDialogProfilo.pannelloScelto);
+					}else if(controllerJDialogProfilo.getDashboard().getRegistrazione().isVisible()) {
+						controllerJDialogProfilo.getDashboard().getPanelRegistrati().setBackground(controllerJDialogProfilo.pannelloScelto);
+					}
 					controllerJDialogProfilo.annullaJDialogProfilo();
 				}
 
@@ -89,6 +93,7 @@ public class JDialogProfilo extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerJDialogProfilo.vaiARegistrazioneDaJDialogProfilo();
+					controllerJDialogProfilo.getDashboard().getPanelRegistrati().setBackground(controllerJDialogProfilo.pannelloScelto);
 				}
 
 				@Override
@@ -121,6 +126,11 @@ public class JDialogProfilo extends JDialog {
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					if (controllerJDialogProfilo.getDashboard().getAccesso().isVisible()) {
+						controllerJDialogProfilo.getDashboard().getPanelAccedi().setBackground(controllerJDialogProfilo.pannelloScelto);
+					}else if(controllerJDialogProfilo.getDashboard().getRegistrazione().isVisible()) {
+						controllerJDialogProfilo.getDashboard().getPanelRegistrati().setBackground(controllerJDialogProfilo.pannelloScelto);
+					}
 					controllerJDialogProfilo.annullaJDialogProfilo();
 				}
 
@@ -146,7 +156,7 @@ public class JDialogProfilo extends JDialog {
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
 			lblX.setIcon(new ImageIcon(img.X1()));
-			lblX.setBounds(448, 1, 51, 36);
+			lblX.setBounds(448, 1, 51, 34);
 			getContentPane().add(lblX);
 
 			lblSpostaUscita = new JLabel("");
@@ -179,6 +189,7 @@ public class JDialogProfilo extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerJDialogProfilo.vaiAdAccediDaJDialogProfilo();
+					controllerJDialogProfilo.getDashboard().getPanelAccedi().setBackground(controllerJDialogProfilo.pannelloScelto);
 				}
 
 				@Override

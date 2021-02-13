@@ -7,8 +7,8 @@ import java.util.Date;
 public class Tratta {
 
 	ArrayList<CompagniaAerea[]> CompagnieAeree = new ArrayList<>();
-	ArrayList<Volo[]> Voli = new ArrayList<>();
-//	Gate gt = new Gate();
+	ArrayList<VoloPartenze[]> VoliPartenza = new ArrayList<>();
+	Gate gt;
 
 	// ATTRIBUTI
 	private String codiceTratta;

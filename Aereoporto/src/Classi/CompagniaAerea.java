@@ -10,7 +10,7 @@ public class CompagniaAerea {
 	
 	ArrayList<ClienteBusiness[]> ClientiBusiness = new ArrayList<>();
 	ArrayList<Tratta[]> Tratte = new ArrayList<>();
-	ArrayList<Volo[]> Voli = new ArrayList<>();
+	ArrayList<VoloPartenze[]> VoliPartenze = new ArrayList<>();
 
 	
 	//GETTER E SETTER

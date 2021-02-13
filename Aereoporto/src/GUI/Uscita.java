@@ -33,7 +33,6 @@ public class Uscita extends JDialog {
 	JLabel lblAnnulla;
 	JLabel lblSi;
 	JLabel lblUscire;
-	private boolean flag = true;
 
 	Immagini img = new Immagini();
 	Controller controllerUscita;
@@ -101,7 +100,7 @@ public class Uscita extends JDialog {
 						});
 						lblX.setHorizontalAlignment(SwingConstants.CENTER);
 						lblX.setIcon(new ImageIcon(img.X1()));
-						lblX.setBounds(448, 1, 51, 36);
+						lblX.setBounds(448, 1, 51, 34);
 						getContentPane().add(lblX);
 			lblSpostaUscita.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSpostaUscita.setIcon(new ImageIcon(img.spostaUscita()));
