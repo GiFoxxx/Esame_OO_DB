@@ -16,8 +16,8 @@ public class ConnessioneDatabase {
 	public ConnessioneDatabase() {
 		this.Url = ("jdbc:postgresql://localhost:5432/Aereoporto");
 		this.Driver = "org.postgresql.Driver";
-		this.Nome = "Admin";
-		this.Password = "Admin";
+		this.Nome = "postgres";
+		this.Password = "admin";
 	}
 
 	// GETTER E SETTER

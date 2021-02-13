@@ -61,6 +61,8 @@ public class Dashboard extends JFrame {
 	private JPanel panelImpostazioni;
 	private JPanel panelUscita;
 
+	private JPanel prenotazioniFalsa;
+
 	private JPanel home;
 	private JPanel accesso;
 	private JPanel registrazione;
@@ -76,6 +78,7 @@ public class Dashboard extends JFrame {
 	private JPanel cambioPassword;
 
 	private JDialog sceltaProfiloSenzaAccesso;
+	private JDialog PasswordDimenticata;
 	private JDialog sceltaVolo;
 	private JDialog uscita;
 
@@ -208,11 +211,19 @@ public class Dashboard extends JFrame {
 		this.uscita = uscita;
 	}
 
-	public JDialog getJDialogProfilo() {
+	public JDialog getPasswordDimenticata() {
+		return PasswordDimenticata;
+	}
+
+	public void setPasswordDimenticata(JDialog passwordDimenticata) {
+		PasswordDimenticata = passwordDimenticata;
+	}
+
+	public JDialog getSceltaProfiloSenzaAccesso() {
 		return sceltaProfiloSenzaAccesso;
 	}
 
-	public void setJDialogProfilo(JDialog sceltaProfiloSenzaAccesso) {
+	public void setSceltaProfiloSenzaAccesso(JDialog sceltaProfiloSenzaAccesso) {
 		this.sceltaProfiloSenzaAccesso = sceltaProfiloSenzaAccesso;
 	}
 
@@ -312,6 +323,14 @@ public class Dashboard extends JFrame {
 		this.cambioPassword = cambioPassword;
 	}
 
+	public JPanel getPrenotazioniFalsa() {
+		return prenotazioniFalsa;
+	}
+
+	public void setPrenotazioniFalsa(JPanel prenotazioniFalsa) {
+		this.prenotazioniFalsa = prenotazioniFalsa;
+	}
+
 	Controller controllerDashboard;
 
 	public Dashboard(Controller controller) {
@@ -330,6 +349,7 @@ public class Dashboard extends JFrame {
 		gestioneVoliPartenze = controllerDashboard.gestioneVoliPartenze();
 		gestioneVoliArrivi = controllerDashboard.gestioneVoliArrivi();
 		sceltaProfiloSenzaAccesso = controllerDashboard.sceltaProfiloSenzaAccesso();
+		PasswordDimenticata = controllerDashboard.passwordDimenticata();
 		sceltaVolo = controllerDashboard.sceltaVolo();
 		recensioni = controllerDashboard.recensione();
 		uscita = controllerDashboard.uscita();

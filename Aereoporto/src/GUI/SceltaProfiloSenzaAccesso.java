@@ -55,7 +55,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					pannelloSelezionatoPrecedentemente();
-					controllerJDialogProfilo.annullaSceltaProfiloSenzaAccesso();
+//					controllerJDialogProfilo.annullaSceltaProfiloSenzaAccesso();
 				}
 
 				@Override
@@ -88,7 +88,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 			lblRegistrati.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					controllerJDialogProfilo.vaiARegistrazioneDaSceltaProfiloSenzaAccesso();
+//					controllerJDialogProfilo.vaiARegistrazioneDaSceltaProfiloSenzaAccesso();
 					controllerJDialogProfilo.getDashboard().getPanelRegistrati().setBackground(controllerJDialogProfilo.pannelloScelto);
 				}
 
@@ -123,7 +123,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					pannelloSelezionatoPrecedentemente();
-					controllerJDialogProfilo.annullaSceltaProfiloSenzaAccesso();
+//					controllerJDialogProfilo.annullaSceltaProfiloSenzaAccesso();
 				}
 
 				@Override
@@ -180,7 +180,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 			lblAccedi.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					controllerJDialogProfilo.vaiAdAccediDaSceltaProfiloSenzaAccesso();
+//					controllerJDialogProfilo.vaiAdAccediDaSceltaProfiloSenzaAccesso();
 					controllerJDialogProfilo.getDashboard().getPanelAccedi().setBackground(controllerJDialogProfilo.pannelloScelto);
 				}
 

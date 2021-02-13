@@ -46,14 +46,14 @@ public class Utente {
 			this.email = email;
 		}
 		
-		public Utente(String email, String password) {
-			this.email = email;
-			this.password = password;
-		}
-		
-		
 		public Utente() {
 			super();
+		}
+		
+		public Utente(String email, String password) {
+			super();
+			this.email = email;
+			this.password = password;
 		}
 		
 		@Override

@@ -129,6 +129,7 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 		return email;
 	}
 	
+
 	@Override
 	public boolean registrazioneUtente(Object utente) {
 		utn = (Utente) utente;
@@ -309,8 +310,6 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 		}
 		return eUtente;
 	}
-
-	
 	
 	
 	

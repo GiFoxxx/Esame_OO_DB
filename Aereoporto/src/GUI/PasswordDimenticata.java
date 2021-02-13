@@ -109,7 +109,7 @@ public class PasswordDimenticata extends JDialog {
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-//					controllerPasswordDimenticata.annullaPasswordDimenticata();
+					controllerPasswordDimenticata.annullaPasswordDimenticata();
 					controllerPasswordDimenticata.svuotaCampiAccesso();
 				}
 
@@ -228,7 +228,7 @@ public class PasswordDimenticata extends JDialog {
 			lblSalva.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-//					controllerPasswordDimenticata.accessoPasswordDimenticata();
+					controllerPasswordDimenticata.accessoPasswordDimenticata();
 				}
 
 				@Override
@@ -271,7 +271,7 @@ public class PasswordDimenticata extends JDialog {
 			lblAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-//					controllerPasswordDimenticata.annullaPasswordDimenticata();
+					controllerPasswordDimenticata.annullaPasswordDimenticata();
 					controllerPasswordDimenticata.svuotaCampiAccesso();
 				}
 

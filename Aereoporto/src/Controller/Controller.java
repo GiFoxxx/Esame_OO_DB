@@ -31,6 +31,10 @@ public class Controller {
 	public Font fontScritte = new Font("Arial", Font.PLAIN, 19);
 	public Font fontTitolo = new Font("Arial", Font.BOLD, 18);
 	public Font fontScritteJDialog = new Font("Arial", Font.BOLD, 20);
+	public Color coloreLabel = new Color(111, 115, 122);
+	public Color coloreLabelEntrata = new Color(205, 205, 205);
+	public Color coloreLabelPressed = new Color(240, 240, 240);
+	public Font fontScritteLabel = new Font("Arial", Font.BOLD, 12);
 
 	private String emailAccesso;
 
@@ -52,7 +56,8 @@ public class Controller {
 	private SceltaVolo sceltaVolo;
 	private Recensione recensioni;
 	private Uscita uscita;
-
+	private PasswordDimenticata passwordDimenticata;
+	
 	Utente utn;
 	VoloPartenze vlprtz;
 	VoloArrivi vlarr;
@@ -213,6 +218,14 @@ public class Controller {
 		this.uscita = uscita;
 	}
 
+	public PasswordDimenticata getPasswordDimenticata() {
+		return passwordDimenticata;
+	}
+
+	public void setPasswordDimenticata(PasswordDimenticata passwordDimenticata) {
+		this.passwordDimenticata = passwordDimenticata;
+	}
+
 	public Recensione getRecensione() {
 		return recensioni;
 	}
@@ -241,6 +254,7 @@ public class Controller {
 		gestioneVoliArrivi = new GestioneVoliArrivi(this);
 		cambioPassword = new CambioPassword(this);
 		sceltaProfiloSenzaAccesso = new SceltaProfiloSenzaAccesso(this);
+		passwordDimenticata = new PasswordDimenticata(this);
 		sceltaVolo = new SceltaVolo(this);
 		recensioni = new Recensione(this);
 		dashboard.setVisible(true);
@@ -277,6 +291,17 @@ public class Controller {
 		} else {
 			return false;
 		}
+	}
+	
+	public void accessoPasswordDimenticata() {
+		Utente utn = new Utente(((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText(),
+				((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().getText());
+		implementazioneUtenteDAO().modificaPassword(utn);
+		mostraPannelli(getDashboard().getAccesso());
+		getDashboard().getPasswordDimenticata().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true);
+		((GestioneVoliPartenze) getDashboard().getGestioneUtenti()).caricaTabella();
 	}
 
 	// METODI DI REGISTRAZIONE
@@ -902,6 +927,11 @@ public class Controller {
 		SceltaProfiloSenzaAccesso sceltaProfiloSenzaAccesso = new SceltaProfiloSenzaAccesso(this);
 		return sceltaProfiloSenzaAccesso;
 	}
+	
+	public JDialog passwordDimenticata() {
+		PasswordDimenticata passwordDimenticata = new PasswordDimenticata(this);
+		return passwordDimenticata;
+	}
 
 	public JPanel recensione() {
 		Recensione recensioni = new Recensione(this);
@@ -959,25 +989,25 @@ public class Controller {
 	// METODI DI SCELTA PROFILO SENZA ACCESSO
 	public void mostraSceltaProfiloSenzaAccesso() {
 		getDashboard().setEnabled(false);
-		getDashboard().getJDialogProfilo().setVisible(true);
+		getDashboard().getSceltaProfiloSenzaAccesso().setVisible(true);
 	}
 
 	public void vaiAdAccediDaSceltaProfiloSenzaAccesso() {
-		getDashboard().getJDialogProfilo().dispose();
+		getDashboard().getSceltaProfiloSenzaAccesso().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getAccesso());
 	}
 
 	public void vaiARegistrazioneDaSceltaProfiloSenzaAccesso() {
-		getDashboard().getJDialogProfilo().dispose();
+		getDashboard().getSceltaProfiloSenzaAccesso().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getRegistrazione());
 	}
 
 	public void annullaSceltaProfiloSenzaAccesso() {
-		getDashboard().getJDialogProfilo().dispose();
+		getDashboard().getSceltaProfiloSenzaAccesso().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 	}
@@ -1031,6 +1061,26 @@ public class Controller {
 	public void logout() {
 		((Accesso) getDashboard().getAccesso()).setSbloccaHome(false);
 		mostraPannelli(getDashboard().getAccesso());
+	}
+	
+
+	//METODI PASSWORD DIMENTICATA
+		public void svuotaCampiPasswordDimenticata() {
+			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().setText("");
+			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().setText("");
+			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtRipetiNuovaPassword().setText("");
+		}
+	
+	public void mostraPasswordDimenticata() {
+		dashboard.setEnabled(false);
+		dashboard.getPasswordDimenticata().setVisible(true);
+		svuotaCampiPasswordDimenticata();
+	}
+
+	public void annullaPasswordDimenticata() {
+		dashboard.getPasswordDimenticata().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true);
 	}
 
 	// METODI DI USCITA

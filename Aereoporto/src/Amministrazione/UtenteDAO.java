@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UtenteDAO {
 
-	public ArrayList<Object[]> stampaUtenti();
+public ArrayList<Object[]> stampaUtenti();
 	
 	public boolean modificaDatiAccount(Object utente);
 	
