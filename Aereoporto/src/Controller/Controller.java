@@ -301,7 +301,7 @@ public class Controller {
 		getDashboard().getPasswordDimenticata().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
-		((GestioneVoliPartenze) getDashboard().getGestioneUtenti()).caricaTabella();
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 	}
 
 	// METODI DI REGISTRAZIONE
