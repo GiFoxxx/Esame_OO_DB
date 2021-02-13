@@ -79,10 +79,10 @@ public class Immagini {
 		return imgSfondo;
 	}
 	
-	public Image sfondoUscita2() {
-		Image imgSfondo2 = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/SfondoUscita2.png")).getImage()
-				.getScaledInstance(500, 300, Image.SCALE_SMOOTH);
-		return imgSfondo2;
+	public Image sfondoPasswordDimenticata() {
+		Image sfondoPasswordDimenticata = new ImageIcon(PasswordDimenticata.class.getResource("immaginiPasswordDimenticata/sfondo.png")).getImage()
+				.getScaledInstance(500, 469, Image.SCALE_SMOOTH);
+		return sfondoPasswordDimenticata;
 	}
 
 	public Image tendina() {
@@ -95,6 +95,12 @@ public class Immagini {
 		Image spostaDashboard = new ImageIcon(Accesso.class.getResource("immaginiDashboard/SpostaDashboard.png")).getImage()
 				.getScaledInstance(1143, 35, Image.SCALE_SMOOTH);
 		return spostaDashboard;
+	}
+	
+	public Image campiPasswordDimenticata() {
+		Image campiPasswordDimenticata = new ImageIcon(PasswordDimenticata.class.getResource("immaginiPasswordDimenticata/campiPasswordDimenticata.png")).getImage()
+				.getScaledInstance(344, 236, Image.SCALE_SMOOTH);
+		return campiPasswordDimenticata;
 	}
 	
 	public Image spostaUscita() {
@@ -172,7 +178,7 @@ public class Immagini {
 	
 	public Image annulla1() {
 		Image annulla1 = new ImageIcon(Uscita.class.getResource("immaginiUscita/annulla1.png")).getImage()
-				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
+				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
 		return annulla1;
 	}
 	
@@ -186,6 +192,24 @@ public class Immagini {
 		Image annulla3 = new ImageIcon(Uscita.class.getResource("immaginiUscita/annulla3.png")).getImage()
 				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return annulla3;
+	}
+	
+	public Image salva1() {
+		Image salva1 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiPasswordDimenticata/salva1.png")).getImage()
+				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+		return salva1;
+	}
+	
+	public Image salva2() {
+		Image salva2 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiPasswordDimenticata/salva2.png")).getImage()
+				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+		return salva2;
+	}
+	
+	public Image salva3() {
+		Image salva3 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiPasswordDimenticata/salva3.png")).getImage()
+				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+		return salva3;
 	}
 	
 	public Image accedi1() {

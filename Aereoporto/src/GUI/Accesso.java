@@ -16,6 +16,8 @@ import java.awt.Cursor;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import java.awt.Font;
+import java.awt.Color;
 
 public class Accesso extends JPanel {
 
@@ -174,27 +176,52 @@ public class Accesso extends JPanel {
 		add(lblAvanti);
 
 		lblMessaggioCredenziali = new JLabel("");
-		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessaggioCredenziali.setFont(controllerAccesso.fontScritte);
+		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMessaggioCredenziali.setFont(controllerAccesso.fontScritteLabel);
 		lblMessaggioCredenziali.setForeground(controllerAccesso.coloreScritturaAllerta);
-		lblMessaggioCredenziali.setBounds(478, 388, 344, 28);
+		lblMessaggioCredenziali.setBounds(478, 412, 344, 14);
 		add(lblMessaggioCredenziali);
-
-		JLabel lblImgAccount = new JLabel("");
-		lblImgAccount.setHorizontalAlignment(SwingConstants.CENTER);
-		lblImgAccount.setBounds(55, 121, 320, 361);
-		add(lblImgAccount);
+		
+		JLabel lblPasswordDimenticata = new JLabel("Password dimenticata?");
+		lblPasswordDimenticata.setForeground(Color.LIGHT_GRAY);
+		lblPasswordDimenticata.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerAccesso.mostraPasswordDimenticata();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblPasswordDimenticata.setForeground(controllerAccesso.coloreLabelEntrata);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblPasswordDimenticata.setForeground(controllerAccesso.coloreLabel);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblPasswordDimenticata.setForeground(controllerAccesso.coloreLabelPressed);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblPasswordDimenticata.setForeground(controllerAccesso.coloreLabel);				
+			}
+		});
+		lblPasswordDimenticata.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblPasswordDimenticata.setForeground(controllerAccesso.coloreLabel);
+		lblPasswordDimenticata.setFont(controllerAccesso.fontScritteLabel);
+		lblPasswordDimenticata.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPasswordDimenticata.setBounds(624, 388, 198, 14);
+		add(lblPasswordDimenticata);
 
 	}
 
 	// METODI
 	
 	public void mostraInserimentoCredenziali() {
-		lblMessaggioCredenziali.setText("Perfavore, inserisci le credenziali!");
+		lblMessaggioCredenziali.setText("Perfavore, inserisci le credenziali");
 	}
 
 	public void mostraErroreAccesso() {
 		lblMessaggioCredenziali.setText("Nome utente o password errati. Riprova");
 	}
-
 }

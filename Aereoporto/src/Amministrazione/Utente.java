@@ -46,6 +46,12 @@ public class Utente {
 			super();
 		}
 		
+		public Utente(String email, String password) {
+			super();
+			this.email = email;
+			this.password = password;
+		}
+		
 		@Override
 		public String toString() {
 			return "Utente [nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", password=" + password

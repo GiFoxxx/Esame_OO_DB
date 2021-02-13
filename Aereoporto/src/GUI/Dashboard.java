@@ -78,6 +78,7 @@ public class Dashboard extends JFrame {
 	private JPanel cambioPassword;
 
 	private JDialog jDialogProfilo;
+	private JDialog PasswordDimenticata;
 	private JDialog sceltaVolo;
 	private JDialog uscita;
 
@@ -218,6 +219,14 @@ public class Dashboard extends JFrame {
 		this.jDialogProfilo = jDialogProfilo;
 	}
 
+	public JDialog getPasswordDimenticata() {
+		return PasswordDimenticata;
+	}
+
+	public void setPasswordDimenticata(JDialog passwordDimenticata) {
+		PasswordDimenticata = passwordDimenticata;
+	}
+
 	public JDialog getSceltaVolo() {
 		return sceltaVolo;
 	}
@@ -340,6 +349,7 @@ public class Dashboard extends JFrame {
 		gestioneVoliPartenze = controllerDashboard.gestioneVoliPartenze();
 		gestioneVoliArrivi = controllerDashboard.gestioneVoliArrivi();
 		jDialogProfilo = controllerDashboard.jdialogProfilo();
+		PasswordDimenticata = controllerDashboard.passwordDimenticata();
 		sceltaVolo = controllerDashboard.sceltaVolo();
 		recensioni = controllerDashboard.recensione();
 		uscita = controllerDashboard.uscita();

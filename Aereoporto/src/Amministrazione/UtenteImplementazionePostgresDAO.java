@@ -24,8 +24,6 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 		String sql = "SELECT * FROM utente";
 
 		try {
-			
-
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -173,9 +171,10 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
-
+			
 			pst.setString(1, utn.getPassword());
-	
+			pst.setString(2, utn.getEmail());
+		
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
