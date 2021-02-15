@@ -53,7 +53,7 @@ public class Dashboard extends JFrame {
 	private JPanel pannelloTendina;
 	private JPanel pannelloBase;
 	private JPanel pannelloDestra;
-	private JPanel noClickDestra;
+	private JPanel noClick;
 	private JPanel panelHome;
 	private JPanel panelAccedi;
 	private JPanel panelRegistrati;
@@ -259,12 +259,12 @@ public class Dashboard extends JFrame {
 		this.pannelloDestra = pannelloDestra;
 	}
 
-	public JPanel getNoClickDestra() {
-		return noClickDestra;
+	public JPanel getNoClick() {
+		return noClick;
 	}
 
-	public void setNoClickDestra(JPanel noClickDestra) {
-		this.noClickDestra = noClickDestra;
+	public void setNoClick(JPanel noClick) {
+		this.noClick = noClick;
 	}
 
 	public JPanel getPanelHome() {
@@ -352,6 +352,7 @@ public class Dashboard extends JFrame {
 		PasswordDimenticata = controllerDashboard.passwordDimenticata();
 		sceltaVolo = controllerDashboard.sceltaVolo();
 		recensioni = controllerDashboard.recensione();
+		noClick = controllerDashboard.noClick();
 		uscita = controllerDashboard.uscita();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -497,6 +498,7 @@ public class Dashboard extends JFrame {
 		panelHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerDashboard.setPannelloPrecedente(1);
 				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(home);
 				if (home.isVisible()) {
@@ -536,7 +538,7 @@ public class Dashboard extends JFrame {
 		});
 		panelHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelHome.setBounds(1, 135, 236, 70);
-		panelHome.setBackground(new Color(0, 0, 0, 0));
+		panelHome.setBackground(controllerDashboard.trasparente);
 		panelHome.setLayout(null);
 		pannelloTendina.add(panelHome);
 
@@ -559,13 +561,13 @@ public class Dashboard extends JFrame {
 		panelAccedi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerDashboard.setPannelloPrecedente(2);
 				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(accesso);
-				if (accesso.isVisible()) {
-					panelAccedi.setBackground(controllerDashboard.pannelloScelto);
-				} else {
-					controllerDashboard.chiudiTendinaIstantanea();
+				if (registrazione.isVisible()) {
+					panelRegistrati.setBackground(controllerDashboard.pannelloScelto);
 				}
+				controllerDashboard.chiudiTendinaIstantanea();
 			}
 
 			@Override
@@ -602,7 +604,7 @@ public class Dashboard extends JFrame {
 		});
 		panelAccedi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelAccedi.setBounds(1, 205, 236, 70);
-		panelAccedi.setBackground(new Color(0, 0, 0, 0));
+		panelAccedi.setBackground(controllerDashboard.trasparente);
 		pannelloTendina.add(panelAccedi);
 		panelAccedi.setLayout(null);
 
@@ -626,13 +628,13 @@ public class Dashboard extends JFrame {
 		panelRegistrati.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerDashboard.setPannelloPrecedente(3);
 				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(registrazione);
 				if (registrazione.isVisible()) {
 					panelRegistrati.setBackground(controllerDashboard.pannelloScelto);
 				}
 				controllerDashboard.chiudiTendinaIstantanea();
-
 			}
 
 			@Override
@@ -690,6 +692,7 @@ public class Dashboard extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				pannelloLateraleSelezionato();
 				if (controllerDashboard.sbloccaGestione()) {
+					controllerDashboard.setPannelloPrecedente(4);
 					controllerDashboard.mostraPannelli(profilo);
 					controllerDashboard.profiloUtenteAccessoEffettuato();
 					if (profilo.isVisible() || sceltaProfiloSenzaAccesso.isVisible()) {
@@ -757,6 +760,7 @@ public class Dashboard extends JFrame {
 		panelImpostazioni.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerDashboard.setPannelloPrecedente(5);
 				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(impostazioni);
 				if (impostazioni.isVisible()) {
@@ -795,7 +799,7 @@ public class Dashboard extends JFrame {
 			}
 		});
 		panelImpostazioni.setBounds(1, 415, 236, 70);
-		panelImpostazioni.setBackground(new Color(0, 0, 0, 0));
+		panelImpostazioni.setBackground(controllerDashboard.trasparente);
 		pannelloTendina.add(panelImpostazioni);
 		panelImpostazioni.setLayout(null);
 
@@ -897,7 +901,7 @@ public class Dashboard extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				controllerDashboard.apriTendina();
 
-				controllerDashboard.mostraPannelloNoClick();
+				controllerDashboard.mostraPannelli(noClick);
 			}
 		});
 		lineeApertura.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -913,7 +917,7 @@ public class Dashboard extends JFrame {
 		pannelloTendina.add(lblTendina);
 
 		pannelloDestra = new JPanel();
-		pannelloDestra.setBounds(51, 0, 1090, 642);
+		pannelloDestra.setBounds(50, 0, 1091, 642);
 		pannelloDestra.setBackground(controllerDashboard.trasparente);
 
 		pannelloDestra.add(home);
@@ -929,22 +933,11 @@ public class Dashboard extends JFrame {
 		pannelloDestra.add(gestioneVoliPartenze);
 		pannelloDestra.add(gestioneVoliArrivi);
 		pannelloDestra.add(recensioni);
+		pannelloDestra.add(noClick);
 		startVisibili();
 
 		pannelloDestra.setLayout(null);
 		pannelloBase.add(pannelloDestra);
-
-		noClickDestra = new JPanel();
-		noClickDestra.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerDashboard.chiudiTendinaIstantanea();
-				controllerDashboard.mostraNoClick();
-			}
-		});
-		noClickDestra.setBounds(238, 0, 852, 642);
-		noClickDestra.setBackground(controllerDashboard.trasparente);
-		pannelloDestra.add(noClickDestra);
 
 		lblLayout = new JLabel("");
 		lblLayout.setBounds(50, 0, 1093, 642);

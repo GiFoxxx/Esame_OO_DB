@@ -17,7 +17,7 @@ public class Home extends JPanel {
 
 	private JLabel lblTratte;
 	private JLabel lblCompagniaAerea;
-	private JLabel lblGestioneAccount;
+	private JLabel lblGestioneUtenti;
 	private JLabel lblPrenotazioni;
 	private JLabel lblGate;
 	private JLabel lblVolo;
@@ -49,12 +49,12 @@ public class Home extends JPanel {
 		this.lblCompagniaAerea = lblCompagniaAerea;
 	}
 
-	public JLabel getLblGestioneAccount() {
-		return lblGestioneAccount;
+	public JLabel getLblGestioneUtenti() {
+		return lblGestioneUtenti;
 	}
 
-	public void setLblGestioneAccount(JLabel lblGestioneAccount) {
-		this.lblGestioneAccount = lblGestioneAccount;
+	public void setLblGestioneUtenti(JLabel lblGestioneAccount) {
+		this.lblGestioneUtenti = lblGestioneAccount;
 	}
 
 	public JLabel getLblPrenotazioni() {
@@ -105,6 +105,7 @@ public class Home extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (controllerHome.sbloccaGestione()) {
+					controllerHome.setPannelloPrecedente(6);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneTratte());
 				} else {
 					lblFareAccesso.setText("Per poter accedere alla gestione delle tratte, accedere al proprio account.");
@@ -132,6 +133,7 @@ public class Home extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (controllerHome.sbloccaGestione()) {
+					controllerHome.setPannelloPrecedente(7);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneCompagnieAeree());
 				} else {
 					lblFareAccesso.setText("Per poter accedere alla gestione delle compagnie aeree, accedere al proprio account.");
@@ -144,32 +146,33 @@ public class Home extends JPanel {
 		lblCompagniaAerea.setBounds(399, 110, 282, 167);
 		add(lblCompagniaAerea);
 
-		lblGestioneAccount = new JLabel("");
-		lblGestioneAccount.addMouseListener(new MouseAdapter() {
+		lblGestioneUtenti = new JLabel("");
+		lblGestioneUtenti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblGestioneAccount.setIcon(new ImageIcon(img.gestioneAccount2()));
+				lblGestioneUtenti.setIcon(new ImageIcon(img.gestioneAccount2()));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblGestioneAccount.setIcon(new ImageIcon(img.gestioneAccount1()));
+				lblGestioneUtenti.setIcon(new ImageIcon(img.gestioneAccount1()));
 			}
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (controllerHome.sbloccaGestione()) {
+					controllerHome.setPannelloPrecedente(8);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneUtenti());
 				} else {
 					lblFareAccesso.setText("Per poter accedere alla gestione degli account, accedere al proprio account.");
 				}
 			}
 		});
-		lblGestioneAccount.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblGestioneAccount.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGestioneAccount.setIcon(new ImageIcon(img.gestioneAccount1()));
-		lblGestioneAccount.setBounds(708, 110, 282, 167);
-		add(lblGestioneAccount);
+		lblGestioneUtenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblGestioneUtenti.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGestioneUtenti.setIcon(new ImageIcon(img.gestioneAccount1()));
+		lblGestioneUtenti.setBounds(708, 110, 282, 167);
+		add(lblGestioneUtenti);
 
 		lblPrenotazioni = new JLabel("");
 		lblPrenotazioni.addMouseListener(new MouseAdapter() {
@@ -185,7 +188,7 @@ public class Home extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				controllerHome.setPannelloPrecedente(9);
 			}
 		});
 		lblPrenotazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -209,6 +212,7 @@ public class Home extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (controllerHome.sbloccaGestione()) {
+					controllerHome.setPannelloPrecedente(10);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneGate());
 				} else {
 					lblFareAccesso.setText("Per poter accedere alla gestione dei gate, accedere al proprio account.");

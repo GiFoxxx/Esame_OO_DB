@@ -142,6 +142,7 @@ public class GestioneVoliPartenze extends JPanel {
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerGestioneVoliPartenze.setPannelloPrecedente(1);
 				controllerGestioneVoliPartenze.mostraPannelli(controllerGestioneVoliPartenze.getDashboard().getHome());
 			}
 			@Override

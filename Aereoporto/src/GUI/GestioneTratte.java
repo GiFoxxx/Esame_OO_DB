@@ -158,6 +158,7 @@ public class GestioneTratte extends JPanel {
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerGestioneTratte.setPannelloPrecedente(1);
 				controllerGestioneTratte.mostraPannelli(controllerGestioneTratte.getDashboard().getHome());
 			}
 			@Override

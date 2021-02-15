@@ -111,6 +111,7 @@ public class GestioneUtenti extends JPanel {
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerGestioneUtenti.setPannelloPrecedente(1);
 				controllerGestioneUtenti.mostraPannelli(controllerGestioneUtenti.getDashboard().getHome());
 			}
 			@Override

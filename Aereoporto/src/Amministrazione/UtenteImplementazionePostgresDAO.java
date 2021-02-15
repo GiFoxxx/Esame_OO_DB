@@ -222,7 +222,36 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 	}
 	
 	@Override
-	public boolean modificaPassword(Object utente) {
+	public boolean passwordDimenticata(Object utente) {
+		utn = (Utente) utente;
+		PreparedStatement pst;
+		String sql = "UPDATE utente SET password=? WHERE email=?";
+		try {
+			db.ConnessioneDB();
+
+			pst = db.ConnessioneDB().prepareStatement(sql);
+			
+			pst.setString(1, utn.getPassword());
+			pst.setString(2, utn.getEmail());
+		
+			int res = pst.executeUpdate();
+
+			if (res > 0) {
+				db.ConnessioneDB().close();
+				return true;
+			} else {
+				db.ConnessioneDB().close();
+				return false;
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean cambioPasswordDB(Object utente) {
 		utn = (Utente) utente;
 		PreparedStatement pst;
 		String sql = "UPDATE utente SET password=? WHERE email=?";

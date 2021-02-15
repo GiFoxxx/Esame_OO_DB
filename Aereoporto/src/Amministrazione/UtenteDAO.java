@@ -16,7 +16,7 @@ public ArrayList<Object[]> stampaUtenti();
 
 	public boolean modificaUtente(Object utente);
 	
-	public boolean modificaPassword(Object utente);
+	public boolean passwordDimenticata(Object utente);
 
 	boolean accessoUtente(String email, String password);
 
@@ -25,4 +25,6 @@ public ArrayList<Object[]> stampaUtenti();
 	public String stampaCognomeAccount(Object utente);
 
 	public String stampaEmailAccount(Object utente);
+
+	boolean cambioPasswordDB(Object utente);
 }

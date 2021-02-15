@@ -43,44 +43,12 @@ public class SceltaVolo extends JDialog {
 		getContentPane().setLayout(null);
 		{
 
-			lblArrivi = new JLabel("");
-			lblArrivi.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					controllerSceltaVolo.vaiAVoliArriviDaSceltaVolo();
-				}
-
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					lblArrivi.setIcon(new ImageIcon(img.arrivi2()));
-				}
-
-				@Override
-				public void mouseExited(MouseEvent e) {
-					lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
-				}
-
-				@Override
-				public void mousePressed(MouseEvent e) {
-					lblArrivi.setIcon(new ImageIcon(img.arrivi3()));
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
-				}
-			});
-			lblArrivi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			lblArrivi.setHorizontalAlignment(SwingConstants.CENTER);
-			lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
-			lblArrivi.setBounds(285, 190, 135, 41);
-			getContentPane().add(lblArrivi);
-
 			lblPartenze = new JLabel("");
 			lblPartenze.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerSceltaVolo.vaiAVoliPartenzeDaSceltaVolo();
+					controllerSceltaVolo.setPannelloPrecedente(11);
 				}
 
 				@Override
@@ -108,6 +76,40 @@ public class SceltaVolo extends JDialog {
 			lblPartenze.setIcon(new ImageIcon(img.partenze1()));
 			lblPartenze.setBounds(65, 190, 135, 41);
 			getContentPane().add(lblPartenze);
+
+			lblArrivi = new JLabel("");
+			lblArrivi.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					controllerSceltaVolo.vaiAVoliArriviDaSceltaVolo();
+					controllerSceltaVolo.setPannelloPrecedente(12);
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					lblArrivi.setIcon(new ImageIcon(img.arrivi2()));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblArrivi.setIcon(new ImageIcon(img.arrivi3()));
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
+				}
+			});
+			lblArrivi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			lblArrivi.setHorizontalAlignment(SwingConstants.CENTER);
+			lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
+			lblArrivi.setBounds(285, 190, 135, 41);
+			getContentPane().add(lblArrivi);
 
 			lblX = new JLabel("");
 			lblX.addMouseListener(new MouseAdapter() {
@@ -188,4 +190,3 @@ public class SceltaVolo extends JDialog {
 		controllerSceltaVolo.centramentoJDialog(this);
 	}
 }
-

@@ -33,7 +33,7 @@ public class PasswordDimenticata extends JDialog {
 	int y;
 
 	JLabel lblLayout;
-	JLabel lblSpostaUscita;
+	JLabel lblSpostaPasswordDimenticata;
 	JLabel lblX;
 	JLabel lblAnnulla;
 
@@ -43,7 +43,6 @@ public class PasswordDimenticata extends JDialog {
 	private JTextField txtEmail;
 	private JPasswordField txtRipetiNuovaPassword;
 	private JPasswordField txtNuovaPassword;
-	private JLabel lblNewLabel;
 	private JLabel lblCampi;
 
 	// GETTER E SETTER
@@ -83,8 +82,8 @@ public class PasswordDimenticata extends JDialog {
 		getContentPane().setLayout(null);
 		{
 
-			lblSpostaUscita = new JLabel("");
-			lblSpostaUscita.addMouseMotionListener(new MouseMotionAdapter() {
+			lblSpostaPasswordDimenticata = new JLabel("");
+			lblSpostaPasswordDimenticata.addMouseMotionListener(new MouseMotionAdapter() {
 				@Override
 				public void mouseDragged(MouseEvent spostaDashboard) {
 					x = spostaDashboard.getXOnScreen();
@@ -95,7 +94,7 @@ public class PasswordDimenticata extends JDialog {
 
 				}
 			});
-			lblSpostaUscita.addMouseListener(new MouseAdapter() {
+			lblSpostaPasswordDimenticata.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent prendiPosizioneMouse) {
 
@@ -104,6 +103,10 @@ public class PasswordDimenticata extends JDialog {
 
 				}
 			});
+			lblSpostaPasswordDimenticata.setHorizontalAlignment(SwingConstants.CENTER);
+			lblSpostaPasswordDimenticata.setIcon(new ImageIcon(img.spostaUscita()));
+			lblSpostaPasswordDimenticata.setBounds(1, 0, 498, 37);
+			getContentPane().add(lblSpostaPasswordDimenticata);
 
 			lblX = new JLabel("");
 			lblX.addMouseListener(new MouseAdapter() {
@@ -133,50 +136,35 @@ public class PasswordDimenticata extends JDialog {
 					lblX.setIcon(new ImageIcon(img.X1()));
 				}
 			});
+			lblX.setHorizontalAlignment(SwingConstants.CENTER);
+			lblX.setIcon(new ImageIcon(img.X1()));
+			lblX.setBounds(448, 1, 51, 34);
+			getContentPane().add(lblX);
 
-			JLabel lblmostraRipetiNuovaPassword = new JLabel("");
-			lblmostraRipetiNuovaPassword.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					lblmostraRipetiNuovaPassword.setVisible(false);
-					txtRipetiNuovaPassword.setEchoChar((char) 0);
-				}
-			});
-			lblmostraRipetiNuovaPassword.setToolTipText("Mostra password");
-			lblmostraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			lblmostraRipetiNuovaPassword.setHorizontalAlignment(SwingConstants.CENTER);
-			lblmostraRipetiNuovaPassword.setIcon(new ImageIcon(img.censuraPassword()));
-			lblmostraRipetiNuovaPassword.setBounds(402, 287, 20, 20);
-			getContentPane().add(lblmostraRipetiNuovaPassword);
-
-			txtRipetiNuovaPassword = new JPasswordField();
-			txtRipetiNuovaPassword.setBorder(null);
-			txtRipetiNuovaPassword.setBackground(controllerPasswordDimenticata.sfondo);
-			txtRipetiNuovaPassword.setForeground(controllerPasswordDimenticata.coloreScritte);
-			txtRipetiNuovaPassword.setBounds(78, 287, 314, 20);
-			getContentPane().add(txtRipetiNuovaPassword);
-
-			JLabel lblcensuraRipetiNuovaPassword = new JLabel("");
-			lblcensuraRipetiNuovaPassword.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					lblmostraRipetiNuovaPassword.setVisible(true);
-					txtRipetiNuovaPassword.setEchoChar('●');
-				}
-			});
-			lblcensuraRipetiNuovaPassword.setToolTipText("Nascondi password");
-			lblcensuraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			lblcensuraRipetiNuovaPassword.setHorizontalAlignment(SwingConstants.CENTER);
-			lblcensuraRipetiNuovaPassword.setIcon(new ImageIcon(img.mostraPassword()));
-			lblcensuraRipetiNuovaPassword.setBounds(402, 287, 20, 20);
-			getContentPane().add(lblcensuraRipetiNuovaPassword);
+			txtEmail = new JTextField();
+			txtEmail.setBorder(null);
+			txtEmail.setForeground(controllerPasswordDimenticata.coloreScritte);
+			txtEmail.setFont(controllerPasswordDimenticata.fontScritte);
+			txtEmail.setBackground(controllerPasswordDimenticata.sfondo);
+			txtEmail.setColumns(10);
+			txtEmail.setBounds(78, 101, 314, 20);
+			getContentPane().add(txtEmail);
 
 			txtNuovaPassword = new JPasswordField();
 			txtNuovaPassword.setBorder(null);
 			txtNuovaPassword.setForeground(controllerPasswordDimenticata.coloreScritte);
+			txtNuovaPassword.setFont(controllerPasswordDimenticata.fontScritte);
 			txtNuovaPassword.setBackground(controllerPasswordDimenticata.sfondo);
-			txtNuovaPassword.setBounds(78, 192, 314, 20);
+			txtNuovaPassword.setBounds(78, 195, 314, 20);
 			getContentPane().add(txtNuovaPassword);
+
+			txtRipetiNuovaPassword = new JPasswordField();
+			txtRipetiNuovaPassword.setBorder(null);
+			txtRipetiNuovaPassword.setBackground(controllerPasswordDimenticata.sfondo);
+			txtRipetiNuovaPassword.setFont(controllerPasswordDimenticata.fontScritte);
+			txtRipetiNuovaPassword.setForeground(controllerPasswordDimenticata.coloreScritte);
+			txtRipetiNuovaPassword.setBounds(78, 289, 314, 20);
+			getContentPane().add(txtRipetiNuovaPassword);
 
 			JLabel lblmostraNuovaPassword = new JLabel("");
 			lblmostraNuovaPassword.addMouseListener(new MouseAdapter() {
@@ -194,14 +182,6 @@ public class PasswordDimenticata extends JDialog {
 			lblmostraNuovaPassword.setBounds(402, 192, 20, 20);
 			getContentPane().add(lblmostraNuovaPassword);
 
-			txtEmail = new JTextField();
-			txtEmail.setBorder(null);
-			txtEmail.setForeground(controllerPasswordDimenticata.coloreScritte);
-			txtEmail.setBackground(controllerPasswordDimenticata.sfondo);
-			txtEmail.setColumns(10);
-			txtEmail.setBounds(78, 97, 314, 20);
-			getContentPane().add(txtEmail);
-
 			JLabel lblcensuraNuovaPassword = new JLabel("");
 			lblcensuraNuovaPassword.addMouseListener(new MouseAdapter() {
 				@Override
@@ -217,11 +197,35 @@ public class PasswordDimenticata extends JDialog {
 			lblcensuraNuovaPassword.setBounds(402, 192, 20, 20);
 			getContentPane().add(lblcensuraNuovaPassword);
 
-			lblCampi = new JLabel("");
-			lblCampi.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCampi.setIcon(new ImageIcon(img.campiPasswordDimenticata()));
-			lblCampi.setBounds(78, 63, 344, 263);
-			getContentPane().add(lblCampi);
+			JLabel lblmostraRipetiNuovaPassword = new JLabel("");
+			lblmostraRipetiNuovaPassword.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					lblmostraRipetiNuovaPassword.setVisible(false);
+					txtRipetiNuovaPassword.setEchoChar((char) 0);
+				}
+			});
+			lblmostraRipetiNuovaPassword.setToolTipText("Mostra password");
+			lblmostraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			lblmostraRipetiNuovaPassword.setHorizontalAlignment(SwingConstants.CENTER);
+			lblmostraRipetiNuovaPassword.setIcon(new ImageIcon(img.censuraPassword()));
+			lblmostraRipetiNuovaPassword.setBounds(402, 287, 20, 20);
+			getContentPane().add(lblmostraRipetiNuovaPassword);
+
+			JLabel lblcensuraRipetiNuovaPassword = new JLabel("");
+			lblcensuraRipetiNuovaPassword.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					lblmostraRipetiNuovaPassword.setVisible(true);
+					txtRipetiNuovaPassword.setEchoChar('●');
+				}
+			});
+			lblcensuraRipetiNuovaPassword.setToolTipText("Nascondi password");
+			lblcensuraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			lblcensuraRipetiNuovaPassword.setHorizontalAlignment(SwingConstants.CENTER);
+			lblcensuraRipetiNuovaPassword.setIcon(new ImageIcon(img.mostraPassword()));
+			lblcensuraRipetiNuovaPassword.setBounds(402, 287, 20, 20);
+			getContentPane().add(lblcensuraRipetiNuovaPassword);
 
 			lblSalva = new JLabel("");
 			lblSalva.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -255,16 +259,10 @@ public class PasswordDimenticata extends JDialog {
 			lblSalva.setFont(new Font("Arial", Font.BOLD, 15));
 			lblSalva.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSalva.setIcon(new ImageIcon(img.salva1()));
-			lblSalva.setBounds(56, 402, 181, 56);
+			lblSalva.setBounds(50, 374, 174, 47);
 			getContentPane().add(lblSalva);
-			lblX.setHorizontalAlignment(SwingConstants.CENTER);
-			lblX.setIcon(new ImageIcon(img.X1()));
-			lblX.setBounds(448, 1, 51, 34);
-			getContentPane().add(lblX);
-			lblSpostaUscita.setHorizontalAlignment(SwingConstants.CENTER);
-			lblSpostaUscita.setIcon(new ImageIcon(img.spostaUscita()));
-			lblSpostaUscita.setBounds(1, 0, 498, 37);
-			getContentPane().add(lblSpostaUscita);
+			
+			
 
 			lblAnnulla = new JLabel("");
 			lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -297,8 +295,14 @@ public class PasswordDimenticata extends JDialog {
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-			lblAnnulla.setBounds(276, 411, 174, 47);
+			lblAnnulla.setBounds(274, 374, 174, 47);
 			getContentPane().add(lblAnnulla);
+
+			lblCampi = new JLabel("");
+			lblCampi.setHorizontalAlignment(SwingConstants.CENTER);
+			lblCampi.setIcon(new ImageIcon(img.campiPasswordDimenticata()));
+			lblCampi.setBounds(78, 63, 344, 263);
+			getContentPane().add(lblCampi);
 
 		}
 

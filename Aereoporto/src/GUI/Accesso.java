@@ -177,7 +177,7 @@ public class Accesso extends JPanel {
 
 		lblMessaggioCredenziali = new JLabel("");
 		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMessaggioCredenziali.setFont(controllerAccesso.fontScritteLabel);
+		lblMessaggioCredenziali.setFont(controllerAccesso.fontLabel);
 		lblMessaggioCredenziali.setForeground(controllerAccesso.coloreScritturaAllerta);
 		lblMessaggioCredenziali.setBounds(478, 412, 344, 14);
 		add(lblMessaggioCredenziali);
@@ -208,9 +208,9 @@ public class Accesso extends JPanel {
 		});
 		lblPasswordDimenticata.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblPasswordDimenticata.setForeground(controllerAccesso.coloreLabel);
-		lblPasswordDimenticata.setFont(controllerAccesso.fontScritteLabel);
-		lblPasswordDimenticata.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPasswordDimenticata.setBounds(624, 388, 198, 14);
+		lblPasswordDimenticata.setFont(controllerAccesso.fontLabel);
+		lblPasswordDimenticata.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPasswordDimenticata.setBounds(681, 388, 141, 14);
 		add(lblPasswordDimenticata);
 
 	}

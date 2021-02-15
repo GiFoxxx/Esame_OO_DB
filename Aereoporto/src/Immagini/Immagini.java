@@ -178,7 +178,7 @@ public class Immagini {
 	
 	public Image annulla1() {
 		Image annulla1 = new ImageIcon(Uscita.class.getResource("immaginiUscita/annulla1.png")).getImage()
-				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return annulla1;
 	}
 	
@@ -196,19 +196,19 @@ public class Immagini {
 	
 	public Image salva1() {
 		Image salva1 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiPasswordDimenticata/salva1.png")).getImage()
-				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return salva1;
 	}
 	
 	public Image salva2() {
 		Image salva2 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiPasswordDimenticata/salva2.png")).getImage()
-				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return salva2;
 	}
 	
 	public Image salva3() {
 		Image salva3 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiPasswordDimenticata/salva3.png")).getImage()
-				.getScaledInstance(135, 41, Image.SCALE_SMOOTH);
+				.getScaledInstance(174, 47, Image.SCALE_SMOOTH);
 		return salva3;
 	}
 	

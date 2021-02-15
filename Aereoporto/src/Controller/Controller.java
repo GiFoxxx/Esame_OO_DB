@@ -34,9 +34,11 @@ public class Controller {
 	public Color coloreLabel = new Color(111, 115, 122);
 	public Color coloreLabelEntrata = new Color(205, 205, 205);
 	public Color coloreLabelPressed = new Color(240, 240, 240);
-	public Font fontScritteLabel = new Font("Arial", Font.BOLD, 12);
+	public Font fontLabel = new Font("Arial", Font.BOLD, 12);
 
 	private String emailAccesso;
+	private String passwordAccesso;
+	private int pannelloPrecedente = 1;
 
 	private Dashboard dashboard;
 	private Home home;
@@ -56,8 +58,9 @@ public class Controller {
 	private SceltaVolo sceltaVolo;
 	private Recensione recensioni;
 	private Uscita uscita;
+	private NoClick noClick;
 	private PasswordDimenticata passwordDimenticata;
-	
+
 	Utente utn;
 	VoloPartenze vlprtz;
 	VoloArrivi vlarr;
@@ -72,6 +75,22 @@ public class Controller {
 
 	public void setEmailAccesso(String emailAccesso) {
 		this.emailAccesso = emailAccesso;
+	}
+
+	public String getPasswordAccesso() {
+		return passwordAccesso;
+	}
+
+	public void setPasswordAccesso(String passwordAccesso) {
+		this.passwordAccesso = passwordAccesso;
+	}
+
+	public int getPannelloPrecedente() {
+		return pannelloPrecedente;
+	}
+
+	public void setPannelloPrecedente(int pannelloPrecedente) {
+		this.pannelloPrecedente = pannelloPrecedente;
 	}
 
 	public Dashboard getDashboard() {
@@ -218,6 +237,14 @@ public class Controller {
 		this.uscita = uscita;
 	}
 
+	public NoClick getNoClick() {
+		return noClick;
+	}
+
+	public void setNoClick(NoClick noClick) {
+		this.noClick = noClick;
+	}
+
 	public PasswordDimenticata getPasswordDimenticata() {
 		return passwordDimenticata;
 	}
@@ -257,6 +284,7 @@ public class Controller {
 		passwordDimenticata = new PasswordDimenticata(this);
 		sceltaVolo = new SceltaVolo(this);
 		recensioni = new Recensione(this);
+		noClick = new NoClick(this);
 		dashboard.setVisible(true);
 	}
 
@@ -272,6 +300,7 @@ public class Controller {
 		String email = ((Accesso) getDashboard().getAccesso()).getTxtEmail().getText();
 		emailAccesso = ((Accesso) getDashboard().getAccesso()).getTxtEmail().getText();
 		String password = ((Accesso) getDashboard().getAccesso()).getTxtPassword().getText();
+		passwordAccesso = ((Accesso) getDashboard().getAccesso()).getTxtPassword().getText();
 
 		if (implementazioneUtenteDAO().accessoUtente(email, password)) {
 			mostraPannelli(getDashboard().getHome());
@@ -292,11 +321,11 @@ public class Controller {
 			return false;
 		}
 	}
-	
+
 	public void accessoPasswordDimenticata() {
 		Utente utn = new Utente(((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText(),
 				((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().getText());
-		implementazioneUtenteDAO().modificaPassword(utn);
+		implementazioneUtenteDAO().passwordDimenticata(utn);
 		mostraPannelli(getDashboard().getAccesso());
 		getDashboard().getPasswordDimenticata().dispose();
 		getDashboard().setEnabled(true);
@@ -783,7 +812,7 @@ public class Controller {
 		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
-	// METODI DASHBOARD
+	// METODI DI DASHBOARD
 
 	@SuppressWarnings("deprecation")
 	public void apriTendina() {
@@ -830,6 +859,7 @@ public class Controller {
 			};
 			th.start();
 			getDashboard().setPosizioneTendina(50);
+			pannelloPrecedentementeSelezionato(pannelloPrecedente);
 		}
 
 	}
@@ -927,7 +957,7 @@ public class Controller {
 		SceltaProfiloSenzaAccesso sceltaProfiloSenzaAccesso = new SceltaProfiloSenzaAccesso(this);
 		return sceltaProfiloSenzaAccesso;
 	}
-	
+
 	public JDialog passwordDimenticata() {
 		PasswordDimenticata passwordDimenticata = new PasswordDimenticata(this);
 		return passwordDimenticata;
@@ -938,36 +968,20 @@ public class Controller {
 		return recensioni;
 	}
 
+	public JPanel noClick() {
+		NoClick noClick = new NoClick(this);
+		return noClick;
+	}
+
 	public JDialog uscita() {
 		Uscita uscita = new Uscita(this);
 		return uscita;
-	}
-
-	public void mostraNoClick() {
-
-		if (getDashboard().getHome().isVisible()) {
-			getDashboard().getHome().setVisible(true);
-		} else if (getDashboard().getAccesso().isVisible()) {
-			getDashboard().getAccesso().setVisible(true);
-		} else if (getDashboard().getRegistrazione().isVisible()) {
-			getDashboard().getRegistrazione().setVisible(true);
-		} else if (getDashboard().getProfilo().isVisible()) {
-			getDashboard().getProfilo().setVisible(true);
-		} else if (getDashboard().getImpostazioni().isVisible()) {
-			getDashboard().getImpostazioni().setVisible(true);
-		}
-		getDashboard().getNoClickDestra().setVisible(true);
-	}
-
-	public void mostraPannelloNoClick() {
-		getDashboard().getNoClickDestra().setVisible(true);
 	}
 
 	public void mostraPannelli(JPanel pane) {
 		((Home) getDashboard().getHome()).getLblFareAccesso().setText("");
 		((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setText("");
 		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
-		getDashboard().getNoClickDestra().setVisible(false);
 		getDashboard().getHome().setVisible(false);
 		getDashboard().getAccesso().setVisible(false);
 		svuotaCampiAccesso();
@@ -982,7 +996,9 @@ public class Controller {
 		getDashboard().getGestioneVoliPartenze().setVisible(false);
 		getDashboard().getGestioneVoliArrivi().setVisible(false);
 		getDashboard().getCambioPassword().setVisible(false);
+		svuotaCampiCambioPassword();
 		getDashboard().getRecensione().setVisible(false);
+		getDashboard().getNoClick().setVisible(false);
 		pane.setVisible(true);
 	}
 
@@ -1054,23 +1070,64 @@ public class Controller {
 	public void profiloUtenteAccessoEffettuato() {
 		utn = new Utente(getEmailAccesso());
 		((Profilo) getDashboard().getProfilo()).getTxtNome().setText(implementazioneUtenteDAO().stampaNomeAccount(utn));
-		((Profilo) getDashboard().getProfilo()).getTxtCognome().setText(implementazioneUtenteDAO().stampaCognomeAccount(utn));
-		((Profilo) getDashboard().getProfilo()).getTxtEmail().setText(implementazioneUtenteDAO().stampaEmailAccount(utn));
+		((Profilo) getDashboard().getProfilo()).getTxtCognome()
+				.setText(implementazioneUtenteDAO().stampaCognomeAccount(utn));
+		((Profilo) getDashboard().getProfilo()).getTxtEmail()
+				.setText(implementazioneUtenteDAO().stampaEmailAccount(utn));
 	}
 
 	public void logout() {
 		((Accesso) getDashboard().getAccesso()).setSbloccaHome(false);
 		mostraPannelli(getDashboard().getAccesso());
 	}
-	
 
-	//METODI PASSWORD DIMENTICATA
-		public void svuotaCampiPasswordDimenticata() {
-			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().setText("");
-			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().setText("");
-			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtRipetiNuovaPassword().setText("");
+	// METODI DI CAMBIO PASSWORD
+
+	public void svuotaCampiCambioPassword() {
+		((CambioPassword) getDashboard().getCambioPassword()).getTxtVecchiaPassword().setText("");
+		((CambioPassword) getDashboard().getCambioPassword()).getTxtNuovaPassword().setText("");
+		((CambioPassword) getDashboard().getCambioPassword()).getTxtRipetiNuovaPassword().setText("");
+	}
+
+	public void cambioPasswordDaProfilo() {
+		utn = new Utente(emailAccesso,
+				((CambioPassword) getDashboard().getCambioPassword()).getTxtNuovaPassword().getText());
+
+		if (passwordVecchiaUgualeAllaNuova() && ripetiCambioPassword()) {
+
+			implementazioneUtenteDAO().cambioPasswordDB(utn);
+			logout();
+			mostraPannelli(getDashboard().getAccesso());
+
+			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 		}
-	
+	}
+
+	public boolean passwordVecchiaUgualeAllaNuova() {
+		if (((CambioPassword) getDashboard().getCambioPassword()).getTxtVecchiaPassword().getText()
+				.equals(passwordAccesso)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean ripetiCambioPassword() {
+		if (((CambioPassword) getDashboard().getCambioPassword()).getTxtNuovaPassword().getText()
+				.equals(((CambioPassword) getDashboard().getCambioPassword()).getTxtRipetiNuovaPassword().getText())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// METODI PASSWORD DIMENTICATA
+	public void svuotaCampiPasswordDimenticata() {
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().setText("");
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().setText("");
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtRipetiNuovaPassword().setText("");
+	}
+
 	public void mostraPasswordDimenticata() {
 		dashboard.setEnabled(false);
 		dashboard.getPasswordDimenticata().setVisible(true);
@@ -1129,6 +1186,41 @@ public class Controller {
 		option.setUndecorated(true);
 
 		return dim;
+	}
+
+	// METODI DI NOCLICK
+
+	public void pannelloPrecedentementeSelezionato(int PanelSelected) {
+		int selezionePannello = PanelSelected;
+
+		if (selezionePannello == 1) {
+			mostraPannelli(getDashboard().getHome());
+		} else if (selezionePannello == 2) {
+			mostraPannelli(getDashboard().getAccesso());
+		} else if (selezionePannello == 3) {
+			mostraPannelli(getDashboard().getRegistrazione());
+		} else if (selezionePannello == 4) {
+			mostraPannelli(getDashboard().getProfilo());
+		} else if (selezionePannello == 5) {
+			mostraPannelli(getDashboard().getImpostazioni());
+		} else if (selezionePannello == 6) {
+			mostraPannelli(getDashboard().getGestioneTratte());
+		} else if (selezionePannello == 7) {
+			mostraPannelli(getDashboard().getGestioneCompagnieAeree());
+		} else if (selezionePannello == 8) {
+			mostraPannelli(getDashboard().getGestioneUtenti());
+		} else if (selezionePannello == 9) {
+			mostraPannelli(getDashboard().getGestioneUtenti());
+		} else if (selezionePannello == 10) {
+			mostraPannelli(getDashboard().getGestioneGate());
+		} else if (selezionePannello == 11) {
+			mostraPannelli(getDashboard().getGestioneVoliPartenze());
+		} else if (selezionePannello == 12) {
+			mostraPannelli(getDashboard().getGestioneVoliArrivi());
+		} else {
+			mostraPannelli(getDashboard().getHome());
+		}
+
 	}
 
 	// METODI DI PROVA

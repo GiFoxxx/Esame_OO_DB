@@ -100,7 +100,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtNome.setFont(controllerRegistrazione.fontScritteJDialog);
+		txtNome.setFont(controllerRegistrazione.fontScritte);
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
 		txtNome.setBackground(controllerRegistrazione.sfondo);
@@ -117,7 +117,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtCognome.setFont(controllerRegistrazione.fontScritteJDialog);
+		txtCognome.setFont(controllerRegistrazione.fontScritte);
 		txtCognome.setColumns(10);
 		txtCognome.setBorder(null);
 		txtCognome.setBackground(controllerRegistrazione.sfondo);
@@ -134,7 +134,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtEmail.setFont(controllerRegistrazione.fontScritteJDialog);
+		txtEmail.setFont(controllerRegistrazione.fontScritte);
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
 		txtEmail.setBackground(controllerRegistrazione.sfondo);
@@ -151,7 +151,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtPassword.setFont(controllerRegistrazione.fontScritteJDialog);
+		txtPassword.setFont(controllerRegistrazione.fontScritte);
 		txtPassword.setBorder(null);
 		txtPassword.setBackground(controllerRegistrazione.sfondo);
 		txtPassword.setForeground(controllerRegistrazione.coloreScritte);
@@ -167,7 +167,7 @@ public class Registrazione extends JPanel {
 				}
 			}
 		});
-		txtRipetiPassword.setFont(controllerRegistrazione.fontScritteJDialog);
+		txtRipetiPassword.setFont(controllerRegistrazione.fontScritte);
 		txtRipetiPassword.setBorder(null);
 		txtRipetiPassword.setBackground(controllerRegistrazione.sfondo);
 		txtRipetiPassword.setForeground(controllerRegistrazione.coloreScritte);
@@ -179,7 +179,7 @@ public class Registrazione extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblmostraPassword.setVisible(false);
-				txtPassword.setEchoChar((char) 0);
+				txtPassword.setEchoChar('●');
 			}
 		});
 		lblmostraPassword.setToolTipText("Mostra password");
@@ -265,7 +265,7 @@ public class Registrazione extends JPanel {
 		lblAvanti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAvanti.setIcon(new ImageIcon(img.avanti1()));
 		lblAvanti.setBackground(controllerRegistrazione.trasparente);
-		lblAvanti.setBounds(736, 548, 174, 47);
+		lblAvanti.setBounds(736, 565, 174, 47);
 		add(lblAvanti);
 
 		JLabel lblInserimentoCredenziali = new JLabel("");
@@ -276,9 +276,9 @@ public class Registrazione extends JPanel {
 
 		lblMessaggioCredenziali = new JLabel("");
 		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessaggioCredenziali.setFont(controllerRegistrazione.fontScritte);
+		lblMessaggioCredenziali.setFont(controllerRegistrazione.fontLabel);
 		lblMessaggioCredenziali.setForeground(controllerRegistrazione.coloreScritturaAllerta);
-		lblMessaggioCredenziali.setBounds(638, 516, 370, 28);
+		lblMessaggioCredenziali.setBounds(638, 526, 370, 14);
 		add(lblMessaggioCredenziali);
 	}
 

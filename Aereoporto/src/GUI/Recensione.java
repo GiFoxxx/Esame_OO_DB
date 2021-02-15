@@ -27,6 +27,7 @@ public class Recensione extends JPanel {
 	int yMouseSuSchermo;
 	int x;
 	int y;
+	int flag = 0;
 
 	JLabel lblLayout;
 	JLabel lblAnnulla;
@@ -77,7 +78,9 @@ public class Recensione extends JPanel {
 		lblAnnulla.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerRecensione.annullaUscita();
+				controllerRecensione.setPannelloPrecedente(5);
+				controllerRecensione.mostraPannelli(controllerRecensione.getDashboard().getImpostazioni());
+				stella0();
 			}
 
 			@Override
@@ -131,574 +134,168 @@ public class Recensione extends JPanel {
 		lblInviaRecensione.setIcon(new ImageIcon(img.inviaRecensione1()));
 		lblInviaRecensione.setBounds(720, 513, 174, 47);
 		add(lblInviaRecensione);
-		
+
 		lblStella1 = new JLabel("");
 		lblStella1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella3.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella4.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				riempimentoStella1();
 			}
 		});
 		lblStella1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella1.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella1.setBounds(67, 100, 35, 35);
 		add(lblStella1);
-		
+
 		lblStella2 = new JLabel("");
 		lblStella2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella4.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella2();
 			}
 		});
 		lblStella2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella2.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella2.setBounds(169, 100, 35, 35);
 		add(lblStella2);
-		
+
 		lblStella3 = new JLabel("");
 		lblStella3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella3();
 			}
 		});
 		lblStella3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella3.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella3.setBounds(271, 100, 35, 35);
 		add(lblStella3);
-		
+
 		lblStella4 = new JLabel("");
 		lblStella4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella4();
 			}
 		});
 		lblStella4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella4.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella4.setBounds(373, 100, 35, 35);
 		add(lblStella4);
-		
+
 		lblStella5 = new JLabel("");
 		lblStella5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella5();
 			}
 		});
 		lblStella5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella5.setBounds(475, 100, 35, 35);
 		add(lblStella5);
-		
+
 		lblStella6 = new JLabel("");
 		lblStella6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella6();
 			}
 		});
 		lblStella6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella6.setBounds(577, 100, 35, 35);
 		add(lblStella6);
-		
+
 		lblStella7 = new JLabel("");
 		lblStella7.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella7();
 			}
 		});
 		lblStella7.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella7.setBounds(679, 100, 35, 35);
 		add(lblStella7);
-		
+
 		lblStella8 = new JLabel("");
 		lblStella8.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella8();
 			}
 		});
 		lblStella8.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella8.setBounds(781, 100, 35, 35);
 		add(lblStella8);
-		
+
 		lblStella9 = new JLabel("");
 		lblStella9.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella9();
 			}
 		});
 		lblStella9.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella9.setBounds(883, 100, 35, 35);
 		add(lblStella9);
-		
+
 		lblStella10 = new JLabel("");
 		lblStella10.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella10();
 			}
 		});
 		lblStella10.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella10.setBounds(985, 100, 35, 35);
 		add(lblStella10);
-		
+
 		lblStella11 = new JLabel("");
 		lblStella11.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella11();
 			}
 		});
 		lblStella11.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella11.setBounds(67, 225, 35, 35);
 		add(lblStella11);
-		
+
 		lblStella12 = new JLabel("");
 		lblStella12.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella12();
 			}
 		});
 		lblStella12.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella12.setBounds(169, 225, 35, 35);
 		add(lblStella12);
-		
+
 		lblStella13 = new JLabel("");
 		lblStella13.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella13();
 			}
 		});
 		lblStella13.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella13.setBounds(271, 225, 35, 35);
 		add(lblStella13);
-		
+
 		lblStella14 = new JLabel("");
 		lblStella14.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella14();
 			}
 		});
 		lblStella14.setHorizontalAlignment(SwingConstants.CENTER);
@@ -710,612 +307,175 @@ public class Recensione extends JPanel {
 		lblStella15.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella15();
 			}
 		});
 		lblStella15.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella15.setBounds(475, 225, 35, 35);
 		add(lblStella15);
-		
+
 		lblStella16 = new JLabel("");
 		lblStella16.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella16();
 			}
 		});
 		lblStella16.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella16.setBounds(577, 225, 35, 35);
 		add(lblStella16);
-		
+
 		lblStella17 = new JLabel("");
 		lblStella17.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella17();
 			}
 		});
 		lblStella17.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella17.setBounds(679, 225, 35, 35);
 		add(lblStella17);
-		
+
 		lblStella18 = new JLabel("");
 		lblStella18.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella18();
 			}
 		});
 		lblStella18.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella18.setBounds(781, 225, 35, 35);
 		add(lblStella18);
-		
+
 		lblStella19 = new JLabel("");
 		lblStella19.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella19();
 			}
 		});
 		lblStella19.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella19.setBounds(883, 225, 35, 35);
 		add(lblStella19);
-		
+
 		lblStella20 = new JLabel("");
 		lblStella20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella20();
 			}
 		});
 		lblStella20.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella20.setBounds(985, 225, 35, 35);
 		add(lblStella20);
-		
+
 		lblStella21 = new JLabel("");
 		lblStella21.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella21();
 			}
 		});
 		lblStella21.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella21.setBounds(67, 350, 35, 35);
 		add(lblStella21);
-		
-		
+
 		lblStella22 = new JLabel("");
 		lblStella22.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella22();
 			}
 		});
 		lblStella22.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella22.setBounds(169, 350, 35, 35);
 		add(lblStella22);
-		
+
 		lblStella23 = new JLabel("");
 		lblStella23.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella23();
 			}
 		});
 		lblStella23.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella23.setBounds(271, 350, 35, 35);
 		add(lblStella23);
-		
+
 		lblStella24 = new JLabel("");
 		lblStella24.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella24();
 			}
 		});
 		lblStella24.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella24.setBounds(373, 350, 35, 35);
 		add(lblStella24);
-		
+
 		lblStella25 = new JLabel("");
 		lblStella25.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella25();
 			}
 		});
 		lblStella25.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella25.setBounds(475, 350, 35, 35);
 		add(lblStella25);
-		
+
 		lblStella26 = new JLabel("");
 		lblStella26.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella26.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella26();
 			}
 		});
 		lblStella26.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella26.setBounds(577, 350, 35, 35);
 		add(lblStella26);
-		
+
 		lblStella27 = new JLabel("");
 		lblStella27.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella26.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella27.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella27();
 			}
 		});
 		lblStella27.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella27.setBounds(679, 350, 35, 35);
 		add(lblStella27);
-		
+
 		lblStella28 = new JLabel("");
 		lblStella28.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella26.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella27.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella28.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella28();
 			}
 		});
 		lblStella28.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella28.setBounds(781, 350, 35, 35);
 		add(lblStella28);
-		
+
 		lblStella29 = new JLabel("");
 		lblStella29.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella26.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella27.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella28.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella29.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+				stella29();
 			}
 		});
 		lblStella29.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1323,41 +483,11 @@ public class Recensione extends JPanel {
 		lblStella29.setBounds(883, 350, 35, 35);
 		add(lblStella29);
 
-		
 		lblStella30 = new JLabel("");
 		lblStella30.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella26.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella27.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella28.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella29.setIcon(new ImageIcon(img.stellaPiena()));
-				lblStella30.setIcon(new ImageIcon(img.stellaPiena()));
+				stella30();
 			}
 		});
 		lblStella30.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1373,6 +503,1073 @@ public class Recensione extends JPanel {
 		add(lblLayout);
 
 	}
+
+	// METODI RIEMPIMENTO STELLE
+
+	public void riempimentoStella1() {
+		if (flag == 0) {
+			stella1();
+			flag = 1;
+		} else if (flag == 1) {
+			stella0();
+			flag = 0;
+		}
+	}
 	
 	
+	public void stella0() {
+		lblStella1.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella2.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella3.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella4.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella1() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella3.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella4.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella2() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella4.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella3() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella4() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella5() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella6() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella7() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella8() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella9() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella10() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella11() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella12() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella13() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella14() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella15() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella16() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella17() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella18() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella19() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella20() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella21() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella22() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella23() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella24() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella25() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella26() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella26.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella27() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella26.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella27.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella28() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella26.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella27.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella28.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella29() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella26.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella27.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella28.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella29.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
+		flag = 0;
+	}
+
+	public void stella30() {
+		lblStella1.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella2.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella3.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella4.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella5.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella6.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella7.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella8.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella9.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella10.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella11.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella12.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella13.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella14.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella15.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella16.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella17.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella18.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella19.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella20.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella21.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella22.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella23.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella24.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella25.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella26.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella27.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella28.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella29.setIcon(new ImageIcon(img.stellaPiena()));
+		lblStella30.setIcon(new ImageIcon(img.stellaPiena()));
+		flag = 0;
+	}
+
 }

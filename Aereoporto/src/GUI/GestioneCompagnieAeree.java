@@ -92,6 +92,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerGestioneCompagnieAeree.setPannelloPrecedente(1);
 				controllerGestioneCompagnieAeree.mostraPannelli(controllerGestioneCompagnieAeree.getDashboard().getHome());
 			}
 			@Override
