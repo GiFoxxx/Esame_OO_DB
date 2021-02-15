@@ -328,7 +328,7 @@ public class Immagini {
 
 	public Image ricerca() {
 		Image ricerca = new ImageIcon(Accesso.class.getResource("immaginiInComune/ricerca.png")).getImage()
-				.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+				.getScaledInstance(13, 13, Image.SCALE_SMOOTH);
 		return ricerca;
 	}
 

@@ -32,6 +32,7 @@ public class Controller {
 	public Font fontScritteTendina = new Font("Arial", Font.BOLD, 17);
 	public Font fontTitolo = new Font("Arial", Font.BOLD, 18);
 	public Font fontScritteJDialog = new Font("Arial", Font.BOLD, 20);
+	public Font fontScritteGestioni = new Font("Arial", Font.PLAIN, 13);
 	public Color coloreLabel = new Color(111, 115, 122);
 	public Color coloreLabelEntrata = new Color(205, 205, 205);
 	public Color coloreLabelPressed = new Color(240, 240, 240);

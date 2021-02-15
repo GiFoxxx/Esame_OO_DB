@@ -113,7 +113,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		lblRicerca.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicerca.setIcon(new ImageIcon(img.ricerca()));
-		lblRicerca.setBounds(840, 36, 27, 27);
+		lblRicerca.setBounds(1031, 39, 23, 23);
 		add(lblRicerca);
 
 		txtBarraRicerca = new JTextField();
@@ -124,20 +124,20 @@ public class GestioneCompagnieAeree extends JPanel {
 			}
 		});
 		txtBarraRicerca.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBianco);
-		txtBarraRicerca.setFont(controllerGestioneCompagnieAeree.fontScritte);
+		txtBarraRicerca.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(704, 42, 135, 20);
+		txtBarraRicerca.setBounds(888, 40, 141, 20);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 
 		JLabel lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(693, 35, 180, 30);
+		lblBarraRicerca.setBounds(876, 38, 184, 25);
 		add(lblBarraRicerca);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 85, 850, 330);
+		scrollPane.setBounds(30, 85, 1030, 330);
 		add(scrollPane);
 
 		tabella = new JTable();
@@ -157,7 +157,7 @@ public class GestioneCompagnieAeree extends JPanel {
 
 		txtCodiceCompagniaAerea = new JTextField();
 		txtCodiceCompagniaAerea.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBianco);
-		txtCodiceCompagniaAerea.setFont(controllerGestioneCompagnieAeree.fontScritte);
+		txtCodiceCompagniaAerea.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtCodiceCompagniaAerea.setColumns(10);
 		txtCodiceCompagniaAerea.setBounds(304, 459, 133, 20);
 		add(txtCodiceCompagniaAerea);
@@ -165,13 +165,13 @@ public class GestioneCompagnieAeree extends JPanel {
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNome.setForeground(controllerGestioneCompagnieAeree.coloreScritte);
-		lblNome.setFont(controllerGestioneCompagnieAeree.fontScritte);
+		lblNome.setFont(controllerGestioneCompagnieAeree.fontLabel);
 		lblNome.setBounds(53, 490, 221, 20);
 		add(lblNome);
 
 		txtNome = new JTextField();
 		txtNome.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBianco);
-		txtNome.setFont(controllerGestioneCompagnieAeree.fontScritte);
+		txtNome.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtNome.setColumns(10);
 		txtNome.setBounds(304, 490, 133, 20);
 		add(txtNome);
@@ -179,7 +179,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		JLabel lblCodiceCompagniaAerea = new JLabel("Codice Compagnia Aerea");
 		lblCodiceCompagniaAerea.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceCompagniaAerea.setForeground(controllerGestioneCompagnieAeree.coloreScritte);
-		lblCodiceCompagniaAerea.setFont(controllerGestioneCompagnieAeree.fontScritte);
+		lblCodiceCompagniaAerea.setFont(controllerGestioneCompagnieAeree.fontLabel);
 		lblCodiceCompagniaAerea.setBounds(53, 459, 221, 20);
 		add(lblCodiceCompagniaAerea);
 

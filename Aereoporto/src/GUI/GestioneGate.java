@@ -117,6 +117,7 @@ public class GestioneGate extends JPanel {
 			public void mouseEntered(MouseEvent e) {
 				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
@@ -127,12 +128,12 @@ public class GestioneGate extends JPanel {
 		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
 		lblimgfrecciaIndietro.setBounds(25, 35, 47, 30);
 		add(lblimgfrecciaIndietro);
-		
+
 		JLabel lblRicerca = new JLabel("");
 		lblRicerca.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicerca.setIcon(new ImageIcon(img.ricerca()));
-		lblRicerca.setBounds(840, 36, 27, 27);
+		lblRicerca.setBounds(1031, 39, 23, 23);
 		add(lblRicerca);
 
 		txtBarraRicerca = new JTextField();
@@ -143,22 +144,22 @@ public class GestioneGate extends JPanel {
 			}
 		});
 		txtBarraRicerca.setForeground(controllerGestioneGate.coloreScritteSuBianco);
-		txtBarraRicerca.setFont(controllerGestioneGate.fontScritte);
+		txtBarraRicerca.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(704, 42, 135, 20);
+		txtBarraRicerca.setBounds(888, 40, 141, 20);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 
 		JLabel lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(693, 35, 180, 30);
+		lblBarraRicerca.setBounds(876, 38, 184, 25);
 		add(lblBarraRicerca);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setFont(new Font("Arial", Font.PLAIN, 12));
+		scrollPane.setFont(controllerGestioneGate.fontLabel);
 		scrollPane.setEnabled(false);
-		scrollPane.setBounds(25, 85, 850, 330);
+		scrollPane.setBounds(30, 85, 1030, 330);
 		add(scrollPane);
 
 		tabella = new JTable();
@@ -175,8 +176,6 @@ public class GestioneGate extends JPanel {
 		modello.setColumnIdentifiers(colonne);
 		tabella.setModel(modello);
 		scrollPane.setViewportView(tabella);
-
-		
 
 		JButton btnElimina = new JButton("elimina");
 		btnElimina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -223,59 +222,59 @@ public class GestioneGate extends JPanel {
 		add(btnSvuota);
 
 		JLabel lblNumeroPorta = new JLabel("Numero Porta");
-		lblNumeroPorta.setFont(controllerGestioneGate.fontScritte);
+		lblNumeroPorta.setFont(controllerGestioneGate.fontLabel);
 		lblNumeroPorta.setForeground(controllerGestioneGate.coloreScritte);
 		lblNumeroPorta.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNumeroPorta.setBounds(20, 494, 114, 20);
 		add(lblNumeroPorta);
 
 		txtNumeroPorta = new JTextField();
-		txtNumeroPorta.setFont(controllerGestioneGate.fontScritte);
+		txtNumeroPorta.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtNumeroPorta.setForeground(controllerGestioneGate.coloreScritteSuBianco);
 		txtNumeroPorta.setColumns(10);
-		txtNumeroPorta.setBounds(168, 494, 133, 20);
+		txtNumeroPorta.setBounds(168, 494, 180, 20);
 		add(txtNumeroPorta);
 
 		JLabel lblInizioImbarco = new JLabel("Inizio Imbarco");
-		lblInizioImbarco.setFont(controllerGestioneGate.fontScritte);
+		lblInizioImbarco.setFont(controllerGestioneGate.fontLabel);
 		lblInizioImbarco.setForeground(controllerGestioneGate.coloreScritte);
 		lblInizioImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblInizioImbarco.setBounds(20, 527, 114, 20);
 		add(lblInizioImbarco);
 
 		txtInizioImbarco = new JTextField();
-		txtInizioImbarco.setFont(controllerGestioneGate.fontScritte);
+		txtInizioImbarco.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtInizioImbarco.setForeground(controllerGestioneGate.coloreScritteSuBianco);
 		txtInizioImbarco.setColumns(10);
-		txtInizioImbarco.setBounds(168, 527, 133, 20);
+		txtInizioImbarco.setBounds(168, 527, 180, 20);
 		add(txtInizioImbarco);
 
 		JLabel lblFineImbarco = new JLabel("Fine Imbarco");
-		lblFineImbarco.setFont(controllerGestioneGate.fontScritte);
+		lblFineImbarco.setFont(controllerGestioneGate.fontLabel);
 		lblFineImbarco.setForeground(controllerGestioneGate.coloreScritte);
 		lblFineImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblFineImbarco.setBounds(20, 561, 114, 20);
 		add(lblFineImbarco);
 
 		txtFineImbarco = new JTextField();
-		txtFineImbarco.setFont(controllerGestioneGate.fontScritte);
+		txtFineImbarco.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtFineImbarco.setForeground(controllerGestioneGate.coloreScritteSuBianco);
 		txtFineImbarco.setColumns(10);
-		txtFineImbarco.setBounds(168, 561, 133, 20);
+		txtFineImbarco.setBounds(168, 561, 180, 20);
 		add(txtFineImbarco);
 
 		JLabel lblCodiceGate = new JLabel("Codice Gate");
 		lblCodiceGate.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCodiceGate.setFont(controllerGestioneGate.fontScritte);
+		lblCodiceGate.setFont(controllerGestioneGate.fontLabel);
 		lblCodiceGate.setForeground(controllerGestioneGate.coloreScritte);
 		lblCodiceGate.setBounds(20, 462, 114, 20);
 		add(lblCodiceGate);
 
 		txtCodiceGate = new JTextField();
-		txtCodiceGate.setFont(controllerGestioneGate.fontScritte);
+		txtCodiceGate.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtCodiceGate.setForeground(controllerGestioneGate.coloreScritteSuBianco);
 		txtCodiceGate.setColumns(10);
-		txtCodiceGate.setBounds(168, 462, 133, 20);
+		txtCodiceGate.setBounds(168, 462, 180, 20);
 		add(txtCodiceGate);
 
 		caricaTabella();
@@ -291,7 +290,7 @@ public class GestioneGate extends JPanel {
 		}
 		tabella.setModel(modello);
 	}
-	
+
 	private void ricerca() {
 		DefaultTableModel table = (DefaultTableModel) tabella.getModel();
 		String ricerca = txtBarraRicerca.getText();

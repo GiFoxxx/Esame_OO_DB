@@ -82,7 +82,7 @@ public class Accesso extends JPanel {
 		});
 		txtEmail.setBackground(controllerAccesso.sfondo);
 		txtEmail.setForeground(controllerAccesso.coloreScritte);
-		txtEmail.setFont(controllerAccesso.fontScritteJDialog);
+		txtEmail.setFont(controllerAccesso.fontScritte);
 		txtEmail.setHorizontalAlignment(SwingConstants.LEFT);
 		txtEmail.setBounds(478, 251, 320, 22);
 		txtEmail.setColumns(10);
@@ -101,7 +101,7 @@ public class Accesso extends JPanel {
 
 		txtPassword.setBackground(controllerAccesso.sfondo);
 		txtPassword.setHorizontalAlignment(SwingConstants.LEFT);
-		txtPassword.setFont(controllerAccesso.fontScritteJDialog);
+		txtPassword.setFont(controllerAccesso.fontScritte);
 		txtPassword.setForeground(controllerAccesso.coloreScritte);
 		txtPassword.setBounds(478, 355, 320, 22);
 		txtPassword.setBorder(null);

@@ -179,7 +179,7 @@ public class GestioneTratte extends JPanel {
 		lblRicerca.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicerca.setIcon(new ImageIcon(img.ricerca()));
-		lblRicerca.setBounds(840, 36, 27, 27);
+		lblRicerca.setBounds(1031, 39, 23, 23);
 		add(lblRicerca);
 
 		txtBarraRicerca = new JTextField();
@@ -190,20 +190,20 @@ public class GestioneTratte extends JPanel {
 			}
 		});
 		txtBarraRicerca.setForeground(controllerGestioneTratte.coloreScritteSuBianco);
-		txtBarraRicerca.setFont(controllerGestioneTratte.fontScritte);
+		txtBarraRicerca.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(704, 42, 135, 20);
+		txtBarraRicerca.setBounds(888, 40, 141, 20);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 
 		JLabel lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(693, 35, 180, 30);
+		lblBarraRicerca.setBounds(876, 38, 184, 25);
 		add(lblBarraRicerca);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 85, 850, 330);
+		scrollPane.setBounds(30, 85, 1030, 330);
 		add(scrollPane);
 		
 		tabella = new JTable();
@@ -236,69 +236,67 @@ public class GestioneTratte extends JPanel {
 		
 		txtCodiceTratta = new JTextField();
 		txtCodiceTratta.setForeground(controllerGestioneTratte.coloreScritteSuBianco);
-		txtCodiceTratta.setFont(controllerGestioneTratte.fontScritte);
+		txtCodiceTratta.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCodiceTratta.setColumns(10);
 		txtCodiceTratta.setBounds(173, 444, 133, 20);
 		add(txtCodiceTratta);
 		
 		JLabel lblCodiceTratta = new JLabel("Codice Tratta");
 		lblCodiceTratta.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCodiceTratta.setFont(controllerGestioneTratte.fontScritte);
+		lblCodiceTratta.setFont(controllerGestioneTratte.fontLabel);
 		lblCodiceTratta.setForeground(controllerGestioneTratte.coloreScritte);
 		lblCodiceTratta.setBounds(25, 444, 114, 20);
 		add(lblCodiceTratta);
 		
 		JLabel lblCittaPartenza = new JLabel("Citta Partenza");
 		lblCittaPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCittaPartenza.setFont(controllerGestioneTratte.fontScritte);
+		lblCittaPartenza.setFont(controllerGestioneTratte.fontLabel);
 		lblCittaPartenza.setForeground(controllerGestioneTratte.coloreScritte);
 		lblCittaPartenza.setBounds(25, 474, 114, 20);
 		add(lblCittaPartenza);
 		
 		txtCittaPartenza = new JTextField();
 		txtCittaPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBianco);
-		txtCittaPartenza.setFont(controllerGestioneTratte.fontScritte);
+		txtCittaPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCittaPartenza.setColumns(10);
 		txtCittaPartenza.setBounds(173, 475, 133, 20);
 		add(txtCittaPartenza);
 		
 		txtCittaArrivo = new JTextField();
 		txtCittaArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBianco);
-		txtCittaArrivo.setFont(controllerGestioneTratte.fontScritte);
+		txtCittaArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCittaArrivo.setColumns(10);
 		txtCittaArrivo.setBounds(173, 505, 133, 20);
 		add(txtCittaArrivo);
 		
 		JLabel lblCittaArrivo = new JLabel("Citta Arrivo");
 		lblCittaArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCittaArrivo.setFont(controllerGestioneTratte.fontScritte);
+		lblCittaArrivo.setFont(controllerGestioneTratte.fontLabel);
 		lblCittaArrivo.setForeground(controllerGestioneTratte.coloreScritte);
 		lblCittaArrivo.setBounds(25, 504, 114, 20);
 		add(lblCittaArrivo);
 		
 		JLabel lblDataPartenza = new JLabel("Data Partenza");
 		lblDataPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDataPartenza.setFont(controllerGestioneTratte.fontScritte);
+		lblDataPartenza.setFont(controllerGestioneTratte.fontLabel);
 		lblDataPartenza.setForeground(controllerGestioneTratte.coloreScritte);
 		lblDataPartenza.setBounds(344, 444, 114, 20);
 		add(lblDataPartenza);
 		
 		dateDataPartenza = new JDateChooser();
-		dateDataPartenza.setFont(controllerGestioneTratte.fontScritte);
-		dateDataPartenza.setFont(controllerGestioneTratte.fontScritte);
+		dateDataPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		dateDataPartenza.setBounds(492, 444, 133, 23);
 		add(dateDataPartenza);
 		
 		JLabel lblDataArrivo = new JLabel("Data Arrivo");
 		lblDataArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDataArrivo.setFont(controllerGestioneTratte.fontScritte);
+		lblDataArrivo.setFont(controllerGestioneTratte.fontLabel);
 		lblDataArrivo.setForeground(controllerGestioneTratte.coloreScritte);
 		lblDataArrivo.setBounds(344, 482, 114, 20);
 		add(lblDataArrivo);
 		
 		dateDataArrivo = new JDateChooser();
-		dateDataArrivo.setFont(controllerGestioneTratte.fontScritte);
-		dateDataArrivo.setFont(controllerGestioneTratte.fontScritte);
+		dateDataArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		dateDataArrivo.setBounds(492, 482, 133, 23);
 		add(dateDataArrivo);
 		
@@ -348,71 +346,71 @@ public class GestioneTratte extends JPanel {
 		
 		JLabel lblOraPartenza = new JLabel("Ora Partenza");
 		lblOraPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblOraPartenza.setForeground((Color) null);
-		lblOraPartenza.setFont(null);
+		lblOraPartenza.setForeground(controllerGestioneTratte.coloreScritte);
+		lblOraPartenza.setFont(controllerGestioneTratte.fontLabel);
 		lblOraPartenza.setBounds(344, 516, 114, 20);
 		add(lblOraPartenza);
 		
 		txtOraPartenza = new JTextField();
-		txtOraPartenza.setForeground((Color) null);
-		txtOraPartenza.setFont(null);
+		txtOraPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBianco);
+		txtOraPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtOraPartenza.setColumns(10);
 		txtOraPartenza.setBounds(492, 516, 27, 20);
 		add(txtOraPartenza);
 		
 		JLabel lblDuePuntiPartenza = new JLabel(":");
 		lblDuePuntiPartenza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDuePuntiPartenza.setForeground((Color) null);
-		lblDuePuntiPartenza.setFont(null);
+		lblDuePuntiPartenza.setForeground(controllerGestioneTratte.coloreScritte);
+		lblDuePuntiPartenza.setFont(controllerGestioneTratte.fontLabel);
 		lblDuePuntiPartenza.setBounds(523, 519, 10, 14);
 		add(lblDuePuntiPartenza);
 		
 		txtOraArrivo = new JTextField();
-		txtOraArrivo.setForeground((Color) null);
-		txtOraArrivo.setFont(null);
+		txtOraArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBianco);
+		txtOraArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtOraArrivo.setColumns(10);
 		txtOraArrivo.setBounds(537, 516, 27, 20);
 		add(txtOraArrivo);
 		
 		JLabel lblMinutoPartenza = new JLabel("Minuto Partenza");
 		lblMinutoPartenza.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMinutoPartenza.setForeground((Color) null);
-		lblMinutoPartenza.setFont(null);
+		lblMinutoPartenza.setForeground(controllerGestioneTratte.coloreScritte);
+		lblMinutoPartenza.setFont(controllerGestioneTratte.fontLabel);
 		lblMinutoPartenza.setBounds(574, 516, 114, 20);
 		add(lblMinutoPartenza);
 		
 		JLabel lblMinutoArrivo = new JLabel("Minuto Arrivo");
 		lblMinutoArrivo.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMinutoArrivo.setForeground((Color) null);
-		lblMinutoArrivo.setFont(null);
+		lblMinutoArrivo.setForeground(controllerGestioneTratte.coloreScritte);
+		lblMinutoArrivo.setFont(controllerGestioneTratte.fontLabel);
 		lblMinutoArrivo.setBounds(574, 556, 114, 20);
 		add(lblMinutoArrivo);
 		
 		txtMinutoPartenza = new JTextField();
-		txtMinutoPartenza.setForeground((Color) null);
-		txtMinutoPartenza.setFont(null);
+		txtMinutoPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBianco);
+		txtMinutoPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtMinutoPartenza.setColumns(10);
 		txtMinutoPartenza.setBounds(537, 556, 27, 20);
 		add(txtMinutoPartenza);
 		
 		JLabel lblDuePuntiArrivo = new JLabel(":");
 		lblDuePuntiArrivo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDuePuntiArrivo.setForeground((Color) null);
-		lblDuePuntiArrivo.setFont(null);
+		lblDuePuntiArrivo.setForeground(controllerGestioneTratte.coloreScritte);
+		lblDuePuntiArrivo.setFont(controllerGestioneTratte.fontLabel);
 		lblDuePuntiArrivo.setBounds(523, 559, 10, 14);
 		add(lblDuePuntiArrivo);
 		
 		txtMinutoArrivo = new JTextField();
-		txtMinutoArrivo.setForeground((Color) null);
-		txtMinutoArrivo.setFont(null);
+		txtMinutoArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBianco);
+		txtMinutoArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtMinutoArrivo.setColumns(10);
 		txtMinutoArrivo.setBounds(492, 556, 27, 20);
 		add(txtMinutoArrivo);
 		
 		JLabel lblOraArrivo = new JLabel("Ora Arrivo");
 		lblOraArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblOraArrivo.setForeground((Color) null);
-		lblOraArrivo.setFont(null);
+		lblOraArrivo.setForeground(controllerGestioneTratte.coloreScritte);
+		lblOraArrivo.setFont(controllerGestioneTratte.fontLabel);
 		lblOraArrivo.setBounds(344, 556, 114, 20);
 		add(lblOraArrivo);
 		
