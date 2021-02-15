@@ -27,6 +27,7 @@ public class SceltaVolo extends JDialog {
 	JLabel lblArrivi;
 	JLabel lblPartenze;
 	JLabel lblScelta;
+	JLabel lblAnnulla;
 
 	Immagini img = new Immagini();
 	Controller controllerSceltaVolo;
@@ -42,6 +43,38 @@ public class SceltaVolo extends JDialog {
 
 		getContentPane().setLayout(null);
 		{
+			lblAnnulla = new JLabel("");
+			lblAnnulla.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					controllerSceltaVolo.annullaSceltaVolo();
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					lblAnnulla.setIcon(new ImageIcon(img.annulla2()));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblAnnulla.setIcon(new ImageIcon(img.annulla3()));
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
+				}
+			});
+			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
+			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
+			lblAnnulla.setBounds(184, 205, 135, 41);
+			getContentPane().add(lblAnnulla);
+			
 
 			lblPartenze = new JLabel("");
 			lblPartenze.addMouseListener(new MouseAdapter() {
@@ -74,7 +107,7 @@ public class SceltaVolo extends JDialog {
 			lblPartenze.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblPartenze.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPartenze.setIcon(new ImageIcon(img.partenze1()));
-			lblPartenze.setBounds(65, 190, 135, 41);
+			lblPartenze.setBounds(76, 125, 135, 41);
 			getContentPane().add(lblPartenze);
 
 			lblArrivi = new JLabel("");
@@ -108,7 +141,7 @@ public class SceltaVolo extends JDialog {
 			lblArrivi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblArrivi.setHorizontalAlignment(SwingConstants.CENTER);
 			lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
-			lblArrivi.setBounds(285, 190, 135, 41);
+			lblArrivi.setBounds(287, 125, 135, 41);
 			getContentPane().add(lblArrivi);
 
 			lblX = new JLabel("");

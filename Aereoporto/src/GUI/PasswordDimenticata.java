@@ -259,7 +259,7 @@ public class PasswordDimenticata extends JDialog {
 			lblSalva.setFont(new Font("Arial", Font.BOLD, 15));
 			lblSalva.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSalva.setIcon(new ImageIcon(img.salva1()));
-			lblSalva.setBounds(50, 374, 174, 47);
+			lblSalva.setBounds(78, 374, 135, 41);
 			getContentPane().add(lblSalva);
 			
 			
@@ -295,7 +295,7 @@ public class PasswordDimenticata extends JDialog {
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-			lblAnnulla.setBounds(274, 374, 174, 47);
+			lblAnnulla.setBounds(287, 374, 135, 41);
 			getContentPane().add(lblAnnulla);
 
 			lblCampi = new JLabel("");

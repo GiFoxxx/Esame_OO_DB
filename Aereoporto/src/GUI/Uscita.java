@@ -138,7 +138,7 @@ public class Uscita extends JDialog {
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-			lblAnnulla.setBounds(267, 213, 174, 47);
+			lblAnnulla.setBounds(281, 213, 135, 41);
 			getContentPane().add(lblAnnulla);
 
 			lblSi = new JLabel("");
@@ -174,7 +174,7 @@ public class Uscita extends JDialog {
 			});
 			lblSi.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSi.setIcon(new ImageIcon(img.si1()));
-			lblSi.setBounds(64, 213, 174, 47);
+			lblSi.setBounds(64, 213, 135, 41);
 			getContentPane().add(lblSi);
 
 			{

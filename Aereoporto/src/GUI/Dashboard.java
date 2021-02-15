@@ -542,12 +542,12 @@ public class Dashboard extends JFrame {
 		panelHome.setLayout(null);
 		pannelloTendina.add(panelHome);
 
-		lblScrittaHome = new JLabel("HOME");
-		lblScrittaHome.setBounds(56, 0, 180, 70);
-		lblScrittaHome.setFont(controllerDashboard.fontScritte);
+		lblScrittaHome = new JLabel("Home");
+		lblScrittaHome.setBounds(57, 0, 180, 70);
+		lblScrittaHome.setFont(controllerDashboard.fontScritteTendina);
 		lblScrittaHome.setForeground(Color.WHITE);
 		lblScrittaHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblScrittaHome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblScrittaHome.setHorizontalAlignment(SwingConstants.LEFT);
 		panelHome.add(lblScrittaHome);
 
 		lblHome = new JLabel("");
@@ -608,12 +608,12 @@ public class Dashboard extends JFrame {
 		pannelloTendina.add(panelAccedi);
 		panelAccedi.setLayout(null);
 
-		lblScrittaAccesso = new JLabel("ACCEDI");
-		lblScrittaAccesso.setBounds(56, 0, 180, 70);
-		lblScrittaAccesso.setFont(controllerDashboard.fontScritte);
+		lblScrittaAccesso = new JLabel("Accedi");
+		lblScrittaAccesso.setBounds(57, 0, 180, 70);
+		lblScrittaAccesso.setFont(controllerDashboard.fontScritteTendina);
 		lblScrittaAccesso.setForeground(Color.WHITE);
 		lblScrittaAccesso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblScrittaAccesso.setHorizontalAlignment(SwingConstants.CENTER);
+		lblScrittaAccesso.setHorizontalAlignment(SwingConstants.LEFT);
 		panelAccedi.add(lblScrittaAccesso);
 
 		lblAccesso = new JLabel("");
@@ -670,12 +670,12 @@ public class Dashboard extends JFrame {
 		pannelloTendina.add(panelRegistrati);
 		panelRegistrati.setLayout(null);
 
-		lblScrittaRegistrazione = new JLabel("REGISTRATI");
-		lblScrittaRegistrazione.setBounds(56, 0, 180, 70);
-		lblScrittaRegistrazione.setFont(controllerDashboard.fontScritte);
+		lblScrittaRegistrazione = new JLabel("Registrati");
+		lblScrittaRegistrazione.setBounds(57, 0, 180, 70);
+		lblScrittaRegistrazione.setFont(controllerDashboard.fontScritteTendina);
 		lblScrittaRegistrazione.setForeground(Color.WHITE);
 		lblScrittaRegistrazione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblScrittaRegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
+		lblScrittaRegistrazione.setHorizontalAlignment(SwingConstants.LEFT);
 		panelRegistrati.add(lblScrittaRegistrazione);
 
 		lblRegistrazione = new JLabel("");
@@ -740,13 +740,13 @@ public class Dashboard extends JFrame {
 		panelProfilo.setLayout(null);
 		pannelloTendina.add(panelProfilo);
 
-		lblScrittaProfilo = new JLabel("PROFILO");
-		lblScrittaProfilo.setBounds(56, 0, 180, 70);
+		lblScrittaProfilo = new JLabel("Profilo");
+		lblScrittaProfilo.setBounds(57, 0, 180, 70);
 		panelProfilo.add(lblScrittaProfilo);
-		lblScrittaProfilo.setFont(controllerDashboard.fontScritte);
+		lblScrittaProfilo.setFont(controllerDashboard.fontScritteTendina);
 		lblScrittaProfilo.setForeground(Color.WHITE);
 		lblScrittaProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblScrittaProfilo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblScrittaProfilo.setHorizontalAlignment(SwingConstants.LEFT);
 
 		lblProfilo = new JLabel("");
 		lblProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -803,12 +803,12 @@ public class Dashboard extends JFrame {
 		pannelloTendina.add(panelImpostazioni);
 		panelImpostazioni.setLayout(null);
 
-		lblImpostazioni = new JLabel("IMPOSTAZIONI");
-		lblImpostazioni.setBounds(56, 0, 180, 70);
-		lblImpostazioni.setFont(controllerDashboard.fontScritte);
+		lblImpostazioni = new JLabel("Impostazioni");
+		lblImpostazioni.setBounds(57, 0, 180, 70);
+		lblImpostazioni.setFont(controllerDashboard.fontScritteTendina);
 		lblImpostazioni.setForeground(Color.WHITE);
 		lblImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImpostazioni.setHorizontalAlignment(SwingConstants.LEFT);
 		panelImpostazioni.add(lblImpostazioni);
 
 		lbllblImpostazioni = new JLabel("");
@@ -864,12 +864,12 @@ public class Dashboard extends JFrame {
 		pannelloTendina.add(panelUscita);
 		panelUscita.setLayout(null);
 
-		lblScrittaEsci = new JLabel("ESCI");
-		lblScrittaEsci.setBounds(56, 0, 180, 70);
-		lblScrittaEsci.setFont(controllerDashboard.fontScritte);
+		lblScrittaEsci = new JLabel("Esci");
+		lblScrittaEsci.setBounds(57, 0, 180, 70);
+		lblScrittaEsci.setFont(controllerDashboard.fontScritteTendina);
 		lblScrittaEsci.setForeground(Color.WHITE);
 		lblScrittaEsci.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblScrittaEsci.setHorizontalAlignment(SwingConstants.CENTER);
+		lblScrittaEsci.setHorizontalAlignment(SwingConstants.LEFT);
 		panelUscita.add(lblScrittaEsci);
 
 		lblEsci = new JLabel("");
