@@ -31,8 +31,30 @@ public class Registrazione extends JPanel {
 	private JPasswordField txtPassword;
 	private JPasswordField txtRipetiPassword;
 	private JLabel lblMessaggioCredenziali;
-
+	private JLabel lblAvanti;
+	private JLabel lblInserimentoCredenziali;
+	private JLabel lblMostraPassword;
+	private JLabel lblCensuraPassword;
+	private JLabel lblMostraRipetiPassword;
+	private JLabel lblCensuraRipetiPassword;
+	
 	// GETTER E SETTER
+
+	public JLabel getLblAvanti() {
+		return lblAvanti;
+	}
+
+	public void setLblAvanti(JLabel lblAvanti) {
+		this.lblAvanti = lblAvanti;
+	}
+
+	public JLabel getLblInserimentoCredenziali() {
+		return lblInserimentoCredenziali;
+	}
+
+	public void setLblInserimentoCredenziali(JLabel lblInserimentoCredenziali) {
+		this.lblInserimentoCredenziali = lblInserimentoCredenziali;
+	}
 
 	public JTextField getTxtNome() {
 		return txtNome;
@@ -82,13 +104,45 @@ public class Registrazione extends JPanel {
 		this.lblMessaggioCredenziali = lblMessaggioCredenziali;
 	}
 
+	public JLabel getLblMostraPassword() {
+		return lblMostraPassword;
+	}
+
+	public void setLblMostraPassword(JLabel lblmostraPassword) {
+		this.lblMostraPassword = lblmostraPassword;
+	}
+
+	public JLabel getLblCensuraPassword() {
+		return lblCensuraPassword;
+	}
+
+	public void setLblCensuraPassword(JLabel lblcensuraPassword) {
+		this.lblCensuraPassword = lblcensuraPassword;
+	}
+
+	public JLabel getLblMostraRipetiPassword() {
+		return lblMostraRipetiPassword;
+	}
+
+	public void setLblMostraRipetiPassword(JLabel lblmostraRipetiPassword) {
+		this.lblMostraRipetiPassword = lblmostraRipetiPassword;
+	}
+
+	public JLabel getLblCensuraRipetiPassword() {
+		return lblCensuraRipetiPassword;
+	}
+
+	public void setLblCensuraRipetiPassword(JLabel lblcensuraRipetiPassword) {
+		this.lblCensuraRipetiPassword = lblcensuraRipetiPassword;
+	}
+
 	Controller controllerRegistrazione;
 
 	public Registrazione(Controller controller) {
 		controllerRegistrazione = controller;
 
 		setBounds(0, 0, 1090, 642);
-		setBackground(controllerRegistrazione.sfondo);
+		setBackground(controllerRegistrazione.sfondoTemaScuro);
 		setLayout(null);
 
 		txtNome = new JTextField();
@@ -103,8 +157,8 @@ public class Registrazione extends JPanel {
 		txtNome.setFont(controllerRegistrazione.fontScritte);
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
-		txtNome.setBackground(controllerRegistrazione.sfondo);
-		txtNome.setForeground(controllerRegistrazione.coloreScritte);
+		txtNome.setBackground(controllerRegistrazione.sfondoTemaScuro);
+		txtNome.setForeground(controllerRegistrazione.coloreScritteTemaScuro);
 		txtNome.setBounds(638, 65, 340, 23);
 		add(txtNome);
 
@@ -120,9 +174,9 @@ public class Registrazione extends JPanel {
 		txtCognome.setFont(controllerRegistrazione.fontScritte);
 		txtCognome.setColumns(10);
 		txtCognome.setBorder(null);
-		txtCognome.setBackground(controllerRegistrazione.sfondo);
-		txtCognome.setForeground(controllerRegistrazione.coloreScritte);
-		txtCognome.setBounds(638, 169, 340, 23);
+		txtCognome.setBackground(controllerRegistrazione.sfondoTemaScuro);
+		txtCognome.setForeground(controllerRegistrazione.coloreScritteTemaScuro);
+		txtCognome.setBounds(638, 170, 340, 23);
 		add(txtCognome);
 
 		txtEmail = new JTextField();
@@ -137,9 +191,9 @@ public class Registrazione extends JPanel {
 		txtEmail.setFont(controllerRegistrazione.fontScritte);
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
-		txtEmail.setBackground(controllerRegistrazione.sfondo);
-		txtEmail.setForeground(controllerRegistrazione.coloreScritte);
-		txtEmail.setBounds(638, 273, 340, 23);
+		txtEmail.setBackground(controllerRegistrazione.sfondoTemaScuro);
+		txtEmail.setForeground(controllerRegistrazione.coloreScritteTemaScuro);
+		txtEmail.setBounds(638, 275, 340, 23);
 		add(txtEmail);
 
 		txtPassword = new JPasswordField();
@@ -153,9 +207,9 @@ public class Registrazione extends JPanel {
 		});
 		txtPassword.setFont(controllerRegistrazione.fontScritte);
 		txtPassword.setBorder(null);
-		txtPassword.setBackground(controllerRegistrazione.sfondo);
-		txtPassword.setForeground(controllerRegistrazione.coloreScritte);
-		txtPassword.setBounds(638, 377, 340, 23);
+		txtPassword.setBackground(controllerRegistrazione.sfondoTemaScuro);
+		txtPassword.setForeground(controllerRegistrazione.coloreScritteTemaScuro);
+		txtPassword.setBounds(638, 380, 310, 23);
 		add(txtPassword);
 
 		txtRipetiPassword = new JPasswordField();
@@ -169,72 +223,68 @@ public class Registrazione extends JPanel {
 		});
 		txtRipetiPassword.setFont(controllerRegistrazione.fontScritte);
 		txtRipetiPassword.setBorder(null);
-		txtRipetiPassword.setBackground(controllerRegistrazione.sfondo);
-		txtRipetiPassword.setForeground(controllerRegistrazione.coloreScritte);
-		txtRipetiPassword.setBounds(638, 482, 340, 23);
+		txtRipetiPassword.setBackground(controllerRegistrazione.sfondoTemaScuro);
+		txtRipetiPassword.setForeground(controllerRegistrazione.coloreScritteTemaScuro);
+		txtRipetiPassword.setBounds(638, 485, 310, 23);
 		add(txtRipetiPassword);
 
-		JLabel lblmostraPassword = new JLabel("");
-		lblmostraPassword.addMouseListener(new MouseAdapter() {
+		lblMostraPassword = new JLabel("");
+		lblMostraPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblmostraPassword.setVisible(false);
+				lblMostraPassword.setVisible(false);
+				txtPassword.setEchoChar((char) 0);
+			}
+		});
+		lblMostraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblMostraPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMostraPassword.setIcon(new ImageIcon(img.censuraPassword()));
+		lblMostraPassword.setBounds(959, 380, 20, 20);
+		add(lblMostraPassword);
+
+		lblCensuraPassword = new JLabel("");
+		lblCensuraPassword.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblMostraPassword.setVisible(true);
 				txtPassword.setEchoChar('●');
 			}
 		});
-		lblmostraPassword.setToolTipText("Mostra password");
-		lblmostraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblmostraPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmostraPassword.setIcon(new ImageIcon(img.censuraPassword()));
-		lblmostraPassword.setBounds(988, 380, 20, 20);
-		add(lblmostraPassword);
+		lblCensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblCensuraPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCensuraPassword.setIcon(new ImageIcon(img.mostraPassword()));
+		lblCensuraPassword.setBounds(959, 380, 20, 20);
+		add(lblCensuraPassword);
 
-		JLabel lblcensuraPassword = new JLabel("");
-		lblcensuraPassword.addMouseListener(new MouseAdapter() {
+		lblMostraRipetiPassword = new JLabel("");
+		lblMostraRipetiPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblmostraPassword.setVisible(true);
-				txtPassword.setEchoChar('●');
-			}
-		});
-		lblcensuraPassword.setToolTipText("Nascondi password");
-		lblcensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblcensuraPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblcensuraPassword.setIcon(new ImageIcon(img.mostraPassword()));
-		lblcensuraPassword.setBounds(988, 380, 20, 20);
-		add(lblcensuraPassword);
-
-		JLabel lblmostraRipetiPassword = new JLabel("");
-		lblmostraRipetiPassword.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblmostraRipetiPassword.setVisible(false);
+				lblMostraRipetiPassword.setVisible(false);
 				txtRipetiPassword.setEchoChar((char) 0);
 			}
 		});
-		lblmostraRipetiPassword.setToolTipText("Mostra password");
-		lblmostraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblmostraRipetiPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmostraRipetiPassword.setIcon(new ImageIcon(img.censuraPassword()));
-		lblmostraRipetiPassword.setBounds(988, 485, 20, 20);
-		add(lblmostraRipetiPassword);
+		lblMostraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblMostraRipetiPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMostraRipetiPassword.setIcon(new ImageIcon(img.censuraPassword()));
+		lblMostraRipetiPassword.setBounds(959, 485, 20, 20);
+		add(lblMostraRipetiPassword);
 
-		JLabel lblcensuraRipetiPassword = new JLabel("");
-		lblcensuraRipetiPassword.addMouseListener(new MouseAdapter() {
+		lblCensuraRipetiPassword = new JLabel("");
+		lblCensuraRipetiPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblmostraRipetiPassword.setVisible(true);
+				lblMostraRipetiPassword.setVisible(true);
 				txtRipetiPassword.setEchoChar('●');
 			}
 		});
-		lblcensuraRipetiPassword.setToolTipText("Nascondi password");
-		lblcensuraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblcensuraRipetiPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblcensuraRipetiPassword.setIcon(new ImageIcon(img.mostraPassword()));
-		lblcensuraRipetiPassword.setBounds(988, 485, 20, 20);
-		add(lblcensuraRipetiPassword);
+		lblCensuraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblCensuraRipetiPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCensuraRipetiPassword.setIcon(new ImageIcon(img.mostraPassword()));
+		lblCensuraRipetiPassword.setBounds(959, 485, 20, 20);
+		add(lblCensuraRipetiPassword);
 
-		JLabel lblAvanti = new JLabel("");
+		lblAvanti = new JLabel("");
 		lblAvanti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -268,16 +318,16 @@ public class Registrazione extends JPanel {
 		lblAvanti.setBounds(756, 565, 135, 41);
 		add(lblAvanti);
 
-		JLabel lblInserimentoCredenziali = new JLabel("");
+		lblInserimentoCredenziali = new JLabel("");
 		lblInserimentoCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInserimentoCredenziali.setIcon(new ImageIcon(img.inserimentoCredenzialiRegistrazione()));
-		lblInserimentoCredenziali.setBounds(638, 37, 370, 470);
+		lblInserimentoCredenziali.setIcon(new ImageIcon(img.credenzialiRegistrazione()));
+		lblInserimentoCredenziali.setBounds(638, 37, 344, 473);
 		add(lblInserimentoCredenziali);
 
 		lblMessaggioCredenziali = new JLabel("");
 		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessaggioCredenziali.setFont(controllerRegistrazione.fontLabel);
-		lblMessaggioCredenziali.setForeground(controllerRegistrazione.coloreScritturaAllerta);
+		lblMessaggioCredenziali.setForeground(controllerRegistrazione.coloreScritturaAllertaTemaScuro);
 		lblMessaggioCredenziali.setBounds(638, 526, 370, 14);
 		add(lblMessaggioCredenziali);
 	}

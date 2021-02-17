@@ -22,13 +22,72 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 	int y;
 
 	JLabel lblLayout;
-	JLabel lblSpostaUscita;
+	JLabel lblSpostaSceltaProfiloSenzaAccesso;
 	JLabel lblX;
 	JLabel lblAnnulla;
 	JLabel lblRegistrati;
 	JLabel lblAccedi;
 	JLabel lblContinuare;
 
+	//GETTER E SETTER
+	
+	public JLabel getLblAnnulla() {
+		return lblAnnulla;
+	}
+
+	public void setLblAnnulla(JLabel lblAnnulla) {
+		this.lblAnnulla = lblAnnulla;
+	}
+
+	public JLabel getLblRegistrati() {
+		return lblRegistrati;
+	}
+
+	public void setLblRegistrati(JLabel lblRegistrati) {
+		this.lblRegistrati = lblRegistrati;
+	}
+
+	public JLabel getLblAccedi() {
+		return lblAccedi;
+	}
+
+	public void setLblAccedi(JLabel lblAccedi) {
+		this.lblAccedi = lblAccedi;
+	}
+
+	public JLabel getLblContinuare() {
+		return lblContinuare;
+	}
+
+	public void setLblContinuare(JLabel lblContinuare) {
+		this.lblContinuare = lblContinuare;
+	}
+
+	public JLabel getLblX() {
+		return lblX;
+	}
+
+	public void setLblX(JLabel lblX) {
+		this.lblX = lblX;
+	}
+
+	public JLabel getLblLayout() {
+		return lblLayout;
+	}
+
+	public void setLblLayout(JLabel lblLayout) {
+		this.lblLayout = lblLayout;
+	}
+
+	public JLabel getLblSpostaSceltaProfiloSenzaAccesso() {
+		return lblSpostaSceltaProfiloSenzaAccesso;
+	}
+
+	public void setLblSpostaSceltaProfiloSenzaAccesso(JLabel lblSpostaSceltaProfiloSenzaAccesso) {
+		this.lblSpostaSceltaProfiloSenzaAccesso = lblSpostaSceltaProfiloSenzaAccesso;
+	}
+	
+	
 	Immagini img = new Immagini();
 	Controller controllerSceltaProfiloSenzaAccesso;
 
@@ -83,7 +142,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerSceltaProfiloSenzaAccesso.vaiARegistrazioneDaSceltaProfiloSenzaAccesso();
-					controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelRegistrati().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloScelto);
+					controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelRegistrati().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloSceltoTemaScuro);
 				}
 
 				@Override
@@ -145,10 +204,10 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 			lblX.setBounds(448, 1, 51, 34);
 			getContentPane().add(lblX);
 
-			lblSpostaUscita = new JLabel("");
-			lblSpostaUscita.setHorizontalAlignment(SwingConstants.CENTER);
-			lblSpostaUscita.setIcon(new ImageIcon(img.spostaUscita()));
-			lblSpostaUscita.addMouseMotionListener(new MouseMotionAdapter() {
+			lblSpostaSceltaProfiloSenzaAccesso = new JLabel("");
+			lblSpostaSceltaProfiloSenzaAccesso.setHorizontalAlignment(SwingConstants.CENTER);
+			lblSpostaSceltaProfiloSenzaAccesso.setIcon(new ImageIcon(img.spostaUscita()));
+			lblSpostaSceltaProfiloSenzaAccesso.addMouseMotionListener(new MouseMotionAdapter() {
 				@Override
 				public void mouseDragged(MouseEvent spostaDashboard) {
 					x = spostaDashboard.getXOnScreen();
@@ -158,7 +217,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 					setLocation(x - xMouse, y - yMouse);
 				}
 			});
-			lblSpostaUscita.addMouseListener(new MouseAdapter() {
+			lblSpostaSceltaProfiloSenzaAccesso.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent prendiPosizioneMouse) {
 
@@ -167,15 +226,15 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 
 				}
 			});
-			lblSpostaUscita.setBounds(1, 0, 498, 37);
-			getContentPane().add(lblSpostaUscita);
+			lblSpostaSceltaProfiloSenzaAccesso.setBounds(1, 0, 498, 37);
+			getContentPane().add(lblSpostaSceltaProfiloSenzaAccesso);
 
 			lblAccedi = new JLabel("");
 			lblAccedi.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerSceltaProfiloSenzaAccesso.vaiAdAccediDaSceltaProfiloSenzaAccesso();
-					controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelAccedi().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloScelto);
+					controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelAccedi().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloSceltoTemaScuro);
 				}
 
 				@Override
@@ -208,8 +267,8 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 				lblContinuare = new JLabel("Accedi o registrati per proseguire");
 				lblContinuare.setHorizontalAlignment(SwingConstants.CENTER);
 				lblContinuare.setFont(controllerSceltaProfiloSenzaAccesso.fontScritteJDialog);
-				lblContinuare.setForeground(controllerSceltaProfiloSenzaAccesso.coloreScritte);
-				lblContinuare.setBounds(2, 48, 498, 37);
+				lblContinuare.setForeground(controllerSceltaProfiloSenzaAccesso.coloreScritteTemaScuro);
+				lblContinuare.setBounds(2, 60, 498, 37);
 				getContentPane().add(lblContinuare);
 			}
 
@@ -228,13 +287,13 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 	
 	public void pannelloSelezionatoPrecedentemente() {
 		if (controllerSceltaProfiloSenzaAccesso.getDashboard().getAccesso().isVisible()) {
-			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelAccedi().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloScelto);
+			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelAccedi().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloSceltoTemaScuro);
 		}else if(controllerSceltaProfiloSenzaAccesso.getDashboard().getRegistrazione().isVisible()) {
-			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelRegistrati().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloScelto);
+			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelRegistrati().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloSceltoTemaScuro);
 		}else if(controllerSceltaProfiloSenzaAccesso.getDashboard().getHome().isVisible()) {
-			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelHome().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloScelto);
+			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelHome().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloSceltoTemaScuro);
 		}else if(controllerSceltaProfiloSenzaAccesso.getDashboard().getImpostazioni().isVisible()) {
-			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelImpostazioni().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloScelto);
+			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelImpostazioni().setBackground(controllerSceltaProfiloSenzaAccesso.pannelloSceltoTemaScuro);
 		}
 	}
 	

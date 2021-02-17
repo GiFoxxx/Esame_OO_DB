@@ -22,12 +22,38 @@ public class SceltaVolo extends JDialog {
 	int y;
 
 	JLabel lblLayout;
-	JLabel lblSpostaUscita;
+	JLabel lblSpostaSceltaVolo;
 	JLabel lblX;
 	JLabel lblArrivi;
 	JLabel lblPartenze;
 	JLabel lblScelta;
 	JLabel lblAnnulla;
+
+	// GETTER E SETTER
+
+	public JLabel getLblLayout() {
+		return lblLayout;
+	}
+
+	public void setLblLayout(JLabel lblLayout) {
+		this.lblLayout = lblLayout;
+	}
+
+	public JLabel getLblSpostaSceltaVolo() {
+		return lblSpostaSceltaVolo;
+	}
+
+	public void setLblSpostaSceltaVolo(JLabel lblSpostaUscita) {
+		this.lblSpostaSceltaVolo = lblSpostaUscita;
+	}
+
+	public JLabel getLblX() {
+		return lblX;
+	}
+
+	public void setLblX(JLabel lblX) {
+		this.lblX = lblX;
+	}
 
 	Immagini img = new Immagini();
 	Controller controllerSceltaVolo;
@@ -74,7 +100,6 @@ public class SceltaVolo extends JDialog {
 			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
 			lblAnnulla.setBounds(184, 205, 135, 41);
 			getContentPane().add(lblAnnulla);
-			
 
 			lblPartenze = new JLabel("");
 			lblPartenze.addMouseListener(new MouseAdapter() {
@@ -176,10 +201,10 @@ public class SceltaVolo extends JDialog {
 			lblX.setBounds(448, 1, 51, 34);
 			getContentPane().add(lblX);
 
-			lblSpostaUscita = new JLabel("");
-			lblSpostaUscita.setHorizontalAlignment(SwingConstants.CENTER);
-			lblSpostaUscita.setIcon(new ImageIcon(img.spostaUscita()));
-			lblSpostaUscita.addMouseMotionListener(new MouseMotionAdapter() {
+			lblSpostaSceltaVolo = new JLabel("");
+			lblSpostaSceltaVolo.setHorizontalAlignment(SwingConstants.CENTER);
+			lblSpostaSceltaVolo.setIcon(new ImageIcon(img.spostaUscita()));
+			lblSpostaSceltaVolo.addMouseMotionListener(new MouseMotionAdapter() {
 				@Override
 				public void mouseDragged(MouseEvent spostaDashboard) {
 					x = spostaDashboard.getXOnScreen();
@@ -189,7 +214,7 @@ public class SceltaVolo extends JDialog {
 					setLocation(x - xMouse, y - yMouse);
 				}
 			});
-			lblSpostaUscita.addMouseListener(new MouseAdapter() {
+			lblSpostaSceltaVolo.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent prendiPosizioneMouse) {
 
@@ -198,14 +223,14 @@ public class SceltaVolo extends JDialog {
 
 				}
 			});
-			lblSpostaUscita.setBounds(1, 0, 498, 37);
-			getContentPane().add(lblSpostaUscita);
+			lblSpostaSceltaVolo.setBounds(1, 0, 498, 37);
+			getContentPane().add(lblSpostaSceltaVolo);
 
 			{
 				lblScelta = new JLabel("Scegli che voli vuoi visualizzare e gestire");
 				lblScelta.setHorizontalAlignment(SwingConstants.CENTER);
 				lblScelta.setFont(controllerSceltaVolo.fontScritteJDialog);
-				lblScelta.setForeground(controllerSceltaVolo.coloreScritte);
+				lblScelta.setForeground(controllerSceltaVolo.coloreScritteTemaScuro);
 				lblScelta.setBounds(2, 55, 498, 37);
 				getContentPane().add(lblScelta);
 			}

@@ -39,6 +39,12 @@ public class GestioneCompagnieAeree extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable tabella;
 	private JTextField txtBarraRicerca;
+	
+	private JLabel lblimgfrecciaIndietro;
+	private JLabel lblRicerca;
+	private JLabel lblBarraRicerca;
+	private JLabel lblNome;
+	private JLabel lblCodiceCompagniaAerea;
 
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -47,6 +53,54 @@ public class GestioneCompagnieAeree extends JPanel {
 
 	public void setModello(DefaultTableModel modello) {
 		this.modello = modello;
+	}
+
+	public JTextField getTxtBarraRicerca() {
+		return txtBarraRicerca;
+	}
+
+	public void setTxtBarraRicerca(JTextField txtBarraRicerca) {
+		this.txtBarraRicerca = txtBarraRicerca;
+	}
+
+	public JLabel getLblimgfrecciaIndietro() {
+		return lblimgfrecciaIndietro;
+	}
+
+	public void setLblimgfrecciaIndietro(JLabel lblimgfrecciaIndietro) {
+		this.lblimgfrecciaIndietro = lblimgfrecciaIndietro;
+	}
+
+	public JLabel getLblRicerca() {
+		return lblRicerca;
+	}
+
+	public void setLblRicerca(JLabel lblRicerca) {
+		this.lblRicerca = lblRicerca;
+	}
+
+	public JLabel getLblBarraRicerca() {
+		return lblBarraRicerca;
+	}
+
+	public void setLblBarraRicerca(JLabel lblBarraRicerca) {
+		this.lblBarraRicerca = lblBarraRicerca;
+	}
+
+	public JLabel getLblNome() {
+		return lblNome;
+	}
+
+	public void setLblNome(JLabel lblNome) {
+		this.lblNome = lblNome;
+	}
+
+	public JLabel getLblCodiceCompagniaAerea() {
+		return lblCodiceCompagniaAerea;
+	}
+
+	public void setLblCodiceCompagniaAerea(JLabel lblCodiceCompagniaAerea) {
+		this.lblCodiceCompagniaAerea = lblCodiceCompagniaAerea;
 	}
 
 	public JTextField getTxtCodiceCompagniaAerea() {
@@ -84,10 +138,10 @@ public class GestioneCompagnieAeree extends JPanel {
 		controllerGestioneCompagnieAeree = controller;
 
 		setBounds(0, 0, 1090, 642);
-		setBackground(controllerGestioneCompagnieAeree.sfondo);
+		setBackground(controllerGestioneCompagnieAeree.sfondoTemaScuro);
 		setLayout(null);
 
-		JLabel lblimgfrecciaIndietro = new JLabel("");
+		lblimgfrecciaIndietro = new JLabel("");
 		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
 			@Override
@@ -109,7 +163,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		lblimgfrecciaIndietro.setBounds(25, 35, 47, 30);
 		add(lblimgfrecciaIndietro);
 		
-		JLabel lblRicerca = new JLabel("");
+		lblRicerca = new JLabel("");
 		lblRicerca.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicerca.setIcon(new ImageIcon(img.ricerca()));
@@ -123,14 +177,14 @@ public class GestioneCompagnieAeree extends JPanel {
 				ricerca();
 			}
 		});
-		txtBarraRicerca.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBianco);
+		txtBarraRicerca.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBiancoTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
 		txtBarraRicerca.setBounds(888, 40, 141, 20);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 
-		JLabel lblBarraRicerca = new JLabel("");
+		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
 		lblBarraRicerca.setBounds(876, 38, 184, 25);
@@ -156,29 +210,29 @@ public class GestioneCompagnieAeree extends JPanel {
 		scrollPane.setViewportView(tabella);
 
 		txtCodiceCompagniaAerea = new JTextField();
-		txtCodiceCompagniaAerea.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBianco);
+		txtCodiceCompagniaAerea.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBiancoTemaScuro);
 		txtCodiceCompagniaAerea.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtCodiceCompagniaAerea.setColumns(10);
 		txtCodiceCompagniaAerea.setBounds(304, 459, 133, 20);
 		add(txtCodiceCompagniaAerea);
 
-		JLabel lblNome = new JLabel("Nome");
+		lblNome = new JLabel("Nome");
 		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNome.setForeground(controllerGestioneCompagnieAeree.coloreScritte);
+		lblNome.setForeground(controllerGestioneCompagnieAeree.coloreScritteTemaScuro);
 		lblNome.setFont(controllerGestioneCompagnieAeree.fontLabel);
 		lblNome.setBounds(53, 490, 221, 20);
 		add(lblNome);
 
 		txtNome = new JTextField();
-		txtNome.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBianco);
+		txtNome.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBiancoTemaScuro);
 		txtNome.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtNome.setColumns(10);
 		txtNome.setBounds(304, 490, 133, 20);
 		add(txtNome);
 
-		JLabel lblCodiceCompagniaAerea = new JLabel("Codice Compagnia Aerea");
+		lblCodiceCompagniaAerea = new JLabel("Codice Compagnia Aerea");
 		lblCodiceCompagniaAerea.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCodiceCompagniaAerea.setForeground(controllerGestioneCompagnieAeree.coloreScritte);
+		lblCodiceCompagniaAerea.setForeground(controllerGestioneCompagnieAeree.coloreScritteTemaScuro);
 		lblCodiceCompagniaAerea.setFont(controllerGestioneCompagnieAeree.fontLabel);
 		lblCodiceCompagniaAerea.setBounds(53, 459, 221, 20);
 		add(lblCodiceCompagniaAerea);
@@ -217,7 +271,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		btnSvuota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneCompagnieAeree.svuotaCampiCompagniaAerea();
+				controllerGestioneCompagnieAeree.svuotaCampiGestioneCompagniaAerea();
 			}
 		});
 		btnSvuota.setBounds(705, 554, 113, 20);

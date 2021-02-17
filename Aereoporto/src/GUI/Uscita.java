@@ -34,7 +34,57 @@ public class Uscita extends JDialog {
 	JLabel lblSi;
 	JLabel lblUscire;
 
+	// GETTER E SETTER
+	public JLabel getLblAnnulla() {
+		return lblAnnulla;
+	}
+
+	public void setLblAnnulla(JLabel lblAnnulla) {
+		this.lblAnnulla = lblAnnulla;
+	}
+
+	public JLabel getLblSi() {
+		return lblSi;
+	}
+
+	public void setLblSi(JLabel lblSi) {
+		this.lblSi = lblSi;
+	}
+
+	public JLabel getLblUscire() {
+		return lblUscire;
+	}
+
+	public void setLblUscire(JLabel lblUscire) {
+		this.lblUscire = lblUscire;
+	}
+
+	public JLabel getLblX() {
+		return lblX;
+	}
+
+	public void setLblX(JLabel lblX) {
+		this.lblX = lblX;
+	}
+
+	public JLabel getLblLayout() {
+		return lblLayout;
+	}
+
+	public void setLblLayout(JLabel lblLayout) {
+		this.lblLayout = lblLayout;
+	}
+
+	public JLabel getLblSpostaUscita() {
+		return lblSpostaUscita;
+	}
+
+	public void setLblSpostaUscita(JLabel lblSpostaUscita) {
+		this.lblSpostaUscita = lblSpostaUscita;
+	}
+
 	Immagini img = new Immagini();
+
 	Controller controllerUscita;
 
 	public Uscita(Controller controller) {
@@ -70,50 +120,49 @@ public class Uscita extends JDialog {
 
 				}
 			});
-			
-						lblX = new JLabel("");
-						lblX.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent e) {
-								controllerUscita.annullaUscita();
-							}
 
-							@Override
-							public void mouseEntered(MouseEvent e) {
-								lblX.setIcon(new ImageIcon(img.X2()));
-							}
+			lblX = new JLabel("");
+			lblX.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					controllerUscita.annullaUscita();
+				}
 
-							@Override
-							public void mouseExited(MouseEvent e) {
-								lblX.setIcon(new ImageIcon(img.X1()));
-							}
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X2()));
+				}
 
-							@Override
-							public void mousePressed(MouseEvent e) {
-								lblX.setIcon(new ImageIcon(img.X3()));
-							}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X1()));
+				}
 
-							@Override
-							public void mouseReleased(MouseEvent e) {
-								lblX.setIcon(new ImageIcon(img.X1()));
-							}
-						});
-						lblX.setHorizontalAlignment(SwingConstants.CENTER);
-						lblX.setIcon(new ImageIcon(img.X1()));
-						lblX.setBounds(448, 1, 51, 34);
-						getContentPane().add(lblX);
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X3()));
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X1()));
+				}
+			});
+			lblX.setHorizontalAlignment(SwingConstants.CENTER);
+			lblX.setIcon(new ImageIcon(img.X1()));
+			lblX.setBounds(448, 1, 51, 34);
+			getContentPane().add(lblX);
 			lblSpostaUscita.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSpostaUscita.setIcon(new ImageIcon(img.spostaUscita()));
 			lblSpostaUscita.setBounds(1, 0, 498, 37);
 			getContentPane().add(lblSpostaUscita);
-
-			
 
 			lblAnnulla = new JLabel("");
 			lblAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerUscita.annullaUscita();
+					
 				}
 
 				@Override
@@ -181,7 +230,7 @@ public class Uscita extends JDialog {
 				lblUscire = new JLabel("Sei sicuro di voler uscire dal programma?");
 				lblUscire.setHorizontalAlignment(SwingConstants.CENTER);
 				lblUscire.setFont(controllerUscita.fontScritteJDialog);
-				lblUscire.setForeground(controllerUscita.coloreScritte);
+				lblUscire.setForeground(controllerUscita.coloreScritteTemaScuro);
 				lblUscire.setBounds(0, 81, 498, 52);
 				getContentPane().add(lblUscire);
 			}

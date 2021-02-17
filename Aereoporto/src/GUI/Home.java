@@ -87,7 +87,7 @@ public class Home extends JPanel {
 		controllerHome = controller;
 
 		setBounds(0, 0, 1090, 642);
-		setBackground(controllerHome.sfondo);
+		setBackground(controllerHome.sfondoTemaScuro);
 		setLayout(null);
 
 		lblTratte = new JLabel("");
@@ -115,7 +115,7 @@ public class Home extends JPanel {
 		lblTratte.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblTratte.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTratte.setIcon(new ImageIcon(img.tratte1()));
-		lblTratte.setBounds(82, 110, 276, 162);
+		lblTratte.setBounds(82, 110, 282, 167);
 		add(lblTratte);
 
 		lblCompagniaAerea = new JLabel("");
@@ -255,7 +255,7 @@ public class Home extends JPanel {
 		lblFareAccesso = new JLabel("");
 		lblFareAccesso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFareAccesso.setFont(controllerHome.fontScritte);
-		lblFareAccesso.setForeground(controllerHome.coloreScritturaAllerta);
+		lblFareAccesso.setForeground(controllerHome.coloreScritturaAllertaTemaScuro);
 		lblFareAccesso.setBounds(80, 522, 867, 28);
 		add(lblFareAccesso);
 	}

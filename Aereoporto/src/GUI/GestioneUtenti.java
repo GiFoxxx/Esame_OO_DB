@@ -43,6 +43,14 @@ public class GestioneUtenti extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable tabella;
 	private JTextField txtBarraRicerca;
+	
+	private JLabel lblimgfrecciaIndietro;
+	private JLabel lblRicerca;
+	private JLabel lblBarraRicerca;
+	private JLabel lblNome;
+	private JLabel lblCognome;
+	private JLabel lblEmail;
+	private JLabel lblPassword;
 
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -51,6 +59,70 @@ public class GestioneUtenti extends JPanel {
 
 	public void setModello(DefaultTableModel modello) {
 		this.modello = modello;
+	}
+
+	public JTextField getTxtBarraRicerca() {
+		return txtBarraRicerca;
+	}
+
+	public void setTxtBarraRicerca(JTextField txtBarraRicerca) {
+		this.txtBarraRicerca = txtBarraRicerca;
+	}
+
+	public JLabel getLblimgfrecciaIndietro() {
+		return lblimgfrecciaIndietro;
+	}
+
+	public void setLblimgfrecciaIndietro(JLabel lblimgfrecciaIndietro) {
+		this.lblimgfrecciaIndietro = lblimgfrecciaIndietro;
+	}
+
+	public JLabel getLblRicerca() {
+		return lblRicerca;
+	}
+
+	public void setLblRicerca(JLabel lblRicerca) {
+		this.lblRicerca = lblRicerca;
+	}
+
+	public JLabel getLblBarraRicerca() {
+		return lblBarraRicerca;
+	}
+
+	public void setLblBarraRicerca(JLabel lblBarraRicerca) {
+		this.lblBarraRicerca = lblBarraRicerca;
+	}
+
+	public JLabel getLblNome() {
+		return lblNome;
+	}
+
+	public void setLblNome(JLabel lblNome) {
+		this.lblNome = lblNome;
+	}
+
+	public JLabel getLblCognome() {
+		return lblCognome;
+	}
+
+	public void setLblCognome(JLabel lblCognome) {
+		this.lblCognome = lblCognome;
+	}
+
+	public JLabel getLblEmail() {
+		return lblEmail;
+	}
+
+	public void setLblEmail(JLabel lblEmail) {
+		this.lblEmail = lblEmail;
+	}
+
+	public JLabel getLblPassword() {
+		return lblPassword;
+	}
+
+	public void setLblPassword(JLabel lblPassword) {
+		this.lblPassword = lblPassword;
 	}
 
 	public JTextField getTxtNome() {
@@ -103,10 +175,10 @@ public class GestioneUtenti extends JPanel {
 		controllerGestioneUtenti = controller;
 
 		setBounds(0, 0, 1090, 642);
-		setBackground(controllerGestioneUtenti.sfondo);
+		setBackground(controllerGestioneUtenti.sfondoTemaScuro);
 		setLayout(null);
 
-		JLabel lblimgfrecciaIndietro = new JLabel("");
+		lblimgfrecciaIndietro = new JLabel("");
 		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
 			@Override
@@ -128,7 +200,7 @@ public class GestioneUtenti extends JPanel {
 		lblimgfrecciaIndietro.setBounds(25, 35, 47, 30);
 		add(lblimgfrecciaIndietro);
 		
-		JLabel lblRicerca = new JLabel("");
+		lblRicerca = new JLabel("");
 		lblRicerca.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicerca.setIcon(new ImageIcon(img.ricerca()));
@@ -142,70 +214,70 @@ public class GestioneUtenti extends JPanel {
 				ricerca();
 			}
 		});
-		txtBarraRicerca.setForeground(controllerGestioneUtenti.coloreScritteSuBianco);
+		txtBarraRicerca.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
 		txtBarraRicerca.setBounds(888, 40, 141, 20);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 
-		JLabel lblBarraRicerca = new JLabel("");
+		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
 		lblBarraRicerca.setBounds(876, 38, 184, 25);
 		add(lblBarraRicerca);
 
-		JLabel lblNome = new JLabel("nome");
+		lblNome = new JLabel("nome");
 		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNome.setFont(controllerGestioneUtenti.fontLabel);
-		lblNome.setForeground(controllerGestioneUtenti.coloreScritte);
+		lblNome.setForeground(controllerGestioneUtenti.coloreScritteTemaScuro);
 		lblNome.setBounds(44, 451, 133, 20);
 		add(lblNome);
 
 		txtNome = new JTextField();
-		txtNome.setForeground(controllerGestioneUtenti.coloreScritteSuBianco);
+		txtNome.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtNome.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtNome.setBounds(215, 451, 133, 20);
 		txtNome.setColumns(10);
 		add(txtNome);
 
-		JLabel lblCognome = new JLabel("cognome");
+		lblCognome = new JLabel("cognome");
 		lblCognome.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCognome.setFont(controllerGestioneUtenti.fontLabel);
-		lblCognome.setForeground(controllerGestioneUtenti.coloreScritte);
+		lblCognome.setForeground(controllerGestioneUtenti.coloreScritteTemaScuro);
 		lblCognome.setBounds(44, 482, 133, 20);
 		add(lblCognome);
 
 		txtCognome = new JTextField();
-		txtCognome.setForeground(controllerGestioneUtenti.coloreScritteSuBianco);
+		txtCognome.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtCognome.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtCognome.setBounds(215, 482, 133, 20);
 		txtCognome.setColumns(10);
 		add(txtCognome);
 
-		JLabel lblEmail = new JLabel("email");
+		lblEmail = new JLabel("email");
 		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEmail.setFont(controllerGestioneUtenti.fontLabel);
-		lblEmail.setForeground(controllerGestioneUtenti.coloreScritte);
+		lblEmail.setForeground(controllerGestioneUtenti.coloreScritteTemaScuro);
 		lblEmail.setBounds(44, 514, 133, 20);
 		add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setForeground(controllerGestioneUtenti.coloreScritteSuBianco);
+		txtEmail.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtEmail.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtEmail.setBounds(215, 514, 133, 20);
 		txtEmail.setColumns(10);
 		add(txtEmail);
 
-		JLabel lblPassword = new JLabel("password");
+		lblPassword = new JLabel("password");
 		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPassword.setFont(controllerGestioneUtenti.fontLabel);
-		lblPassword.setForeground(controllerGestioneUtenti.coloreScritte);
+		lblPassword.setForeground(controllerGestioneUtenti.coloreScritteTemaScuro);
 		lblPassword.setBounds(44, 546, 133, 20);
 		add(lblPassword);
 
 		txtPassword = new JTextField();
-		txtPassword.setForeground(controllerGestioneUtenti.coloreScritteSuBianco);
+		txtPassword.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtPassword.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtPassword.setBounds(215, 546, 133, 20);
 		txtPassword.setColumns(10);

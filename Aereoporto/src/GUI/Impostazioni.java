@@ -12,41 +12,99 @@ import java.awt.event.MouseEvent;
 
 public class Impostazioni extends JPanel {
 
+	private JLabel lblTema;
+	private JLabel lblInformazioni;
+	private JLabel lblRiconoscimenti;
+	private JLabel lblTerminiECondizioni;
+	private JLabel lblRecensione;
+
+	// GETTER E SETTER
+
+	public JLabel getLblTema() {
+		return lblTema;
+	}
+
+	public void setLblTema(JLabel lblTema) {
+		this.lblTema = lblTema;
+	}
+
+	public JLabel getLblInformazioni() {
+		return lblInformazioni;
+	}
+
+	public void setLblInformazioni(JLabel lblInformazioni) {
+		this.lblInformazioni = lblInformazioni;
+	}
+
+	public JLabel getLblRiconoscimenti() {
+		return lblRiconoscimenti;
+	}
+
+	public void setLblRiconoscimenti(JLabel lblRiconoscimenti) {
+		this.lblRiconoscimenti = lblRiconoscimenti;
+	}
+
+	public JLabel getLblTerminiECondizioni() {
+		return lblTerminiECondizioni;
+	}
+
+	public void setLblTerminiECondizioni(JLabel lblTerminiECondizioni) {
+		this.lblTerminiECondizioni = lblTerminiECondizioni;
+	}
+
+	public JLabel getLblRecensione() {
+		return lblRecensione;
+	}
+
+	public void setLblRecensione(JLabel lblRecensione) {
+		this.lblRecensione = lblRecensione;
+	}
+
 	Controller controllerImpostazioni;
-	
-	
+
 	public Impostazioni(Controller controller) {
 		controllerImpostazioni = controller;
 
 		setBounds(0, 0, 1090, 642);
-		setBackground(controllerImpostazioni.sfondo);
+		setBackground(controllerImpostazioni.sfondoTemaScuro);
 		setLayout(null);
-		
-		JLabel lblTema = new JLabel("Tema");
+
+		lblTema = new JLabel("Tema");
+		lblTema.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (controllerImpostazioni.cambioTema()) {
+					controllerImpostazioni.temaChiaro();
+				} else {
+					controllerImpostazioni.temaScuro();
+				}
+			}
+		});
+		lblTema.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblTema.setForeground(Color.LIGHT_GRAY);
 		lblTema.setBounds(69, 180, 120, 22);
 		add(lblTema);
-		
-		JLabel lblInformazioni = new JLabel("Informazioni");
+
+		lblInformazioni = new JLabel("Informazioni");
 		lblInformazioni.setForeground(Color.LIGHT_GRAY);
 		lblInformazioni.setBounds(69, 230, 120, 22);
 		add(lblInformazioni);
-		
-		JLabel lblRiconoscimenti = new JLabel("Riconoscimenti");
+
+		lblRiconoscimenti = new JLabel("Riconoscimenti");
 		lblRiconoscimenti.setForeground(Color.LIGHT_GRAY);
 		lblRiconoscimenti.setBounds(69, 271, 120, 22);
 		add(lblRiconoscimenti);
-		
-		JLabel lblTermECondiz = new JLabel("Termini e condizioni");
-		lblTermECondiz.setForeground(Color.LIGHT_GRAY);
-		lblTermECondiz.setBounds(69, 314, 120, 22);
-		add(lblTermECondiz);
-		
-		JLabel lblRecensione = new JLabel("Lascia una recensione");
+
+		lblTerminiECondizioni = new JLabel("Termini e condizioni");
+		lblTerminiECondizioni.setForeground(Color.LIGHT_GRAY);
+		lblTerminiECondizioni.setBounds(69, 314, 120, 22);
+		add(lblTerminiECondizioni);
+
+		lblRecensione = new JLabel("Lascia una recensione");
 		lblRecensione.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerImpostazioni.mostraPannelli(controllerImpostazioni.getDashboard().getRecensione());
+				controllerImpostazioni.mostraPannelli(controllerImpostazioni.getDashboard().getRecensioni());
 			}
 		});
 		lblRecensione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

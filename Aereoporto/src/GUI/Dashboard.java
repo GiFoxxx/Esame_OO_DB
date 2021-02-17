@@ -30,10 +30,10 @@ public class Dashboard extends JFrame {
 	private JPanel contentPane;
 
 	private JLabel lblX;
+	private JLabel lblMinimizza;
 	private JLabel lineeChiusura;
 	private JLabel lineeApertura;
-	private JLabel lblMinimizza;
-	private JLabel lblSpostaDaashboard;
+	private JLabel lblSpostaDashboard;
 	private JLabel lblTitolo;
 	private JLabel lblScrittaHome;
 	private JLabel lblHome;
@@ -43,11 +43,13 @@ public class Dashboard extends JFrame {
 	private JLabel lblRegistrazione;
 	private JLabel lblScrittaProfilo;
 	private JLabel lblProfilo;
+	private JLabel lblScrittaImpostazioni;
 	private JLabel lblImpostazioni;
-	private JLabel lbllblImpostazioni;
 	private JLabel lblScrittaEsci;
 	private JLabel lblEsci;
 	private JLabel lblTendina;
+	private JLabel lblCambioTemaChiaro;
+	private JLabel lblCambioTemaScuro;
 	private JLabel lblLayout;
 
 	private JPanel pannelloTendina;
@@ -83,6 +85,151 @@ public class Dashboard extends JFrame {
 	private JDialog uscita;
 
 	// GETTER E SETTER
+
+	public JLabel getLblScrittaHome() {
+		return lblScrittaHome;
+	}
+
+	public void setLblScrittaHome(JLabel lblScrittaHome) {
+		this.lblScrittaHome = lblScrittaHome;
+	}
+
+	public JLabel getLblScrittaAccesso() {
+		return lblScrittaAccesso;
+	}
+
+	public void setLblScrittaAccesso(JLabel lblScrittaAccesso) {
+		this.lblScrittaAccesso = lblScrittaAccesso;
+	}
+
+	public JLabel getLblScrittaRegistrazione() {
+		return lblScrittaRegistrazione;
+	}
+
+	public void setLblScrittaRegistrazione(JLabel lblScrittaRegistrazione) {
+		this.lblScrittaRegistrazione = lblScrittaRegistrazione;
+	}
+
+	public JLabel getLblScrittaProfilo() {
+		return lblScrittaProfilo;
+	}
+
+	public void setLblScrittaProfilo(JLabel lblScrittaProfilo) {
+		this.lblScrittaProfilo = lblScrittaProfilo;
+	}
+
+	public JLabel getLblScrittaImpostazioni() {
+		return lblScrittaImpostazioni;
+	}
+
+	public void setLblScrittaImpostazioni(JLabel lblScrittaImpostazioni) {
+		this.lblScrittaImpostazioni = lblScrittaImpostazioni;
+	}
+
+	public JLabel getLblScrittaEsci() {
+		return lblScrittaEsci;
+	}
+
+	public void setLblScrittaEsci(JLabel lblScrittaEsci) {
+		this.lblScrittaEsci = lblScrittaEsci;
+	}
+
+	public JLabel getLblCambioTemaChiaro() {
+		return lblCambioTemaChiaro;
+	}
+
+	public void setLblCambioTemaChiaro(JLabel lblCambioTema) {
+		this.lblCambioTemaChiaro = lblCambioTema;
+	}
+
+	public JLabel getLblCambioTemaScuro() {
+		return lblCambioTemaScuro;
+	}
+
+	public void setLblCambioTemaScuro(JLabel lblCambioTemaScuro) {
+		this.lblCambioTemaScuro = lblCambioTemaScuro;
+	}
+
+	public JLabel getLblX() {
+		return lblX;
+	}
+
+	public void setLblX(JLabel lblX) {
+		this.lblX = lblX;
+	}
+
+	public JLabel getLblMinimizza() {
+		return lblMinimizza;
+	}
+
+	public void setLblMinimizza(JLabel lblMinimizza) {
+		this.lblMinimizza = lblMinimizza;
+	}
+
+	public JLabel getLblTitolo() {
+		return lblTitolo;
+	}
+
+	public void setLblTitolo(JLabel lblTitolo) {
+		this.lblTitolo = lblTitolo;
+	}
+
+	public JLabel getLblSpostaDashboard() {
+		return lblSpostaDashboard;
+	}
+
+	public void setLblSpostaDashboard(JLabel lblSpostaDashboard) {
+		this.lblSpostaDashboard = lblSpostaDashboard;
+	}
+
+	public JLabel getLblHome() {
+		return lblHome;
+	}
+
+	public void setLblHome(JLabel lblHome) {
+		this.lblHome = lblHome;
+	}
+
+	public JLabel getLblAccesso() {
+		return lblAccesso;
+	}
+
+	public void setLblAccesso(JLabel lblAccesso) {
+		this.lblAccesso = lblAccesso;
+	}
+
+	public JLabel getLblRegistrazione() {
+		return lblRegistrazione;
+	}
+
+	public void setLblRegistrazione(JLabel lblRegistrazione) {
+		this.lblRegistrazione = lblRegistrazione;
+	}
+
+	public JLabel getLblProfilo() {
+		return lblProfilo;
+	}
+
+	public void setLblProfilo(JLabel lblProfilo) {
+		this.lblProfilo = lblProfilo;
+	}
+
+	public JLabel getLblImpostazioni() {
+		return lblImpostazioni;
+	}
+
+	public void setLblImpostazioni(JLabel lblImpostazioni) {
+		this.lblImpostazioni = lblImpostazioni;
+	}
+
+	public JLabel getLblEsci() {
+		return lblEsci;
+	}
+
+	public void setLblEsci(JLabel lblEsci) {
+		this.lblEsci = lblEsci;
+	}
+
 	public JLabel getLineeChiusura() {
 		return lineeChiusura;
 	}
@@ -195,11 +342,11 @@ public class Dashboard extends JFrame {
 		this.gestioneTratte = gestioneTratte1;
 	}
 
-	public JPanel getRecensione() {
+	public JPanel getRecensioni() {
 		return recensioni;
 	}
 
-	public void setRecensione(JPanel recensioni) {
+	public void setRecensioni(JPanel recensioni) {
 		this.recensioni = recensioni;
 	}
 
@@ -331,6 +478,22 @@ public class Dashboard extends JFrame {
 		this.prenotazioniFalsa = prenotazioniFalsa;
 	}
 
+	public JLabel getLblLayout() {
+		return lblLayout;
+	}
+
+	public void setLblLayout(JLabel lblLayout) {
+		this.lblLayout = lblLayout;
+	}
+
+	public JLabel getLblTendina() {
+		return lblTendina;
+	}
+
+	public void setLblTendina(JLabel lblTendina) {
+		this.lblTendina = lblTendina;
+	}
+
 	Controller controllerDashboard;
 
 	public Dashboard(Controller controller) {
@@ -366,7 +529,7 @@ public class Dashboard extends JFrame {
 		lblTitolo = new JLabel("AIRPORT MANAGEMENT");
 		lblTitolo.setBounds(0, 0, 238, 37);
 		lblTitolo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitolo.setForeground(controllerDashboard.coloreScritte);
+		lblTitolo.setForeground(controllerDashboard.coloreScritteTemaScuro);
 		lblTitolo.setFont(controllerDashboard.fontTitolo);
 		contentPane.add(lblTitolo);
 
@@ -435,8 +598,8 @@ public class Dashboard extends JFrame {
 		lblMinimizza.setBounds(1040, 0, 51, 35);
 		contentPane.add(lblMinimizza);
 
-		lblSpostaDaashboard = new JLabel("");
-		lblSpostaDaashboard.addMouseMotionListener(new MouseMotionAdapter() {
+		lblSpostaDashboard = new JLabel("");
+		lblSpostaDashboard.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent spostaDashboard) {
 				x = spostaDashboard.getXOnScreen();
@@ -453,7 +616,7 @@ public class Dashboard extends JFrame {
 
 			}
 		});
-		lblSpostaDaashboard.addMouseListener(new MouseAdapter() {
+		lblSpostaDashboard.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent prendiPosizioneMouse) {
 
@@ -478,9 +641,9 @@ public class Dashboard extends JFrame {
 //				}
 			}
 		});
-		lblSpostaDaashboard.setIcon(new ImageIcon(img.spostaDashboard()));
-		lblSpostaDaashboard.setBounds(0, 0, 1143, 35);
-		contentPane.add(lblSpostaDaashboard);
+		lblSpostaDashboard.setIcon(new ImageIcon(img.spostaDashboard()));
+		lblSpostaDashboard.setBounds(0, 0, 1143, 35);
+		contentPane.add(lblSpostaDashboard);
 
 		pannelloBase = new JPanel();
 		pannelloBase.setBackground(controllerDashboard.trasparente);
@@ -502,7 +665,7 @@ public class Dashboard extends JFrame {
 				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(home);
 				if (home.isVisible()) {
-					panelHome.setBackground(controllerDashboard.pannelloScelto);
+					panelHome.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				}
 				controllerDashboard.chiudiTendinaIstantanea();
 
@@ -510,30 +673,30 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelHome.setBackground(controllerDashboard.entroPannello);
+				panelHome.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (home.isVisible()) {
-					panelHome.setBackground(controllerDashboard.pannelloScelto);
+					panelHome.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelHome.setBackground(controllerDashboard.escoPannello);
+					panelHome.setBackground(controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (home.isVisible()) {
-					panelHome.setBackground(controllerDashboard.pannelloScelto);
+					panelHome.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelHome.setBackground(controllerDashboard.clickPannello);
+					panelHome.setBackground(controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelHome.setBackground(controllerDashboard.entroPannello);
+				panelHome.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 		});
 		panelHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -545,7 +708,7 @@ public class Dashboard extends JFrame {
 		lblScrittaHome = new JLabel("Home");
 		lblScrittaHome.setBounds(57, 0, 180, 70);
 		lblScrittaHome.setFont(controllerDashboard.fontScritteTendina);
-		lblScrittaHome.setForeground(Color.WHITE);
+		lblScrittaHome.setForeground(controllerDashboard.coloreScritteTemaScuro);
 		lblScrittaHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaHome.setHorizontalAlignment(SwingConstants.LEFT);
 		panelHome.add(lblScrittaHome);
@@ -565,7 +728,7 @@ public class Dashboard extends JFrame {
 				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(accesso);
 				if (registrazione.isVisible()) {
-					panelRegistrati.setBackground(controllerDashboard.pannelloScelto);
+					panelRegistrati.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				}
 				controllerDashboard.chiudiTendinaIstantanea();
 			}
@@ -573,33 +736,33 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (accesso.isVisible()) {
-					panelAccedi.setBackground(controllerDashboard.pannelloScelto);
+					panelAccedi.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelAccedi.setBackground(controllerDashboard.entroPannello);
+					panelAccedi.setBackground(controllerDashboard.entroPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (accesso.isVisible()) {
-					panelAccedi.setBackground(controllerDashboard.pannelloScelto);
+					panelAccedi.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelAccedi.setBackground(controllerDashboard.escoPannello);
+					panelAccedi.setBackground(controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (accesso.isVisible()) {
-					panelAccedi.setBackground(controllerDashboard.pannelloScelto);
+					panelAccedi.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelAccedi.setBackground(controllerDashboard.clickPannello);
+					panelAccedi.setBackground(controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelAccedi.setBackground(controllerDashboard.entroPannello);
+				panelAccedi.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 		});
 		panelAccedi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -611,7 +774,7 @@ public class Dashboard extends JFrame {
 		lblScrittaAccesso = new JLabel("Accedi");
 		lblScrittaAccesso.setBounds(57, 0, 180, 70);
 		lblScrittaAccesso.setFont(controllerDashboard.fontScritteTendina);
-		lblScrittaAccesso.setForeground(Color.WHITE);
+		lblScrittaAccesso.setForeground(controllerDashboard.coloreScritteTemaScuro);
 		lblScrittaAccesso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaAccesso.setHorizontalAlignment(SwingConstants.LEFT);
 		panelAccedi.add(lblScrittaAccesso);
@@ -632,37 +795,37 @@ public class Dashboard extends JFrame {
 				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(registrazione);
 				if (registrazione.isVisible()) {
-					panelRegistrati.setBackground(controllerDashboard.pannelloScelto);
+					panelRegistrati.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				}
 				controllerDashboard.chiudiTendinaIstantanea();
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelRegistrati.setBackground(controllerDashboard.entroPannello);
+				panelRegistrati.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (registrazione.isVisible()) {
-					panelRegistrati.setBackground(controllerDashboard.pannelloScelto);
+					panelRegistrati.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelRegistrati.setBackground(controllerDashboard.escoPannello);
+					panelRegistrati.setBackground(controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (registrazione.isVisible()) {
-					panelRegistrati.setBackground(controllerDashboard.pannelloScelto);
+					panelRegistrati.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelRegistrati.setBackground(controllerDashboard.clickPannello);
+					panelRegistrati.setBackground(controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelRegistrati.setBackground(controllerDashboard.entroPannello);
+				panelRegistrati.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 		});
 		panelRegistrati.setBounds(1, 275, 236, 70);
@@ -673,7 +836,7 @@ public class Dashboard extends JFrame {
 		lblScrittaRegistrazione = new JLabel("Registrati");
 		lblScrittaRegistrazione.setBounds(57, 0, 180, 70);
 		lblScrittaRegistrazione.setFont(controllerDashboard.fontScritteTendina);
-		lblScrittaRegistrazione.setForeground(Color.WHITE);
+		lblScrittaRegistrazione.setForeground(controllerDashboard.coloreScritteTemaScuro);
 		lblScrittaRegistrazione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaRegistrazione.setHorizontalAlignment(SwingConstants.LEFT);
 		panelRegistrati.add(lblScrittaRegistrazione);
@@ -696,43 +859,43 @@ public class Dashboard extends JFrame {
 					controllerDashboard.mostraPannelli(profilo);
 					controllerDashboard.profiloUtenteAccessoEffettuato();
 					if (profilo.isVisible() || sceltaProfiloSenzaAccesso.isVisible()) {
-						panelProfilo.setBackground(controllerDashboard.pannelloScelto);
+						panelProfilo.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 					}
 					controllerDashboard.chiudiTendinaIstantanea();
 				} else {
 					controllerDashboard.mostraSceltaProfiloSenzaAccesso();
 				}
 				if (profilo.isVisible() || sceltaProfiloSenzaAccesso.isVisible()) {
-					panelProfilo.setBackground(controllerDashboard.pannelloScelto);
+					panelProfilo.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelProfilo.setBackground(controllerDashboard.entroPannello);
+				panelProfilo.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (profilo.isVisible() || sceltaProfiloSenzaAccesso.isVisible()) {
-					panelProfilo.setBackground(controllerDashboard.pannelloScelto);
+					panelProfilo.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelProfilo.setBackground(controllerDashboard.escoPannello);
+					panelProfilo.setBackground(controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (profilo.isVisible()) {
-					panelProfilo.setBackground(controllerDashboard.pannelloScelto);
+					panelProfilo.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelProfilo.setBackground(controllerDashboard.clickPannello);
+					panelProfilo.setBackground(controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelProfilo.setBackground(controllerDashboard.entroPannello);
+				panelProfilo.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 		});
 		panelProfilo.setBounds(1, 345, 236, 70);
@@ -742,11 +905,11 @@ public class Dashboard extends JFrame {
 
 		lblScrittaProfilo = new JLabel("Profilo");
 		lblScrittaProfilo.setBounds(57, 0, 180, 70);
-		panelProfilo.add(lblScrittaProfilo);
 		lblScrittaProfilo.setFont(controllerDashboard.fontScritteTendina);
-		lblScrittaProfilo.setForeground(Color.WHITE);
+		lblScrittaProfilo.setForeground(controllerDashboard.coloreScritteTemaScuro);
 		lblScrittaProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaProfilo.setHorizontalAlignment(SwingConstants.LEFT);
+		panelProfilo.add(lblScrittaProfilo);
 
 		lblProfilo = new JLabel("");
 		lblProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -764,7 +927,7 @@ public class Dashboard extends JFrame {
 				pannelloLateraleSelezionato();
 				controllerDashboard.mostraPannelli(impostazioni);
 				if (impostazioni.isVisible()) {
-					panelImpostazioni.setBackground(controllerDashboard.pannelloScelto);
+					panelImpostazioni.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				}
 				controllerDashboard.chiudiTendinaIstantanea();
 
@@ -772,30 +935,30 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelImpostazioni.setBackground(controllerDashboard.entroPannello);
+				panelImpostazioni.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (impostazioni.isVisible()) {
-					panelImpostazioni.setBackground(controllerDashboard.pannelloScelto);
+					panelImpostazioni.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelImpostazioni.setBackground(controllerDashboard.escoPannello);
+					panelImpostazioni.setBackground(controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (impostazioni.isVisible()) {
-					panelImpostazioni.setBackground(controllerDashboard.pannelloScelto);
+					panelImpostazioni.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelImpostazioni.setBackground(controllerDashboard.clickPannello);
+					panelImpostazioni.setBackground(controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelImpostazioni.setBackground(controllerDashboard.entroPannello);
+				panelImpostazioni.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 		});
 		panelImpostazioni.setBounds(1, 415, 236, 70);
@@ -803,20 +966,20 @@ public class Dashboard extends JFrame {
 		pannelloTendina.add(panelImpostazioni);
 		panelImpostazioni.setLayout(null);
 
-		lblImpostazioni = new JLabel("Impostazioni");
-		lblImpostazioni.setBounds(57, 0, 180, 70);
-		lblImpostazioni.setFont(controllerDashboard.fontScritteTendina);
-		lblImpostazioni.setForeground(Color.WHITE);
-		lblImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblImpostazioni.setHorizontalAlignment(SwingConstants.LEFT);
-		panelImpostazioni.add(lblImpostazioni);
+		lblScrittaImpostazioni = new JLabel("Impostazioni");
+		lblScrittaImpostazioni.setBounds(57, 0, 180, 70);
+		lblScrittaImpostazioni.setFont(controllerDashboard.fontScritteTendina);
+		lblScrittaImpostazioni.setForeground(controllerDashboard.coloreScritteTemaScuro);
+		lblScrittaImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblScrittaImpostazioni.setHorizontalAlignment(SwingConstants.LEFT);
+		panelImpostazioni.add(lblScrittaImpostazioni);
 
-		lbllblImpostazioni = new JLabel("");
-		lbllblImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lbllblImpostazioni.setBounds(0, 0, 50, 70);
-		panelImpostazioni.add(lbllblImpostazioni);
-		lbllblImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
-		lbllblImpostazioni.setIcon(new ImageIcon(img.impostazioni()));
+		lblImpostazioni = new JLabel("");
+		lblImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblImpostazioni.setBounds(0, 0, 50, 70);
+		panelImpostazioni.add(lblImpostazioni);
+		lblImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImpostazioni.setIcon(new ImageIcon(img.impostazioni()));
 
 		panelUscita = new JPanel();
 		panelUscita.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -826,37 +989,37 @@ public class Dashboard extends JFrame {
 				pannelloLateraleSelezionato();
 				controllerDashboard.mostraUscita();
 				if (uscita.isVisible()) {
-					panelUscita.setBackground(controllerDashboard.pannelloScelto);
+					panelUscita.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				}
 				controllerDashboard.chiudiTendinaIstantanea();
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panelUscita.setBackground(controllerDashboard.entroPannello);
+				panelUscita.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (uscita.isVisible()) {
-					panelUscita.setBackground(controllerDashboard.pannelloScelto);
+					panelUscita.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelUscita.setBackground(controllerDashboard.escoPannello);
+					panelUscita.setBackground(controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (uscita.isVisible()) {
-					panelUscita.setBackground(controllerDashboard.pannelloScelto);
+					panelUscita.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					panelUscita.setBackground(controllerDashboard.clickPannello);
+					panelUscita.setBackground(controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panelUscita.setBackground(controllerDashboard.entroPannello);
+				panelUscita.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 		});
 		panelUscita.setBounds(1, 485, 236, 70);
@@ -867,7 +1030,7 @@ public class Dashboard extends JFrame {
 		lblScrittaEsci = new JLabel("Esci");
 		lblScrittaEsci.setBounds(57, 0, 180, 70);
 		lblScrittaEsci.setFont(controllerDashboard.fontScritteTendina);
-		lblScrittaEsci.setForeground(Color.WHITE);
+		lblScrittaEsci.setForeground(controllerDashboard.coloreScritteTemaScuro);
 		lblScrittaEsci.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblScrittaEsci.setHorizontalAlignment(SwingConstants.LEFT);
 		panelUscita.add(lblScrittaEsci);
@@ -893,7 +1056,7 @@ public class Dashboard extends JFrame {
 		lineeChiusura.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lineeChiusura.setHorizontalAlignment(SwingConstants.CENTER);
 		lineeChiusura.setIcon(new ImageIcon(img.lineeChiusura()));
-		lineeChiusura.setBounds(182, 20, 50, 70);
+		lineeChiusura.setBounds(182, 20, 50, 50);
 		pannelloTendina.add(lineeChiusura);
 
 		lineeApertura.addMouseListener(new MouseAdapter() {
@@ -905,10 +1068,72 @@ public class Dashboard extends JFrame {
 			}
 		});
 		lineeApertura.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lineeApertura.setBounds(1, 20, 50, 70);
-		pannelloTendina.add(lineeApertura);
+		lineeApertura.setBounds(1, 20, 50, 50);
 		lineeApertura.setHorizontalAlignment(SwingConstants.CENTER);
 		lineeApertura.setIcon(new ImageIcon(img.lineeApertura()));
+		pannelloTendina.add(lineeApertura);
+		
+		lblCambioTemaChiaro = new JLabel("");
+		lblCambioTemaChiaro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCambioTemaChiaro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerDashboard.temaChiaro();
+				controllerDashboard.chiudiTendinaIstantanea();
+				controllerDashboard.pannelloPrecedentementeSelezionato(controllerDashboard.getPannelloPrecedente());
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblCambioTemaChiaro.setIcon(new ImageIcon(img.temaChiaro2()));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblCambioTemaChiaro.setIcon(new ImageIcon(img.temaChiaro3()));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblCambioTemaChiaro.setIcon(new ImageIcon(img.temaChiaro1()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblCambioTemaChiaro.setIcon(new ImageIcon(img.temaChiaro1()));
+			}
+		});
+		lblCambioTemaChiaro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblCambioTemaChiaro.setIcon(new ImageIcon(img.temaChiaro1()));
+		lblCambioTemaChiaro.setBounds(94, 81, 50, 50);
+		pannelloTendina.add(lblCambioTemaChiaro);
+		
+		lblCambioTemaScuro = new JLabel("");
+		lblCambioTemaScuro.setVisible(false);
+		lblCambioTemaScuro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerDashboard.temaScuro();
+				controllerDashboard.chiudiTendinaIstantanea();
+				controllerDashboard.pannelloPrecedentementeSelezionato(controllerDashboard.getPannelloPrecedente());
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblCambioTemaScuro.setIcon(new ImageIcon(img.temaScuro2()));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblCambioTemaScuro.setIcon(new ImageIcon(img.temaScuro3()));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblCambioTemaScuro.setIcon(new ImageIcon(img.temaScuro1()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblCambioTemaScuro.setIcon(new ImageIcon(img.temaScuro2()));
+			}
+		});
+		lblCambioTemaScuro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblCambioTemaScuro.setIcon(new ImageIcon(img.temaScuro1()));
+		lblCambioTemaScuro.setBounds(94, 81, 50, 50);
+		pannelloTendina.add(lblCambioTemaScuro);
 
 		lblTendina = new JLabel("");
 		lblTendina.setBounds(0, 0, 237, 642);
@@ -917,7 +1142,7 @@ public class Dashboard extends JFrame {
 		pannelloTendina.add(lblTendina);
 
 		pannelloDestra = new JPanel();
-		pannelloDestra.setBounds(50, 0, 1091, 642);
+		pannelloDestra.setBounds(50, 0, 1093, 642);
 		pannelloDestra.setBackground(controllerDashboard.trasparente);
 
 		pannelloDestra.add(home);
@@ -965,15 +1190,24 @@ public class Dashboard extends JFrame {
 		gestioneVoliArrivi.setVisible(false);
 		cambioPassword.setVisible(false);
 		recensioni.setVisible(false);
-		panelHome.setBackground(controllerDashboard.pannelloScelto);
+		panelHome.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 	}
 
 	private void pannelloLateraleSelezionato() {
-		panelHome.setBackground(controllerDashboard.escoPannello);
-		panelAccedi.setBackground(controllerDashboard.escoPannello);
-		panelRegistrati.setBackground(controllerDashboard.escoPannello);
-		panelProfilo.setBackground(controllerDashboard.escoPannello);
-		panelImpostazioni.setBackground(controllerDashboard.escoPannello);
-		panelUscita.setBackground(controllerDashboard.escoPannello);
+//		if (controllerDashboard.cambioTema()) {
+//			panelHome.setBackground(controllerDashboard.escoPannelloTemaChiaro);
+//			panelAccedi.setBackground(controllerDashboard.escoPannelloTemaChiaro);
+//			panelRegistrati.setBackground(controllerDashboard.escoPannelloTemaChiaro);
+//			panelProfilo.setBackground(controllerDashboard.escoPannelloTemaChiaro);
+//			panelImpostazioni.setBackground(controllerDashboard.escoPannelloTemaChiaro);
+//			panelUscita.setBackground(controllerDashboard.escoPannelloTemaChiaro);
+//		} else {
+		panelHome.setBackground(controllerDashboard.escoPannelloTemaScuro);
+		panelAccedi.setBackground(controllerDashboard.escoPannelloTemaScuro);
+		panelRegistrati.setBackground(controllerDashboard.escoPannelloTemaScuro);
+		panelProfilo.setBackground(controllerDashboard.escoPannelloTemaScuro);
+		panelImpostazioni.setBackground(controllerDashboard.escoPannelloTemaScuro);
+		panelUscita.setBackground(controllerDashboard.escoPannelloTemaScuro);
+//		}
 	}
 }

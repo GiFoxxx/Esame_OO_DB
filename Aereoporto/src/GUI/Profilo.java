@@ -25,10 +25,34 @@ public class Profilo extends JPanel {
 	private JTextField txtNome;
 	private JTextField txtCognome;
 	private JTextField txtEmail;
-
 	private JLabel lblCambiaPassword;
 
 	// GETTER E SETTER
+
+	public JLabel getLblLogout() {
+		return lblLogout;
+	}
+
+	public void setLblLogout(JLabel lblLogout) {
+		this.lblLogout = lblLogout;
+	}
+
+	public JLabel getLblDatiAccount() {
+		return lblDatiAccount;
+	}
+
+	public void setLblDatiAccount(JLabel lblDatiAccount) {
+		this.lblDatiAccount = lblDatiAccount;
+	}
+
+	public JLabel getLblCambiaPassword() {
+		return lblCambiaPassword;
+	}
+
+	public void setLblCambiaPassword(JLabel lblCambiaPassword) {
+		this.lblCambiaPassword = lblCambiaPassword;
+	}
+
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
@@ -59,7 +83,7 @@ public class Profilo extends JPanel {
 		controllerProfilo = controller;
 
 		setBounds(0, 0, 1090, 642);
-		setBackground(controllerProfilo.sfondo);
+		setBackground(controllerProfilo.sfondoTemaScuro);
 		setLayout(null);
 
 		lblLogout = new JLabel("Logout");
@@ -71,14 +95,14 @@ public class Profilo extends JPanel {
 		});
 		lblLogout.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogout.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblLogout.setForeground(controllerProfilo.coloreScritte);
+		lblLogout.setForeground(controllerProfilo.coloreScritteTemaScuro);
 		lblLogout.setFont(controllerProfilo.fontScritte);
 		lblLogout.setBounds(968, 30, 100, 22);
 		add(lblLogout);
 
 		txtNome = new JTextField();
 		txtNome.setEditable(false);
-		txtNome.setForeground(controllerProfilo.coloreScritte);
+		txtNome.setForeground(controllerProfilo.coloreScritteTemaScuro);
 		txtNome.setFont(controllerProfilo.fontScritte);
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
@@ -88,7 +112,7 @@ public class Profilo extends JPanel {
 
 		txtCognome = new JTextField();
 		txtCognome.setEditable(false);
-		txtCognome.setForeground(controllerProfilo.coloreScritte);
+		txtCognome.setForeground(controllerProfilo.coloreScritteTemaScuro);
 		txtCognome.setFont(controllerProfilo.fontScritte);
 		txtCognome.setColumns(10);
 		txtCognome.setBorder(null);
@@ -98,7 +122,7 @@ public class Profilo extends JPanel {
 
 		txtEmail = new JTextField();
 		txtEmail.setEditable(false);
-		txtEmail.setForeground(controllerProfilo.coloreScritte);
+		txtEmail.setForeground(controllerProfilo.coloreScritteTemaScuro);
 		txtEmail.setFont(controllerProfilo.fontScritte);
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
@@ -121,25 +145,25 @@ public class Profilo extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblCambiaPassword.setForeground(controllerProfilo.coloreLabelEntrata);
+				lblCambiaPassword.setForeground(controllerProfilo.coloreLabelEntrataTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblCambiaPassword.setForeground(controllerProfilo.coloreLabel);
+				lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblCambiaPassword.setForeground(controllerProfilo.coloreLabelPressed);
+				lblCambiaPassword.setForeground(controllerProfilo.coloreLabelPressedTemaScuro);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblCambiaPassword.setForeground(controllerProfilo.coloreLabel);
+				lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
 			}
 		});
-		lblCambiaPassword.setForeground(controllerProfilo.coloreLabel);
+		lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
 		lblCambiaPassword.setFont(controllerProfilo.fontLabel);
 		lblCambiaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblCambiaPassword.setHorizontalAlignment(SwingConstants.LEFT);

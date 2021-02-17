@@ -71,7 +71,7 @@ public class Recensione extends JPanel {
 		controllerRecensione = controller;
 
 		setBounds(0, 0, 1090, 642);
-		setBackground(controllerRecensione.sfondo);
+		setBackground(controllerRecensione.sfondoTemaScuro);
 		setLayout(null);
 
 		lblAnnulla = new JLabel("");

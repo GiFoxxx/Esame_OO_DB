@@ -18,24 +18,43 @@ import ImplementazioniPostrgresDAO.*;
 public class Controller {
 
 	Immagini img = new Immagini();
+	private int flagCambioTema = 0;
 
-	public Color sfondo = new Color(54, 57, 63);
-	public Color coloreScritte = new Color(141, 142, 146);
-	public Color coloreScritteSuBianco = new Color(35, 39, 42);
-	public Color escoPannello = new Color(35, 39, 42);
-	public Color entroPannello = new Color(40, 45, 48);
-	public Color clickPannello = new Color(50, 55, 58);
-	public Color pannelloScelto = new Color(60, 65, 68);
-	public Color coloreScritturaAllerta = new Color(250, 45, 45);
+	// PALETTE COLORI TEMA SCURO
+	public Color sfondoTemaScuro = new Color(54, 57, 63);
+	public Color coloreBianco = new Color(255, 255, 255);
+	public Color coloreScritteTemaScuro = new Color(242, 242, 242);
+	public Color coloreScritteSuBiancoTemaScuro = new Color(35, 39, 42);
+	public Color escoPannelloTemaScuro = new Color(35, 39, 42);
+	public Color entroPannelloTemaScuro = new Color(40, 45, 48);
+	public Color clickPannelloTemaScuro = new Color(50, 55, 58);
+	public Color pannelloSceltoTemaScuro = new Color(60, 65, 68);
+	public Color coloreScritturaAllertaTemaScuro = new Color(250, 45, 45);
+	public Color coloreLabelTemaScuro = new Color(200, 200, 200);
+	public Color coloreLabelEntrataTemaScuro = new Color(220, 220, 220);
+	public Color coloreLabelPressedTemaScuro = new Color(242, 242, 242);
+
+	// PALETTE COLORI TEMA CHIARO
+	public Color sfondoTemaChiaro = new Color(255, 255, 255);
+	public Color coloreScritteTemaChiaro = new Color(35, 39, 42);
+	public Color coloreScritteTendinaTemaChiaro = new Color(106, 110, 117);
+	public Color escoPannelloTemaChiaro = new Color(237, 239, 242);
+	public Color entroPannelloTemaChiaro = new Color(232, 234, 237);
+	public Color clickPannelloTemaChiaro = new Color(227, 229, 232);
+	public Color pannelloSceltoTemaChiaro = new Color(212, 215, 220);
+	public Color coloreScritturaAllertaTemaChiaro = new Color(250, 45, 45);
+	public Color coloreLabelTemaChiaro = new Color(106, 110, 117);
+	public Color coloreLabelEntrataTemaChiaro = new Color(65, 70, 74);
+	public Color coloreLabelPressedTemaChiaro = new Color(46, 51, 56);
+
 	public Color trasparente = new Color(0, 0, 0, 0);
-	public Font fontScritte = new Font("Arial", Font.PLAIN, 19);
+
+	// FONT TESTI
+	public Font fontScritte = new Font("Arial", Font.PLAIN, 18);
 	public Font fontScritteTendina = new Font("Arial", Font.BOLD, 17);
 	public Font fontTitolo = new Font("Arial", Font.BOLD, 18);
-	public Font fontScritteJDialog = new Font("Arial", Font.BOLD, 20);
+	public Font fontScritteJDialog = new Font("Arial", Font.BOLD, 18);
 	public Font fontScritteGestioni = new Font("Arial", Font.PLAIN, 13);
-	public Color coloreLabel = new Color(111, 115, 122);
-	public Color coloreLabelEntrata = new Color(205, 205, 205);
-	public Color coloreLabelPressed = new Color(240, 240, 240);
 	public Font fontLabel = new Font("Arial", Font.BOLD, 12);
 
 	private String emailAccesso;
@@ -375,7 +394,7 @@ public class Controller {
 					((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText());
 			implementazioneUtenteDAO().registrazioneUtente(utn);
 			mostraPannelli(getDashboard().getAccesso());
-
+			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 		} else if ((!formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuoto()) {
 
 			JOptionPane.showMessageDialog(null,
@@ -480,7 +499,7 @@ public class Controller {
 
 	// METODI GESTIONE COMPAGNIA AEREA
 
-	public void svuotaCampiCompagniaAerea() {
+	public void svuotaCampiGestioneCompagniaAerea() {
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().setText("");
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().setText("");
 	}
@@ -498,7 +517,7 @@ public class Controller {
 		implementazioneCompagniaAereaDAO().aggiungiCompagniaAerea(compAerea);
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
 				.addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
-		svuotaCampiCompagniaAerea();
+		svuotaCampiGestioneCompagniaAerea();
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 	}
 
@@ -510,7 +529,7 @@ public class Controller {
 		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
 		implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
-		svuotaCampiCompagniaAerea();
+		svuotaCampiGestioneCompagniaAerea();
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 	}
 
@@ -528,13 +547,13 @@ public class Controller {
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText(), t, 1);
 
 		implementazioneCompagniaAereaDAO().modificaCompagniaAerea(compAerea);
-		svuotaCampiCompagniaAerea();
+		svuotaCampiGestioneCompagniaAerea();
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 	}
 
 	// METODI GESTIONE TRATTE
 
-	public void svuotaCampiTratta() {
+	public void svuotaCampiGestioneTratta() {
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().setText("");
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().setText("");
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().setText("");
@@ -560,7 +579,7 @@ public class Controller {
 		implementazioneTrattaDAO().aggiungiTratta(trt);
 		((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
 				.addRow(((GestioneTratte) getDashboard().getGestioneTratte()).getRow());
-		svuotaCampiTratta();
+		svuotaCampiGestioneTratta();
 		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 	}
 
@@ -576,7 +595,7 @@ public class Controller {
 		int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().getSelectedRow();
 		implementazioneTrattaDAO().cancellaTratta(trt);
 		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().removeRow(t);
-		svuotaCampiTratta();
+		svuotaCampiGestioneTratta();
 		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 	}
 
@@ -599,13 +618,13 @@ public class Controller {
 				.setValueAt(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(), t, 2);
 
 		implementazioneTrattaDAO().modificaTratta(trt);
-		svuotaCampiTratta();
+		svuotaCampiGestioneTratta();
 		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 	}
 
 	// METODI GESTIONE VOLI PARTENZE
 
-	public void svuotaCampiVoloPartenze() {
+	public void svuotaCampiGestioneVoloPartenze() {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().setText("");
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCittaArrivo().setText("");
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().setDate(null);
@@ -633,7 +652,7 @@ public class Controller {
 		implementazioneVoloPartenzeDAO().aggiungiVoloPartenze(vlprtz);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
 				.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
-		svuotaCampiVoloPartenze();
+		svuotaCampiGestioneVoloPartenze();
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
@@ -650,7 +669,7 @@ public class Controller {
 		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
 		implementazioneVoloPartenzeDAO().cancellaVoloPartenze(vlprtz);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().removeRow(t);
-		svuotaCampiVoloPartenze();
+		svuotaCampiGestioneVoloPartenze();
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
@@ -681,13 +700,13 @@ public class Controller {
 				t, 4);
 
 		implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
-		svuotaCampiVoloPartenze();
+		svuotaCampiGestioneVoloPartenze();
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
 	// METODI GESTIONE VOLI ARRIVI
 
-	public void svuotaCampiVoloArrivi() {
+	public void svuotaCampiGestioneVoloArrivi() {
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().setText("");
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().setText("");
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().setDate(null);
@@ -711,7 +730,7 @@ public class Controller {
 		implementazioneVoloArriviDAO().aggiungiVoloArrivi(vlarr);
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello()
 				.addRow(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getRow());
-		svuotaCampiVoloArrivi();
+		svuotaCampiGestioneVoloArrivi();
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 	}
 
@@ -726,7 +745,7 @@ public class Controller {
 		int t = ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTabella().getSelectedRow();
 		implementazioneVoloArriviDAO().cancellaVoloArrivi(vlarr);
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().removeRow(t);
-		svuotaCampiVoloArrivi();
+		svuotaCampiGestioneVoloArrivi();
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 	}
 
@@ -749,13 +768,13 @@ public class Controller {
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
 				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText(), t, 3);
 		implementazioneVoloArriviDAO().modificaVoloArrivi(vlarr);
-		svuotaCampiVoloArrivi();
+		svuotaCampiGestioneVoloArrivi();
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 	}
 
 	// METODI GESTIONE GATE
 
-	public void svuotaCampiGate() {
+	public void svuotaCampiGestioneGate() {
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setText("");
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setText("");
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtInizioImbarco().setText("");
@@ -775,7 +794,7 @@ public class Controller {
 		implementazioneGateDAO().aggiungiGate(gt);
 		((GestioneGate) getDashboard().getGestioneGate()).getModello()
 				.addRow(((GestioneGate) getDashboard().getGestioneGate()).getRow());
-		svuotaCampiGate();
+		svuotaCampiGestioneGate();
 		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
@@ -788,7 +807,7 @@ public class Controller {
 		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
 		implementazioneGateDAO().cancellaGate(gt);
 		((GestioneGate) getDashboard().getGestioneGate()).getModello().removeRow(t);
-		svuotaCampiGate();
+		svuotaCampiGestioneGate();
 		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
@@ -810,7 +829,7 @@ public class Controller {
 				.setValueAt(((GestioneGate) getDashboard().getGestioneGate()).getTxtFineImbarco().getText(), t, 3);
 
 		implementazioneGateDAO().modificaGate(gt);
-		svuotaCampiGate();
+		svuotaCampiGestioneGate();
 		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
@@ -983,7 +1002,10 @@ public class Controller {
 	public void mostraPannelli(JPanel pane) {
 		((Home) getDashboard().getHome()).getLblFareAccesso().setText("");
 		((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setText("");
+		((Accesso) getDashboard().getAccesso()).getLblMostraPassword().setVisible(true);
 		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
+		((Registrazione) getDashboard().getRegistrazione()).getLblMostraPassword().setVisible(true);
+		((Registrazione) getDashboard().getRegistrazione()).getLblMostraRipetiPassword().setVisible(true);
 		getDashboard().getHome().setVisible(false);
 		getDashboard().getAccesso().setVisible(false);
 		svuotaCampiAccesso();
@@ -992,14 +1014,23 @@ public class Controller {
 		getDashboard().getProfilo().setVisible(false);
 		getDashboard().getImpostazioni().setVisible(false);
 		getDashboard().getGestioneCompagnieAeree().setVisible(false);
+		svuotaCampiGestioneCompagniaAerea();
 		getDashboard().getGestioneUtenti().setVisible(false);
+		svuotaCampiGestioneUtenti();
 		getDashboard().getGestioneGate().setVisible(false);
+		svuotaCampiGestioneGate();
 		getDashboard().getGestioneTratte().setVisible(false);
+		svuotaCampiGestioneTratta();
 		getDashboard().getGestioneVoliPartenze().setVisible(false);
+		svuotaCampiGestioneVoloPartenze();
 		getDashboard().getGestioneVoliArrivi().setVisible(false);
+		svuotaCampiGestioneVoloArrivi();
 		getDashboard().getCambioPassword().setVisible(false);
 		svuotaCampiCambioPassword();
-		getDashboard().getRecensione().setVisible(false);
+		((CambioPassword) getDashboard().getCambioPassword()).getLblMostraNuovaPassword().setVisible(true);
+		((CambioPassword) getDashboard().getCambioPassword()).getLblMostraRipetiNuovaPassword().setVisible(true);
+		svuotaCampiCambioPassword();
+		getDashboard().getRecensioni().setVisible(false);
 		getDashboard().getNoClick().setVisible(false);
 		pane.setVisible(true);
 	}
@@ -1028,6 +1059,7 @@ public class Controller {
 		getDashboard().getSceltaProfiloSenzaAccesso().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
+		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
 
 	// METODI SCELTA VOLI
@@ -1055,6 +1087,7 @@ public class Controller {
 		getDashboard().getSceltaVolo().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
+		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
 
 	// METODI DI HOME
@@ -1131,15 +1164,19 @@ public class Controller {
 	}
 
 	public void mostraPasswordDimenticata() {
-		dashboard.setEnabled(false);
-		dashboard.getPasswordDimenticata().setVisible(true);
+		getDashboard().setEnabled(false);
+		getDashboard().getPasswordDimenticata().setVisible(true);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMostraNuovaPassword().setVisible(true);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMostraRipetiNuovaPassword()
+				.setVisible(true);
 		svuotaCampiPasswordDimenticata();
 	}
 
 	public void annullaPasswordDimenticata() {
-		dashboard.getPasswordDimenticata().dispose();
+		getDashboard().getPasswordDimenticata().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
+		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
 
 	// METODI DI USCITA
@@ -1158,6 +1195,7 @@ public class Controller {
 		dashboard.getUscita().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
+		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
 
 	// METODI PER RIDIMENSIONAMENTO
@@ -1336,4 +1374,481 @@ public class Controller {
 			System.out.println("Il ritardo della partenze è di: " + ritardoSecondo_Arrivo + " secondi.");
 		}
 	}
+
+	public boolean cambioTema() {
+		if (flagCambioTema == 0) {
+			flagCambioTema = 1;
+			return true;
+		} else {
+			flagCambioTema = 0;
+			return false;
+		}
+	}
+
+	public void temaChiaro() {
+//		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
+		mostraPannelli(getDashboard().getNoClick());
+		getDashboard().getLblCambioTemaChiaro().setVisible(false);
+		getDashboard().getLblCambioTemaScuro().setVisible(true);
+		getDashboard().getLblLayout().setIcon(new ImageIcon(img.sfondoTemaChiaro()));
+		getDashboard().getLblTendina().setIcon(new ImageIcon(img.tendinaTemaChiaro()));
+		getDashboard().getLblTitolo().setForeground(coloreScritteTendinaTemaChiaro);
+		getDashboard().getLblSpostaDashboard().setIcon(new ImageIcon(img.spostaDashboardTemaChiaro()));
+		getDashboard().getLblX().setIcon(new ImageIcon(img.X1TemaChiaro()));
+		getDashboard().getLblMinimizza().setIcon(new ImageIcon(img.minimizza1TemaChiaro()));
+
+		getDashboard().getPannelloTendina().setBackground(trasparente);
+		getDashboard().getLineeApertura().setIcon(new ImageIcon(img.lineeAperturaTemaChiaro()));
+		getDashboard().getLineeChiusura().setIcon(new ImageIcon(img.lineeChiusuraTemaChiaro()));
+		getDashboard().getLblHome().setIcon(new ImageIcon(img.casaTemaChiaro()));
+		getDashboard().getLblAccesso().setIcon(new ImageIcon(img.accediTemaChiaro()));
+		getDashboard().getLblRegistrazione().setIcon(new ImageIcon(img.registratiTemaChiaro()));
+		getDashboard().getLblProfilo().setIcon(new ImageIcon(img.profiloTemaChiaro()));
+		getDashboard().getLblImpostazioni().setIcon(new ImageIcon(img.impostazioniTemaChiaro()));
+		getDashboard().getLblEsci().setIcon(new ImageIcon(img.esciTemaChiaro()));
+
+		// NO CLICK
+				getDashboard().getNoClick().setBackground(trasparente);
+		
+		
+		// HOME
+		getDashboard().getHome().setBackground(sfondoTemaChiaro);
+		
+		// ACCESSO
+		getDashboard().getAccesso().setBackground(sfondoTemaChiaro);
+		((Accesso) getDashboard().getAccesso()).getTxtEmail().setBackground(sfondoTemaChiaro);
+		((Accesso) getDashboard().getAccesso()).getTxtEmail().setForeground(coloreLabelTemaChiaro);
+		((Accesso) getDashboard().getAccesso()).getTxtPassword().setBackground(sfondoTemaChiaro);
+		((Accesso) getDashboard().getAccesso()).getTxtPassword().setForeground(coloreLabelTemaChiaro);
+		((Accesso) getDashboard().getAccesso()).getLblPasswordDimenticata().setForeground(coloreLabelTemaChiaro);
+		((Accesso) getDashboard().getAccesso()).getLblAvanti().setIcon(new ImageIcon(img.avanti1TemaChiaro()));
+		((Accesso) getDashboard().getAccesso()).getLblCredenziali()
+				.setIcon(new ImageIcon(img.credenzialiAccessoTemaChiaro()));
+
+		// REGISTRAZIONE
+		getDashboard().getRegistrazione().setBackground(sfondoTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtNome().setBackground(sfondoTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtNome().setForeground(coloreLabelTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().setBackground(sfondoTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().setForeground(coloreLabelTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().setBackground(sfondoTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().setForeground(coloreLabelTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setBackground(sfondoTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setForeground(coloreLabelTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setBackground(sfondoTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setForeground(coloreLabelTemaChiaro);
+		((Registrazione) getDashboard().getRegistrazione()).getLblAvanti()
+				.setIcon(new ImageIcon(img.avanti1TemaChiaro()));
+		((Registrazione) getDashboard().getRegistrazione()).getLblInserimentoCredenziali()
+				.setIcon(new ImageIcon(img.credenzialiRegistrazioneTemaChiaro()));
+
+		// PROFILO
+		getDashboard().getProfilo().setBackground(sfondoTemaChiaro);
+		((Profilo) getDashboard().getProfilo()).getTxtNome().setBackground(sfondoTemaChiaro);
+		((Profilo) getDashboard().getProfilo()).getTxtNome().setForeground(coloreLabelTemaChiaro);
+		((Profilo) getDashboard().getProfilo()).getTxtCognome().setBackground(sfondoTemaChiaro);
+		((Profilo) getDashboard().getProfilo()).getTxtCognome().setForeground(coloreLabelTemaChiaro);
+		((Profilo) getDashboard().getProfilo()).getTxtEmail().setBackground(sfondoTemaChiaro);
+		((Profilo) getDashboard().getProfilo()).getTxtEmail().setForeground(coloreLabelTemaChiaro);
+		((Profilo) getDashboard().getProfilo()).getLblLogout().setForeground(coloreLabelTemaChiaro);
+		((Profilo) getDashboard().getProfilo()).getLblCambiaPassword().setForeground(coloreLabelTemaChiaro);
+		((Profilo) getDashboard().getProfilo()).getLblDatiAccount().setIcon(new ImageIcon(img.datiProfiloTemaChiaro()));
+
+		// IMPOSTAZIONI
+		getDashboard().getImpostazioni().setBackground(sfondoTemaChiaro);
+		((Impostazioni) getDashboard().getImpostazioni()).getLblTema().setForeground(coloreLabelTemaChiaro);
+		((Impostazioni) getDashboard().getImpostazioni()).getLblInformazioni().setForeground(coloreLabelTemaChiaro);
+		((Impostazioni) getDashboard().getImpostazioni()).getLblRiconoscimenti().setForeground(coloreLabelTemaChiaro);
+		((Impostazioni) getDashboard().getImpostazioni()).getLblTerminiECondizioni()
+				.setForeground(coloreLabelTemaChiaro);
+		((Impostazioni) getDashboard().getImpostazioni()).getLblRecensione().setForeground(coloreLabelTemaChiaro);
+
+		// GESTIONE TRATTA
+		getDashboard().getGestioneTratte().setBackground(sfondoTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblCodiceTratta().setForeground(coloreLabelTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblCittaPartenza()
+				.setForeground(coloreLabelTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblCittaArrivo().setForeground(coloreLabelTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblDataPartenza().setForeground(coloreLabelTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblDataArrivo().setForeground(coloreLabelTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblOraPartenza().setForeground(coloreLabelTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblOraArrivo().setForeground(coloreLabelTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblMinutoPartenza()
+				.setForeground(coloreLabelTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblMinutoArrivo().setForeground(coloreLabelTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblDuePuntiPartenza()
+				.setForeground(coloreLabelTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblDuePuntiArrivo()
+				.setForeground(coloreLabelTemaChiaro);
+
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta()
+				.setForeground(coloreScritteTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza()
+				.setForeground(coloreScritteTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo()
+				.setForeground(coloreScritteTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataPartenza()
+				.setForeground(coloreScritteTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataArrivo()
+				.setForeground(coloreScritteTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOraPartenza()
+				.setForeground(coloreScritteTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOraArrivo().setForeground(coloreScritteTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtMinutoPartenza()
+				.setForeground(coloreScritteTemaChiaro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtMinutoArrivo()
+				.setForeground(coloreScritteTemaChiaro);
+
+		// GESTIONE COMPAGNIE AEREE
+		getDashboard().getGestioneCompagnieAeree().setBackground(sfondoTemaChiaro);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getLblCodiceCompagniaAerea()
+				.setForeground(coloreLabelTemaChiaro);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getLblNome()
+				.setForeground(coloreLabelTemaChiaro);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
+				.setForeground(coloreScritteTemaChiaro);
+
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome()
+				.setForeground(coloreScritteTemaChiaro);
+
+		// GESTIONE UTENTI
+		getDashboard().getGestioneUtenti().setBackground(sfondoTemaChiaro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblNome().setForeground(coloreLabelTemaChiaro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblCognome().setForeground(coloreLabelTemaChiaro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblEmail().setForeground(coloreLabelTemaChiaro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblPassword().setForeground(coloreLabelTemaChiaro);
+
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().setForeground(coloreScritteTemaChiaro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().setForeground(coloreScritteTemaChiaro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().setForeground(coloreScritteTemaChiaro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().setForeground(coloreScritteTemaChiaro);
+
+		// GESTIONE VOLI PARTENZE
+		getDashboard().getGestioneVoliPartenze().setBackground(sfondoTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblCodiceVoloPartenze().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblCittaArrivo().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblDataPartenza().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblOraPartenza().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMinutoPartenza().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblDuePuntiPartenza().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblNumeroPrenoazioni().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRitardo().setForeground(coloreLabelTemaChiaro);
+		
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().setForeground(coloreScritteTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCittaArrivo().setForeground(coloreScritteTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().setForeground(coloreScritteTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().setForeground(coloreScritteTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().setForeground(coloreScritteTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().setForeground(coloreScritteTemaChiaro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().setForeground(coloreScritteTemaChiaro);
+		
+		// GESTIONE VOLO ARRIVI
+		getDashboard().getGestioneVoliArrivi().setBackground(sfondoTemaChiaro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblCodiceVoloArrivi().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblCittaPartenza().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblDataArrivo().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblOraArrivo().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblMinutoArrivo().setForeground(coloreLabelTemaChiaro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblDuePuntiArrivo().setForeground(coloreLabelTemaChiaro);
+		
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().setForeground(coloreScritteTemaChiaro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().setForeground(coloreScritteTemaChiaro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().setForeground(coloreScritteTemaChiaro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().setForeground(coloreScritteTemaChiaro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().setForeground(coloreScritteTemaChiaro);
+
+		// GESTIONE GATE
+		getDashboard().getGestioneGate().setBackground(sfondoTemaChiaro);
+		((GestioneGate) getDashboard().getGestioneGate()).getLblCodiceGate().setForeground(coloreLabelTemaChiaro);
+		((GestioneGate) getDashboard().getGestioneGate()).getLblNumeroPorta().setForeground(coloreLabelTemaChiaro);
+		((GestioneGate) getDashboard().getGestioneGate()).getLblInizioImbarco().setForeground(coloreLabelTemaChiaro);
+		((GestioneGate) getDashboard().getGestioneGate()).getLblFineImbarco().setForeground(coloreLabelTemaChiaro);
+
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setForeground(coloreScritteTemaChiaro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setForeground(coloreScritteTemaChiaro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtInizioImbarco().setForeground(coloreScritteTemaChiaro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtFineImbarco().setForeground(coloreScritteTemaChiaro);
+
+		// RECENSIONE
+		getDashboard().getRecensioni().setBackground(sfondoTemaChiaro);
+
+		// CAMBIO PASSWORD
+		getDashboard().getCambioPassword().setBackground(sfondoTemaChiaro);
+
+		// JDIALOG USCITA
+		((Uscita) getDashboard().getUscita()).getLblLayout().setIcon(new ImageIcon(img.sfondoUscitaTemaChiaro()));
+		((Uscita) getDashboard().getUscita()).getLblSpostaUscita().setIcon(new ImageIcon(img.spostaUscitaTemaChiaro()));
+		((Uscita) getDashboard().getUscita()).getLblX().setIcon(new ImageIcon(img.X1TemaChiaro()));
+		((Uscita) getDashboard().getUscita()).getLblUscire().setForeground(coloreScritteTemaChiaro);
+
+		//PASSWORD DIMENTICATA
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblLayout().setIcon(new ImageIcon(img.sfondoPasswordDimenticataTemaChiaro()));
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblSpostaPasswordDimenticata()
+				.setIcon(new ImageIcon(img.spostaUscitaTemaChiaro()));
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblX().setIcon(new ImageIcon(img.X1TemaChiaro()));
+		
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblCampi().setIcon(new ImageIcon(img.credenzialiPasswordDimenticataTemaChiaro()));
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblSalva().setIcon(new ImageIcon(img.salva1TemaChiaro()));
+		
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().setBackground(sfondoTemaChiaro);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().setForeground(coloreScritteTemaChiaro);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().setBackground(sfondoTemaChiaro);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().setForeground(coloreScritteTemaChiaro);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtRipetiNuovaPassword().setBackground(sfondoTemaChiaro);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtRipetiNuovaPassword().setForeground(coloreScritteTemaChiaro);
+		
+		// JDIALOG SCELTA PROFILO SENZA ACCESSO
+		((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblLayout()
+				.setIcon(new ImageIcon(img.sfondoUscitaTemaChiaro()));
+		((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso())
+				.getLblSpostaSceltaProfiloSenzaAccesso().setIcon(new ImageIcon(img.spostaUscitaTemaChiaro()));
+		((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblX()
+				.setIcon(new ImageIcon(img.X1TemaChiaro()));
+		((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblContinuare().setForeground(coloreLabelTemaChiaro);
+
+		// JDIALOG SCELTA VOLI
+		((SceltaVolo) getDashboard().getSceltaVolo()).getLblLayout()
+				.setIcon(new ImageIcon(img.sfondoUscitaTemaChiaro()));
+		((SceltaVolo) getDashboard().getSceltaVolo()).getLblSpostaSceltaVolo()
+				.setIcon(new ImageIcon(img.spostaUscitaTemaChiaro()));
+		((SceltaVolo) getDashboard().getSceltaVolo()).getLblX().setIcon(new ImageIcon(img.X1TemaChiaro()));
+
+		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
+	}
+
+	public void temaScuro() {
+//		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
+		mostraPannelli(getDashboard().getNoClick());
+		getDashboard().getLblCambioTemaScuro().setVisible(false);
+		getDashboard().getLblCambioTemaChiaro().setVisible(true);
+		getDashboard().getLblLayout().setIcon(new ImageIcon(img.sfondo()));
+		getDashboard().getLblTendina().setIcon(new ImageIcon(img.tendina()));
+		getDashboard().getLblTitolo().setForeground(coloreBianco);
+		getDashboard().getLblSpostaDashboard().setIcon(new ImageIcon(img.spostaDashboard()));
+		getDashboard().getLblX().setIcon(new ImageIcon(img.X1()));
+		getDashboard().getLblMinimizza().setIcon(new ImageIcon(img.minimizza1()));
+
+		getDashboard().getPannelloTendina().setBackground(trasparente);
+		getDashboard().getLineeApertura().setIcon(new ImageIcon(img.lineeApertura()));
+		getDashboard().getLineeChiusura().setIcon(new ImageIcon(img.lineeChiusura()));
+		getDashboard().getLblHome().setIcon(new ImageIcon(img.casa()));
+		getDashboard().getLblAccesso().setIcon(new ImageIcon(img.accedi()));
+		getDashboard().getLblRegistrazione().setIcon(new ImageIcon(img.registrati()));
+		getDashboard().getLblProfilo().setIcon(new ImageIcon(img.profilo()));
+		getDashboard().getLblImpostazioni().setIcon(new ImageIcon(img.impostazioni()));
+		getDashboard().getLblEsci().setIcon(new ImageIcon(img.esci()));
+
+		// NO CLICK
+		getDashboard().getNoClick().setBackground(trasparente);
+		
+		
+		// HOME
+		getDashboard().getHome().setBackground(sfondoTemaScuro);
+		// ACCESSO
+		getDashboard().getAccesso().setBackground(sfondoTemaScuro);
+		((Accesso) getDashboard().getAccesso()).getTxtEmail().setBackground(sfondoTemaScuro);
+		((Accesso) getDashboard().getAccesso()).getTxtEmail().setForeground(coloreScritteTemaScuro);
+		((Accesso) getDashboard().getAccesso()).getTxtPassword().setBackground(sfondoTemaScuro);
+		((Accesso) getDashboard().getAccesso()).getTxtPassword().setForeground(coloreScritteTemaScuro);
+		((Accesso) getDashboard().getAccesso()).getLblPasswordDimenticata().setForeground(coloreScritteTemaScuro);
+		((Accesso) getDashboard().getAccesso()).getLblAvanti().setIcon(new ImageIcon(img.avanti1()));
+		((Accesso) getDashboard().getAccesso()).getLblCredenziali().setIcon(new ImageIcon(img.credenzialiAccesso()));
+
+		// REGISTRAZIONE
+		getDashboard().getRegistrazione().setBackground(sfondoTemaScuro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtNome().setForeground(coloreScritteTemaScuro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().setForeground(coloreScritteTemaScuro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().setForeground(coloreScritteTemaScuro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setForeground(coloreScritteTemaScuro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword()
+				.setForeground(coloreScritteTemaScuro);
+
+		((Registrazione) getDashboard().getRegistrazione()).getTxtNome().setBackground(sfondoTemaScuro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().setBackground(sfondoTemaScuro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().setBackground(sfondoTemaScuro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setBackground(sfondoTemaScuro);
+		((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setBackground(sfondoTemaScuro);
+
+		((Registrazione) getDashboard().getRegistrazione()).getLblAvanti().setIcon(new ImageIcon(img.avanti1()));
+		((Registrazione) getDashboard().getRegistrazione()).getLblInserimentoCredenziali()
+				.setIcon(new ImageIcon(img.credenzialiRegistrazione()));
+
+		// PROFILO
+		getDashboard().getProfilo().setBackground(sfondoTemaScuro);		
+		((Profilo) getDashboard().getProfilo()).getLblLogout().setForeground(coloreScritteTemaScuro);
+		((Profilo) getDashboard().getProfilo()).getLblCambiaPassword().setForeground(coloreScritteTemaScuro);
+
+		((Profilo) getDashboard().getProfilo()).getTxtNome().setBackground(sfondoTemaScuro);
+		((Profilo) getDashboard().getProfilo()).getTxtNome().setForeground(coloreScritteTemaScuro);
+		((Profilo) getDashboard().getProfilo()).getTxtCognome().setBackground(sfondoTemaScuro);
+		((Profilo) getDashboard().getProfilo()).getTxtCognome().setForeground(coloreScritteTemaScuro);
+		((Profilo) getDashboard().getProfilo()).getTxtEmail().setBackground(sfondoTemaScuro);
+		((Profilo) getDashboard().getProfilo()).getTxtEmail().setForeground(coloreScritteTemaScuro);
+
+		((Profilo) getDashboard().getProfilo()).getLblDatiAccount().setIcon(new ImageIcon(img.datiAccount()));
+
+		// IMPOSTAZIONI
+		getDashboard().getImpostazioni().setBackground(sfondoTemaScuro);
+		((Impostazioni) getDashboard().getImpostazioni()).getLblTema().setForeground(coloreScritteTemaScuro);
+		((Impostazioni) getDashboard().getImpostazioni()).getLblInformazioni().setForeground(coloreScritteTemaScuro);
+		((Impostazioni) getDashboard().getImpostazioni()).getLblRiconoscimenti().setForeground(coloreScritteTemaScuro);
+		((Impostazioni) getDashboard().getImpostazioni()).getLblTerminiECondizioni()
+				.setForeground(coloreScritteTemaScuro);
+		((Impostazioni) getDashboard().getImpostazioni()).getLblRecensione().setForeground(coloreScritteTemaScuro);
+
+		// GESTIONE TRATTA
+		getDashboard().getGestioneTratte().setBackground(sfondoTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblCodiceTratta()
+				.setForeground(coloreScritteTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblCittaPartenza()
+				.setForeground(coloreScritteTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblCittaArrivo().setForeground(coloreScritteTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblDataPartenza()
+				.setForeground(coloreScritteTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblDataArrivo().setForeground(coloreScritteTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblOraPartenza().setForeground(coloreScritteTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblOraArrivo().setForeground(coloreScritteTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblMinutoPartenza()
+				.setForeground(coloreScritteTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblMinutoArrivo()
+				.setForeground(coloreScritteTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblDuePuntiPartenza()
+				.setForeground(coloreScritteTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getLblDuePuntiArrivo()
+				.setForeground(coloreScritteTemaScuro);
+
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataPartenza()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getDateDataArrivo()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOraPartenza()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtOraArrivo()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtMinutoPartenza()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtMinutoArrivo()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+
+		// GESTIONE COMPAGNIE AEREE
+		getDashboard().getGestioneCompagnieAeree().setBackground(sfondoTemaScuro);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getLblCodiceCompagniaAerea()
+				.setForeground(coloreScritteTemaScuro);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getLblNome()
+				.setForeground(coloreScritteTemaScuro);
+		
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+
+		// GESTIONE UTENTI
+		getDashboard().getGestioneUtenti().setBackground(sfondoTemaScuro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblNome().setForeground(coloreLabelTemaScuro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblCognome().setForeground(coloreLabelTemaScuro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblEmail().setForeground(coloreLabelTemaScuro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblPassword().setForeground(coloreLabelTemaScuro);
+
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().setForeground(coloreScritteTemaScuro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().setForeground(coloreScritteTemaScuro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().setForeground(coloreScritteTemaScuro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().setForeground(coloreScritteTemaScuro);
+
+		// GESTIONE VOLI PARTENZE
+		getDashboard().getGestioneVoliPartenze().setBackground(sfondoTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblCodiceVoloPartenze().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblCittaArrivo().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblDataPartenza().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblOraPartenza().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMinutoPartenza().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblDuePuntiPartenza().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblNumeroPrenoazioni().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRitardo().setForeground(coloreLabelTemaScuro);
+		
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().setForeground(coloreScritteTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCittaArrivo().setForeground(coloreScritteTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().setForeground(coloreScritteTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().setForeground(coloreScritteTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().setForeground(coloreScritteTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().setForeground(coloreScritteTemaScuro);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().setForeground(coloreScritteTemaScuro);
+
+		// GESTIONE VOLO ARRIVI
+		getDashboard().getGestioneVoliArrivi().setBackground(sfondoTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblCodiceVoloArrivi().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblCittaPartenza().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblDataArrivo().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblOraArrivo().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblMinutoArrivo().setForeground(coloreLabelTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblDuePuntiArrivo().setForeground(coloreLabelTemaScuro);
+		
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().setForeground(coloreScritteTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().setForeground(coloreScritteTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().setForeground(coloreScritteTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().setForeground(coloreScritteTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().setForeground(coloreScritteTemaScuro);
+
+		// GESTIONE GATE
+		getDashboard().getGestioneGate().setBackground(sfondoTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getLblCodiceGate().setForeground(coloreLabelTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getLblNumeroPorta().setForeground(coloreLabelTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getLblInizioImbarco().setForeground(coloreLabelTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getLblFineImbarco().setForeground(coloreLabelTemaScuro);
+
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setForeground(coloreScritteTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setForeground(coloreScritteTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtInizioImbarco().setForeground(coloreScritteTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtFineImbarco().setForeground(coloreScritteTemaScuro);
+
+		// RECENSIONE
+		getDashboard().getRecensioni().setBackground(sfondoTemaScuro);
+
+		// CAMBIO PASSWORD
+		getDashboard().getCambioPassword().setBackground(sfondoTemaScuro);
+
+		// JDIALOG USCITA
+		((Uscita) getDashboard().getUscita()).getLblLayout().setIcon(new ImageIcon(img.sfondoUscita()));
+		((Uscita) getDashboard().getUscita()).getLblSpostaUscita().setIcon(new ImageIcon(img.spostaUscita()));
+		((Uscita) getDashboard().getUscita()).getLblX().setIcon(new ImageIcon(img.X1()));
+
+		// JDIALOG PASSWORD DIMENTICATA
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblLayout().setIcon(new ImageIcon(img.sfondoPasswordDimenticata()));
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblSpostaPasswordDimenticata()
+				.setIcon(new ImageIcon(img.spostaUscita()));
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblX().setIcon(new ImageIcon(img.X1()));
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblCampi().setIcon(new ImageIcon(img.credenzialiPasswordDimenticata()));
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblSalva().setIcon(new ImageIcon(img.salva1()));
+		
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().setBackground(sfondoTemaScuro);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().setForeground(coloreScritteTemaScuro);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().setBackground(sfondoTemaScuro);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().setForeground(coloreScritteTemaScuro);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtRipetiNuovaPassword().setBackground(sfondoTemaScuro);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtRipetiNuovaPassword().setForeground(coloreScritteTemaScuro);
+		
+		// JDIALOG SCELTA PROFILO SENZA ACCESSO
+		((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblLayout()
+				.setIcon(new ImageIcon(img.sfondoUscita()));
+		((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso())
+				.getLblSpostaSceltaProfiloSenzaAccesso().setIcon(new ImageIcon(img.spostaUscita()));
+		((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblX()
+				.setIcon(new ImageIcon(img.X1()));
+		((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblContinuare().setForeground(coloreLabelTemaScuro);
+
+		// JDIALOG SCELTA VOLI
+		((SceltaVolo) getDashboard().getSceltaVolo()).getLblLayout().setIcon(new ImageIcon(img.sfondoUscita()));
+		((SceltaVolo) getDashboard().getSceltaVolo()).getLblSpostaSceltaVolo()
+				.setIcon(new ImageIcon(img.spostaUscita()));
+		((SceltaVolo) getDashboard().getSceltaVolo()).getLblX().setIcon(new ImageIcon(img.X1()));
+
+		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
+		
+	}
+
 }
