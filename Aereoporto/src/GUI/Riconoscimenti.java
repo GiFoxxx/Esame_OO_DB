@@ -1,24 +1,27 @@
 package GUI;
+
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.EventQueue;
-
-
+import java.awt.Font;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import Controller.Controller;
 
 public class Riconoscimenti extends JFrame {
 
+
+
 	private JPanel contentPane;
 
-	Controller controllerRiconoscimenti;
+	static Controller controllerRiconoscimenti;
 
 	public Riconoscimenti(Controller controller) {
-		
-		controllerRiconoscimenti=controller;
-		
+
+		controllerRiconoscimenti = controller;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -26,5 +29,8 @@ public class Riconoscimenti extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 	}
+	
+	
+
 
 }

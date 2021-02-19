@@ -29,8 +29,8 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Object[] Lista = new Object[4];
-				for (int i = 0; i <= 3; i++) {
+				Object[] Lista = new Object[3];
+				for (int i = 0; i <= 2; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}
 				ListaGate.add(Lista);
@@ -48,7 +48,7 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 	public boolean aggiungiGate(Object gate) {
 		gt = (Gate) gate;
 		PreparedStatement pst;
-		String sql = "INSERT INTO gate (codiceGate, numeroPorta, inizioImbarco, fineImbarco) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO gate (codiceGate, numeroPorta, tempoImbarcoEffettivo) VALUES (?, ?, ?)";
 		try {
 			db.ConnessioneDB();
 
@@ -56,8 +56,7 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 
 			pst.setString(1, gt.getCodiceGate());
 			pst.setString(2, gt.getNumeroPorta());
-			pst.setString(3, gt.getInizioImbarco());
-			pst.setString(4, gt.getInizioImbarco());
+			pst.setInt(3, gt.getTempoImbarcoEffettivo());
 
 			int res = pst.executeUpdate();
 
@@ -108,16 +107,15 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 	public boolean modificaGate(Object gate) {
 		gt = (Gate) gate;
 		PreparedStatement pst;
-		String sql = "UPDATE gate SET numeroporta = ?, inizioimbarco = ?, fineimbarco = ? WHERE codiceGate = ?";
+		String sql = "UPDATE gate SET numeroporta = ?, tempoimbarcoeffettivo = ? WHERE codiceGate = ?";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, gt.getNumeroPorta());
-			pst.setString(2, gt.getInizioImbarco());
-			pst.setString(3, gt.getFineImbarco());
-			pst.setString(4, gt.getCodiceGate());
+			pst.setInt(2, gt.getTempoImbarcoEffettivo());
+			pst.setString(3, gt.getCodiceGate());
 
 			int res = pst.executeUpdate();
 

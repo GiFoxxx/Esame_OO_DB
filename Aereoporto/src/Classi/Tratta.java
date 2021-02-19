@@ -18,6 +18,7 @@ public class Tratta {
 	private Date dataArrivo;
 	private String orarioPartenza;
 	private String orarioArrivo;
+	private String tempoImbarcoStimato;
 	
 
 	// GETTER E SETTER
@@ -77,8 +78,16 @@ public class Tratta {
 		this.orarioArrivo = orarioArrivo;
 	}
 
+	public String getTempoImbarcoStimato() {
+		return tempoImbarcoStimato;
+	}
+
+	public void setTempoImbarcoStimato(String tempoImbarcoStimato) {
+		this.tempoImbarcoStimato = tempoImbarcoStimato;
+	}
+
 	// COSTRUTTORI
-	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo, Date dataPartenza, Date dataArrivo, String orarioPartenza, String orarioArrivo) {
+	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo, Date dataPartenza, Date dataArrivo, String orarioPartenza, String orarioArrivo, String tempoImbarcoStimato) {
 		super();
 		this.codiceTratta = codiceTratta;
 		this.cittaPartenza = cittaPartenza;
@@ -87,6 +96,7 @@ public class Tratta {
 		this.dataArrivo = dataArrivo;
 		this.orarioPartenza = orarioPartenza;
 		this.orarioArrivo = orarioArrivo;
+		this.tempoImbarcoStimato = tempoImbarcoStimato;
 	}
 
 	public Tratta() {

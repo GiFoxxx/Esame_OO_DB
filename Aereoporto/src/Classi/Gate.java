@@ -12,14 +12,19 @@ public class Gate {
 	// ATTRIBUTI
 	private String codiceGate;
 	private String numeroPorta;
-	private String inizioImbarco;
-	private String fineImbarco;
+	private int tempoImbarcoEffettivo;
 
 	// GETTER E SETTER
-	
-	
 	public String getCodiceGate() {
 		return codiceGate;
+	}
+
+	public int getTempoImbarcoEffettivo() {
+		return tempoImbarcoEffettivo;
+	}
+
+	public void setTempoImbarcoEffettivo(int tempoImbarcoEffettivo) {
+		this.tempoImbarcoEffettivo = tempoImbarcoEffettivo;
 	}
 
 	public void setCodiceGate(String condiceGate) {
@@ -34,43 +39,38 @@ public class Gate {
 		this.numeroPorta = numeroPorta;
 	}
 
-	public String getInizioImbarco() {
-		return inizioImbarco;
-	}
-
-	public void setInizioImbarco(String inizioImbarco) {
-		this.inizioImbarco = inizioImbarco;
-	}
-
-	public String getFineImbarco() {
-		return fineImbarco;
-	}
-
-	public void setFineImbarco(String fineImbarco) {
-		this.fineImbarco = fineImbarco;
-	}
 
 	//COSTRUTTORI
 
 	public Gate() {
 		super();
 	}
+	
+	@Override
+	public String toString() {
+		return "Gate [CodeDiImbarco=" + CodeDiImbarco + ", VoliPartenze=" + VoliPartenze + ", trt=" + trt
+				+ ", codiceGate=" + codiceGate + ", numeroPorta=" + numeroPorta + ", tempoImbarcoEffettivo="
+				+ tempoImbarcoEffettivo + "]";
+	}
+	
+	
 
-	public Gate(String codiceGate, String numeroPorta, String inizioImbarco, String fineImbarco) {
+	public Gate(ArrayList<CodaDiImbarco[]> codeDiImbarco, ArrayList<VoloPartenze[]> voliPartenze, Tratta trt,
+			String codiceGate, String numeroPorta, int tempoImbarcoEffettivo) {
+		super();
+		CodeDiImbarco = codeDiImbarco;
+		VoliPartenze = voliPartenze;
+		this.trt = trt;
+		this.codiceGate = codiceGate;
+		this.numeroPorta = numeroPorta;
+		this.tempoImbarcoEffettivo = tempoImbarcoEffettivo;
+	}
+
+	public Gate(String codiceGate, String numeroPorta, int tempoImbarcoEffettivo) {
 		super();
 		this.codiceGate = codiceGate;
 		this.numeroPorta = numeroPorta;
-		this.inizioImbarco = inizioImbarco;
-		this.fineImbarco = fineImbarco;
-	}
-
-	@Override
-	public String toString() {
-		return "Gate [codiceGate=" + codiceGate + ", numeroPorta=" + numeroPorta + ", inizioImbarco=" + inizioImbarco
-				+ ", fineImbarco=" + fineImbarco + "]";
-	}
-
-	
-	
+		this.tempoImbarcoEffettivo = tempoImbarcoEffettivo;
+	}		
 
 }

@@ -29,7 +29,7 @@ import java.awt.event.KeyEvent;
 
 public class GestioneGate extends JPanel {
 
-	String colonne[] = { "Codice Gate", "Numero Porta", "Tempo Inizio Imbarco", "Tempo Fine Imbarco" };
+	String colonne[] = { "Codice Gate", "Numero Porta", "Tempo imbarco effettivo" };
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaGate = new ArrayList<>();
@@ -37,8 +37,15 @@ public class GestioneGate extends JPanel {
 
 	private JTextField txtCodiceGate;
 	private JTextField txtNumeroPorta;
-	private JTextField txtInizioImbarco;
-	private JTextField txtFineImbarco;
+	private JTextField txtTempoImbarcoEffettivo;
+	public JTextField getTxtTempoImbarcoEffettivo() {
+		return txtTempoImbarcoEffettivo;
+	}
+
+	public void setTxtTempoImbarcoEffettivo(JTextField txtTempoImbarcoEffettivo) {
+		this.txtTempoImbarcoEffettivo = txtTempoImbarcoEffettivo;
+	}
+
 	private JTable tabella;
 	private JTextField txtBarraRicerca;
 	
@@ -46,8 +53,7 @@ public class GestioneGate extends JPanel {
 	private JLabel lblRicerca;
 	private JLabel lblBarraRicerca;
 	private JLabel lblNumeroPorta;
-	private JLabel lblInizioImbarco;
-	private JLabel lblFineImbarco;
+	private JLabel lblTempoImbarcoEffettivo;
 	private JLabel lblCodiceGate;
 	
 	// GETTER E SETTER
@@ -103,20 +109,12 @@ public class GestioneGate extends JPanel {
 		this.lblNumeroPorta = lblNumeroPorta;
 	}
 
-	public JLabel getLblInizioImbarco() {
-		return lblInizioImbarco;
+	public JLabel getLblTempoImbarcoEffettivo() {
+		return lblTempoImbarcoEffettivo;
 	}
 
-	public void setLblInizioImbarco(JLabel lblInizioImbarco) {
-		this.lblInizioImbarco = lblInizioImbarco;
-	}
-
-	public JLabel getLblFineImbarco() {
-		return lblFineImbarco;
-	}
-
-	public void setLblFineImbarco(JLabel lblFineImbarco) {
-		this.lblFineImbarco = lblFineImbarco;
+	public void setLblTempoImbarcoEffettivo(JLabel lblTempoImbarcoEffettivo) {
+		this.lblTempoImbarcoEffettivo = lblTempoImbarcoEffettivo;
 	}
 
 	public JLabel getLblCodiceGate() {
@@ -143,21 +141,6 @@ public class GestioneGate extends JPanel {
 		this.txtNumeroPorta = txtNumeroPorta;
 	}
 
-	public JTextField getTxtInizioImbarco() {
-		return txtInizioImbarco;
-	}
-
-	public void setTxtInizioImbarco(JTextField txtInizioImbarco) {
-		this.txtInizioImbarco = txtInizioImbarco;
-	}
-
-	public JTextField getTxtFineImbarco() {
-		return txtFineImbarco;
-	}
-
-	public void setTxtFineImbarco(JTextField txtFineImbarco) {
-		this.txtFineImbarco = txtFineImbarco;
-	}
 
 	public JTable getTabella() {
 		return tabella;
@@ -166,8 +149,6 @@ public class GestioneGate extends JPanel {
 	public void setTabella(JTable table) {
 		this.tabella = table;
 	}
-
-	
 
 	Controller controllerGestioneGate;
 
@@ -252,8 +233,7 @@ public class GestioneGate extends JPanel {
 				int t = tabella.getSelectedRow();
 				txtCodiceGate.setText(modello.getValueAt(t, 0).toString());
 				txtNumeroPorta.setText(modello.getValueAt(t, 1).toString());
-				txtInizioImbarco.setText(modello.getValueAt(t, 2).toString());
-				txtFineImbarco.setText(modello.getValueAt(t, 3).toString());
+				txtTempoImbarcoEffettivo.setText(modello.getValueAt(t, 2).toString());
 			}
 		});
 		modello.setColumnIdentifiers(colonne);
@@ -326,50 +306,6 @@ public class GestioneGate extends JPanel {
 		txtNumeroPorta.setBounds(168, 494, 180, 20);
 		add(txtNumeroPorta);
 
-		lblInizioImbarco = new JLabel("Inizio Imbarco");
-		lblInizioImbarco.setFont(controllerGestioneGate.fontLabel);
-		lblInizioImbarco.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
-		lblInizioImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblInizioImbarco.setBounds(20, 527, 114, 20);
-		add(lblInizioImbarco);
-
-		txtInizioImbarco = new JTextField();
-		txtInizioImbarco.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneGate.aggiungiGate();
-				}
-			}
-		});
-		txtInizioImbarco.setFont(controllerGestioneGate.fontScritteGestioni);
-		txtInizioImbarco.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
-		txtInizioImbarco.setColumns(10);
-		txtInizioImbarco.setBounds(168, 527, 180, 20);
-		add(txtInizioImbarco);
-
-		lblFineImbarco = new JLabel("Fine Imbarco");
-		lblFineImbarco.setFont(controllerGestioneGate.fontLabel);
-		lblFineImbarco.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
-		lblFineImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblFineImbarco.setBounds(20, 561, 114, 20);
-		add(lblFineImbarco);
-
-		txtFineImbarco = new JTextField();
-		txtFineImbarco.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneGate.aggiungiGate();
-				}
-			}
-		});
-		txtFineImbarco.setFont(controllerGestioneGate.fontScritteGestioni);
-		txtFineImbarco.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
-		txtFineImbarco.setColumns(10);
-		txtFineImbarco.setBounds(168, 561, 180, 20);
-		add(txtFineImbarco);
-
 		lblCodiceGate = new JLabel("Codice Gate");
 		lblCodiceGate.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceGate.setFont(controllerGestioneGate.fontLabel);
@@ -391,6 +327,20 @@ public class GestioneGate extends JPanel {
 		txtCodiceGate.setColumns(10);
 		txtCodiceGate.setBounds(168, 462, 180, 20);
 		add(txtCodiceGate);
+		
+		lblTempoImbarcoEffettivo = new JLabel("Tempo imbarco effettivo");
+		lblTempoImbarcoEffettivo.setFont(controllerGestioneGate.fontLabel);
+		lblTempoImbarcoEffettivo.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
+		lblTempoImbarcoEffettivo.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTempoImbarcoEffettivo.setBounds(20, 561, 129, 20);
+		add(lblTempoImbarcoEffettivo);
+
+		txtTempoImbarcoEffettivo = new JTextField();
+		txtTempoImbarcoEffettivo.setFont(controllerGestioneGate.fontScritteGestioni);
+		txtTempoImbarcoEffettivo.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
+		txtTempoImbarcoEffettivo.setColumns(10);
+		txtTempoImbarcoEffettivo.setBounds(168, 561, 180, 20);
+		add(txtTempoImbarcoEffettivo);
 
 		caricaTabella();
 

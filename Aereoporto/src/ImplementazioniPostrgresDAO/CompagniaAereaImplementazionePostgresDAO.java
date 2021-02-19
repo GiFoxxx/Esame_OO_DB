@@ -29,7 +29,7 @@ public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaD
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Object[] Lista = new Object[4];
+				Object[] Lista = new Object[2];
 				for (int i = 0; i <= 1; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}

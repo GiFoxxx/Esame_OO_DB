@@ -31,7 +31,7 @@ import javax.swing.JButton;
 
 public class GestioneTratte extends JPanel {
 	
-	String colonne[] = {"Codice Tratta", "Citta Partenza", "Citta Arrivo", "Data Partenza", "Data Arrivo", "Orario Partenza", "Orario Arrivo"};
+	String colonne[] = {"Codice Tratta", "Citta Partenza", "Citta Arrivo", "Data Partenza", "Data Arrivo", "Orario Partenza", "Orario Arrivo", "Tempo Imbarco stimato"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaTratte = new ArrayList<>();
@@ -46,6 +46,7 @@ public class GestioneTratte extends JPanel {
 	private JTextField txtOraArrivo;
 	private JTextField txtMinutoPartenza;
 	private JTextField txtMinutoArrivo;
+	private JTextField txtTempoImbarcoStimato;
 	private JTable tabella;
 	private JTextField txtBarraRicerca;
 	
@@ -63,6 +64,7 @@ public class GestioneTratte extends JPanel {
 	private JLabel lblMinutoArrivo;
 	private JLabel lblDuePuntiArrivo;
 	private JLabel lblOraArrivo;
+	private JLabel lblTempoImbarcoStimato;
 	
 	//GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -267,6 +269,14 @@ public class GestioneTratte extends JPanel {
 
 	public void setTxtMinutoArrivo(JTextField txtMinutoArrivo) {
 		this.txtMinutoArrivo = txtMinutoArrivo;
+	}
+
+	public JTextField getTxtTempoImbarcoStimato() {
+		return txtTempoImbarcoStimato;
+	}
+
+	public void setTxtTempoImbarcoStimato(JTextField txtTempoImbarcoStimato) {
+		this.txtTempoImbarcoStimato = txtTempoImbarcoStimato;
 	}
 
 	public JDateChooser getDateDataArrivo() {

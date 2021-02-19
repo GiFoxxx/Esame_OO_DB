@@ -619,7 +619,7 @@ public class Dashboard extends JFrame {
 		contentPane.add(lblMinimizza);
 
 		lblNome = new JLabel("Nessun utente ha effettuato l'accesso");
-		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -633,7 +633,7 @@ public class Dashboard extends JFrame {
 		lblNome.setFont(controllerDashboard.fontLabel);
 		lblNome.setBorder(null);
 		lblNome.setBackground(controllerDashboard.trasparente);
-		lblNome.setBounds(730, 7, 300, 23);
+		lblNome.setBounds(814, 7, 216, 23);
 		contentPane.add(lblNome);
 
 		lblSpostaDashboard = new JLabel("");

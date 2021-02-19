@@ -30,14 +30,14 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT * FROM voloPartenze";
+		String sql = "SELECT * FROM voloPartenza";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Object[] Lista = new Object[8];
-				for (int i = 0; i <= 7; i++) {
+				Object[] Lista = new Object[6];
+				for (int i = 0; i <= 5; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}
 				ListaVoliPartenze.add(Lista);

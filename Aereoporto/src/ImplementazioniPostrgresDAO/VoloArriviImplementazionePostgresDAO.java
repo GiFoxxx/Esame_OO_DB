@@ -29,14 +29,14 @@ public class VoloArriviImplementazionePostgresDAO implements VoloArriviDAO {
 
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT * FROM voloArrivi";
+		String sql = "SELECT * FROM voloArrivo";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Object[] Lista = new Object[8];
-				for (int i = 0; i <= 4; i++) {
+				Object[] Lista = new Object[4];
+				for (int i = 0; i <= 3; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}
 				ListaVoliArrivi.add(Lista);
