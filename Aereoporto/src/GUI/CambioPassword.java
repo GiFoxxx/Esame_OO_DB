@@ -33,6 +33,7 @@ public class CambioPassword extends JPanel {
 	private JLabel lblMostraRipetiNuovaPassword;
 	private JLabel lblCensuraRipetiNuovaPassword;
 	private JLabel lblCambioPassword;
+	private JLabel lblPasswordDimenticata;
 	
 	// GETTER E SETTER
 
@@ -98,6 +99,14 @@ public class CambioPassword extends JPanel {
 
 	public void setTxtRipetiNuovaPassword(JPasswordField txtRipetiNuovaPassword) {
 		this.txtRipetiNuovaPassword = txtRipetiNuovaPassword;
+	}
+	
+	public JLabel getLblPasswordDimenticata() {
+		return lblPasswordDimenticata;
+	}
+
+	public void setLblPasswordDimenticata(JLabel lblPasswordDimenticata) {
+		this.lblPasswordDimenticata = lblPasswordDimenticata;
 	}
 
 	Controller controllerCambioPassword;
@@ -199,6 +208,41 @@ public class CambioPassword extends JPanel {
 		lblCambioPassword.setIcon(new ImageIcon(img.cambioPassword()));
 		lblCambioPassword.setBounds(641, 51, 344, 263);
 		add(lblCambioPassword);
+		
+		lblPasswordDimenticata = new JLabel("Password dimenticata?");
+		lblPasswordDimenticata.setForeground(Color.LIGHT_GRAY);
+		lblPasswordDimenticata.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerCambioPassword.mostraPasswordDimenticata();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblPasswordDimenticata.setForeground(controllerCambioPassword.coloreLabelEntrataTemaScuro);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblPasswordDimenticata.setForeground(controllerCambioPassword.coloreLabelTemaScuro);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblPasswordDimenticata.setForeground(controllerCambioPassword.coloreLabelPressedTemaScuro);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblPasswordDimenticata.setForeground(controllerCambioPassword.coloreLabelTemaScuro);
+			}
+		});
+		lblPasswordDimenticata.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblPasswordDimenticata.setForeground(controllerCambioPassword.coloreLabelTemaScuro);
+		lblPasswordDimenticata.setFont(controllerCambioPassword.fontLabel);
+		lblPasswordDimenticata.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPasswordDimenticata.setBounds(844, 323, 141, 14);
+		add(lblPasswordDimenticata);
 
 		JButton btnSalva = new JButton("Salva");
 		btnSalva.addMouseListener(new MouseAdapter() {

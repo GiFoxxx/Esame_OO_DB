@@ -160,13 +160,7 @@ public class Home extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (controllerHome.sbloccaGestione()) {
-					controllerHome.setPannelloPrecedente(8);
-					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneUtenti());
-				} else {
-					lblFareAccesso.setText("Per poter accedere alla gestione degli account, accedere al proprio account.");
 				}
-			}
 		});
 		lblGestioneUtenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblGestioneUtenti.setHorizontalAlignment(SwingConstants.CENTER);

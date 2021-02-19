@@ -139,7 +139,11 @@ public class Accesso extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(!controllerAccesso.sbloccaGestione()) {
 					controllerAccesso.accedi();
+					} else {
+						lblMessaggioCredenziali.setText("Devi effettuare il logout se vuoi accedere con altre credenziali.");
+					}
 				}
 			}
 		});
@@ -221,10 +225,10 @@ public class Accesso extends JPanel {
 		add(lblAvanti);
 
 		lblMessaggioCredenziali = new JLabel("");
-		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessaggioCredenziali.setFont(controllerAccesso.fontLabel);
 		lblMessaggioCredenziali.setForeground(controllerAccesso.coloreScritturaAllertaTemaScuro);
-		lblMessaggioCredenziali.setBounds(478, 412, 344, 14);
+		lblMessaggioCredenziali.setBounds(460, 412, 380, 14);
 		add(lblMessaggioCredenziali);
 
 		lblPasswordDimenticata = new JLabel("Password dimenticata?");

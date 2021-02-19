@@ -217,6 +217,7 @@ public class GestioneGate extends JPanel {
 				ricerca();
 			}
 		});
+		txtBarraRicerca.setBackground(controllerGestioneGate.coloreScritteTemaScuro);
 		txtBarraRicerca.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
@@ -237,6 +238,14 @@ public class GestioneGate extends JPanel {
 		add(scrollPane);
 
 		tabella = new JTable();
+		tabella.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoDelete) {
+				if (EventoDelete.getKeyCode() == KeyEvent.VK_DELETE) {
+					controllerGestioneGate.eliminaGate();
+				}
+			}
+		});
 		tabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -303,6 +312,14 @@ public class GestioneGate extends JPanel {
 		add(lblNumeroPorta);
 
 		txtNumeroPorta = new JTextField();
+		txtNumeroPorta.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneGate.aggiungiGate();
+				}
+			}
+		});
 		txtNumeroPorta.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtNumeroPorta.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
 		txtNumeroPorta.setColumns(10);
@@ -317,6 +334,14 @@ public class GestioneGate extends JPanel {
 		add(lblInizioImbarco);
 
 		txtInizioImbarco = new JTextField();
+		txtInizioImbarco.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneGate.aggiungiGate();
+				}
+			}
+		});
 		txtInizioImbarco.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtInizioImbarco.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
 		txtInizioImbarco.setColumns(10);
@@ -331,6 +356,14 @@ public class GestioneGate extends JPanel {
 		add(lblFineImbarco);
 
 		txtFineImbarco = new JTextField();
+		txtFineImbarco.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneGate.aggiungiGate();
+				}
+			}
+		});
 		txtFineImbarco.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtFineImbarco.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
 		txtFineImbarco.setColumns(10);
@@ -345,6 +378,14 @@ public class GestioneGate extends JPanel {
 		add(lblCodiceGate);
 
 		txtCodiceGate = new JTextField();
+		txtCodiceGate.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneGate.aggiungiGate();
+				}
+			}
+		});
 		txtCodiceGate.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtCodiceGate.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
 		txtCodiceGate.setColumns(10);

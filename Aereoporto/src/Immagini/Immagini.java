@@ -43,6 +43,12 @@ public class Immagini {
 		return stellaPiena;
 	}
 
+	public Image spuntaSuccesso() {
+		Image spuntaSuccesso = new ImageIcon(Recensione.class.getResource("immaginiDashboard/SpuntaSuccesso.png")).getImage()
+				.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+		return spuntaSuccesso;
+	}
+	
 	public Image sfondoUscita() {
 		Image imgSfondo = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/SfondoUscita.png")).getImage()
 				.getScaledInstance(500, 300, Image.SCALE_SMOOTH);

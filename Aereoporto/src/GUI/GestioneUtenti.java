@@ -214,6 +214,7 @@ public class GestioneUtenti extends JPanel {
 				ricerca();
 			}
 		});
+		txtBarraRicerca.setBackground(controllerGestioneUtenti.coloreScritteTemaScuro);
 		txtBarraRicerca.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
@@ -235,6 +236,14 @@ public class GestioneUtenti extends JPanel {
 		add(lblNome);
 
 		txtNome = new JTextField();
+		txtNome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneUtenti.aggiungiUtente();
+				}
+			}
+		});
 		txtNome.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtNome.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtNome.setBounds(215, 451, 133, 20);
@@ -249,6 +258,14 @@ public class GestioneUtenti extends JPanel {
 		add(lblCognome);
 
 		txtCognome = new JTextField();
+		txtCognome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneUtenti.aggiungiUtente();
+				}
+			}
+		});
 		txtCognome.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtCognome.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtCognome.setBounds(215, 482, 133, 20);
@@ -263,6 +280,14 @@ public class GestioneUtenti extends JPanel {
 		add(lblEmail);
 
 		txtEmail = new JTextField();
+		txtEmail.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneUtenti.aggiungiUtente();
+				}
+			}
+		});
 		txtEmail.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtEmail.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtEmail.setBounds(215, 514, 133, 20);
@@ -277,6 +302,14 @@ public class GestioneUtenti extends JPanel {
 		add(lblPassword);
 
 		txtPassword = new JTextField();
+		txtPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneUtenti.aggiungiUtente();
+				}
+			}
+		});
 		txtPassword.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtPassword.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtPassword.setBounds(215, 546, 133, 20);
@@ -288,6 +321,14 @@ public class GestioneUtenti extends JPanel {
 		add(scrollPane);
 
 		tabella = new JTable();
+		tabella.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoDelete) {
+				if (EventoDelete.getKeyCode() == KeyEvent.VK_DELETE) {
+					controllerGestioneUtenti.eliminaUtente();
+				}
+			}
+		});
 		tabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

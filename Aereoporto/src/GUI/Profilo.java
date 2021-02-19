@@ -22,10 +22,10 @@ public class Profilo extends JPanel {
 
 	private JLabel lblLogout;
 	private JLabel lblDatiAccount;
+	private JLabel lblCambiaPassword;
 	private JTextField txtNome;
 	private JTextField txtCognome;
 	private JTextField txtEmail;
-	private JLabel lblCambiaPassword;
 
 	// GETTER E SETTER
 
@@ -53,6 +53,14 @@ public class Profilo extends JPanel {
 		this.lblCambiaPassword = lblCambiaPassword;
 	}
 
+	public JLabel getLblGestioneUtenti() {
+		return lblGestioneUtenti;
+	}
+
+	public void setLblGestioneUtenti(JLabel lblGestioneUtenti) {
+		this.lblGestioneUtenti = lblGestioneUtenti;
+	}
+
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
@@ -78,6 +86,7 @@ public class Profilo extends JPanel {
 	}
 
 	Controller controllerProfilo;
+	private JLabel lblGestioneUtenti;
 
 	public Profilo(Controller controller) {
 		controllerProfilo = controller;
@@ -170,5 +179,31 @@ public class Profilo extends JPanel {
 		lblCambiaPassword.setBounds(655, 390, 129, 14);
 		add(lblCambiaPassword);
 
+		lblGestioneUtenti = new JLabel("");
+		lblGestioneUtenti.setEnabled(false);
+
+		lblGestioneUtenti.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (controllerProfilo.isEntraGestioneUtenti()) {
+					entraInGestioneUtenti();
+				}
+			}
+		});
+		lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelTemaScuro);
+		lblGestioneUtenti.setFont(controllerProfilo.fontLabel);
+		lblGestioneUtenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblGestioneUtenti.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblGestioneUtenti.setBounds(897, 390, 100, 14);
+		add(lblGestioneUtenti);
+
 	}
+
+	private void entraInGestioneUtenti() {
+		if (controllerProfilo.sbloccaGestione()) {
+			controllerProfilo.setPannelloPrecedente(8);
+			controllerProfilo.mostraPannelli(controllerProfilo.getDashboard().getGestioneUtenti());
+		}
+	}
+
 }

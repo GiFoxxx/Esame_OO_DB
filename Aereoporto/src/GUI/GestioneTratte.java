@@ -324,6 +324,7 @@ public class GestioneTratte extends JPanel {
 				ricerca();
 			}
 		});
+		txtBarraRicerca.setBackground(controllerGestioneTratte.coloreScritteTemaScuro);
 		txtBarraRicerca.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
@@ -342,6 +343,14 @@ public class GestioneTratte extends JPanel {
 		add(scrollPane);
 		
 		tabella = new JTable();
+		tabella.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoDelete) {
+				if (EventoDelete.getKeyCode() == KeyEvent.VK_DELETE) {
+					controllerGestioneTratte.eliminaTratta();
+				}
+			}
+		});
 		tabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -350,13 +359,13 @@ public class GestioneTratte extends JPanel {
 				txtCittaPartenza.setText(modello.getValueAt(t, 1).toString());
 				txtCittaArrivo.setText(modello.getValueAt(t, 2).toString());
 				try {
-					java.util.Date datePartenza = new SimpleDateFormat("dd-MM-yyyy").parse((String) modello.getValueAt(t,3));
+					java.util.Date datePartenza = new SimpleDateFormat("dd/MM/yyyy").parse((String) modello.getValueAt(t,3));
 					dateDataPartenza.setDate(datePartenza);
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
 				try {
-					java.util.Date dateArrivo = new SimpleDateFormat("dd-MM-yyyy").parse((String) modello.getValueAt(t,4));
+					java.util.Date dateArrivo = new SimpleDateFormat("dd/MM/yyyy").parse((String) modello.getValueAt(t,4));
 					dateDataArrivo.setDate(dateArrivo);
 				} catch (ParseException e1) {
 					e1.printStackTrace();
@@ -370,6 +379,14 @@ public class GestioneTratte extends JPanel {
 		scrollPane.setViewportView(tabella);
 		
 		txtCodiceTratta = new JTextField();
+		txtCodiceTratta.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneTratte.aggiungiTratta();
+				}
+			}
+		});
 		txtCodiceTratta.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCodiceTratta.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCodiceTratta.setColumns(10);
@@ -391,6 +408,14 @@ public class GestioneTratte extends JPanel {
 		add(lblCittaPartenza);
 		
 		txtCittaPartenza = new JTextField();
+		txtCittaPartenza.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneTratte.aggiungiTratta();
+				}
+			}
+		});
 		txtCittaPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCittaPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCittaPartenza.setColumns(10);
@@ -398,6 +423,14 @@ public class GestioneTratte extends JPanel {
 		add(txtCittaPartenza);
 		
 		txtCittaArrivo = new JTextField();
+		txtCittaArrivo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneTratte.aggiungiTratta();
+				}
+			}
+		});
 		txtCittaArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCittaArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCittaArrivo.setColumns(10);
@@ -419,6 +452,15 @@ public class GestioneTratte extends JPanel {
 		add(lblDataPartenza);
 		
 		dateDataPartenza = new JDateChooser();
+		dateDataPartenza.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneTratte.aggiungiTratta();
+				}
+			}
+		});
+		dateDataPartenza.setDateFormatString("dd/MM/yyyy");
 		dateDataPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		dateDataPartenza.setBounds(492, 444, 133, 23);
 		add(dateDataPartenza);
@@ -431,6 +473,15 @@ public class GestioneTratte extends JPanel {
 		add(lblDataArrivo);
 		
 		dateDataArrivo = new JDateChooser();
+		dateDataArrivo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneTratte.aggiungiTratta();
+				}
+			}
+		});
+		dateDataArrivo.setDateFormatString("dd/MM/yyyy");
 		dateDataArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		dateDataArrivo.setBounds(492, 482, 133, 23);
 		add(dateDataArrivo);
@@ -487,6 +538,14 @@ public class GestioneTratte extends JPanel {
 		add(lblOraPartenza);
 		
 		txtOraPartenza = new JTextField();
+		txtOraPartenza.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneTratte.aggiungiTratta();
+				}
+			}
+		});
 		txtOraPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtOraPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtOraPartenza.setColumns(10);
@@ -501,6 +560,14 @@ public class GestioneTratte extends JPanel {
 		add(lblDuePuntiPartenza);
 		
 		txtOraArrivo = new JTextField();
+		txtOraArrivo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneTratte.aggiungiTratta();
+				}
+			}
+		});
 		txtOraArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtOraArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtOraArrivo.setColumns(10);
@@ -522,6 +589,14 @@ public class GestioneTratte extends JPanel {
 		add(lblMinutoArrivo);
 		
 		txtMinutoPartenza = new JTextField();
+		txtMinutoPartenza.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneTratte.aggiungiTratta();
+				}
+			}
+		});
 		txtMinutoPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtMinutoPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtMinutoPartenza.setColumns(10);
@@ -536,6 +611,14 @@ public class GestioneTratte extends JPanel {
 		add(lblDuePuntiArrivo);
 		
 		txtMinutoArrivo = new JTextField();
+		txtMinutoArrivo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneTratte.aggiungiTratta();
+				}
+			}
+		});
 		txtMinutoArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtMinutoArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtMinutoArrivo.setColumns(10);

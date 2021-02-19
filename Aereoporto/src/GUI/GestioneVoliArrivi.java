@@ -244,6 +244,7 @@ public class GestioneVoliArrivi extends JPanel {
 				ricerca();
 			}
 		});
+		txtBarraRicerca.setBackground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
 		txtBarraRicerca.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
@@ -262,6 +263,14 @@ public class GestioneVoliArrivi extends JPanel {
 		add(scrollPane);
 		
 		tabella = new JTable();
+		tabella.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoDelete) {
+				if (EventoDelete.getKeyCode() == KeyEvent.VK_DELETE) {
+					controllerGestioneVoliArrivi.eliminaVoloArrivi();
+				}
+			}
+		});
 		tabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -284,6 +293,14 @@ public class GestioneVoliArrivi extends JPanel {
 		scrollPane.setViewportView(tabella);
 		
 		txtCodiceVoloArrivi = new JTextField();
+		txtCodiceVoloArrivi.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneVoliArrivi.aggiungiVoloArrivi();
+				}
+			}
+		});
 		txtCodiceVoloArrivi.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtCodiceVoloArrivi.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtCodiceVoloArrivi.setColumns(10);
@@ -305,6 +322,14 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblCittaPartenza);
 		
 		txtCittaPartenza = new JTextField();
+		txtCittaPartenza.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneVoliArrivi.aggiungiVoloArrivi();
+				}
+			}
+		});
 		txtCittaPartenza.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtCittaPartenza.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtCittaPartenza.setColumns(10);
@@ -319,6 +344,14 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblDataArrivo);
 		
 		dateDataArrivo = new JDateChooser();
+		dateDataArrivo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneVoliArrivi.aggiungiVoloArrivi();
+				}
+			}
+		});
 		dateDataArrivo.setDateFormatString("dd/MM/yyyy");
 		dateDataArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		dateDataArrivo.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
@@ -333,6 +366,14 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblOraArrivo);
 		
 		txtOraArrivo = new JTextField();
+		txtOraArrivo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneVoliArrivi.aggiungiVoloArrivi();
+				}
+			}
+		});
 		txtOraArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtOraArrivo.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtOraArrivo.setColumns(10);
@@ -347,6 +388,14 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblMinutoArrivo);
 		
 		txtMinutoArrivo = new JTextField();
+		txtMinutoArrivo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneVoliArrivi.aggiungiVoloArrivi();
+				}
+			}
+		});
 		txtMinutoArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtMinutoArrivo.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtMinutoArrivo.setColumns(10);

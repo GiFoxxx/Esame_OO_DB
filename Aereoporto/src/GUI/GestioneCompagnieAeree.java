@@ -177,6 +177,7 @@ public class GestioneCompagnieAeree extends JPanel {
 				ricerca();
 			}
 		});
+		txtBarraRicerca.setBackground(controllerGestioneCompagnieAeree.coloreScritteTemaScuro);
 		txtBarraRicerca.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBiancoTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
@@ -195,6 +196,14 @@ public class GestioneCompagnieAeree extends JPanel {
 		add(scrollPane);
 
 		tabella = new JTable();
+		tabella.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoDelete) {
+				if (EventoDelete.getKeyCode() == KeyEvent.VK_DELETE) {
+					controllerGestioneCompagnieAeree.eliminaCompagniaAerea();
+				}
+			}
+		});
 		tabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -210,6 +219,14 @@ public class GestioneCompagnieAeree extends JPanel {
 		scrollPane.setViewportView(tabella);
 
 		txtCodiceCompagniaAerea = new JTextField();
+		txtCodiceCompagniaAerea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneCompagnieAeree.aggiungiCompagniaAerea();
+				}
+			}
+		});
 		txtCodiceCompagniaAerea.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBiancoTemaScuro);
 		txtCodiceCompagniaAerea.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtCodiceCompagniaAerea.setColumns(10);
@@ -224,6 +241,14 @@ public class GestioneCompagnieAeree extends JPanel {
 		add(lblNome);
 
 		txtNome = new JTextField();
+		txtNome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneCompagnieAeree.aggiungiCompagniaAerea();
+				}
+			}
+		});
 		txtNome.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBiancoTemaScuro);
 		txtNome.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtNome.setColumns(10);

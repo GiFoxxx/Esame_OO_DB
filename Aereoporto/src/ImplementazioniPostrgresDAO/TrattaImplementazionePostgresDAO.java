@@ -17,7 +17,7 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 
 	ConnessioneDatabase db = new ConnessioneDatabase();
 	Tratta trt = new Tratta();
-	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 	@SuppressWarnings("finally")
 	@Override // stampa tratte
