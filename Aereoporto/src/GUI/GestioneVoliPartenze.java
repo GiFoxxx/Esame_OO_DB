@@ -32,8 +32,8 @@ import java.awt.Color;
 
 public class GestioneVoliPartenze extends JPanel {
 
-	String colonne[] = { "Codice Volo Partenze", "Citta di Arrivo", "Data Partenza", "Ora Partenza", "Minuto Partenza",
-			"Numero Prenotazioni", "Ritardo" };
+	String colonne[] = { "Codice Volo Partenze", "Citta di Arrivo", "Data Partenza", "Ora Partenza", "Minuto Partenza", "Ora arrivo", "Minuto arrivo",
+			"Numero Prenotazioni", "Ritardo"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaVoliPartenze = new ArrayList<>();
@@ -44,6 +44,8 @@ public class GestioneVoliPartenze extends JPanel {
 	private JDateChooser dateDataPartenza;
 	private JTextField txtOraPartenza;
 	private JTextField txtMinutoPartenza;
+	private JTextField txtOraArrivo;
+	private JTextField txtMinutoArrivo;
 	private JTextField txtNumeroPrenotazioni;
 	private JTextField txtRitardo;
 	private JScrollPane scrollPane;
@@ -58,6 +60,8 @@ public class GestioneVoliPartenze extends JPanel {
 	private JLabel lblDataPartenza;
 	private JLabel lblOraPartenza;
 	private JLabel lblMinutoPartenza;
+	private JLabel lblOraArrivo;
+	private JLabel lblMinutoArrivo;
 	private JLabel lblDuePuntiPartenza;
 	private JLabel lblNumeroPrenoazioni;
 	private JLabel lblRitardo;
@@ -174,6 +178,22 @@ public class GestioneVoliPartenze extends JPanel {
 	public JLabel getLblRitardo() {
 		return lblRitardo;
 	}
+	
+	public JLabel getLblOraArrivo() {
+		return lblOraArrivo;
+	}
+
+	public void setLblOraArrivo(JLabel lblOraArrivo) {
+		this.lblOraArrivo = lblOraArrivo;
+	}
+
+	public JLabel getLblMinutoArrivo() {
+		return lblMinutoArrivo;
+	}
+
+	public void setLblMinutoArrivo(JLabel lblMinutoArrivo) {
+		this.lblMinutoArrivo = lblMinutoArrivo;
+	}
 
 	public void setLblRitardo(JLabel lblRitardo) {
 		this.lblRitardo = lblRitardo;
@@ -217,6 +237,22 @@ public class GestioneVoliPartenze extends JPanel {
 
 	public void setTxtMinutoPartenza(JTextField txtMinutoPartenza) {
 		this.txtMinutoPartenza = txtMinutoPartenza;
+	}
+
+	public JTextField getTxtOraArrivo() {
+		return txtOraArrivo;
+	}
+
+	public void setTxtOraArrivo(JTextField txtOraArrivo) {
+		this.txtOraArrivo = txtOraArrivo;
+	}
+
+	public JTextField getTxtMinutoArrivo() {
+		return txtMinutoArrivo;
+	}
+
+	public void setTxtMinutoArrivo(JTextField txtMinutoArrivo) {
+		this.txtMinutoArrivo = txtMinutoArrivo;
 	}
 
 	public JTextField getTxtNumeroPrenotazioni() {
@@ -324,8 +360,10 @@ public class GestioneVoliPartenze extends JPanel {
 				}
 				txtOraPartenza.setText(modello.getValueAt(t, 3).toString());
 				txtMinutoPartenza.setText(modello.getValueAt(t, 4).toString());
-				txtNumeroPrenotazioni.setText(modello.getValueAt(t, 5).toString());
-				txtRitardo.setText(modello.getValueAt(t, 6).toString());
+				txtOraArrivo.setText(modello.getValueAt(t, 5).toString());
+				txtMinutoArrivo.setText(modello.getValueAt(t, 6).toString());
+				txtNumeroPrenotazioni.setText(modello.getValueAt(t, 7).toString());
+				txtRitardo.setText(modello.getValueAt(t, 8).toString());
 			}
 		});
 		modello.setColumnIdentifiers(colonne);
@@ -527,7 +565,7 @@ public class GestioneVoliPartenze extends JPanel {
 		lblRitardo = new JLabel("Ritardo");
 		lblRitardo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblRitardo.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
-		lblRitardo.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
+		lblRitardo.setFont(controllerGestioneVoliPartenze.fontLabel);
 		lblRitardo.setBounds(810, 469, 101, 20);
 		add(lblRitardo);
 
@@ -550,6 +588,24 @@ public class GestioneVoliPartenze extends JPanel {
 
 		lblNewLabel.setBounds(810, 35, 47, 30);
 		add(lblNewLabel);
+		
+		txtOraArrivo = new JTextField();
+		txtOraArrivo.setBounds(301, 570, 47, 23);
+		add(txtOraArrivo);
+		txtOraArrivo.setColumns(10);
+		
+		txtMinutoArrivo = new JTextField();
+		txtMinutoArrivo.setBounds(383, 571, 47, 20);
+		add(txtMinutoArrivo);
+		txtMinutoArrivo.setColumns(10);
+		
+		JLabel lblOraArrivo = new JLabel("Ora arrivo");
+		lblOraArrivo.setBounds(228, 574, 63, 14);
+		add(lblOraArrivo);
+		
+		JLabel lblMinutoArrivo = new JLabel("minuto arrivo");
+		lblMinutoArrivo.setBounds(454, 574, 63, 14);
+		add(lblMinutoArrivo);
 
 		caricaTabella();
 	}

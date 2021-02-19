@@ -26,14 +26,14 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT * FROM tratta";
+		String sql = "SELECT * FROM tratta ORDER BY codicetratta";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Object[] Lista = new Object[8];
-				for (int i = 0; i <= 6; i++) {
+				Object[] Lista = new Object[3];
+				for (int i = 0; i <= 2; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}
 				ListaTratta.add(Lista);
@@ -81,7 +81,7 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 		trt = (Tratta) tratta;
 		
 		PreparedStatement pst;
-		String sql = "UPDATE tratta SET cittapartenza=?, cittaarrivo=?, dataPartenza=?, dataArrivo=?, orarioPartenza=?, orarioArrivo=? WHERE codicetratta=?";
+		String sql = "UPDATE tratta SET cittapartenza=?, cittaarrivo=? WHERE codicetratta=?";
 		try {
 			db.ConnessioneDB();
 
@@ -89,13 +89,7 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 
 			pst.setString(1, trt.getCittaPartenza());
 			pst.setString(2, trt.getCittaArrivo());
-			String dataPartenza = sdf.format(trt.getDataPartenza());
-			pst.setString(3, dataPartenza);
-			String dataArrivo = sdf.format(trt.getDataArrivo());
-			pst.setString(4, dataArrivo);
-			pst.setString(5, trt.getOrarioPartenza());
-			pst.setString(6, trt.getOrarioArrivo());
-			pst.setString(7, trt.getCodiceTratta());
+			pst.setString(3, trt.getCodiceTratta());
 			
 			int res = pst.executeUpdate();
 
@@ -118,7 +112,7 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 		trt = (Tratta) tratta;
 		
 		PreparedStatement pst;
-		String sql = "INSERT INTO tratta (codiceTratta, cittaPartenza, cittaArrivo, dataPartenza, dataArrivo, orarioPartenza, orarioArrivo) VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO tratta (codiceTratta, cittaPartenza, cittaArrivo) VALUES (?,?,?)";
 		try {
 			db.ConnessioneDB();
 
@@ -127,12 +121,6 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 			pst.setString(1, trt.getCodiceTratta());
 			pst.setString(2, trt.getCittaPartenza());
 			pst.setString(3, trt.getCittaArrivo());
-			String dataPartenza = sdf.format(trt.getDataPartenza());
-			pst.setString(4, dataPartenza);
-			String dataArrivo = sdf.format(trt.getDataArrivo());
-			pst.setString(5, dataArrivo);
-			pst.setString(6, trt.getOrarioPartenza());
-			pst.setString(7, trt.getOrarioArrivo());
 			
 			int res = pst.executeUpdate();
 

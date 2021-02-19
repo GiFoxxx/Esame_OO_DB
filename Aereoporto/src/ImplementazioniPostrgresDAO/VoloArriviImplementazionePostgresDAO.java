@@ -29,14 +29,14 @@ public class VoloArriviImplementazionePostgresDAO implements VoloArriviDAO {
 
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT * FROM voloArrivo";
+		String sql = "SELECT * FROM voloArrivo ORDER BY dataarrivo";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Object[] Lista = new Object[4];
-				for (int i = 0; i <= 3; i++) {
+				Object[] Lista = new Object[5];
+				for (int i = 0; i <= 4; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}
 				ListaVoliArrivi.add(Lista);
@@ -55,7 +55,7 @@ public class VoloArriviImplementazionePostgresDAO implements VoloArriviDAO {
 		vlarr = (VoloArrivi) voloArrivi;
 
 		PreparedStatement pst;
-		String sql = "DELETE FROM voloArrivi WHERE codiceVoloArrivi = ?";
+		String sql = "DELETE FROM voloArrivo WHERE codiceVoloArrivo = ?";
 		try {
 			db.ConnessioneDB();
 
@@ -84,7 +84,7 @@ public class VoloArriviImplementazionePostgresDAO implements VoloArriviDAO {
 		vlarr = (VoloArrivi) voloArrivi;
 		
 		PreparedStatement pst;
-		String sql = "UPDATE voloArrivi SET cittapartenza = ?, dataarrivo = ?, oraarrivo = ?, minutoArrivo = ? WHERE codiceVoloArrivi = ?";
+		String sql = "UPDATE voloArrivo SET cittapartenza = ?, dataarrivo = ?, oraarrivo = ?, minutoArrivo = ? WHERE codiceVoloArrivo = ?";
 		try {
 			db.ConnessioneDB();
 
@@ -117,7 +117,7 @@ public class VoloArriviImplementazionePostgresDAO implements VoloArriviDAO {
 		vlarr = (VoloArrivi) voloArrivi;
 		
 		PreparedStatement pst;
-		String sql = "INSERT INTO voloArrivi (codiceVoloArrivi, cittaPartenza, dataArrivo, oraArrivo, minutoArrivo) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO voloArrivo (codiceVoloArrivo, cittaPartenza, dataArrivo, oraArrivo, minutoArrivo) VALUES (?,?,?,?,?)";
 		try {
 			db.ConnessioneDB();
 

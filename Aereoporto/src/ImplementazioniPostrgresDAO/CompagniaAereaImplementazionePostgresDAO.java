@@ -23,7 +23,7 @@ public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaD
 		
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT * FROM compagniaaerea";
+		String sql = "SELECT * FROM compagniaaerea ORDER BY nome";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);

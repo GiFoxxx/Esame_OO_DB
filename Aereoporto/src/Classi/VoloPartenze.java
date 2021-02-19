@@ -16,10 +16,29 @@ public class VoloPartenze {
 	private Date dataPartenza;
 	private String oraPartenza;
 	private String minutoPartenza;
+	private String oraArrivo;
+	private String minutoArrivo;
 	private String numeroPrenotazioni;
 	private String ritardo;
 
 	// GETTER E SETTER
+	
+	public String getOraArrivo() {
+		return oraArrivo;
+	}
+	
+	public void setOraArrivo(String oraArrivo) {
+		this.oraArrivo = oraArrivo;
+	}
+	
+	public String getMinutoArrivo() {
+		return minutoArrivo;
+	}
+
+	public void setMinutoArrivo(String minutoArrivo) {
+		this.minutoArrivo = minutoArrivo;
+	}
+	
 	public String getCodiceVoloPartenze() {
 		return codiceVoloPartenze;
 	}
@@ -82,13 +101,15 @@ public class VoloPartenze {
 	}
 
 	public VoloPartenze(String codiceVoloPartenze, String cittaArrivo, Date dataPartenza, String oraPartenza,
-			String minutoPartenza, String numeroPrenotazioni, String ritardo) {
+			String minutoPartenza, String oraArrivo, String minutoArrivo, String numeroPrenotazioni, String ritardo) {
 		super();
 		this.codiceVoloPartenze = codiceVoloPartenze;
 		this.cittaArrivo = cittaArrivo;
 		this.dataPartenza = dataPartenza;
 		this.oraPartenza = oraPartenza;
 		this.minutoPartenza = minutoPartenza;
+		this.oraArrivo = oraArrivo;
+		this.minutoArrivo = minutoArrivo;
 		this.numeroPrenotazioni = numeroPrenotazioni;
 		this.ritardo = ritardo;
 	}
@@ -96,7 +117,8 @@ public class VoloPartenze {
 	@Override
 	public String toString() {
 		return "VoloPartenze [codiceVoloPartenze=" + codiceVoloPartenze + ", cittaArrivo=" + cittaArrivo
-				+ ", dataPartenza=" + dataPartenza + ", oraPartenza=" + oraPartenza + ", numeroPrenotazioni="
-				+ numeroPrenotazioni + "]";
+				+ ", dataPartenza=" + dataPartenza + ", oraPartenza=" + oraPartenza + ", minutoPartenza="
+				+ minutoPartenza + ", oraArrivo=" + oraArrivo + ", minutoArrivo=" + minutoArrivo
+				+ ", numeroPrenotazioni=" + numeroPrenotazioni + ", ritardo=" + ritardo + "]";
 	}
 }

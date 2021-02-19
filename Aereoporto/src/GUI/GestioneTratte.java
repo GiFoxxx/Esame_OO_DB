@@ -31,7 +31,7 @@ import javax.swing.JButton;
 
 public class GestioneTratte extends JPanel {
 	
-	String colonne[] = {"Codice Tratta", "Citta Partenza", "Citta Arrivo", "Data Partenza", "Data Arrivo", "Orario Partenza", "Orario Arrivo", "Tempo Imbarco stimato"};
+	String colonne[] = {"Codice Tratta", "Citta Partenza", "Citta Arrivo"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaTratte = new ArrayList<>();
@@ -40,13 +40,6 @@ public class GestioneTratte extends JPanel {
 	private JTextField txtCodiceTratta;
 	private JTextField txtCittaPartenza;
 	private JTextField txtCittaArrivo;
-	private JDateChooser dateDataPartenza;
-	private JDateChooser dateDataArrivo;
-	private JTextField txtOraPartenza;
-	private JTextField txtOraArrivo;
-	private JTextField txtMinutoPartenza;
-	private JTextField txtMinutoArrivo;
-	private JTextField txtTempoImbarcoStimato;
 	private JTable tabella;
 	private JTextField txtBarraRicerca;
 	
@@ -56,15 +49,6 @@ public class GestioneTratte extends JPanel {
 	private JLabel lblCodiceTratta;
 	private JLabel lblCittaPartenza;
 	private JLabel lblCittaArrivo;
-	private JLabel lblDataPartenza;
-	private JLabel lblDataArrivo;
-	private JLabel lblOraPartenza;
-	private JLabel lblDuePuntiPartenza;
-	private JLabel lblMinutoPartenza;
-	private JLabel lblMinutoArrivo;
-	private JLabel lblDuePuntiArrivo;
-	private JLabel lblOraArrivo;
-	private JLabel lblTempoImbarcoStimato;
 	
 	//GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -143,70 +127,6 @@ public class GestioneTratte extends JPanel {
 		this.lblCittaArrivo = lblCittaArrivo;
 	}
 
-	public JLabel getLblDataPartenza() {
-		return lblDataPartenza;
-	}
-
-	public void setLblDataPartenza(JLabel lblDataPartenza) {
-		this.lblDataPartenza = lblDataPartenza;
-	}
-
-	public JLabel getLblDataArrivo() {
-		return lblDataArrivo;
-	}
-
-	public void setLblDataArrivo(JLabel lblDataArrivo) {
-		this.lblDataArrivo = lblDataArrivo;
-	}
-
-	public JLabel getLblOraPartenza() {
-		return lblOraPartenza;
-	}
-
-	public void setLblOraPartenza(JLabel lblOraPartenza) {
-		this.lblOraPartenza = lblOraPartenza;
-	}
-
-	public JLabel getLblDuePuntiPartenza() {
-		return lblDuePuntiPartenza;
-	}
-
-	public void setLblDuePuntiPartenza(JLabel lblDuePuntiPartenza) {
-		this.lblDuePuntiPartenza = lblDuePuntiPartenza;
-	}
-
-	public JLabel getLblMinutoPartenza() {
-		return lblMinutoPartenza;
-	}
-
-	public void setLblMinutoPartenza(JLabel lblMinutoPartenza) {
-		this.lblMinutoPartenza = lblMinutoPartenza;
-	}
-
-	public JLabel getLblMinutoArrivo() {
-		return lblMinutoArrivo;
-	}
-
-	public void setLblMinutoArrivo(JLabel lblMinutoArrivo) {
-		this.lblMinutoArrivo = lblMinutoArrivo;
-	}
-
-	public JLabel getLblDuePuntiArrivo() {
-		return lblDuePuntiArrivo;
-	}
-
-	public void setLblDuePuntiArrivo(JLabel lblDuePuntiArrivo) {
-		this.lblDuePuntiArrivo = lblDuePuntiArrivo;
-	}
-
-	public JLabel getLblOraArrivo() {
-		return lblOraArrivo;
-	}
-
-	public void setLblOraArrivo(JLabel lblOraArrivo) {
-		this.lblOraArrivo = lblOraArrivo;
-	}
-
 	public JTextField getTxtCodiceTratta() {
 		return txtCodiceTratta;
 	}
@@ -230,63 +150,6 @@ public class GestioneTratte extends JPanel {
 	public void setTxtCittaArrivo(JTextField txtCittaArrivo) {
 		this.txtCittaArrivo = txtCittaArrivo;
 	}
-
-	public JDateChooser getDateDataPartenza() {
-		return dateDataPartenza;
-	}
-
-	public void setDateDataPartenza(JDateChooser dateDataPartenza) {
-		this.dateDataPartenza = dateDataPartenza;
-	}
-	
-	public JTextField getTxtOraPartenza() {
-		return txtOraPartenza;
-	}
-
-	public void setTxtOraPartenza(JTextField txtOrarioPartenza) {
-		this.txtOraPartenza = txtOrarioPartenza;
-	}
-
-	public JTextField getTxtOraArrivo() {
-		return txtOraArrivo;
-	}
-
-	public void setTxtOraArrivo(JTextField txtOrarioArrivo) {
-		this.txtOraArrivo = txtOrarioArrivo;
-	}
-
-	public JTextField getTxtMinutoPartenza() {
-		return txtMinutoPartenza;
-	}
-
-	public void setTxtMinutoPartenza(JTextField txtMinutoPartenza) {
-		this.txtMinutoPartenza = txtMinutoPartenza;
-	}
-
-	public JTextField getTxtMinutoArrivo() {
-		return txtMinutoArrivo;
-	}
-
-	public void setTxtMinutoArrivo(JTextField txtMinutoArrivo) {
-		this.txtMinutoArrivo = txtMinutoArrivo;
-	}
-
-	public JTextField getTxtTempoImbarcoStimato() {
-		return txtTempoImbarcoStimato;
-	}
-
-	public void setTxtTempoImbarcoStimato(JTextField txtTempoImbarcoStimato) {
-		this.txtTempoImbarcoStimato = txtTempoImbarcoStimato;
-	}
-
-	public JDateChooser getDateDataArrivo() {
-		return dateDataArrivo;
-	}
-
-	public void setDateDataArrivo(JDateChooser dateDataArrivo) {
-		this.dateDataArrivo = dateDataArrivo;
-	}
-
 
 	Controller controllerGestioneTratte;
 	
@@ -368,20 +231,6 @@ public class GestioneTratte extends JPanel {
 				txtCodiceTratta.setText(modello.getValueAt(t, 0).toString());
 				txtCittaPartenza.setText(modello.getValueAt(t, 1).toString());
 				txtCittaArrivo.setText(modello.getValueAt(t, 2).toString());
-				try {
-					java.util.Date datePartenza = new SimpleDateFormat("dd/MM/yyyy").parse((String) modello.getValueAt(t,3));
-					dateDataPartenza.setDate(datePartenza);
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
-				try {
-					java.util.Date dateArrivo = new SimpleDateFormat("dd/MM/yyyy").parse((String) modello.getValueAt(t,4));
-					dateDataArrivo.setDate(dateArrivo);
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
-				txtOraPartenza.setText(modello.getValueAt(t, 5).toString());
-				txtOraArrivo.setText(modello.getValueAt(t, 6).toString());
 			}
 		});
 		modello.setColumnIdentifiers(colonne);
@@ -454,48 +303,6 @@ public class GestioneTratte extends JPanel {
 		lblCittaArrivo.setBounds(25, 504, 114, 20);
 		add(lblCittaArrivo);
 		
-		lblDataPartenza = new JLabel("Data Partenza");
-		lblDataPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDataPartenza.setFont(controllerGestioneTratte.fontLabel);
-		lblDataPartenza.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblDataPartenza.setBounds(344, 444, 114, 20);
-		add(lblDataPartenza);
-		
-		dateDataPartenza = new JDateChooser();
-		dateDataPartenza.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneTratte.aggiungiTratta();
-				}
-			}
-		});
-		dateDataPartenza.setDateFormatString("dd/MM/yyyy");
-		dateDataPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
-		dateDataPartenza.setBounds(492, 444, 133, 23);
-		add(dateDataPartenza);
-		
-		lblDataArrivo = new JLabel("Data Arrivo");
-		lblDataArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDataArrivo.setFont(controllerGestioneTratte.fontLabel);
-		lblDataArrivo.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblDataArrivo.setBounds(344, 482, 114, 20);
-		add(lblDataArrivo);
-		
-		dateDataArrivo = new JDateChooser();
-		dateDataArrivo.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneTratte.aggiungiTratta();
-				}
-			}
-		});
-		dateDataArrivo.setDateFormatString("dd/MM/yyyy");
-		dateDataArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
-		dateDataArrivo.setBounds(492, 482, 133, 23);
-		add(dateDataArrivo);
-		
 		JButton btnAggiungi = new JButton("aggiungi");
 		btnAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAggiungi.addMouseListener(new MouseAdapter() {
@@ -539,108 +346,6 @@ public class GestioneTratte extends JPanel {
 		});
 		btnSvuota.setBounds(767, 546, 89, 23);
 		add(btnSvuota);
-		
-		lblOraPartenza = new JLabel("Ora Partenza");
-		lblOraPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblOraPartenza.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblOraPartenza.setFont(controllerGestioneTratte.fontLabel);
-		lblOraPartenza.setBounds(344, 516, 114, 20);
-		add(lblOraPartenza);
-		
-		txtOraPartenza = new JTextField();
-		txtOraPartenza.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneTratte.aggiungiTratta();
-				}
-			}
-		});
-		txtOraPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
-		txtOraPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
-		txtOraPartenza.setColumns(10);
-		txtOraPartenza.setBounds(492, 516, 27, 20);
-		add(txtOraPartenza);
-		
-		lblDuePuntiPartenza = new JLabel(":");
-		lblDuePuntiPartenza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDuePuntiPartenza.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblDuePuntiPartenza.setFont(controllerGestioneTratte.fontLabel);
-		lblDuePuntiPartenza.setBounds(523, 519, 10, 14);
-		add(lblDuePuntiPartenza);
-		
-		txtOraArrivo = new JTextField();
-		txtOraArrivo.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneTratte.aggiungiTratta();
-				}
-			}
-		});
-		txtOraArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
-		txtOraArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
-		txtOraArrivo.setColumns(10);
-		txtOraArrivo.setBounds(537, 516, 27, 20);
-		add(txtOraArrivo);
-		
-		lblMinutoPartenza = new JLabel("Minuto Partenza");
-		lblMinutoPartenza.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMinutoPartenza.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblMinutoPartenza.setFont(controllerGestioneTratte.fontLabel);
-		lblMinutoPartenza.setBounds(574, 516, 114, 20);
-		add(lblMinutoPartenza);
-		
-		lblMinutoArrivo = new JLabel("Minuto Arrivo");
-		lblMinutoArrivo.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMinutoArrivo.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblMinutoArrivo.setFont(controllerGestioneTratte.fontLabel);
-		lblMinutoArrivo.setBounds(574, 556, 114, 20);
-		add(lblMinutoArrivo);
-		
-		txtMinutoPartenza = new JTextField();
-		txtMinutoPartenza.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneTratte.aggiungiTratta();
-				}
-			}
-		});
-		txtMinutoPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
-		txtMinutoPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
-		txtMinutoPartenza.setColumns(10);
-		txtMinutoPartenza.setBounds(537, 556, 27, 20);
-		add(txtMinutoPartenza);
-		
-		lblDuePuntiArrivo = new JLabel(":");
-		lblDuePuntiArrivo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDuePuntiArrivo.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblDuePuntiArrivo.setFont(controllerGestioneTratte.fontLabel);
-		lblDuePuntiArrivo.setBounds(523, 559, 10, 14);
-		add(lblDuePuntiArrivo);
-		
-		txtMinutoArrivo = new JTextField();
-		txtMinutoArrivo.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneTratte.aggiungiTratta();
-				}
-			}
-		});
-		txtMinutoArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
-		txtMinutoArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
-		txtMinutoArrivo.setColumns(10);
-		txtMinutoArrivo.setBounds(492, 556, 27, 20);
-		add(txtMinutoArrivo);
-		
-		lblOraArrivo = new JLabel("Ora Arrivo");
-		lblOraArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblOraArrivo.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblOraArrivo.setFont(controllerGestioneTratte.fontLabel);
-		lblOraArrivo.setBounds(344, 556, 114, 20);
-		add(lblOraArrivo);
 		
 		caricaTabella();
 	}

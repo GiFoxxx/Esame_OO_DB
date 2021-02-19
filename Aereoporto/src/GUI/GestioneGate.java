@@ -29,7 +29,7 @@ import java.awt.event.KeyEvent;
 
 public class GestioneGate extends JPanel {
 
-	String colonne[] = { "Codice Gate", "Numero Porta", "Tempo imbarco effettivo" };
+	String colonne[] = { "Codice Gate", "Numero Porta" };
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaGate = new ArrayList<>();
@@ -37,14 +37,7 @@ public class GestioneGate extends JPanel {
 
 	private JTextField txtCodiceGate;
 	private JTextField txtNumeroPorta;
-	private JTextField txtTempoImbarcoEffettivo;
-	public JTextField getTxtTempoImbarcoEffettivo() {
-		return txtTempoImbarcoEffettivo;
-	}
 
-	public void setTxtTempoImbarcoEffettivo(JTextField txtTempoImbarcoEffettivo) {
-		this.txtTempoImbarcoEffettivo = txtTempoImbarcoEffettivo;
-	}
 
 	private JTable tabella;
 	private JTextField txtBarraRicerca;
@@ -53,7 +46,6 @@ public class GestioneGate extends JPanel {
 	private JLabel lblRicerca;
 	private JLabel lblBarraRicerca;
 	private JLabel lblNumeroPorta;
-	private JLabel lblTempoImbarcoEffettivo;
 	private JLabel lblCodiceGate;
 	
 	// GETTER E SETTER
@@ -107,14 +99,6 @@ public class GestioneGate extends JPanel {
 
 	public void setLblNumeroPorta(JLabel lblNumeroPorta) {
 		this.lblNumeroPorta = lblNumeroPorta;
-	}
-
-	public JLabel getLblTempoImbarcoEffettivo() {
-		return lblTempoImbarcoEffettivo;
-	}
-
-	public void setLblTempoImbarcoEffettivo(JLabel lblTempoImbarcoEffettivo) {
-		this.lblTempoImbarcoEffettivo = lblTempoImbarcoEffettivo;
 	}
 
 	public JLabel getLblCodiceGate() {
@@ -233,7 +217,6 @@ public class GestioneGate extends JPanel {
 				int t = tabella.getSelectedRow();
 				txtCodiceGate.setText(modello.getValueAt(t, 0).toString());
 				txtNumeroPorta.setText(modello.getValueAt(t, 1).toString());
-				txtTempoImbarcoEffettivo.setText(modello.getValueAt(t, 2).toString());
 			}
 		});
 		modello.setColumnIdentifiers(colonne);
@@ -327,20 +310,6 @@ public class GestioneGate extends JPanel {
 		txtCodiceGate.setColumns(10);
 		txtCodiceGate.setBounds(168, 462, 180, 20);
 		add(txtCodiceGate);
-		
-		lblTempoImbarcoEffettivo = new JLabel("Tempo imbarco effettivo");
-		lblTempoImbarcoEffettivo.setFont(controllerGestioneGate.fontLabel);
-		lblTempoImbarcoEffettivo.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
-		lblTempoImbarcoEffettivo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTempoImbarcoEffettivo.setBounds(20, 561, 129, 20);
-		add(lblTempoImbarcoEffettivo);
-
-		txtTempoImbarcoEffettivo = new JTextField();
-		txtTempoImbarcoEffettivo.setFont(controllerGestioneGate.fontScritteGestioni);
-		txtTempoImbarcoEffettivo.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
-		txtTempoImbarcoEffettivo.setColumns(10);
-		txtTempoImbarcoEffettivo.setBounds(168, 561, 180, 20);
-		add(txtTempoImbarcoEffettivo);
 
 		caricaTabella();
 

@@ -12,19 +12,10 @@ public class Gate {
 	// ATTRIBUTI
 	private String codiceGate;
 	private String numeroPorta;
-	private int tempoImbarcoEffettivo;
 
 	// GETTER E SETTER
 	public String getCodiceGate() {
 		return codiceGate;
-	}
-
-	public int getTempoImbarcoEffettivo() {
-		return tempoImbarcoEffettivo;
-	}
-
-	public void setTempoImbarcoEffettivo(int tempoImbarcoEffettivo) {
-		this.tempoImbarcoEffettivo = tempoImbarcoEffettivo;
 	}
 
 	public void setCodiceGate(String condiceGate) {
@@ -45,32 +36,26 @@ public class Gate {
 	public Gate() {
 		super();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Gate [CodeDiImbarco=" + CodeDiImbarco + ", VoliPartenze=" + VoliPartenze + ", trt=" + trt
-				+ ", codiceGate=" + codiceGate + ", numeroPorta=" + numeroPorta + ", tempoImbarcoEffettivo="
-				+ tempoImbarcoEffettivo + "]";
+				+ ", codiceGate=" + codiceGate + ", numeroPorta=" + numeroPorta + "]";
 	}
-	
-	
 
 	public Gate(ArrayList<CodaDiImbarco[]> codeDiImbarco, ArrayList<VoloPartenze[]> voliPartenze, Tratta trt,
-			String codiceGate, String numeroPorta, int tempoImbarcoEffettivo) {
+			String codiceGate, String numeroPorta) {
 		super();
 		CodeDiImbarco = codeDiImbarco;
 		VoliPartenze = voliPartenze;
 		this.trt = trt;
 		this.codiceGate = codiceGate;
 		this.numeroPorta = numeroPorta;
-		this.tempoImbarcoEffettivo = tempoImbarcoEffettivo;
 	}
 
-	public Gate(String codiceGate, String numeroPorta, int tempoImbarcoEffettivo) {
+	public Gate(String codiceGate, String numeroPorta) {
 		super();
 		this.codiceGate = codiceGate;
-		this.numeroPorta = numeroPorta;
-		this.tempoImbarcoEffettivo = tempoImbarcoEffettivo;
 	}		
 
 }
