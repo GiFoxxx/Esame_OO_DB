@@ -14,10 +14,10 @@ public class ConnessioneDatabase {
 
 	// COSTRUTTORE
 	public ConnessioneDatabase() {
-		this.Url = ("jdbc:postgresql://localhost:5432/Aereoporto");
+		this.Url = ("jdbc:postgresql://localhost:5432/Progetto_Aeroporto");
 		this.Driver = "org.postgresql.Driver";
-		this.Nome = "postgres";
-		this.Password = "admin";
+		this.Nome = "Admin";
+		this.Password = "Admin";
 	}
 
 	// GETTER E SETTER

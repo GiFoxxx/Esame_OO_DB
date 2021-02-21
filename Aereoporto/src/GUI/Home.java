@@ -90,8 +90,16 @@ public class Home extends JPanel {
 					controllerHome.setPannelloPrecedente(6);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneTratte());
 				} else {
-					lblFareAccesso.setText("Per poter accedere alla gestione delle tratte, accedere al proprio account.");
+					mostraErroreMancatoAccesso();
 				}
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblTratte.setIcon(new ImageIcon(img.tratte3()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblTratte.setIcon(new ImageIcon(img.tratte1()));
 			}
 		});
 		lblTratte.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -118,8 +126,16 @@ public class Home extends JPanel {
 					controllerHome.setPannelloPrecedente(7);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneCompagnieAeree());
 				} else {
-					lblFareAccesso.setText("Per poter accedere alla gestione delle compagnie aeree, accedere al proprio account.");
+					mostraErroreMancatoAccesso();
 				}
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblCompagniaAerea.setIcon(new ImageIcon(img.compagnieAeree3()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblCompagniaAerea.setIcon(new ImageIcon(img.compagnieAeree1()));
 			}
 		});
 		lblCompagniaAerea.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -146,8 +162,16 @@ public class Home extends JPanel {
 					controllerHome.setPannelloPrecedente(10);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneGate());
 				} else {
-					lblFareAccesso.setText("Per poter accedere alla gestione dei gate, accedere al proprio account.");
+					mostraErroreMancatoAccesso();
 				}
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblGate.setIcon(new ImageIcon(img.gate3()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblGate.setIcon(new ImageIcon(img.gate1()));
 			}
 		});
 		lblGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -173,8 +197,16 @@ public class Home extends JPanel {
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.mostraSceltaVolo();
 				} else {
-					lblFareAccesso.setText("Per poter accedere alla gestione dei voli devi prima accedere al tuo account.");
+					mostraErroreMancatoAccesso();
 				}
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblVolo.setIcon(new ImageIcon(img.voli3()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblVolo.setIcon(new ImageIcon(img.voli1()));
 			}
 		});
 		lblVolo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -187,8 +219,11 @@ public class Home extends JPanel {
 		lblFareAccesso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFareAccesso.setFont(controllerHome.fontScritte);
 		lblFareAccesso.setForeground(controllerHome.coloreScritturaAllertaTemaScuro);
-		lblFareAccesso.setBounds(80, 522, 867, 28);
+		lblFareAccesso.setBounds(112, 550, 867, 28);
 		add(lblFareAccesso);
 	}
 
+	private void mostraErroreMancatoAccesso() {
+		lblFareAccesso.setText("Per continuare, effettuare prima l'accesso.");
+	}
 }

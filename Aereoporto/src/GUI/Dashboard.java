@@ -618,7 +618,7 @@ public class Dashboard extends JFrame {
 		lblMinimizza.setBounds(1040, 0, 51, 35);
 		contentPane.add(lblMinimizza);
 
-		lblNome = new JLabel("Nessun utente ha effettuato l'accesso");
+		lblNome = new JLabel("Nessun accesso effettuato");
 		lblNome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNome.addMouseListener(new MouseAdapter() {
 			@Override
@@ -711,6 +711,7 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
+				
 				panelHome.setBackground(controllerDashboard.entroPannelloTemaScuro);
 			}
 
@@ -1053,10 +1054,26 @@ public class Dashboard extends JFrame {
 				controllerDashboard.chiudiTendina();
 
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lineeChiusura.setIcon(new ImageIcon(img.lineeChiusura2()));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lineeChiusura.setIcon(new ImageIcon(img.lineeChiusura1()));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lineeChiusura.setIcon(new ImageIcon(img.lineeChiusura3()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lineeChiusura.setIcon(new ImageIcon(img.lineeChiusura1()));
+			}
 		});
 		lineeChiusura.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lineeChiusura.setHorizontalAlignment(SwingConstants.CENTER);
-		lineeChiusura.setIcon(new ImageIcon(img.lineeChiusura()));
+		lineeChiusura.setIcon(new ImageIcon(img.lineeChiusura1()));
 		lineeChiusura.setBounds(182, 20, 50, 50);
 		pannelloTendina.add(lineeChiusura);
 
@@ -1067,11 +1084,27 @@ public class Dashboard extends JFrame {
 
 				controllerDashboard.mostraPannelli(noClick);
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lineeApertura.setIcon(new ImageIcon(img.lineeApertura2()));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lineeApertura.setIcon(new ImageIcon(img.lineeApertura1()));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lineeApertura.setIcon(new ImageIcon(img.lineeApertura3()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lineeApertura.setIcon(new ImageIcon(img.lineeApertura1()));
+			}
 		});
 		lineeApertura.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lineeApertura.setBounds(1, 20, 50, 50);
 		lineeApertura.setHorizontalAlignment(SwingConstants.CENTER);
-		lineeApertura.setIcon(new ImageIcon(img.lineeApertura()));
+		lineeApertura.setIcon(new ImageIcon(img.lineeApertura1()));
 		pannelloTendina.add(lineeApertura);
 
 		lblCambioTemaChiaro = new JLabel("");
@@ -1250,11 +1283,9 @@ public class Dashboard extends JFrame {
 	}
 	
 	private void clickPannelloLateraleUscita() {
-		controllerDashboard.setPannelloPrecedente(5);
 		pannelloLateraleSelezionato();
-		controllerDashboard.mostraPannelli(impostazioni);
-		if (impostazioni.isVisible()) {
-			panelImpostazioni.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
+		if (uscita.isVisible()) {
+			panelUscita.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
 		}
 		controllerDashboard.chiudiTendinaIstantanea();
 		

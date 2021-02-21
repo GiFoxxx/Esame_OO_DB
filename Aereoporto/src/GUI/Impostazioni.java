@@ -14,7 +14,6 @@ public class Impostazioni extends JPanel {
 
 	private JLabel lblTema;
 	private JLabel lblInformazioni;
-	private JLabel lblRiconoscimenti;
 	private JLabel lblTerminiECondizioni;
 	private JLabel lblRecensione;
 
@@ -34,14 +33,6 @@ public class Impostazioni extends JPanel {
 
 	public void setLblInformazioni(JLabel lblInformazioni) {
 		this.lblInformazioni = lblInformazioni;
-	}
-
-	public JLabel getLblRiconoscimenti() {
-		return lblRiconoscimenti;
-	}
-
-	public void setLblRiconoscimenti(JLabel lblRiconoscimenti) {
-		this.lblRiconoscimenti = lblRiconoscimenti;
 	}
 
 	public JLabel getLblTerminiECondizioni() {
@@ -82,22 +73,17 @@ public class Impostazioni extends JPanel {
 		});
 		lblTema.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblTema.setForeground(Color.LIGHT_GRAY);
-		lblTema.setBounds(69, 180, 120, 22);
+		lblTema.setBounds(69, 110, 120, 22);
 		add(lblTema);
 
 		lblInformazioni = new JLabel("Informazioni");
 		lblInformazioni.setForeground(Color.LIGHT_GRAY);
-		lblInformazioni.setBounds(69, 230, 120, 22);
+		lblInformazioni.setBounds(69, 242, 120, 22);
 		add(lblInformazioni);
-
-		lblRiconoscimenti = new JLabel("Riconoscimenti");
-		lblRiconoscimenti.setForeground(Color.LIGHT_GRAY);
-		lblRiconoscimenti.setBounds(69, 271, 120, 22);
-		add(lblRiconoscimenti);
 
 		lblTerminiECondizioni = new JLabel("Termini e condizioni");
 		lblTerminiECondizioni.setForeground(Color.LIGHT_GRAY);
-		lblTerminiECondizioni.setBounds(69, 314, 120, 22);
+		lblTerminiECondizioni.setBounds(69, 374, 120, 22);
 		add(lblTerminiECondizioni);
 
 		lblRecensione = new JLabel("Lascia una recensione");
@@ -109,7 +95,7 @@ public class Impostazioni extends JPanel {
 		});
 		lblRecensione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRecensione.setForeground(Color.LIGHT_GRAY);
-		lblRecensione.setBounds(69, 363, 120, 22);
+		lblRecensione.setBounds(69, 506, 120, 22);
 		add(lblRecensione);
 	}
 

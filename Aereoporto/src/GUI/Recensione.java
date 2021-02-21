@@ -28,6 +28,7 @@ public class Recensione extends JPanel {
 	int x;
 	int y;
 	int flag = 0;
+	int valutazione = 0;
 
 	JLabel lblLayout;
 	JLabel lblAnnulla;
@@ -62,7 +63,33 @@ public class Recensione extends JPanel {
 	JLabel lblStella29;
 	JLabel lblStella30;
 
+	JLabel lblStelleSelezionate;
 	JLabel lblInviaRecensione;
+
+	// GETTER E SETTER
+	public JLabel getLblAnnulla() {
+		return lblAnnulla;
+	}
+
+	public void setLblAnnulla(JLabel lblAnnulla) {
+		this.lblAnnulla = lblAnnulla;
+	}
+
+	public JLabel getLblStelleSelezionate() {
+		return lblStelleSelezionate;
+	}
+
+	public void setLblStelleSelezionate(JLabel lblStelleSelezionate) {
+		this.lblStelleSelezionate = lblStelleSelezionate;
+	}
+
+	public JLabel getLblInviaRecensione() {
+		return lblInviaRecensione;
+	}
+
+	public void setLblInviaRecensione(JLabel lblInviaRecensione) {
+		this.lblInviaRecensione = lblInviaRecensione;
+	}
 
 	Immagini img = new Immagini();
 	Controller controllerRecensione;
@@ -128,6 +155,11 @@ public class Recensione extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				lblInviaRecensione.setIcon(new ImageIcon(img.inviaRecensione1()));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				votoInviato();
 			}
 		});
 		lblInviaRecensione.setHorizontalAlignment(SwingConstants.CENTER);
@@ -495,6 +527,13 @@ public class Recensione extends JPanel {
 		lblStella30.setBounds(985, 350, 35, 35);
 		add(lblStella30);
 
+		lblStelleSelezionate = new JLabel("Inserire valutazione.");
+		lblStelleSelezionate.setHorizontalAlignment(SwingConstants.CENTER);
+		lblStelleSelezionate.setForeground(Color.LIGHT_GRAY);
+		lblStelleSelezionate.setFont(null);
+		lblStelleSelezionate.setBounds(373, 438, 341, 20);
+		add(lblStelleSelezionate);
+
 		lblLayout = new JLabel("");
 		lblLayout.setBorder(null);
 		lblLayout.setBounds(0, 0, 1090, 642);
@@ -506,6 +545,18 @@ public class Recensione extends JPanel {
 
 	// METODI RIEMPIMENTO STELLE
 
+	public void votoInviato() {
+		if (valutazione < 18) {
+			lblStelleSelezionate.setText("Voto non sufficiente");
+		} else if (valutazione > 17 && valutazione < 23) {
+			lblStelleSelezionate.setText("Voto discreto");
+		} else if (valutazione > 23 && valutazione < 27) {
+			lblStelleSelezionate.setText("Voto buono");
+		} else {
+			lblStelleSelezionate.setText("Voto ottimo");
+		}
+	}
+
 	public void riempimentoStella1() {
 		if (flag == 0) {
 			stella1();
@@ -515,8 +566,7 @@ public class Recensione extends JPanel {
 			flag = 0;
 		}
 	}
-	
-	
+
 	public void stella0() {
 		lblStella1.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella2.setIcon(new ImageIcon(img.stellaVuota()));
@@ -549,6 +599,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 0;
 	}
 
 	public void stella1() {
@@ -583,6 +634,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 1;
 	}
 
 	public void stella2() {
@@ -617,6 +669,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 2;
 	}
 
 	public void stella3() {
@@ -651,6 +704,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 3;
 	}
 
 	public void stella4() {
@@ -685,6 +739,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 4;
 	}
 
 	public void stella5() {
@@ -719,6 +774,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 5;
 	}
 
 	public void stella6() {
@@ -753,6 +809,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 6;
 	}
 
 	public void stella7() {
@@ -787,6 +844,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 7;
 	}
 
 	public void stella8() {
@@ -821,6 +879,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 8;
 	}
 
 	public void stella9() {
@@ -855,6 +914,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 9;
 	}
 
 	public void stella10() {
@@ -889,6 +949,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 10;
 	}
 
 	public void stella11() {
@@ -923,6 +984,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 11;
 	}
 
 	public void stella12() {
@@ -957,6 +1019,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 12;
 	}
 
 	public void stella13() {
@@ -991,6 +1054,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 13;
 	}
 
 	public void stella14() {
@@ -1025,6 +1089,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 14;
 	}
 
 	public void stella15() {
@@ -1060,6 +1125,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 15;
 	}
 
 	public void stella16() {
@@ -1094,6 +1160,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 16;
 	}
 
 	public void stella17() {
@@ -1128,6 +1195,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 17;
 	}
 
 	public void stella18() {
@@ -1162,6 +1230,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 18;
 	}
 
 	public void stella19() {
@@ -1196,6 +1265,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 19;
 	}
 
 	public void stella20() {
@@ -1230,6 +1300,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 20;
 	}
 
 	public void stella21() {
@@ -1264,6 +1335,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 21;
 	}
 
 	public void stella22() {
@@ -1298,6 +1370,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 22;
 	}
 
 	public void stella23() {
@@ -1332,6 +1405,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 23;
 	}
 
 	public void stella24() {
@@ -1366,6 +1440,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 24;
 	}
 
 	public void stella25() {
@@ -1400,6 +1475,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 25;
 	}
 
 	public void stella26() {
@@ -1434,6 +1510,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 26;
 	}
 
 	public void stella27() {
@@ -1468,6 +1545,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 27;
 	}
 
 	public void stella28() {
@@ -1502,6 +1580,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 28;
 	}
 
 	public void stella29() {
@@ -1536,6 +1615,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaPiena()));
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		flag = 0;
+		valutazione = 29;
 	}
 
 	public void stella30() {
@@ -1570,6 +1650,7 @@ public class Recensione extends JPanel {
 		lblStella29.setIcon(new ImageIcon(img.stellaPiena()));
 		lblStella30.setIcon(new ImageIcon(img.stellaPiena()));
 		flag = 0;
+		valutazione = 30;
 	}
 
 }

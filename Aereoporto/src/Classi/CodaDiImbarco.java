@@ -1,7 +1,5 @@
 package Classi;
 
-import java.util.ArrayList;
-
 public class CodaDiImbarco {
 
 	Gate gt = new Gate();

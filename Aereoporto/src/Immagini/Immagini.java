@@ -44,11 +44,11 @@ public class Immagini {
 	}
 
 	public Image spuntaSuccesso() {
-		Image spuntaSuccesso = new ImageIcon(Recensione.class.getResource("immaginiDashboard/SpuntaSuccesso.png")).getImage()
-				.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+		Image spuntaSuccesso = new ImageIcon(Recensione.class.getResource("immaginiDashboard/SpuntaSuccesso.png"))
+				.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
 		return spuntaSuccesso;
 	}
-	
+
 	public Image sfondoUscita() {
 		Image imgSfondo = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/SfondoUscita.png")).getImage()
 				.getScaledInstance(500, 300, Image.SCALE_SMOOTH);
@@ -82,7 +82,7 @@ public class Immagini {
 						.getScaledInstance(499, 35, Image.SCALE_SMOOTH);
 		return spostaUscita;
 	}
-	
+
 	public Image sfondoPasswordDimenticataTemaChiaro() {
 		Image sfondoPasswordDimenticata = new ImageIcon(
 				PasswordDimenticata.class.getResource("immaginiDashboardChiare/SfondoUscitaChiaro.png")).getImage()
@@ -158,15 +158,40 @@ public class Immagini {
 		return imgSfondoFull;
 	}
 
-	public Image lineeChiusura() {
-		Image lineeChiusura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/lineeChiusura.png")).getImage()
-				.getScaledInstance(25, 15, Image.SCALE_SMOOTH);
+	public Image lineeChiusura1() {
+		Image lineeChiusura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/lineeChiusura1.png"))
+				.getImage().getScaledInstance(41, 41, Image.SCALE_SMOOTH);
 		return lineeChiusura;
 	}
 
-	public Image lineeApertura() {
-		Image lineeApertura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/lineeApertura.png")).getImage()
-				.getScaledInstance(25, 15, Image.SCALE_SMOOTH);
+	public Image lineeChiusura2() {
+		Image lineeChiusura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/lineeChiusura2.png"))
+				.getImage().getScaledInstance(41, 41, Image.SCALE_SMOOTH);
+		return lineeChiusura;
+	}
+	
+	public Image lineeChiusura3() {
+		Image lineeChiusura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/lineeChiusura3.png"))
+				.getImage().getScaledInstance(41, 41, Image.SCALE_SMOOTH);
+		return lineeChiusura;
+	}
+
+
+	public Image lineeApertura1() {
+		Image lineeApertura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/lineeApertura1.png"))
+				.getImage().getScaledInstance(41, 41, Image.SCALE_SMOOTH);
+		return lineeApertura;
+	}
+
+	public Image lineeApertura2() {
+		Image lineeApertura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/lineeApertura2.png"))
+				.getImage().getScaledInstance(41, 41, Image.SCALE_SMOOTH);
+		return lineeApertura;
+	}
+
+	public Image lineeApertura3() {
+		Image lineeApertura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/lineeApertura3.png"))
+				.getImage().getScaledInstance(41, 41, Image.SCALE_SMOOTH);
 		return lineeApertura;
 	}
 
@@ -284,8 +309,8 @@ public class Immagini {
 
 	public Image credenzialiPasswordDimenticata() {
 		Image credenzialiPasswordDimenticata = new ImageIcon(
-				PasswordDimenticata.class.getResource("immaginiCredenziali/credenzialiPasswordDimenticata.png")).getImage()
-						.getScaledInstance(344, 236, Image.SCALE_SMOOTH);
+				PasswordDimenticata.class.getResource("immaginiCredenziali/credenzialiPasswordDimenticata.png"))
+						.getImage().getScaledInstance(344, 236, Image.SCALE_SMOOTH);
 		return credenzialiPasswordDimenticata;
 	}
 
@@ -339,6 +364,12 @@ public class Immagini {
 		return voli2;
 	}
 
+	public Image voli3() {
+		Image voli3 = new ImageIcon(Accesso.class.getResource("immaginiHome/voli3.png")).getImage()
+				.getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+		return voli3;
+	}
+
 	public Image gate1() {
 		Image gate1 = new ImageIcon(Accesso.class.getResource("immaginiHome/gate1.png")).getImage()
 				.getScaledInstance(272, 157, Image.SCALE_SMOOTH);
@@ -351,16 +382,10 @@ public class Immagini {
 		return gate2;
 	}
 
-	public Image prenotazioni1() {
-		Image prenotazioni1 = new ImageIcon(Accesso.class.getResource("immaginiHome/prenotazioni1.png")).getImage()
+	public Image gate3() {
+		Image gate3 = new ImageIcon(Accesso.class.getResource("immaginiHome/gate3.png")).getImage()
 				.getScaledInstance(272, 157, Image.SCALE_SMOOTH);
-		return prenotazioni1;
-	}
-
-	public Image prenotazioni2() {
-		Image prenotazioni2 = new ImageIcon(Accesso.class.getResource("immaginiHome/prenotazioni2.png")).getImage()
-				.getScaledInstance(292, 177, Image.SCALE_SMOOTH);
-		return prenotazioni2;
+		return gate3;
 	}
 
 	public Image tratte1() {
@@ -375,6 +400,12 @@ public class Immagini {
 		return tratte2;
 	}
 
+	public Image tratte3() {
+		Image tratte3 = new ImageIcon(Accesso.class.getResource("immaginiHome/tratte3.png")).getImage()
+				.getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+		return tratte3;
+	}
+
 	public Image compagnieAeree1() {
 		Image compagnieAeree1 = new ImageIcon(Accesso.class.getResource("immaginiHome/compagnieAeree1.png")).getImage()
 				.getScaledInstance(272, 157, Image.SCALE_SMOOTH);
@@ -387,28 +418,22 @@ public class Immagini {
 		return compagnieAeree2;
 	}
 
-	public Image gestioneAccount1() {
-		Image gestioneAccount1 = new ImageIcon(Accesso.class.getResource("immaginiHome/gestioneAccount1.png"))
-				.getImage().getScaledInstance(272, 157, Image.SCALE_SMOOTH);
-		return gestioneAccount1;
-	}
-
-	public Image gestioneAccount2() {
-		Image gestioneAccount2 = new ImageIcon(Accesso.class.getResource("immaginiHome/gestioneAccount2.png"))
-				.getImage().getScaledInstance(292, 177, Image.SCALE_SMOOTH);
-		return gestioneAccount2;
+	public Image compagnieAeree3() {
+		Image compagnieAeree3 = new ImageIcon(Accesso.class.getResource("immaginiHome/compagnieAeree3.png")).getImage()
+				.getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+		return compagnieAeree3;
 	}
 
 	/*-----------------------------------------------------------ICONE-----------------------------------------------------------*/
 
 	// DASHBOARD
-	
+
 	public Image temaChiaro1() {
 		Image temaChiaro = new ImageIcon(Accesso.class.getResource("immaginiDashboard/temaChiaro1.png")).getImage()
 				.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		return temaChiaro;
 	}
-	
+
 	public Image temaChiaro2() {
 		Image temaChiaro2 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/temaChiaro2.png")).getImage()
 				.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -420,7 +445,7 @@ public class Immagini {
 				.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		return temaChiaro3;
 	}
-	
+
 	public Image registrati() {
 		Image registrati = new ImageIcon(Accesso.class.getResource("immaginiDashboard/registrazione.png")).getImage()
 				.getScaledInstance(27, 27, Image.SCALE_SMOOTH);
@@ -477,12 +502,6 @@ public class Immagini {
 		return barraRicerca;
 	}
 
-	public Image ricerca() {
-		Image ricerca = new ImageIcon(Accesso.class.getResource("immaginiInComune/ricerca.png")).getImage()
-				.getScaledInstance(13, 13, Image.SCALE_SMOOTH);
-		return ricerca;
-	}
-
 	/*-----------------------------------------------------------ICONE TEMA CHIARO-----------------------------------------------------*/
 	// DASHBOARD
 	public Image temaScuro1() {
@@ -490,19 +509,19 @@ public class Immagini {
 				.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		return temaScuro1;
 	}
-	
+
 	public Image temaScuro2() {
 		Image temaScuro2 = new ImageIcon(Accesso.class.getResource("immaginiDashboardChiare/temaScuro2.png")).getImage()
 				.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		return temaScuro2;
 	}
-	
+
 	public Image temaScuro3() {
 		Image temaScuro3 = new ImageIcon(Accesso.class.getResource("immaginiDashboardChiare/temaScuro3.png")).getImage()
 				.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		return temaScuro3;
 	}
-	
+
 	public Image registratiTemaChiaro() {
 		Image registrati = new ImageIcon(Accesso.class.getResource("immaginiDashboardChiare/registratiChiaro.png"))
 				.getImage().getScaledInstance(27, 27, Image.SCALE_SMOOTH);

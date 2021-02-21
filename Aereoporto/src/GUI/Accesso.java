@@ -121,7 +121,7 @@ public class Accesso extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerAccesso.accedi();
+					controlloAccesso();
 				}
 			}
 		});
@@ -139,11 +139,7 @@ public class Accesso extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					if(!controllerAccesso.sbloccaGestione()) {
-					controllerAccesso.accedi();
-					} else {
-						lblMessaggioCredenziali.setText("Devi effettuare il logout se vuoi accedere con altre credenziali.");
-					}
+					controlloAccesso();
 				}
 			}
 		});
@@ -204,7 +200,7 @@ public class Accesso extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerAccesso.accedi();
+				controlloAccesso();
 			}
 
 			@Override
@@ -269,6 +265,16 @@ public class Accesso extends JPanel {
 	}
 
 	// METODI
+	
+	private void controlloAccesso() {
+		if(!controllerAccesso.sbloccaGestione()) {
+			controllerAccesso.accedi();
+		} else if(controllerAccesso.getEmailAccesso().equals(txtEmail.getText())) {
+			mostraGiaUtilizziAccount();
+		} else{
+			mostraEseguirePrimaLogout();
+		}
+	}
 
 	public void mostraInserimentoCredenziali() {
 		lblMessaggioCredenziali.setText("Perfavore, inserisci le credenziali");
@@ -277,4 +283,13 @@ public class Accesso extends JPanel {
 	public void mostraErroreAccesso() {
 		lblMessaggioCredenziali.setText("Nome utente o password errati. Riprova");
 	}
+
+	public void mostraEseguirePrimaLogout() {
+		lblMessaggioCredenziali.setText("Devi effettuare il logout se vuoi accedere con altre credenziali.");
+	}
+
+	public void mostraGiaUtilizziAccount() {
+		lblMessaggioCredenziali.setText("Stai già utilizzando questo account.");
+	}
+
 }

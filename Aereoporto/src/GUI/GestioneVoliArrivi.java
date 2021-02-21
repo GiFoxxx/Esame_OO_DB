@@ -28,6 +28,7 @@ import Immagini.Immagini;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JComboBox;
 
 public class GestioneVoliArrivi extends JPanel {
 
@@ -47,7 +48,6 @@ public class GestioneVoliArrivi extends JPanel {
 	private JTextField txtBarraRicerca;
 	
 	private JLabel lblimgfrecciaIndietro;
-	private JLabel lblRicerca;
 	private JLabel lblBarraRicerca;
 	private JLabel lblCodiceVoloArrivi;
 	private JLabel lblCittaPartenza;
@@ -91,14 +91,6 @@ public class GestioneVoliArrivi extends JPanel {
 
 	public void setLblimgfrecciaIndietro(JLabel lblimgfrecciaIndietro) {
 		this.lblimgfrecciaIndietro = lblimgfrecciaIndietro;
-	}
-
-	public JLabel getLblRicerca() {
-		return lblRicerca;
-	}
-
-	public void setLblRicerca(JLabel lblRicerca) {
-		this.lblRicerca = lblRicerca;
 	}
 
 	public JLabel getLblBarraRicerca() {
@@ -230,13 +222,6 @@ public class GestioneVoliArrivi extends JPanel {
 		lblimgfrecciaIndietro.setBounds(30, 35, 47, 30);
 		add(lblimgfrecciaIndietro);
 		
-		lblRicerca = new JLabel("");
-		lblRicerca.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		lblRicerca.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRicerca.setIcon(new ImageIcon(img.ricerca()));
-		lblRicerca.setBounds(1031, 39, 23, 23);
-		add(lblRicerca);
-
 		txtBarraRicerca = new JTextField();
 		txtBarraRicerca.addKeyListener(new KeyAdapter() {
 			@Override
@@ -244,8 +229,8 @@ public class GestioneVoliArrivi extends JPanel {
 				ricerca();
 			}
 		});
-		txtBarraRicerca.setBackground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
-		txtBarraRicerca.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
+		txtBarraRicerca.setBackground(controllerGestioneVoliArrivi.escoPannelloTemaScuro);
+		txtBarraRicerca.setForeground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
 		txtBarraRicerca.setBounds(888, 40, 141, 20);

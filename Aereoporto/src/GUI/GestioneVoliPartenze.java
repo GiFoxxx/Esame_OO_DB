@@ -53,13 +53,11 @@ public class GestioneVoliPartenze extends JPanel {
 	private JTextField txtBarraRicerca;
 
 	private JLabel lblimgfrecciaIndietro;
-	private JLabel lblRicerca;
 	private JLabel lblBarraRicerca;
 	private JLabel lblCodiceVoloPartenze;
 	private JLabel lblCittaArrivo;
 	private JLabel lblDataPartenza;
-	private JLabel lblOraPartenza;
-	private JLabel lblMinutoPartenza;
+	private JLabel lblOrarioPartenza;
 	private JLabel lblOraArrivo;
 	private JLabel lblMinutoArrivo;
 	private JLabel lblDuePuntiPartenza;
@@ -103,14 +101,6 @@ public class GestioneVoliPartenze extends JPanel {
 		this.lblimgfrecciaIndietro = lblimgfrecciaIndietro;
 	}
 
-	public JLabel getLblRicerca() {
-		return lblRicerca;
-	}
-
-	public void setLblRicerca(JLabel lblRicerca) {
-		this.lblRicerca = lblRicerca;
-	}
-
 	public JLabel getLblBarraRicerca() {
 		return lblBarraRicerca;
 	}
@@ -144,19 +134,11 @@ public class GestioneVoliPartenze extends JPanel {
 	}
 
 	public JLabel getLblOraPartenza() {
-		return lblOraPartenza;
+		return lblOrarioPartenza;
 	}
 
 	public void setLblOraPartenza(JLabel lblOraPartenza) {
-		this.lblOraPartenza = lblOraPartenza;
-	}
-
-	public JLabel getLblMinutoPartenza() {
-		return lblMinutoPartenza;
-	}
-
-	public void setLblMinutoPartenza(JLabel lblMinutoPartenza) {
-		this.lblMinutoPartenza = lblMinutoPartenza;
+		this.lblOrarioPartenza = lblOraPartenza;
 	}
 
 	public JLabel getLblDuePuntiPartenza() {
@@ -303,14 +285,7 @@ public class GestioneVoliPartenze extends JPanel {
 		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
 		lblimgfrecciaIndietro.setBounds(30, 35, 47, 30);
 		add(lblimgfrecciaIndietro);
-
-		lblRicerca = new JLabel("");
-		lblRicerca.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		lblRicerca.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRicerca.setIcon(new ImageIcon(img.ricerca()));
-		lblRicerca.setBounds(1031, 39, 23, 23);
-		add(lblRicerca);
-
+		
 		txtBarraRicerca = new JTextField();
 		txtBarraRicerca.addKeyListener(new KeyAdapter() {
 			@Override
@@ -318,11 +293,11 @@ public class GestioneVoliPartenze extends JPanel {
 				ricerca();
 			}
 		});
-		txtBarraRicerca.setBackground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
-		txtBarraRicerca.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
+		txtBarraRicerca.setBackground(controllerGestioneVoliPartenze.escoPannelloTemaScuro);
+		txtBarraRicerca.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(888, 40, 141, 20);
+		txtBarraRicerca.setBounds(888, 41, 141, 20);
 		txtBarraRicerca.setColumns(10);
 		add(txtBarraRicerca);
 
@@ -436,12 +411,12 @@ public class GestioneVoliPartenze extends JPanel {
 		dateDataPartenza.setBounds(519, 438, 133, 20);
 		add(dateDataPartenza);
 
-		lblOraPartenza = new JLabel("Ora Partenza");
-		lblOraPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblOraPartenza.setFont(controllerGestioneVoliPartenze.fontLabel);
-		lblOraPartenza.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
-		lblOraPartenza.setBounds(383, 469, 117, 20);
-		add(lblOraPartenza);
+		lblOrarioPartenza = new JLabel("Orario Partenza");
+		lblOrarioPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblOrarioPartenza.setFont(controllerGestioneVoliPartenze.fontLabel);
+		lblOrarioPartenza.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
+		lblOrarioPartenza.setBounds(383, 469, 117, 20);
+		add(lblOrarioPartenza);
 
 		txtOraPartenza = new JTextField();
 		txtOraPartenza.addKeyListener(new KeyAdapter() {
@@ -457,13 +432,6 @@ public class GestioneVoliPartenze extends JPanel {
 		txtOraPartenza.setColumns(10);
 		txtOraPartenza.setBounds(519, 469, 30, 20);
 		add(txtOraPartenza);
-
-		lblMinutoPartenza = new JLabel("Minuto Partenza");
-		lblMinutoPartenza.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMinutoPartenza.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
-		lblMinutoPartenza.setFont(controllerGestioneVoliPartenze.fontLabel);
-		lblMinutoPartenza.setBounds(613, 469, 117, 20);
-		add(lblMinutoPartenza);
 
 		txtMinutoPartenza = new JTextField();
 		txtMinutoPartenza.addKeyListener(new KeyAdapter() {
@@ -590,22 +558,18 @@ public class GestioneVoliPartenze extends JPanel {
 		add(lblNewLabel);
 		
 		txtOraArrivo = new JTextField();
-		txtOraArrivo.setBounds(301, 570, 47, 23);
+		txtOraArrivo.setBounds(301, 570, 30, 20);
 		add(txtOraArrivo);
 		txtOraArrivo.setColumns(10);
 		
 		txtMinutoArrivo = new JTextField();
-		txtMinutoArrivo.setBounds(383, 571, 47, 20);
+		txtMinutoArrivo.setBounds(343, 570, 30, 20);
 		add(txtMinutoArrivo);
 		txtMinutoArrivo.setColumns(10);
 		
-		JLabel lblOraArrivo = new JLabel("Ora arrivo");
-		lblOraArrivo.setBounds(228, 574, 63, 14);
-		add(lblOraArrivo);
-		
-		JLabel lblMinutoArrivo = new JLabel("minuto arrivo");
-		lblMinutoArrivo.setBounds(454, 574, 63, 14);
-		add(lblMinutoArrivo);
+		JLabel lblOrarioArrivo = new JLabel("Orario arrivo");
+		lblOrarioArrivo.setBounds(228, 574, 63, 14);
+		add(lblOrarioArrivo);
 
 		caricaTabella();
 	}

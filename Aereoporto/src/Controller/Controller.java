@@ -75,7 +75,6 @@ public class Controller {
 	private Profilo profilo;
 	private GestioneVoliPartenze gestioneVoliPartenze;
 	private GestioneVoliArrivi gestioneVoliArrivi;
-	private Prenotazione prenotazioni;
 	private GestioneUtenti gestioneUtenti;
 	private GestioneCompagnieAeree gestioneCompagnieAeree;
 	private GestioneTratte gestioneTratte;
@@ -217,14 +216,6 @@ public class Controller {
 		this.gestioneVoliArrivi = gestioneVoliArrivi;
 	}
 
-	public Prenotazione getPrenotazioni() {
-		return prenotazioni;
-	}
-
-	public void setPrenotazioni(Prenotazione prenotazioni) {
-		this.prenotazioni = prenotazioni;
-	}
-
 	public GestioneUtenti getGestioneUtenti() {
 		return gestioneUtenti;
 	}
@@ -317,7 +308,6 @@ public class Controller {
 		accesso = new Accesso(this);
 		registrazione = new Registrazione(this);
 		riconoscimenti = new Riconoscimenti(this);
-		prenotazioni = new Prenotazione(this);
 		gestioneUtenti = new GestioneUtenti(this);
 		gestioneCompagnieAeree = new GestioneCompagnieAeree(this);
 		gestioneTratte = new GestioneTratte(this);
@@ -419,7 +409,7 @@ public class Controller {
 	@SuppressWarnings("deprecation")
 	public void registrati() {
 		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
-		if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto()) {
+		if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto() && !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
 			Utente utn = new Utente(((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText(),
@@ -430,7 +420,7 @@ public class Controller {
 
 			mostraPannelli(getDashboard().getAccesso());
 			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-		} else if ((!formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuoto()) {
+		} else if (!formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto()) {
 
 			JOptionPane.showMessageDialog(null,
 					"Formato email inserito non valido!\n" + "Inserire l'email dal formato tipo: example@example.com");
@@ -439,9 +429,10 @@ public class Controller {
 
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
 					.setText("La password ripetuta non è corretta.");
-			((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().setText("");
-			((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setText("");
 
+		} else if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto() && ((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
+			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
+			.setText("Effettuare il logout prima della registrazione");
 		} else {
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
 					.setText("Ci sono campi vuoti, riempirli tutti per la registrazione.");
@@ -1062,6 +1053,8 @@ public class Controller {
 
 	// METODI DI SCELTA PROFILO SENZA ACCESSO
 	public void mostraSceltaProfiloSenzaAccesso() {
+		svuotaCampiAccesso();
+		svuotaCampiRegistrazione();
 		getDashboard().setEnabled(false);
 		getDashboard().getSceltaProfiloSenzaAccesso().setVisible(true);
 	}
@@ -1195,6 +1188,7 @@ public class Controller {
 
 	public void mostraPasswordDimenticata() {
 		svuotaCampiAccesso();
+		svuotaCampiCambioPassword();
 		getDashboard().setEnabled(false);
 		getDashboard().getPasswordDimenticata().setVisible(true);
 		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMostraNuovaPassword().setVisible(true);
@@ -1226,6 +1220,8 @@ public class Controller {
 	// METODI DI USCITA
 
 	public void mostraUscita() {
+		svuotaCampiAccesso();
+		svuotaCampiRegistrazione();
 		dashboard.setEnabled(false);
 		dashboard.getUscita().setVisible(true);
 	}
@@ -1500,7 +1496,6 @@ public class Controller {
 		getDashboard().getImpostazioni().setBackground(sfondoTemaChiaro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblTema().setForeground(coloreLabelTemaChiaro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblInformazioni().setForeground(coloreLabelTemaChiaro);
-		((Impostazioni) getDashboard().getImpostazioni()).getLblRiconoscimenti().setForeground(coloreLabelTemaChiaro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblTerminiECondizioni()
 				.setForeground(coloreLabelTemaChiaro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblRecensione().setForeground(coloreLabelTemaChiaro);
@@ -1552,8 +1547,6 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblDataPartenza()
 				.setForeground(coloreLabelTemaChiaro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblOraPartenza()
-				.setForeground(coloreLabelTemaChiaro);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMinutoPartenza()
 				.setForeground(coloreLabelTemaChiaro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblDuePuntiPartenza()
 				.setForeground(coloreLabelTemaChiaro);
@@ -1679,8 +1672,8 @@ public class Controller {
 		getDashboard().getLblMinimizza().setIcon(new ImageIcon(img.minimizza1()));
 
 		getDashboard().getPannelloTendina().setBackground(trasparente);
-		getDashboard().getLineeApertura().setIcon(new ImageIcon(img.lineeApertura()));
-		getDashboard().getLineeChiusura().setIcon(new ImageIcon(img.lineeChiusura()));
+		getDashboard().getLineeApertura().setIcon(new ImageIcon(img.lineeApertura1()));
+		getDashboard().getLineeChiusura().setIcon(new ImageIcon(img.lineeChiusura1()));
 		getDashboard().getLblHome().setIcon(new ImageIcon(img.casa()));
 		getDashboard().getLblAccesso().setIcon(new ImageIcon(img.accedi()));
 		getDashboard().getLblRegistrazione().setIcon(new ImageIcon(img.registrati()));
@@ -1740,7 +1733,6 @@ public class Controller {
 		getDashboard().getImpostazioni().setBackground(sfondoTemaScuro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblTema().setForeground(coloreScritteTemaScuro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblInformazioni().setForeground(coloreScritteTemaScuro);
-		((Impostazioni) getDashboard().getImpostazioni()).getLblRiconoscimenti().setForeground(coloreScritteTemaScuro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblTerminiECondizioni()
 				.setForeground(coloreScritteTemaScuro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblRecensione().setForeground(coloreScritteTemaScuro);
@@ -1794,15 +1786,12 @@ public class Controller {
 				.setForeground(coloreLabelTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblOraPartenza()
 				.setForeground(coloreLabelTemaScuro);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMinutoPartenza()
-				.setForeground(coloreLabelTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblDuePuntiPartenza()
 				.setForeground(coloreLabelTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblNumeroPrenoazioni()
 				.setForeground(coloreLabelTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRitardo()
 				.setForeground(coloreLabelTemaScuro);
-
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
 				.setForeground(coloreScritteTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCittaArrivo()
