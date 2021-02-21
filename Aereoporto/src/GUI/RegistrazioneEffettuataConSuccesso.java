@@ -109,7 +109,7 @@ public class RegistrazioneEffettuataConSuccesso extends JDialog {
 			lblSpostaRegistrazioneEffettuataConSuccesso.setBounds(1, 0, 498, 37);
 			getContentPane().add(lblSpostaRegistrazioneEffettuataConSuccesso);
 
-			lblComplimenti = new JLabel("Complimenti registrazione effettuata con successo.");
+			lblComplimenti = new JLabel("Complimenti, registrazione effettuata con successo!");
 			lblComplimenti.setHorizontalAlignment(SwingConstants.CENTER);
 			lblComplimenti.setFont(controllerRegistrazioneEffettuataConSuccesso.fontScritteJDialog);
 			lblComplimenti.setForeground(controllerRegistrazioneEffettuataConSuccesso.coloreScritteTemaScuro);

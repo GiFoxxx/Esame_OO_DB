@@ -168,6 +168,14 @@ public class GestioneTratte extends JPanel {
 			public void mouseExited(MouseEvent e) {
 				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
 			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3()));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
+			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));

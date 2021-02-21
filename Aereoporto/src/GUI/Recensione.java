@@ -62,8 +62,6 @@ public class Recensione extends JPanel {
 	JLabel lblStella28;
 	JLabel lblStella29;
 	JLabel lblStella30;
-
-	JLabel lblStelleSelezionate;
 	JLabel lblInviaRecensione;
 
 	// GETTER E SETTER
@@ -75,13 +73,13 @@ public class Recensione extends JPanel {
 		this.lblAnnulla = lblAnnulla;
 	}
 
-	public JLabel getLblStelleSelezionate() {
-		return lblStelleSelezionate;
-	}
-
-	public void setLblStelleSelezionate(JLabel lblStelleSelezionate) {
-		this.lblStelleSelezionate = lblStelleSelezionate;
-	}
+//	public JLabel getLblStelleSelezionate() {
+//		return lblStelleSelezionate;
+//	}
+//
+//	public void setLblStelleSelezionate(JLabel lblStelleSelezionate) {
+//		this.lblStelleSelezionate = lblStelleSelezionate;
+//	}
 
 	public JLabel getLblInviaRecensione() {
 		return lblInviaRecensione;
@@ -132,7 +130,7 @@ public class Recensione extends JPanel {
 		});
 		lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-		lblAnnulla.setBounds(200, 513, 135, 41);
+		lblAnnulla.setBounds(200, 513, 321, 41);
 		add(lblAnnulla);
 
 		lblInviaRecensione = new JLabel("");
@@ -157,14 +155,14 @@ public class Recensione extends JPanel {
 				lblInviaRecensione.setIcon(new ImageIcon(img.inviaRecensione1()));
 			}
 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				votoInviato();
-			}
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				votoInviato();
+//			}
 		});
 		lblInviaRecensione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInviaRecensione.setIcon(new ImageIcon(img.inviaRecensione1()));
-		lblInviaRecensione.setBounds(720, 513, 135, 41);
+		lblInviaRecensione.setBounds(720, 513, 321, 41);
 		add(lblInviaRecensione);
 
 		lblStella1 = new JLabel("");
@@ -527,13 +525,6 @@ public class Recensione extends JPanel {
 		lblStella30.setBounds(985, 350, 35, 35);
 		add(lblStella30);
 
-		lblStelleSelezionate = new JLabel("Inserire valutazione.");
-		lblStelleSelezionate.setHorizontalAlignment(SwingConstants.CENTER);
-		lblStelleSelezionate.setForeground(Color.LIGHT_GRAY);
-		lblStelleSelezionate.setFont(null);
-		lblStelleSelezionate.setBounds(373, 438, 341, 20);
-		add(lblStelleSelezionate);
-
 		lblLayout = new JLabel("");
 		lblLayout.setBorder(null);
 		lblLayout.setBounds(0, 0, 1090, 642);
@@ -544,18 +535,18 @@ public class Recensione extends JPanel {
 	}
 
 	// METODI RIEMPIMENTO STELLE
-
-	public void votoInviato() {
-		if (valutazione < 18) {
-			lblStelleSelezionate.setText("Voto non sufficiente");
-		} else if (valutazione > 17 && valutazione < 23) {
-			lblStelleSelezionate.setText("Voto discreto");
-		} else if (valutazione > 23 && valutazione < 27) {
-			lblStelleSelezionate.setText("Voto buono");
-		} else {
-			lblStelleSelezionate.setText("Voto ottimo");
-		}
-	}
+//
+//	public void votoInviato() {
+//		if (valutazione < 18) {
+//			lblStelleSelezionate.setText("Voto non sufficiente");
+//		} else if (valutazione > 17 && valutazione < 23) {
+//			lblStelleSelezionate.setText("Voto discreto");
+//		} else if (valutazione > 23 && valutazione < 27) {
+//			lblStelleSelezionate.setText("Voto buono");
+//		} else {
+//			lblStelleSelezionate.setText("Voto ottimo");
+//		}
+//	}
 
 	public void riempimentoStella1() {
 		if (flag == 0) {
