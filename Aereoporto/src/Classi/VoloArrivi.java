@@ -6,9 +6,7 @@ import java.util.Date;
 public class VoloArrivi {
 
 	CompagniaAerea compagniaAerea = new CompagniaAerea();
-	Gate gt = new Gate();
 	Tratta trt = new Tratta();
-	ArrayList<ClienteBusiness[]> ClientiBusiness = new ArrayList<>();
 
 	// ATTRIBUTI
 	private String codiceVoloArrivi;

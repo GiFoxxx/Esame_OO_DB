@@ -217,7 +217,7 @@ public class Accesso extends JPanel {
 		lblAvanti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAvanti.setIcon(new ImageIcon(img.avanti1()));
 		lblAvanti.setBackground(controllerAccesso.trasparente);
-		lblAvanti.setBounds(512, 479, 321, 41);
+		lblAvanti.setBounds(490, 472, 321, 41);
 		add(lblAvanti);
 
 		lblMessaggioCredenziali = new JLabel("");

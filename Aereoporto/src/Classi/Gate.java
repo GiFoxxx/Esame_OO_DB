@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Gate {
 
-	ArrayList<CodaDiImbarco[]> CodeDiImbarco = new ArrayList<>();
-	ArrayList<VoloPartenze[]> VoliPartenze = new ArrayList<>();
+	CodaDiImbarco[] codeDiImbarco = new CodaDiImbarco[2];
+	
 	Tratta trt;
 
 	// ATTRIBUTI
@@ -14,6 +14,13 @@ public class Gate {
 	private String numeroPorta;
 
 	// GETTER E SETTER
+	public CodaDiImbarco[] getCodeDiImbarco() {
+		return codeDiImbarco;
+	}
+
+	public void setCodeDiImbarco(CodaDiImbarco[] codaDiImbarco) {
+		this.codeDiImbarco = codaDiImbarco;
+	}
 	public String getCodiceGate() {
 		return codiceGate;
 	}
@@ -37,23 +44,19 @@ public class Gate {
 		super();
 	}
 
-	@Override
-	public String toString() {
-		return "Gate [CodeDiImbarco=" + CodeDiImbarco + ", VoliPartenze=" + VoliPartenze + ", trt=" + trt
-				+ ", codiceGate=" + codiceGate + ", numeroPorta=" + numeroPorta + "]";
-	}
-
-	public Gate(ArrayList<CodaDiImbarco[]> codeDiImbarco, ArrayList<VoloPartenze[]> voliPartenze, Tratta trt,
-			String codiceGate, String numeroPorta) {
+	public Gate( String codiceGate, String numeroPorta, CodaDiImbarco codaDiImbarco1, CodaDiImbarco codaDiImbarco2) {
 		super();
-		CodeDiImbarco = codeDiImbarco;
-		VoliPartenze = voliPartenze;
-		this.trt = trt;
+		this.codiceGate = codiceGate;
+		this.numeroPorta = numeroPorta;
+	}
+	
+	public Gate( String codiceGate, String numeroPorta) {
+		super();
 		this.codiceGate = codiceGate;
 		this.numeroPorta = numeroPorta;
 	}
 
-	public Gate(String codiceGate, String numeroPorta) {
+	public Gate(String codiceGate) {
 		super();
 		this.codiceGate = codiceGate;
 	}		

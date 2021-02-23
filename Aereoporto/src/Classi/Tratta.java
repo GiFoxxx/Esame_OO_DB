@@ -6,9 +6,7 @@ import java.util.Date;
 
 public class Tratta {
 
-	ArrayList<CompagniaAerea[]> CompagnieAeree = new ArrayList<>();
-	ArrayList<VoloPartenze[]> VoliPartenza = new ArrayList<>();
-	Gate gt;
+	VoloPartenze[] VoliPartenza = new VoloPartenze[2];
 
 	// ATTRIBUTI
 	private String codiceTratta;
@@ -48,6 +46,11 @@ public class Tratta {
 		this.cittaArrivo = cittaArrivo;
 	}
 
+	public Tratta(String codiceTratta) {
+		super();
+		this.codiceTratta = codiceTratta;
+	}
+	
 	public Tratta() {
 		super();
 	}

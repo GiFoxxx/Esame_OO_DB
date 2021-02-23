@@ -21,7 +21,6 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 	Gate gt = new Gate();
 	Tratta trt = new Tratta();
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	
 
 	@SuppressWarnings("finally")
 	@Override // stampa voli
@@ -30,14 +29,14 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT * FROM voloPartenza ORDER BY datapartenza";
+		String sql = "SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.datapartenza, vp.orapartenza, vp.minutopartenza, vp.oraarrivo, vp.minutoarrivo, vp.numeroprenotazioni, vp.ritardo FROM volopartenza AS vp, tratta AS tr, compagniaAerea AS ca, gate AS gt WHERE (xcodiceTratta = codiceTratta) AND (xcodicegate = codiceGate) ORDER BY datapartenza";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Object[] Lista = new Object[9];
-				for (int i = 0; i <=8; i++) {
+				Object[] Lista = new Object[11];
+				for (int i = 0; i <= 10; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}
 				ListaVoliPartenze.add(Lista);
@@ -83,24 +82,26 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 	@Override // modifica info volo partenze
 	public boolean modificaVoloPartenze(Object voloPartenze) {
 		vlprtz = (VoloPartenze) voloPartenze;
-		
+
 		PreparedStatement pst;
 		String sql = "UPDATE voloPartenza SET cittaarrivo = ?, datapartenza = ?, orapartenza = ?, minutoPartenza = ?, numeroprenotazioni = ?, ritardo = ?, minutoarrivo = ?, oraarrivo =? WHERE codiceVoloPartenza=?";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
-			pst.setString(1, vlprtz.getCittaArrivo());
 			String dataPartenza = sdf.format(vlprtz.getDataPartenza());
-			pst.setString(2, dataPartenza);
-			pst.setString(3, vlprtz.getOraPartenza());
-			pst.setString(4, vlprtz.getMinutoPartenza());
-			pst.setString(5, vlprtz.getNumeroPrenotazioni());
-			pst.setString(6, vlprtz.getRitardo());
-			pst.setString(7, vlprtz.getMinutoArrivo());
-			pst.setString(8, vlprtz.getOraArrivo());
-			pst.setString(9, vlprtz.getCodiceVoloPartenze());
-			
+			pst.setString(1, dataPartenza);
+			pst.setString(2, vlprtz.getOraPartenza());
+			pst.setString(3, vlprtz.getMinutoPartenza());
+			pst.setString(4, vlprtz.getNumeroPrenotazioni());
+			pst.setLong(5, vlprtz.getRitardo());
+			pst.setString(6, vlprtz.getMinutoArrivo());
+			pst.setString(7, vlprtz.getOraArrivo());
+			pst.setString(8, vlprtz.getGt().getCodiceGate());
+			pst.setString(9, vlprtz.getTrt().getCodiceTratta());
+			pst.setString(10, vlprtz.getCompagniaAerea().getCodiceCompagniaAerea());
+			pst.setString(11, vlprtz.getCodiceVoloPartenze());
+
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
@@ -120,24 +121,26 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 	@Override // aggiungi volo partenze
 	public boolean aggiungiVoloPartenze(Object voloPartenze) {
 		vlprtz = (VoloPartenze) voloPartenze;
-		
+
 		PreparedStatement pst;
-		String sql = "INSERT INTO voloPartenza (codiceVoloPartenza, cittaArrivo, dataPartenza, oraPartenza, minutoPartenza, minutoarrivo, oraarrivo, numeroPrenotazioni, ritardo) VALUES (?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO voloPartenza (codiceVoloPartenza, dataPartenza, oraPartenza, minutoPartenza, minutoarrivo, oraarrivo, numeroPrenotazioni, ritardo, xcodiceGate, xcodiceTratta, xcodiceCompagniaAerea) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, vlprtz.getCodiceVoloPartenze());
-			pst.setString(2, vlprtz.getCittaArrivo());
 			String dataPartenza = sdf.format(vlprtz.getDataPartenza());
-			pst.setString(3, dataPartenza);
-			pst.setString(4, vlprtz.getOraPartenza());
-			pst.setString(5, vlprtz.getMinutoPartenza());
-			pst.setString(6, vlprtz.getMinutoArrivo());
-			pst.setString(7, vlprtz.getOraArrivo());
-			pst.setString(8, vlprtz.getNumeroPrenotazioni());
-			pst.setString(9, vlprtz.getRitardo());
+			pst.setString(2, dataPartenza);
+			pst.setString(3, vlprtz.getOraPartenza());
+			pst.setString(4, vlprtz.getMinutoPartenza());
+			pst.setString(5, vlprtz.getMinutoArrivo());
+			pst.setString(6, vlprtz.getOraArrivo());
+			pst.setString(7, vlprtz.getNumeroPrenotazioni());
+			pst.setLong(8, vlprtz.getRitardo());
+			pst.setString(9, vlprtz.getGt().getCodiceGate());
+			pst.setString(10, vlprtz.getTrt().getCodiceTratta());
+			pst.setString(11, vlprtz.getCompagniaAerea().getCodiceCompagniaAerea());
 			
 
 			int res = pst.executeUpdate();

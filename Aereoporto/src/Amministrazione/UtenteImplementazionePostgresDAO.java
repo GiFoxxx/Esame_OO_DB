@@ -327,9 +327,7 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 			
 			if (res.next()) {
                 eUtente = true;
-//                System.out.println("Autenticazione utente riuscita");
             } else {
-//                System.out.println("Email o password non valido!!!");
             }
 			
 			
@@ -340,7 +338,33 @@ public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 		return eUtente;
 	}
 	
-	
+	@Override
+	public boolean esisteEmail(String email) {
+		
+		boolean eUtente=false;
+		PreparedStatement pst;
+		String sql = "SELECT * FROM utente WHERE email = ? ";
+		
+		try {
+			db.ConnessioneDB();
+			pst = db.ConnessioneDB().prepareStatement(sql);
+
+			pst.setString(1, email);
+
+			ResultSet res = pst.executeQuery();
+			
+			if (res.next()) {
+                eUtente = true;
+            } else {
+            }
+			
+			
+		} catch (SQLException e) {
+			Logger.getLogger(Accesso.class.getName()).log(Level.SEVERE, null, e);
+			return false;
+		}
+		return eUtente;
+	}
 	
 
 }

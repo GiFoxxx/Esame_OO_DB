@@ -5,21 +5,20 @@ import java.util.Date;
 
 public class VoloPartenze {
 
-	CompagniaAerea compagniaAerea = new CompagniaAerea();
-	Gate gt = new Gate();
-	Tratta trt = new Tratta();
-	ArrayList<ClienteBusiness[]> ClientiBusiness = new ArrayList<>();
+	CompagniaAerea compagniaAerea;
+	Gate gt;
+	Tratta trt;
 
 	// ATTRIBUTI
 	private String codiceVoloPartenze;
-	private String cittaArrivo;
 	private Date dataPartenza;
 	private String oraPartenza;
 	private String minutoPartenza;
 	private String oraArrivo;
 	private String minutoArrivo;
 	private String numeroPrenotazioni;
-	private String ritardo;
+	private int ritardo;
+	
 
 	// GETTER E SETTER
 	
@@ -45,14 +44,6 @@ public class VoloPartenze {
 
 	public void setCodiceVoloPartenze(String codiceVoloPartenze) {
 		this.codiceVoloPartenze = codiceVoloPartenze;
-	}
-
-	public String getCittaArrivo() {
-		return cittaArrivo;
-	}
-
-	public void setCittaArrivo(String cittaArrivo) {
-		this.cittaArrivo = cittaArrivo;
 	}
 
 	public Date getDataPartenza() {
@@ -87,12 +78,36 @@ public class VoloPartenze {
 		this.numeroPrenotazioni = numeroPrenotazioni;
 	}
 
-	public String getRitardo() {
+	public int getRitardo() {
 		return ritardo;
 	}
 
-	public void setRitardo(String ritardo) {
+	public void setRitardo(int ritardo) {
 		this.ritardo = ritardo;
+	}
+
+	public CompagniaAerea getCompagniaAerea() {
+		return compagniaAerea;
+	}
+
+	public void setCompagniaAerea(CompagniaAerea compagniaAerea) {
+		this.compagniaAerea = compagniaAerea;
+	}
+
+	public Gate getGt() {
+		return gt;
+	}
+
+	public void setGt(Gate gt) {
+		this.gt = gt;
+	}
+
+	public Tratta getTrt() {
+		return trt;
+	}
+
+	public void setTrt(Tratta trt) {
+		this.trt = trt;
 	}
 
 	// COSTRUTTORE
@@ -100,11 +115,13 @@ public class VoloPartenze {
 		super();
 	}
 
-	public VoloPartenze(String codiceVoloPartenze, String cittaArrivo, Date dataPartenza, String oraPartenza,
-			String minutoPartenza, String oraArrivo, String minutoArrivo, String numeroPrenotazioni, String ritardo) {
+	public VoloPartenze(String codiceVoloPartenze, Date dataPartenza, String oraPartenza, String minutoPartenza, String oraArrivo,
+			String minutoArrivo, String numeroPrenotazioni, int ritardo, Tratta trt, Gate gt, CompagniaAerea compagniaAerea) {
 		super();
+		this.compagniaAerea = compagniaAerea;
+		this.gt = gt;
+		this.trt = trt;
 		this.codiceVoloPartenze = codiceVoloPartenze;
-		this.cittaArrivo = cittaArrivo;
 		this.dataPartenza = dataPartenza;
 		this.oraPartenza = oraPartenza;
 		this.minutoPartenza = minutoPartenza;
@@ -116,9 +133,11 @@ public class VoloPartenze {
 
 	@Override
 	public String toString() {
-		return "VoloPartenze [codiceVoloPartenze=" + codiceVoloPartenze + ", cittaArrivo=" + cittaArrivo
-				+ ", dataPartenza=" + dataPartenza + ", oraPartenza=" + oraPartenza + ", minutoPartenza="
-				+ minutoPartenza + ", oraArrivo=" + oraArrivo + ", minutoArrivo=" + minutoArrivo
-				+ ", numeroPrenotazioni=" + numeroPrenotazioni + ", ritardo=" + ritardo + "]";
+		return "VoloPartenze [compagniaAerea=" + compagniaAerea + ", gt=" + gt + ", trt=" + trt
+				+ ", codiceVoloPartenze=" + codiceVoloPartenze + ", dataPartenza=" + dataPartenza + ", oraPartenza="
+				+ oraPartenza + ", minutoPartenza=" + minutoPartenza + ", oraArrivo=" + oraArrivo + ", minutoArrivo="
+				+ minutoArrivo + ", numeroPrenotazioni=" + numeroPrenotazioni + ", ritardo=" + ritardo + "]";
 	}
+
+	
 }

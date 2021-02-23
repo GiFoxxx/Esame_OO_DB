@@ -27,4 +27,6 @@ public ArrayList<Object[]> stampaUtenti();
 	public String stampaEmailAccount(Object utente);
 
 	boolean cambioPasswordDB(Object utente);
+
+	boolean esisteEmail(String email);
 }

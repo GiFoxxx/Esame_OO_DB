@@ -8,9 +8,6 @@ public class CompagniaAerea {
 	private String codiceCompagniaAerea;
 	private String nome;
 	
-	ArrayList<ClienteBusiness[]> ClientiBusiness = new ArrayList<>();
-	ArrayList<Tratta[]> Tratte = new ArrayList<>();
-	ArrayList<VoloPartenze[]> VoliPartenze = new ArrayList<>();
 
 	
 	//GETTER E SETTER
@@ -35,6 +32,11 @@ public class CompagniaAerea {
 		super();	
 		this.codiceCompagniaAerea = codiceCompagniaAerea;
 		this.nome = nome;
+	}
+	
+	public CompagniaAerea(String codiceCompagniaAerea) {
+		super();	
+		this.codiceCompagniaAerea = codiceCompagniaAerea;
 	}
 	
 	public CompagniaAerea() {

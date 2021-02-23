@@ -22,11 +22,13 @@ import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PasswordDimenticata extends JDialog {
-	
+
 	Immagini img = new Immagini();
-	
+
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -37,7 +39,7 @@ public class PasswordDimenticata extends JDialog {
 	private JTextField txtEmail;
 	private JPasswordField txtRipetiNuovaPassword;
 	private JPasswordField txtNuovaPassword;
-	
+
 	private JLabel lblLayout;
 	private JLabel lblSpostaPasswordDimenticata;
 	private JLabel lblX;
@@ -48,8 +50,8 @@ public class PasswordDimenticata extends JDialog {
 	private JLabel lblCensuraNuovaPassword;
 	private JLabel lblMostraRipetiNuovaPassword;
 	private JLabel lblCensuraRipetiNuovaPassword;
-	
-	
+	private JLabel lblMessaggioCredenziali;
+
 	Controller controllerPasswordDimenticata;
 
 	// GETTER E SETTER
@@ -132,7 +134,7 @@ public class PasswordDimenticata extends JDialog {
 	public void setLblCensuraRipetiNuovaPassword(JLabel lblcensuraRipetiNuovaPassword) {
 		this.lblCensuraRipetiNuovaPassword = lblcensuraRipetiNuovaPassword;
 	}
-	
+
 	public JTextField getTxtNuovaPassword() {
 		return txtNuovaPassword;
 	}
@@ -155,6 +157,14 @@ public class PasswordDimenticata extends JDialog {
 
 	public void setTxtEmail(JTextField txtEmail) {
 		this.txtEmail = txtEmail;
+	}
+
+	public JLabel getLblMessaggioCredenziali() {
+		return lblMessaggioCredenziali;
+	}
+
+	public void setLblMessaggioCredenziali(JLabel lblMessaggioCredenziali) {
+		this.lblMessaggioCredenziali = lblMessaggioCredenziali;
 	}
 
 	public PasswordDimenticata(Controller controller) {
@@ -190,45 +200,53 @@ public class PasswordDimenticata extends JDialog {
 
 				}
 			});
-			
-						lblX = new JLabel("");
-						lblX.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent e) {
-								controllerPasswordDimenticata.annullaPasswordDimenticata();
-								controllerPasswordDimenticata.svuotaCampiAccesso();
-							}
 
-							@Override
-							public void mouseEntered(MouseEvent e) {
-								lblX.setIcon(new ImageIcon(img.X2()));
-							}
+			lblX = new JLabel("");
+			lblX.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					controllerPasswordDimenticata.annullaPasswordDimenticata();
+					controllerPasswordDimenticata.svuotaCampiAccesso();
+				}
 
-							@Override
-							public void mouseExited(MouseEvent e) {
-								lblX.setIcon(new ImageIcon(img.X1()));
-							}
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X2()));
+				}
 
-							@Override
-							public void mousePressed(MouseEvent e) {
-								lblX.setIcon(new ImageIcon(img.X3()));
-							}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X1()));
+				}
 
-							@Override
-							public void mouseReleased(MouseEvent e) {
-								lblX.setIcon(new ImageIcon(img.X1()));
-							}
-						});
-						lblX.setHorizontalAlignment(SwingConstants.CENTER);
-						lblX.setIcon(new ImageIcon(img.X1()));
-						lblX.setBounds(448, 1, 51, 34);
-						getContentPane().add(lblX);
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X3()));
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblX.setIcon(new ImageIcon(img.X1()));
+				}
+			});
+			lblX.setHorizontalAlignment(SwingConstants.CENTER);
+			lblX.setIcon(new ImageIcon(img.X1()));
+			lblX.setBounds(448, 1, 51, 34);
+			getContentPane().add(lblX);
 			lblSpostaPasswordDimenticata.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSpostaPasswordDimenticata.setIcon(new ImageIcon(img.spostaUscita()));
 			lblSpostaPasswordDimenticata.setBounds(1, 0, 498, 37);
 			getContentPane().add(lblSpostaPasswordDimenticata);
 
 			txtEmail = new JTextField();
+			txtEmail.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent EventoInvio) {
+					if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+						controllerPasswordDimenticata.accessoPasswordDimenticata();
+					}
+				}
+			});
 			txtEmail.setBorder(null);
 			txtEmail.setForeground(controllerPasswordDimenticata.coloreScritteTemaScuro);
 			txtEmail.setFont(controllerPasswordDimenticata.fontScritte);
@@ -238,6 +256,14 @@ public class PasswordDimenticata extends JDialog {
 			getContentPane().add(txtEmail);
 
 			txtNuovaPassword = new JPasswordField();
+			txtNuovaPassword.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent EventoInvio) {
+					if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+						controllerPasswordDimenticata.accessoPasswordDimenticata();
+					}
+				}
+			});
 			txtNuovaPassword.setBorder(null);
 			txtNuovaPassword.setForeground(controllerPasswordDimenticata.coloreScritteTemaScuro);
 			txtNuovaPassword.setFont(controllerPasswordDimenticata.fontScritte);
@@ -246,6 +272,14 @@ public class PasswordDimenticata extends JDialog {
 			getContentPane().add(txtNuovaPassword);
 
 			txtRipetiNuovaPassword = new JPasswordField();
+			txtRipetiNuovaPassword.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent EventoInvio) {
+					if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+						controllerPasswordDimenticata.accessoPasswordDimenticata();
+					}
+				}
+			});
 			txtRipetiNuovaPassword.setBorder(null);
 			txtRipetiNuovaPassword.setBackground(controllerPasswordDimenticata.sfondoTemaScuro);
 			txtRipetiNuovaPassword.setFont(controllerPasswordDimenticata.fontScritte);
@@ -390,6 +424,13 @@ public class PasswordDimenticata extends JDialog {
 			getContentPane().add(lblCampi);
 
 		}
+
+		lblMessaggioCredenziali = new JLabel("");
+		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessaggioCredenziali.setForeground(controllerPasswordDimenticata.coloreScritturaAllertaTemaScuro);
+		lblMessaggioCredenziali.setFont(controllerPasswordDimenticata.fontLabel);
+		lblMessaggioCredenziali.setBounds(78, 337, 344, 14);
+		getContentPane().add(lblMessaggioCredenziali);
 
 		lblLayout = new JLabel("");
 		lblLayout.setBorder(null);

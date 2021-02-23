@@ -30,15 +30,18 @@ import javax.swing.JComboBox;
 
 public class GestioneGate extends JPanel {
 
-	String colonne[] = { "Codice Gate", "Numero Porta", "Coda D'Imbarco 1", "Coda D'Imbarco 2", "Coda D'Imbarco 3" };
+	String colonne[] = { "Codice Gate", "Numero Porta", "Coda D'Imbarco 1", "Coda D'Imbarco 2"};
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaGate = new ArrayList<>();
+	ArrayList<String> ListaCodaDiImbarco = new ArrayList<>();
 	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceGate;
 	private JTextField txtNumeroPorta;
-
+	
+	private JComboBox<String> comboBoxCodaImbarco1;
+	private JComboBox<String> comboBoxCodaImbarco2;
 
 	private JTable tabella;
 	private JTextField txtBarraRicerca;
@@ -47,6 +50,8 @@ public class GestioneGate extends JPanel {
 	private JLabel lblBarraRicerca;
 	private JLabel lblNumeroPorta;
 	private JLabel lblCodiceGate;
+	private JLabel lblCodaImbarco1;
+	private JLabel lblCodaDimbarco2;
 	
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -117,6 +122,37 @@ public class GestioneGate extends JPanel {
 		this.txtNumeroPorta = txtNumeroPorta;
 	}
 
+	public JLabel getLblCodaImbarco1() {
+		return lblCodaImbarco1;
+	}
+
+	public void setLblCodaImbarco1(JLabel lblCodaImbarco1) {
+		this.lblCodaImbarco1 = lblCodaImbarco1;
+	}
+
+	public JLabel getLblCodaDimbarco2() {
+		return lblCodaDimbarco2;
+	}
+
+	public void setLblCodaDimbarco2(JLabel lblCodaDimbarco2) {
+		this.lblCodaDimbarco2 = lblCodaDimbarco2;
+	}
+
+	public JComboBox<String> getComboBoxCodaImbarco1() {
+		return comboBoxCodaImbarco1;
+	}
+
+	public void setComboBoxCodaImbarco1(JComboBox<String> comboBoxCodaImbarco1) {
+		this.comboBoxCodaImbarco1 = comboBoxCodaImbarco1;
+	}
+
+	public JComboBox<String> getComboBoxCodaImbarco2() {
+		return comboBoxCodaImbarco2;
+	}
+
+	public void setComboBoxCodaImbarco2(JComboBox<String> comboBoxCodaImbarco2) {
+		this.comboBoxCodaImbarco2 = comboBoxCodaImbarco2;
+	}
 
 	public JTable getTabella() {
 		return tabella;
@@ -127,7 +163,7 @@ public class GestioneGate extends JPanel {
 	}
 
 	Controller controllerGestioneGate;
-	private JTextField txtCodeImbarco;
+	
 
 	public GestioneGate(Controller controller) {
 		controllerGestioneGate = controller;
@@ -305,19 +341,37 @@ public class GestioneGate extends JPanel {
 		txtCodiceGate.setBounds(178, 461, 180, 20);
 		add(txtCodiceGate);
 		
-		JLabel lblCodeimbarco = new JLabel("Code d'Imbarco");
-		lblCodeimbarco.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCodeimbarco.setForeground((Color) null);
-		lblCodeimbarco.setFont(null);
-		lblCodeimbarco.setBounds(30, 525, 114, 20);
-		add(lblCodeimbarco);
+		lblCodaImbarco1 = new JLabel("Coda d'Imbarco1");
+		lblCodaImbarco1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCodaImbarco1.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
+		lblCodaImbarco1.setFont(controllerGestioneGate.fontScritteGestioni);
+		lblCodaImbarco1.setBounds(30, 525, 114, 20);
+		add(lblCodaImbarco1);
 		
-		txtCodeImbarco = new JTextField();
-		txtCodeImbarco.setForeground((Color) null);
-		txtCodeImbarco.setFont(null);
-		txtCodeImbarco.setColumns(10);
-		txtCodeImbarco.setBounds(178, 525, 180, 20);
-		add(txtCodeImbarco);
+		lblCodaDimbarco2 = new JLabel("Coda d'Imbarco 2");
+		lblCodaDimbarco2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCodaDimbarco2.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
+		lblCodaDimbarco2.setFont(controllerGestioneGate.fontScritteGestioni);
+		lblCodaDimbarco2.setBounds(30, 560, 114, 20);
+		add(lblCodaDimbarco2);
+		
+		comboBoxCodaImbarco1 = new JComboBox();
+		comboBoxCodaImbarco1.addItem("Business");
+		comboBoxCodaImbarco1.addItem("Diversamente Abili");
+		comboBoxCodaImbarco1.addItem("Priority");
+		comboBoxCodaImbarco1.addItem("Famiglia");
+		comboBoxCodaImbarco1.addItem("Economy");
+		comboBoxCodaImbarco1.setBounds(178, 525, 180, 20);
+		add(comboBoxCodaImbarco1);
+		
+		comboBoxCodaImbarco2 = new JComboBox();
+		comboBoxCodaImbarco2.addItem("Business");
+		comboBoxCodaImbarco2.addItem("Diversamente Abili");
+		comboBoxCodaImbarco2.addItem("Priority");
+		comboBoxCodaImbarco2.addItem("Famiglia");
+		comboBoxCodaImbarco2.addItem("Economy");
+		comboBoxCodaImbarco2.setBounds(178, 560, 180, 20);
+		add(comboBoxCodaImbarco2);
 
 		caricaTabella();
 
@@ -340,4 +394,5 @@ public class GestioneGate extends JPanel {
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
+	
 }

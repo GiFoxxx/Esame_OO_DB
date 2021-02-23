@@ -30,7 +30,6 @@ public class Recensione extends JPanel {
 	int flag = 0;
 	int valutazione = 0;
 
-	JLabel lblLayout;
 	JLabel lblAnnulla;
 	JLabel lblStella1;
 	JLabel lblStella2;
@@ -88,6 +87,16 @@ public class Recensione extends JPanel {
 	public void setLblInviaRecensione(JLabel lblInviaRecensione) {
 		this.lblInviaRecensione = lblInviaRecensione;
 	}
+
+	public int getValutazione() {
+		return valutazione;
+	}
+
+	public void setValutazione(int valutazione) {
+		this.valutazione = valutazione;
+	}
+
+	
 
 	Immagini img = new Immagini();
 	Controller controllerRecensione;
@@ -525,17 +534,12 @@ public class Recensione extends JPanel {
 		lblStella30.setBounds(985, 350, 35, 35);
 		add(lblStella30);
 
-		lblLayout = new JLabel("");
-		lblLayout.setBorder(null);
-		lblLayout.setBounds(0, 0, 1090, 642);
-		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLayout.setIcon(new ImageIcon(img.sfondo()));
-		add(lblLayout);
+		
 
 	}
 
 	// METODI RIEMPIMENTO STELLE
-//
+
 //	public void votoInviato() {
 //		if (valutazione < 18) {
 //			lblStelleSelezionate.setText("Voto non sufficiente");

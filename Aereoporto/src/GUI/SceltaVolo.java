@@ -55,6 +55,38 @@ public class SceltaVolo extends JDialog {
 		this.lblX = lblX;
 	}
 
+	public JLabel getLblArrivi() {
+		return lblArrivi;
+	}
+
+	public void setLblArrivi(JLabel lblArrivi) {
+		this.lblArrivi = lblArrivi;
+	}
+
+	public JLabel getLblPartenze() {
+		return lblPartenze;
+	}
+
+	public void setLblPartenze(JLabel lblPartenze) {
+		this.lblPartenze = lblPartenze;
+	}
+
+	public JLabel getLblScelta() {
+		return lblScelta;
+	}
+
+	public void setLblScelta(JLabel lblScelta) {
+		this.lblScelta = lblScelta;
+	}
+
+	public JLabel getLblAnnulla() {
+		return lblAnnulla;
+	}
+
+	public void setLblAnnulla(JLabel lblAnnulla) {
+		this.lblAnnulla = lblAnnulla;
+	}
+
 	Immagini img = new Immagini();
 	Controller controllerSceltaVolo;
 

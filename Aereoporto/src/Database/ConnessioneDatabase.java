@@ -7,10 +7,10 @@ import javax.swing.JOptionPane;
 public class ConnessioneDatabase {
 
 	// ATTRIBUTI
-	String Nome;
-	String Password;
-	String Url;
-	String Driver;
+	private String Nome;
+	private String Password;
+	private String Url;
+	private String Driver;
 
 	// COSTRUTTORE
 	public ConnessioneDatabase() {

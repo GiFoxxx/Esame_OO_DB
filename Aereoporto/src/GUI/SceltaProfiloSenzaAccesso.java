@@ -21,13 +21,13 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 	int x;
 	int y;
 
-	JLabel lblLayout;
-	JLabel lblSpostaSceltaProfiloSenzaAccesso;
-	JLabel lblX;
-	JLabel lblAnnulla;
-	JLabel lblRegistrati;
-	JLabel lblAccedi;
-	JLabel lblContinuare;
+	private JLabel lblLayout;
+	private JLabel lblSpostaSceltaProfiloSenzaAccesso;
+	private JLabel lblX;
+	private JLabel lblAnnulla;
+	private JLabel lblRegistrati;
+	private JLabel lblAccedi;
+	private JLabel lblContinuare;
 
 	// GETTER E SETTER
 
