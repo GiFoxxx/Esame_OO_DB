@@ -613,6 +613,25 @@ public class Immagini {
 				.getScaledInstance(321, 41, Image.SCALE_SMOOTH);
 		return salva3;
 	}
+	
+	// INFORMAZIONI E TERMINI E CONDIZIONI
+		public Image tornaIndietro1() {
+			Image tornaIndietro1 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro1.png")).getImage()
+					.getScaledInstance(321, 41, Image.SCALE_SMOOTH);
+			return tornaIndietro1;
+		}
+
+		public Image tornaIndietro2() {
+			Image tornaIndietro1 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro1.png")).getImage()
+					.getScaledInstance(321, 41, Image.SCALE_SMOOTH);
+			return tornaIndietro1;
+		}
+
+		public Image tornaIndietro3() {
+			Image tornaIndietro3 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro3.png")).getImage()
+					.getScaledInstance(321, 41, Image.SCALE_SMOOTH);
+			return tornaIndietro3;
+		}
 
 	// ACCEDI
 	public Image accedi1() {

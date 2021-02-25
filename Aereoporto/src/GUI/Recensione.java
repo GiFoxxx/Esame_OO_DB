@@ -18,6 +18,8 @@ import java.awt.Cursor;
 import java.awt.Font;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class Recensione extends JPanel {
 
@@ -100,6 +102,8 @@ public class Recensione extends JPanel {
 
 	Immagini img = new Immagini();
 	Controller controllerRecensione;
+	private JTextArea textArea;
+	private JScrollPane scrollPane;
 
 	public Recensione(Controller controller) {
 		controllerRecensione = controller;
@@ -139,7 +143,7 @@ public class Recensione extends JPanel {
 		});
 		lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-		lblAnnulla.setBounds(200, 513, 321, 41);
+		lblAnnulla.setBounds(149, 590, 321, 41);
 		add(lblAnnulla);
 
 		lblInviaRecensione = new JLabel("");
@@ -171,7 +175,7 @@ public class Recensione extends JPanel {
 		});
 		lblInviaRecensione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInviaRecensione.setIcon(new ImageIcon(img.inviaRecensione1()));
-		lblInviaRecensione.setBounds(720, 513, 321, 41);
+		lblInviaRecensione.setBounds(619, 590, 321, 41);
 		add(lblInviaRecensione);
 
 		lblStella1 = new JLabel("");
@@ -533,6 +537,18 @@ public class Recensione extends JPanel {
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setBounds(985, 350, 35, 35);
 		add(lblStella30);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(44, 430, 1018, 123);
+		add(scrollPane);
+		
+		textArea = new JTextArea();
+		textArea.setLocation(37, 0);
+		scrollPane.setViewportView(textArea);
+		
+		JLabel lblNewLabel = new JLabel("Lascia un commento e  faremo il possibile per migliorare il programma!");
+		lblNewLabel.setBounds(44, 415, 338, 14);
+		add(lblNewLabel);
 
 		
 
@@ -1647,5 +1663,4 @@ public class Recensione extends JPanel {
 		flag = 0;
 		valutazione = 30;
 	}
-
 }

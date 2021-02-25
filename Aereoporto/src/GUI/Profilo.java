@@ -116,7 +116,7 @@ public class Profilo extends JPanel {
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
 		txtNome.setBackground(controllerProfilo.trasparente);
-		txtNome.setBounds(373, 180, 340, 23);
+		txtNome.setBounds(374, 180, 340, 23);
 		add(txtNome);
 
 		txtCognome = new JTextField();
@@ -126,7 +126,7 @@ public class Profilo extends JPanel {
 		txtCognome.setColumns(10);
 		txtCognome.setBorder(null);
 		txtCognome.setBackground(controllerProfilo.trasparente);
-		txtCognome.setBounds(373, 285, 340, 23);
+		txtCognome.setBounds(374, 285, 340, 23);
 		add(txtCognome);
 
 		txtEmail = new JTextField();
@@ -136,7 +136,7 @@ public class Profilo extends JPanel {
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
 		txtEmail.setBackground(controllerProfilo.trasparente);
-		txtEmail.setBounds(373, 389, 340, 23);
+		txtEmail.setBounds(374, 389, 340, 23);
 		add(txtEmail);
 
 		lblDatiAccount = new JLabel("");

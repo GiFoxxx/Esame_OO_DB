@@ -141,7 +141,7 @@ public class CambioPassword extends JPanel {
 		txtVecchiaPassword.setFont(controllerCambioPassword.fontScritte);
 		txtVecchiaPassword.setBackground(controllerCambioPassword.sfondoTemaScuro);
 		txtVecchiaPassword.setForeground(controllerCambioPassword.coloreScritteTemaScuro);
-		txtVecchiaPassword.setBounds(360, 175, 304, 23);
+		txtVecchiaPassword.setBounds(361, 175, 304, 23);
 		txtVecchiaPassword.setColumns(10);
 		add(txtVecchiaPassword);
 
@@ -150,7 +150,7 @@ public class CambioPassword extends JPanel {
 		txtNuovaPassword.setFont(controllerCambioPassword.fontScritte);
 		txtNuovaPassword.setBackground(controllerCambioPassword.sfondoTemaScuro);
 		txtNuovaPassword.setForeground(controllerCambioPassword.coloreScritteTemaScuro);
-		txtNuovaPassword.setBounds(360, 279, 304, 23);
+		txtNuovaPassword.setBounds(361, 279, 304, 23);
 		add(txtNuovaPassword);
 
 		txtRipetiNuovaPassword = new JPasswordField();
@@ -158,7 +158,7 @@ public class CambioPassword extends JPanel {
 		txtRipetiNuovaPassword.setFont(controllerCambioPassword.fontScritte);
 		txtRipetiNuovaPassword.setBackground(controllerCambioPassword.sfondoTemaScuro);
 		txtRipetiNuovaPassword.setForeground(controllerCambioPassword.coloreScritteTemaScuro);
-		txtRipetiNuovaPassword.setBounds(360, 384, 314, 23);
+		txtRipetiNuovaPassword.setBounds(361, 384, 314, 23);
 		add(txtRipetiNuovaPassword);
 
 		lblMostraNuovaPassword = new JLabel("");

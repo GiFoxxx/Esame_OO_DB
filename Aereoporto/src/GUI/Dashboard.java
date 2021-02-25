@@ -80,6 +80,8 @@ public class Dashboard extends JFrame {
 	private JPanel recensioni;
 	private JPanel cambioPassword;
 
+	private JDialog informazioni;
+	private JDialog terminiECondizioni;
 	private JDialog registrazioneEffettuataConSuccesso;
 	private JDialog sceltaProfiloSenzaAccesso;
 	private JDialog PasswordDimenticata;
@@ -512,6 +514,22 @@ public class Dashboard extends JFrame {
 		this.lblTendina = lblTendina;
 	}
 
+	public JDialog getInformazioni() {
+		return informazioni;
+	}
+
+	public void setInformazioni(JDialog informazioni) {
+		this.informazioni = informazioni;
+	}
+
+	public JDialog getTerminiECondizioni() {
+		return terminiECondizioni;
+	}
+
+	public void setTerminiECondizioni(JDialog terminiECondizioni) {
+		this.terminiECondizioni = terminiECondizioni;
+	}
+
 	Controller controllerDashboard;
 
 	public Dashboard(Controller controller) {
@@ -535,6 +553,8 @@ public class Dashboard extends JFrame {
 		recensioni = controllerDashboard.recensione();
 		noClick = controllerDashboard.noClick();
 		registrazioneEffettuataConSuccesso = controllerDashboard.registrazioneEffettuataConSuccesso();
+		terminiECondizioni = controllerDashboard.terminiECondizioni();
+		informazioni = controllerDashboard.informazioni();
 		uscita = controllerDashboard.uscita();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

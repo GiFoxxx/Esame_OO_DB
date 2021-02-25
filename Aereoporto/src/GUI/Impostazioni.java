@@ -9,23 +9,14 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 public class Impostazioni extends JPanel {
-
-	private JLabel lblTema;
 	private JLabel lblInformazioni;
 	private JLabel lblTerminiECondizioni;
 	private JLabel lblRecensione;
 
 	// GETTER E SETTER
-
-	public JLabel getLblTema() {
-		return lblTema;
-	}
-
-	public void setLblTema(JLabel lblTema) {
-		this.lblTema = lblTema;
-	}
 
 	public JLabel getLblInformazioni() {
 		return lblInformazioni;
@@ -60,30 +51,30 @@ public class Impostazioni extends JPanel {
 		setBackground(controllerImpostazioni.sfondoTemaScuro);
 		setLayout(null);
 
-		lblTema = new JLabel("Tema");
-		lblTema.addMouseListener(new MouseAdapter() {
+		lblInformazioni = new JLabel("Informazioni");
+		lblInformazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblInformazioni.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInformazioni.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (controllerImpostazioni.cambioTema()) {
-					controllerImpostazioni.temaChiaro();
-				} else {
-					controllerImpostazioni.temaScuro();
-				}
+				controllerImpostazioni.mostraInformazioni();
 			}
 		});
-		lblTema.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblTema.setForeground(Color.LIGHT_GRAY);
-		lblTema.setBounds(69, 110, 120, 22);
-		add(lblTema);
-
-		lblInformazioni = new JLabel("Informazioni");
 		lblInformazioni.setForeground(Color.LIGHT_GRAY);
-		lblInformazioni.setBounds(69, 242, 120, 22);
+		lblInformazioni.setBounds(485, 144, 120, 22);
 		add(lblInformazioni);
 
 		lblTerminiECondizioni = new JLabel("Termini e condizioni");
+		lblTerminiECondizioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblTerminiECondizioni.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTerminiECondizioni.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerImpostazioni.mostraTerminiECondizioni();
+			}
+		});
 		lblTerminiECondizioni.setForeground(Color.LIGHT_GRAY);
-		lblTerminiECondizioni.setBounds(69, 374, 120, 22);
+		lblTerminiECondizioni.setBounds(485, 310, 120, 22);
 		add(lblTerminiECondizioni);
 
 		lblRecensione = new JLabel("Lascia una recensione");
@@ -95,8 +86,7 @@ public class Impostazioni extends JPanel {
 		});
 		lblRecensione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRecensione.setForeground(Color.LIGHT_GRAY);
-		lblRecensione.setBounds(69, 506, 120, 22);
+		lblRecensione.setBounds(485, 476, 120, 22);
 		add(lblRecensione);
 	}
-
 }

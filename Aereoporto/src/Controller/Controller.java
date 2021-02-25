@@ -82,6 +82,8 @@ public class Controller {
 	private Recensione recensioni;
 	private NoClick noClick;
 
+	private Informazioni informazioni;
+	private TerminiECondizioni terminiECondizioni;
 	private RegistrazioneEffettuataConSuccesso registrazioneEffettuataConSuccesso;
 	private PasswordDimenticata passwordDimenticata;
 	private SceltaProfiloSenzaAccesso sceltaProfiloSenzaAccesso;
@@ -297,6 +299,22 @@ public class Controller {
 		this.recensioni = recensione;
 	}
 
+	public Informazioni getInformazioni() {
+		return informazioni;
+	}
+
+	public void setInformazioni(Informazioni informazioni) {
+		this.informazioni = informazioni;
+	}
+
+	public TerminiECondizioni getTerminiECondizioni() {
+		return terminiECondizioni;
+	}
+
+	public void setTerminiECondizioni(TerminiECondizioni terminiECondizioni) {
+		this.terminiECondizioni = terminiECondizioni;
+	}
+
 	public static void main(String[] args) {
 		Controller controller = new Controller();
 	}
@@ -321,6 +339,35 @@ public class Controller {
 		recensioni = new Recensione(this);
 		noClick = new NoClick(this);
 		dashboard.setVisible(true);
+
+	}
+
+	//IMPOSTAZIONI
+			
+	// TERMINI E CONDIZIONI
+	public void mostraTerminiECondizioni() {
+		getDashboard().setEnabled(false);
+		getDashboard().getTerminiECondizioni().setVisible(true);
+	}
+	
+	public void annullaTerminiECondizioni() {
+		getDashboard().getTerminiECondizioni().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true);
+		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
+	}
+	
+	//INFORMAZIONI
+	public void mostraInformazioni() {
+		getDashboard().setEnabled(false);
+		getDashboard().getInformazioni().setVisible(true);
+	}
+	
+	public void annullaInformazioni() {
+		getDashboard().getInformazioni().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true); 
+		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
 
 	// METODI DI ACCESSO
@@ -646,11 +693,14 @@ public class Controller {
 
 	public void aggiungiVoloPartenze() {
 		gt = new Gate(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText());
-		trt = new Tratta(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
-		compAerea = new CompagniaAerea(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceCompagniaAerea().getText());
-		
-		int ritardo = Integer.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().getText());
-		
+		trt = new Tratta(
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
+		compAerea = new CompagniaAerea(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+				.getTxtCodiceCompagniaAerea().getText());
+
+		int ritardo = Integer
+				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().getText());
+
 		vlprtz = new VoloPartenze(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
@@ -670,11 +720,14 @@ public class Controller {
 
 	public void eliminaVoloPartenze() {
 		gt = new Gate(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText());
-		trt = new Tratta(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
-		compAerea = new CompagniaAerea(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceCompagniaAerea().getText());
-		
-		int ritardo = Integer.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().getText());
-		
+		trt = new Tratta(
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
+		compAerea = new CompagniaAerea(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+				.getTxtCodiceCompagniaAerea().getText());
+
+		int ritardo = Integer
+				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().getText());
+
 		vlprtz = new VoloPartenze(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
@@ -694,10 +747,13 @@ public class Controller {
 
 	public void modificaVoloPartenze() {
 		gt = new Gate(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText());
-		trt = new Tratta(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
-		compAerea = new CompagniaAerea(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceCompagniaAerea().getText());
-		
-		int ritardo = Integer.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().getText());
+		trt = new Tratta(
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
+		compAerea = new CompagniaAerea(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+				.getTxtCodiceCompagniaAerea().getText());
+
+		int ritardo = Integer
+				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().getText());
 
 		vlprtz = new VoloPartenze(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
@@ -829,7 +885,7 @@ public class Controller {
 	public void eliminaGate() {
 		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
 				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText());
-		
+
 		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
 		implementazioneGateDAO().cancellaGate(gt);
 		((GestioneGate) getDashboard().getGestioneGate()).getModello().removeRow(t);
@@ -840,7 +896,7 @@ public class Controller {
 	public void modificaGate() {
 		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
 				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText());
-		
+
 		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
 
 		((GestioneGate) getDashboard().getGestioneGate()).getModello()
@@ -904,7 +960,7 @@ public class Controller {
 			pannelloLateraleSelezionato();
 			mostraPannelli(getDashboard().getProfilo());
 			profiloUtenteAccessoEffettuato();
-			
+
 			if (getDashboard().getProfilo().isVisible()) {
 				if (cambioTema()) {
 					getDashboard().getPanelProfilo().setBackground(pannelloSceltoTemaChiaro);
@@ -957,9 +1013,7 @@ public class Controller {
 			getDashboard().getPanelUscita().setBackground(escoPannelloTemaScuro);
 		}
 	}
-	
-	
-	
+
 	public void mostraUtenteLoggato() {
 		utn = new Utente(getEmailAccesso());
 		getDashboard().getLblAccount().setText(implementazioneUtenteDAO().stampaNomeAccount(utn) + " "
@@ -1137,6 +1191,16 @@ public class Controller {
 		return uscita;
 	}
 
+	public JDialog informazioni() {
+		Informazioni informazioni = new Informazioni(this);
+		return informazioni;
+	}
+
+	public JDialog terminiECondizioni() {
+		TerminiECondizioni terminiECondizioni = new TerminiECondizioni(this);
+		return terminiECondizioni;
+	}
+
 	public void mostraPannelli(JPanel pane) {
 		((Home) getDashboard().getHome()).getLblFareAccesso().setText("");
 		((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setText("");
@@ -1248,7 +1312,7 @@ public class Controller {
 			mostraPannelli(getDashboard().getGestioneUtenti());
 		}
 	}
-	
+
 	public void profiloUtenteAccessoEffettuato() {
 		utn = new Utente(getEmailAccesso());
 		((Profilo) getDashboard().getProfilo()).getTxtNome().setText(implementazioneUtenteDAO().stampaNomeAccount(utn));
@@ -1687,7 +1751,6 @@ public class Controller {
 
 		// IMPOSTAZIONI
 		getDashboard().getImpostazioni().setBackground(sfondoTemaChiaro);
-		((Impostazioni) getDashboard().getImpostazioni()).getLblTema().setForeground(coloreLabelTemaChiaro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblInformazioni().setForeground(coloreLabelTemaChiaro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblTerminiECondizioni()
 				.setForeground(coloreLabelTemaChiaro);
@@ -1941,7 +2004,6 @@ public class Controller {
 
 		// IMPOSTAZIONI
 		getDashboard().getImpostazioni().setBackground(sfondoTemaScuro);
-		((Impostazioni) getDashboard().getImpostazioni()).getLblTema().setForeground(coloreScritteTemaScuro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblInformazioni().setForeground(coloreScritteTemaScuro);
 		((Impostazioni) getDashboard().getImpostazioni()).getLblTerminiECondizioni()
 				.setForeground(coloreScritteTemaScuro);
