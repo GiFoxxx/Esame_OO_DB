@@ -217,7 +217,7 @@ public class Accesso extends JPanel {
 		lblAvanti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAvanti.setIcon(new ImageIcon(img.avanti1()));
 		lblAvanti.setBackground(controllerAccesso.trasparente);
-		lblAvanti.setBounds(386, 472, 321, 41);
+		lblAvanti.setBounds(387, 472, 319, 36);
 		add(lblAvanti);
 
 		lblMessaggioCredenziali = new JLabel("");
@@ -228,7 +228,7 @@ public class Accesso extends JPanel {
 		add(lblMessaggioCredenziali);
 
 		lblPasswordDimenticata = new JLabel("Password dimenticata?");
-		lblPasswordDimenticata.setForeground(Color.LIGHT_GRAY);
+	
 		lblPasswordDimenticata.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

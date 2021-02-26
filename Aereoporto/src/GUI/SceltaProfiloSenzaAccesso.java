@@ -133,7 +133,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 			lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-			lblAnnulla.setBounds(91, 222, 321, 41);
+			lblAnnulla.setBounds(92, 222, 319, 36);
 			getContentPane().add(lblAnnulla);
 
 			lblX = new JLabel("");
@@ -227,7 +227,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 			lblAccedi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblAccedi.setHorizontalAlignment(SwingConstants.CENTER);
 			lblAccedi.setIcon(new ImageIcon(img.accedi1()));
-			lblAccedi.setBounds(91, 118, 321, 41);
+			lblAccedi.setBounds(92, 118, 319, 36);
 			getContentPane().add(lblAccedi);
 
 			lblRegistrati = new JLabel("");
@@ -263,7 +263,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 			lblRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblRegistrati.setHorizontalAlignment(SwingConstants.CENTER);
 			lblRegistrati.setIcon(new ImageIcon(img.registrati1()));
-			lblRegistrati.setBounds(91, 170, 321, 41);
+			lblRegistrati.setBounds(92, 170, 319, 36);
 			getContentPane().add(lblRegistrati);
 
 			{

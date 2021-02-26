@@ -287,10 +287,11 @@ public class CambioPassword extends JPanel {
 				lblSalva.setIcon(new ImageIcon(img.salvaModifiche2()));
 			}
 		});
-		lblSalva.setBounds(383, 494, 321, 41);
+		lblSalva.setBounds(373, 494, 319, 36);
 		add(lblSalva);
 		
 		JLabel lblAnnulla = new JLabel("");
+		lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro1()));
 		lblAnnulla.addMouseListener(new MouseAdapter() {
@@ -305,12 +306,12 @@ public class CambioPassword extends JPanel {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro2()));
+				lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro1()));
 
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro2()));
+				lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro3()));
 
 			}
 			@Override
@@ -319,7 +320,7 @@ public class CambioPassword extends JPanel {
 
 			}
 		});
-		lblAnnulla.setBounds(100, 51, 41, 41);
+		lblAnnulla.setBounds(277, 79, 41, 41);
 		add(lblAnnulla);
 
 	}

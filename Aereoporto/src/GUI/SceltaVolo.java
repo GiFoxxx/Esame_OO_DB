@@ -130,7 +130,7 @@ public class SceltaVolo extends JDialog {
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-			lblAnnulla.setBounds(91, 216, 321, 41);
+			lblAnnulla.setBounds(92, 216, 319, 36);
 			getContentPane().add(lblAnnulla);
 
 			lblPartenze = new JLabel("");
@@ -164,7 +164,7 @@ public class SceltaVolo extends JDialog {
 			lblPartenze.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblPartenze.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPartenze.setIcon(new ImageIcon(img.partenze1()));
-			lblPartenze.setBounds(91, 111, 321, 41);
+			lblPartenze.setBounds(92, 111, 319, 36);
 			getContentPane().add(lblPartenze);
 
 			lblArrivi = new JLabel("");
@@ -198,7 +198,7 @@ public class SceltaVolo extends JDialog {
 			lblArrivi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblArrivi.setHorizontalAlignment(SwingConstants.CENTER);
 			lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
-			lblArrivi.setBounds(91, 163, 321, 41);
+			lblArrivi.setBounds(92, 163, 319, 36);
 			getContentPane().add(lblArrivi);
 
 			lblX = new JLabel("");

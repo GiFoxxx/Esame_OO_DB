@@ -315,7 +315,7 @@ public class Registrazione extends JPanel {
 		lblAvanti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAvanti.setIcon(new ImageIcon(img.avanti1()));
 		lblAvanti.setBackground(controllerRegistrazione.trasparente);
-		lblAvanti.setBounds(385, 568, 321, 41);
+		lblAvanti.setBounds(386, 568, 319, 36);
 		add(lblAvanti);
 
 		lblInserimentoCredenziali = new JLabel("");

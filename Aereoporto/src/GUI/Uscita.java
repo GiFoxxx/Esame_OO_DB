@@ -158,39 +158,40 @@ public class Uscita extends JDialog {
 			getContentPane().add(lblSpostaUscita);
 
 			lblAnnulla = new JLabel("");
+			lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerUscita.annullaUscita();
-					
 				}
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annulla2()));
+					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2()));
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
+					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1()));
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annulla3()));
+					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita3()));
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
+					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1()));
 				}
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
-			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-			lblAnnulla.setBounds(281, 213, 135, 41);
+			lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1()));
+			lblAnnulla.setBounds(290, 203, 130, 36);
 			getContentPane().add(lblAnnulla);
 
 			lblSi = new JLabel("");
+			lblSi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblSi.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -200,30 +201,26 @@ public class Uscita extends JDialog {
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					lblSi.setIcon(new ImageIcon(img.si2()));
-
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
 					lblSi.setIcon(new ImageIcon(img.si1()));
-
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblSi.setIcon(new ImageIcon(img.si3()));
-
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblSi.setIcon(new ImageIcon(img.si1()));
-
 				}
 			});
 			lblSi.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSi.setIcon(new ImageIcon(img.si1()));
-			lblSi.setBounds(64, 213, 135, 41);
+			lblSi.setBounds(80, 203, 130, 36);
 			getContentPane().add(lblSi);
 
 			{

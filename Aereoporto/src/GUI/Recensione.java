@@ -143,7 +143,7 @@ public class Recensione extends JPanel {
 		});
 		lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-		lblAnnulla.setBounds(149, 590, 321, 41);
+		lblAnnulla.setBounds(150, 590, 319, 36);
 		add(lblAnnulla);
 
 		lblInviaRecensione = new JLabel("");
@@ -175,7 +175,7 @@ public class Recensione extends JPanel {
 		});
 		lblInviaRecensione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInviaRecensione.setIcon(new ImageIcon(img.inviaRecensione1()));
-		lblInviaRecensione.setBounds(619, 590, 321, 41);
+		lblInviaRecensione.setBounds(619, 590, 319, 36);
 		add(lblInviaRecensione);
 
 		lblStella1 = new JLabel("");
@@ -546,9 +546,12 @@ public class Recensione extends JPanel {
 		textArea.setLocation(37, 0);
 		scrollPane.setViewportView(textArea);
 		
-		JLabel lblNewLabel = new JLabel("Lascia un commento e  faremo il possibile per migliorare il programma!");
-		lblNewLabel.setBounds(44, 415, 338, 14);
-		add(lblNewLabel);
+		JLabel lblCommento = new JLabel("Lascia un commento e faremo il possibile per migliorare il programma!");
+		lblCommento.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCommento.setFont(controllerRecensione.fontLabel);
+		lblCommento.setForeground(controllerRecensione.coloreScritteTemaScuro);
+		lblCommento.setBounds(44, 410, 525, 19);
+		add(lblCommento);
 
 		
 

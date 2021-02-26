@@ -101,12 +101,31 @@ public class Profilo extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				controllerProfilo.logout();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblLogout.setForeground(controllerProfilo.coloreLabelEntrataTemaScuro);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblLogout.setForeground(controllerProfilo.coloreLabelTemaScuro);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblLogout.setForeground(controllerProfilo.coloreLabelPressedTemaScuro);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblLogout.setForeground(controllerProfilo.coloreLabelTemaScuro);
+			}
 		});
 		lblLogout.setHorizontalAlignment(SwingConstants.LEFT);
 		lblLogout.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblLogout.setForeground(controllerProfilo.coloreScritteTemaScuro);
+		lblLogout.setForeground(controllerProfilo.coloreLabelTemaScuro);
 		lblLogout.setFont(controllerProfilo.fontLabel);
-		lblLogout.setBounds(373, 426, 100, 22);
+		lblLogout.setBounds(375, 426, 100, 22);
 		add(lblLogout);
 
 		txtNome = new JTextField();
@@ -116,7 +135,7 @@ public class Profilo extends JPanel {
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
 		txtNome.setBackground(controllerProfilo.trasparente);
-		txtNome.setBounds(374, 180, 340, 23);
+		txtNome.setBounds(373, 180, 340, 23);
 		add(txtNome);
 
 		txtCognome = new JTextField();
@@ -126,7 +145,7 @@ public class Profilo extends JPanel {
 		txtCognome.setColumns(10);
 		txtCognome.setBorder(null);
 		txtCognome.setBackground(controllerProfilo.trasparente);
-		txtCognome.setBounds(374, 285, 340, 23);
+		txtCognome.setBounds(373, 285, 340, 23);
 		add(txtCognome);
 
 		txtEmail = new JTextField();
@@ -136,7 +155,7 @@ public class Profilo extends JPanel {
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
 		txtEmail.setBackground(controllerProfilo.trasparente);
-		txtEmail.setBounds(374, 389, 340, 23);
+		txtEmail.setBounds(373, 389, 340, 23);
 		add(txtEmail);
 
 		lblDatiAccount = new JLabel("");
@@ -189,12 +208,31 @@ public class Profilo extends JPanel {
 					entraInGestioneUtenti();
 				}
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelEntrataTemaScuro);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelTemaScuro);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelPressedTemaScuro);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelTemaScuro);
+			}
 		});
 		lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelTemaScuro);
 		lblGestioneUtenti.setFont(controllerProfilo.fontLabel);
 		lblGestioneUtenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblGestioneUtenti.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblGestioneUtenti.setBounds(958, 40, 100, 14);
+		lblGestioneUtenti.setBounds(930, 38, 100, 14);
 		add(lblGestioneUtenti);
 
 	}
@@ -205,5 +243,4 @@ public class Profilo extends JPanel {
 			controllerProfilo.mostraPannelli(controllerProfilo.getDashboard().getGestioneUtenti());
 		}
 	}
-
 }

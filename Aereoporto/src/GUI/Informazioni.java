@@ -41,7 +41,7 @@ public class Informazioni extends JDialog {
 		
 		JTextArea txtInformazioni = new JTextArea();
 		txtInformazioni.setEditable(false);
-		txtInformazioni.setText("Sviluppatori: \r\nBuonanno Manuel\r\nDe Marco Luigi\r\n\r\nSoftware utilizzati:\r\nAdobe XD\r\nPhotoshop\r\nPichon\r\nGitHub\r\npgAdmin\r\nWord\r\n\r\n");
+		txtInformazioni.setText("Sviluppatori: \r\nBuonanno Manuel\r\nDe Marco Luigi\r\n\r\nSoftware utilizzati:\r\nAdobe XD\r\nPichon\r\nGitHub\r\npgAdmin\r\n\r\n");
 		txtInformazioni.setToolTipText("");
 		txtInformazioni.setBounds(10, 11, 330, 503);
 		contentPanel.add(txtInformazioni);
@@ -72,7 +72,7 @@ public class Informazioni extends JDialog {
 		});
 		lblTornaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro1()));
-		lblTornaIndietro.setBounds(15, 566, 321, 41);
+		lblTornaIndietro.setBounds(16, 566, 319, 36);
 		contentPanel.add(lblTornaIndietro);
 	
 		

@@ -219,7 +219,7 @@ public class Home extends JPanel {
 		lblFareAccesso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFareAccesso.setFont(controllerHome.fontScritte);
 		lblFareAccesso.setForeground(controllerHome.coloreScritturaAllertaTemaScuro);
-		lblFareAccesso.setBounds(112, 550, 867, 28);
+		lblFareAccesso.setBounds(112, 564, 867, 28);
 		add(lblFareAccesso);
 	}
 

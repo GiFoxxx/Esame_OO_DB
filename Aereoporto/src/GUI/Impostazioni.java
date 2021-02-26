@@ -60,8 +60,9 @@ public class Impostazioni extends JPanel {
 				controllerImpostazioni.mostraInformazioni();
 			}
 		});
-		lblInformazioni.setForeground(Color.LIGHT_GRAY);
-		lblInformazioni.setBounds(485, 144, 120, 22);
+		lblInformazioni.setFont(controllerImpostazioni.fontLabel);
+		lblInformazioni.setForeground(controllerImpostazioni.coloreScritteTemaScuro);
+		lblInformazioni.setBounds(485, 251, 120, 22);
 		add(lblInformazioni);
 
 		lblTerminiECondizioni = new JLabel("Termini e condizioni");
@@ -73,7 +74,8 @@ public class Impostazioni extends JPanel {
 				controllerImpostazioni.mostraTerminiECondizioni();
 			}
 		});
-		lblTerminiECondizioni.setForeground(Color.LIGHT_GRAY);
+		lblTerminiECondizioni.setFont(controllerImpostazioni.fontLabel);
+		lblTerminiECondizioni.setForeground(controllerImpostazioni.coloreScritteTemaScuro);
 		lblTerminiECondizioni.setBounds(485, 310, 120, 22);
 		add(lblTerminiECondizioni);
 
@@ -85,8 +87,9 @@ public class Impostazioni extends JPanel {
 			}
 		});
 		lblRecensione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblRecensione.setForeground(Color.LIGHT_GRAY);
-		lblRecensione.setBounds(485, 476, 120, 22);
+		lblRecensione.setFont(controllerImpostazioni.fontLabel);
+		lblRecensione.setForeground(controllerImpostazioni.coloreScritteTemaScuro);
+		lblRecensione.setBounds(485, 381, 180, 22);
 		add(lblRecensione);
 	}
 }
