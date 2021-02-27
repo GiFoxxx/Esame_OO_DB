@@ -614,6 +614,44 @@ public class Immagini {
 		return salva3;
 	}
 	
+	//GATE
+	public Image gateScelta1() {
+		Image gateScelta1 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/gateScelta1.png")).getImage()
+				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return gateScelta1;
+	}
+
+	public Image gateScelta2() {
+		Image gateScelta2 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/gateScelta2.png")).getImage()
+				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return gateScelta2;
+	}
+
+	public Image gateScelta3() {
+		Image gateScelta3 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/gateScelta3.png")).getImage()
+				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return gateScelta3;
+	}
+	
+	//CODE DI IMBARCO
+	public Image codeDiImbarco1() {
+		Image codeDiImbarco1 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/codeDiImbarco1.png")).getImage()
+				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return codeDiImbarco1;
+	}
+
+	public Image codeDiImbarco2() {
+		Image codeDiImbarco2 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/codeDiImbarco2.png")).getImage()
+				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return codeDiImbarco2;
+	}
+
+	public Image codeDiImbarco3() {
+		Image codeDiImbarco3 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/codeDiImbarco3.png")).getImage()
+				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return codeDiImbarco3;
+	}
+	
 	// INFORMAZIONI E TERMINI E CONDIZIONI
 		public Image tornaIndietro1() {
 			Image tornaIndietro1 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro1.png")).getImage()

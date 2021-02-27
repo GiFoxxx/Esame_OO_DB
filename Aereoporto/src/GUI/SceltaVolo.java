@@ -174,7 +174,7 @@ public class SceltaVolo extends JDialog {
 					controllerSceltaVolo.vaiAVoliArriviDaSceltaVolo();
 					controllerSceltaVolo.setPannelloPrecedente(12);
 				}
-
+				
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					lblArrivi.setIcon(new ImageIcon(img.arrivi2()));
@@ -259,7 +259,7 @@ public class SceltaVolo extends JDialog {
 			getContentPane().add(lblSpostaSceltaVolo);
 
 			{
-				lblScelta = new JLabel("Scegli che voli vuoi visualizzare e gestire");
+				lblScelta = new JLabel("Cosa vuoi gestire?");
 				lblScelta.setHorizontalAlignment(SwingConstants.CENTER);
 				lblScelta.setFont(controllerSceltaVolo.fontScritteJDialog);
 				lblScelta.setForeground(controllerSceltaVolo.coloreScritteTemaScuro);

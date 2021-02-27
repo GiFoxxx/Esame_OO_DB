@@ -29,7 +29,7 @@ public class Informazioni extends JDialog {
 	public Informazioni(Controller controller) {
 		controllerInformazioni = controller;
 		
-		setBounds(100, 100, 350, 650);
+		setBounds(100, 100, 350, 642);
 		setModal(true);
 		setFocusable(true);
 		setUndecorated(true);
