@@ -76,6 +76,7 @@ public class Dashboard extends JFrame {
 	private JPanel gestioneVoliPartenze;
 	private JPanel gestioneVoliArrivi;
 	private JPanel gestioneGate;
+	private JPanel gateCodeImbarco;
 	private JPanel gestioneTratte;
 	private JPanel recensioni;
 	private JPanel cambioPassword;
@@ -86,6 +87,7 @@ public class Dashboard extends JFrame {
 	private JDialog sceltaProfiloSenzaAccesso;
 	private JDialog PasswordDimenticata;
 	private JDialog sceltaVolo;
+	private JDialog sceltaGate;
 	private JDialog uscita;
 
 	// GETTER E SETTER
@@ -330,6 +332,14 @@ public class Dashboard extends JFrame {
 		this.gestioneGate = gestioneGate;
 	}
 
+	public JPanel getGateCodeImbarco() {
+		return gateCodeImbarco;
+	}
+
+	public void setGateCodeImbarco(JPanel gateCodeImbarco) {
+		this.gateCodeImbarco = gateCodeImbarco;
+	}
+
 	public JPanel getGestioneVoliArrivi() {
 		return gestioneVoliArrivi;
 	}
@@ -368,6 +378,14 @@ public class Dashboard extends JFrame {
 
 	public void setRegistrazioneEffettuataConSuccesso(JDialog registrazioneEffettuataConSuccesso) {
 		this.registrazioneEffettuataConSuccesso = registrazioneEffettuataConSuccesso;
+	}
+
+	public JDialog getSceltaGate() {
+		return sceltaGate;
+	}
+
+	public void setSceltaGate(JDialog sceltaGate) {
+		this.sceltaGate = sceltaGate;
 	}
 
 	public JDialog getUscita() {
@@ -544,11 +562,13 @@ public class Dashboard extends JFrame {
 		gestioneUtenti = controllerDashboard.gestioneUtenti();
 		gestioneCompagnieAeree = controllerDashboard.gestioneCompagnieAeree();
 		gestioneGate = controllerDashboard.gestioneGate();
+		gateCodeImbarco = controllerDashboard.gateCodeImbarco();
 		gestioneTratte = controllerDashboard.gestioneTratte();
 		gestioneVoliPartenze = controllerDashboard.gestioneVoliPartenze();
 		gestioneVoliArrivi = controllerDashboard.gestioneVoliArrivi();
 		sceltaProfiloSenzaAccesso = controllerDashboard.sceltaProfiloSenzaAccesso();
 		PasswordDimenticata = controllerDashboard.passwordDimenticata();
+		sceltaGate = controllerDashboard.sceltaGate();
 		sceltaVolo = controllerDashboard.sceltaVolo();
 		recensioni = controllerDashboard.recensione();
 		noClick = controllerDashboard.noClick();
@@ -1517,6 +1537,7 @@ public class Dashboard extends JFrame {
 		pannelloDestra.add(impostazioni);
 		pannelloDestra.add(gestioneUtenti);
 		pannelloDestra.add(gestioneGate);
+		pannelloDestra.add(gateCodeImbarco);
 		pannelloDestra.add(gestioneCompagnieAeree);
 		pannelloDestra.add(gestioneTratte);
 		pannelloDestra.add(gestioneVoliPartenze);
@@ -1549,6 +1570,7 @@ public class Dashboard extends JFrame {
 		gestioneUtenti.setVisible(false);
 		gestioneCompagnieAeree.setVisible(false);
 		gestioneGate.setVisible(false);
+		gateCodeImbarco.setVisible(false);
 		gestioneTratte.setVisible(false);
 		gestioneVoliPartenze.setVisible(false);
 		gestioneVoliArrivi.setVisible(false);

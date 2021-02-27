@@ -4,10 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
 import Classi.CodaDiImbarco;
+import Classi.Gate;
 import ClassiDAO.CodaDiImbarcoDAO;
 import Database.ConnessioneDatabase;
 
@@ -23,13 +25,13 @@ public class CodaDiImbarcoImplementazionePostgresDAO implements CodaDiImbarcoDAO
 
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT tipologiaClasse FROM codaDiImbarco ";
+		String sql = "SELECT nomeCoda FROM codaDiImbarco";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String nome = rs.getString("tipologiaClasse");
+				String nome = rs.getString("nomeCoda");
 			}
 			db.ConnessioneDB().close();
 
@@ -40,4 +42,31 @@ public class CodaDiImbarcoImplementazionePostgresDAO implements CodaDiImbarcoDAO
 		}
 	}
 
+	
+	@Override
+	public HashMap<String, String> stampaCodaDiImbarcoInComboBox() {
+
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		PreparedStatement pst;
+		ResultSet rs;
+		String sql = "SELECT codicecodadiimbarco, nomeCoda FROM codadiimbarco ORDER BY nomeCoda";
+
+		try {
+			pst = db.ConnessioneDB().prepareStatement(sql);
+			rs = pst.executeQuery();
+			CodaDiImbarco codaDiImbarco;
+			
+			while (rs.next()) {
+				codaDiImbarco = new CodaDiImbarco(rs.getString(2), rs.getString(1));
+				map.put(codaDiImbarco.getCodiceCodaDiImbarco(), codaDiImbarco.getNomeCoda());
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		}
+		return map;
+	}
+	
+	
 }

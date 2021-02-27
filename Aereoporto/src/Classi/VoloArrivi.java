@@ -1,5 +1,6 @@
 package Classi;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,8 +13,7 @@ public class VoloArrivi {
 	private String codiceVoloArrivi;
 	private String cittaPartenza;
 	private Date dataArrivo;
-	private String orarioArrivo;
-	private String minutoArrivo;
+	private Time orarioArrivo;
 
 	// GETTER E SETTER
 	public String getCodiceVoloArrivi() {
@@ -40,20 +40,12 @@ public class VoloArrivi {
 		this.dataArrivo = dataPartenza;
 	}
 
-	public String getOrarioArrivo() {
+	public Time getOrarioArrivo() {
 		return orarioArrivo;
 	}
 
-	public void setOrarioArrivo(String orarioPartenza) {
+	public void setOrarioArrivo(Time orarioPartenza) {
 		this.orarioArrivo = orarioPartenza;
-	}
-
-	public String getMinutoArrivo() {
-		return minutoArrivo;
-	}
-
-	public void setMinutoArrivo(String minutoArrivo) {
-		this.minutoArrivo = minutoArrivo;
 	}
 
 	// COSTRUTTORE
@@ -61,13 +53,17 @@ public class VoloArrivi {
 		super();
 	}
 
-	public VoloArrivi(String codiceVoloArrivi, String cittaPartenza, Date dataArrivo, String orarioArrivo, String minutoArrivo) {
+	public VoloArrivi(String codiceVoloArrivi, String cittaPartenza, Date dataArrivo, Time orarioArrivo) {
 		super();
 		this.codiceVoloArrivi = codiceVoloArrivi;
 		this.cittaPartenza = cittaPartenza;
 		this.dataArrivo = dataArrivo;
 		this.orarioArrivo = orarioArrivo;
-		this.minutoArrivo = minutoArrivo;
+	}
+
+	public VoloArrivi(String codiceVoloArrivi) {
+		super();
+		this.codiceVoloArrivi = codiceVoloArrivi;
 	}
 
 	@Override

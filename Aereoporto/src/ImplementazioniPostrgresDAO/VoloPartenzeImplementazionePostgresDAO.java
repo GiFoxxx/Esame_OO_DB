@@ -29,14 +29,16 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.datapartenza, vp.orapartenza, vp.minutopartenza, vp.oraarrivo, vp.minutoarrivo, vp.numeroprenotazioni, vp.ritardo FROM volopartenza AS vp, tratta AS tr, compagniaAerea AS ca, gate AS gt WHERE (xcodiceTratta = codiceTratta) AND (xcodicegate = codiceGate) ORDER BY datapartenza";
+		String sql = "SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.datapartenza, vp.orariopartenza, (orariopartenza - gt.tempodiimbarcostimato - '00:20:00') AS inizioimbarco, (orariopartenza - '00:20:00') AS fineimbarco, vp.numeroprenotazioni, vp.ritardo "
+				+ "FROM volopartenza AS vp, tratta AS tr, compagniaAerea AS ca, gate AS gt "
+				+ "WHERE (xcodiceTratta = codiceTratta) AND (xcodicegate = codiceGate) AND (xcodiceCompagniaAerea = codiceCompagniaAerea) ORDER BY datapartenza";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Object[] Lista = new Object[11];
-				for (int i = 0; i <= 10; i++) {
+				Object[] Lista = new Object[10];
+				for (int i = 0; i <= 9; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}
 				ListaVoliPartenze.add(Lista);
@@ -84,23 +86,20 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 		vlprtz = (VoloPartenze) voloPartenze;
 
 		PreparedStatement pst;
-		String sql = "UPDATE voloPartenza SET cittaarrivo = ?, datapartenza = ?, orapartenza = ?, minutoPartenza = ?, numeroprenotazioni = ?, ritardo = ?, minutoarrivo = ?, oraarrivo =? WHERE codiceVoloPartenza=?";
+		String sql = "UPDATE voloPartenza SET dataPartenza = ?, orarioPartenza = ?, numeroPrenotazioni = ?, ritardo = ?, xcodiceGate = ?, xcodiceTratta = ? WHERE codiceVoloPartenza=?";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
-			String dataPartenza = sdf.format(vlprtz.getDataPartenza());
-			pst.setString(1, dataPartenza);
-			pst.setString(2, vlprtz.getOraPartenza());
-			pst.setString(3, vlprtz.getMinutoPartenza());
-			pst.setString(4, vlprtz.getNumeroPrenotazioni());
-			pst.setLong(5, vlprtz.getRitardo());
-			pst.setString(6, vlprtz.getMinutoArrivo());
-			pst.setString(7, vlprtz.getOraArrivo());
-			pst.setString(8, vlprtz.getGt().getCodiceGate());
-			pst.setString(9, vlprtz.getTrt().getCodiceTratta());
-			pst.setString(10, vlprtz.getCompagniaAerea().getCodiceCompagniaAerea());
-			pst.setString(11, vlprtz.getCodiceVoloPartenze());
+			long tempoDataPartenza = vlprtz.getDataPartenza().getTime();
+			java.sql.Date dataPartenza = new java.sql.Date(tempoDataPartenza);
+			pst.setDate(1, dataPartenza);
+			pst.setTime(2, vlprtz.getOrarioPartenza());
+			pst.setString(3, vlprtz.getNumeroPrenotazioni());
+			pst.setLong(4, vlprtz.getRitardo());
+			pst.setString(5, vlprtz.getGt().getCodiceGate());
+			pst.setString(6, vlprtz.getTrt().getCodiceTratta());
+			pst.setString(7, vlprtz.getCodiceVoloPartenze());
 
 			int res = pst.executeUpdate();
 
@@ -123,26 +122,22 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 		vlprtz = (VoloPartenze) voloPartenze;
 
 		PreparedStatement pst;
-		String sql = "INSERT INTO voloPartenza (codiceVoloPartenza, dataPartenza, oraPartenza, minutoPartenza, minutoarrivo, oraarrivo, numeroPrenotazioni, ritardo, xcodiceGate, xcodiceTratta, xcodiceCompagniaAerea) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO voloPartenza (codiceVoloPartenza, dataPartenza, orarioPartenza, numeroPrenotazioni, ritardo, xcodiceGate, xcodiceTratta) VALUES (?,?,?,?,?,?,?)";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, vlprtz.getCodiceVoloPartenze());
-			String dataPartenza = sdf.format(vlprtz.getDataPartenza());
-			pst.setString(2, dataPartenza);
-			pst.setString(3, vlprtz.getOraPartenza());
-			pst.setString(4, vlprtz.getMinutoPartenza());
-			pst.setString(5, vlprtz.getMinutoArrivo());
-			pst.setString(6, vlprtz.getOraArrivo());
-			pst.setString(7, vlprtz.getNumeroPrenotazioni());
-			pst.setLong(8, vlprtz.getRitardo());
-			pst.setString(9, vlprtz.getGt().getCodiceGate());
-			pst.setString(10, vlprtz.getTrt().getCodiceTratta());
-			pst.setString(11, vlprtz.getCompagniaAerea().getCodiceCompagniaAerea());
+			long tempoDataPartenza = vlprtz.getDataPartenza().getTime();
+			java.sql.Date dataPartenza = new java.sql.Date(tempoDataPartenza);
+			pst.setDate(2, dataPartenza);
+			pst.setTime(3, vlprtz.getOrarioPartenza());
+			pst.setString(4, vlprtz.getNumeroPrenotazioni());
+			pst.setLong(5, vlprtz.getRitardo());
+			pst.setString(6, vlprtz.getGt().getCodiceGate());
+			pst.setString(7, vlprtz.getTrt().getCodiceTratta());
 			
-
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
@@ -158,5 +153,4 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 			return false;
 		}
 	}
-
 }

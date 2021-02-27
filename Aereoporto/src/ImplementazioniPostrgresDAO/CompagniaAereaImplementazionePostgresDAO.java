@@ -3,11 +3,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
 
 import Classi.CompagniaAerea;
+import Classi.Gate;
 import ClassiDAO.CompagniaAereaDAO;
 import Database.ConnessioneDatabase;
 
@@ -128,6 +130,31 @@ public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaD
 			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
 			return false;
 		}
+	}
+	
+	@Override
+	public HashMap<String, String> stampaNomeCompagniaAereaInComboBox() {
+
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		PreparedStatement pst;
+		ResultSet rs;
+		String sql = "SELECT * FROM CompagniaAerea ORDER BY codiceCompagniaAerea";
+
+		try {
+			pst = db.ConnessioneDB().prepareStatement(sql);
+			rs = pst.executeQuery();
+			CompagniaAerea compAerea;
+			
+			while (rs.next()) {
+				compAerea = new CompagniaAerea(rs.getString(2), rs.getString(1));
+				map.put(compAerea.getCodiceCompagniaAerea(), compAerea.getNome());
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		}
+		return map;
 	}
 
 }

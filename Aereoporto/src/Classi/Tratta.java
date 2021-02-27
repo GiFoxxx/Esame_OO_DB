@@ -6,12 +6,14 @@ import java.util.Date;
 
 public class Tratta {
 
-	VoloPartenze[] VoliPartenza = new VoloPartenze[2];
+	
+	CompagniaAerea compagniaAerea;
 
 	// ATTRIBUTI
 	private String codiceTratta;
 	private String cittaPartenza;
 	private String cittaArrivo;
+	
 
 	// GETTER E SETTER
 	public String getCodiceTratta() {
@@ -37,10 +39,20 @@ public class Tratta {
 	public void setCittaArrivo(String cittaArrivo) {
 		this.cittaArrivo = cittaArrivo;
 	}
+	
+	public CompagniaAerea getCompagniaAerea() {
+		return compagniaAerea;
+	}
+
+	public void setCompagniaAerea(CompagniaAerea compagniaAerea) {
+		this.compagniaAerea = compagniaAerea;
+	}
+	
 
 	// COSTRUTTORI
-	public Tratta(String codiceTratta, String cittaPartenza, String cittaArrivo) {
+	public Tratta(CompagniaAerea compagniaAerea, String codiceTratta, String cittaPartenza, String cittaArrivo) {
 		super();
+		this.compagniaAerea = compagniaAerea;
 		this.codiceTratta = codiceTratta;
 		this.cittaPartenza = cittaPartenza;
 		this.cittaArrivo = cittaArrivo;
@@ -51,6 +63,12 @@ public class Tratta {
 		this.codiceTratta = codiceTratta;
 	}
 	
+	public Tratta(String codiceTratta, String cittaArrivo) {
+		super();
+		this.codiceTratta = codiceTratta;
+		this.cittaArrivo = cittaArrivo;
+	}
+
 	public Tratta() {
 		super();
 	}

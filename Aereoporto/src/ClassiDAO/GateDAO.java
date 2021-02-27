@@ -6,7 +6,7 @@ import java.util.HashMap;
 public interface GateDAO {
 	
 
-	public ArrayList<Object[]> stampaGate();
+	public ArrayList<Object[]> stampaGateCodeImbarco();
 
 	public boolean aggiungiGate(Object gate);
 
@@ -14,7 +14,11 @@ public interface GateDAO {
 
 	public boolean modificaGate(Object gate);
 
-	HashMap<String, String> stampaCodiceGateInComboBox();
+	HashMap<String, String> stampaNumeroPortaInComboBox();
+
+	ArrayList<Object[]> stampaGate();
+
+	public boolean aggiungiGateInCodaDiImbarcoGate(Object gate, Object codaImbarco);
 
 
 }

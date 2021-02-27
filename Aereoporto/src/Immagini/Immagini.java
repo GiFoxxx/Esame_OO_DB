@@ -595,6 +595,80 @@ public class Immagini {
 
 	/*-----------------------------------------------------------BOTTONI-----------------------------------------------------------*/
 
+	//AGGIUNGI
+		public Image aggiungi1() {
+			Image aggiungi1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/aggiungi1.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return aggiungi1;
+		}
+
+		public Image aggiungi2() {
+			Image aggiungi2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/aggiungi2.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return aggiungi2;
+		}
+
+		public Image aggiungi3() {
+			Image aggiungi3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/aggiungi3.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return aggiungi3;
+		}
+		
+		//ELIMINA
+		public Image elimina1() {
+			Image elimina1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/elimina1.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return elimina1;
+		}
+
+		public Image elimina2() {
+			Image elimina2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/elimina2.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return elimina2;
+		}
+
+		public Image elimina3() {
+			Image elimina3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/elimina3.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return elimina3;
+		}
+		//SVUOTA
+		public Image svuota1() {
+			Image svuota1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/svuota1.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return svuota1;
+		}
+
+		public Image svuota2() {
+			Image svuota2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/svuota2.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return svuota2;
+		}
+
+		public Image svuota3() {
+			Image svuota3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/svuota3.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return svuota3;
+		}
+		//MODIFICA
+		public Image modifica1() {
+			Image modifica1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/modifica1.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return modifica1;
+		}
+
+		public Image modifica2() {
+			Image modifica2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/modifica2.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return modifica2;
+		}
+
+		public Image modifica3() {
+			Image modifica3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/modifica3.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return modifica3;
+		}
+	
 	// SALVA
 	public Image salva1() {
 		Image salva1 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiBottoni/salva1.png")).getImage()

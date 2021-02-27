@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -11,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -28,28 +31,34 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 public class GestioneTratte extends JPanel {
-	
-	String colonne[] = {"Codice Tratta", "Citta Partenza", "Citta Arrivo"};
+
+	String colonne[] = { "Codice Tratta", "Citta Partenza", "Citta Arrivo", "Nome Compagnia Aerea" };
 	final Object[] row = new Object[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaTratte = new ArrayList<>();
 	private Immagini img = new Immagini();
-	
+
 	private JTextField txtCodiceTratta;
 	private JTextField txtCittaPartenza;
 	private JTextField txtCittaArrivo;
+	private JTextField txtCodiceCompagniaAerea;
+	
 	private JTable tabella;
 	private JTextField txtBarraRicerca;
-	
+
 	private JLabel lblimgfrecciaIndietro;
+	private JLabel lblCompagniaAerea;
 	private JLabel lblBarraRicerca;
 	private JLabel lblCodiceTratta;
 	private JLabel lblCittaPartenza;
 	private JLabel lblCittaArrivo;
 	
-	//GETTER E SETTER
+	private JComboBox<String> comboBoxNomeCompagniaAerea;
+	
+	// GETTER E SETTER
 	public DefaultTableModel getModello() {
 		return modello;
 	}
@@ -69,7 +78,7 @@ public class GestioneTratte extends JPanel {
 	public Object[] getRow() {
 		return row;
 	}
-	
+
 	public JTextField getTxtBarraRicerca() {
 		return txtBarraRicerca;
 	}
@@ -142,16 +151,31 @@ public class GestioneTratte extends JPanel {
 		this.txtCittaArrivo = txtCittaArrivo;
 	}
 
+	public JTextField getTxtCodiceCompagniaAerea() {
+		return txtCodiceCompagniaAerea;
+	}
+
+	public void setTxtCodiceCompagniaAerea(JTextField txtCodiceCompagniaAerea) {
+		this.txtCodiceCompagniaAerea = txtCodiceCompagniaAerea;
+	}
+
+	public JLabel getLblCompagniaAerea() {
+		return lblCompagniaAerea;
+	}
+
+	public void setLblCompagniaAerea(JLabel lblCompagniaAerea) {
+		this.lblCompagniaAerea = lblCompagniaAerea;
+	}
+
 	Controller controllerGestioneTratte;
-	
 
 	public GestioneTratte(Controller controller) {
 		controllerGestioneTratte = controller;
-		
+
 		setBounds(0, 0, 1090, 642);
 		setBackground(controllerGestioneTratte.sfondoTemaScuro);
 		setLayout(null);
-		
+
 		lblimgfrecciaIndietro = new JLabel("");
 		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
@@ -160,18 +184,22 @@ public class GestioneTratte extends JPanel {
 				controllerGestioneTratte.setPannelloPrecedente(1);
 				controllerGestioneTratte.mostraPannelli(controllerGestioneTratte.getDashboard().getHome());
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3()));
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
@@ -202,11 +230,11 @@ public class GestioneTratte extends JPanel {
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
 		lblBarraRicerca.setBounds(876, 38, 184, 25);
 		add(lblBarraRicerca);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(30, 85, 1030, 330);
 		add(scrollPane);
-		
+
 		tabella = new JTable();
 		tabella.addKeyListener(new KeyAdapter() {
 			@Override
@@ -228,8 +256,9 @@ public class GestioneTratte extends JPanel {
 		modello.setColumnIdentifiers(colonne);
 		tabella.setModel(modello);
 		scrollPane.setViewportView(tabella);
-		
+
 		txtCodiceTratta = new JTextField();
+		txtCodiceTratta.setHorizontalAlignment(SwingConstants.LEFT);
 		txtCodiceTratta.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -241,24 +270,25 @@ public class GestioneTratte extends JPanel {
 		txtCodiceTratta.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCodiceTratta.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCodiceTratta.setColumns(10);
-		txtCodiceTratta.setBounds(173, 444, 133, 20);
+		txtCodiceTratta.setBounds(233, 445, 133, 20);
 		add(txtCodiceTratta);
-		
+
 		lblCodiceTratta = new JLabel("Codice Tratta");
 		lblCodiceTratta.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceTratta.setFont(controllerGestioneTratte.fontLabel);
 		lblCodiceTratta.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblCodiceTratta.setBounds(25, 444, 114, 20);
+		lblCodiceTratta.setBounds(37, 445, 186, 20);
 		add(lblCodiceTratta);
-		
+
 		lblCittaPartenza = new JLabel("Citta Partenza");
 		lblCittaPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCittaPartenza.setFont(controllerGestioneTratte.fontLabel);
 		lblCittaPartenza.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblCittaPartenza.setBounds(25, 474, 114, 20);
+		lblCittaPartenza.setBounds(536, 445, 114, 20);
 		add(lblCittaPartenza);
-		
+
 		txtCittaPartenza = new JTextField();
+		txtCittaPartenza.setHorizontalAlignment(SwingConstants.LEFT);
 		txtCittaPartenza.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -270,10 +300,11 @@ public class GestioneTratte extends JPanel {
 		txtCittaPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCittaPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCittaPartenza.setColumns(10);
-		txtCittaPartenza.setBounds(173, 475, 133, 20);
+		txtCittaPartenza.setBounds(660, 445, 133, 20);
 		add(txtCittaPartenza);
-		
+
 		txtCittaArrivo = new JTextField();
+		txtCittaArrivo.setHorizontalAlignment(SwingConstants.LEFT);
 		txtCittaArrivo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -285,16 +316,16 @@ public class GestioneTratte extends JPanel {
 		txtCittaArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCittaArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCittaArrivo.setColumns(10);
-		txtCittaArrivo.setBounds(173, 505, 133, 20);
+		txtCittaArrivo.setBounds(660, 485, 133, 20);
 		add(txtCittaArrivo);
-		
+
 		lblCittaArrivo = new JLabel("Citta Arrivo");
 		lblCittaArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCittaArrivo.setFont(controllerGestioneTratte.fontLabel);
 		lblCittaArrivo.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblCittaArrivo.setBounds(25, 504, 114, 20);
+		lblCittaArrivo.setBounds(536, 485, 114, 20);
 		add(lblCittaArrivo);
-		
+
 		JButton btnAggiungi = new JButton("aggiungi");
 		btnAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAggiungi.addMouseListener(new MouseAdapter() {
@@ -303,9 +334,9 @@ public class GestioneTratte extends JPanel {
 				controllerGestioneTratte.aggiungiTratta();
 			}
 		});
-		btnAggiungi.setBounds(767, 444, 89, 23);
+		btnAggiungi.setBounds(146, 554, 89, 23);
 		add(btnAggiungi);
-		
+
 		JButton btnModifica = new JButton("modifica");
 		btnModifica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnModifica.addMouseListener(new MouseAdapter() {
@@ -314,9 +345,9 @@ public class GestioneTratte extends JPanel {
 				controllerGestioneTratte.modificaTratta();
 			}
 		});
-		btnModifica.setBounds(767, 478, 89, 23);
+		btnModifica.setBounds(381, 554, 89, 23);
 		add(btnModifica);
-		
+
 		JButton btnElimina = new JButton("elimina");
 		btnElimina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnElimina.addMouseListener(new MouseAdapter() {
@@ -325,9 +356,9 @@ public class GestioneTratte extends JPanel {
 				controllerGestioneTratte.eliminaTratta();
 			}
 		});
-		btnElimina.setBounds(767, 512, 89, 23);
+		btnElimina.setBounds(616, 554, 89, 23);
 		add(btnElimina);
-		
+
 		JButton btnSvuota = new JButton("svuota");
 		btnSvuota.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSvuota.addMouseListener(new MouseAdapter() {
@@ -336,21 +367,65 @@ public class GestioneTratte extends JPanel {
 				controllerGestioneTratte.svuotaCampiGestioneTratta();
 			}
 		});
-		btnSvuota.setBounds(767, 546, 89, 23);
+		btnSvuota.setBounds(851, 554, 89, 23);
 		add(btnSvuota);
+
+		lblCompagniaAerea = new JLabel("Codice Compagnia Aerea");
+		lblCompagniaAerea.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCompagniaAerea.setFont(controllerGestioneTratte.fontLabel);
+		lblCompagniaAerea.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
+		lblCompagniaAerea.setBounds(40, 485, 183, 20);
+		add(lblCompagniaAerea);
+
+		txtCodiceCompagniaAerea = new JTextField();
+		txtCodiceCompagniaAerea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerGestioneTratte.aggiungiVoloPartenze();
+				}
+			}
+		});
+		txtCodiceCompagniaAerea.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
+		txtCodiceCompagniaAerea.setFont(controllerGestioneTratte.fontScritteGestioni);
+		txtCodiceCompagniaAerea.setEditable(false);
+		txtCodiceCompagniaAerea.setColumns(10);
+		txtCodiceCompagniaAerea.setBounds(233, 485, 82, 20);
+		add(txtCodiceCompagniaAerea);
+
+		comboBoxNomeCompagniaAerea = new JComboBox<String>();
+		comboBoxNomeCompagniaAerea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HashMap<String, String> map = controllerGestioneTratte.implementazioneCompagniaAereaDAO()
+						.stampaNomeCompagniaAereaInComboBox();
+				txtCodiceCompagniaAerea.setText(map.get(comboBoxNomeCompagniaAerea.getSelectedItem().toString()));
+			}
+		});
+		comboBoxNomeCompagniaAerea.setBounds(315, 485, 95, 20);
+		add(comboBoxNomeCompagniaAerea);
+
 		
+		stampaComboBoxNomeCompagniaAerea();
 		caricaTabella();
 	}
-	
-	public void  caricaTabella() {
+
+	public void caricaTabella() {
 		this.ListaTratte = controllerGestioneTratte.implementazioneTrattaDAO().stampaTratte();
 		modello.setNumRows(0);
-		for(Object [] dato : this.ListaTratte) {
+		for (Object[] dato : this.ListaTratte) {
 			this.modello.addRow(dato);
 		}
-		tabella.setModel(modello);		
+		tabella.setModel(modello);
 	}
-	
+
+	public void stampaComboBoxNomeCompagniaAerea() {
+		HashMap<String, String> map = controllerGestioneTratte.implementazioneCompagniaAereaDAO()
+				.stampaNomeCompagniaAereaInComboBox();
+		for (String s : map.keySet()) {
+			comboBoxNomeCompagniaAerea.addItem(s);
+		}
+	}
+
 	private void ricerca() {
 		DefaultTableModel table = (DefaultTableModel) tabella.getModel();
 		String ricerca = txtBarraRicerca.getText();

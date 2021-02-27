@@ -159,8 +159,7 @@ public class Home extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (controllerHome.sbloccaGestione()) {
-					controllerHome.setPannelloPrecedente(10);
-					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneGate());
+					controllerHome.mostraSceltaGate();
 				} else {
 					mostraErroreMancatoAccesso();
 				}

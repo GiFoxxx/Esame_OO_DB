@@ -1,6 +1,7 @@
 package ClassiDAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface TrattaDAO {
 	
@@ -11,5 +12,7 @@ public interface TrattaDAO {
 	public boolean modificaTratta(Object tratta);
 	
 	public boolean aggiungiTratta(Object tratta);
+
+	HashMap<String, String> stampaCittaArrivoInComboBox();
 
 }

@@ -5,22 +5,15 @@ import java.util.ArrayList;
 
 public class Gate {
 
-	CodaDiImbarco[] codeDiImbarco = new CodaDiImbarco[2];
-	
-	Tratta trt;
+	CodaDiImbarco codeDiImbarco;
 
 	// ATTRIBUTI
 	private String codiceGate;
 	private String numeroPorta;
+	private Time tempoImbarcoStimato;
 
 	// GETTER E SETTER
-	public CodaDiImbarco[] getCodeDiImbarco() {
-		return codeDiImbarco;
-	}
 
-	public void setCodeDiImbarco(CodaDiImbarco[] codaDiImbarco) {
-		this.codeDiImbarco = codaDiImbarco;
-	}
 	public String getCodiceGate() {
 		return codiceGate;
 	}
@@ -37,28 +30,60 @@ public class Gate {
 		this.numeroPorta = numeroPorta;
 	}
 
+	public CodaDiImbarco getCodeDiImbarco() {
+		return codeDiImbarco;
+	}
 
-	//COSTRUTTORI
+	public void setCodeDiImbarco(CodaDiImbarco codeDiImbarco) {
+		this.codeDiImbarco = codeDiImbarco;
+	}
+
+	public Time getTempoImbarcoStimato() {
+		return tempoImbarcoStimato;
+	}
+
+	public void setTempoImbarcoStimato(Time tempoImbarcoStimato) {
+		this.tempoImbarcoStimato = tempoImbarcoStimato;
+	}
+
+	// COSTRUTTORI
 
 	public Gate() {
 		super();
 	}
 
-	public Gate( String codiceGate, String numeroPorta, CodaDiImbarco codaDiImbarco1, CodaDiImbarco codaDiImbarco2) {
+	public Gate(CodaDiImbarco codeDiImbarco, String codiceGate, String numeroPorta, Time tempoImbarcoStimato) {
+		super();
+		this.codeDiImbarco = codeDiImbarco;
+		this.codiceGate = codiceGate;
+		this.numeroPorta = numeroPorta;
+		this.tempoImbarcoStimato = tempoImbarcoStimato;
+	}
+
+	public Gate(String codiceGate, String numeroPorta) {
 		super();
 		this.codiceGate = codiceGate;
 		this.numeroPorta = numeroPorta;
 	}
 	
-	public Gate( String codiceGate, String numeroPorta) {
+	
+
+	public Gate(String codiceGate, String numeroPorta, Time tempoImbarcoStimato) {
 		super();
 		this.codiceGate = codiceGate;
 		this.numeroPorta = numeroPorta;
+		this.tempoImbarcoStimato = tempoImbarcoStimato;
+	}
+
+	public Gate(CodaDiImbarco codeDiImbarco, String codiceGate) {
+		super();
+		this.codeDiImbarco = codeDiImbarco;
+		this.codiceGate = codiceGate;
 	}
 
 	public Gate(String codiceGate) {
 		super();
 		this.codiceGate = codiceGate;
-	}		
+	}
 
 }

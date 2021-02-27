@@ -35,8 +35,8 @@ public class VoloArriviImplementazionePostgresDAO implements VoloArriviDAO {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Object[] Lista = new Object[5];
-				for (int i = 0; i <= 4; i++) {
+				Object[] Lista = new Object[4];
+				for (int i = 0; i <= 3; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}
 				ListaVoliArrivi.add(Lista);
@@ -84,17 +84,17 @@ public class VoloArriviImplementazionePostgresDAO implements VoloArriviDAO {
 		vlarr = (VoloArrivi) voloArrivi;
 		
 		PreparedStatement pst;
-		String sql = "UPDATE voloArrivo SET cittapartenza = ?, dataarrivo = ?, oraarrivo = ?, minutoArrivo = ? WHERE codiceVoloArrivo = ?";
+		String sql = "UPDATE voloArrivo SET cittapartenza = ?, dataarrivo = ?, orarioarrivo = ? WHERE codiceVoloArrivo = ?";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			pst.setString(1, vlarr.getCittaPartenza());
-			String dataPartenza = sdf.format(vlarr.getDataArrivo());
-			pst.setString(2, dataPartenza);
-			pst.setString(3, vlarr.getOrarioArrivo());
-			pst.setString(4, vlarr.getMinutoArrivo());
-			pst.setString(5, vlarr.getCodiceVoloArrivi());
+			long tempoDataPartenza = vlarr.getDataArrivo().getTime();
+			java.sql.Date dataPartenza = new java.sql.Date(tempoDataPartenza);
+			pst.setDate(2, dataPartenza);
+			pst.setTime(3, vlarr.getOrarioArrivo());
+			pst.setString(4, vlarr.getCodiceVoloArrivi());
 
 			
 			int res = pst.executeUpdate();
@@ -117,7 +117,7 @@ public class VoloArriviImplementazionePostgresDAO implements VoloArriviDAO {
 		vlarr = (VoloArrivi) voloArrivi;
 		
 		PreparedStatement pst;
-		String sql = "INSERT INTO voloArrivo (codiceVoloArrivo, cittaPartenza, dataArrivo, oraArrivo, minutoArrivo) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO voloArrivo (codiceVoloArrivo, cittaPartenza, dataArrivo, orarioArrivo) VALUES (?,?,?,?)";
 		try {
 			db.ConnessioneDB();
 
@@ -125,10 +125,10 @@ public class VoloArriviImplementazionePostgresDAO implements VoloArriviDAO {
 
 			pst.setString(1, vlarr.getCodiceVoloArrivi());
 			pst.setString(2, vlarr.getCittaPartenza());
-			String dataPartenza = sdf.format(vlarr.getDataArrivo());
-			pst.setString(3, dataPartenza);
-			pst.setString(4, vlarr.getOrarioArrivo());
-			pst.setString(5, vlarr.getMinutoArrivo());
+			long tempoDataPartenza = vlarr.getDataArrivo().getTime();
+			java.sql.Date dataPartenza = new java.sql.Date(tempoDataPartenza);
+			pst.setDate(3, dataPartenza);
+			pst.setTime(4, vlarr.getOrarioArrivo());
 
 			int res = pst.executeUpdate();
 

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 import Amministrazione.Utente;
+import Classi.CodaDiImbarco;
 import Classi.Gate;
 import ClassiDAO.GateDAO;
 import Controller.Controller;
@@ -19,6 +20,7 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 
 	ConnessioneDatabase db = new ConnessioneDatabase();
 	Gate gt;
+	CodaDiImbarco codaImbarco;
 
 	@SuppressWarnings("finally")
 	@Override // stampa gate
@@ -27,14 +29,46 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT * FROM gate ORDER BY numeroPorta";
+		String sql = "SELECT DISTINCT * "
+				+ "FROM gate AS gt "
+				+ "ORDER BY numeroPorta";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				Object[] Lista = new Object[2];
-				for (int i = 0; i <= 1; i++) {
+				Object[] Lista = new Object[3];
+				for (int i = 0; i <= 2; i++) {
+					Lista[i] = rs.getObject(i + 1);
+				}
+				ListaGate.add(Lista);
+			}
+			db.ConnessioneDB().close();
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		} finally {
+			return ListaGate;
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	@Override // stampa gate
+	public ArrayList<Object[]> stampaGateCodeImbarco() {
+		ArrayList<Object[]> ListaGate = new ArrayList<>();
+
+		PreparedStatement pst;
+		ResultSet rs;
+		String sql = "SELECT DISTINCT gt.codicegate, gt.numeroporta, nomecoda AS nomeCoda "
+				+ "FROM gate AS gt , codadiimbarco AS cdi, codadiimbarcogate AS cdigt "
+				+ "WHERE ((xcodicecodadiimbarco = codicecodadiimbarco)) AND (xcodicegate=codicegate) ORDER BY numeroporta";
+
+		try {
+			pst = db.ConnessioneDB().prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Object[] Lista = new Object[3];
+				for (int i = 0; i <= 2; i++) {
 					Lista[i] = rs.getObject(i + 1);
 				}
 				ListaGate.add(Lista);
@@ -52,17 +86,48 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 	public boolean aggiungiGate(Object gate) {
 		gt = (Gate) gate;
 		PreparedStatement pst;
-		String sql = "INSERT INTO gate (codiceGate, numeroPorta, codaDiImbarco1, codaDiImbarco2) VALUES (?, ?, ?, ?)";
+		String sql1 = "INSERT INTO gate (codiceGate, numeroPorta, tempodiimbarcostimato) VALUES (?, ?, ?)";
+		try {
+			db.ConnessioneDB();
+
+			pst = db.ConnessioneDB().prepareStatement(sql1);
+
+			pst.setString(1, gt.getCodiceGate());
+			pst.setString(2, gt.getNumeroPorta());	
+			pst.setTime(3, gt.getTempoImbarcoStimato());
+
+			int res = pst.executeUpdate();
+
+			if (res > 0) {
+				db.ConnessioneDB().close();
+				return true;
+			} else {
+				db.ConnessioneDB().close();
+				return false;
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+			return false;
+		}
+	}
+	
+	
+	@Override // aggiungo un codadiimbarcogate
+	public boolean aggiungiGateInCodaDiImbarcoGate(Object gate, Object codaDiImbarco) {
+		gt = (Gate) gate;
+		codaImbarco = (CodaDiImbarco) codaDiImbarco;
+		PreparedStatement pst;
+		
+		String sql = "INSERT INTO codadiimbarcogate (xcodiceGate, xcodicecodaDiImbarco) VALUES (?, ?)";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, gt.getCodiceGate());
-			pst.setString(2, gt.getNumeroPorta());
-			pst.setString(3, gt.getCodiceGate());
-			pst.setString(4, gt.getNumeroPorta());
-
+			pst.setString(2, codaImbarco.getCodiceCodaDiImbarco());
+			
 			int res = pst.executeUpdate();
 
 			if (res > 0) {
@@ -139,7 +204,7 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 
 	
 	@Override
-	public HashMap<String, String> stampaCodiceGateInComboBox() {
+	public HashMap<String, String> stampaNumeroPortaInComboBox() {
 
 		HashMap<String, String> map = new HashMap<String, String>();
 

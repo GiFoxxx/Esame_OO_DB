@@ -1,6 +1,7 @@
 package ClassiDAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface CompagniaAereaDAO {
 	
@@ -11,4 +12,6 @@ public interface CompagniaAereaDAO {
 	public boolean cancellaCompagniaAerea(Object compagniaAerea);
 
 	public boolean modificaCompagniaAerea(Object compagniaAerea);
+
+	HashMap<String, String> stampaNomeCompagniaAereaInComboBox();
 }

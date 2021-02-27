@@ -105,7 +105,7 @@ public class SceltaGate extends JDialog {
 			lblAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-//					controllerSceltaVolo.annullaSceltaVolo();
+					controllerSceltaGate.annullaSceltaGate();
 				}
 
 				@Override
@@ -137,8 +137,8 @@ public class SceltaGate extends JDialog {
 			lblGate.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-//					controllerSceltaVolo.vaiAVoliPartenzeDaSceltaVolo();
-//					controllerSceltaVolo.setPannelloPrecedente(11);
+					controllerSceltaGate.vaiAGateDaSceltaGate();
+					controllerSceltaGate.setPannelloPrecedente(13);
 				}
 
 				@Override
@@ -171,8 +171,8 @@ public class SceltaGate extends JDialog {
 			lblCodeDiImbarco.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-//					controllerSceltaVolo.vaiAVoliArriviDaSceltaVolo();
-//					controllerSceltaVolo.setPannelloPrecedente(12);
+					controllerSceltaGate.vaiAGateCodeImbarcoDaSceltaVolo();
+					controllerSceltaGate.setPannelloPrecedente(14);
 				}
 				
 				@Override
@@ -205,7 +205,7 @@ public class SceltaGate extends JDialog {
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-//					controllerSceltaVolo.annullaSceltaVolo();
+					controllerSceltaGate.annullaSceltaGate();
 				}
 
 				@Override
@@ -252,7 +252,6 @@ public class SceltaGate extends JDialog {
 
 					xMouse = prendiPosizioneMouse.getX();
 					yMouse = prendiPosizioneMouse.getY();
-
 				}
 			});
 			lblSpostaSceltaVolo.setBounds(1, 0, 498, 37);

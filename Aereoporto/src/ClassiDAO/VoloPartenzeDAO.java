@@ -2,6 +2,8 @@ package ClassiDAO;
 
 import java.util.ArrayList;
 
+import Classi.VoloPartenze;
+
 public interface VoloPartenzeDAO {
 	
 	public ArrayList<Object[]> stampaVoliPartenze();
