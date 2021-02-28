@@ -14,7 +14,7 @@ public class VoloPartenze {
 	private Date dataPartenza;
 	private Time orarioPartenza;
 	private String numeroPrenotazioni;
-	private int ritardo;
+
 	
 
 	// GETTER E SETTER
@@ -50,13 +50,6 @@ public class VoloPartenze {
 		this.numeroPrenotazioni = numeroPrenotazioni;
 	}
 
-	public int getRitardo() {
-		return ritardo;
-	}
-
-	public void setRitardo(int ritardo) {
-		this.ritardo = ritardo;
-	}
 
 	public Gate getGt() {
 		return gt;
@@ -80,7 +73,7 @@ public class VoloPartenze {
 	}
 
 	public VoloPartenze(String codiceVoloPartenze, Date dataPartenza, Time orarioPartenza,
-			String numeroPrenotazioni, int ritardo, Tratta trt, Gate gt) {
+			String numeroPrenotazioni, Tratta trt, Gate gt) {
 		super();
 		this.gt = gt;
 		this.trt = trt;
@@ -88,7 +81,6 @@ public class VoloPartenze {
 		this.dataPartenza = dataPartenza;
 		this.orarioPartenza = orarioPartenza;
 		this.numeroPrenotazioni = numeroPrenotazioni;
-		this.ritardo = ritardo;
 	}
 	
 	public VoloPartenze(String codiceVoloPartenze) {

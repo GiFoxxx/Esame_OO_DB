@@ -83,7 +83,7 @@ public class Dashboard extends JFrame {
 
 	private JDialog informazioni;
 	private JDialog terminiECondizioni;
-	private JDialog registrazioneEffettuataConSuccesso;
+	private JDialog operazioneEffettuataConSuccesso;
 	private JDialog sceltaProfiloSenzaAccesso;
 	private JDialog PasswordDimenticata;
 	private JDialog sceltaVolo;
@@ -372,12 +372,12 @@ public class Dashboard extends JFrame {
 		this.recensioni = recensioni;
 	}
 
-	public JDialog getRegistrazioneEffettuataConSuccesso() {
-		return registrazioneEffettuataConSuccesso;
+	public JDialog getOperazioneEffettuataConSuccesso() {
+		return operazioneEffettuataConSuccesso;
 	}
 
-	public void setRegistrazioneEffettuataConSuccesso(JDialog registrazioneEffettuataConSuccesso) {
-		this.registrazioneEffettuataConSuccesso = registrazioneEffettuataConSuccesso;
+	public void setOperazioneEffettuataConSuccesso(JDialog registrazioneEffettuataConSuccesso) {
+		this.operazioneEffettuataConSuccesso = registrazioneEffettuataConSuccesso;
 	}
 
 	public JDialog getSceltaGate() {
@@ -572,7 +572,7 @@ public class Dashboard extends JFrame {
 		sceltaVolo = controllerDashboard.sceltaVolo();
 		recensioni = controllerDashboard.recensione();
 		noClick = controllerDashboard.noClick();
-		registrazioneEffettuataConSuccesso = controllerDashboard.registrazioneEffettuataConSuccesso();
+		operazioneEffettuataConSuccesso = controllerDashboard.registrazioneEffettuataConSuccesso();
 		terminiECondizioni = controllerDashboard.terminiECondizioni();
 		informazioni = controllerDashboard.informazioni();
 		uscita = controllerDashboard.uscita();
@@ -858,7 +858,7 @@ public class Dashboard extends JFrame {
 		panelHome.add(lblScrittaHome);
 
 		lblHome = new JLabel("");
-		lblHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblHome.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblHome.setBounds(0, 0, 50, 70);
 		lblHome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHome.setIcon(new ImageIcon(img.casa()));
@@ -954,7 +954,7 @@ public class Dashboard extends JFrame {
 		panelAccedi.add(lblScrittaAccesso);
 
 		lblAccesso = new JLabel("");
-		lblAccesso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAccesso.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblAccesso.setBounds(0, 0, 50, 70);
 		panelAccedi.add(lblAccesso);
 		lblAccesso.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1050,7 +1050,7 @@ public class Dashboard extends JFrame {
 		panelRegistrati.add(lblScrittaRegistrazione);
 
 		lblRegistrazione = new JLabel("");
-		lblRegistrazione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRegistrazione.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblRegistrazione.setBounds(0, 0, 50, 70);
 		panelRegistrati.add(lblRegistrazione);
 		lblRegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1147,7 +1147,7 @@ public class Dashboard extends JFrame {
 		panelProfilo.add(lblScrittaProfilo);
 
 		lblProfilo = new JLabel("");
-		lblProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblProfilo.setBounds(0, 0, 50, 70);
 		panelProfilo.add(lblProfilo);
 		lblProfilo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1244,7 +1244,7 @@ public class Dashboard extends JFrame {
 		panelImpostazioni.add(lblScrittaImpostazioni);
 
 		lblImpostazioni = new JLabel("");
-		lblImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblImpostazioni.setBounds(0, 0, 50, 70);
 		panelImpostazioni.add(lblImpostazioni);
 		lblImpostazioni.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1340,7 +1340,7 @@ public class Dashboard extends JFrame {
 		panelUscita.add(lblScrittaEsci);
 
 		lblEsci = new JLabel("");
-		lblEsci.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblEsci.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblEsci.setBounds(0, 0, 50, 70);
 		lblEsci.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEsci.setIcon(new ImageIcon(img.esci()));

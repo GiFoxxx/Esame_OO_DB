@@ -50,6 +50,11 @@ public class GestioneUtenti extends JPanel {
 	private JLabel lblCognome;
 	private JLabel lblEmail;
 	private JLabel lblPassword;
+	
+	private JLabel lblAggiungi;
+	private JLabel lblModifica;
+	private JLabel lblElimina;
+	private JLabel lblSvuota;
 
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -154,6 +159,38 @@ public class GestioneUtenti extends JPanel {
 
 	public void setTabella(JTable table) {
 		this.tabella = table;
+	}
+
+	public JLabel getLblAggiungi() {
+		return lblAggiungi;
+	}
+
+	public void setLblAggiungi(JLabel lblAggiungi) {
+		this.lblAggiungi = lblAggiungi;
+	}
+
+	public JLabel getLblModifica() {
+		return lblModifica;
+	}
+
+	public void setLblModifica(JLabel lblModifica) {
+		this.lblModifica = lblModifica;
+	}
+
+	public JLabel getLblElimina() {
+		return lblElimina;
+	}
+
+	public void setLblElimina(JLabel lblElimina) {
+		this.lblElimina = lblElimina;
+	}
+
+	public JLabel getLblSvuota() {
+		return lblSvuota;
+	}
+
+	public void setLblSvuota(JLabel lblSvuota) {
+		this.lblSvuota = lblSvuota;
 	}
 
 	public Object[] getRow() {
@@ -268,7 +305,7 @@ public class GestioneUtenti extends JPanel {
 		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEmail.setFont(controllerGestioneUtenti.fontLabel);
 		lblEmail.setForeground(controllerGestioneUtenti.coloreScritteTemaScuro);
-		lblEmail.setBounds(44, 514, 133, 20);
+		lblEmail.setBounds(358, 450, 133, 20);
 		add(lblEmail);
 
 		txtEmail = new JTextField();
@@ -282,7 +319,7 @@ public class GestioneUtenti extends JPanel {
 		});
 		txtEmail.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtEmail.setFont(controllerGestioneUtenti.fontScritteGestioni);
-		txtEmail.setBounds(215, 514, 133, 20);
+		txtEmail.setBounds(529, 450, 133, 20);
 		txtEmail.setColumns(10);
 		add(txtEmail);
 
@@ -290,7 +327,7 @@ public class GestioneUtenti extends JPanel {
 		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPassword.setFont(controllerGestioneUtenti.fontLabel);
 		lblPassword.setForeground(controllerGestioneUtenti.coloreScritteTemaScuro);
-		lblPassword.setBounds(44, 546, 133, 20);
+		lblPassword.setBounds(358, 482, 133, 20);
 		add(lblPassword);
 
 		txtPassword = new JTextField();
@@ -304,7 +341,7 @@ public class GestioneUtenti extends JPanel {
 		});
 		txtPassword.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtPassword.setFont(controllerGestioneUtenti.fontScritteGestioni);
-		txtPassword.setBounds(215, 546, 133, 20);
+		txtPassword.setBounds(529, 482, 133, 20);
 		txtPassword.setColumns(10);
 		add(txtPassword);
 
@@ -335,50 +372,156 @@ public class GestioneUtenti extends JPanel {
 		tabella.setModel(modello);
 
 		scrollPane.setViewportView(tabella);
-
-		JButton btnAggiungi = new JButton("aggiungi");
-		btnAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAggiungi.addMouseListener(new MouseAdapter() {
+		
+		lblAggiungi = new JLabel("");
+		lblAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneUtenti.aggiungiUtente();
-			}
-		});
-		btnAggiungi.setBounds(693, 451, 113, 20);
-		add(btnAggiungi);
 
-		JButton btnModifica = new JButton("modifica");
-		btnModifica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnModifica.addMouseListener(new MouseAdapter() {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
+
+			}
+
+		});
+		lblAggiungi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
+		lblAggiungi.setBounds(358, 569, 130, 36);
+		add(lblAggiungi);
+
+		lblModifica = new JLabel("");
+		lblModifica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneUtenti.modificaUtente();
 			}
-		});
-		btnModifica.setBounds(693, 482, 113, 20);
-		add(btnModifica);
 
-		JButton btnElimina = new JButton("elimina");
-		btnElimina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnElimina.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica2()));
+
+			}
+		});
+		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
+		lblModifica.setIcon(new ImageIcon(img.modifica1()));
+		lblModifica.setBounds(114, 569, 130, 36);
+		add(lblModifica);
+
+		lblElimina = new JLabel("");
+		lblElimina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneUtenti.eliminaUtente();
 			}
-		});
-		btnElimina.setBounds(693, 514, 113, 20);
-		add(btnElimina);
 
-		JButton btnSvuota = new JButton("svuota");
-		btnSvuota.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnSvuota.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina2()));
+
+			}
+		});
+		lblElimina.setHorizontalAlignment(SwingConstants.CENTER);
+		lblElimina.setIcon(new ImageIcon(img.elimina1()));
+		lblElimina.setBounds(846, 569, 130, 36);
+		add(lblElimina);
+
+		lblSvuota = new JLabel("");
+		lblSvuota.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblSvuota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneUtenti.svuotaCampiGestioneUtenti();
 			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota2()));
+
+			}
 		});
-		btnSvuota.setBounds(693, 546, 113, 20);
-		add(btnSvuota);
+		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
+		lblSvuota.setBounds(602, 569, 130, 36);
+		add(lblSvuota);
 		
 		caricaTabella();
 	}

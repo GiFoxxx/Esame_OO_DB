@@ -44,6 +44,12 @@ public class GestioneCompagnieAeree extends JPanel {
 	private JLabel lblBarraRicerca;
 	private JLabel lblNome;
 	private JLabel lblCodiceCompagniaAerea;
+	
+	private JLabel lblAggiungi;
+	private JLabel lblModifica;
+	private JLabel lblElimina;
+	private JLabel lblSvuota;
+
 
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -116,6 +122,38 @@ public class GestioneCompagnieAeree extends JPanel {
 
 	public void setTabella(JTable table) {
 		this.tabella = table;
+	}
+
+	public JLabel getLblAggiungi() {
+		return lblAggiungi;
+	}
+
+	public void setLblAggiungi(JLabel lblAggiungi) {
+		this.lblAggiungi = lblAggiungi;
+	}
+
+	public JLabel getLblModifica() {
+		return lblModifica;
+	}
+
+	public void setLblModifica(JLabel lblModifica) {
+		this.lblModifica = lblModifica;
+	}
+
+	public JLabel getLblElimina() {
+		return lblElimina;
+	}
+
+	public void setLblElimina(JLabel lblElimina) {
+		this.lblElimina = lblElimina;
+	}
+
+	public JLabel getLblSvuota() {
+		return lblSvuota;
+	}
+
+	public void setLblSvuota(JLabel lblSvuota) {
+		this.lblSvuota = lblSvuota;
 	}
 
 	public Object[] getRow() {
@@ -254,46 +292,156 @@ public class GestioneCompagnieAeree extends JPanel {
 		lblCodiceCompagniaAerea.setBounds(53, 459, 221, 20);
 		add(lblCodiceCompagniaAerea);
 
-		JButton btnAggiungi = new JButton("aggiungi");
-		btnAggiungi.addMouseListener(new MouseAdapter() {
+		lblAggiungi = new JLabel("");
+		lblAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneCompagnieAeree.aggiungiCompagniaAerea();
-			}
-		});
-		btnAggiungi.setBounds(705, 459, 113, 20);
-		add(btnAggiungi);
 
-		JButton btnModifica = new JButton("modifica");
-		btnModifica.addMouseListener(new MouseAdapter() {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
+
+			}
+
+		});
+		lblAggiungi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
+		lblAggiungi.setBounds(358, 569, 130, 36);
+		add(lblAggiungi);
+
+		lblModifica = new JLabel("");
+		lblModifica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneCompagnieAeree.modificaCompagniaAerea();
 			}
-		});
-		btnModifica.setBounds(705, 490, 113, 20);
-		add(btnModifica);
 
-		JButton btnElimina = new JButton("elimina");
-		btnElimina.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica2()));
+
+			}
+		});
+		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
+		lblModifica.setIcon(new ImageIcon(img.modifica1()));
+		lblModifica.setBounds(114, 569, 130, 36);
+		add(lblModifica);
+
+		lblElimina = new JLabel("");
+		lblElimina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneCompagnieAeree.eliminaCompagniaAerea();
 			}
-		});
-		btnElimina.setBounds(705, 522, 113, 20);
-		add(btnElimina);
 
-		JButton btnSvuota = new JButton("svuota");
-		btnSvuota.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina2()));
+
+			}
+		});
+		lblElimina.setHorizontalAlignment(SwingConstants.CENTER);
+		lblElimina.setIcon(new ImageIcon(img.elimina1()));
+		lblElimina.setBounds(846, 569, 130, 36);
+		add(lblElimina);
+
+		lblSvuota = new JLabel("");
+		lblSvuota.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblSvuota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneCompagnieAeree.svuotaCampiGestioneCompagniaAerea();
 			}
-		});
-		btnSvuota.setBounds(705, 554, 113, 20);
-		add(btnSvuota);
 
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota2()));
+
+			}
+		});
+		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
+		lblSvuota.setBounds(602, 569, 130, 36);
+		add(lblSvuota);
+		
 		caricaTabella();
 	}
 

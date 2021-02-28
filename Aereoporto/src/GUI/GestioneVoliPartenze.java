@@ -40,14 +40,14 @@ import java.util.Calendar;
 
 public class GestioneVoliPartenze extends JPanel {
 
-	String colonne[] = { "Codice Volo Partenze", "Compagnia Aerea", "N°Gate", "Citta di Arrivo", "Data Partenza", "Orario Partenza", "Apertura Gate", "Chiusura Gate", "Numero Prenotazioni", "Ritardo" };
+	String colonne[] = { "Codice Volo Partenze", "Compagnia Aerea", "N°Gate", "Citta di Arrivo", "Data Partenza",
+			"Orario Partenza", "Apertura Gate", "Chiusura Gate", "Numero Prenotazioni" };
 	Object[] row = new Object[11];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaVoliPartenze = new ArrayList<>();
 	private Immagini img = new Immagini();
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	
-	
+
 	private JTextField txtCodiceVoloPartenze;
 	private JDateChooser dateDataPartenza;
 	private JTextField txtCodiceTratta;
@@ -55,7 +55,6 @@ public class GestioneVoliPartenze extends JPanel {
 	private JTextField txtOraPartenza;
 	private JTextField txtMinutoPartenza;
 	private JTextField txtNumeroPrenotazioni;
-	private JTextField txtRitardo;
 	private JScrollPane scrollPane;
 	private JTable tabella;
 	private JTextField txtBarraRicerca;
@@ -69,11 +68,15 @@ public class GestioneVoliPartenze extends JPanel {
 	private JLabel lblDuePuntiPartenza;
 	private JLabel lblGate;
 	private JLabel lblNumeroPrenotazioni;
-	private JLabel lblRitardo;
+
+	private JLabel lblAggiungi;
+	private JLabel lblModifica;
+	private JLabel lblElimina;
+	private JLabel lblSvuota;
 
 	private JComboBox<String> comboBoxNumeroPorta;
 	private JComboBox<String> comboBoxCittaArrivo;
-	
+
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
 		return modello;
@@ -159,13 +162,7 @@ public class GestioneVoliPartenze extends JPanel {
 		this.lblNumeroPrenotazioni = lblNumeroPrenoazioni;
 	}
 
-	public JLabel getLblRitardo() {
-		return lblRitardo;
-	}
 
-	public void setLblRitardo(JLabel lblRitardo) {
-		this.lblRitardo = lblRitardo;
-	}
 
 	public JTextField getTxtCodiceVoloPartenze() {
 		return txtCodiceVoloPartenze;
@@ -207,13 +204,7 @@ public class GestioneVoliPartenze extends JPanel {
 		this.txtNumeroPrenotazioni = txtNumeroPrenotazioni;
 	}
 
-	public JTextField getTxtRitardo() {
-		return txtRitardo;
-	}
-
-	public void setTxtRitardo(JTextField txtRitardo) {
-		this.txtRitardo = txtRitardo;
-	}
+	
 
 	public JTextField getTxtCodiceGate() {
 		return txtCodiceGate;
@@ -270,7 +261,7 @@ public class GestioneVoliPartenze extends JPanel {
 	public void setComboBoxNumeroPorta(JComboBox<String> comboBox) {
 		this.comboBoxNumeroPorta = comboBox;
 	}
-	
+
 	public JComboBox<String> getComboBoxCittaArrivo() {
 		return comboBoxCittaArrivo;
 	}
@@ -279,8 +270,39 @@ public class GestioneVoliPartenze extends JPanel {
 		this.comboBoxCittaArrivo = comboBoxCittaArrivo;
 	}
 
+	public JLabel getLblAggiungi() {
+		return lblAggiungi;
+	}
+
+	public void setLblAggiungi(JLabel lblAggiungi) {
+		this.lblAggiungi = lblAggiungi;
+	}
+
+	public JLabel getLblModifica() {
+		return lblModifica;
+	}
+
+	public void setLblModifica(JLabel lblModifica) {
+		this.lblModifica = lblModifica;
+	}
+
+	public JLabel getLblElimina() {
+		return lblElimina;
+	}
+
+	public void setLblElimina(JLabel lblElimina) {
+		this.lblElimina = lblElimina;
+	}
+
+	public JLabel getLblSvuota() {
+		return lblSvuota;
+	}
+
+	public void setLblSvuota(JLabel lblSvuota) {
+		this.lblSvuota = lblSvuota;
+	}
+
 	Controller controllerGestioneVoliPartenze;
-	
 
 	public GestioneVoliPartenze(Controller controller) {
 		controllerGestioneVoliPartenze = controller;
@@ -361,11 +383,10 @@ public class GestioneVoliPartenze extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int t = tabella.getSelectedRow();
-				txtCodiceVoloPartenze.setText(modello.getValueAt(t, 0).toString());				
+				txtCodiceVoloPartenze.setText(modello.getValueAt(t, 0).toString());
 				txtCodiceGate.setText(modello.getValueAt(t, 2).toString());
 				txtCodiceTratta.setText(modello.getValueAt(t, 3).toString());
 				txtNumeroPrenotazioni.setText(modello.getValueAt(t, 7).toString());
-				txtRitardo.setText(modello.getValueAt(t, 8).toString());				
 			}
 		});
 		modello.setColumnIdentifiers(colonne);
@@ -460,50 +481,6 @@ public class GestioneVoliPartenze extends JPanel {
 		lblDuePuntiPartenza.setBounds(583, 472, 10, 14);
 		add(lblDuePuntiPartenza);
 
-		JButton btnAggiungi = new JButton("aggiungi");
-		btnAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAggiungi.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoliPartenze.aggiungiVoloPartenze();
-			}
-		});
-		btnAggiungi.setBounds(92, 596, 105, 23);
-		add(btnAggiungi);
-
-		JButton btnModifica = new JButton("modifica");
-		btnModifica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnModifica.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoliPartenze.modificaVoloPartenze();
-			}
-		});
-		btnModifica.setBounds(290, 596, 105, 23);
-		add(btnModifica);
-
-		JButton btnElimina = new JButton("elimina");
-		btnElimina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnElimina.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoliPartenze.eliminaVoloPartenze();
-			}
-		});
-		btnElimina.setBounds(488, 596, 105, 23);
-		add(btnElimina);
-
-		JButton btnSvuota = new JButton("svuota");
-		btnSvuota.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnSvuota.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoliPartenze.svuotaCampiGestioneVoloPartenze();
-			}
-		});
-		btnSvuota.setBounds(686, 596, 105, 23);
-		add(btnSvuota);
-
 		lblNumeroPrenotazioni = new JLabel("Numero Prenotazioni");
 		lblNumeroPrenotazioni.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNumeroPrenotazioni.setFont(controllerGestioneVoliPartenze.fontLabel);
@@ -525,37 +502,6 @@ public class GestioneVoliPartenze extends JPanel {
 		txtNumeroPrenotazioni.setColumns(10);
 		txtNumeroPrenotazioni.setBounds(866, 438, 80, 20);
 		add(txtNumeroPrenotazioni);
-
-		JButton btnCalcolaRitardo = new JButton("Calcola Ritardo");
-		btnCalcolaRitardo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controllerGestioneVoliPartenze.calcoloRitardo();
-			}
-		});
-		btnCalcolaRitardo.setBounds(879, 596, 105, 23);
-		add(btnCalcolaRitardo);
-
-		lblRitardo = new JLabel("Ritardo");
-		lblRitardo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblRitardo.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
-		lblRitardo.setFont(controllerGestioneVoliPartenze.fontLabel);
-		lblRitardo.setBounds(694, 469, 162, 20);
-		add(lblRitardo);
-
-		txtRitardo = new JTextField();
-		txtRitardo.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneVoliPartenze.aggiungiVoloPartenze();
-				}
-			}
-		});
-		txtRitardo.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
-		txtRitardo.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
-		txtRitardo.setColumns(10);
-		txtRitardo.setBounds(866, 469, 30, 20);
-		add(txtRitardo);
 
 		lblCodiceTratta = new JLabel("Codice Tratta");
 		lblCodiceTratta.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -587,51 +533,202 @@ public class GestioneVoliPartenze extends JPanel {
 		txtCodiceGate.setColumns(10);
 		txtCodiceGate.setBounds(223, 469, 80, 20);
 		add(txtCodiceGate);
-		
-		
+
 		comboBoxNumeroPorta = new JComboBox<String>();
 		comboBoxNumeroPorta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneGateDAO().stampaNumeroPortaInComboBox();
+				HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneGateDAO()
+						.stampaNumeroPortaInComboBox();
 				txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
 			}
 		});
 		comboBoxNumeroPorta.setBounds(303, 469, 40, 20);
 		add(comboBoxNumeroPorta);
-		
+
 		comboBoxCittaArrivo = new JComboBox<String>();
 		comboBoxCittaArrivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneTrattaDAO().stampaCittaArrivoInComboBox();
+				HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneTrattaDAO()
+						.stampaCittaArrivoInComboBox();
 				txtCodiceTratta.setText(map.get(comboBoxCittaArrivo.getSelectedItem().toString()));
 			}
 		});
 		comboBoxCittaArrivo.setBounds(305, 500, 95, 20);
 		add(comboBoxCittaArrivo);
-		
-		
+
+		lblAggiungi = new JLabel("");
+		lblAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAggiungi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneVoliPartenze.aggiungiVoloPartenze();
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
+
+			}
+
+		});
+		lblAggiungi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
+		lblAggiungi.setBounds(358, 569, 130, 36);
+		add(lblAggiungi);
+
+		lblModifica = new JLabel("");
+		lblModifica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblModifica.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneVoliPartenze.modificaVoloPartenze();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica2()));
+
+			}
+		});
+		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
+		lblModifica.setIcon(new ImageIcon(img.modifica1()));
+		lblModifica.setBounds(114, 569, 130, 36);
+		add(lblModifica);
+
+		lblElimina = new JLabel("");
+		lblElimina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblElimina.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneVoliPartenze.eliminaVoloPartenze();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina2()));
+
+			}
+		});
+		lblElimina.setHorizontalAlignment(SwingConstants.CENTER);
+		lblElimina.setIcon(new ImageIcon(img.elimina1()));
+		lblElimina.setBounds(846, 569, 130, 36);
+		add(lblElimina);
+
+		lblSvuota = new JLabel("");
+		lblSvuota.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblSvuota.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneVoliPartenze.svuotaCampiGestioneVoloPartenze();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota2()));
+
+			}
+		});
+		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
+		lblSvuota.setBounds(602, 569, 130, 36);
+		add(lblSvuota);
 
 		stampaComboBoxNumeroPorta();
 		stampaComboBoxCittaArrivo();
-		
+
 		caricaTabella();
 	}
 
 	public void stampaComboBoxNumeroPorta() {
-		HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneGateDAO().stampaNumeroPortaInComboBox();
-		for(String s : map.keySet()) {
+		HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneGateDAO()
+				.stampaNumeroPortaInComboBox();
+		for (String s : map.keySet()) {
 			comboBoxNumeroPorta.addItem(s);
 		}
 	}
-	
+
 	public void stampaComboBoxCittaArrivo() {
-		HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneTrattaDAO().stampaCittaArrivoInComboBox();
-		for(String s : map.keySet()) {
+		HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneTrattaDAO()
+				.stampaCittaArrivoInComboBox();
+		for (String s : map.keySet()) {
 			comboBoxCittaArrivo.addItem(s);
-			
+
 		}
 	}
-	
+
 	public void caricaTabella() {
 		this.ListaVoliPartenze = controllerGestioneVoliPartenze.implementazioneVoloPartenzeDAO().stampaVoliPartenze();
 		modello.setNumRows(0);

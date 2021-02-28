@@ -11,8 +11,10 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-public class RegistrazioneEffettuataConSuccesso extends JDialog {
+public class OperazioneRiuscitaConSuccesso extends JDialog {
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -71,7 +73,7 @@ public class RegistrazioneEffettuataConSuccesso extends JDialog {
 
 	Controller controllerRegistrazioneEffettuataConSuccesso;
 
-	public RegistrazioneEffettuataConSuccesso(Controller controller) {
+	public OperazioneRiuscitaConSuccesso(Controller controller) {
 		controllerRegistrazioneEffettuataConSuccesso = controller;
 
 		setModal(true);
@@ -109,14 +111,14 @@ public class RegistrazioneEffettuataConSuccesso extends JDialog {
 			lblSpostaRegistrazioneEffettuataConSuccesso.setBounds(1, 0, 498, 37);
 			getContentPane().add(lblSpostaRegistrazioneEffettuataConSuccesso);
 
-			lblComplimenti = new JLabel("Complimenti, registrazione effettuata con successo!");
+			lblComplimenti = new JLabel("");
 			lblComplimenti.setHorizontalAlignment(SwingConstants.CENTER);
 			lblComplimenti.setFont(controllerRegistrazioneEffettuataConSuccesso.fontScritteJDialog);
 			lblComplimenti.setForeground(controllerRegistrazioneEffettuataConSuccesso.coloreScritteTemaScuro);
 			lblComplimenti.setBounds(0, 81, 498, 52);
 			getContentPane().add(lblComplimenti);
 
-			lblClicca = new JLabel("Clicca per accedere.");
+			lblClicca = new JLabel("Clicca per continuare");
 			lblClicca.setHorizontalAlignment(SwingConstants.CENTER);
 			lblClicca.setFont(controllerRegistrazioneEffettuataConSuccesso.fontLabel);
 			lblClicca.setForeground(controllerRegistrazioneEffettuataConSuccesso.coloreScritteTemaScuro);
@@ -127,7 +129,7 @@ public class RegistrazioneEffettuataConSuccesso extends JDialog {
 			lblSpuntaSuccesso.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					controllerRegistrazioneEffettuataConSuccesso.fineRegistrazioneEffettuataConSuccesso();
+					controllerRegistrazioneEffettuataConSuccesso.operazioneRiuscitaConSuccesso();
 				}
 			});
 			lblSpuntaSuccesso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -19,6 +19,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import Amministrazione.*;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CambioPassword extends JPanel {
 
@@ -36,6 +38,7 @@ public class CambioPassword extends JPanel {
 	private JLabel lblPasswordDimenticata;
 	private JLabel lblSalva;
 	private JLabel lblAnnulla;
+	private JLabel lblMessaggioErrore;
 	
 	// GETTER E SETTER
 
@@ -127,7 +130,16 @@ public class CambioPassword extends JPanel {
 		this.lblPasswordDimenticata = lblPasswordDimenticata;
 	}
 
+	public JLabel getLblMessaggioErrore() {
+		return lblMessaggioErrore;
+	}
+
+	public void setLblMessaggioErrore(JLabel lblMessaggioErrore) {
+		this.lblMessaggioErrore = lblMessaggioErrore;
+	}
+
 	Controller controllerCambioPassword;
+	
 
 	public CambioPassword(Controller controller) {
 		controllerCambioPassword = controller;
@@ -137,6 +149,14 @@ public class CambioPassword extends JPanel {
 		setLayout(null);
 
 		txtVecchiaPassword = new JTextField();
+		txtVecchiaPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+					controllerCambioPassword.cambioPasswordDaProfilo();
+				}
+			}
+		});
 		txtVecchiaPassword.setBorder(null);
 		txtVecchiaPassword.setFont(controllerCambioPassword.fontScritte);
 		txtVecchiaPassword.setBackground(controllerCambioPassword.sfondoTemaScuro);
@@ -146,6 +166,14 @@ public class CambioPassword extends JPanel {
 		add(txtVecchiaPassword);
 
 		txtNuovaPassword = new JPasswordField();
+		txtNuovaPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+				controllerCambioPassword.cambioPasswordDaProfilo();
+				}
+			}
+		});
 		txtNuovaPassword.setBorder(null);
 		txtNuovaPassword.setFont(controllerCambioPassword.fontScritte);
 		txtNuovaPassword.setBackground(controllerCambioPassword.sfondoTemaScuro);
@@ -154,6 +182,14 @@ public class CambioPassword extends JPanel {
 		add(txtNuovaPassword);
 
 		txtRipetiNuovaPassword = new JPasswordField();
+		txtRipetiNuovaPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoInvio) {
+				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
+				controllerCambioPassword.cambioPasswordDaProfilo();
+				}
+			}
+		});
 		txtRipetiNuovaPassword.setBorder(null);
 		txtRipetiNuovaPassword.setFont(controllerCambioPassword.fontScritte);
 		txtRipetiNuovaPassword.setBackground(controllerCambioPassword.sfondoTemaScuro);
@@ -262,13 +298,15 @@ public class CambioPassword extends JPanel {
 		lblPasswordDimenticata.setBounds(563, 418, 141, 14);
 		add(lblPasswordDimenticata);
 		
-		JLabel lblSalva = new JLabel("");
+		lblSalva = new JLabel("");
+		lblSalva.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblSalva.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSalva.setIcon(new ImageIcon(img.salvaModifiche1()));
 		lblSalva.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerCambioPassword.cambioPasswordDaProfilo();
+				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -290,7 +328,7 @@ public class CambioPassword extends JPanel {
 		lblSalva.setBounds(373, 494, 319, 36);
 		add(lblSalva);
 		
-		JLabel lblAnnulla = new JLabel("");
+		lblAnnulla = new JLabel("");
 		lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro1()));
@@ -322,9 +360,14 @@ public class CambioPassword extends JPanel {
 		});
 		lblAnnulla.setBounds(277, 79, 41, 41);
 		add(lblAnnulla);
+		
+		lblMessaggioErrore = new JLabel("");
+		lblMessaggioErrore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessaggioErrore.setFont(controllerCambioPassword.fontLabel);
+		lblMessaggioErrore.setForeground(controllerCambioPassword.coloreScritturaAllertaTemaScuro);
+		lblMessaggioErrore.setBounds(342, 455, 380, 14);
+		add(lblMessaggioErrore);
 
 	}
-
-	// METODI
 
 }

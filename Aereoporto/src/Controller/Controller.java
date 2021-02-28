@@ -86,7 +86,7 @@ public class Controller {
 
 	private Informazioni informazioni;
 	private TerminiECondizioni terminiECondizioni;
-	private RegistrazioneEffettuataConSuccesso registrazioneEffettuataConSuccesso;
+	private OperazioneRiuscitaConSuccesso operazioneEffettuataConSuccesso;
 	private PasswordDimenticata passwordDimenticata;
 	private SceltaProfiloSenzaAccesso sceltaProfiloSenzaAccesso;
 	private SceltaVolo sceltaVolo;
@@ -252,14 +252,14 @@ public class Controller {
 	public void setGateCodeImbarco(GateCodeImbarco gateCodeImbarco) {
 		this.gateCodeImbarco = gateCodeImbarco;
 	}
-	
-	public SceltaGate getSceltaGate() {
-        return sceltaGate;
-    }
 
-    public void setSceltaGate(SceltaGate sceltaGate) {
-        this.sceltaGate = sceltaGate;
-    }
+	public SceltaGate getSceltaGate() {
+		return sceltaGate;
+	}
+
+	public void setSceltaGate(SceltaGate sceltaGate) {
+		this.sceltaGate = sceltaGate;
+	}
 
 	public Recensione getRecensioni() {
 		return recensioni;
@@ -285,13 +285,12 @@ public class Controller {
 		this.terminiECondizioni = terminiECondizioni;
 	}
 
-	public RegistrazioneEffettuataConSuccesso getRegistrazioneEffettuataConSuccesso() {
-		return registrazioneEffettuataConSuccesso;
+	public OperazioneRiuscitaConSuccesso getOperazioneEffettuataConSuccesso() {
+		return operazioneEffettuataConSuccesso;
 	}
 
-	public void setRegistrazioneEffettuataConSuccesso(
-			RegistrazioneEffettuataConSuccesso registrazioneEffettuataConSuccesso) {
-		this.registrazioneEffettuataConSuccesso = registrazioneEffettuataConSuccesso;
+	public void setOperazioneEffettuataConSuccesso(OperazioneRiuscitaConSuccesso registrazioneEffettuataConSuccesso) {
+		this.operazioneEffettuataConSuccesso = registrazioneEffettuataConSuccesso;
 	}
 
 	public Uscita getUscita() {
@@ -434,29 +433,30 @@ public class Controller {
 					((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText());
 			implementazioneUtenteDAO().registrazioneUtente(utn);
-
-			mostraRegistrazioneEffettuataConSuccesso();
+			((OperazioneRiuscitaConSuccesso) getDashboard().getOperazioneEffettuataConSuccesso()).getLblComplimenti()
+					.setText("Registrazione effettuata con successo");
+			mostraOperazioneEffettuataConSuccesso();
 
 			mostraPannelli(getDashboard().getAccesso());
 			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 		} else if ((!formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuoto()
 				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText(
-					"Formato email inserito non valido!\n" + "Inserire l'email dal formato tipo: example@example.com");
+					"Formato email inserito non valido!\n" + " Inserire l'email dal formato tipo: example@example.com");
 
 		} else if (formatoEmailInseritaErrato() && !ripetiPassword() && nessunCampoVuoto()
 				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
 
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
-					.setText("Le passwords non corrispondono.");
+					.setText("Le passwords non corrispondono");
 
 		} else if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto()
 				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
-					.setText("Effettuare il logout prima della registrazione.");
+					.setText("Effettuare il logout prima della registrazione");
 		} else {
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
-					.setText("Ci sono campi vuoti, riempirli tutti per la registrazione.");
+					.setText("Riempire tutti i campi per continuare");
 		}
 	}
 
@@ -675,7 +675,6 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().setText("");
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().setText("");
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().setText(null);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().setText("");
 	}
 
 	public VoloPartenzeDAO implementazioneVoloPartenzeDAO() {
@@ -687,9 +686,6 @@ public class Controller {
 		gt = new Gate(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText());
 		trt = new Tratta(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
-
-		int ritardo = Integer
-				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().getText());
 
 		int ora = Integer.parseInt(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText());
@@ -704,7 +700,7 @@ public class Controller {
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
 				tempo,
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().getText(),
-				ritardo, trt, gt);
+				trt, gt);
 
 		implementazioneVoloPartenzeDAO().aggiungiVoloPartenze(vlprtz);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
@@ -714,7 +710,8 @@ public class Controller {
 	}
 
 	public void eliminaVoloPartenze() {
-		vlprtz = new VoloPartenze(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText());
+		vlprtz = new VoloPartenze(
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText());
 
 		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
 		implementazioneVoloPartenzeDAO().cancellaVoloPartenze(vlprtz);
@@ -728,9 +725,6 @@ public class Controller {
 		trt = new Tratta(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
 
-		int ritardo = Integer
-				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().getText());
-
 		int ora = Integer.parseInt(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText());
 		int minuto = Integer.parseInt(
@@ -744,7 +738,7 @@ public class Controller {
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
 				tempo,
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().getText(),
-				ritardo, trt, gt);
+				trt, gt);
 
 		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
 
@@ -766,8 +760,6 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().getText(),
 				t, 6);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo().getText(), t, 7);
 
 		implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
 		svuotaCampiGestioneVoloPartenze();
@@ -870,7 +862,8 @@ public class Controller {
 
 	public void aggiungiGate() {
 		int ora = 0;
-		int minuto = Integer.parseInt(((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().getText());
+		int minuto = Integer
+				.parseInt(((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().getText());
 		int secondo = 0;
 		@SuppressWarnings("deprecation")
 		Time tempo = new Time(ora, minuto, secondo);
@@ -897,7 +890,8 @@ public class Controller {
 
 	public void modificaGate() {
 		int ora = 0;
-		int minuto = Integer.parseInt(((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().getText());
+		int minuto = Integer
+				.parseInt(((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().getText());
 		int secondo = 0;
 		@SuppressWarnings("deprecation")
 		Time tempo = new Time(ora, minuto, secondo);
@@ -916,14 +910,13 @@ public class Controller {
 		svuotaCampiGestioneGate();
 		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
-	
-	//METODI DI GATE CODE DI IMBARCO
+
+	// METODI DI GATE CODE DI IMBARCO
 	public void svuotaCampiGateCodeImbarco() {
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().setText("");
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().setText("");
 	}
-	
-	
+
 	public void aggiungiGateCodeImbarco() {
 		codaImbarco = new CodaDiImbarco(
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText());
@@ -931,7 +924,8 @@ public class Controller {
 		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText());
 
 		implementazioneGateDAO().aggiungiGateInCodaDiImbarcoGate(gt, codaImbarco);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello().addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRow());
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello()
+				.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRow());
 		svuotaCampiGateCodeImbarco();
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabella();
 	}
@@ -940,7 +934,8 @@ public class Controller {
 		CodaDiImbarco codaImbarco = new CodaDiImbarco(
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText());
 
-		gt = new Gate(codaImbarco, ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
+		gt = new Gate(codaImbarco,
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
 
 		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabella().getSelectedRow();
 		implementazioneGateDAO().cancellaGate(gt);
@@ -953,13 +948,14 @@ public class Controller {
 		CodaDiImbarco codaImbarco = new CodaDiImbarco(
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText());
 
-		gt = new Gate(codaImbarco, ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
+		gt = new Gate(codaImbarco,
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
 		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabella().getSelectedRow();
 
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello()
 				.setValueAt(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText(), t, 0);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello()
-				.setValueAt(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText(), t, 1);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello().setValueAt(
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText(), t, 1);
 
 		implementazioneGateDAO().modificaGate(gt);
 		svuotaCampiGestioneGate();
@@ -1196,7 +1192,7 @@ public class Controller {
 		GestioneGate gestioneGate = new GestioneGate(this);
 		return gestioneGate;
 	}
-	
+
 	public JPanel gateCodeImbarco() {
 		GateCodeImbarco gateCodeImbarco = new GateCodeImbarco(this);
 		return gateCodeImbarco;
@@ -1221,20 +1217,19 @@ public class Controller {
 		SceltaVolo sceltaVolo = new SceltaVolo(this);
 		return sceltaVolo;
 	}
-	
+
 	public JDialog sceltaGate() {
 		SceltaGate sceltaGate = new SceltaGate(this);
 		return sceltaGate;
 	}
-	
+
 	public JDialog sceltaProfiloSenzaAccesso() {
 		SceltaProfiloSenzaAccesso sceltaProfiloSenzaAccesso = new SceltaProfiloSenzaAccesso(this);
 		return sceltaProfiloSenzaAccesso;
 	}
 
 	public JDialog registrazioneEffettuataConSuccesso() {
-		RegistrazioneEffettuataConSuccesso registrazioneEffettuataConSuccesso = new RegistrazioneEffettuataConSuccesso(
-				this);
+		OperazioneRiuscitaConSuccesso registrazioneEffettuataConSuccesso = new OperazioneRiuscitaConSuccesso(this);
 		return registrazioneEffettuataConSuccesso;
 	}
 
@@ -1302,7 +1297,17 @@ public class Controller {
 		svuotaCampiCambioPassword();
 		getDashboard().getRecensioni().setVisible(false);
 		getDashboard().getNoClick().setVisible(false);
-		pane.setVisible(true);
+		
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
+	    ((GestioneGate)getDashboard().getGestioneGate()).caricaTabella();
+	    ((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
+	    ((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
+	    ((GestioneVoliArrivi)getDashboard().getGestioneVoliArrivi()).caricaTabella();
+	    ((GestioneVoliPartenze)getDashboard().getGestioneVoliPartenze()).caricaTabella();
+	    ((CambioPassword) getDashboard().getCambioPassword()).getLblMostraNuovaPassword().setVisible(true);
+	    ((CambioPassword) getDashboard().getCambioPassword()).getLblMostraRipetiNuovaPassword().setVisible(true);
+	    
+	    pane.setVisible(true);
 	}
 
 	// METODI DI SCELTA PROFILO SENZA ACCESSO
@@ -1361,34 +1366,34 @@ public class Controller {
 		getDashboard().setVisible(true);
 		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
-	
+
 	// METODI SCELTA GATE
 
-		public void mostraSceltaGate() {
-			getDashboard().setEnabled(false);
-			getDashboard().getSceltaGate().setVisible(true);
-		}
+	public void mostraSceltaGate() {
+		getDashboard().setEnabled(false);
+		getDashboard().getSceltaGate().setVisible(true);
+	}
 
-		public void vaiAGateDaSceltaGate() {
-			getDashboard().getSceltaGate().dispose();
-			getDashboard().setEnabled(true);
-			getDashboard().setVisible(true);
-			mostraPannelli(getDashboard().getGestioneGate());
-		}
+	public void vaiAGateDaSceltaGate() {
+		getDashboard().getSceltaGate().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true);
+		mostraPannelli(getDashboard().getGestioneGate());
+	}
 
-		public void vaiAGateCodeImbarcoDaSceltaVolo() {
-			getDashboard().getSceltaGate().dispose();
-			getDashboard().setEnabled(true);
-			getDashboard().setVisible(true);
-			mostraPannelli(getDashboard().getGateCodeImbarco());
-		}
+	public void vaiAGateCodeImbarcoDaSceltaVolo() {
+		getDashboard().getSceltaGate().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true);
+		mostraPannelli(getDashboard().getGateCodeImbarco());
+	}
 
-		public void annullaSceltaGate() {
-			getDashboard().getSceltaGate().dispose();
-			getDashboard().setEnabled(true);
-			getDashboard().setVisible(true);
-			pannelloPrecedentementeSelezionato(getPannelloPrecedente());
-		}
+	public void annullaSceltaGate() {
+		getDashboard().getSceltaGate().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true);
+		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
+	}
 
 	// METODI DI HOME
 
@@ -1440,13 +1445,37 @@ public class Controller {
 		utn = new Utente(emailAccesso,
 				((CambioPassword) getDashboard().getCambioPassword()).getTxtNuovaPassword().getText());
 
-		if (passwordVecchiaUgualeAllaNuova() && ripetiCambioPassword()) {
-
+		if (passwordVecchiaUgualeAllaNuova() && ripetiCambioPassword() && !(controlloCampiSeVuotiCambioPassword())) {
 			implementazioneUtenteDAO().cambioPasswordDB(utn);
+			((OperazioneRiuscitaConSuccesso) getDashboard().getOperazioneEffettuataConSuccesso()).getLblComplimenti()
+					.setText("Operazione avvenuta con successo");
+			mostraOperazioneEffettuataConSuccesso();
 			logout();
 			mostraPannelli(getDashboard().getAccesso());
 
 			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
+		} else if ((passwordVecchiaUgualeAllaNuova()) && !(ripetiCambioPassword())
+				&& !(controlloCampiSeVuotiCambioPassword())) {
+			((CambioPassword) getDashboard().getCambioPassword()).getLblMessaggioErrore()
+					.setText("Le password non corrispondono");
+		} else if (!(passwordVecchiaUgualeAllaNuova()) && (ripetiCambioPassword())
+				&& !(controlloCampiSeVuotiCambioPassword())) {
+			((CambioPassword) getDashboard().getCambioPassword()).getLblMessaggioErrore()
+					.setText("La password che hai non corrisponde con quella scritta");
+		} else {
+			((CambioPassword) getDashboard().getCambioPassword()).getLblMessaggioErrore()
+					.setText("Riempire tutti i campi per continuare");
+		}
+	}
+
+	public boolean controlloCampiSeVuotiCambioPassword() {
+		if (((CambioPassword) getDashboard().getCambioPassword()).getTxtVecchiaPassword().getText().length() <= 0
+				|| ((CambioPassword) getDashboard().getCambioPassword()).getTxtNuovaPassword().getText().length() <= 0
+				|| ((CambioPassword) getDashboard().getCambioPassword()).getTxtRipetiNuovaPassword().getText()
+						.length() <= 0) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -1502,14 +1531,14 @@ public class Controller {
 		} else if (!ripetiPasswordDimenticata() && implementazioneUtenteDAO().esisteEmail(email)
 				&& !(controlloCampiSeVuotiPasswordDimenticata())) {
 			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
-					.setText("Le passwords non corrispondono.");
+					.setText("Le passwords non corrispondono");
 		} else if (ripetiPasswordDimenticata()
 				&& (implementazioneUtenteDAO().esisteEmail(email) && controlloCampiSeVuotiPasswordDimenticata())) {
 			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
-					.setText("Inserire i campi vuoti.");
+					.setText("Inserire i campi vuoti");
 		} else {
 			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
-					.setText("L'email non esiste.");
+					.setText("L'email non esiste");
 		}
 	}
 
@@ -1544,13 +1573,13 @@ public class Controller {
 
 	// METODI DI REGISTRAZIONE EFFETTUATA CON SUCCESSO
 
-	public void mostraRegistrazioneEffettuataConSuccesso() {
+	public void mostraOperazioneEffettuataConSuccesso() {
 		dashboard.setEnabled(false);
-		dashboard.getRegistrazioneEffettuataConSuccesso().setVisible(true);
+		dashboard.getOperazioneEffettuataConSuccesso().setVisible(true);
 	}
 
-	public void fineRegistrazioneEffettuataConSuccesso() {
-		dashboard.getRegistrazioneEffettuataConSuccesso().dispose();
+	public void operazioneRiuscitaConSuccesso() {
+		dashboard.getOperazioneEffettuataConSuccesso().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 	}
@@ -1665,7 +1694,7 @@ public class Controller {
 			mostraPannelli(getDashboard().getGestioneGate());
 		} else if (selezionePannello == 14) {
 			mostraPannelli(getDashboard().getGateCodeImbarco());
-		}else {
+		} else {
 			mostraPannelli(getDashboard().getHome());
 		}
 
@@ -1932,8 +1961,6 @@ public class Controller {
 				.setForeground(coloreLabelTemaChiaro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblNumeroPrenoazioni()
 				.setForeground(coloreLabelTemaChiaro);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRitardo()
-				.setForeground(coloreLabelTemaChiaro);
 
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
 				.setForeground(coloreScritteTemaChiaro);
@@ -1944,8 +1971,6 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza()
 				.setForeground(coloreScritteTemaChiaro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni()
-				.setForeground(coloreScritteTemaChiaro);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo()
 				.setForeground(coloreScritteTemaChiaro);
 
 		// GESTIONE VOLO ARRIVI
@@ -1976,11 +2001,13 @@ public class Controller {
 		getDashboard().getGestioneGate().setBackground(sfondoTemaChiaro);
 		((GestioneGate) getDashboard().getGestioneGate()).getLblCodiceGate().setForeground(coloreLabelTemaChiaro);
 		((GestioneGate) getDashboard().getGestioneGate()).getLblNumeroPorta().setForeground(coloreLabelTemaChiaro);
-		((GestioneGate) getDashboard().getGestioneGate()).getLblTempoImbarcoStimato().setForeground(coloreLabelTemaChiaro);
+		((GestioneGate) getDashboard().getGestioneGate()).getLblTempoImbarcoStimato()
+				.setForeground(coloreLabelTemaChiaro);
 
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setForeground(coloreScritteTemaChiaro);
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setForeground(coloreScritteTemaChiaro);
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().setForeground(coloreScritteTemaChiaro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato()
+				.setForeground(coloreScritteTemaChiaro);
 
 		// RECENSIONE
 		getDashboard().getRecensioni().setBackground(sfondoTemaChiaro);
@@ -2182,8 +2209,7 @@ public class Controller {
 				.setForeground(coloreLabelTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblNumeroPrenoazioni()
 				.setForeground(coloreLabelTemaScuro);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRitardo()
-				.setForeground(coloreLabelTemaScuro);
+
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
 				.setForeground(coloreScritteTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
@@ -2193,8 +2219,6 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza()
 				.setForeground(coloreScritteTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni()
-				.setForeground(coloreScritteTemaScuro);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtRitardo()
 				.setForeground(coloreScritteTemaScuro);
 
 		// GESTIONE VOLO ARRIVI
@@ -2225,11 +2249,15 @@ public class Controller {
 		getDashboard().getGestioneGate().setBackground(sfondoTemaScuro);
 		((GestioneGate) getDashboard().getGestioneGate()).getLblCodiceGate().setForeground(coloreLabelTemaScuro);
 		((GestioneGate) getDashboard().getGestioneGate()).getLblNumeroPorta().setForeground(coloreLabelTemaScuro);
-		((GestioneGate) getDashboard().getGestioneGate()).getLblTempoImbarcoStimato().setForeground(coloreLabelTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getLblTempoImbarcoStimato()
+				.setForeground(coloreLabelTemaScuro);
 
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setForeground(coloreScritteSuBiancoTemaScuro);
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setForeground(coloreScritteSuBiancoTemaScuro);
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
 
 		// RECENSIONE
 		getDashboard().getRecensioni().setBackground(sfondoTemaScuro);

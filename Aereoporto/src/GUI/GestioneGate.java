@@ -52,6 +52,11 @@ public class GestioneGate extends JPanel {
 	private JLabel lblNumeroPorta;
 	private JLabel lblCodiceGate;
 	private JLabel lblTempoImbarcoStimato;
+	
+	private JLabel lblAggiungi;
+	private JLabel lblModifica;
+	private JLabel lblElimina;
+	private JLabel lblSvuota;
 
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -144,6 +149,38 @@ public class GestioneGate extends JPanel {
 
 	public void setTxtTempoImbarcoStimato(JTextField txtTempoImbarcoStimato) {
 		this.txtTempoImbarcoStimato = txtTempoImbarcoStimato;
+	}
+
+	public JLabel getLblAggiungi() {
+		return lblAggiungi;
+	}
+
+	public void setLblAggiungi(JLabel lblAggiungi) {
+		this.lblAggiungi = lblAggiungi;
+	}
+
+	public JLabel getLblModifica() {
+		return lblModifica;
+	}
+
+	public void setLblModifica(JLabel lblModifica) {
+		this.lblModifica = lblModifica;
+	}
+
+	public JLabel getLblElimina() {
+		return lblElimina;
+	}
+
+	public void setLblElimina(JLabel lblElimina) {
+		this.lblElimina = lblElimina;
+	}
+
+	public JLabel getLblSvuota() {
+		return lblSvuota;
+	}
+
+	public void setLblSvuota(JLabel lblSvuota) {
+		this.lblSvuota = lblSvuota;
 	}
 
 	Controller controllerGestioneGate;
@@ -240,50 +277,6 @@ public class GestioneGate extends JPanel {
 		tabella.setModel(modello);
 		scrollPane.setViewportView(tabella);
 
-		JButton btnElimina = new JButton("elimina");
-		btnElimina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnElimina.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.eliminaGate();
-			}
-		});
-		btnElimina.setBounds(750, 526, 89, 23);
-		add(btnElimina);
-
-		JButton btnAggiungi = new JButton("aggiungi");
-		btnAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAggiungi.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.aggiungiGate();
-			}
-		});
-		btnAggiungi.setBounds(750, 461, 89, 23);
-		add(btnAggiungi);
-
-		JButton btnModifica = new JButton("modifica");
-		btnModifica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnModifica.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.modificaGate();
-			}
-		});
-		btnModifica.setBounds(750, 493, 89, 23);
-		add(btnModifica);
-
-		JButton btnSvuota = new JButton("svuota");
-		btnSvuota.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnSvuota.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.svuotaCampiGestioneGate();
-			}
-		});
-		btnSvuota.setBounds(750, 560, 89, 23);
-		add(btnSvuota);
-
 		lblNumeroPorta = new JLabel("Numero Porta");
 		lblNumeroPorta.setFont(controllerGestioneGate.fontLabel);
 		lblNumeroPorta.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
@@ -341,7 +334,156 @@ public class GestioneGate extends JPanel {
 		lblTempoImbarcoStimato.setFont(controllerGestioneGate.fontLabel);
 		lblTempoImbarcoStimato.setBounds(30, 527, 204, 20);
 		add(lblTempoImbarcoStimato);
+		
+		lblAggiungi = new JLabel("");
+		lblAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAggiungi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneGate.aggiungiGate();
 
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
+
+			}
+
+		});
+		lblAggiungi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
+		lblAggiungi.setBounds(358, 569, 130, 36);
+		add(lblAggiungi);
+
+		lblModifica = new JLabel("");
+		lblModifica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblModifica.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneGate.modificaGate();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblModifica.setIcon(new ImageIcon(img.modifica2()));
+
+			}
+		});
+		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
+		lblModifica.setIcon(new ImageIcon(img.modifica1()));
+		lblModifica.setBounds(114, 569, 130, 36);
+		add(lblModifica);
+
+		lblElimina = new JLabel("");
+		lblElimina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblElimina.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneGate.eliminaGate();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblElimina.setIcon(new ImageIcon(img.elimina2()));
+
+			}
+		});
+		lblElimina.setHorizontalAlignment(SwingConstants.CENTER);
+		lblElimina.setIcon(new ImageIcon(img.elimina1()));
+		lblElimina.setBounds(846, 569, 130, 36);
+		add(lblElimina);
+
+		lblSvuota = new JLabel("");
+		lblSvuota.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblSvuota.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneGate.svuotaCampiGestioneGate();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota2()));
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota1()));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota3()));
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblSvuota.setIcon(new ImageIcon(img.svuota2()));
+
+			}
+		});
+		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
+		lblSvuota.setBounds(602, 569, 130, 36);
+		add(lblSvuota);
 		
 		caricaTabella();
 

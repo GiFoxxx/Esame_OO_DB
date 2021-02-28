@@ -328,13 +328,8 @@ public class Registrazione extends JPanel {
 		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessaggioCredenziali.setFont(controllerRegistrazione.fontLabel);
 		lblMessaggioCredenziali.setForeground(controllerRegistrazione.coloreScritturaAllertaTemaScuro);
-		lblMessaggioCredenziali.setBounds(334, 526, 422, 14);
+		lblMessaggioCredenziali.setBounds(269, 526, 553, 14);
 		add(lblMessaggioCredenziali);
 	}
-
-	// METODI
-
-	
-
 	
 }
