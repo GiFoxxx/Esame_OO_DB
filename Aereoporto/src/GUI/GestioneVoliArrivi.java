@@ -60,13 +60,22 @@ public class GestioneVoliArrivi extends JPanel {
 	private JLabel lblDataArrivo;
 	private JLabel lblOrarioArrivo;
 	private JLabel lblDuePuntiArrivo;
-	
+
 	private JLabel lblAggiungi;
 	private JLabel lblModifica;
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
+	private JLabel lblMessaggioErrore;
 
 	// GETTER E SETTER
+	public JLabel getLblMessaggioErrore() {
+		return lblMessaggioErrore;
+	}
+
+	public void setLblMessaggioErrore(JLabel lblMessaggioErrore) {
+		this.lblMessaggioErrore = lblMessaggioErrore;
+	}
+
 	public DefaultTableModel getModello() {
 		return modello;
 	}
@@ -142,7 +151,7 @@ public class GestioneVoliArrivi extends JPanel {
 	public void setLblOraArrivo(JLabel lblOraArrivo) {
 		this.lblOrarioArrivo = lblOraArrivo;
 	}
-	
+
 	public JLabel getLblDuePuntiArrivo() {
 		return lblDuePuntiArrivo;
 	}
@@ -571,7 +580,14 @@ public class GestioneVoliArrivi extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
-		
+
+		lblMessaggioErrore = new JLabel("");
+		lblMessaggioErrore.setForeground(controllerGestioneVoliArrivi.coloreScritturaAllertaTemaScuro);
+		lblMessaggioErrore.setFont(controllerGestioneVoliArrivi.fontLabel);
+		lblMessaggioErrore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessaggioErrore.setBounds(223, 24, 633, 14);
+		add(lblMessaggioErrore);
+
 		caricaTabella();
 	}
 

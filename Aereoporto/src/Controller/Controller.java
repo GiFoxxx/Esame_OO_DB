@@ -5,7 +5,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -695,18 +697,37 @@ public class Controller {
 		@SuppressWarnings("deprecation")
 		Time tempo = new Time(ora, minuto, secondo);
 
-		vlprtz = new VoloPartenze(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
-				tempo,
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().getText(),
-				trt, gt);
+		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
-		implementazioneVoloPartenzeDAO().aggiungiVoloPartenze(vlprtz);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
-				.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
-		svuotaCampiGestioneVoloPartenze();
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+			@SuppressWarnings("deprecation")
+			Timestamp dataTempo = new Timestamp(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
+							.getYear(),
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
+							.getMonth(),
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
+							.getDate(),
+					tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
+
+			vlprtz = new VoloPartenze(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
+							.getText(),
+					dataTempo,
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni()
+							.getText(),
+					trt, gt,
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getChckbxPartito().isSelected());
+
+			implementazioneVoloPartenzeDAO().aggiungiVoloPartenze(vlprtz);
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
+					.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
+			svuotaCampiGestioneVoloPartenze();
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore().setText("");
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+		} else {
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore()
+					.setText("Errore nell'inserimento dell'orario");
+		}
 	}
 
 	public void eliminaVoloPartenze() {
@@ -733,12 +754,63 @@ public class Controller {
 		@SuppressWarnings("deprecation")
 		Time tempo = new Time(ora, minuto, secondo);
 
+		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
+
+			vlprtz = new VoloPartenze(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
+							.getText(),
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
+					tempo,
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni()
+							.getText(),
+					trt, gt,
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getChckbxPartito().isSelected());
+
+			int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
+
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
+					.setValueAt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+							.getTxtCodiceVoloPartenze().getText(), t, 0);
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText(), t,
+					1);
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText(), t,
+					2);
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
+					t, 3);
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText(), t,
+					4);
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText(),
+					t, 5);
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
+					.setValueAt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+							.getTxtNumeroPrenotazioni().getText(), t, 6);
+
+			implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
+			svuotaCampiGestioneVoloPartenze();
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+		} else {
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore()
+					.setText("Errore nell'inserimento dell'orario");
+		}
+	}
+
+	public void modificaStatusVoloPartenze() {
+		boolean partito = false;
+
+		if (((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getChckbxPartito().isSelected()) {
+			partito = true;
+		} else {
+			partito = false;
+		}
+
 		vlprtz = new VoloPartenze(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
-				tempo,
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().getText(),
-				trt, gt);
+				partito);
 
 		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
 
@@ -746,22 +818,10 @@ public class Controller {
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
 				t, 0);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText(), t, 1);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText(), t, 2);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(), t,
-				3);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText(), t, 4);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText(), t,
-				5);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().getText(),
-				t, 6);
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getChckbxPartito().isSelected(), t,
+				8);
 
-		implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
+		implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
 		svuotaCampiGestioneVoloPartenze();
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
@@ -790,16 +850,22 @@ public class Controller {
 		@SuppressWarnings("deprecation")
 		Time tempo = new Time(ora, minuto, secondo);
 
-		vlarr = new VoloArrivi(
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(),
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(),
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate(), tempo);
+		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
-		implementazioneVoloArriviDAO().aggiungiVoloArrivi(vlarr);
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello()
-				.addRow(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getRow());
-		svuotaCampiGestioneVoloArrivi();
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
+			vlarr = new VoloArrivi(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(),
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(),
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate(), tempo);
+
+			implementazioneVoloArriviDAO().aggiungiVoloArrivi(vlarr);
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello()
+					.addRow(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getRow());
+			svuotaCampiGestioneVoloArrivi();
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
+		} else {
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblMessaggioErrore()
+					.setText("Errore nell'inserimento dell'orario");
+		}
 	}
 
 	public void eliminaVoloArrivi() {
@@ -822,24 +888,32 @@ public class Controller {
 		@SuppressWarnings("deprecation")
 		Time tempo = new Time(ora, minuto, secondo);
 
-		vlarr = new VoloArrivi(
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(),
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(),
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate(), tempo);
+		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
-		int t = ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTabella().getSelectedRow();
+			vlarr = new VoloArrivi(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(),
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(),
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate(), tempo);
 
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(), t, 0);
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(), t, 1);
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate(), t, 2);
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText(), t, 3);
-		implementazioneVoloArriviDAO().modificaVoloArrivi(vlarr);
-		svuotaCampiGestioneVoloArrivi();
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
+			int t = ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTabella().getSelectedRow();
+
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(), t,
+					0);
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(), t,
+					1);
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate(), t, 2);
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText(), t, 3);
+			implementazioneVoloArriviDAO().modificaVoloArrivi(vlarr);
+			svuotaCampiGestioneVoloArrivi();
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
+		} else {
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblMessaggioErrore()
+					.setText("Errore nell'inserimento dell'orario");
+		}
 	}
 
 	// METODI GESTIONE GATE
@@ -1270,6 +1344,7 @@ public class Controller {
 		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
 		((Registrazione) getDashboard().getRegistrazione()).getLblMostraPassword().setVisible(true);
 		((Registrazione) getDashboard().getRegistrazione()).getLblMostraRipetiPassword().setVisible(true);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore().setText("");
 		getDashboard().getHome().setVisible(false);
 		getDashboard().getAccesso().setVisible(false);
 		svuotaCampiAccesso();
@@ -1297,17 +1372,17 @@ public class Controller {
 		svuotaCampiCambioPassword();
 		getDashboard().getRecensioni().setVisible(false);
 		getDashboard().getNoClick().setVisible(false);
-		
+
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
-	    ((GestioneGate)getDashboard().getGestioneGate()).caricaTabella();
-	    ((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
-	    ((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-	    ((GestioneVoliArrivi)getDashboard().getGestioneVoliArrivi()).caricaTabella();
-	    ((GestioneVoliPartenze)getDashboard().getGestioneVoliPartenze()).caricaTabella();
-	    ((CambioPassword) getDashboard().getCambioPassword()).getLblMostraNuovaPassword().setVisible(true);
-	    ((CambioPassword) getDashboard().getCambioPassword()).getLblMostraRipetiNuovaPassword().setVisible(true);
-	    
-	    pane.setVisible(true);
+		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
+		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+		((CambioPassword) getDashboard().getCambioPassword()).getLblMostraNuovaPassword().setVisible(true);
+		((CambioPassword) getDashboard().getCambioPassword()).getLblMostraRipetiNuovaPassword().setVisible(true);
+
+		pane.setVisible(true);
 	}
 
 	// METODI DI SCELTA PROFILO SENZA ACCESSO

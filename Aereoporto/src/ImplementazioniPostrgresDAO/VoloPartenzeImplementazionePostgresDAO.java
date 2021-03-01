@@ -29,9 +29,9 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.datapartenza, vp.orariopartenza, (orariopartenza - gt.tempodiimbarcostimato - '00:20:00') AS inizioimbarco, (orariopartenza - '00:20:00') AS fineimbarco, vp.numeroprenotazioni "
+		String sql = "SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.dataOrariopartenza, (vp.dataOrarioPartenza - gt.tempodiimbarcostimato) AS aperturagate, vp.dataOrarioPartenza AS chiusuragate, vp.numeroprenotazioni, vp.status "
 				+ "FROM volopartenza AS vp, tratta AS tr, compagniaAerea AS ca, gate AS gt "
-				+ "WHERE (xcodiceTratta = codiceTratta) AND (xcodicegate = codiceGate) AND (xcodiceCompagniaAerea = codiceCompagniaAerea) ORDER BY datapartenza";
+				+ "WHERE (xcodiceTratta = codiceTratta) AND (xcodicegate = codiceGate) AND (xcodiceCompagniaAerea = codiceCompagniaAerea) ORDER BY dataOrariopartenza";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);
@@ -115,26 +115,53 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 			return false;
 		}
 	}
+	
+	@Override // modifica info volo partenze
+	public boolean modificaStatusVoloPartenze(Object voloPartenze) {
+		vlprtz = (VoloPartenze) voloPartenze;
+
+		PreparedStatement pst;
+		String sql = "UPDATE voloPartenza SET status = ? WHERE codiceVoloPartenza=?";
+		try {
+			db.ConnessioneDB();
+
+			pst = db.ConnessioneDB().prepareStatement(sql);
+			
+			pst.setBoolean(1, vlprtz.isStatus());
+			pst.setString(2, vlprtz.getCodiceVoloPartenze());
+
+			int res = pst.executeUpdate();
+
+			if (res > 0) {
+				db.ConnessioneDB().close();
+				return true;
+			} else {
+				db.ConnessioneDB().close();
+				return false;
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+			return false;
+		}
+	}
 
 	@Override // aggiungi volo partenze
 	public boolean aggiungiVoloPartenze(Object voloPartenze) {
 		vlprtz = (VoloPartenze) voloPartenze;
 
 		PreparedStatement pst;
-		String sql = "INSERT INTO voloPartenza (codiceVoloPartenza, dataPartenza, orarioPartenza, numeroPrenotazioni, xcodiceGate, xcodiceTratta) VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO voloPartenza (codiceVoloPartenza, dataOrarioPartenza, numeroPrenotazioni, xcodiceGate, xcodiceTratta) VALUES (?,?,?,?,?)";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, vlprtz.getCodiceVoloPartenze());
-			long tempoDataPartenza = vlprtz.getDataPartenza().getTime();
-			java.sql.Date dataPartenza = new java.sql.Date(tempoDataPartenza);
-			pst.setDate(2, dataPartenza);
-			pst.setTime(3, vlprtz.getOrarioPartenza());
-			pst.setString(4, vlprtz.getNumeroPrenotazioni());
-			pst.setString(5, vlprtz.getGt().getCodiceGate());
-			pst.setString(6, vlprtz.getTrt().getCodiceTratta());
+			pst.setTimestamp(2, vlprtz.getDataOrarioPartenza());
+			pst.setString(3, vlprtz.getNumeroPrenotazioni());
+			pst.setString(4, vlprtz.getGt().getCodiceGate());
+			pst.setString(5, vlprtz.getTrt().getCodiceTratta());
 			
 			int res = pst.executeUpdate();
 

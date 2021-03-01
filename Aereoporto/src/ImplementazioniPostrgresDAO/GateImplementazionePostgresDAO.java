@@ -177,14 +177,15 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 	public boolean modificaGate(Object gate) {
 		gt = (Gate) gate;
 		PreparedStatement pst;
-		String sql = "UPDATE gate SET numeroporta = ? WHERE codiceGate = ?";
+		String sql = "UPDATE gate SET numeroporta = ?, tempodiimbarcostimato = ? WHERE codiceGate = ?";
 		try {
 			db.ConnessioneDB();
 
 			pst = db.ConnessioneDB().prepareStatement(sql);
 
 			pst.setString(1, gt.getNumeroPorta());
-			pst.setString(2, gt.getCodiceGate());
+			pst.setTime(2, gt.getTempoImbarcoStimato());
+			pst.setString(3, gt.getCodiceGate());
 
 			int res = pst.executeUpdate();
 
@@ -210,7 +211,7 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 
 		PreparedStatement pst;
 		ResultSet rs;
-		String sql = "SELECT * FROM gate ORDER BY codiceGate";
+		String sql = "SELECT * FROM gate ORDER BY numeroPorta";
 
 		try {
 			pst = db.ConnessioneDB().prepareStatement(sql);

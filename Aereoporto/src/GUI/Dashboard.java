@@ -376,8 +376,8 @@ public class Dashboard extends JFrame {
 		return operazioneEffettuataConSuccesso;
 	}
 
-	public void setOperazioneEffettuataConSuccesso(JDialog registrazioneEffettuataConSuccesso) {
-		this.operazioneEffettuataConSuccesso = registrazioneEffettuataConSuccesso;
+	public void setOperazioneEffettuataConSuccesso(JDialog operazioneEffettuataConSuccesso) {
+		this.operazioneEffettuataConSuccesso = operazioneEffettuataConSuccesso;
 	}
 
 	public JDialog getSceltaGate() {
@@ -506,14 +506,6 @@ public class Dashboard extends JFrame {
 
 	public void setCambioPassword(JPanel cambioPassword) {
 		this.cambioPassword = cambioPassword;
-	}
-
-	public JPanel getPrenotazioniFalsa() {
-		return prenotazioniFalsa;
-	}
-
-	public void setPrenotazioniFalsa(JPanel prenotazioniFalsa) {
-		this.prenotazioniFalsa = prenotazioniFalsa;
 	}
 
 	public JLabel getLblLayout() {

@@ -37,11 +37,12 @@ import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.util.Calendar;
+import javax.swing.JCheckBox;
 
 public class GestioneVoliPartenze extends JPanel {
 
-	String colonne[] = { "Codice Volo Partenze", "Compagnia Aerea", "N°Gate", "Citta di Arrivo", "Data Partenza",
-			"Orario Partenza", "Apertura Gate", "Chiusura Gate", "Numero Prenotazioni" };
+	String colonne[] = { "Codice Volo Partenze", "Compagnia Aerea", "N°Gate", "Citta di Arrivo",
+			"Data e Orario Partenza", "Apertura Gate", "Chiusura Gate", "Numero Prenotazioni", "Status" };
 	Object[] row = new Object[11];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	ArrayList<Object[]> ListaVoliPartenze = new ArrayList<>();
@@ -73,11 +74,21 @@ public class GestioneVoliPartenze extends JPanel {
 	private JLabel lblModifica;
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
+	private JLabel lblMessaggioErrore;
 
+	private JCheckBox chckbxPartito;
 	private JComboBox<String> comboBoxNumeroPorta;
 	private JComboBox<String> comboBoxCittaArrivo;
 
 	// GETTER E SETTER
+	public JLabel getLblMessaggioErrore() {
+		return lblMessaggioErrore;
+	}
+
+	public void setLblMessaggioErrore(JLabel lblMessaggioErrore) {
+		this.lblMessaggioErrore = lblMessaggioErrore;
+	}
+
 	public DefaultTableModel getModello() {
 		return modello;
 	}
@@ -162,8 +173,6 @@ public class GestioneVoliPartenze extends JPanel {
 		this.lblNumeroPrenotazioni = lblNumeroPrenoazioni;
 	}
 
-
-
 	public JTextField getTxtCodiceVoloPartenze() {
 		return txtCodiceVoloPartenze;
 	}
@@ -203,8 +212,6 @@ public class GestioneVoliPartenze extends JPanel {
 	public void setTxtNumeroPrenotazioni(JTextField txtNumeroPrenotazioni) {
 		this.txtNumeroPrenotazioni = txtNumeroPrenotazioni;
 	}
-
-	
 
 	public JTextField getTxtCodiceGate() {
 		return txtCodiceGate;
@@ -268,6 +275,14 @@ public class GestioneVoliPartenze extends JPanel {
 
 	public void setComboBoxCittaArrivo(JComboBox<String> comboBoxCittaArrivo) {
 		this.comboBoxCittaArrivo = comboBoxCittaArrivo;
+	}
+
+	public JCheckBox getChckbxPartito() {
+		return chckbxPartito;
+	}
+
+	public void setChckbxPartito(JCheckBox chckbxPartito) {
+		this.chckbxPartito = chckbxPartito;
 	}
 
 	public JLabel getLblAggiungi() {
@@ -600,7 +615,11 @@ public class GestioneVoliPartenze extends JPanel {
 		lblModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoliPartenze.modificaVoloPartenze();
+				if (getTxtOraPartenza().getText().length() <= 0) {
+					controllerGestioneVoliPartenze.modificaStatusVoloPartenze();
+				} else {
+					controllerGestioneVoliPartenze.modificaVoloPartenze();
+				}
 			}
 
 			@Override
@@ -705,6 +724,18 @@ public class GestioneVoliPartenze extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
+
+		chckbxPartito = new JCheckBox("Partito");
+		chckbxPartito.setHorizontalAlignment(SwingConstants.RIGHT);
+		chckbxPartito.setBounds(849, 469, 97, 23);
+		add(chckbxPartito);
+
+		lblMessaggioErrore = new JLabel("");
+		lblMessaggioErrore.setForeground(controllerGestioneVoliPartenze.coloreScritturaAllertaTemaScuro);
+		lblMessaggioErrore.setFont(controllerGestioneVoliPartenze.fontLabel);
+		lblMessaggioErrore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessaggioErrore.setBounds(223, 24, 633, 14);
+		add(lblMessaggioErrore);
 
 		stampaComboBoxNumeroPorta();
 		stampaComboBoxCittaArrivo();
