@@ -677,6 +677,8 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().setText("");
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().setText("");
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().setText(null);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo().setText(null);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().setText(null);
 	}
 
 	public VoloPartenzeDAO implementazioneVoloPartenzeDAO() {
@@ -684,6 +686,7 @@ public class Controller {
 		return dao;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void aggiungiVoloPartenze() {
 		gt = new Gate(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText());
 		trt = new Tratta(
@@ -694,12 +697,16 @@ public class Controller {
 		int minuto = Integer.parseInt(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText());
 		int secondo = 0;
-		@SuppressWarnings("deprecation")
 		Time tempo = new Time(ora, minuto, secondo);
+		int minutoTempoImbarcoEffettivo = Integer
+				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+						.getTxtTempoDiImbarcoEffettivo().getText());
+		Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarcoEffettivo, 0);
+		int status = Integer
+				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText());
 
 		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
-			@SuppressWarnings("deprecation")
 			Timestamp dataTempo = new Timestamp(
 					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
 							.getYear(),
@@ -712,11 +719,9 @@ public class Controller {
 			vlprtz = new VoloPartenze(
 					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
 							.getText(),
-					dataTempo,
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni()
-							.getText(),
-					trt, gt,
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getChckbxPartito().isSelected());
+					dataTempo, ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+							.getTxtNumeroPrenotazioni().getText(),
+					tempoImbarcoEffettivo, trt, gt, status);
 
 			implementazioneVoloPartenzeDAO().aggiungiVoloPartenze(vlprtz);
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
@@ -741,6 +746,7 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
+	@SuppressWarnings("deprecation")
 	public void modificaVoloPartenze() {
 		gt = new Gate(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText());
 		trt = new Tratta(
@@ -753,18 +759,31 @@ public class Controller {
 		int secondo = 0;
 		@SuppressWarnings("deprecation")
 		Time tempo = new Time(ora, minuto, secondo);
+		int minutoTempoImbarcoEffettivo = Integer
+				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+						.getTxtTempoDiImbarcoEffettivo().getText());
+		Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarcoEffettivo, 0);
+		int status = Integer
+				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText());
 
 		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
+			@SuppressWarnings("deprecation")
+			Timestamp dataTempo = new Timestamp(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
+							.getYear(),
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
+							.getMonth(),
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
+							.getDate(),
+					tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
+			
 			vlprtz = new VoloPartenze(
 					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
-							.getText(),
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
-					tempo,
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni()
-							.getText(),
-					trt, gt,
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getChckbxPartito().isSelected());
+					.getText(),
+			dataTempo, ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+					.getTxtNumeroPrenotazioni().getText(),
+			tempoImbarcoEffettivo, trt, gt, status);
 
 			int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
 
@@ -799,18 +818,13 @@ public class Controller {
 		}
 	}
 
-	public void modificaStatusVoloPartenze() {
-		boolean partito = false;
-
-		if (((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getChckbxPartito().isSelected()) {
-			partito = true;
-		} else {
-			partito = false;
-		}
+	public void modificaStatusImbarcoVoloPartenze() {
+		int tempoImbarcoStimato = Integer
+				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo().getText());
 
 		vlprtz = new VoloPartenze(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
-				partito);
+				tempoImbarcoStimato);
 
 		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
 
@@ -818,8 +832,35 @@ public class Controller {
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
 				t, 0);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getChckbxPartito().isSelected(), t,
-				8);
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText(), t, 8);
+
+		implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+		svuotaCampiGestioneVoloPartenze();
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void modificaStatusVoloPartenze() {
+		int status = Integer
+				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText());
+
+		int minutoImbarcoEffettivo = Integer
+				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo().getText());
+		
+		Time tempoImbarcoEffettivo = new Time(0, minutoImbarcoEffettivo, 0);
+		
+		vlprtz = new VoloPartenze(
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
+				status, tempoImbarcoEffettivo);
+
+		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
+
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
+				t, 0);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(vlprtz.isStatusImbarco(), t, 8);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText(), t, 9);
 
 		implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
 		svuotaCampiGestioneVoloPartenze();
@@ -934,16 +975,19 @@ public class Controller {
 		return dao;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void aggiungiGate() {
 		int ora = 0;
 		int minuto = Integer
 				.parseInt(((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().getText());
+		int minutoChiusuraGate = 20;
 		int secondo = 0;
-		@SuppressWarnings("deprecation")
+
 		Time tempo = new Time(ora, minuto, secondo);
+		Time chiusuraGate = new Time(ora, minutoChiusuraGate, secondo);
 
 		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
-				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), tempo);
+				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), tempo, chiusuraGate);
 
 		implementazioneGateDAO().aggiungiGate(gt);
 		((GestioneGate) getDashboard().getGestioneGate()).getModello()
@@ -962,16 +1006,19 @@ public class Controller {
 		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
+	@SuppressWarnings("deprecation")
 	public void modificaGate() {
 		int ora = 0;
 		int minuto = Integer
 				.parseInt(((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().getText());
+		int minutoChiusuraGate = 20;
 		int secondo = 0;
-		@SuppressWarnings("deprecation")
+
 		Time tempo = new Time(ora, minuto, secondo);
+		Time chiusuraGate = new Time(ora, minutoChiusuraGate, secondo);
 
 		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
-				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), tempo);
+				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), tempo, chiusuraGate);
 
 		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
 

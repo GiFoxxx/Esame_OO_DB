@@ -15,4 +15,5 @@ public interface VoloPartenzeDAO {
 	boolean aggiungiVoloPartenze(Object voloPartenze);
 
 	boolean modificaStatusVoloPartenze(Object voloPartenze);
+
 }

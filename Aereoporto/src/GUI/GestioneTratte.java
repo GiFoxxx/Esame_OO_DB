@@ -383,7 +383,7 @@ public class GestioneTratte extends JPanel {
 		txtCodiceCompagniaAerea.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCodiceCompagniaAerea.setEditable(false);
 		txtCodiceCompagniaAerea.setColumns(10);
-		txtCodiceCompagniaAerea.setBounds(233, 485, 82, 20);
+		txtCodiceCompagniaAerea.setBounds(233, 485, 0, 20);
 		add(txtCodiceCompagniaAerea);
 
 		comboBoxNomeCompagniaAerea = new JComboBox<String>();
@@ -394,7 +394,7 @@ public class GestioneTratte extends JPanel {
 				txtCodiceCompagniaAerea.setText(map.get(comboBoxNomeCompagniaAerea.getSelectedItem().toString()));
 			}
 		});
-		comboBoxNomeCompagniaAerea.setBounds(315, 485, 95, 20);
+		comboBoxNomeCompagniaAerea.setBounds(243, 485, 95, 20);
 		add(comboBoxNomeCompagniaAerea);
 		
 		lblAggiungi = new JLabel("");

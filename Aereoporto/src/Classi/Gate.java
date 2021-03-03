@@ -11,6 +11,7 @@ public class Gate {
 	private String codiceGate;
 	private String numeroPorta;
 	private Time tempoImbarcoStimato;
+	private Time tempoChiusuraGate;
 
 	// GETTER E SETTER
 
@@ -45,6 +46,14 @@ public class Gate {
 	public void setTempoImbarcoStimato(Time tempoImbarcoStimato) {
 		this.tempoImbarcoStimato = tempoImbarcoStimato;
 	}
+	
+	public Time getTempoChiusuraGate() {
+		return tempoChiusuraGate;
+	}
+
+	public void setTempoChiusuraGate(Time tempoChiusuraGate) {
+		this.tempoChiusuraGate = tempoChiusuraGate;
+	}
 
 	// COSTRUTTORI
 
@@ -52,12 +61,13 @@ public class Gate {
 		super();
 	}
 
-	public Gate(CodaDiImbarco codeDiImbarco, String codiceGate, String numeroPorta, Time tempoImbarcoStimato) {
+	public Gate(CodaDiImbarco codeDiImbarco, String codiceGate, String numeroPorta, Time tempoImbarcoStimato, Time tempoChiusuraGate) {
 		super();
 		this.codeDiImbarco = codeDiImbarco;
 		this.codiceGate = codiceGate;
 		this.numeroPorta = numeroPorta;
 		this.tempoImbarcoStimato = tempoImbarcoStimato;
+		
 	}
 
 	public Gate(String codiceGate, String numeroPorta) {
@@ -68,11 +78,12 @@ public class Gate {
 	
 	
 
-	public Gate(String codiceGate, String numeroPorta, Time tempoImbarcoStimato) {
+	public Gate(String codiceGate, String numeroPorta, Time tempoImbarcoStimato, Time tempoChiusuraGate) {
 		super();
 		this.codiceGate = codiceGate;
 		this.numeroPorta = numeroPorta;
 		this.tempoImbarcoStimato = tempoImbarcoStimato;
+		this.tempoChiusuraGate = tempoChiusuraGate;
 	}
 
 	public Gate(CodaDiImbarco codeDiImbarco, String codiceGate) {
