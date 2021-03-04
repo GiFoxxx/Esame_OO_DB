@@ -310,19 +310,35 @@ public class CambioPassword extends JPanel {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblSalva.setIcon(new ImageIcon(img.salvaModifiche2()));
+				if (controllerCambioPassword.cambioTema()) {
+					lblSalva.setIcon(new ImageIcon(img.salvaModifiche2TemaChiaro()));
+				} else {
+					lblSalva.setIcon(new ImageIcon(img.salvaModifiche2()));
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblSalva.setIcon(new ImageIcon(img.salvaModifiche1()));
+				if (controllerCambioPassword.cambioTema()) {
+					lblSalva.setIcon(new ImageIcon(img.salvaModifiche1TemaChiaro()));
+				} else {
+					lblSalva.setIcon(new ImageIcon(img.salvaModifiche1()));
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblSalva.setIcon(new ImageIcon(img.salvaModifiche3()));
+				if (controllerCambioPassword.cambioTema()) {
+					lblSalva.setIcon(new ImageIcon(img.salvaModifiche3TemaChiaro()));
+				} else {
+					lblSalva.setIcon(new ImageIcon(img.salvaModifiche3()));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblSalva.setIcon(new ImageIcon(img.salvaModifiche2()));
+				if (controllerCambioPassword.cambioTema()) {
+					lblSalva.setIcon(new ImageIcon(img.salvaModifiche2TemaChiaro()));
+				} else {
+					lblSalva.setIcon(new ImageIcon(img.salvaModifiche2()));
+				}
 			}
 		});
 		lblSalva.setBounds(373, 494, 319, 36);
@@ -339,23 +355,35 @@ public class CambioPassword extends JPanel {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro2()));
-
+				if (controllerCambioPassword.cambioTema()) {
+					lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro2TemaChiaro()));
+				} else {
+					lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro2()));
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro1()));
-
+				if (controllerCambioPassword.cambioTema()) {
+					lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro1TemaChiaro()));
+				} else {
+					lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro1()));
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro3()));
-
+				if (controllerCambioPassword.cambioTema()) {
+					lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro3TemaChiaro()));
+				} else {
+					lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro3()));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro2()));
-
+				if (controllerCambioPassword.cambioTema()) {
+					lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro2TemaChiaro()));
+				} else {
+					lblAnnulla.setIcon(new ImageIcon(img.frecciaIndietro2()));
+				}
 			}
 		});
 		lblAnnulla.setBounds(277, 79, 41, 41);

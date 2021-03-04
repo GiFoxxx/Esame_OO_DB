@@ -92,6 +92,33 @@ public class Immagini {
 
 	/*-----------------------------------------------------------DASHBOARD-----------------------------------------------------------*/
 
+	//MENU
+	public Image menu() {
+		Image menu = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/menu.png")).getImage()
+				.getScaledInstance(266, 148, Image.SCALE_SMOOTH);
+		return menu;
+	}
+	
+	public Image frecciaMenu1() {
+		Image frecciaMenu1 = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/frecciaMenu1.png")).getImage()
+				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
+		return frecciaMenu1;
+	}
+	
+	public Image frecciaMenu2() {
+		Image frecciaMenu2 = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/frecciaMenu2.png")).getImage()
+				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
+		return frecciaMenu2;
+	}
+	
+	public Image frecciaMenu3() {
+		Image frecciaMenu3 = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/frecciaMenu3.png")).getImage()
+				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
+		return frecciaMenu3;
+	}
+	
+	
+	
 	public Image sfondo() {
 		Image imgSfondo = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/SfondoDashboard.png")).getImage()
 				.getScaledInstance(1143, 677, Image.SCALE_SMOOTH);
@@ -169,13 +196,12 @@ public class Immagini {
 				.getImage().getScaledInstance(41, 41, Image.SCALE_SMOOTH);
 		return lineeChiusura;
 	}
-	
+
 	public Image lineeChiusura3() {
 		Image lineeChiusura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/lineeChiusura3.png"))
 				.getImage().getScaledInstance(41, 41, Image.SCALE_SMOOTH);
 		return lineeChiusura;
 	}
-
 
 	public Image lineeApertura1() {
 		Image lineeApertura = new ImageIcon(Accesso.class.getResource("immaginiDashboard/lineeApertura1.png"))
@@ -224,14 +250,14 @@ public class Immagini {
 						.getScaledInstance(41, 41, Image.SCALE_SMOOTH);
 		return lineeChiusura1Chiare;
 	}
-	
+
 	public Image lineeChiusura2TemaChiaro() {
 		Image lineeChiusura2Chiare = new ImageIcon(
 				Accesso.class.getResource("immaginiDashboardChiare/lineeChiusura2Chiaro.png")).getImage()
 						.getScaledInstance(41, 41, Image.SCALE_SMOOTH);
 		return lineeChiusura2Chiare;
 	}
-	
+
 	public Image lineeChiusura3TemaChiaro() {
 		Image lineeChiusura3Chiare = new ImageIcon(
 				Accesso.class.getResource("immaginiDashboardChiare/lineeChiusura3Chiaro.png")).getImage()
@@ -245,14 +271,14 @@ public class Immagini {
 						.getScaledInstance(41, 41, Image.SCALE_SMOOTH);
 		return lineeApertura1Chiaro;
 	}
-	
+
 	public Image lineeApertura2TemaChiaro() {
 		Image lineeApertura2Chiaro = new ImageIcon(
 				Accesso.class.getResource("immaginiDashboardChiare/lineeApertura2Chiaro.png")).getImage()
 						.getScaledInstance(41, 41, Image.SCALE_SMOOTH);
 		return lineeApertura2Chiaro;
 	}
-	
+
 	public Image lineeApertura3TemaChiaro() {
 		Image lineeApertura3Chiaro = new ImageIcon(
 				Accesso.class.getResource("immaginiDashboardChiare/lineeApertura3Chiaro.png")).getImage()
@@ -375,7 +401,7 @@ public class Immagini {
 	public Image credenzialiPasswordDimenticataTemaChiaro() {
 		Image campiPasswordDimenticataTemaChiaro = new ImageIcon(PasswordDimenticata.class
 				.getResource("immaginiCredenzialiChiare/credenzialiPasswordDimenticataChiaro.png")).getImage()
-						.getScaledInstance(344, 236, Image.SCALE_SMOOTH);
+						.getScaledInstance(344, 263, Image.SCALE_SMOOTH);
 		return campiPasswordDimenticataTemaChiaro;
 	}
 
@@ -388,13 +414,13 @@ public class Immagini {
 
 	public Image voli2() {
 		Image voli2 = new ImageIcon(Accesso.class.getResource("immaginiHome/voli2.png")).getImage()
-				.getScaledInstance(292, 177, Image.SCALE_SMOOTH);
+				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
 		return voli2;
 	}
 
 	public Image voli3() {
 		Image voli3 = new ImageIcon(Accesso.class.getResource("immaginiHome/voli3.png")).getImage()
-				.getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
 		return voli3;
 	}
 
@@ -406,13 +432,13 @@ public class Immagini {
 
 	public Image gate2() {
 		Image gate2 = new ImageIcon(Accesso.class.getResource("immaginiHome/gate2.png")).getImage()
-				.getScaledInstance(292, 177, Image.SCALE_SMOOTH);
+				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
 		return gate2;
 	}
 
 	public Image gate3() {
 		Image gate3 = new ImageIcon(Accesso.class.getResource("immaginiHome/gate3.png")).getImage()
-				.getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
 		return gate3;
 	}
 
@@ -424,13 +450,13 @@ public class Immagini {
 
 	public Image tratte2() {
 		Image tratte2 = new ImageIcon(Accesso.class.getResource("immaginiHome/tratte2.png")).getImage()
-				.getScaledInstance(292, 177, Image.SCALE_SMOOTH);
+				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
 		return tratte2;
 	}
 
 	public Image tratte3() {
 		Image tratte3 = new ImageIcon(Accesso.class.getResource("immaginiHome/tratte3.png")).getImage()
-				.getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
 		return tratte3;
 	}
 
@@ -442,13 +468,13 @@ public class Immagini {
 
 	public Image compagnieAeree2() {
 		Image compagnieAeree2 = new ImageIcon(Accesso.class.getResource("immaginiHome/compagnieAeree2.png")).getImage()
-				.getScaledInstance(292, 177, Image.SCALE_SMOOTH);
+				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
 		return compagnieAeree2;
 	}
 
 	public Image compagnieAeree3() {
 		Image compagnieAeree3 = new ImageIcon(Accesso.class.getResource("immaginiHome/compagnieAeree3.png")).getImage()
-				.getScaledInstance(272, 157, Image.SCALE_SMOOTH);
+				.getScaledInstance(276, 162, Image.SCALE_SMOOTH);
 		return compagnieAeree3;
 	}
 
@@ -523,11 +549,10 @@ public class Immagini {
 				.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		return frecciaIndietro2;
 	}
-	
+
 	public Image frecciaIndietro3() {
-		Image frecciaIndietro3 = new ImageIcon(
-				Registrazione.class.getResource("immaginiInComune/frecciaIndietro3.png")).getImage()
-						.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		Image frecciaIndietro3 = new ImageIcon(Registrazione.class.getResource("immaginiInComune/frecciaIndietro3.png"))
+				.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		return frecciaIndietro3;
 	}
 
@@ -535,6 +560,33 @@ public class Immagini {
 		Image barraRicerca = new ImageIcon(Accesso.class.getResource("immaginiInComune/barraRicerca.png")).getImage()
 				.getScaledInstance(184, 25, Image.SCALE_SMOOTH);
 		return barraRicerca;
+	}
+
+	public Image frecciaIndietro1TemaChiaro() {
+		Image frecciaIndietro1Chiaro = new ImageIcon(
+				Registrazione.class.getResource("immaginiInComuneChiare/frecciaIndietro1Chiaro.png")).getImage()
+						.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		return frecciaIndietro1Chiaro;
+	}
+
+	public Image frecciaIndietro2TemaChiaro() {
+		Image frecciaIndietro2Chiaro = new ImageIcon(
+				Registrazione.class.getResource("immaginiInComuneChiare/frecciaIndietro2Chiaro.png")).getImage()
+						.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		return frecciaIndietro2Chiaro;
+	}
+
+	public Image frecciaIndietro3TemaChiaro() {
+		Image frecciaIndietro3Chiaro = new ImageIcon(
+				Registrazione.class.getResource("immaginiInComuneChiare/frecciaIndietro3Chiaro.png")).getImage()
+						.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		return frecciaIndietro3Chiaro;
+	}
+	
+	public Image barraRicercaTemaChiaro() {
+		Image barraRicercaChiara = new ImageIcon(Accesso.class.getResource("immaginiInComuneChiare/barraRicercaChiara.png")).getImage()
+				.getScaledInstance(184, 25, Image.SCALE_SMOOTH);
+		return barraRicercaChiara;
 	}
 
 	/*-----------------------------------------------------------ICONE TEMA CHIARO-----------------------------------------------------*/
@@ -595,80 +647,104 @@ public class Immagini {
 
 	/*-----------------------------------------------------------BOTTONI-----------------------------------------------------------*/
 
-	//AGGIUNGI
-		public Image aggiungi1() {
-			Image aggiungi1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/aggiungi1.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return aggiungi1;
-		}
+	// TORNA INDIETRO
+	public Image tornaIndietro1TemaChiaro() {
+		Image tornaIndietro1Chiaro = new ImageIcon(
+				SceltaGate.class.getResource("immaginiBottoniChiare/tornaIndietro1Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return tornaIndietro1Chiaro;
+	}
 
-		public Image aggiungi2() {
-			Image aggiungi2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/aggiungi2.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return aggiungi2;
-		}
+	public Image tornaIndietro2TemaChiaro() {
+		Image tornaIndietro2Chiaro = new ImageIcon(
+				SceltaGate.class.getResource("immaginiBottoniChiare/tornaIndietro2Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return tornaIndietro2Chiaro;
+	}
 
-		public Image aggiungi3() {
-			Image aggiungi3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/aggiungi3.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return aggiungi3;
-		}
-		
-		//ELIMINA
-		public Image elimina1() {
-			Image elimina1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/elimina1.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return elimina1;
-		}
+	public Image tornaIndietro3TemaChiaro() {
+		Image tornaIndietro3Chiaro = new ImageIcon(
+				SceltaGate.class.getResource("immaginiBottoniChiare/tornaIndietro3Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return tornaIndietro3Chiaro;
+	}
 
-		public Image elimina2() {
-			Image elimina2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/elimina2.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return elimina2;
-		}
+	// AGGIUNGI
+	public Image aggiungi1() {
+		Image aggiungi1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/aggiungi1.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return aggiungi1;
+	}
 
-		public Image elimina3() {
-			Image elimina3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/elimina3.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return elimina3;
-		}
-		//SVUOTA
-		public Image svuota1() {
-			Image svuota1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/svuota1.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return svuota1;
-		}
+	public Image aggiungi2() {
+		Image aggiungi2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/aggiungi2.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return aggiungi2;
+	}
 
-		public Image svuota2() {
-			Image svuota2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/svuota2.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return svuota2;
-		}
+	public Image aggiungi3() {
+		Image aggiungi3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/aggiungi3.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return aggiungi3;
+	}
 
-		public Image svuota3() {
-			Image svuota3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/svuota3.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return svuota3;
-		}
-		//MODIFICA
-		public Image modifica1() {
-			Image modifica1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/modifica1.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return modifica1;
-		}
+	// ELIMINA
+	public Image elimina1() {
+		Image elimina1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/elimina1.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return elimina1;
+	}
 
-		public Image modifica2() {
-			Image modifica2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/modifica2.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return modifica2;
-		}
+	public Image elimina2() {
+		Image elimina2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/elimina2.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return elimina2;
+	}
 
-		public Image modifica3() {
-			Image modifica3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/modifica3.png")).getImage()
-					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
-			return modifica3;
-		}
-	
+	public Image elimina3() {
+		Image elimina3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/elimina3.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return elimina3;
+	}
+
+	// SVUOTA
+	public Image svuota1() {
+		Image svuota1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/svuota1.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return svuota1;
+	}
+
+	public Image svuota2() {
+		Image svuota2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/svuota2.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return svuota2;
+	}
+
+	public Image svuota3() {
+		Image svuota3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/svuota3.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return svuota3;
+	}
+
+	// MODIFICA
+	public Image modifica1() {
+		Image modifica1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/modifica1.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return modifica1;
+	}
+
+	public Image modifica2() {
+		Image modifica2 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/modifica2.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return modifica2;
+	}
+
+	public Image modifica3() {
+		Image modifica3 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/modifica3.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return modifica3;
+	}
+
 	// SALVA
 	public Image salva1() {
 		Image salva1 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiBottoni/salva1.png")).getImage()
@@ -687,8 +763,8 @@ public class Immagini {
 				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
 		return salva3;
 	}
-	
-	//GATE
+
+	// GATE
 	public Image gateScelta1() {
 		Image gateScelta1 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/gateScelta1.png")).getImage()
 				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
@@ -706,44 +782,47 @@ public class Immagini {
 				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return gateScelta3;
 	}
-	
-	//CODE DI IMBARCO
+
+	// CODE DI IMBARCO
 	public Image codeDiImbarco1() {
-		Image codeDiImbarco1 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/codeDiImbarco1.png")).getImage()
-				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		Image codeDiImbarco1 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/codeDiImbarco1.png"))
+				.getImage().getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return codeDiImbarco1;
 	}
 
 	public Image codeDiImbarco2() {
-		Image codeDiImbarco2 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/codeDiImbarco2.png")).getImage()
-				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		Image codeDiImbarco2 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/codeDiImbarco2.png"))
+				.getImage().getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return codeDiImbarco2;
 	}
 
 	public Image codeDiImbarco3() {
-		Image codeDiImbarco3 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/codeDiImbarco3.png")).getImage()
-				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		Image codeDiImbarco3 = new ImageIcon(SceltaGate.class.getResource("immaginiBottoni/codeDiImbarco3.png"))
+				.getImage().getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return codeDiImbarco3;
 	}
-	
+
 	// INFORMAZIONI E TERMINI E CONDIZIONI
-		public Image tornaIndietro1() {
-			Image tornaIndietro1 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro1.png")).getImage()
-					.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
-			return tornaIndietro1;
-		}
+	public Image tornaIndietro1() {
+		Image tornaIndietro1 = new ImageIcon(
+				PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro1.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return tornaIndietro1;
+	}
 
-		public Image tornaIndietro2() {
-			Image tornaIndietro1 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro1.png")).getImage()
-					.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
-			return tornaIndietro1;
-		}
+	public Image tornaIndietro2() {
+		Image tornaIndietro1 = new ImageIcon(
+				PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro1.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return tornaIndietro1;
+	}
 
-		public Image tornaIndietro3() {
-			Image tornaIndietro3 = new ImageIcon(PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro3.png")).getImage()
-					.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
-			return tornaIndietro3;
-		}
+	public Image tornaIndietro3() {
+		Image tornaIndietro3 = new ImageIcon(
+				PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro3.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return tornaIndietro3;
+	}
 
 	// ACCEDI
 	public Image accedi1() {
@@ -823,7 +902,7 @@ public class Immagini {
 				.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return annulla3;
 	}
-	
+
 	public Image annullaUscita1() {
 		Image annullaUscita1 = new ImageIcon(Uscita.class.getResource("immaginiBottoni/annullaUscita1.png")).getImage()
 				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
@@ -917,8 +996,8 @@ public class Immagini {
 				36, Image.SCALE_SMOOTH);
 		return si3;
 	}
-	
-	//SALVA MODIFICHE
+
+	// SALVA MODIFICHE
 	public Image salvaModifiche1() {
 		Image salvaModifiche1 = new ImageIcon(
 				PasswordDimenticata.class.getResource("immaginiBottoni/salvaModifiche1.png")).getImage()
@@ -932,7 +1011,7 @@ public class Immagini {
 						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return salvaModifiche2;
 	}
-	
+
 	public Image salvaModifiche3() {
 		Image salvaModifiche3 = new ImageIcon(
 				PasswordDimenticata.class.getResource("immaginiBottoni/salvaModifiche3.png")).getImage()
@@ -940,9 +1019,51 @@ public class Immagini {
 		return salvaModifiche3;
 	}
 
-	
-
 	/*-----------------------------------------------------------BOTTONI TEMA CHIARO-----------------------------------------------------------*/
+
+	// GATE
+	public Image gateScelta1TemaChiaro() {
+		Image gateScelta1Chiaro = new ImageIcon(
+				SceltaGate.class.getResource("immaginiBottoniChiare/gateScelta1Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return gateScelta1Chiaro;
+	}
+
+	public Image gateScelta2TemaChiaro() {
+		Image gateScelta2Chiaro = new ImageIcon(
+				SceltaGate.class.getResource("immaginiBottoniChiare/gateScelta2Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return gateScelta2Chiaro;
+	}
+
+	public Image gateScelta3TemaChiaro() {
+		Image gateScelta3Chiaro = new ImageIcon(
+				SceltaGate.class.getResource("immaginiBottoniChiare/gateScelta3Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return gateScelta3Chiaro;
+	}
+
+	// CODE DI IMBARCO
+	public Image codeDiImbarco1TemaChiaro() {
+		Image codeDiImbarco1Chiaro = new ImageIcon(
+				SceltaGate.class.getResource("immaginiBottoniChiare/codeDiImbarco1Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return codeDiImbarco1Chiaro;
+	}
+
+	public Image codeDiImbarco2TemaChiaro() {
+		Image codeDiImbarco2Chiaro = new ImageIcon(
+				SceltaGate.class.getResource("immaginiBottoniChiare/codeDiImbarco2Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return codeDiImbarco2Chiaro;
+	}
+
+	public Image codeDiImbarco3TemaChiaro() {
+		Image codeDiImbarco3Chiaro = new ImageIcon(
+				SceltaGate.class.getResource("immaginiBottoniChiare/codeDiImbarco3Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return codeDiImbarco3Chiaro;
+	}
 
 	// SALVA
 	public Image salva1TemaChiaro() {
@@ -964,6 +1085,50 @@ public class Immagini {
 				PasswordDimenticata.class.getResource("immaginiBottoniChiare/salva3Chiaro.png")).getImage()
 						.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
 		return salva3TemaChiaro;
+	}
+
+	// ANNULLA USCITA
+	public Image annullaUscita1TemaChiaro() {
+		Image annullaUscita1Chiaro = new ImageIcon(
+				PasswordDimenticata.class.getResource("immaginiBottoniChiare/annullaUscita1Chiaro.png")).getImage()
+						.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return annullaUscita1Chiaro;
+	}
+
+	public Image annullaUscita2TemaChiaro() {
+		Image annullaUscita2Chiaro = new ImageIcon(
+				PasswordDimenticata.class.getResource("immaginiBottoniChiare/annullaUscita2Chiaro.png")).getImage()
+						.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return annullaUscita2Chiaro;
+	}
+
+	public Image annullaUscita3TemaChiaro() {
+		Image annullaUscita3Chiaro = new ImageIcon(
+				PasswordDimenticata.class.getResource("immaginiBottoniChiare/annullaUscita3Chiaro.png")).getImage()
+						.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return annullaUscita3Chiaro;
+	}
+
+	// SALVA MODIFICHE
+	public Image salvaModifiche1TemaChiaro() {
+		Image salvaModifiche1Chiaro = new ImageIcon(
+				CambioPassword.class.getResource("immaginiBottoniChiare/salvaModifiche1Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return salvaModifiche1Chiaro;
+	}
+
+	public Image salvaModifiche2TemaChiaro() {
+		Image salvaModifiche2Chiaro = new ImageIcon(
+				CambioPassword.class.getResource("immaginiBottoniChiare/salvaModifiche2Chiaro.png")).getImage()
+						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return salvaModifiche2Chiaro;
+	}
+
+	public Image salvaModifiche3TemaChiaro() {
+		Image salvaModifiche3Chiaro = new ImageIcon(
+				CambioPassword.class.getResource("immaginiBoimmaginiBottoniChiarettoni/salvaModifiche3Chiaro.png"))
+						.getImage().getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+		return salvaModifiche3Chiaro;
 	}
 
 	// ACCEDI
@@ -1032,19 +1197,19 @@ public class Immagini {
 	// ANNULLA
 	public Image annulla1TemaChiaro() {
 		Image annulla1TemaChiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/annulla1Chiaro.png"))
-				.getImage().getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+				.getImage().getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return annulla1TemaChiaro;
 	}
 
 	public Image annulla2TemaChiaro() {
 		Image annulla2TemaChiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/annulla2Chiaro.png"))
-				.getImage().getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+				.getImage().getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return annulla2TemaChiaro;
 	}
 
 	public Image annulla3TemaChiaro() {
 		Image annulla3TemaChiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/annulla3Chiaro.png"))
-				.getImage().getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+				.getImage().getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return annulla3TemaChiaro;
 	}
 
@@ -1129,5 +1294,81 @@ public class Immagini {
 				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
 		return si3TemaChiaro;
 	}
+	
+	// AGGIUNGI
+		public Image aggiungi1TemaChiaro() {
+			Image aggiungi1Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/aggiungi1Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return aggiungi1Chiaro;
+		}
+
+		public Image aggiungi2TemaChiaro() {
+			Image aggiungi2Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/aggiungi2Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return aggiungi2Chiaro;
+		}
+
+		public Image aggiungi3TemaChiaro() {
+			Image aggiungi3Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/aggiungi3Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return aggiungi3Chiaro;
+		}
+		
+		// MODIFICA
+		public Image modifica1TemaChiaro() {
+			Image modifica1Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/modifica1Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return modifica1Chiaro;
+		}
+
+		public Image modifica2TemaChiaro() {
+			Image modifica2Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/modifica2Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return modifica2Chiaro;
+		}
+
+		public Image modifica3TemaChiaro() {
+			Image modifica3Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/modifica3Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return modifica3Chiaro;
+		}
+		
+		// ELIMINA
+		public Image elimina1TemaChiaro() {
+			Image elimina1Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/elimina1Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return elimina1Chiaro;
+		}
+
+		public Image elimina2TemaChiaro() {
+			Image elimina2Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/elimina2Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return elimina2Chiaro;
+		}
+
+		public Image elimina3TemaChiaro() {
+			Image elimina3Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/elimina3Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return elimina3Chiaro;
+		}
+		
+		// SVUOTA
+		public Image svuota1TemaChiaro() {
+			Image svuota1Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/svuota1Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return svuota1Chiaro;
+		}
+
+		public Image svuota2TemaChiaro() {
+			Image svuota2Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/svuota2Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return svuota2Chiaro;
+		}
+
+		public Image svuota3TemaChiaro() {
+			Image svuota3Chiaro = new ImageIcon(Uscita.class.getResource("immaginiBottoniChiare/svuota3Chiaro.png")).getImage()
+					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+			return svuota3Chiaro;
+		}
 
 }

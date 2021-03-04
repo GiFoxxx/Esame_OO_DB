@@ -25,6 +25,16 @@ public class Informazioni extends JDialog {
 
 
 	Controller controllerInformazioni;
+	JLabel lblTornaIndietro;
+	JTextArea txtInformazioni;
+	
+	public JLabel getLblTornaIndietro() {
+		return lblTornaIndietro;
+	}
+
+	public void setLblTornaIndietro(JLabel lblTornaIndietro) {
+		this.lblTornaIndietro = lblTornaIndietro;
+	}
 
 	public Informazioni(Controller controller) {
 		controllerInformazioni = controller;
@@ -39,14 +49,14 @@ public class Informazioni extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JTextArea txtInformazioni = new JTextArea();
+		txtInformazioni = new JTextArea();
 		txtInformazioni.setEditable(false);
-		txtInformazioni.setText("Sviluppatori: \r\nBuonanno Manuel\r\nDe Marco Luigi\r\n\r\nSoftware utilizzati:\r\nAdobe XD\r\nPichon\r\nGitHub\r\npgAdmin\r\n\r\n");
+		txtInformazioni.setText("Sviluppatori: \r\nBuonanno Manuel\r\nDe Marco Luigi\r\n\r\nSoftware utilizzati:\r\nAdobe XD\r\nPichon\r\nGitHub\r\npgAdmin\r\n\r\nVersione: v.00439796");
 		txtInformazioni.setToolTipText("");
 		txtInformazioni.setBounds(10, 11, 330, 503);
 		contentPanel.add(txtInformazioni);
 		
-		JLabel lblTornaIndietro = new JLabel("");
+		lblTornaIndietro = new JLabel("");
 		lblTornaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblTornaIndietro.addMouseListener(new MouseAdapter() {
 			@Override
@@ -55,19 +65,35 @@ public class Informazioni extends JDialog {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro2()));
+				if (controllerInformazioni.cambioTema()) {
+					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro2TemaChiaro()));
+				} else {
+					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro2()));
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro1()));
+				if (controllerInformazioni.cambioTema()) {
+					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro1TemaChiaro()));
+				} else {
+					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro1()));
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro3()));
+				if (controllerInformazioni.cambioTema()) {
+					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro3TemaChiaro()));
+				} else {
+					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro3()));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro2()));
+				if (controllerInformazioni.cambioTema()) {
+					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro2TemaChiaro()));
+				} else {
+					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro2()));
+				}
 			}
 		});
 		lblTornaIndietro.setHorizontalAlignment(SwingConstants.CENTER);

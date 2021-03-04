@@ -27,6 +27,8 @@ public class Dashboard extends JFrame {
 	int x;
 	int y;
 
+	
+
 	private JPanel contentPane;
 
 	private JLabel lblX;
@@ -52,6 +54,7 @@ public class Dashboard extends JFrame {
 	private JLabel lblCambioTemaScuro;
 	private JLabel lblLayout;
 	private JLabel lblAccount;
+	private JLabel lblFrecciaMenu;
 
 	private JPanel pannelloTendina;
 	private JPanel pannelloBase;
@@ -63,8 +66,6 @@ public class Dashboard extends JFrame {
 	private JPanel panelProfilo;
 	private JPanel panelImpostazioni;
 	private JPanel panelUscita;
-
-	private JPanel prenotazioniFalsa;
 
 	private JPanel home;
 	private JPanel accesso;
@@ -80,6 +81,7 @@ public class Dashboard extends JFrame {
 	private JPanel gestioneTratte;
 	private JPanel recensioni;
 	private JPanel cambioPassword;
+	private JPanel menuInfoAccount;
 
 	private JDialog informazioni;
 	private JDialog terminiECondizioni;
@@ -94,6 +96,14 @@ public class Dashboard extends JFrame {
 
 	public JLabel getLblScrittaHome() {
 		return lblScrittaHome;
+	}
+	
+	public JLabel getLblFrecciaMenu() {
+		return lblFrecciaMenu;
+	}
+
+	public void setLblFrecciaMenu(JLabel lblFrecciaMenu) {
+		this.lblFrecciaMenu = lblFrecciaMenu;
 	}
 
 	public void setLblScrittaHome(JLabel lblScrittaHome) {
@@ -508,6 +518,14 @@ public class Dashboard extends JFrame {
 		this.cambioPassword = cambioPassword;
 	}
 
+	public JPanel getMenuInfoAccount() {
+		return menuInfoAccount;
+	}
+
+	public void setMenuInfoAccount(JPanel menuInfoAccount) {
+		this.menuInfoAccount = menuInfoAccount;
+	}
+
 	public JLabel getLblLayout() {
 		return lblLayout;
 	}
@@ -543,6 +561,8 @@ public class Dashboard extends JFrame {
 	Controller controllerDashboard;
 
 	public Dashboard(Controller controller) {
+		
+		
 		controllerDashboard = controller;
 
 		home = controllerDashboard.home();
@@ -564,6 +584,7 @@ public class Dashboard extends JFrame {
 		sceltaVolo = controllerDashboard.sceltaVolo();
 		recensioni = controllerDashboard.recensione();
 		noClick = controllerDashboard.noClick();
+		menuInfoAccount = controllerDashboard.menuInfoAccount();
 		operazioneEffettuataConSuccesso = controllerDashboard.registrazioneEffettuataConSuccesso();
 		terminiECondizioni = controllerDashboard.terminiECondizioni();
 		informazioni = controllerDashboard.informazioni();
@@ -576,6 +597,44 @@ public class Dashboard extends JFrame {
 		setContentPane(contentPane);
 		setUndecorated(true);
 		contentPane.setLayout(null);
+		
+		lblFrecciaMenu = new JLabel("");
+		lblFrecciaMenu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(menuInfoAccount.isVisible()) {
+					menuInfoAccount.setVisible(false);
+				}else {
+				lblFrecciaMenu.setIcon(new ImageIcon(img.menu()));
+				controllerDashboard.mostraPannelli(noClick);
+				controllerDashboard.mostraPannelli(menuInfoAccount);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblFrecciaMenu.setIcon(new ImageIcon(img.frecciaMenu2()));
+
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblFrecciaMenu.setIcon(new ImageIcon(img.frecciaMenu1()));
+
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblFrecciaMenu.setIcon(new ImageIcon(img.frecciaMenu3()));
+
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblFrecciaMenu.setIcon(new ImageIcon(img.frecciaMenu2()));
+
+			}
+		});
+		lblFrecciaMenu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFrecciaMenu.setIcon(new ImageIcon(img.frecciaMenu1()));
+		lblFrecciaMenu.setBounds(980, 0, 23, 35);
+		contentPane.add(lblFrecciaMenu);
 
 		lblTitolo = new JLabel("AIRPORT MANAGEMENT");
 		lblTitolo.setBounds(0, 0, 238, 37);
@@ -682,7 +741,7 @@ public class Dashboard extends JFrame {
 		contentPane.add(lblMinimizza);
 
 		lblAccount = new JLabel("Nessun accesso effettuato");
-		lblAccount.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAccount.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblAccount.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -696,7 +755,7 @@ public class Dashboard extends JFrame {
 		lblAccount.setFont(controllerDashboard.fontLabel);
 		lblAccount.setBorder(null);
 		lblAccount.setBackground(controllerDashboard.trasparente);
-		lblAccount.setBounds(814, 7, 216, 23);
+		lblAccount.setBounds(760, 7, 216, 23);
 		contentPane.add(lblAccount);
 
 		lblSpostaDashboard = new JLabel("");
@@ -811,7 +870,7 @@ public class Dashboard extends JFrame {
 					}
 				} else {
 					if (controllerDashboard.cambioTema()) {
-						panelHome.setBackground(controllerDashboard.clickPannelloTemaChiaro);
+						panelHome.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					} else {
 						panelHome.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					}
@@ -907,7 +966,7 @@ public class Dashboard extends JFrame {
 					}
 				} else {
 					if (controllerDashboard.cambioTema()) {
-						panelAccedi.setBackground(controllerDashboard.clickPannelloTemaChiaro);
+						panelAccedi.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					} else {
 						panelAccedi.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					}
@@ -1004,7 +1063,7 @@ public class Dashboard extends JFrame {
 					}
 				} else {
 					if (controllerDashboard.cambioTema()) {
-						panelRegistrati.setBackground(controllerDashboard.clickPannelloTemaChiaro);
+						panelRegistrati.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					} else {
 						panelRegistrati.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					}
@@ -1101,7 +1160,7 @@ public class Dashboard extends JFrame {
 					}
 				} else {
 					if (controllerDashboard.cambioTema()) {
-						panelProfilo.setBackground(controllerDashboard.clickPannelloTemaChiaro);
+						panelProfilo.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					} else {
 						panelProfilo.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					}
@@ -1197,7 +1256,7 @@ public class Dashboard extends JFrame {
 					}
 				} else {
 					if (controllerDashboard.cambioTema()) {
-						panelImpostazioni.setBackground(controllerDashboard.clickPannelloTemaChiaro);
+						panelImpostazioni.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					} else {
 						panelImpostazioni.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					}
@@ -1294,7 +1353,7 @@ public class Dashboard extends JFrame {
 					}
 				} else {
 					if (controllerDashboard.cambioTema()) {
-						panelUscita.setBackground(controllerDashboard.clickPannelloTemaChiaro);
+						panelUscita.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					} else {
 						panelUscita.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					}
@@ -1536,7 +1595,8 @@ public class Dashboard extends JFrame {
 		pannelloDestra.add(gestioneVoliArrivi);
 		pannelloDestra.add(recensioni);
 		pannelloDestra.add(noClick);
-		startVisibili();
+		pannelloDestra.add(menuInfoAccount);
+
 
 		pannelloDestra.setLayout(null);
 		pannelloBase.add(pannelloDestra);
@@ -1548,6 +1608,8 @@ public class Dashboard extends JFrame {
 		pannelloBase.add(lblLayout);
 
 		controllerDashboard.centramentoJFrame(this);
+		
+		startVisibili();
 
 	}
 
@@ -1567,9 +1629,9 @@ public class Dashboard extends JFrame {
 		gestioneVoliPartenze.setVisible(false);
 		gestioneVoliArrivi.setVisible(false);
 		cambioPassword.setVisible(false);
+		menuInfoAccount.setVisible(false);
 		recensioni.setVisible(false);
 		panelHome.setBackground(controllerDashboard.pannelloSceltoTemaScuro);
-	}
 
-	
+	}
 }

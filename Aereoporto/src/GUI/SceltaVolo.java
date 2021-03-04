@@ -102,6 +102,7 @@ public class SceltaVolo extends JDialog {
 		getContentPane().setLayout(null);
 		{
 			lblAnnulla = new JLabel("");
+			lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -110,22 +111,38 @@ public class SceltaVolo extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annulla2()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annulla2TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annulla2()));
+					}
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annulla1TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
+					}
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annulla3()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annulla3TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annulla3()));
+					}
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annulla2TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annulla2()));
+					}
 				}
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
@@ -143,22 +160,38 @@ public class SceltaVolo extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lblPartenze.setIcon(new ImageIcon(img.partenze2()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblPartenze.setIcon(new ImageIcon(img.partenze2TemaChiaro()));
+					} else {
+						lblPartenze.setIcon(new ImageIcon(img.partenze2()));
+					}
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lblPartenze.setIcon(new ImageIcon(img.partenze1()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblPartenze.setIcon(new ImageIcon(img.partenze1TemaChiaro()));
+					} else {
+						lblPartenze.setIcon(new ImageIcon(img.partenze1()));
+					}
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblPartenze.setIcon(new ImageIcon(img.partenze3()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblPartenze.setIcon(new ImageIcon(img.partenze3TemaChiaro()));
+					} else {
+						lblPartenze.setIcon(new ImageIcon(img.partenze3()));
+					}
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblPartenze.setIcon(new ImageIcon(img.partenze1()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblPartenze.setIcon(new ImageIcon(img.partenze2TemaChiaro()));
+					} else {
+						lblPartenze.setIcon(new ImageIcon(img.partenze2()));
+					}
 				}
 			});
 			lblPartenze.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -177,22 +210,38 @@ public class SceltaVolo extends JDialog {
 				
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lblArrivi.setIcon(new ImageIcon(img.arrivi2()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblArrivi.setIcon(new ImageIcon(img.arrivi2TemaChiaro()));
+					} else {
+						lblArrivi.setIcon(new ImageIcon(img.arrivi2()));
+					}
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblArrivi.setIcon(new ImageIcon(img.arrivi1TemaChiaro()));
+					} else {
+						lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
+					}
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblArrivi.setIcon(new ImageIcon(img.arrivi3()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblArrivi.setIcon(new ImageIcon(img.arrivi3TemaChiaro()));
+					} else {
+						lblArrivi.setIcon(new ImageIcon(img.arrivi3()));
+					}
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblArrivi.setIcon(new ImageIcon(img.arrivi1()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblArrivi.setIcon(new ImageIcon(img.arrivi2TemaChiaro()));
+					} else {
+						lblArrivi.setIcon(new ImageIcon(img.arrivi2()));
+					}
 				}
 			});
 			lblArrivi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -209,23 +258,38 @@ public class SceltaVolo extends JDialog {
 				}
 
 				@Override
-				public void mouseEntered(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X2()));
-				}
-
-				@Override
 				public void mouseExited(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X1()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X1TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X1()));
+					}
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X3()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X3TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X3()));
+					}
 				}
-
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X1()));
+					if (controllerSceltaVolo.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X2()));
+					}
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					if (controllerSceltaVolo.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X2()));
+					}
 				}
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);

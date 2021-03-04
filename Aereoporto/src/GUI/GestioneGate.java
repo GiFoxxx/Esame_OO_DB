@@ -205,22 +205,38 @@ public class GestioneGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
+				if (controllerGestioneGate.cambioTema()) {
+					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2TemaChiaro()));
+				} else {
+					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
+				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
+				if (controllerGestioneGate.cambioTema()) {
+					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1TemaChiaro()));
+				} else {
+					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3()));
+				if (controllerGestioneGate.cambioTema()) {
+					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3TemaChiaro()));
+				} else {
+					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3()));
+				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
+				if (controllerGestioneGate.cambioTema()) {
+					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2TemaChiaro()));
+				} else {
+					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
+				}
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -384,26 +400,38 @@ public class GestioneGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblModifica.setIcon(new ImageIcon(img.modifica2()));
-
+				if (controllerGestioneGate.cambioTema()) {
+					lblModifica.setIcon(new ImageIcon(img.modifica2TemaChiaro()));
+				} else {
+					lblModifica.setIcon(new ImageIcon(img.modifica2()));
+				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblModifica.setIcon(new ImageIcon(img.modifica1()));
-
+				if (controllerGestioneGate.cambioTema()) {
+					lblModifica.setIcon(new ImageIcon(img.modifica1TemaChiaro()));
+				} else {
+					lblModifica.setIcon(new ImageIcon(img.modifica1()));
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblModifica.setIcon(new ImageIcon(img.modifica3()));
-
+				if (controllerGestioneGate.cambioTema()) {
+					lblModifica.setIcon(new ImageIcon(img.modifica3TemaChiaro()));
+				} else {
+					lblModifica.setIcon(new ImageIcon(img.modifica3()));
+				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblModifica.setIcon(new ImageIcon(img.modifica2()));
-
+				if (controllerGestioneGate.cambioTema()) {
+					lblModifica.setIcon(new ImageIcon(img.modifica2TemaChiaro()));
+				} else {
+					lblModifica.setIcon(new ImageIcon(img.modifica2()));
+				}
 			}
 		});
 		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
@@ -458,26 +486,38 @@ public class GestioneGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblSvuota.setIcon(new ImageIcon(img.svuota2()));
-
+				if (controllerGestioneGate.cambioTema()) {
+					lblSvuota.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
+				} else {
+					lblSvuota.setIcon(new ImageIcon(img.svuota2()));
+				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblSvuota.setIcon(new ImageIcon(img.svuota1()));
-
+				if (controllerGestioneGate.cambioTema()) {
+					lblSvuota.setIcon(new ImageIcon(img.svuota1TemaChiaro()));
+				} else {
+					lblSvuota.setIcon(new ImageIcon(img.svuota1()));
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblSvuota.setIcon(new ImageIcon(img.svuota3()));
-
+				if (controllerGestioneGate.cambioTema()) {
+					lblSvuota.setIcon(new ImageIcon(img.svuota3TemaChiaro()));
+				} else {
+					lblSvuota.setIcon(new ImageIcon(img.svuota3()));
+				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblSvuota.setIcon(new ImageIcon(img.svuota2()));
-
+				if (controllerGestioneGate.cambioTema()) {
+					lblSvuota.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
+				} else {
+					lblSvuota.setIcon(new ImageIcon(img.svuota2()));
+				}
 			}
 		});
 		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);

@@ -129,23 +129,38 @@ public class Uscita extends JDialog {
 				}
 
 				@Override
-				public void mouseEntered(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X2()));
-				}
-
-				@Override
 				public void mouseExited(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X1()));
+					if (controllerUscita.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X1TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X1()));
+					}
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X3()));
+					if (controllerUscita.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X3TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X3()));
+					}
 				}
-
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X1()));
+					if (controllerUscita.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X2()));
+					}
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					if (controllerUscita.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X2()));
+					}
 				}
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
@@ -167,22 +182,38 @@ public class Uscita extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2()));
+					if (controllerUscita.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2()));
+					}
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1()));
+					if (controllerUscita.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1()));
+					}
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita3()));
+					if (controllerUscita.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita3TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita3()));
+					}
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1()));
+					if (controllerUscita.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2()));
+					}
 				}
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
@@ -200,22 +231,38 @@ public class Uscita extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lblSi.setIcon(new ImageIcon(img.si2()));
+					if (controllerUscita.cambioTema()) {
+						lblSi.setIcon(new ImageIcon(img.si2TemaChiaro()));
+					} else {
+						lblSi.setIcon(new ImageIcon(img.si2()));
+					}
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lblSi.setIcon(new ImageIcon(img.si1()));
+					if (controllerUscita.cambioTema()) {
+						lblSi.setIcon(new ImageIcon(img.si1TemaChiaro()));
+					} else {
+						lblSi.setIcon(new ImageIcon(img.si1()));
+					}
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblSi.setIcon(new ImageIcon(img.si3()));
+					if (controllerUscita.cambioTema()) {
+						lblSi.setIcon(new ImageIcon(img.si3TemaChiaro()));
+					} else {
+						lblSi.setIcon(new ImageIcon(img.si3()));
+					}
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblSi.setIcon(new ImageIcon(img.si1()));
+					if (controllerUscita.cambioTema()) {
+						lblSi.setIcon(new ImageIcon(img.si2TemaChiaro()));
+					} else {
+						lblSi.setIcon(new ImageIcon(img.si2()));
+					}
 				}
 			});
 			lblSi.setHorizontalAlignment(SwingConstants.CENTER);

@@ -53,14 +53,6 @@ public class Profilo extends JPanel {
 		this.lblCambiaPassword = lblCambiaPassword;
 	}
 
-	public JLabel getLblGestioneUtenti() {
-		return lblGestioneUtenti;
-	}
-
-	public void setLblGestioneUtenti(JLabel lblGestioneUtenti) {
-		this.lblGestioneUtenti = lblGestioneUtenti;
-	}
-
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
@@ -86,7 +78,6 @@ public class Profilo extends JPanel {
 	}
 
 	Controller controllerProfilo;
-	private JLabel lblGestioneUtenti;
 
 	public Profilo(Controller controller) {
 		controllerProfilo = controller;
@@ -173,22 +164,37 @@ public class Profilo extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblCambiaPassword.setForeground(controllerProfilo.coloreLabelEntrataTemaScuro);
+				if (controllerProfilo.cambioTema()) {
+					lblCambiaPassword.setForeground(controllerProfilo.clickPannelloTemaScuro);
+				} else {
+					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
+				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
+				if (controllerProfilo.cambioTema()) {
+					lblCambiaPassword.setForeground(controllerProfilo.entroPannelloTemaChiaro);
+				} else {
+					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
+				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblCambiaPassword.setForeground(controllerProfilo.coloreLabelPressedTemaScuro);
+				if (controllerProfilo.cambioTema()) {
+					lblCambiaPassword.setForeground(controllerProfilo.escoPannelloTemaChiaro);
+				} else {
+					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
+				}
 			}
-
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
+				if (controllerProfilo.cambioTema()) {
+					lblCambiaPassword.setForeground(controllerProfilo.entroPannelloTemaChiaro);
+				} else {
+					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
+				}
 			}
 		});
 		lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
@@ -198,49 +204,8 @@ public class Profilo extends JPanel {
 		lblCambiaPassword.setBounds(584, 430, 129, 14);
 		add(lblCambiaPassword);
 
-		lblGestioneUtenti = new JLabel("");
-		lblGestioneUtenti.setEnabled(false);
-
-		lblGestioneUtenti.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (controllerProfilo.isEntraGestioneUtenti()) {
-					entraInGestioneUtenti();
-				}
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelEntrataTemaScuro);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelTemaScuro);
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelPressedTemaScuro);
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelTemaScuro);
-			}
-		});
-		lblGestioneUtenti.setForeground(controllerProfilo.coloreLabelTemaScuro);
-		lblGestioneUtenti.setFont(controllerProfilo.fontLabel);
-		lblGestioneUtenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblGestioneUtenti.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblGestioneUtenti.setBounds(930, 38, 100, 14);
-		add(lblGestioneUtenti);
-
 	}
 
-	private void entraInGestioneUtenti() {
-		if (controllerProfilo.sbloccaGestione()) {
-			controllerProfilo.setPannelloPrecedente(8);
-			controllerProfilo.mostraPannelli(controllerProfilo.getDashboard().getGestioneUtenti());
-		}
-	}
+	
+	
 }

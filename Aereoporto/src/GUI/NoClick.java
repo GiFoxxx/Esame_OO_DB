@@ -17,7 +17,9 @@ public class NoClick extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerNoClick.chiudiTendinaIstantanea();
+				controllerNoClick.getDashboard().getMenuInfoAccount().setVisible(false);
 				controllerNoClick.pannelloPrecedentementeSelezionato(controllerNoClick.getPannelloPrecedente());
+				
 			}
 		});
 

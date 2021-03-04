@@ -50,25 +50,25 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 
 					status = rs.getString(9);
 
-//					switch (status) {
-//					case "0":
-//						Lista[9] = "In preparazione";
-//						break;
-//					case "1":
-//						Lista[9] = "In partenza";
-//						break;
-//					case "2":
-//						Lista[9] = "In ritardo";
-//						break;
-//					}
+					switch (status) {
+					case "0":
+						Lista[9] = "In preparazione";
+						break;
+					case "1":
+						Lista[9] = "In partenza";
+						break;
+					case "2":
+						Lista[9] = "In ritardo";
+						break;
+					}
 						
-//					tempoImbarcoStimato = Integer.parseInt(String.valueOf(rs.getTime(11)));
-//					tempoImbarcoEffettivo = Integer.parseInt(String.valueOf(rs.getTime(12)));
-//					if(tempoImbarcoEffettivo<= tempoImbarcoStimato) {
-//						Lista[8] = "In orario";
-//					}else {
-//						Lista[8] = "In ritardo";
-//					}
+					tempoImbarcoStimato = Integer.parseInt(String.valueOf(rs.getTime(11)));
+					tempoImbarcoEffettivo = Integer.parseInt(String.valueOf(rs.getTime(12)));
+					if(tempoImbarcoEffettivo<= tempoImbarcoStimato) {
+						Lista[8] = "In orario";
+					}else {
+						Lista[8] = "In ritardo";
+					}
 				}
 				
 				ListaVoliPartenze.add(Lista);
@@ -82,53 +82,53 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 		}
 	}
 
-//	@SuppressWarnings("finally")
-//	public int tempoImbarcoStimato() {
-//		int tempoImbarcoStimato = 0;
-//		PreparedStatement pst;
-//		ResultSet rs;
-//		
-//		String sql = "SELECT gt.tempodiimbarcostimato " + "FROM volopartenza AS vp, gate AS gt "
-//				+ "WHERE (xcodicegate = codiceGate) ORDER BY dataOrariopartenza";
-//		
-//		try {
-//			pst = db.ConnessioneDB().prepareStatement(sql);
-//			rs = pst.executeQuery();
-//			while (rs.next()) {
-//				tempoImbarcoStimato = Integer.parseInt(String.valueOf(rs.getTime(1)));
-//			}
-//			
-//
-//		} catch (SQLException e) {
-//			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-//		} finally {
-//			return tempoImbarcoStimato;
-//		}
-//	}
-//
-//	@SuppressWarnings("finally")
-//	public int tempoImbarcoEffettivo() {
-//		int tempoImbarcoEffettivo = 0;
-//		PreparedStatement pst;
-//		ResultSet rs;
-//		
-//		String sql = "SELECT vp.tempodiimbarcoeffettivo  " + "FROM volopartenza AS vp, gate AS gt "
-//				+ "WHERE (xcodicegate = codiceGate) ORDER BY dataOrariopartenza";
-//		
-//		try {
-//			pst = db.ConnessioneDB().prepareStatement(sql);
-//			rs = pst.executeQuery();
-//			while (rs.next()) {
-//				tempoImbarcoEffettivo = Integer.parseInt(String.valueOf(rs.getTime(1)));
-//			}
-//			
-//
-//		} catch (SQLException e) {
-//			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-//		} finally {
-//			return tempoImbarcoEffettivo;
-//		}
-//	}
+	@SuppressWarnings("finally")
+	public int tempoImbarcoStimato() {
+		int tempoImbarcoStimato = 0;
+		PreparedStatement pst;
+		ResultSet rs;
+		
+		String sql = "SELECT gt.tempodiimbarcostimato " + "FROM volopartenza AS vp, gate AS gt "
+				+ "WHERE (xcodicegate = codiceGate) ORDER BY dataOrariopartenza";
+		
+		try {
+			pst = db.ConnessioneDB().prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				tempoImbarcoStimato = Integer.parseInt(String.valueOf(rs.getTime(1)));
+			}
+			
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		} finally {
+			return tempoImbarcoStimato;
+		}
+	}
+
+	@SuppressWarnings("finally")
+	public int tempoImbarcoEffettivo() {
+		int tempoImbarcoEffettivo = 0;
+		PreparedStatement pst;
+		ResultSet rs;
+		
+		String sql = "SELECT vp.tempodiimbarcoeffettivo  " + "FROM volopartenza AS vp, gate AS gt "
+				+ "WHERE (xcodicegate = codiceGate) ORDER BY dataOrariopartenza";
+		
+		try {
+			pst = db.ConnessioneDB().prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				tempoImbarcoEffettivo = Integer.parseInt(String.valueOf(rs.getTime(1)));
+			}
+			
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		} finally {
+			return tempoImbarcoEffettivo;
+		}
+	}
 
 	@Override // cancello una volo partenze
 	public boolean cancellaVoloPartenze(Object voloPartenze) {

@@ -211,27 +211,42 @@ public class PasswordDimenticata extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X2()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X2()));
+					}
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X1()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X1TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X1()));
+					}
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X3()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X3TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X3()));
+					}
 				}
-
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblX.setIcon(new ImageIcon(img.X1()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
+					} else {
+						lblX.setIcon(new ImageIcon(img.X2()));
+					}
 				}
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
 			lblX.setIcon(new ImageIcon(img.X1()));
-			lblX.setBounds(448, 1, 51, 34);
+			lblX.setBounds(448, 2, 51, 34);
 			getContentPane().add(lblX);
 			lblSpostaPasswordDimenticata.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSpostaPasswordDimenticata.setIcon(new ImageIcon(img.spostaUscita()));
@@ -252,7 +267,7 @@ public class PasswordDimenticata extends JDialog {
 			txtEmail.setFont(controllerPasswordDimenticata.fontScritte);
 			txtEmail.setBackground(controllerPasswordDimenticata.sfondoTemaScuro);
 			txtEmail.setColumns(10);
-			txtEmail.setBounds(79, 94, 314, 20);
+			txtEmail.setBounds(79, 93, 314, 20);
 			getContentPane().add(txtEmail);
 
 			txtNuovaPassword = new JPasswordField();
@@ -268,7 +283,7 @@ public class PasswordDimenticata extends JDialog {
 			txtNuovaPassword.setForeground(controllerPasswordDimenticata.coloreScritteTemaScuro);
 			txtNuovaPassword.setFont(controllerPasswordDimenticata.fontScritte);
 			txtNuovaPassword.setBackground(controllerPasswordDimenticata.sfondoTemaScuro);
-			txtNuovaPassword.setBounds(79, 199, 314, 20);
+			txtNuovaPassword.setBounds(79, 198, 314, 20);
 			getContentPane().add(txtNuovaPassword);
 
 			txtRipetiNuovaPassword = new JPasswordField();
@@ -284,7 +299,7 @@ public class PasswordDimenticata extends JDialog {
 			txtRipetiNuovaPassword.setBackground(controllerPasswordDimenticata.sfondoTemaScuro);
 			txtRipetiNuovaPassword.setFont(controllerPasswordDimenticata.fontScritte);
 			txtRipetiNuovaPassword.setForeground(controllerPasswordDimenticata.coloreScritteTemaScuro);
-			txtRipetiNuovaPassword.setBounds(79, 304, 314, 20);
+			txtRipetiNuovaPassword.setBounds(79, 303, 314, 20);
 			getContentPane().add(txtRipetiNuovaPassword);
 
 			lblMostraNuovaPassword = new JLabel("");
@@ -358,22 +373,38 @@ public class PasswordDimenticata extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lblSalva.setIcon(new ImageIcon(img.salva2()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblSalva.setIcon(new ImageIcon(img.salva2TemaChiaro()));
+					} else {
+						lblSalva.setIcon(new ImageIcon(img.salva2()));
+					}
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lblSalva.setIcon(new ImageIcon(img.salva1()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblSalva.setIcon(new ImageIcon(img.salva1TemaChiaro()));
+					} else {
+						lblSalva.setIcon(new ImageIcon(img.salva1()));
+					}
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblSalva.setIcon(new ImageIcon(img.salva3()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblSalva.setIcon(new ImageIcon(img.salva3TemaChiaro()));
+					} else {
+						lblSalva.setIcon(new ImageIcon(img.salva3()));
+					}
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblSalva.setIcon(new ImageIcon(img.salva1()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblSalva.setIcon(new ImageIcon(img.salva2TemaChiaro()));
+					} else {
+						lblSalva.setIcon(new ImageIcon(img.salva2()));
+					}
 				}
 			});
 			lblSalva.setForeground(Color.LIGHT_GRAY);
@@ -394,22 +425,38 @@ public class PasswordDimenticata extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2()));
+					}
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1()));
+					}
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita3()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita3TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita3()));
+					}
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1()));
+					if (controllerPasswordDimenticata.cambioTema()) {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2TemaChiaro()));
+					} else {
+						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2()));
+					}
 				}
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);

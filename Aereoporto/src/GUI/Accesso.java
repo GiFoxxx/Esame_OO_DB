@@ -190,12 +190,20 @@ public class Accesso extends JPanel {
 		lblAvanti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblAvanti.setIcon(new ImageIcon(img.avanti2()));
+				if (controllerAccesso.cambioTema()) {
+					lblAvanti.setIcon(new ImageIcon(img.avanti2TemaChiaro()));
+				} else {
+					lblAvanti.setIcon(new ImageIcon(img.avanti2()));
+				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblAvanti.setIcon(new ImageIcon(img.avanti1()));
+				if (controllerAccesso.cambioTema()) {
+					lblAvanti.setIcon(new ImageIcon(img.avanti1TemaChiaro()));
+				} else {
+					lblAvanti.setIcon(new ImageIcon(img.avanti1()));
+				}
 			}
 
 			@Override
@@ -205,12 +213,20 @@ public class Accesso extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblAvanti.setIcon(new ImageIcon(img.avanti3()));
+				if (controllerAccesso.cambioTema()) {
+					lblAvanti.setIcon(new ImageIcon(img.avanti3TemaChiaro()));
+				} else {
+					lblAvanti.setIcon(new ImageIcon(img.avanti3()));
+				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblAvanti.setIcon(new ImageIcon(img.avanti1()));
+				if (controllerAccesso.cambioTema()) {
+					lblAvanti.setIcon(new ImageIcon(img.avanti1TemaChiaro()));
+				} else {
+					lblAvanti.setIcon(new ImageIcon(img.avanti1()));
+				}
 			}
 		});
 		lblAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -228,7 +244,7 @@ public class Accesso extends JPanel {
 		add(lblMessaggioCredenziali);
 
 		lblPasswordDimenticata = new JLabel("Password dimenticata?");
-	
+
 		lblPasswordDimenticata.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -265,13 +281,13 @@ public class Accesso extends JPanel {
 	}
 
 	// METODI
-	
+
 	private void controlloAccesso() {
-		if(!controllerAccesso.sbloccaGestione()) {
+		if (!controllerAccesso.sbloccaGestione()) {
 			controllerAccesso.accedi();
-		} else if(controllerAccesso.getEmailAccesso().equals(txtEmail.getText())) {
+		} else if (controllerAccesso.getEmailAccesso().equals(txtEmail.getText())) {
 			mostraGiaUtilizziAccount();
-		} else{
+		} else {
 			mostraEseguirePrimaLogout();
 		}
 	}

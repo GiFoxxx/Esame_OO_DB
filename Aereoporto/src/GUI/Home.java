@@ -99,13 +99,13 @@ public class Home extends JPanel {
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblTratte.setIcon(new ImageIcon(img.tratte1()));
+				lblTratte.setIcon(new ImageIcon(img.tratte2()));
 			}
 		});
 		lblTratte.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblTratte.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTratte.setIcon(new ImageIcon(img.tratte1()));
-		lblTratte.setBounds(175, 102, 282, 167);
+		lblTratte.setBounds(179, 102, 276, 162);
 		add(lblTratte);
 
 		lblCompagniaAerea = new JLabel("");
@@ -141,7 +141,7 @@ public class Home extends JPanel {
 		lblCompagniaAerea.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblCompagniaAerea.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCompagniaAerea.setIcon(new ImageIcon(img.compagnieAeree1()));
-		lblCompagniaAerea.setBounds(632, 102, 282, 167);
+		lblCompagniaAerea.setBounds(634, 102, 276, 162);
 		add(lblCompagniaAerea);
 
 		lblGate = new JLabel("");
@@ -176,7 +176,7 @@ public class Home extends JPanel {
 		lblGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblGate.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGate.setIcon(new ImageIcon(img.gate1()));
-		lblGate.setBounds(632, 371, 282, 167);
+		lblGate.setBounds(634, 371, 276, 162);
 		add(lblGate);
 
 		lblVolo = new JLabel("");
@@ -211,7 +211,7 @@ public class Home extends JPanel {
 		lblVolo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblVolo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVolo.setIcon(new ImageIcon(img.voli1()));
-		lblVolo.setBounds(175, 371, 282, 167);
+		lblVolo.setBounds(179, 371, 276, 162);
 		add(lblVolo);
 
 		lblFareAccesso = new JLabel("");
@@ -223,6 +223,6 @@ public class Home extends JPanel {
 	}
 
 	private void mostraErroreMancatoAccesso() {
-		lblFareAccesso.setText("Per continuare, effettuare prima l'accesso.");
+		lblFareAccesso.setText("Per continuare, effettuare prima l'accesso");
 	}
 }

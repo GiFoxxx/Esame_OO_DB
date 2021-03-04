@@ -26,7 +26,15 @@ public class TerminiECondizioni extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	
 	Immagini img = new Immagini();
-	private JLabel lblAnnulla;
+	JLabel lblAnnulla;
+
+	public JLabel getLblAnnulla() {
+		return lblAnnulla;
+	}
+
+	public void setLblAnnulla(JLabel lblAnnulla) {
+		this.lblAnnulla = lblAnnulla;
+	}
 
 	Controller controllerTerminiECondizioni;
 	
@@ -55,28 +63,44 @@ public class TerminiECondizioni extends JDialog {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro2()));
+				if (controllerTerminiECondizioni.cambioTema()) {
+					lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro2TemaChiaro()));
+				} else {
+					lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro2()));
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro1()));
+				if (controllerTerminiECondizioni.cambioTema()) {
+					lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro1TemaChiaro()));
+				} else {
+					lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro1()));
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro3()));
+				if (controllerTerminiECondizioni.cambioTema()) {
+					lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro3TemaChiaro()));
+				} else {
+					lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro3()));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro2()));
+				if (controllerTerminiECondizioni.cambioTema()) {
+					lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro2TemaChiaro()));
+				} else {
+					lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro2()));
+				}
 			}
 		});
 		lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnnulla.setIcon(new ImageIcon(img.tornaIndietro1()));
-		lblAnnulla.setBounds(65, 598, 319, 36);
+		lblAnnulla.setBounds(65, 592, 319, 36);
 		contentPanel.add(lblAnnulla);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 430, 566);
+		scrollPane.setBounds(10, 13, 430, 566);
 		contentPanel.add(scrollPane);
 		
 		txtArea = new JTextArea();
