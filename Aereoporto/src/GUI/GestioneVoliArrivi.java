@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,6 +31,7 @@ import javax.swing.table.TableRowSorter;
 
 import com.toedter.calendar.JDateChooser;
 
+import Classi.VoloArrivi;
 import Controller.Controller;
 import Immagini.Immagini;
 import java.awt.event.ActionListener;
@@ -38,10 +41,10 @@ import javax.swing.JComboBox;
 
 public class GestioneVoliArrivi extends JPanel {
 
-	String colonne[] = { "Codice Volo Arrivi", "Citta di Partenza", "Data Arrivo", "Orario Arrivo" };
-	final Object[] row = new Object[4];
+	String colonne[] = { "Codice Volo Arrivi", "Citta di Partenza", "Data e Orario Arrivo" };
+	VoloArrivi[] row = new VoloArrivi[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	ArrayList<Object[]> ListaVoliArrivi = new ArrayList<>();
+	List<VoloArrivi> ListaVoliArrivi = new ArrayList<VoloArrivi>();
 	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceVoloArrivi;
@@ -656,10 +659,15 @@ public class GestioneVoliArrivi extends JPanel {
 	}
 
 	public void caricaTabella() {
-		this.ListaVoliArrivi = controllerGestioneVoliArrivi.implementazioneVoloArriviDAO().stampaVoliArrivi();
+		try {
+			this.ListaVoliArrivi = controllerGestioneVoliArrivi.implementazioneVoloArriviDAO().stampaVoliArrivi();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		modello.setNumRows(0);
-		for (Object[] dato : this.ListaVoliArrivi) {
-			this.modello.addRow(dato);
+		for (VoloArrivi dato : this.ListaVoliArrivi) {
+			this.modello.addRow(
+					new Object[] { dato.getCodiceVoloArrivi(), dato.getCittaPartenza(), dato.getDataOrarioPartenza() });
 		}
 		tabella.setModel(modello);
 	}

@@ -1,6 +1,7 @@
 package Classi;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,8 +13,7 @@ public class VoloArrivi {
 	// ATTRIBUTI
 	private String codiceVoloArrivi;
 	private String cittaPartenza;
-	private Date dataArrivo;
-	private Time orarioArrivo;
+	private Timestamp dataOrarioPartenza;
 
 	// GETTER E SETTER
 	public String getCodiceVoloArrivi() {
@@ -32,20 +32,12 @@ public class VoloArrivi {
 		this.cittaPartenza = cittaPartenza;
 	}
 
-	public Date getDataArrivo() {
-		return dataArrivo;
+	public Timestamp getDataOrarioPartenza() {
+		return dataOrarioPartenza;
 	}
 
-	public void setDataArrivo(Date dataPartenza) {
-		this.dataArrivo = dataPartenza;
-	}
-
-	public Time getOrarioArrivo() {
-		return orarioArrivo;
-	}
-
-	public void setOrarioArrivo(Time orarioPartenza) {
-		this.orarioArrivo = orarioPartenza;
+	public void setDataOrarioPartenza(Timestamp dataOrarioPartenza) {
+		this.dataOrarioPartenza = dataOrarioPartenza;
 	}
 
 	// COSTRUTTORE
@@ -53,12 +45,11 @@ public class VoloArrivi {
 		super();
 	}
 
-	public VoloArrivi(String codiceVoloArrivi, String cittaPartenza, Date dataArrivo, Time orarioArrivo) {
+	public VoloArrivi(String codiceVoloArrivi, String cittaPartenza, Timestamp dataOrarioPartenza) {
 		super();
 		this.codiceVoloArrivi = codiceVoloArrivi;
 		this.cittaPartenza = cittaPartenza;
-		this.dataArrivo = dataArrivo;
-		this.orarioArrivo = orarioArrivo;
+		this.dataOrarioPartenza = dataOrarioPartenza;
 	}
 
 	public VoloArrivi(String codiceVoloArrivi) {
@@ -68,8 +59,11 @@ public class VoloArrivi {
 
 	@Override
 	public String toString() {
-		return "VoloArrivi [codiceVoloArrivi=" + codiceVoloArrivi + ", cittaArrivo=" + cittaPartenza + ", dataArrivo="
-				+ dataArrivo + ", orarioArrivo=" + orarioArrivo + "]";
+		return "VoloArrivi [compagniaAerea=" + compagniaAerea + ", trt=" + trt + ", codiceVoloArrivi="
+				+ codiceVoloArrivi + ", cittaPartenza=" + cittaPartenza + ", dataOrarioPartenza=" + dataOrarioPartenza
+				+ "]";
 	}
+
+	
 
 }

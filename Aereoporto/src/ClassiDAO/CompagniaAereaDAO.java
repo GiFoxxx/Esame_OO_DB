@@ -1,17 +1,21 @@
 package ClassiDAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import Classi.CompagniaAerea;
 
 public interface CompagniaAereaDAO {
 	
-	public ArrayList<Object[]> stampaCompagnieAeree();
+	public List<CompagniaAerea> stampaCompagnieAeree() throws SQLException;
 
-	public boolean aggiungiCompagniaAerea(Object compagniaAerea);
+	public int aggiungiCompagniaAerea(CompagniaAerea compAerea) throws SQLException;
 
-	public boolean cancellaCompagniaAerea(Object compagniaAerea);
-
-	public boolean modificaCompagniaAerea(Object compagniaAerea);
-
-	HashMap<String, String> stampaNomeCompagniaAereaInComboBox();
+	public int cancellaCompagniaAerea(CompagniaAerea compAerea) throws SQLException;
+	
+	public int modificaCompagniaAerea(CompagniaAerea compAerea) throws SQLException;
+	
+	public HashMap<String, String> stampaNomeCompagniaAereaInComboBox() throws SQLException;
 }

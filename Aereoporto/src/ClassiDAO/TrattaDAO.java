@@ -1,18 +1,22 @@
 package ClassiDAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import Classi.Tratta;
 
 public interface TrattaDAO {
 	
-	public ArrayList<Object[]> stampaTratte();
+	public List<Tratta> stampaTratte() throws SQLException;
 	
-	public boolean cancellaTratta(Object tratta);
+	public int aggiungiTratta(Tratta trt) throws SQLException;
 	
-	public boolean modificaTratta(Object tratta);
+	public int cancellaTratta(Tratta trt) throws SQLException;
 	
-	public boolean aggiungiTratta(Object tratta);
+	public int modificaTratta(Tratta trt) throws SQLException;
 
-	HashMap<String, String> stampaCittaArrivoInComboBox();
+	public HashMap<String, String> stampaCittaArrivoInComboBox() throws SQLException;
 
 }

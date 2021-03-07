@@ -3,12 +3,14 @@ package ImplementazioniPostrgresDAO;
 import ClassiDAO.TrattaDAO;
 import Database.ConnessioneDatabase;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -16,154 +18,79 @@ import Classi.*;
 
 public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 
-	ConnessioneDatabase db = new ConnessioneDatabase();
-	Tratta trt = new Tratta();
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	private Connection connection;
+	private PreparedStatement stampaTrattePS, aggiungiTrattaPS, cancellaTrattaPS, modificaTrattaPS,
+			stampaCittaArrivoInComboBoxPS;
 
-	@SuppressWarnings("finally")
-	@Override // stampa tratte
-	public ArrayList<Object[]> stampaTratte() {
-		ArrayList<Object[]> ListaTratta = new ArrayList<>();
+	public TrattaImplementazionePostgresDAO(Connection connection) throws SQLException {
+		this.connection = connection;
 
-		PreparedStatement pst;
-		ResultSet rs;
-		String sql = "SELECT * FROM tratta ORDER BY codicetratta ASC";
-
-		try {
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				Object[] Lista = new Object[4];
-				for (int i = 0; i <= 3; i++) {
-					Lista[i] = rs.getObject(i + 1);
-				}
-				ListaTratta.add(Lista);
-			}
-			db.ConnessioneDB().close();
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-		} finally {
-			return ListaTratta;
-		}
+		stampaTrattePS = connection.prepareStatement(
+				"SELECT trt.codicetratta, trt.cittaPartenza, trt.cittaArrivo, ca.nome AS nomecompagniaaerea "
+						+ "FROM tratta AS trt, compagniaaerea AS ca "
+						+ "WHERE (xcodiceCompagniaAerea = codiceCompagniaAerea)");
+		aggiungiTrattaPS = connection.prepareStatement(
+				"INSERT INTO tratta (codiceTratta, cittaPartenza, cittaArrivo, xcodiceCompagniaAerea) VALUES (?,?,?,?)");
+		cancellaTrattaPS = connection.prepareStatement("DELETE FROM tratta WHERE codicetratta = ?");
+		modificaTrattaPS = connection.prepareStatement(
+				"UPDATE tratta SET cittapartenza=?, cittaarrivo=? xcodiceCompagniaAerea=? WHERE codicetratta=?");
+		stampaCittaArrivoInComboBoxPS = connection
+				.prepareStatement("SELECT codiceTratta, cittaArrivo FROM tratta ORDER BY codicetratta ASC");
 	}
 
-	@Override // cancello una tratta
-	public boolean cancellaTratta(Object tratta) {
-		trt = (Tratta) tratta;
+	public List<Tratta> stampaTratte() throws SQLException {
 
-		PreparedStatement pst;
-		String sql = "DELETE FROM tratta WHERE codicetratta = ?";
-		try {
-			db.ConnessioneDB();
-
-			pst = db.ConnessioneDB().prepareStatement(sql);
-
-			pst.setString(1, trt.getCodiceTratta());
-
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
+		ResultSet rs = stampaTrattePS.executeQuery();
+		List<Tratta> lista = new ArrayList<Tratta>();
+		while (rs.next()) {
+			Tratta trt = new Tratta();
+			CompagniaAerea compAerea = new CompagniaAerea();
+			trt.setCodiceTratta(rs.getString("codiceTratta"));
+			trt.setCittaPartenza(rs.getString("cittaPartenza"));
+			trt.setCittaArrivo(rs.getString("cittaArrivo"));
+			compAerea.setCodiceCompagniaAerea(rs.getString("nomecompagniaaerea"));
+			trt.setCompagniaAerea(compAerea);
+			lista.add(trt);
 		}
+		rs.close();
+		return lista;
 	}
 
-	@Override // modifica info tratta
-	public boolean modificaTratta(Object tratta) {
-		trt = (Tratta) tratta;
-		
-		PreparedStatement pst;
-		String sql = "UPDATE tratta SET cittapartenza=?, cittaarrivo=? xcodiceCompagniaAerea=? WHERE codicetratta=?";
-		try {
-			db.ConnessioneDB();
+	public int aggiungiTratta(Tratta trt) throws SQLException {
+		aggiungiTrattaPS.setString(1, trt.getCodiceTratta());
+		aggiungiTrattaPS.setString(2, trt.getCittaPartenza());
+		aggiungiTrattaPS.setString(3, trt.getCittaArrivo());
+		aggiungiTrattaPS.setString(4, trt.getCompagniaAerea().getCodiceCompagniaAerea());
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-
-			pst.setString(1, trt.getCittaPartenza());
-			pst.setString(2, trt.getCittaArrivo());
-			pst.setString(3, trt.getCodiceTratta());
-			pst.setString(4, trt.getCompagniaAerea().getCodiceCompagniaAerea());
-			
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
-		}
+		int row = aggiungiTrattaPS.executeUpdate();
+		return row;
 	}
 
-	@Override // aggiungi tratta
-	public boolean aggiungiTratta(Object tratta) {
-		trt = (Tratta) tratta;
-		
-		PreparedStatement pst;
-		String sql = "INSERT INTO tratta (codiceTratta, cittaPartenza, cittaArrivo, xcodiceCompagniaAerea) VALUES (?,?,?,?)";
-		try {
-			db.ConnessioneDB();
+	public int cancellaTratta(Tratta trt) throws SQLException {
+		cancellaTrattaPS.setString(1, trt.getCodiceTratta());
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-
-			pst.setString(1, trt.getCodiceTratta());
-			pst.setString(2, trt.getCittaPartenza());
-			pst.setString(3, trt.getCittaArrivo());
-			pst.setString(4, trt.getCompagniaAerea().getCodiceCompagniaAerea());
-			
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
-		}
+		int row = cancellaTrattaPS.executeUpdate();
+		return row;
 	}
 
-	@Override
-	public HashMap<String, String> stampaCittaArrivoInComboBox() {
+	public int modificaTratta(Tratta trt) throws SQLException {
+		modificaTrattaPS.setString(1, trt.getCittaPartenza());
+		modificaTrattaPS.setString(2, trt.getCittaArrivo());
+		modificaTrattaPS.setString(3, trt.getCompagniaAerea().getCodiceCompagniaAerea());
+		modificaTrattaPS.setString(4, trt.getCodiceTratta());
 
+		int row = modificaTrattaPS.executeUpdate();
+		return row;
+	}
+
+	public HashMap<String, String> stampaCittaArrivoInComboBox() throws SQLException {
 		HashMap<String, String> map = new HashMap<String, String>();
 
-		PreparedStatement pst;
-		ResultSet rs;
-		String sql = "SELECT codiceTratta, cittaArrivo FROM tratta ORDER BY codicetratta ASC";
-
-		try {
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			rs = pst.executeQuery();
-			Tratta trt;
-			
-			while (rs.next()) {
-				trt = new Tratta(rs.getString(2), rs.getString(1));
-				map.put(trt.getCodiceTratta(), trt.getCittaArrivo());
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		ResultSet rs = stampaCittaArrivoInComboBoxPS.executeQuery();
+		while (rs.next()) {
+			Tratta trt = new Tratta(rs.getString(2), rs.getString(1));
+			map.put(trt.getCodiceTratta(), trt.getCittaArrivo());
 		}
 		return map;
 	}
-	
 }

@@ -30,6 +30,7 @@ public class Controller {
 
 	Immagini img = new Immagini();
 	private int flagCambioTema = 0;
+	private boolean stopMenuTT = false;
 
 	// PALETTE COLORI TEMA SCURO
 	public Color sfondoTemaScuro = new Color(54, 57, 63);
@@ -108,6 +109,22 @@ public class Controller {
 	CompagniaAerea compAerea;
 
 	// GETTER E SETTER
+	public int getFlagCambioTema() {
+		return flagCambioTema;
+	}
+
+	public void setFlagCambioTema(int flagCambioTema) {
+		this.flagCambioTema = flagCambioTema;
+	}
+
+	public boolean isStopMenuTT() {
+		return stopMenuTT;
+	}
+
+	public void setStopMenuTT(boolean stopMenuTT) {
+		this.stopMenuTT = stopMenuTT;
+	}
+
 	public String getEmailAccesso() {
 		return emailAccesso;
 	}
@@ -612,7 +629,16 @@ public class Controller {
 	}
 
 	public CompagniaAereaDAO implementazioneCompagniaAereaDAO() {
-		CompagniaAereaDAO dao = new CompagniaAereaImplementazionePostgresDAO();
+		ConnessioneDatabase1 dbconn = null;
+		Connection connection = null;
+		CompagniaAereaDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase1.getInstance();
+			connection = dbconn.getConnection();
+			dao = new CompagniaAereaImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			System.out.println("SQLException: " + exception.getMessage());
+		}
 		return dao;
 	}
 
@@ -621,7 +647,11 @@ public class Controller {
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
 						.getText(),
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
-		implementazioneCompagniaAereaDAO().aggiungiCompagniaAerea(compAerea);
+		try {
+			implementazioneCompagniaAereaDAO().aggiungiCompagniaAerea(compAerea);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
 				.addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
 		svuotaCampiGestioneCompagniaAerea();
@@ -634,7 +664,11 @@ public class Controller {
 						.getText(),
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
 		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
-		implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
+		try {
+			implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
 		svuotaCampiGestioneCompagniaAerea();
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
@@ -653,7 +687,11 @@ public class Controller {
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText(), t, 1);
 
-		implementazioneCompagniaAereaDAO().modificaCompagniaAerea(compAerea);
+		try {
+			implementazioneCompagniaAereaDAO().modificaCompagniaAerea(compAerea);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		svuotaCampiGestioneCompagniaAerea();
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 	}
@@ -667,7 +705,16 @@ public class Controller {
 	}
 
 	public TrattaDAO implementazioneTrattaDAO() {
-		TrattaDAO dao = new TrattaImplementazionePostgresDAO();
+		ConnessioneDatabase1 dbconn = null;
+		Connection connection = null;
+		TrattaDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase1.getInstance();
+			connection = dbconn.getConnection();
+			dao = new TrattaImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			System.out.println("SQLException: " + exception.getMessage());
+		}
 		return dao;
 	}
 
@@ -681,7 +728,11 @@ public class Controller {
 				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
 				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText());
 
-		implementazioneTrattaDAO().aggiungiTratta(trt);
+		try {
+			implementazioneTrattaDAO().aggiungiTratta(trt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
 				.addRow(((GestioneTratte) getDashboard().getGestioneTratte()).getRow());
 		svuotaCampiGestioneTratta();
@@ -696,7 +747,11 @@ public class Controller {
 		trt = new Tratta(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText());
 
 		int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().getSelectedRow();
-		implementazioneTrattaDAO().cancellaTratta(trt);
+		try {
+			implementazioneTrattaDAO().cancellaTratta(trt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().removeRow(t);
 		svuotaCampiGestioneTratta();
 		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
@@ -720,7 +775,11 @@ public class Controller {
 		((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
 				.setValueAt(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(), t, 2);
 
-		implementazioneTrattaDAO().modificaTratta(trt);
+		try {
+			implementazioneTrattaDAO().modificaTratta(trt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		svuotaCampiGestioneTratta();
 		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 	}
@@ -959,29 +1018,52 @@ public class Controller {
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().setText("");
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().setText("");
 	}
-
+	
 	public VoloArriviDAO implementazioneVoloArriviDAO() {
-		VoloArriviDAO dao = new VoloArriviImplementazionePostgresDAO();
+		ConnessioneDatabase1 dbconn = null;
+		Connection connection = null;
+		VoloArriviDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase1.getInstance();
+			connection = dbconn.getConnection();
+			dao = new VoloArriviImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			System.out.println("SQLException: " + exception.getMessage());
+		}
 		return dao;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void aggiungiVoloArrivi() {
 		int ora = Integer
 				.parseInt(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText());
 		int minuto = Integer
 				.parseInt(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().getText());
 		int secondo = 0;
-		@SuppressWarnings("deprecation")
+
 		Time tempo = new Time(ora, minuto, secondo);
 
 		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
+			Timestamp dataTempo = new Timestamp(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+							.getYear(),
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+							.getMonth(),
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+							.getDate(),
+					tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
+
 			vlarr = new VoloArrivi(
 					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(),
 					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(),
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate(), tempo);
+					dataTempo);
 
-			implementazioneVoloArriviDAO().aggiungiVoloArrivi(vlarr);
+			try {
+				implementazioneVoloArriviDAO().aggiungiVoloArrivi(vlarr);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello()
 					.addRow(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getRow());
 			svuotaCampiGestioneVoloArrivi();
@@ -997,41 +1079,46 @@ public class Controller {
 				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText());
 
 		int t = ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTabella().getSelectedRow();
-		implementazioneVoloArriviDAO().cancellaVoloArrivi(vlarr);
+		try {
+			implementazioneVoloArriviDAO().cancellaVoloArrivi(vlarr);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().removeRow(t);
 		svuotaCampiGestioneVoloArrivi();
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 	}
 
+	@SuppressWarnings("deprecation")
 	public void modificaVoloArrivi() {
 		int ora = Integer
 				.parseInt(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText());
 		int minuto = Integer
 				.parseInt(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().getText());
 		int secondo = 0;
-		@SuppressWarnings("deprecation")
+
 		Time tempo = new Time(ora, minuto, secondo);
 
 		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
+			Timestamp dataTempo = new Timestamp(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+							.getYear(),
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+							.getMonth(),
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+							.getDate(),
+					tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
+
 			vlarr = new VoloArrivi(
 					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(),
 					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(),
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate(), tempo);
-
-			int t = ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTabella().getSelectedRow();
-
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(), t,
-					0);
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(), t,
-					1);
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate(), t, 2);
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().setValueAt(
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText(), t, 3);
-			implementazioneVoloArriviDAO().modificaVoloArrivi(vlarr);
+					dataTempo);
+			try {
+				implementazioneVoloArriviDAO().modificaVoloArrivi(vlarr);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			svuotaCampiGestioneVoloArrivi();
 			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 		} else {
@@ -1546,6 +1633,31 @@ public class Controller {
 		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 		getDashboard().getMenuInfoAccount().setVisible(false);
 	}
+
+//	public void chiudiMenuTT() {
+//		getDashboard().getLblMenuTT().setVisible(false);
+//	}
+//
+//	public void mostraMenuTT() {
+//		Thread th = new Thread() {
+//			@Override
+//			public void run() {
+//				try {
+//					Thread.sleep(475);
+//					getDashboard().getLblMenuTT().setVisible(true);
+//					getDashboard().getLblMenuTT().setIcon(new ImageIcon(img.menuTT()));
+//				} catch (Exception e) {
+//					JOptionPane.showMessageDialog(null, e);
+//				}
+//			}
+//		};
+//		th.start();
+//
+//		if (stopMenuTT) {
+//			th.stop();
+//		}
+//
+//	}
 
 	// METODI DI SCELTA PROFILO SENZA ACCESSO
 	public void mostraSceltaProfiloSenzaAccesso() {

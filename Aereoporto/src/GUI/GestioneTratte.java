@@ -10,10 +10,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -30,15 +32,19 @@ import javax.swing.RowFilter;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
+
+import Classi.CompagniaAerea;
+import Classi.Tratta;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 public class GestioneTratte extends JPanel {
 
 	String colonne[] = { "Codice Tratta", "Citta Partenza", "Citta Arrivo", "Nome Compagnia Aerea" };
-	final Object[] row = new Object[4];
+	Tratta[] row = new Tratta[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	ArrayList<Object[]> ListaTratte = new ArrayList<>();
+	List<Tratta> ListaTratte = new ArrayList<Tratta>();
 	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceTratta;
@@ -405,8 +411,13 @@ public class GestioneTratte extends JPanel {
 		comboBoxNomeCompagniaAerea = new JComboBox<String>();
 		comboBoxNomeCompagniaAerea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HashMap<String, String> map = controllerGestioneTratte.implementazioneCompagniaAereaDAO()
-						.stampaNomeCompagniaAereaInComboBox();
+				HashMap<String, String> map = null;
+				try {
+					map = controllerGestioneTratte.implementazioneCompagniaAereaDAO()
+							.stampaNomeCompagniaAereaInComboBox();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				txtCodiceCompagniaAerea.setText(map.get(comboBoxNomeCompagniaAerea.getSelectedItem().toString()));
 			}
 		});
@@ -616,17 +627,26 @@ public class GestioneTratte extends JPanel {
 	}
 
 	public void caricaTabella() {
-		this.ListaTratte = controllerGestioneTratte.implementazioneTrattaDAO().stampaTratte();
+		try {
+			this.ListaTratte = controllerGestioneTratte.implementazioneTrattaDAO().stampaTratte();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		modello.setNumRows(0);
-		for (Object[] dato : this.ListaTratte) {
-			this.modello.addRow(dato);
+		for (Tratta dato : this.ListaTratte) {
+			this.modello.addRow(new Object[] {dato.getCodiceTratta(), dato.getCittaPartenza(), dato.getCittaArrivo(), dato.getCompagniaAerea().getCodiceCompagniaAerea()});
 		}
 		tabella.setModel(modello);
 	}
 
 	public void stampaComboBoxNomeCompagniaAerea() {
-		HashMap<String, String> map = controllerGestioneTratte.implementazioneCompagniaAereaDAO()
-				.stampaNomeCompagniaAereaInComboBox();
+		HashMap<String, String> map = null;
+		try {
+			map = controllerGestioneTratte.implementazioneCompagniaAereaDAO()
+					.stampaNomeCompagniaAereaInComboBox();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		for (String s : map.keySet()) {
 			comboBoxNomeCompagniaAerea.addItem(s);
 		}

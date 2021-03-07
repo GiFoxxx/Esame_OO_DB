@@ -1,159 +1,87 @@
 package ImplementazioniPostrgresDAO;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
-
+import Amministrazione.Utente;
 import Classi.CompagniaAerea;
 import Classi.Gate;
 import ClassiDAO.CompagniaAereaDAO;
 import Database.ConnessioneDatabase;
 
-public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaDAO{
+public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaDAO {
 
-	ConnessioneDatabase db = new ConnessioneDatabase();
-	CompagniaAerea compAerea = new CompagniaAerea();
-	
-	@SuppressWarnings("finally")
-	@Override
-	public ArrayList<Object[]> stampaCompagnieAeree() {
-		ArrayList<Object[]> ListaCompagnieAeree = new ArrayList<>();
-		
-		PreparedStatement pst;
-		ResultSet rs;
-		String sql = "SELECT * FROM compagniaaerea ORDER BY nome";
+	private Connection connection;
+	private PreparedStatement stampaCompagnieAereePS, aggiungiCompagniaAereaPS, cancellaCompagniaAereaPS,
+			modificaCompagniaAereaPS, stampaNomeCompagniaAereaInComboBoxPS;
 
-		try {
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				Object[] Lista = new Object[2];
-				for (int i = 0; i <= 1; i++) {
-					Lista[i] = rs.getObject(i + 1);
-				}
-				ListaCompagnieAeree.add(Lista);
-			}
-			db.ConnessioneDB().close();
+	public CompagniaAereaImplementazionePostgresDAO(Connection connection) throws SQLException {
+		this.connection = connection;
 
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-		} finally {
-			return ListaCompagnieAeree;
-		}
+		stampaCompagnieAereePS = connection.prepareStatement("SELECT * FROM compagniaaerea ORDER BY nome");
+		aggiungiCompagniaAereaPS = connection
+				.prepareStatement("INSERT INTO compagniaaerea (codiceCompagniaAerea, nome) VALUES (?,?)");
+		cancellaCompagniaAereaPS = connection
+				.prepareStatement("DELETE FROM compagniaAerea WHERE codiceCompagniaAerea = ?");
+		modificaCompagniaAereaPS = connection
+				.prepareStatement("UPDATE compagniaaerea SET nome = ? WHERE codicecompagniaaerea = ? ");
+		stampaNomeCompagniaAereaInComboBoxPS = connection
+				.prepareStatement("SELECT * FROM CompagniaAerea ORDER BY codiceCompagniaAerea");
 	}
 
-	@Override
-	public boolean aggiungiCompagniaAerea(Object compagniaAerea) {
-		compAerea = (CompagniaAerea) compagniaAerea;
-		PreparedStatement pst;
-		String sql = "INSERT INTO compagniaaerea (codiceCompagniaAerea, nome) VALUES (?,?)";
-		try {
-			db.ConnessioneDB();
+	public List<CompagniaAerea> stampaCompagnieAeree() throws SQLException {
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-
-			pst.setString(1, compAerea.getCodiceCompagniaAerea());
-			pst.setString(2, compAerea.getNome());
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
+		ResultSet rs = stampaCompagnieAereePS.executeQuery();
+		List<CompagniaAerea> lista = new ArrayList<CompagniaAerea>();
+		while (rs.next()) {
+			CompagniaAerea compAerea = new CompagniaAerea();
+			compAerea.setCodiceCompagniaAerea(rs.getString("codiceCompagniaAerea"));
+			compAerea.setNome(rs.getString("nome"));
+			lista.add(compAerea);
 		}
+		rs.close();
+		return lista;
 	}
 
-	@Override
-	public boolean cancellaCompagniaAerea(Object compagniaAerea) {
-		compAerea = (CompagniaAerea) compagniaAerea;
-		
-		PreparedStatement pst;
-		String sql = "DELETE FROM compagniaAerea WHERE codiceCompagniaAerea = ?";
-		try {
-			db.ConnessioneDB();
+	public int aggiungiCompagniaAerea(CompagniaAerea compAerea) throws SQLException {
+		aggiungiCompagniaAereaPS.setString(1, compAerea.getCodiceCompagniaAerea());
+		aggiungiCompagniaAereaPS.setString(2, compAerea.getNome());
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-
-			pst.setString(1, compAerea.getCodiceCompagniaAerea());
-
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
-		}
+		int row = aggiungiCompagniaAereaPS.executeUpdate();
+		return row;
 	}
 
-	@Override
-	public boolean modificaCompagniaAerea(Object compagniaAerea) {
-		compAerea = (CompagniaAerea) compagniaAerea;
-		PreparedStatement pst;
-		String sql = "UPDATE compagniaaerea SET nome = ? WHERE codicecompagniaaerea = ? ";
-		try {
-			db.ConnessioneDB();
+	public int cancellaCompagniaAerea(CompagniaAerea compAerea) throws SQLException {
+		cancellaCompagniaAereaPS.setString(1, compAerea.getCodiceCompagniaAerea());
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			
-			pst.setString(1, compAerea.getNome());
-			pst.setString(2, compAerea.getCodiceCompagniaAerea());
-			
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
-		}
+		int row = cancellaCompagniaAereaPS.executeUpdate();
+		return row;
 	}
-	
-	@Override
-	public HashMap<String, String> stampaNomeCompagniaAereaInComboBox() {
 
+	public int modificaCompagniaAerea(CompagniaAerea compAerea) throws SQLException {
+		modificaCompagniaAereaPS.setString(1, compAerea.getNome());
+		modificaCompagniaAereaPS.setString(2, compAerea.getCodiceCompagniaAerea());
+
+		int row = modificaCompagniaAereaPS.executeUpdate();
+		return row;
+	}
+
+	public HashMap<String, String> stampaNomeCompagniaAereaInComboBox() throws SQLException {
 		HashMap<String, String> map = new HashMap<String, String>();
 
-		PreparedStatement pst;
-		ResultSet rs;
-		String sql = "SELECT * FROM CompagniaAerea ORDER BY codiceCompagniaAerea";
-
-		try {
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			rs = pst.executeQuery();
-			CompagniaAerea compAerea;
-			
-			while (rs.next()) {
-				compAerea = new CompagniaAerea(rs.getString(2), rs.getString(1));
-				map.put(compAerea.getCodiceCompagniaAerea(), compAerea.getNome());
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		ResultSet rs = stampaNomeCompagniaAereaInComboBoxPS.executeQuery();
+		while (rs.next()) {
+			CompagniaAerea compAerea = new CompagniaAerea(rs.getString(2), rs.getString(1));
+			map.put(compAerea.getCodiceCompagniaAerea(), compAerea.getNome());
 		}
+
 		return map;
 	}
 

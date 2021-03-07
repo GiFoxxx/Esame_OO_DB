@@ -8,7 +8,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,6 +23,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import Amministrazione.Utente;
+import Classi.CompagniaAerea;
 import Controller.Controller;
 import Immagini.Immagini;
 
@@ -29,9 +33,9 @@ import javax.swing.JButton;
 public class GestioneCompagnieAeree extends JPanel {
 
 	String colonne[] = { "Codice Compagnia aerea", "Nome" };
-	final Object[] row = new Object[4];
+	CompagniaAerea[] row = new CompagniaAerea[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	ArrayList<Object[]> ListaCompagnieAeree = new ArrayList<>();
+	List<CompagniaAerea> ListaCompagnieAeree = new ArrayList<CompagniaAerea>();
 	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceCompagniaAerea;
@@ -513,11 +517,15 @@ public class GestioneCompagnieAeree extends JPanel {
 	}
 
 	public void caricaTabella() {
-		this.ListaCompagnieAeree = controllerGestioneCompagnieAeree.implementazioneCompagniaAereaDAO()
-				.stampaCompagnieAeree();
+		try {
+			this.ListaCompagnieAeree = controllerGestioneCompagnieAeree.implementazioneCompagniaAereaDAO()
+					.stampaCompagnieAeree();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		modello.setNumRows(0);
-		for (Object[] dato : this.ListaCompagnieAeree) {
-			this.modello.addRow(dato);
+		for (CompagniaAerea dato : this.ListaCompagnieAeree) {
+			this.modello.addRow(new Object[] {dato.getCodiceCompagniaAerea(), dato.getNome()});
 		}
 		tabella.setModel(modello);
 	}

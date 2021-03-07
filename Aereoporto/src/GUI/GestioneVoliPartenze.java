@@ -609,8 +609,13 @@ public class GestioneVoliPartenze extends JPanel {
 		comboBoxCittaArrivo = new JComboBox<String>();
 		comboBoxCittaArrivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneTrattaDAO()
-						.stampaCittaArrivoInComboBox();
+				HashMap<String, String> map = null;
+				try {
+					map = controllerGestioneVoliPartenze.implementazioneTrattaDAO()
+							.stampaCittaArrivoInComboBox();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				txtCodiceTratta.setText(map.get(comboBoxCittaArrivo.getSelectedItem().toString()));
 			}
 		});
@@ -894,8 +899,14 @@ public class GestioneVoliPartenze extends JPanel {
 	}
 
 	public void stampaComboBoxCittaArrivo() {
-		HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneTrattaDAO()
-				.stampaCittaArrivoInComboBox();
+		HashMap<String, String> map = null;
+		try {
+			map = controllerGestioneVoliPartenze.implementazioneTrattaDAO()
+					.stampaCittaArrivoInComboBox();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for (String s : map.keySet()) {
 			comboBoxCittaArrivo.addItem(s);
 

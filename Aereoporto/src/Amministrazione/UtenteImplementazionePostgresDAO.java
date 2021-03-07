@@ -14,9 +14,6 @@ import Classi.VoloPartenze;
 
 public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 
-	ConnessioneDatabase db = new ConnessioneDatabase();
-	Utente utn = new Utente();
-
 	private Connection connection;
 	private PreparedStatement stampaUtentiPS, registrazioneUtentePS, cancellaUtentePS, modificaUtentePS,
 			stampaNomeAccountPS, stampaCognomeAccountPS, stampaEmailAccountPS, passwordDimenticataPS, cambioPasswordPS,

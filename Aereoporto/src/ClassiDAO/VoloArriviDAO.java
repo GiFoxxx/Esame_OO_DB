@@ -1,14 +1,21 @@
 package ClassiDAO;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
+
+import Classi.CompagniaAerea;
+import Classi.VoloArrivi;
 
 public interface VoloArriviDAO {
-
-public ArrayList<Object[]> stampaVoliArrivi();
 	
-	public boolean cancellaVoloArrivi(Object voloArrivi);
+	public List<VoloArrivi> stampaVoliArrivi() throws SQLException;
 
-	boolean modificaVoloArrivi(Object voloArrivi);
+	public int aggiungiVoloArrivi(VoloArrivi vlArr) throws SQLException;
 
-	boolean aggiungiVoloArrivi(Object voloArrivi);
+	public int cancellaVoloArrivi(VoloArrivi vlArr) throws SQLException;
+	
+	public int modificaVoloArrivi(VoloArrivi vlArr) throws SQLException;
+	
+	
+	
 }
