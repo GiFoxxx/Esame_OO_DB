@@ -600,9 +600,9 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (menuInfoAccount.isVisible()) {
-					menuInfoAccount.setVisible(false);
+					controllerDashboard.chiudiMenuInfoAccount();
 				} else {
-					lblFrecciaMenu.setIcon(new ImageIcon(img.menu()));
+					lblFrecciaMenu.setIcon(new ImageIcon(img.frecciaMenu3()));
 					controllerDashboard.mostraMenuInfoAccount();
 				}
 			}
@@ -1258,7 +1258,6 @@ public class Dashboard extends JFrame {
 						panelImpostazioni.setBackground(controllerDashboard.clickPannelloTemaScuro);
 					}
 				}
-
 			}
 
 			@Override
@@ -1400,7 +1399,6 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerDashboard.chiudiTendina();
-
 			}
 
 			@Override

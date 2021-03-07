@@ -390,9 +390,16 @@ public class Controller {
 		try {
 			if (implementazioneUtenteDAO().accessoUtente(email, password)) {
 				mostraPannelli(getDashboard().getHome());
+
 				mostraUtenteLoggato();
 				getDashboard().getLblFrecciaMenu().setVisible(true);
 				setPannelloPrecedente(1);
+				if (cambioTema()) {
+					getDashboard().getPanelAccedi().setBackground(escoPannelloTemaChiaro);
+				} else {
+					getDashboard().getPanelAccedi().setBackground(escoPannelloTemaScuro);
+				}
+
 				if (email.equals("luigidemarco@gmail.com") || email.equals("manuelbuonanno00@gmail.com")) {
 					entraGestioneUtenti = true;
 				} else {
@@ -1513,6 +1520,7 @@ public class Controller {
 		pane.setVisible(true);
 	}
 
+	// METODI DI MENU INFO ACCOUNT
 	public void mostraMenuInfoAccount() {
 		getDashboard().getHome().setVisible(false);
 		getDashboard().getAccesso().setVisible(false);
@@ -1532,6 +1540,11 @@ public class Controller {
 		getDashboard().getNoClick().setVisible(true);
 		getDashboard().getNoClick().setBounds(0, 0, 1093, 642);
 		getDashboard().getMenuInfoAccount().setVisible(true);
+	}
+
+	public void chiudiMenuInfoAccount() {
+		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
+		getDashboard().getMenuInfoAccount().setVisible(false);
 	}
 
 	// METODI DI SCELTA PROFILO SENZA ACCESSO
@@ -1808,12 +1821,6 @@ public class Controller {
 	}
 
 	public void annullaPasswordDimenticata() {
-		if (cambioTema()) {
-			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblX()
-					.setIcon(new ImageIcon(img.X1TemaChiaro()));
-		} else {
-			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblX().setIcon(new ImageIcon(img.X1()));
-		}
 		getDashboard().getPasswordDimenticata().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
