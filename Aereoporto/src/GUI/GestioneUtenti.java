@@ -1,14 +1,13 @@
 package GUI;
 
-import java.awt.Color;
-
 import java.awt.Cursor;
-import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -17,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import Amministrazione.Utente;
 import Controller.Controller;
 import Immagini.Immagini;
 
@@ -24,16 +24,14 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 
-import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
 
 public class GestioneUtenti extends JPanel {
 
 	String colonne[] = { "Nome", "Cognome", "Email", "Password" };
-	final Object[] row = new Object[4];
+	Utente[] row = new Utente[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	ArrayList<Object[]> ListaUtenti = new ArrayList<>();
+	List<Utente> ListaUtenti = new ArrayList<Utente>();
 	private Immagini img = new Immagini();
 
 	private JTextField txtNome;
@@ -193,7 +191,7 @@ public class GestioneUtenti extends JPanel {
 		this.lblSvuota = lblSvuota;
 	}
 
-	public Object[] getRow() {
+	public Utente[] getRow() {
 		return row;
 	}
 
@@ -594,10 +592,14 @@ public class GestioneUtenti extends JPanel {
 	}
 
 	public void caricaTabella() {
-		this.ListaUtenti = controllerGestioneUtenti.implementazioneUtenteDAO().stampaUtenti();
+		try {
+			this.ListaUtenti = controllerGestioneUtenti.implementazioneUtenteDAO().stampaUtenti();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		modello.setNumRows(0);
-		for (Object[] dato : this.ListaUtenti) {
-			this.modello.addRow(dato);
+		for (Utente dato : this.ListaUtenti) {
+			modello.addRow(new Object[] {dato.getNome(), dato.getCognome(), dato.getEmail(), dato.getPassword()});
 		}
 		tabella.setModel(modello);
 	}

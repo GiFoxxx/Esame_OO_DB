@@ -16,168 +16,263 @@ import java.awt.Cursor;
 public class MenuInfoAccount extends JPanel {
 
 	private Immagini img = new Immagini();
-	
+
 	JLabel lblGestioneUtenti;
 	JLabel lblLayout;
 	JLabel lblErrore;
 	JLabel lblLogout;
-	JLabel lblBoh;
-	
-	JPanel pannello2;
-	JPanel pannello3;
-	JPanel pannello1;
-	
+	JLabel lblComingSoon;
+
+	JPanel panelGestioneUtente;
+	JPanel panelComingSoon;
+	JPanel panelLogout;
+
 	public JLabel getLblGestioneUtenti() {
 		return lblGestioneUtenti;
 	}
-
 
 	public void setLblGestioneUtenti(JLabel lblGestioneUtenti) {
 		this.lblGestioneUtenti = lblGestioneUtenti;
 	}
 
-
 	public JLabel getLblLayout() {
 		return lblLayout;
 	}
-
 
 	public void setLblLayout(JLabel lblLayout) {
 		this.lblLayout = lblLayout;
 	}
 
-
 	public JLabel getLblErrore() {
 		return lblErrore;
 	}
-
 
 	public void setLblErrore(JLabel lblErrore) {
 		this.lblErrore = lblErrore;
 	}
 
-
 	public JLabel getLblLogout() {
 		return lblLogout;
 	}
-
 
 	public void setLblLogout(JLabel lblLogout) {
 		this.lblLogout = lblLogout;
 	}
 
-
-	public JLabel getLblBoh() {
-		return lblBoh;
+	public JLabel getLblComingSoon() {
+		return lblComingSoon;
 	}
 
-
-	public void setLblBoh(JLabel lblBoh) {
-		this.lblBoh = lblBoh;
+	public void setLblComingSoon(JLabel lblBoh) {
+		this.lblComingSoon = lblBoh;
 	}
 
-
-	public JPanel getPannello2() {
-		return pannello2;
+	public JPanel getPanelComingSoon() {
+		return panelComingSoon;
 	}
 
-
-	public void setPannello2(JPanel pannello2) {
-		this.pannello2 = pannello2;
+	public void setPanelComingSoon(JPanel pannello2) {
+		this.panelComingSoon = pannello2;
 	}
 
-
-	public JPanel getPannello3() {
-		return pannello3;
+	public JPanel getPanelLogout() {
+		return panelLogout;
 	}
 
-
-	public void setPannello3(JPanel pannello3) {
-		this.pannello3 = pannello3;
+	public void setPanelLogout(JPanel pannello3) {
+		this.panelLogout = pannello3;
 	}
 
-
-	public JPanel getPannello1() {
-		return pannello1;
+	public JPanel getPanelGestioneUtente() {
+		return panelGestioneUtente;
 	}
 
-
-	public void setPannello1(JPanel pannello1) {
-		this.pannello1 = pannello1;
+	public void setPanelGestioneUtente(JPanel pannello1) {
+		this.panelGestioneUtente = pannello1;
 	}
-
 
 	Controller controllerMenuInfoAccount;
 
 	public MenuInfoAccount(Controller controller) {
 		controllerMenuInfoAccount = controller;
 
-		setBounds(717, 5, 266, 148);
+		setBounds(710, 5, 266, 148);
 		setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
 		setLayout(null);
 
-		pannello1 = new JPanel();
-		pannello1.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
-		pannello1.setBounds(0, 10, 266, 46);
-		add(pannello1);
-		pannello1.setLayout(null);
-
-		 lblGestioneUtenti = new JLabel("Gestione Utenti");
-		 lblGestioneUtenti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblGestioneUtenti.addMouseListener(new MouseAdapter() {
+		panelGestioneUtente = new JPanel();
+		panelGestioneUtente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (controllerMenuInfoAccount.isEntraGestioneUtenti()) {
 					controllerMenuInfoAccount.entraInGestioneUtenti();
 				}
 			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelGestioneUtente.setBackground(controllerMenuInfoAccount.entroPannelloTemaChiaro);
+				} else {
+					panelGestioneUtente.setBackground(controllerMenuInfoAccount.entroPannelloTemaScuro);
+				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelGestioneUtente.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
+				} else {
+					panelGestioneUtente.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelGestioneUtente.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
+				} else {
+					panelGestioneUtente.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelGestioneUtente.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
+				} else {
+					panelGestioneUtente.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
+				}
+			}
 		});
+		panelGestioneUtente.setBackground(controllerMenuInfoAccount.trasparente);
+		panelGestioneUtente.setBounds(0, 10, 266, 46);
+		add(panelGestioneUtente);
+		panelGestioneUtente.setLayout(null);
+
+		lblGestioneUtenti = new JLabel("Gestione Utenti");
 		lblGestioneUtenti.setHorizontalAlignment(SwingConstants.LEFT);
 		lblGestioneUtenti.setForeground(controllerMenuInfoAccount.coloreLabelPressedTemaScuro);
 		lblGestioneUtenti.setFont(controllerMenuInfoAccount.fontLabel);
-		lblGestioneUtenti.setBounds(10, 16, 95, 14);
-		pannello1.add(lblGestioneUtenti);
+		lblGestioneUtenti.setBounds(10, 0, 107, 46);
+		panelGestioneUtente.add(lblGestioneUtenti);
 
 		lblErrore = new JLabel("");
-		lblErrore.setFont(controllerMenuInfoAccount.fontScritte);
+		lblErrore.setFont(controllerMenuInfoAccount.fontLabel);
 		lblErrore.setForeground(controllerMenuInfoAccount.coloreScritturaAllertaTemaScuro);
-		lblErrore.setHorizontalAlignment(SwingConstants.CENTER);
-		lblErrore.setBounds(125, 16, 141, 14);
-		pannello1.add(lblErrore);
+		lblErrore.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblErrore.setBounds(125, 0, 139, 46);
+		panelGestioneUtente.add(lblErrore);
 
-		pannello2 = new JPanel();
-		pannello2.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
-		pannello2.setBounds(0, 56, 266, 46);
-		add(pannello2);
-		pannello2.setLayout(null);
-		
-		lblBoh = new JLabel("Coming soon");
-		lblBoh.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblBoh.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBoh.setForeground(controllerMenuInfoAccount.coloreLabelPressedTemaScuro);
-		lblBoh.setFont(controllerMenuInfoAccount.fontLabel);
-		lblBoh.setBounds(10, 16, 74, 14);
-		pannello2.add(lblBoh);
+		panelComingSoon = new JPanel();
+		panelComingSoon.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
 
-		pannello3 = new JPanel();
-		pannello3.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
-		pannello3.setBounds(0, 102, 266, 46);
-		add(pannello3);
-		pannello3.setLayout(null);
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelComingSoon.setBackground(controllerMenuInfoAccount.entroPannelloTemaChiaro);
+				} else {
+					panelComingSoon.setBackground(controllerMenuInfoAccount.entroPannelloTemaScuro);
+				}
+			}
 
-		lblLogout = new JLabel("Logout");
-		lblLogout.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblLogout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelComingSoon.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
+				} else {
+					panelComingSoon.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelComingSoon.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
+				} else {
+					panelComingSoon.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelComingSoon.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
+				} else {
+					panelComingSoon.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
+				}
+			}
+		});
+		panelComingSoon.setBackground(controllerMenuInfoAccount.trasparente);
+		panelComingSoon.setBounds(0, 56, 266, 46);
+		add(panelComingSoon);
+		panelComingSoon.setLayout(null);
+
+		lblComingSoon = new JLabel("Coming soon");
+		lblComingSoon.setHorizontalAlignment(SwingConstants.LEFT);
+		lblComingSoon.setForeground(controllerMenuInfoAccount.coloreLabelPressedTemaScuro);
+		lblComingSoon.setFont(controllerMenuInfoAccount.fontLabel);
+		lblComingSoon.setBounds(10, 0, 107, 46);
+		panelComingSoon.add(lblComingSoon);
+
+		panelLogout = new JPanel();
+		panelLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerMenuInfoAccount.logout();
 			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelLogout.setBackground(controllerMenuInfoAccount.entroPannelloTemaChiaro);
+				} else {
+					panelLogout.setBackground(controllerMenuInfoAccount.entroPannelloTemaScuro);
+				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelLogout.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
+				} else {
+					panelLogout.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelLogout.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
+				} else {
+					panelLogout.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (controllerMenuInfoAccount.cambioTema()) {
+					panelLogout.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
+				} else {
+					panelLogout.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
+				}
+			}
 		});
+		panelLogout.setBackground(controllerMenuInfoAccount.trasparente);
+		panelLogout.setBounds(0, 102, 266, 46);
+		add(panelLogout);
+		panelLogout.setLayout(null);
+
+		lblLogout = new JLabel("Logout");
 		lblLogout.setHorizontalAlignment(SwingConstants.LEFT);
 		lblLogout.setForeground(controllerMenuInfoAccount.coloreLabelPressedTemaScuro);
 		lblLogout.setFont(controllerMenuInfoAccount.fontLabel);
-		lblLogout.setBounds(10, 16, 40, 14);
-		pannello3.add(lblLogout);
+		lblLogout.setBounds(10, 0, 107, 46);
+		panelLogout.add(lblLogout);
 
 		lblLayout = new JLabel("");
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);

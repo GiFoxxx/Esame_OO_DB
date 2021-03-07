@@ -61,11 +61,10 @@ public class ConnessioneDatabase {
 		con = DriverManager.getConnection(getUrl(), getNome(), getPassword());
 
 	} catch (SQLException | ClassNotFoundException e) {
-		JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		JOptionPane.showMessageDialog(null, "Errore brutto: " + e.getMessage());
 		
 	}
 	return con;
-	
 	}
 	
 	

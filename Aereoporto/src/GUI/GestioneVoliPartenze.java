@@ -5,15 +5,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
-import java.text.ParseException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,7 +19,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
-import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -34,10 +31,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JComboBox;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
-import java.util.Calendar;
-import javax.swing.JCheckBox;
 
 public class GestioneVoliPartenze extends JPanel {
 
@@ -45,7 +38,7 @@ public class GestioneVoliPartenze extends JPanel {
 			"Data e Orario Partenza", "Apertura Gate", "Chiusura Gate", "Numero Prenotazioni", "Status Imbarco" , "Status Volo" };
 	Object[] row = new Object[11];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	ArrayList<Object[]> ListaVoliPartenze = new ArrayList<>();
+	List<VoloPartenze> ListaVoliPartenze = new ArrayList<>();
 	private Immagini img = new Immagini();
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -683,7 +676,8 @@ public class GestioneVoliPartenze extends JPanel {
 				if (getTxtOraPartenza().getText().length() <= 0) {
 					controllerGestioneVoliPartenze.modificaStatusVoloPartenze();
 				} else {
-					controllerGestioneVoliPartenze.modificaVoloPartenze();
+						controllerGestioneVoliPartenze.modificaVoloPartenze();
+					
 				}
 			}
 
@@ -888,7 +882,7 @@ public class GestioneVoliPartenze extends JPanel {
 		stampaComboBoxNumeroPorta();
 		stampaComboBoxCittaArrivo();
 
-		caricaTabella();
+//		caricaTabella();
 	}
 
 	public void stampaComboBoxNumeroPorta() {
@@ -908,14 +902,14 @@ public class GestioneVoliPartenze extends JPanel {
 		}
 	}
 
-	public void caricaTabella() {
-		this.ListaVoliPartenze = controllerGestioneVoliPartenze.implementazioneVoloPartenzeDAO().stampaVoliPartenze();
-		modello.setNumRows(0);
-		for (Object[] dato : this.ListaVoliPartenze) {
-			this.modello.addRow(dato);
-		}
-		tabella.setModel(modello);
-	}
+//	public void caricaTabella() {
+//		this.ListaVoliPartenze = controllerGestioneVoliPartenze.implementazioneVoloPartenzeDAO().stampaVoliPartenze();
+//		modello.setNumRows(0);
+//		for (Object[] dato : this.ListaVoliPartenze) {
+//			this.modello.addRow(dato);
+//		}
+//		tabella.setModel(modello);
+//	}
 
 	private void ricerca() {
 		DefaultTableModel table = (DefaultTableModel) tabella.getModel();

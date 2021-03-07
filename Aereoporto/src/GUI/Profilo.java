@@ -160,6 +160,7 @@ public class Profilo extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerProfilo.mostraPannelli(controllerProfilo.getDashboard().getCambioPassword());
+				controllerProfilo.setPannelloPrecedente(13);
 			}
 
 			@Override

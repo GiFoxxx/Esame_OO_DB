@@ -1,19 +1,24 @@
 package ClassiDAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import Classi.VoloPartenze;
 
 public interface VoloPartenzeDAO {
 	
-	public ArrayList<Object[]> stampaVoliPartenze();
+//	public List<VoloPartenze> getAllVoloPartenze() throws SQLException;
+	public int inserisciVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
 	
-	public boolean cancellaVoloPartenze(Object voloPartenze);
+//	public ArrayList<Object[]> stampaVoliPartenze();
+	
+	public int cancellaVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
 
-	boolean modificaVoloPartenze(Object voloPartenze);
+	public int modificaVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
 
-	boolean aggiungiVoloPartenze(Object voloPartenze);
+//	boolean aggiungiVoloPartenze(Object voloPartenze);
 
-	boolean modificaStatusVoloPartenze(Object voloPartenze);
+//	boolean modificaStatusVoloPartenze(Object voloPartenze);
 
 }

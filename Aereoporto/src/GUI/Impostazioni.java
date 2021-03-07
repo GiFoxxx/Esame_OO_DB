@@ -58,6 +58,7 @@ public class Impostazioni extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerImpostazioni.mostraInformazioni();
+				
 			}
 		});
 		lblInformazioni.setFont(controllerImpostazioni.fontLabel);
@@ -84,6 +85,7 @@ public class Impostazioni extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerImpostazioni.mostraPannelli(controllerImpostazioni.getDashboard().getRecensioni());
+				controllerImpostazioni.setPannelloPrecedente(12);
 			}
 		});
 		lblRecensione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -128,16 +128,18 @@ public class VoloPartenze {
 		this.codiceVoloPartenze = codiceVoloPartenze;
 		this.statusVolo = status;
 	}
+	
+	public VoloPartenze(String codiceVoloPartenze, Time tempoImbarcoEffettivo) {
+		super();
+		this.codiceVoloPartenze = codiceVoloPartenze;
+		this.tempoImbarcoEffettivo = tempoImbarcoEffettivo;
+	}
 
 	public VoloPartenze(String codiceVoloPartenze, int status, Time tempoImbarcoEffettivo) {
 		super();
 		this.codiceVoloPartenze = codiceVoloPartenze;
 		this.statusVolo = status;
 		this.tempoImbarcoEffettivo = tempoImbarcoEffettivo;
-	}
-
-	public VoloPartenze(String string, String string2, String string3, String string4, java.sql.Date date,
-			String string5, String string6, String string7, String string8, String string9, int int1) {
 	}
 
 }

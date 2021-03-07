@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -13,6 +15,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import Database.ConnessioneDatabase;
+import Database.ConnessioneDatabase1;
 
 import javax.swing.*;
 import Amministrazione.*;
@@ -336,6 +340,7 @@ public class Controller {
 		this.recensioni = recensione;
 	}
 
+	// MAIN
 	public static void main(String[] args) {
 		Controller controller = new Controller();
 	}
@@ -363,12 +368,11 @@ public class Controller {
 		dashboard.setVisible(true);
 	}
 
-	
-	//RECENSIONE
+	// RECENSIONE
 	public void svuotaArea() {
 		((Recensione) getDashboard().getRecensioni()).getTextArea().setText("");
 	}
-	
+
 	// METODI DI ACCESSO
 	public void svuotaCampiAccesso() {
 		((Accesso) getDashboard().getAccesso()).getTxtEmail().setText("");
@@ -383,21 +387,26 @@ public class Controller {
 		String password = ((Accesso) getDashboard().getAccesso()).getTxtPassword().getText();
 		passwordAccesso = ((Accesso) getDashboard().getAccesso()).getTxtPassword().getText();
 
-		if (implementazioneUtenteDAO().accessoUtente(email, password)) {
-			mostraPannelli(getDashboard().getHome());
-			mostraUtenteLoggato();
-			setPannelloPrecedente(1);
-			if (email.equals("luigidemarco@gmail.com") || email.equals("manuelbuonanno00@gmail.com")) {
-				entraGestioneUtenti = true;
-			}else {
-				((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblErrore()
-				.setText("Non sei amministratore");
+		try {
+			if (implementazioneUtenteDAO().accessoUtente(email, password)) {
+				mostraPannelli(getDashboard().getHome());
+				mostraUtenteLoggato();
+				getDashboard().getLblFrecciaMenu().setVisible(true);
+				setPannelloPrecedente(1);
+				if (email.equals("luigidemarco@gmail.com") || email.equals("manuelbuonanno00@gmail.com")) {
+					entraGestioneUtenti = true;
+				} else {
+					((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblErrore()
+							.setText("Non sei amministratore");
+				}
+				((Accesso) getDashboard().getAccesso()).setSbloccaHome(true);
+			} else if (controlloCampiSeVuotiAccesso()) {
+				((Accesso) getDashboard().getAccesso()).mostraInserimentoCredenziali();
+			} else {
+				((Accesso) getDashboard().getAccesso()).mostraErroreAccesso();
 			}
-			((Accesso) getDashboard().getAccesso()).setSbloccaHome(true);
-		} else if (controlloCampiSeVuotiAccesso()) {
-			((Accesso) getDashboard().getAccesso()).mostraInserimentoCredenziali();
-		} else {
-			((Accesso) getDashboard().getAccesso()).mostraErroreAccesso();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -445,31 +454,35 @@ public class Controller {
 	@SuppressWarnings("deprecation")
 	public void registrati() {
 		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
-		if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto()
+		if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuotoRegistrazione()
 				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
 			Utente utn = new Utente(((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText());
-			implementazioneUtenteDAO().registrazioneUtente(utn);
+			try {
+				implementazioneUtenteDAO().registrazioneUtente(utn);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			((OperazioneRiuscitaConSuccesso) getDashboard().getOperazioneEffettuataConSuccesso()).getLblComplimenti()
 					.setText("Registrazione effettuata con successo");
 			mostraOperazioneEffettuataConSuccesso();
 
 			mostraPannelli(getDashboard().getAccesso());
 			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-		} else if ((!formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuoto()
+		} else if ((!formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuotoRegistrazione()
 				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText(
 					"Formato email inserito non valido!\n" + " Inserire l'email dal formato tipo: example@example.com");
 
-		} else if (formatoEmailInseritaErrato() && !ripetiPassword() && nessunCampoVuoto()
+		} else if (formatoEmailInseritaErrato() && !ripetiPassword() && nessunCampoVuotoRegistrazione()
 				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
 
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
 					.setText("Le passwords non corrispondono");
 
-		} else if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuoto()
+		} else if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuotoRegistrazione()
 				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
 					.setText("Effettuare il logout prima della registrazione");
@@ -480,7 +493,7 @@ public class Controller {
 	}
 
 	@SuppressWarnings("deprecation")
-	public boolean nessunCampoVuoto() {
+	public boolean nessunCampoVuotoRegistrazione() {
 		if (((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText().length() <= 0
 				|| ((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText().length() <= 0
 				|| ((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText().length() <= 0
@@ -514,17 +527,29 @@ public class Controller {
 	}
 
 	public UtenteDAO implementazioneUtenteDAO() {
-		UtenteDAO dao = new UtenteImplementazionePostgresDAO();
+		ConnessioneDatabase1 dbconn = null;
+		Connection connection = null;
+		UtenteDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase1.getInstance();
+			connection = dbconn.getConnection();
+			dao = new UtenteImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			System.out.println("SQLException: " + exception.getMessage());
+		}
 		return dao;
 	}
-	
 
 	public void aggiungiUtente() {
 		utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(),
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(),
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
-		implementazioneUtenteDAO().registrazioneUtente(utn);
+		try {
+			implementazioneUtenteDAO().registrazioneUtente(utn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
 				.addRow(((GestioneUtenti) getDashboard().getGestioneUtenti()).getRow());
 		svuotaCampiGestioneUtenti();
@@ -537,7 +562,11 @@ public class Controller {
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(),
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
 		int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTabella().getSelectedRow();
-		implementazioneUtenteDAO().cancellaUtente(utn);
+		try {
+			implementazioneUtenteDAO().cancellaUtente(utn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().removeRow(t);
 		svuotaCampiGestioneUtenti();
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
@@ -550,16 +579,20 @@ public class Controller {
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
 		int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTabella().getSelectedRow();
 
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
-				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(), t, 0);
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
-				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(), t, 1);
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
-				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(), t, 2);
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
-				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText(), t, 3);
+//		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
+//				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(), t, 0);
+//		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
+//				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(), t, 1);
+//		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
+//				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(), t, 2);
+//		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
+//				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText(), t, 3);
 
-		implementazioneUtenteDAO().modificaUtente(utn);
+		try {
+			implementazioneUtenteDAO().modificaUtente(utn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		svuotaCampiGestioneUtenti();
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 	}
@@ -700,7 +733,16 @@ public class Controller {
 	}
 
 	public VoloPartenzeDAO implementazioneVoloPartenzeDAO() {
-		VoloPartenzeDAO dao = new VoloPartenzeImplementazionePostgresDAO();
+		ConnessioneDatabase1 dbconn = null;
+		Connection connection = null;
+		VoloPartenzeDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase1.getInstance();
+			connection = dbconn.getConnection();
+			dao = new VoloPartenzeImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			System.out.println("SQLException: " + exception.getMessage());
+		}
 		return dao;
 	}
 
@@ -720,6 +762,7 @@ public class Controller {
 				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
 						.getTxtTempoDiImbarcoEffettivo().getText());
 		Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarcoEffettivo, 0);
+
 		int status = Integer
 				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText());
 
@@ -741,12 +784,16 @@ public class Controller {
 							.getTxtNumeroPrenotazioni().getText(),
 					tempoImbarcoEffettivo, trt, gt, status);
 
-			implementazioneVoloPartenzeDAO().aggiungiVoloPartenze(vlprtz);
+			try {
+				implementazioneVoloPartenzeDAO().inserisciVoloPartenze(vlprtz);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
 					.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
 			svuotaCampiGestioneVoloPartenze();
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore().setText("");
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} else {
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore()
 					.setText("Errore nell'inserimento dell'orario");
@@ -758,10 +805,14 @@ public class Controller {
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText());
 
 		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
-		implementazioneVoloPartenzeDAO().cancellaVoloPartenze(vlprtz);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().removeRow(t);
+		try {
+			implementazioneVoloPartenzeDAO().cancellaVoloPartenze(vlprtz);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+//		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().removeRow(t);
 		svuotaCampiGestioneVoloPartenze();
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+//		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -775,18 +826,18 @@ public class Controller {
 		int minuto = Integer.parseInt(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText());
 		int secondo = 0;
-		@SuppressWarnings("deprecation")
+
 		Time tempo = new Time(ora, minuto, secondo);
 		int minutoTempoImbarcoEffettivo = Integer
 				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
 						.getTxtTempoDiImbarcoEffettivo().getText());
 		Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarcoEffettivo, 0);
+
 		int status = Integer
 				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText());
 
 		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
-			@SuppressWarnings("deprecation")
 			Timestamp dataTempo = new Timestamp(
 					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
 							.getYear(),
@@ -805,31 +856,35 @@ public class Controller {
 
 			int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
 
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
-					.setValueAt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-							.getTxtCodiceVoloPartenze().getText(), t, 0);
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText(), t,
-					1);
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText(), t,
-					2);
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
-					t, 3);
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText(), t,
-					4);
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText(),
-					t, 5);
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
-					.setValueAt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-							.getTxtNumeroPrenotazioni().getText(), t, 6);
+//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
+//					.setValueAt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+//							.getTxtCodiceVoloPartenze().getText(), t, 0);
+//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+//					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText(), t,
+//					1);
+//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+//					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText(), t,
+//					2);
+//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+//					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
+//					t, 3);
+//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+//					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText(), t,
+//					4);
+//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+//					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText(),
+//					t, 5);
+//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
+//					.setValueAt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+//							.getTxtNumeroPrenotazioni().getText(), t, 6);
 
-			implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
+			try {
+				implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			svuotaCampiGestioneVoloPartenze();
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} else {
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore()
 					.setText("Errore nell'inserimento dell'orario");
@@ -837,12 +892,14 @@ public class Controller {
 	}
 
 	public void modificaStatusImbarcoVoloPartenze() {
-		int tempoImbarcoStimato = Integer.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+		int minutoTempoImbarco = Integer.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
 				.getTxtTempoDiImbarcoEffettivo().getText());
+
+		Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarco, 0);
 
 		vlprtz = new VoloPartenze(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
-				tempoImbarcoStimato);
+				tempoImbarcoEffettivo);
 
 		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
 
@@ -852,9 +909,9 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText(), t, 8);
 
-		implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+//		implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
 		svuotaCampiGestioneVoloPartenze();
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+//		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -881,9 +938,9 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText(), t, 9);
 
-		implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+//		implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
 		svuotaCampiGestioneVoloPartenze();
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+//		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
 	// METODI GESTIONE VOLI ARRIVI
@@ -1209,8 +1266,12 @@ public class Controller {
 
 	public void mostraUtenteLoggato() {
 		utn = new Utente(getEmailAccesso());
-		getDashboard().getLblAccount().setText(implementazioneUtenteDAO().stampaNomeAccount(utn) + " "
-				+ implementazioneUtenteDAO().stampaCognomeAccount(utn));
+		try {
+			getDashboard().getLblAccount().setText(implementazioneUtenteDAO().stampaNomeAccount(utn) + " "
+					+ implementazioneUtenteDAO().stampaCognomeAccount(utn));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		getDashboard().getLblAccount().setBounds(820, 7, 140, 23);
 	}
 
@@ -1387,7 +1448,7 @@ public class Controller {
 		NoClick noClick = new NoClick(this);
 		return noClick;
 	}
-	
+
 	public JPanel menuInfoAccount() {
 		MenuInfoAccount menuInfoAccount = new MenuInfoAccount(this);
 		return menuInfoAccount;
@@ -1442,20 +1503,35 @@ public class Controller {
 		((CambioPassword) getDashboard().getCambioPassword()).getLblMostraRipetiNuovaPassword().setVisible(true);
 		svuotaCampiCambioPassword();
 		getDashboard().getRecensioni().setVisible(false);
+		getDashboard().getNoClick().setBounds(238, 0, 905, 642);
 		getDashboard().getNoClick().setVisible(false);
 		getDashboard().getMenuInfoAccount().setVisible(false);
 
-
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
-		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
-		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		((CambioPassword) getDashboard().getCambioPassword()).getLblMostraNuovaPassword().setVisible(true);
 		((CambioPassword) getDashboard().getCambioPassword()).getLblMostraRipetiNuovaPassword().setVisible(true);
 
 		pane.setVisible(true);
+	}
+
+	public void mostraMenuInfoAccount() {
+		getDashboard().getHome().setVisible(false);
+		getDashboard().getAccesso().setVisible(false);
+		getDashboard().getRegistrazione().setVisible(false);
+		getDashboard().getProfilo().setVisible(false);
+		getDashboard().getImpostazioni().setVisible(false);
+		getDashboard().getGestioneCompagnieAeree().setVisible(false);
+		getDashboard().getGestioneUtenti().setVisible(false);
+		getDashboard().getGestioneGate().setVisible(false);
+		getDashboard().getGateCodeImbarco().setVisible(false);
+		getDashboard().getGestioneTratte().setVisible(false);
+		getDashboard().getGestioneVoliPartenze().setVisible(false);
+		getDashboard().getGestioneVoliArrivi().setVisible(false);
+		getDashboard().getCambioPassword().setVisible(false);
+		getDashboard().getMenuInfoAccount().setVisible(false);
+
+		getDashboard().getNoClick().setVisible(true);
+		getDashboard().getNoClick().setBounds(0, 0, 1093, 642);
+		getDashboard().getMenuInfoAccount().setVisible(true);
 	}
 
 	// METODI DI SCELTA PROFILO SENZA ACCESSO
@@ -1482,6 +1558,7 @@ public class Controller {
 
 	public void annullaSceltaProfiloSenzaAccesso() {
 		getDashboard().getSceltaProfiloSenzaAccesso().dispose();
+		pannelloLateraleSelezionato();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
@@ -1509,11 +1586,6 @@ public class Controller {
 	}
 
 	public void annullaSceltaVolo() {
-		if (cambioTema()) {
-			((SceltaVolo) getDashboard().getSceltaVolo()).getLblX().setIcon(new ImageIcon(img.X1TemaChiaro()));
-		} else {
-			((SceltaVolo) getDashboard().getSceltaVolo()).getLblX().setIcon(new ImageIcon(img.X1()));
-		}
 		getDashboard().getSceltaVolo().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
@@ -1542,11 +1614,6 @@ public class Controller {
 	}
 
 	public void annullaSceltaGate() {
-		if (cambioTema()) {
-			((SceltaGate) getDashboard().getSceltaGate()).getLblX().setIcon(new ImageIcon(img.X1TemaChiaro()));
-		} else {
-			((SceltaGate) getDashboard().getSceltaGate()).getLblX().setIcon(new ImageIcon(img.X1()));
-		}
 		getDashboard().getSceltaGate().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
@@ -1562,18 +1629,20 @@ public class Controller {
 			return false;
 		}
 	}
-	
-	//MENU INFO ACCOUNT
+
+	// MENU INFO ACCOUNT
 	public void entraInGestioneUtenti() {
 		if (sbloccaGestione()) {
 			setPannelloPrecedente(8);
 			mostraPannelli(getDashboard().getGestioneUtenti());
-		}	
+		}
 	}
-	
+
 	public void logout() {
 		getDashboard().getLblAccount().setBounds(760, 7, 216, 23);
 		getDashboard().getLblAccount().setText("Nessun accesso effettuato");
+		getDashboard().getLblFrecciaMenu().setVisible(false);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblErrore().setText("");
 		entraGestioneUtenti = false;
 		((Accesso) getDashboard().getAccesso()).setSbloccaHome(false);
 		mostraPannelli(getDashboard().getAccesso());
@@ -1583,11 +1652,17 @@ public class Controller {
 
 	public void profiloUtenteAccessoEffettuato() {
 		utn = new Utente(getEmailAccesso());
-		((Profilo) getDashboard().getProfilo()).getTxtNome().setText(implementazioneUtenteDAO().stampaNomeAccount(utn));
-		((Profilo) getDashboard().getProfilo()).getTxtCognome()
-				.setText(implementazioneUtenteDAO().stampaCognomeAccount(utn));
-		((Profilo) getDashboard().getProfilo()).getTxtEmail()
-				.setText(implementazioneUtenteDAO().stampaEmailAccount(utn));
+		try {
+			((Profilo) getDashboard().getProfilo()).getTxtNome()
+					.setText(implementazioneUtenteDAO().stampaNomeAccount(utn));
+
+			((Profilo) getDashboard().getProfilo()).getTxtCognome()
+					.setText(implementazioneUtenteDAO().stampaCognomeAccount(utn));
+			((Profilo) getDashboard().getProfilo()).getTxtEmail()
+					.setText(implementazioneUtenteDAO().stampaEmailAccount(utn));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// METODI DI CAMBIO PASSWORD
@@ -1598,12 +1673,17 @@ public class Controller {
 		((CambioPassword) getDashboard().getCambioPassword()).getTxtRipetiNuovaPassword().setText("");
 	}
 
+	@SuppressWarnings("deprecation")
 	public void cambioPasswordDaProfilo() {
 		utn = new Utente(emailAccesso,
 				((CambioPassword) getDashboard().getCambioPassword()).getTxtNuovaPassword().getText());
 
 		if (passwordVecchiaUgualeAllaNuova() && ripetiCambioPassword() && !(controlloCampiSeVuotiCambioPassword())) {
-			implementazioneUtenteDAO().cambioPasswordDB(utn);
+			try {
+				implementazioneUtenteDAO().cambioPasswordDB(utn);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			((OperazioneRiuscitaConSuccesso) getDashboard().getOperazioneEffettuataConSuccesso()).getLblComplimenti()
 					.setText("Operazione avvenuta con successo");
 			mostraOperazioneEffettuataConSuccesso();
@@ -1625,6 +1705,7 @@ public class Controller {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean controlloCampiSeVuotiCambioPassword() {
 		if (((CambioPassword) getDashboard().getCambioPassword()).getTxtVecchiaPassword().getText().length() <= 0
 				|| ((CambioPassword) getDashboard().getCambioPassword()).getTxtNuovaPassword().getText().length() <= 0
@@ -1645,6 +1726,7 @@ public class Controller {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean ripetiCambioPassword() {
 		if (((CambioPassword) getDashboard().getCambioPassword()).getTxtNuovaPassword().getText()
 				.equals(((CambioPassword) getDashboard().getCambioPassword()).getTxtRipetiNuovaPassword().getText())) {
@@ -1677,25 +1759,29 @@ public class Controller {
 				((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().getText());
 		String email = ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText();
 
-		if (ripetiPasswordDimenticata() && implementazioneUtenteDAO().esisteEmail(email)
-				&& !(controlloCampiSeVuotiPasswordDimenticata())) {
-			implementazioneUtenteDAO().passwordDimenticata(utn);
-			mostraPannelli(getDashboard().getAccesso());
-			getDashboard().getPasswordDimenticata().dispose();
-			getDashboard().setEnabled(true);
-			getDashboard().setVisible(true);
-			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-		} else if (!ripetiPasswordDimenticata() && implementazioneUtenteDAO().esisteEmail(email)
-				&& !(controlloCampiSeVuotiPasswordDimenticata())) {
-			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
-					.setText("Le passwords non corrispondono");
-		} else if (ripetiPasswordDimenticata()
-				&& (implementazioneUtenteDAO().esisteEmail(email) && controlloCampiSeVuotiPasswordDimenticata())) {
-			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
-					.setText("Inserire i campi vuoti");
-		} else {
-			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
-					.setText("L'email non esiste");
+		try {
+			if (ripetiPasswordDimenticata() && implementazioneUtenteDAO().esisteEmail(email)
+					&& !(controlloCampiSeVuotiPasswordDimenticata())) {
+				implementazioneUtenteDAO().passwordDimenticata(utn);
+				mostraPannelli(getDashboard().getAccesso());
+				getDashboard().getPasswordDimenticata().dispose();
+				getDashboard().setEnabled(true);
+				getDashboard().setVisible(true);
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
+			} else if (!ripetiPasswordDimenticata() && implementazioneUtenteDAO().esisteEmail(email)
+					&& !(controlloCampiSeVuotiPasswordDimenticata())) {
+				((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
+						.setText("Le passwords non corrispondono");
+			} else if (ripetiPasswordDimenticata()
+					&& (implementazioneUtenteDAO().esisteEmail(email) && controlloCampiSeVuotiPasswordDimenticata())) {
+				((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
+						.setText("Inserire i campi vuoti");
+			} else {
+				((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
+						.setText("L'email non esiste");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -1836,32 +1922,55 @@ public class Controller {
 
 		if (selezionePannello == 1) {
 			mostraPannelli(getDashboard().getHome());
+			if (cambioTema()) {
+				getDashboard().getPanelHome().setBackground(pannelloSceltoTemaChiaro);
+			} else {
+				getDashboard().getPanelHome().setBackground(pannelloSceltoTemaScuro);
+			}
 		} else if (selezionePannello == 2) {
 			mostraPannelli(getDashboard().getAccesso());
+			if (cambioTema()) {
+				getDashboard().getPanelAccedi().setBackground(pannelloSceltoTemaChiaro);
+			} else {
+				getDashboard().getPanelAccedi().setBackground(pannelloSceltoTemaScuro);
+			}
 		} else if (selezionePannello == 3) {
 			mostraPannelli(getDashboard().getRegistrazione());
+			if (cambioTema()) {
+				getDashboard().getPanelRegistrati().setBackground(pannelloSceltoTemaChiaro);
+			} else {
+				getDashboard().getPanelRegistrati().setBackground(pannelloSceltoTemaScuro);
+			}
 		} else if (selezionePannello == 4) {
 			mostraPannelli(getDashboard().getProfilo());
+			if (cambioTema()) {
+				getDashboard().getPanelProfilo().setBackground(pannelloSceltoTemaChiaro);
+			} else {
+				getDashboard().getPanelProfilo().setBackground(pannelloSceltoTemaScuro);
+			}
 		} else if (selezionePannello == 5) {
 			mostraPannelli(getDashboard().getImpostazioni());
+			if (cambioTema()) {
+				getDashboard().getPanelImpostazioni().setBackground(pannelloSceltoTemaChiaro);
+			} else {
+				getDashboard().getPanelImpostazioni().setBackground(pannelloSceltoTemaScuro);
+			}
 		} else if (selezionePannello == 6) {
 			mostraPannelli(getDashboard().getGestioneTratte());
 		} else if (selezionePannello == 7) {
 			mostraPannelli(getDashboard().getGestioneCompagnieAeree());
 		} else if (selezionePannello == 8) {
-			mostraPannelli(getDashboard().getGestioneUtenti());
+			mostraPannelli(getDashboard().getGestioneGate());
 		} else if (selezionePannello == 9) {
-			mostraPannelli(getDashboard().getGestioneUtenti());
-		} else if (selezionePannello == 10) {
-			mostraPannelli(getDashboard().getGestioneGate());
-		} else if (selezionePannello == 11) {
 			mostraPannelli(getDashboard().getGestioneVoliPartenze());
-		} else if (selezionePannello == 12) {
+		} else if (selezionePannello == 10) {
 			mostraPannelli(getDashboard().getGestioneVoliArrivi());
-		} else if (selezionePannello == 13) {
-			mostraPannelli(getDashboard().getGestioneGate());
-		} else if (selezionePannello == 14) {
+		} else if (selezionePannello == 11) {
 			mostraPannelli(getDashboard().getGateCodeImbarco());
+		} else if (selezionePannello == 12) {
+			mostraPannelli(getDashboard().getRecensioni());
+		} else if (selezionePannello == 13) {
+			mostraPannelli(getDashboard().getCambioPassword());
 		} else {
 			mostraPannelli(getDashboard().getHome());
 		}
@@ -2805,5 +2914,4 @@ public class Controller {
 				.setIcon(new ImageIcon(img.spostaUscita()));
 
 	}
-
 }

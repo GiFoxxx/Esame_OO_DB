@@ -4,367 +4,168 @@ import Database.*;
 import GUI.Accesso;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
+
+import Classi.VoloPartenze;
 
 public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 
 	ConnessioneDatabase db = new ConnessioneDatabase();
 	Utente utn = new Utente();
 
-	@SuppressWarnings("finally")
-	@Override
-	public ArrayList<Object[]> stampaUtenti() {
-		ArrayList<Object[]> ListaUtenti = new ArrayList<>();
-		
-		PreparedStatement pst;
-		ResultSet rs;
-		String sql = "SELECT * FROM utente";
+	private Connection connection;
+	private PreparedStatement stampaUtentiPS, registrazioneUtentePS, cancellaUtentePS, modificaUtentePS,
+			stampaNomeAccountPS, stampaCognomeAccountPS, stampaEmailAccountPS, passwordDimenticataPS, cambioPasswordPS,
+			accessoUtentePS, esisteEmailPS;
 
-		try {
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				Object[] Lista = new Object[4];
-				for (int i = 0; i <= 3; i++) {
-					Lista[i] = rs.getObject(i + 1);
-				}
-				ListaUtenti.add(Lista);
-			}
-			db.ConnessioneDB().close();
+	public UtenteImplementazionePostgresDAO(Connection connection) throws SQLException {
+		this.connection = connection;
 
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-		} finally {
-			return ListaUtenti;
-		}
+		stampaUtentiPS = connection.prepareStatement("SELECT * FROM utente");
+		registrazioneUtentePS = connection.prepareStatement("INSERT INTO utente VALUES (?,?,?,?)");
+		cancellaUtentePS = connection.prepareStatement("DELETE FROM utente WHERE email = ?");
+		modificaUtentePS = connection.prepareStatement("UPDATE utente SET nome=?, cognome=?, password=? WHERE email=?");
+		stampaNomeAccountPS = connection.prepareStatement("SELECT nome FROM utente WHERE email=?");
+		stampaCognomeAccountPS = connection.prepareStatement("SELECT cognome FROM utente WHERE email=?");
+		stampaEmailAccountPS = connection.prepareStatement("SELECT email FROM utente WHERE email=?");
+		passwordDimenticataPS = connection.prepareStatement("UPDATE utente SET password=? WHERE email=?");
+		cambioPasswordPS = connection.prepareStatement("UPDATE utente SET password=? WHERE email=?");
+		accessoUtentePS = connection.prepareStatement("SELECT * FROM utente WHERE email = ? AND password = ?");
+		esisteEmailPS = connection.prepareStatement("SELECT * FROM utente WHERE email = ? ");
 	}
-	
-	@Override
-	public String stampaNomeAccount(Object utente) {
-		utn = (Utente) utente;
-		
+
+	public List<Utente> stampaUtenti() throws SQLException {
+
+		ResultSet rs = stampaUtentiPS.executeQuery();
+		List<Utente> lista = new ArrayList<Utente>();
+		while (rs.next()) {
+			Utente utn = new Utente();
+			utn.setNome(rs.getString("nome"));
+			utn.setCognome(rs.getString("cognome"));
+			utn.setEmail(rs.getString("email"));
+			utn.setPassword(rs.getString("password"));
+			lista.add(utn);
+		}
+		rs.close();
+		return lista;
+	}
+
+	public int registrazioneUtente(Utente utente) throws SQLException {
+		registrazioneUtentePS.setString(1, utente.getNome());
+		registrazioneUtentePS.setString(2, utente.getCognome());
+		registrazioneUtentePS.setString(3, utente.getEmail());
+		registrazioneUtentePS.setString(4, utente.getPassword());
+
+		int row = registrazioneUtentePS.executeUpdate();
+		return row;
+	}
+
+	public int cancellaUtente(Utente utente) throws SQLException {
+		cancellaUtentePS.setString(1, utente.getEmail());
+
+		int row = cancellaUtentePS.executeUpdate();
+		return row;
+	}
+
+	public int modificaUtente(Utente utente) throws SQLException {
+		modificaUtentePS.setString(1, utente.getNome());
+		modificaUtentePS.setString(2, utente.getCognome());
+		modificaUtentePS.setString(3, utente.getPassword());
+		modificaUtentePS.setString(4, utente.getEmail());
+
+		int row = modificaUtentePS.executeUpdate();
+		return row;
+	}
+
+	public String stampaNomeAccount(Utente utente) throws SQLException {
 		String nome = null;
-		PreparedStatement pst;
-		ResultSet rs;
-		String sql = "SELECT nome FROM utente WHERE email=?";
 
-		try {
+		stampaNomeAccountPS.setString(1, utente.getEmail());
+		ResultSet rs = stampaNomeAccountPS.executeQuery();
+		StringBuilder resultText = new StringBuilder();
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			pst.setString(1, utn.getEmail());
-			rs = pst.executeQuery();
-			StringBuilder resultText = new StringBuilder();
+		while (rs.next()) {
+			resultText.append(rs.getString(1));
+		}
+		nome = resultText.toString();
 
-			while (rs.next()) {
-			    resultText.append(rs.getString(1));
-			}
-			nome = resultText.toString();
-			
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-		} 
 		return nome;
 	}
 
-	@Override
-	public String stampaCognomeAccount(Object utente) {
-		utn = (Utente) utente;
-		
+	public String stampaCognomeAccount(Utente utente) throws SQLException {
 		String cognome = null;
-		PreparedStatement pst;
-		ResultSet rs;
-		String sql = "SELECT cognome FROM utente WHERE email=?";
 
-		try {
+		stampaCognomeAccountPS.setString(1, utente.getEmail());
+		ResultSet rs = stampaCognomeAccountPS.executeQuery();
+		StringBuilder resultText = new StringBuilder();
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			
-			pst.setString(1, utn.getEmail());
-			
-			rs = pst.executeQuery();
-			
-			StringBuilder resultText = new StringBuilder();
-
-			while (rs.next()) {
-			    resultText.append(rs.getString(1));
-			}
-			cognome = resultText.toString();
-			
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
+		while (rs.next()) {
+			resultText.append(rs.getString(1));
 		}
+		cognome = resultText.toString();
+
 		return cognome;
 	}
 
-	@Override
-	public String stampaEmailAccount(Object utente) {
-		utn = (Utente) utente;
-		
+	public String stampaEmailAccount(Utente utente) throws SQLException {
 		String email = null;
-		PreparedStatement pst;
-		ResultSet rs;
-		String sql = "SELECT email FROM utente WHERE email=?";
 
-		try {
+		stampaEmailAccountPS.setString(1, utente.getEmail());
+		ResultSet rs = stampaEmailAccountPS.executeQuery();
+		StringBuilder resultText = new StringBuilder();
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			pst.setString(1, utn.getEmail());
-			rs = pst.executeQuery();
-			StringBuilder resultText = new StringBuilder();
+		while (rs.next()) {
+			resultText.append(rs.getString(1));
+		}
+		email = resultText.toString();
 
-			while (rs.next()) {
-			    resultText.append(rs.getString(1));
-			}
-			email = resultText.toString();
-			
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-		} 
 		return email;
 	}
-	
 
-	@Override
-	public boolean registrazioneUtente(Object utente) {
-		utn = (Utente) utente;
-		PreparedStatement pst;
-		String sql = "INSERT INTO utente VALUES (?,?,?,?)";
-		try {
-			db.ConnessioneDB();
+	public int passwordDimenticata(Utente utente) throws SQLException {
+		passwordDimenticataPS.setString(1, utente.getPassword());
+		passwordDimenticataPS.setString(2, utente.getEmail());
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-
-			pst.setString(1, utn.getNome());
-			pst.setString(2, utn.getCognome());
-			pst.setString(3, utn.getEmail());
-			pst.setString(4, utn.getPassword());
-
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
-		}
+		int row = passwordDimenticataPS.executeUpdate();
+		return row;
 	}
 
-	@Override
-	public boolean cancellaUtente(Object utente) {
-		utn = (Utente) utente;
-		
-		PreparedStatement pst;
-		String sql = "DELETE FROM utente WHERE email = ?";
-		try {
-			db.ConnessioneDB();
+	public int cambioPasswordDB(Utente utente) throws SQLException {
+		cambioPasswordPS.setString(1, utente.getPassword());
+		cambioPasswordPS.setString(2, utente.getEmail());
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-
-			pst.setString(1, utn.getEmail());
-
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
-		}
+		int row = cambioPasswordPS.executeUpdate();
+		return row;
 	}
 
-	@Override
-	public boolean modificaUtente(Object utente) {
-		utn = (Utente) utente;
-		PreparedStatement pst;
-		String sql = "UPDATE utente SET nome=?, cognome=?, password=? WHERE email=?";
-		try {
-			db.ConnessioneDB();
+	public boolean accessoUtente(String email, String password) throws SQLException {
+		boolean eUtente = false;
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
+		accessoUtentePS.setString(1, email);
+		accessoUtentePS.setString(2, password);
 
-			pst.setString(1, utn.getNome());
-			pst.setString(2, utn.getCognome());
-			pst.setString(3, utn.getPassword());
-			pst.setString(4, utn.getEmail());
-
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
+		ResultSet res = accessoUtentePS.executeQuery();
+		if (res.next()) {
+			eUtente = true;
 		}
-	}
-	
-	@Override
-	public boolean passwordDimenticata(Object utente) {
-		utn = (Utente) utente;
-		PreparedStatement pst;
-		String sql = "UPDATE utente SET password=? WHERE email=?";
-		try {
-			db.ConnessioneDB();
 
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			
-			pst.setString(1, utn.getPassword());
-			pst.setString(2, utn.getEmail());
-		
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
-		}
-	}
-	
-	@Override
-	public boolean cambioPasswordDB(Object utente) {
-		utn = (Utente) utente;
-		PreparedStatement pst;
-		String sql = "UPDATE utente SET password=? WHERE email=?";
-		try {
-			db.ConnessioneDB();
-
-			pst = db.ConnessioneDB().prepareStatement(sql);
-			
-			pst.setString(1, utn.getPassword());
-			pst.setString(2, utn.getEmail());
-		
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
-		}
-	}
-	
-	@Override
-	public boolean modificaDatiAccount(Object utente) {
-		utn = (Utente) utente;
-		PreparedStatement pst;
-		String sql = "UPDATE utente SET nome=?, cognome=? WHERE email=?";
-		try {
-			db.ConnessioneDB();
-
-			pst = db.ConnessioneDB().prepareStatement(sql);
-
-			pst.setString(1, utn.getNome());
-			pst.setString(2, utn.getCognome());
-			pst.setString(3, utn.getEmail());
-
-			int res = pst.executeUpdate();
-
-			if (res > 0) {
-				db.ConnessioneDB().close();
-				return true;
-			} else {
-				db.ConnessioneDB().close();
-				return false;
-			}
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Errore: " + e.getMessage());
-			return false;
-		}
-	}
-
-	@Override
-	public boolean accessoUtente(String email, String password) {
-		
-		boolean eUtente=false;
-		PreparedStatement pst;
-		String sql = "SELECT * FROM utente WHERE email = ? AND password = ?";
-		
-		try {
-			db.ConnessioneDB();
-			pst = db.ConnessioneDB().prepareStatement(sql);
-
-			pst.setString(1, email);
-			pst.setString(2, password);
-
-			ResultSet res = pst.executeQuery();
-			
-			if (res.next()) {
-                eUtente = true;
-            } else {
-            }
-			
-			
-		} catch (SQLException e) {
-			Logger.getLogger(Accesso.class.getName()).log(Level.SEVERE, null, e);
-			return false;
-		}
 		return eUtente;
 	}
-	
-	@Override
-	public boolean esisteEmail(String email) {
-		
-		boolean eUtente=false;
-		PreparedStatement pst;
-		String sql = "SELECT * FROM utente WHERE email = ? ";
-		
-		try {
-			db.ConnessioneDB();
-			pst = db.ConnessioneDB().prepareStatement(sql);
 
-			pst.setString(1, email);
+	public boolean esisteEmail(String email) throws SQLException {
+		boolean eUtente = false;
 
-			ResultSet res = pst.executeQuery();
-			
-			if (res.next()) {
-                eUtente = true;
-            } else {
-            }
-			
-			
-		} catch (SQLException e) {
-			Logger.getLogger(Accesso.class.getName()).log(Level.SEVERE, null, e);
-			return false;
+		esisteEmailPS.setString(1, email);
+
+		ResultSet res = esisteEmailPS.executeQuery();
+		if (res.next()) {
+			eUtente = true;
 		}
+
 		return eUtente;
 	}
-	
-
 }
