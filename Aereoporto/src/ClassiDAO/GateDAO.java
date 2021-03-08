@@ -1,24 +1,26 @@
 package ClassiDAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import Classi.CodaDiImbarco;
+import Classi.Gate;
 
 public interface GateDAO {
 	
+	public List<Gate> stampaGate() throws SQLException;
+	
+	public List<Gate> stampaGateCodeImbarco() throws SQLException ;
+	
+	public int aggiungiGate(Gate gt) throws SQLException;
 
-	public ArrayList<Object[]> stampaGateCodeImbarco();
+	public int aggiungiGateInCodaDiImbarcoGate(Gate gt, CodaDiImbarco codaImbarco) throws SQLException;
 
-	public boolean aggiungiGate(Object gate);
+	public int cancellaGate(Gate gt) throws SQLException;
 
-	public boolean cancellaGate(Object gate);
-
-	public boolean modificaGate(Object gate);
-
-	HashMap<String, String> stampaNumeroPortaInComboBox();
-
-	ArrayList<Object[]> stampaGate();
-
-	public boolean aggiungiGateInCodaDiImbarcoGate(Object gate, Object codaImbarco);
-
-
+	public int modificaGate(Gate gt) throws SQLException;
+	
+	public HashMap<String, String> stampaNumeroPortaInComboBox() throws SQLException;
 }

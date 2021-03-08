@@ -538,3 +538,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
 }
+
+
+
+

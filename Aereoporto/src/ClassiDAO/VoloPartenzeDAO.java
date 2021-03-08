@@ -8,17 +8,13 @@ import Classi.VoloPartenze;
 
 public interface VoloPartenzeDAO {
 	
-//	public List<VoloPartenze> getAllVoloPartenze() throws SQLException;
-	public int inserisciVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
+	public List<VoloPartenze> stampaVoliPartenze() throws SQLException;
 	
-//	public ArrayList<Object[]> stampaVoliPartenze();
+	public int inserisciVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
 	
 	public int cancellaVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
 
 	public int modificaVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
-
-//	boolean aggiungiVoloPartenze(Object voloPartenze);
-
-//	boolean modificaStatusVoloPartenze(Object voloPartenze);
-
+	
+	public int modificaStatusVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
 }

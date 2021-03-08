@@ -912,8 +912,6 @@ public class Dashboard extends JFrame {
 					controllerDashboard.setStopHomeTT(false);
 					controllerDashboard.chiudiTutto();
 					controllerDashboard.mostraHomeTT();
-				
-
 				}
 
 			}
@@ -937,8 +935,6 @@ public class Dashboard extends JFrame {
 					controllerDashboard.setStopHomeTT(true);
 					controllerDashboard.chiudiTutto();
 					controllerDashboard.chiudiHomeTT();
-				
-
 				}
 			}
 
@@ -1314,9 +1310,9 @@ public class Dashboard extends JFrame {
 		lblProfilo = new JLabel("");
 		lblProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblProfilo.setBounds(0, 0, 50, 70);
-		panelProfilo.add(lblProfilo);
 		lblProfilo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilo.setIcon(new ImageIcon(img.profilo()));
+		panelProfilo.add(lblProfilo);
 
 		panelImpostazioni = new JPanel();
 		panelImpostazioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

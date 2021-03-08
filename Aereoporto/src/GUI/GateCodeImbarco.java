@@ -4,14 +4,17 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import Classi.Gate;
 import Controller.Controller;
 import Immagini.Immagini;
 
@@ -34,10 +37,9 @@ import javax.swing.JComboBox;
 public class GateCodeImbarco extends JPanel {
 
 	String colonne[] = { "Codice Gate", "Numero Porta", "Coda D'Imbarco" };
-	final Object[] row = new Object[4];
+	Gate[] row = new Gate[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	ArrayList<Object[]> ListaGate = new ArrayList<>();
-	ArrayList<String> ListaCodaDiImbarco = new ArrayList<>();
+	List<Gate> ListaGate = new ArrayList<Gate>();
 	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceGate;
@@ -323,8 +325,12 @@ public class GateCodeImbarco extends JPanel {
 		comboBoxCodaDiImbarco = new JComboBox<String>();
 		comboBoxCodaDiImbarco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HashMap<String, String> map = controllerGestioneGate.implementazioneCodaDiImbarcoDAO()
-						.stampaCodaDiImbarcoInComboBox();
+				HashMap<String, String> map = null;
+				try {
+					map = controllerGestioneGate.implementazioneCodaDiImbarcoDAO().stampaCodaDiImbarcoInComboBox();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				txtCodaDiImbarco.setText(map.get(comboBoxCodaDiImbarco.getSelectedItem().toString()));
 			}
 		});
@@ -343,8 +349,12 @@ public class GateCodeImbarco extends JPanel {
 		comboBoxNumeroPorta = new JComboBox<String>();
 		comboBoxNumeroPorta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HashMap<String, String> map = controllerGestioneGate.implementazioneGateDAO()
-						.stampaNumeroPortaInComboBox();
+				HashMap<String, String> map = null;
+				try {
+					map = controllerGestioneGate.implementazioneGateDAO().stampaNumeroPortaInComboBox();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
 			}
 		});
@@ -458,6 +468,7 @@ public class GateCodeImbarco extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneGate.eliminaGateCodeImbarco();
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (controllerGestioneGate.cambioTema()) {
@@ -557,25 +568,38 @@ public class GateCodeImbarco extends JPanel {
 	// METODI
 
 	public void stampaComboBoxNumeroPorta() {
-		HashMap<String, String> map = controllerGestioneGate.implementazioneGateDAO().stampaNumeroPortaInComboBox();
+		HashMap<String, String> map = null;
+		try {
+			map = controllerGestioneGate.implementazioneGateDAO().stampaNumeroPortaInComboBox();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		for (String s : map.keySet()) {
 			comboBoxNumeroPorta.addItem(s);
 		}
 	}
 
 	public void stampaComboBoxCodaDiImbarco() {
-		HashMap<String, String> map = controllerGestioneGate.implementazioneCodaDiImbarcoDAO()
-				.stampaCodaDiImbarcoInComboBox();
+		HashMap<String, String> map = null;
+		try {
+			map = controllerGestioneGate.implementazioneCodaDiImbarcoDAO().stampaCodaDiImbarcoInComboBox();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		for (String s : map.keySet()) {
 			comboBoxCodaDiImbarco.addItem(s);
 		}
 	}
 
 	public void caricaTabella() {
-		this.ListaGate = controllerGestioneGate.implementazioneGateDAO().stampaGateCodeImbarco();
+		try {
+			this.ListaGate = controllerGestioneGate.implementazioneGateDAO().stampaGateCodeImbarco();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		modello.setNumRows(0);
-		for (Object[] dato : this.ListaGate) {
-			this.modello.addRow(dato);
+		for (Gate dato : this.ListaGate) {
+			this.modello.addRow(new Object[] { dato.getCodiceGate(), dato.getNumeroPorta(), dato.getCodeDiImbarco().getNomeCoda() });
 		}
 		tabella.setModel(modello);
 	}

@@ -9,13 +9,10 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import Database.ConnessioneDatabase;
 import Database.ConnessioneDatabase1;
 
 import javax.swing.*;
@@ -541,6 +538,58 @@ public class Controller {
 		}
 	}
 
+	public void chiudiMostraPasswordAccessoTT() {
+		((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT().setVisible(false);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void mostraMostraPasswordAccessoTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT().setVisible(true);
+					((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT()
+							.setIcon(new ImageIcon(img.mostraPasswordTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopMostraPasswordAccessoTT) {
+			th.stop();
+		}
+	}
+
+	public void chiudiCensuraPasswordAccessoTT() {
+		((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT().setVisible(false);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void mostraCensuraPasswordAccessoTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT().setVisible(true);
+					((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT()
+							.setIcon(new ImageIcon(img.nascondiPasswordTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopCensuraPasswordAccessoTT) {
+			th.stop();
+		}
+	}
+
 	// METODI DI REGISTRAZIONE
 	public void svuotaCampiRegistrazione() {
 		((Registrazione) getDashboard().getRegistrazione()).getTxtNome().setText("");
@@ -697,17 +746,6 @@ public class Controller {
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(),
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
-		int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTabella().getSelectedRow();
-
-//		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
-//				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(), t, 0);
-//		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
-//				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(), t, 1);
-//		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
-//				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(), t, 2);
-//		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello()
-//				.setValueAt(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText(), t, 3);
-
 		try {
 			implementazioneUtenteDAO().modificaUtente(utn);
 		} catch (SQLException e) {
@@ -925,8 +963,7 @@ public class Controller {
 						.getTxtTempoDiImbarcoEffettivo().getText());
 		Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarcoEffettivo, 0);
 
-		int status = Integer
-				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText());
+		String status = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText();
 
 		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
@@ -955,7 +992,7 @@ public class Controller {
 					.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
 			svuotaCampiGestioneVoloPartenze();
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore().setText("");
-//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} else {
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore()
 					.setText("Errore nell'inserimento dell'orario");
@@ -972,9 +1009,9 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-//		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().removeRow(t);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().removeRow(t);
 		svuotaCampiGestioneVoloPartenze();
-//		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -995,8 +1032,7 @@ public class Controller {
 						.getTxtTempoDiImbarcoEffettivo().getText());
 		Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarcoEffettivo, 0);
 
-		int status = Integer
-				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText());
+		String status = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText();
 
 		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
@@ -1016,43 +1052,20 @@ public class Controller {
 							.getTxtNumeroPrenotazioni().getText(),
 					tempoImbarcoEffettivo, trt, gt, status);
 
-			int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
-
-//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
-//					.setValueAt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-//							.getTxtCodiceVoloPartenze().getText(), t, 0);
-//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-//					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText(), t,
-//					1);
-//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-//					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText(), t,
-//					2);
-//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-//					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate(),
-//					t, 3);
-//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-//					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText(), t,
-//					4);
-//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-//					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText(),
-//					t, 5);
-//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
-//					.setValueAt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-//							.getTxtNumeroPrenotazioni().getText(), t, 6);
-
 			try {
 				implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			svuotaCampiGestioneVoloPartenze();
-//			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} else {
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore()
 					.setText("Errore nell'inserimento dell'orario");
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void modificaStatusImbarcoVoloPartenze() {
 		int minutoTempoImbarco = Integer.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
 				.getTxtTempoDiImbarcoEffettivo().getText());
@@ -1071,15 +1084,18 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText(), t, 8);
 
-//		implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+		try {
+			implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		svuotaCampiGestioneVoloPartenze();
-//		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
 	@SuppressWarnings("deprecation")
 	public void modificaStatusVoloPartenze() {
-		int status = Integer
-				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText());
+		String statusVolo = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText();
 
 		int minutoImbarcoEffettivo = Integer.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
 				.getTxtTempoDiImbarcoEffettivo().getText());
@@ -1088,21 +1104,15 @@ public class Controller {
 
 		vlprtz = new VoloPartenze(
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
-				status, tempoImbarcoEffettivo);
+				statusVolo, tempoImbarcoEffettivo);
 
-		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
-
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
-				t, 0);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
-				.setValueAt(vlprtz.isStatusImbarco(), t, 8);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText(), t, 9);
-
-//		implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+		try {
+			implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		svuotaCampiGestioneVoloPartenze();
-//		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
 	// METODI GESTIONE VOLI ARRIVI
@@ -1232,12 +1242,30 @@ public class Controller {
 	}
 
 	public GateDAO implementazioneGateDAO() {
-		GateDAO dao = new GateImplementazionePostgresDAO();
+		ConnessioneDatabase1 dbconn = null;
+		Connection connection = null;
+		GateDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase1.getInstance();
+			connection = dbconn.getConnection();
+			dao = new GateImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			System.out.println("SQLException: " + exception.getMessage());
+		}
 		return dao;
 	}
 
 	public CodaDiImbarcoDAO implementazioneCodaDiImbarcoDAO() {
-		CodaDiImbarcoDAO dao = new CodaDiImbarcoImplementazionePostgresDAO();
+		ConnessioneDatabase1 dbconn = null;
+		Connection connection = null;
+		CodaDiImbarcoDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase1.getInstance();
+			connection = dbconn.getConnection();
+			dao = new CodaDiImbarcoImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			System.out.println("SQLException: " + exception.getMessage());
+		}
 		return dao;
 	}
 
@@ -1255,7 +1283,11 @@ public class Controller {
 		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
 				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), tempo, chiusuraGate);
 
-		implementazioneGateDAO().aggiungiGate(gt);
+		try {
+			implementazioneGateDAO().aggiungiGate(gt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GestioneGate) getDashboard().getGestioneGate()).getModello()
 				.addRow(((GestioneGate) getDashboard().getGestioneGate()).getRow());
 		svuotaCampiGestioneGate();
@@ -1266,7 +1298,11 @@ public class Controller {
 		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText());
 
 		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
-		implementazioneGateDAO().cancellaGate(gt);
+		try {
+			implementazioneGateDAO().cancellaGate(gt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GestioneGate) getDashboard().getGestioneGate()).getModello().removeRow(t);
 		svuotaCampiGestioneGate();
 		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
@@ -1293,7 +1329,11 @@ public class Controller {
 		((GestioneGate) getDashboard().getGestioneGate()).getModello()
 				.setValueAt(((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), t, 1);
 
-		implementazioneGateDAO().modificaGate(gt);
+		try {
+			implementazioneGateDAO().modificaGate(gt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		svuotaCampiGestioneGate();
 		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
@@ -1310,7 +1350,11 @@ public class Controller {
 
 		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText());
 
-		implementazioneGateDAO().aggiungiGateInCodaDiImbarcoGate(gt, codaImbarco);
+		try {
+			implementazioneGateDAO().aggiungiGateInCodaDiImbarcoGate(gt, codaImbarco);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello()
 				.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRow());
 		svuotaCampiGateCodeImbarco();
@@ -1325,7 +1369,11 @@ public class Controller {
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
 
 		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabella().getSelectedRow();
-		implementazioneGateDAO().cancellaGate(gt);
+		try {
+			implementazioneGateDAO().cancellaGate(gt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello().removeRow(t);
 		svuotaCampiGestioneGate();
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabella();
@@ -1344,12 +1392,69 @@ public class Controller {
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello().setValueAt(
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText(), t, 1);
 
-		implementazioneGateDAO().modificaGate(gt);
+		try {
+			implementazioneGateDAO().modificaGate(gt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		svuotaCampiGestioneGate();
 		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
 	// METODI DI DASHBOARD
+
+	// MENU INFO ACCOUNT
+	public void chiudiMenuTT() {
+		getDashboard().getLblMenuTT().setVisible(false);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void mostraMenuTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					getDashboard().getLblMenuTT().setVisible(true);
+					getDashboard().getLblMenuTT().setIcon(new ImageIcon(img.menuTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopMenuTT) {
+			th.stop();
+		}
+
+	}
+
+	// PANEL HOME
+	public void chiudiHomeTT() {
+		getDashboard().getLblHomeTT().setVisible(false);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void mostraHomeTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(800);
+					getDashboard().getLblHomeTT().setVisible(true);
+					getDashboard().getLblHomeTT().setIcon(new ImageIcon(img.homeTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopHomeTT) {
+			th.stop();
+		}
+	}
 
 	public void clickPannelloLateraleHome() {
 		setPannelloPrecedente(1);
@@ -1363,6 +1468,32 @@ public class Controller {
 			}
 		}
 		chiudiTendinaIstantanea();
+	}
+
+	// PANEL ACCEDI
+	public void chiudiAccediTT() {
+		getDashboard().getLblAccediTT().setVisible(false);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void mostraAccediTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(800);
+					getDashboard().getLblAccediTT().setVisible(true);
+					getDashboard().getLblAccediTT().setIcon(new ImageIcon(img.accediTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopAccediTT) {
+			th.stop();
+		}
 	}
 
 	public void clickPannelloLateraleAccedi() {
@@ -1379,6 +1510,32 @@ public class Controller {
 		chiudiTendinaIstantanea();
 	}
 
+	// PANEL REGISTRATI
+	public void chiudiRegistratiTT() {
+		getDashboard().getLblRegistratiTT().setVisible(false);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void mostraRegistratiTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					getDashboard().getLblRegistratiTT().setVisible(true);
+					getDashboard().getLblRegistratiTT().setIcon(new ImageIcon(img.registratiTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopRegistratiTT) {
+			th.stop();
+		}
+	}
+
 	public void clickPannelloLateraleRegistrati() {
 		setPannelloPrecedente(3);
 		pannelloLateraleSelezionato();
@@ -1391,6 +1548,32 @@ public class Controller {
 			}
 		}
 		chiudiTendinaIstantanea();
+	}
+
+	// PANEL PROFILO
+	public void chiudiProfiloTT() {
+		getDashboard().getLblProfiloTT().setVisible(false);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void mostraProfiloTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					getDashboard().getLblProfiloTT().setVisible(true);
+					getDashboard().getLblProfiloTT().setIcon(new ImageIcon(img.profiloTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopProfiloTT) {
+			th.stop();
+		}
 	}
 
 	public void clickPannelloLateraleProfilo() {
@@ -1414,6 +1597,32 @@ public class Controller {
 		}
 	}
 
+	// PANEL IMPOSTAZIONI
+	public void chiudiImpostazioniTT() {
+		getDashboard().getLblImpostazioniTT().setVisible(false);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void mostraImpostazioniTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					getDashboard().getLblImpostazioniTT().setVisible(true);
+					getDashboard().getLblImpostazioniTT().setIcon(new ImageIcon(img.impostazioniTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopImpostazioniTT) {
+			th.stop();
+		}
+	}
+
 	public void clickPannelloLateraleImpostazioni() {
 		setPannelloPrecedente(5);
 		pannelloLateraleSelezionato();
@@ -1426,6 +1635,32 @@ public class Controller {
 			}
 		}
 		chiudiTendinaIstantanea();
+	}
+
+	// PANEL ESCI
+	public void chiudiEsciTT() {
+		getDashboard().getLblEsciTT().setVisible(false);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void mostraEsciTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					getDashboard().getLblEsciTT().setVisible(true);
+					getDashboard().getLblEsciTT().setIcon(new ImageIcon(img.esciTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopEsciTT) {
+			th.stop();
+		}
 	}
 
 	public void clickPannelloLateraleUscita() {
@@ -3140,32 +3375,6 @@ public class Controller {
 		getDashboard().getLblEsciTT().setVisible(false);
 	}
 
-	// MENU
-	public void chiudiMenuTT() {
-		getDashboard().getLblMenuTT().setVisible(false);
-	}
-
-	public void mostraMenuTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(525);
-					getDashboard().getLblMenuTT().setVisible(true);
-					getDashboard().getLblMenuTT().setIcon(new ImageIcon(img.menuTT()));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-
-		if (stopMenuTT) {
-			th.stop();
-		}
-
-	}
-
 	// TEMI
 //	public void mostraTemaChiaroTT() {
 //	Thread th = new Thread() {
@@ -3206,205 +3415,5 @@ public class Controller {
 //		th.stop();
 //	}
 //}
-
-	// HOME
-	public void chiudiHomeTT() {
-		getDashboard().getLblHomeTT().setVisible(false);
-	}
-
-	public void mostraHomeTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(800);
-					getDashboard().getLblHomeTT().setVisible(true);
-					getDashboard().getLblHomeTT().setIcon(new ImageIcon(img.homeTT()));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-
-		if (stopHomeTT) {
-			th.stop();
-		}
-	}
-
-	// ACCEDI
-	public void chiudiAccediTT() {
-		getDashboard().getLblAccediTT().setVisible(false);
-	}
-
-	public void mostraAccediTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(800);
-					getDashboard().getLblAccediTT().setVisible(true);
-					getDashboard().getLblAccediTT().setIcon(new ImageIcon(img.accediTT()));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-
-		if (stopAccediTT) {
-			th.stop();
-		}
-	}
-
-	public void chiudiMostraPasswordAccessoTT() {
-		((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT().setVisible(false);
-	}
-
-	public void mostraMostraPasswordAccessoTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(525);
-					((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT().setVisible(true);
-					((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT()
-							.setIcon(new ImageIcon(img.mostraPasswordTT()));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-
-		if (stopMostraPasswordAccessoTT) {
-			th.stop();
-		}
-	}
-
-	public void chiudiCensuraPasswordAccessoTT() {
-		((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT().setVisible(false);
-	}
-
-	public void mostraCensuraPasswordAccessoTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(525);
-					((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT().setVisible(true);
-					((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT()
-							.setIcon(new ImageIcon(img.nascondiPasswordTT()));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-
-		if (stopCensuraPasswordAccessoTT) {
-			th.stop();
-		}
-	}
-
-	// REGISTRATI
-	public void chiudiRegistratiTT() {
-		getDashboard().getLblRegistratiTT().setVisible(false);
-	}
-
-	public void mostraRegistratiTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(525);
-					getDashboard().getLblRegistratiTT().setVisible(true);
-					getDashboard().getLblRegistratiTT().setIcon(new ImageIcon(img.registratiTT()));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-
-		if (stopRegistratiTT) {
-			th.stop();
-		}
-	}
-
-	// IMPOSTAZIONI
-	public void chiudiImpostazioniTT() {
-		getDashboard().getLblImpostazioniTT().setVisible(false);
-	}
-
-	public void mostraImpostazioniTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(525);
-					getDashboard().getLblImpostazioniTT().setVisible(true);
-					getDashboard().getLblImpostazioniTT().setIcon(new ImageIcon(img.impostazioniTT()));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-
-		if (stopImpostazioniTT) {
-			th.stop();
-		}
-	}
-
-	// ESCI
-	public void chiudiEsciTT() {
-		getDashboard().getLblEsciTT().setVisible(false);
-	}
-
-	public void mostraEsciTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(525);
-					getDashboard().getLblEsciTT().setVisible(true);
-					getDashboard().getLblEsciTT().setIcon(new ImageIcon(img.esciTT()));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-
-		if (stopEsciTT) {
-			th.stop();
-		}
-	}
-
-	// PROFILO
-	public void chiudiProfiloTT() {
-		getDashboard().getLblProfiloTT().setVisible(false);
-	}
-
-	public void mostraProfiloTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(525);
-					getDashboard().getLblProfiloTT().setVisible(true);
-					getDashboard().getLblProfiloTT().setIcon(new ImageIcon(img.profiloTT()));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-
-		if (stopProfiloTT) {
-			th.stop();
-		}
-	}
 
 }

@@ -4,14 +4,17 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import Classi.Gate;
 import Controller.Controller;
 import Immagini.Immagini;
 
@@ -34,10 +37,9 @@ import javax.swing.JComboBox;
 public class GestioneGate extends JPanel {
 
 	String colonne[] = { "Codice Gate", "Numero Porta","Tempo Di Imbarco Stimato"};
-	final Object[] row = new Object[4];
+	Gate[] row = new Gate[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
-	ArrayList<Object[]> ListaGate = new ArrayList<>();
-	ArrayList<String> ListaCodaDiImbarco = new ArrayList<>();
+	List<Gate> ListaGate = new ArrayList<Gate>();
 	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceGate;
@@ -531,10 +533,14 @@ public class GestioneGate extends JPanel {
 
 	// METODI
 	public void caricaTabella() {
-		this.ListaGate = controllerGestioneGate.implementazioneGateDAO().stampaGate();
+		try {
+			this.ListaGate = controllerGestioneGate.implementazioneGateDAO().stampaGate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		modello.setNumRows(0);
-		for (Object[] dato : this.ListaGate) {
-			this.modello.addRow(dato);
+		for (Gate dato : this.ListaGate) {
+			this.modello.addRow(new Object[] {dato.getCodiceGate(), dato.getNumeroPorta(), dato.getTempoImbarcoStimato()});
 		}
 		tabella.setModel(modello);
 	}

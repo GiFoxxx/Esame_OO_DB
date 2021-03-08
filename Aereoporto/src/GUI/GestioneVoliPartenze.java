@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,8 +36,9 @@ import javax.swing.JComboBox;
 public class GestioneVoliPartenze extends JPanel {
 
 	String colonne[] = { "Codice Volo Partenze", "Compagnia Aerea", "N°Gate", "Citta di Arrivo",
-			"Data e Orario Partenza", "Apertura Gate", "Chiusura Gate", "Numero Prenotazioni", "Status Imbarco" , "Status Volo" };
-	Object[] row = new Object[11];
+			"Data e Orario Partenza", "Apertura Gate", "Chiusura Gate", "Numero Prenotazioni", "Status Imbarco",
+			"Status Volo" };
+	VoloPartenze[] row = new VoloPartenze[11];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	List<VoloPartenze> ListaVoliPartenze = new ArrayList<>();
 	private Immagini img = new Immagini();
@@ -72,7 +74,7 @@ public class GestioneVoliPartenze extends JPanel {
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
 	private JLabel lblMessaggioErrore;
-	
+
 	private JComboBox<String> comboBoxStatus;
 	private JComboBox<String> comboBoxNumeroPorta;
 	private JComboBox<String> comboBoxCittaArrivo;
@@ -347,7 +349,6 @@ public class GestioneVoliPartenze extends JPanel {
 	}
 
 	Controller controllerGestioneVoliPartenze;
-	
 
 	public GestioneVoliPartenze(Controller controller) {
 		controllerGestioneVoliPartenze = controller;
@@ -598,8 +599,12 @@ public class GestioneVoliPartenze extends JPanel {
 		comboBoxNumeroPorta = new JComboBox<String>();
 		comboBoxNumeroPorta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneGateDAO()
-						.stampaNumeroPortaInComboBox();
+				HashMap<String, String> map = null;
+				try {
+					map = controllerGestioneVoliPartenze.implementazioneGateDAO().stampaNumeroPortaInComboBox();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
 			}
 		});
@@ -611,8 +616,7 @@ public class GestioneVoliPartenze extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				HashMap<String, String> map = null;
 				try {
-					map = controllerGestioneVoliPartenze.implementazioneTrattaDAO()
-							.stampaCittaArrivoInComboBox();
+					map = controllerGestioneVoliPartenze.implementazioneTrattaDAO().stampaCittaArrivoInComboBox();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -678,11 +682,10 @@ public class GestioneVoliPartenze extends JPanel {
 		lblModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (getTxtOraPartenza().getText().length() <= 0) {
+				if (getTxtMinutoPartenza().getText().length() <= 0) {
 					controllerGestioneVoliPartenze.modificaStatusVoloPartenze();
 				} else {
-						controllerGestioneVoliPartenze.modificaVoloPartenze();
-					
+					controllerGestioneVoliPartenze.modificaVoloPartenze();
 				}
 			}
 
@@ -831,14 +834,14 @@ public class GestioneVoliPartenze extends JPanel {
 		lblMessaggioErrore.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessaggioErrore.setBounds(223, 24, 633, 14);
 		add(lblMessaggioErrore);
-		
+
 		lblStatus = new JLabel("Status Volo");
 		lblStatus.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblStatus.setFont(controllerGestioneVoliPartenze.fontLabel);
 		lblStatus.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
 		lblStatus.setBounds(694, 469, 162, 20);
 		add(lblStatus);
-		
+
 		txtStatus = new JTextField();
 		txtStatus.setHorizontalAlignment(SwingConstants.LEFT);
 		txtStatus.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
@@ -847,39 +850,43 @@ public class GestioneVoliPartenze extends JPanel {
 		txtStatus.setColumns(10);
 		txtStatus.setBounds(866, 469, 0, 20);
 		add(txtStatus);
-		
+
 		comboBoxStatus = new JComboBox<String>();
 		comboBoxStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch(comboBoxStatus.getSelectedIndex()) {
+				switch (comboBoxStatus.getSelectedIndex()) {
 				case 0:
-					txtStatus.setText("0");
+					txtStatus.setText("In programma");
 					break;
 				case 1:
-					txtStatus.setText("1");
+					txtStatus.setText("In preparazione");
 					break;
 				case 2:
-					txtStatus.setText("2");
+					txtStatus.setText("In partenza");
+					break;
+				case 3:
+					txtStatus.setText("In ritardo");
 					break;
 				}
 			}
 		});
+		comboBoxStatus.addItem("In programma");
 		comboBoxStatus.addItem("In preparazione");
 		comboBoxStatus.addItem("In partenza");
 		comboBoxStatus.addItem("In ritardo");
 		comboBoxStatus.setBounds(866, 469, 123, 20);
 		add(comboBoxStatus);
-		
+
 		lblTempoDiImbarcoEffettivo = new JLabel("Tempo Di Imbarco Effettivo");
 		lblTempoDiImbarcoEffettivo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTempoDiImbarcoEffettivo.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
 		lblTempoDiImbarcoEffettivo.setFont(controllerGestioneVoliPartenze.fontLabel);
 		lblTempoDiImbarcoEffettivo.setBounds(352, 500, 184, 20);
 		add(lblTempoDiImbarcoEffettivo);
-		
+
 		txtTempoDiImbarcoEffettivo = new JTextField();
-		txtTempoDiImbarcoEffettivo.setForeground((Color) null);
-		txtTempoDiImbarcoEffettivo.setFont(null);
+		txtTempoDiImbarcoEffettivo.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
+		txtTempoDiImbarcoEffettivo.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		txtTempoDiImbarcoEffettivo.setColumns(10);
 		txtTempoDiImbarcoEffettivo.setBounds(545, 500, 48, 20);
 		add(txtTempoDiImbarcoEffettivo);
@@ -887,12 +894,16 @@ public class GestioneVoliPartenze extends JPanel {
 		stampaComboBoxNumeroPorta();
 		stampaComboBoxCittaArrivo();
 
-//		caricaTabella();
+		caricaTabella();
 	}
 
 	public void stampaComboBoxNumeroPorta() {
-		HashMap<String, String> map = controllerGestioneVoliPartenze.implementazioneGateDAO()
-				.stampaNumeroPortaInComboBox();
+		HashMap<String, String> map = null;
+		try {
+			map = controllerGestioneVoliPartenze.implementazioneGateDAO().stampaNumeroPortaInComboBox();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		for (String s : map.keySet()) {
 			comboBoxNumeroPorta.addItem(s);
 		}
@@ -901,10 +912,8 @@ public class GestioneVoliPartenze extends JPanel {
 	public void stampaComboBoxCittaArrivo() {
 		HashMap<String, String> map = null;
 		try {
-			map = controllerGestioneVoliPartenze.implementazioneTrattaDAO()
-					.stampaCittaArrivoInComboBox();
+			map = controllerGestioneVoliPartenze.implementazioneTrattaDAO().stampaCittaArrivoInComboBox();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		for (String s : map.keySet()) {
@@ -913,14 +922,22 @@ public class GestioneVoliPartenze extends JPanel {
 		}
 	}
 
-//	public void caricaTabella() {
-//		this.ListaVoliPartenze = controllerGestioneVoliPartenze.implementazioneVoloPartenzeDAO().stampaVoliPartenze();
-//		modello.setNumRows(0);
-//		for (Object[] dato : this.ListaVoliPartenze) {
-//			this.modello.addRow(dato);
-//		}
-//		tabella.setModel(modello);
-//	}
+	public void caricaTabella() {
+		try {
+			this.ListaVoliPartenze = controllerGestioneVoliPartenze.implementazioneVoloPartenzeDAO()
+					.stampaVoliPartenze();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		modello.setNumRows(0);
+		for (VoloPartenze dato : this.ListaVoliPartenze) {
+			this.modello.addRow(new Object[] { dato.getCodiceVoloPartenze(), dato.getCompAerea().getNome(),
+					dato.getGt().getNumeroPorta(), dato.getTrt().getCittaArrivo(), dato.getDataOrarioPartenza(),
+					dato.getAperturaGate(), dato.getChiusuraGate(), dato.getNumeroPrenotazioni(),
+					dato.getStatusImbarco(), dato.getStatusVolo() });
+		}
+		tabella.setModel(modello);
+	}
 
 	private void ricerca() {
 		DefaultTableModel table = (DefaultTableModel) tabella.getModel();
