@@ -311,7 +311,7 @@ public class PasswordDimenticata extends JDialog {
 				}
 			});
 
-			lblMostraNuovaPassword.setToolTipText("Mostra password");
+			lblMostraNuovaPassword.setToolTipText("");
 			lblMostraNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblMostraNuovaPassword.setHorizontalAlignment(SwingConstants.CENTER);
 			lblMostraNuovaPassword.setIcon(new ImageIcon(img.censuraPassword()));
@@ -341,7 +341,7 @@ public class PasswordDimenticata extends JDialog {
 					txtRipetiNuovaPassword.setEchoChar((char) 0);
 				}
 			});
-			lblMostraRipetiNuovaPassword.setToolTipText("Mostra password");
+			lblMostraRipetiNuovaPassword.setToolTipText("");
 			lblMostraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblMostraRipetiNuovaPassword.setHorizontalAlignment(SwingConstants.CENTER);
 			lblMostraRipetiNuovaPassword.setIcon(new ImageIcon(img.censuraPassword()));

@@ -32,6 +32,8 @@ public class Accesso extends JPanel {
 	private JLabel lblMostraPassword;
 	private JLabel lblCensuraPassword;
 	private boolean sbloccaHome = false;
+	private JLabel lblMostraPasswordAccessoTT;
+	private JLabel lblCensuraPasswordAccessoTT;
 
 	// GETTER E SETTER
 
@@ -107,8 +109,24 @@ public class Accesso extends JPanel {
 		this.lblCensuraPassword = lblcensuraPassword;
 	}
 
-	Controller controllerAccesso;
+	public JLabel getLblMostraPasswordAccessoTT() {
+		return lblMostraPasswordAccessoTT;
+	}
 
+	public void setLblMostraPasswordAccessoTT(JLabel lblMostraPasswordAccessoTT) {
+		this.lblMostraPasswordAccessoTT = lblMostraPasswordAccessoTT;
+	}
+
+	public JLabel getLblCensuraPasswordAccessoTT() {
+		return lblCensuraPasswordAccessoTT;
+	}
+
+	public void setLblCensuraPasswordAccessoTT(JLabel lblCensuraPasswordAccessoTT) {
+		this.lblCensuraPasswordAccessoTT = lblCensuraPasswordAccessoTT;
+	}
+
+	Controller controllerAccesso;
+	
 	public Accesso(Controller controller) {
 		controllerAccesso = controller;
 
@@ -156,8 +174,18 @@ public class Accesso extends JPanel {
 		lblMostraPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerAccesso.chiudiMostraPasswordAccessoTT();
 				lblMostraPassword.setVisible(false);
 				txtPassword.setEchoChar((char) 0);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerAccesso.mostraMostraPasswordAccessoTT();
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerAccesso.chiudiMostraPasswordAccessoTT();
+
 			}
 		});
 		lblMostraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -170,8 +198,18 @@ public class Accesso extends JPanel {
 		lblCensuraPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerAccesso.chiudiCensuraPasswordAccessoTT();
 				lblMostraPassword.setVisible(true);
 				txtPassword.setEchoChar('●');
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerAccesso.mostraCensuraPasswordAccessoTT();
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerAccesso.chiudiCensuraPasswordAccessoTT();
+
 			}
 		});
 		lblCensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -277,6 +315,16 @@ public class Accesso extends JPanel {
 		lblPasswordDimenticata.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPasswordDimenticata.setBounds(577, 396, 141, 14);
 		add(lblPasswordDimenticata);
+		
+		lblMostraPasswordAccessoTT = new JLabel("");
+		lblMostraPasswordAccessoTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMostraPasswordAccessoTT.setBounds(745, 349, 90, 30);
+		add(lblMostraPasswordAccessoTT);
+		
+		lblCensuraPasswordAccessoTT = new JLabel("");
+		lblCensuraPasswordAccessoTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCensuraPasswordAccessoTT.setBounds(741, 357, 94, 22);
+		add(lblCensuraPasswordAccessoTT);
 
 	}
 
@@ -307,5 +355,4 @@ public class Accesso extends JPanel {
 	public void mostraGiaUtilizziAccount() {
 		lblMessaggioCredenziali.setText("Stai già utilizzando questo account.");
 	}
-
 }

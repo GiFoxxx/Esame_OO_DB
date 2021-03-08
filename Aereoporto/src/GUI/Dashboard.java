@@ -53,6 +53,13 @@ public class Dashboard extends JFrame {
 	private JLabel lblLayout;
 	private JLabel lblAccount;
 	private JLabel lblFrecciaMenu;
+	private JLabel lblMenuTT;
+	private JLabel lblHomeTT;
+	private JLabel lblAccediTT;
+	private JLabel lblRegistratiTT;
+	private JLabel lblProfiloTT;
+	private JLabel lblImpostazioniTT;
+	private JLabel lblEsciTT;
 
 	private JPanel pannelloTendina;
 	private JPanel pannelloBase;
@@ -250,6 +257,54 @@ public class Dashboard extends JFrame {
 
 	public void setLblEsci(JLabel lblEsci) {
 		this.lblEsci = lblEsci;
+	}
+
+	public JLabel getLblHomeTT() {
+		return lblHomeTT;
+	}
+
+	public void setLblHomeTT(JLabel lblHomeTT) {
+		this.lblHomeTT = lblHomeTT;
+	}
+
+	public JLabel getLblAccediTT() {
+		return lblAccediTT;
+	}
+
+	public void setLblAccediTT(JLabel lblAccediTT) {
+		this.lblAccediTT = lblAccediTT;
+	}
+
+	public JLabel getLblRegistratiTT() {
+		return lblRegistratiTT;
+	}
+
+	public void setLblRegistratiTT(JLabel lblRegistratiTT) {
+		this.lblRegistratiTT = lblRegistratiTT;
+	}
+
+	public JLabel getLblProfiloTT() {
+		return lblProfiloTT;
+	}
+
+	public void setLblProfiloTT(JLabel lblProfiloTT) {
+		this.lblProfiloTT = lblProfiloTT;
+	}
+
+	public JLabel getLblImpostazioniTT() {
+		return lblImpostazioniTT;
+	}
+
+	public void setLblImpostazioniTT(JLabel lblImpostazioniTT) {
+		this.lblImpostazioniTT = lblImpostazioniTT;
+	}
+
+	public JLabel getLblEsciTT() {
+		return lblEsciTT;
+	}
+
+	public void setLblEsciTT(JLabel lblEsciTT) {
+		this.lblEsciTT = lblEsciTT;
 	}
 
 	public JLabel getLineeChiusura() {
@@ -556,6 +611,14 @@ public class Dashboard extends JFrame {
 		this.terminiECondizioni = terminiECondizioni;
 	}
 
+	public JLabel getLblMenuTT() {
+		return lblMenuTT;
+	}
+
+	public void setLblMenuTT(JLabel lblMenuTT) {
+		this.lblMenuTT = lblMenuTT;
+	}
+
 	Controller controllerDashboard;
 
 	public Dashboard(Controller controller) {
@@ -600,6 +663,7 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (menuInfoAccount.isVisible()) {
+					controllerDashboard.chiudiMenuTT();
 					controllerDashboard.chiudiMenuInfoAccount();
 				} else {
 					lblFrecciaMenu.setIcon(new ImageIcon(img.frecciaMenu3()));
@@ -610,12 +674,16 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblFrecciaMenu.setIcon(new ImageIcon(img.frecciaMenu2()));
+				controllerDashboard.setStopMenuTT(false);
+				controllerDashboard.mostraMenuTT();
 
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblFrecciaMenu.setIcon(new ImageIcon(img.frecciaMenu1()));
+				controllerDashboard.setStopMenuTT(true);
+				controllerDashboard.chiudiMenuTT();
 
 			}
 
@@ -823,7 +891,6 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerDashboard.clickPannelloLateraleHome();
-
 			}
 
 			@Override
@@ -840,6 +907,13 @@ public class Dashboard extends JFrame {
 					} else {
 						panelHome.setBackground(controllerDashboard.entroPannelloTemaScuro);
 					}
+				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.setStopHomeTT(false);
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.mostraHomeTT();
+				
+
 				}
 
 			}
@@ -858,6 +932,13 @@ public class Dashboard extends JFrame {
 					} else {
 						panelHome.setBackground(controllerDashboard.escoPannelloTemaScuro);
 					}
+				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.setStopHomeTT(true);
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiHomeTT();
+				
+
 				}
 			}
 
@@ -937,6 +1018,12 @@ public class Dashboard extends JFrame {
 						panelAccedi.setBackground(controllerDashboard.entroPannelloTemaScuro);
 					}
 				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.setStopAccediTT(false);
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.mostraAccediTT();
+
+				}
 			}
 
 			@Override
@@ -953,6 +1040,12 @@ public class Dashboard extends JFrame {
 					} else {
 						panelAccedi.setBackground(controllerDashboard.escoPannelloTemaScuro);
 					}
+				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.setStopAccediTT(true);
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiAccediTT();
+
 				}
 			}
 
@@ -1033,6 +1126,12 @@ public class Dashboard extends JFrame {
 						panelRegistrati.setBackground(controllerDashboard.entroPannelloTemaScuro);
 					}
 				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.mostraRegistratiTT();
+					controllerDashboard.chiudiTutto();
+
+				}
 			}
 
 			@Override
@@ -1049,6 +1148,12 @@ public class Dashboard extends JFrame {
 					} else {
 						panelRegistrati.setBackground(controllerDashboard.escoPannelloTemaScuro);
 					}
+				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiRegistratiTT();
+					controllerDashboard.chiudiTutto();
+
 				}
 			}
 
@@ -1129,6 +1234,12 @@ public class Dashboard extends JFrame {
 						panelProfilo.setBackground(controllerDashboard.entroPannelloTemaScuro);
 					}
 				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.mostraProfiloTT();
+					controllerDashboard.chiudiTutto();
+
+				}
 			}
 
 			@Override
@@ -1145,6 +1256,12 @@ public class Dashboard extends JFrame {
 					} else {
 						panelProfilo.setBackground(controllerDashboard.escoPannelloTemaScuro);
 					}
+				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiProfiloTT();
+					controllerDashboard.chiudiTutto();
+
 				}
 			}
 
@@ -1224,6 +1341,12 @@ public class Dashboard extends JFrame {
 						panelImpostazioni.setBackground(controllerDashboard.entroPannelloTemaScuro);
 					}
 				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.mostraImpostazioniTT();
+					controllerDashboard.chiudiTutto();
+
+				}
 			}
 
 			@Override
@@ -1240,6 +1363,12 @@ public class Dashboard extends JFrame {
 					} else {
 						panelImpostazioni.setBackground(controllerDashboard.escoPannelloTemaScuro);
 					}
+				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiImpostazioniTT();
+					controllerDashboard.chiudiTutto();
+
 				}
 			}
 
@@ -1319,6 +1448,12 @@ public class Dashboard extends JFrame {
 						panelUscita.setBackground(controllerDashboard.entroPannelloTemaScuro);
 					}
 				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.mostraEsciTT();
+					controllerDashboard.chiudiTutto();
+
+				}
 			}
 
 			@Override
@@ -1335,6 +1470,12 @@ public class Dashboard extends JFrame {
 					} else {
 						panelUscita.setBackground(controllerDashboard.escoPannelloTemaScuro);
 					}
+				}
+				if (getPosizioneTendina() == 50) {
+					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiEsciTT();
+					controllerDashboard.chiudiTutto();
+
 				}
 			}
 
@@ -1569,10 +1710,48 @@ public class Dashboard extends JFrame {
 		lblTendina.setIcon(new ImageIcon(img.tendina()));
 		pannelloTendina.add(lblTendina);
 
+		lblHomeTT = new JLabel("");
+		lblHomeTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHomeTT.setBounds(10, 155, 90, 23);
+
+		lblAccediTT = new JLabel("");
+		lblAccediTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAccediTT.setBounds(10, 221, 90, 29);
+
+		lblRegistratiTT = new JLabel("");
+		lblRegistratiTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegistratiTT.setBounds(10, 297, 90, 23);
+
+		lblProfiloTT = new JLabel("");
+		lblProfiloTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProfiloTT.setBounds(10, 365, 90, 23);
+
+		lblImpostazioniTT = new JLabel("");
+		lblImpostazioniTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImpostazioniTT.setBounds(10, 432, 90, 23);
+
+		lblEsciTT = new JLabel("");
+		lblEsciTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEsciTT.setBounds(10, 501, 90, 23);
+
+		lblMenuTT = new JLabel("");
+		lblMenuTT.setVisible(false);
+		lblMenuTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMenuTT.setBounds(914, 11, 60, 37);
+
 		pannelloDestra = new JPanel();
 		pannelloDestra.setBounds(50, 0, 1093, 642);
 		pannelloDestra.setBackground(controllerDashboard.trasparente);
 
+		pannelloDestra.add(lblHomeTT);
+		pannelloDestra.add(lblHomeTT);
+		pannelloDestra.add(lblAccediTT);
+		pannelloDestra.add(lblRegistratiTT);
+		pannelloDestra.add(lblProfiloTT);
+		pannelloDestra.add(lblImpostazioniTT);
+		pannelloDestra.add(lblEsciTT);
+
+		pannelloDestra.add(lblMenuTT);
 		pannelloDestra.add(home);
 		pannelloDestra.add(accesso);
 		pannelloDestra.add(cambioPassword);

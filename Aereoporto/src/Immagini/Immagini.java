@@ -95,7 +95,7 @@ public class Immagini {
 	//MENU
 	public Image menu() {
 		Image menu = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/menu.png")).getImage()
-				.getScaledInstance(266, 148, Image.SCALE_SMOOTH);
+				.getScaledInstance(265, 147, Image.SCALE_SMOOTH);
 		return menu;
 	}
 	
@@ -115,6 +115,24 @@ public class Immagini {
 		Image frecciaMenu3 = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/frecciaMenu3.png")).getImage()
 				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
 		return frecciaMenu3;
+	}
+	
+	public Image frecciaMenu1Chiaro() {
+		Image frecciaMenu1Chiaro = new ImageIcon(Dashboard.class.getResource("immaginiDashboardChiare/frecciaMenu1Chiaro.png")).getImage()
+				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
+		return frecciaMenu1Chiaro;
+	}
+	
+	public Image frecciaMenu2Chiaro() {
+		Image frecciaMenu2Chiaro = new ImageIcon(Dashboard.class.getResource("immaginiDashboardChiare/frecciaMenu2Chiaro.png")).getImage()
+				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
+		return frecciaMenu2Chiaro;
+	}
+	
+	public Image frecciaMenu3Chiaro() {
+		Image frecciaMenu3Chiaro = new ImageIcon(Dashboard.class.getResource("immaginiDashboardChiare/frecciaMenu3Chiaro.png")).getImage()
+				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
+		return frecciaMenu3Chiaro;
 	}
 	
 	
@@ -1370,5 +1388,142 @@ public class Immagini {
 					.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
 			return svuota3Chiaro;
 		}
+		
+		/*-----------------------------------------------------------TOOLTIP-----------------------------------------------------------*/
+		
+		public Image menuTT() {
+			Image menuTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/menuTT.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return menuTT;
+		}
+		
+		public Image accediTT() {
+			Image accediTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/accediTT.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return accediTT;
+		}
+		
+		public Image esciTT() {
+			Image esciTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/esciTT.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return esciTT;
+		}
+		
+		public Image homeTT() {
+			Image homeTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/homeTT.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return homeTT;
+		}
+		
+		public Image impostazioniTT() {
+			Image impostazioniTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/impostazioniTT.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return impostazioniTT;
+		}
+		
+		public Image nascondiPasswordTT() {
+			Image nascondiPasswordTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/nascondiPasswordTT.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return nascondiPasswordTT;
+		}
+		
+		public Image mostraPasswordTT() {
+			Image mostraPasswordTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/mostraPasswordTT.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return mostraPasswordTT;
+		}
+		
+		public Image profiloTT() {
+			Image profiloTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/profiloTT.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return profiloTT;
+		}
+		
+		public Image registratiTT() {
+			Image registratiTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/registratiTT.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return registratiTT;
+		}
+		
+		public Image temaChiaroTT() {
+			Image temaChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/temaChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return temaChiaro;
+		}
+		
+		public Image temaScuroTT() {
+			Image temaScuroTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/temaScuroTT.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return temaScuroTT;
+		}
+		
+/*-----------------------------------------------------------TOOLTIP TEMA CHIARO-----------------------------------------------------------*/
+		
+		public Image menuTTChiaro() {
+			Image menuTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/menuTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return menuTTChiaro;
+		}
+		
+		public Image accediTTChiaro() {
+			Image accediTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/accediTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return accediTTChiaro;
+		}
+		
+		public Image esciTTChiaro() {
+			Image esciTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/esciTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return esciTTChiaro;
+		}
+		
+		public Image homeTTChiaro() {
+			Image homeTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/homeTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return homeTTChiaro;
+		}
+		
+		public Image impostazioniTTChiaro() {
+			Image impostazioniTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/impostazioniTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return impostazioniTTChiaro;
+		}
+		
+		public Image nascondiPasswordTTChiaro() {
+			Image nascondiPasswordTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/nascondiPasswordTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return nascondiPasswordTTChiaro;
+		}
+		
+		public Image mostraPasswordTTChiaro() {
+			Image mostraPasswordTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/mostraPasswordTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return mostraPasswordTTChiaro;
+		}
+		
+		public Image profiloTTChiaro() {
+			Image profiloTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/profiloTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return profiloTTChiaro;
+		}
+		
+		public Image registratiTTChiaro() {
+			Image registratiTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/registratiTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return registratiTTChiaro;
+		}
+		
+		public Image temaChiaroTTChiaro() {
+			Image temaChiaroTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/temaChiaroTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return temaChiaroTTChiaro;
+		}
+		
+		public Image temaScuroTTChiaro() {
+			Image temaScuroTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/temaScuroTTChiaro.png")).getImage()
+					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+			return temaScuroTTChiaro;
+		}
+
 
 }

@@ -31,6 +31,16 @@ public class Controller {
 	Immagini img = new Immagini();
 	private int flagCambioTema = 0;
 	private boolean stopMenuTT = false;
+	private boolean stopHomeTT = false;
+	private boolean stopAccediTT = false;
+	private boolean stopRegistratiTT = false;
+	private boolean stopProfiloTT = false;
+	private boolean stopImpostazioniTT = false;
+	private boolean stopEsciTT = false;
+	private boolean stopTemaChiaroTT = false;
+	private boolean stopTemaScuroTT = false;
+	private boolean stopMostraPasswordAccessoTT = false;
+	private boolean stopCensuraPasswordAccessoTT = false;
 
 	// PALETTE COLORI TEMA SCURO
 	public Color sfondoTemaScuro = new Color(54, 57, 63);
@@ -109,6 +119,86 @@ public class Controller {
 	CompagniaAerea compAerea;
 
 	// GETTER E SETTER
+	public boolean isStopHomeTT() {
+		return stopHomeTT;
+	}
+
+	public void setStopHomeTT(boolean stopHomeTT) {
+		this.stopHomeTT = stopHomeTT;
+	}
+
+	public boolean isStopAccediTT() {
+		return stopAccediTT;
+	}
+
+	public void setStopAccediTT(boolean stopAccediTT) {
+		this.stopAccediTT = stopAccediTT;
+	}
+
+	public boolean isStopRegistratiTT() {
+		return stopRegistratiTT;
+	}
+
+	public void setStopRegistratiTT(boolean stopRegistratiTT) {
+		this.stopRegistratiTT = stopRegistratiTT;
+	}
+
+	public boolean isStopProfiloTT() {
+		return stopProfiloTT;
+	}
+
+	public void setStopProfiloTT(boolean stopProfiloTT) {
+		this.stopProfiloTT = stopProfiloTT;
+	}
+
+	public boolean isStopImpostazioniTT() {
+		return stopImpostazioniTT;
+	}
+
+	public void setStopImpostazioniTT(boolean stopImpostazioniTT) {
+		this.stopImpostazioniTT = stopImpostazioniTT;
+	}
+
+	public boolean isStopEsciTT() {
+		return stopEsciTT;
+	}
+
+	public void setStopEsciTT(boolean stopEsciTT) {
+		this.stopEsciTT = stopEsciTT;
+	}
+
+	public boolean isStopTemaChiaroTT() {
+		return stopTemaChiaroTT;
+	}
+
+	public void setStopTemaChiaroTT(boolean stopTemaChiaroTT) {
+		this.stopTemaChiaroTT = stopTemaChiaroTT;
+	}
+
+	public boolean isStopTemaScuroTT() {
+		return stopTemaScuroTT;
+	}
+
+	public void setStopTemaScuroTT(boolean stopTemaScuroTT) {
+		this.stopTemaScuroTT = stopTemaScuroTT;
+	}
+
+	public boolean isStopMostraPasswordAccessoTT() {
+		return stopMostraPasswordAccessoTT;
+	}
+
+	public void setStopMostraPasswordAccessoTT(boolean stopMostraPasswordAccessoTT) {
+		this.stopMostraPasswordAccessoTT = stopMostraPasswordAccessoTT;
+	}
+
+	public boolean isStopCensuraPasswordAccessoTT() {
+		return stopCensuraPasswordAccessoTT;
+	}
+
+	public void setStopCensuraPasswordAccessoTT(boolean stopCensuraPasswordAccessoTT) {
+		this.stopCensuraPasswordAccessoTT = stopCensuraPasswordAccessoTT;
+	}
+
 	public int getFlagCambioTema() {
 		return flagCambioTema;
 	}
@@ -388,6 +478,12 @@ public class Controller {
 	// RECENSIONE
 	public void svuotaArea() {
 		((Recensione) getDashboard().getRecensioni()).getTextArea().setText("");
+	}
+
+	public void invioRecensione() {
+		((OperazioneRiuscitaConSuccesso) getDashboard().getOperazioneEffettuataConSuccesso()).getLblComplimenti()
+				.setText("Grazie per aver lasciato un commento!");
+		mostraOperazioneEffettuataConSuccesso();
 	}
 
 	// METODI DI ACCESSO
@@ -1018,7 +1114,7 @@ public class Controller {
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().setText("");
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().setText("");
 	}
-	
+
 	public VoloArriviDAO implementazioneVoloArriviDAO() {
 		ConnessioneDatabase1 dbconn = null;
 		Connection connection = null;
@@ -1395,6 +1491,17 @@ public class Controller {
 	}
 
 	public void chiudiTendina() {
+
+		getDashboard().getLblHomeTT().setVisible(false);
+		getDashboard().getLblAccediTT().setVisible(false);
+		getDashboard().getLblRegistratiTT().setVisible(false);
+		getDashboard().getLblProfiloTT().setVisible(false);
+		getDashboard().getLblImpostazioniTT().setVisible(false);
+		getDashboard().getLblEsciTT().setVisible(false);
+		getDashboard().getLblMenuTT().setVisible(false);
+//		getDashboard().getLblTemaChiaroTT().setVisible(false);
+//		getDashboard().getLblTemaScuroTT().setVisible(false);
+
 		getDashboard().getLineeChiusura().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 238) {
 			getDashboard().getPannelloTendina().setSize(50, 642);
@@ -1420,6 +1527,17 @@ public class Controller {
 	}
 
 	public void chiudiTendinaIstantanea() {
+
+		getDashboard().getLblHomeTT().setVisible(false);
+		getDashboard().getLblAccediTT().setVisible(false);
+		getDashboard().getLblRegistratiTT().setVisible(false);
+		getDashboard().getLblProfiloTT().setVisible(false);
+		getDashboard().getLblImpostazioniTT().setVisible(false);
+		getDashboard().getLblEsciTT().setVisible(false);
+		getDashboard().getLblMenuTT().setVisible(false);
+//		getDashboard().getLblTemaChiaroTT().setVisible(false);
+//		getDashboard().getLblTemaScuroTT().setVisible(false);
+
 		getDashboard().getLineeChiusura().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 238) {
 			getDashboard().getPannelloTendina().setSize(50, 642);
@@ -1633,31 +1751,6 @@ public class Controller {
 		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 		getDashboard().getMenuInfoAccount().setVisible(false);
 	}
-
-//	public void chiudiMenuTT() {
-//		getDashboard().getLblMenuTT().setVisible(false);
-//	}
-//
-//	public void mostraMenuTT() {
-//		Thread th = new Thread() {
-//			@Override
-//			public void run() {
-//				try {
-//					Thread.sleep(475);
-//					getDashboard().getLblMenuTT().setVisible(true);
-//					getDashboard().getLblMenuTT().setIcon(new ImageIcon(img.menuTT()));
-//				} catch (Exception e) {
-//					JOptionPane.showMessageDialog(null, e);
-//				}
-//			}
-//		};
-//		th.start();
-//
-//		if (stopMenuTT) {
-//			th.stop();
-//		}
-//
-//	}
 
 	// METODI DI SCELTA PROFILO SENZA ACCESSO
 	public void mostraSceltaProfiloSenzaAccesso() {
@@ -2503,6 +2596,7 @@ public class Controller {
 				.setBackground(clickPannelloTemaChiaro);
 
 		// RECENSIONE
+
 		getDashboard().getRecensioni().setBackground(sfondoTemaChiaro);
 		((Recensione) getDashboard().getRecensioni()).getLblAnnulla().setIcon(new ImageIcon(img.annulla1TemaChiaro()));
 		((Recensione) getDashboard().getRecensioni()).getLblInviaRecensione()
@@ -3033,4 +3127,284 @@ public class Controller {
 				.setIcon(new ImageIcon(img.spostaUscita()));
 
 	}
+
+	// METODI TOOLTIP
+
+	public void chiudiTutto() {
+		getDashboard().getLblMenuTT().setVisible(false);
+		getDashboard().getLblHomeTT().setVisible(false);
+		getDashboard().getLblAccediTT().setVisible(false);
+		getDashboard().getLblRegistratiTT().setVisible(false);
+		getDashboard().getLblProfiloTT().setVisible(false);
+		getDashboard().getLblImpostazioniTT().setVisible(false);
+		getDashboard().getLblEsciTT().setVisible(false);
+	}
+
+	// MENU
+	public void chiudiMenuTT() {
+		getDashboard().getLblMenuTT().setVisible(false);
+	}
+
+	public void mostraMenuTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					getDashboard().getLblMenuTT().setVisible(true);
+					getDashboard().getLblMenuTT().setIcon(new ImageIcon(img.menuTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopMenuTT) {
+			th.stop();
+		}
+
+	}
+
+	// TEMI
+//	public void mostraTemaChiaroTT() {
+//	Thread th = new Thread() {
+//		@Override
+//		public void run() {
+//			try {
+//				Thread.sleep(525);
+//				getDashboard().getLblTemaChiaroTT().setVisible(true);
+//				getDashboard().getLblTemaScuroTT().setIcon(new ImageIcon(img.temaChiaroTT()));
+//			} catch (Exception e) {
+//				JOptionPane.showMessageDialog(null, e);
+//			}
+//		}
+//	};
+//	th.start();
+//
+//	if (stopTemaChiaroTT) {
+//		th.stop();
+//	}
+//}
+//
+//public void mostraTemaScuroTT() {
+//	Thread th = new Thread() {
+//		@Override
+//		public void run() {
+//			try {
+//				Thread.sleep(525);
+//				getDashboard().getLblTemaScuroTT().setVisible(true);
+//				getDashboard().getLblTemaScuroTT().setIcon(new ImageIcon(img.temaScuroTT()));
+//			} catch (Exception e) {
+//				JOptionPane.showMessageDialog(null, e);
+//			}
+//		}
+//	};
+//	th.start();
+//
+//	if (stopTemaScuroTT) {
+//		th.stop();
+//	}
+//}
+
+	// HOME
+	public void chiudiHomeTT() {
+		getDashboard().getLblHomeTT().setVisible(false);
+	}
+
+	public void mostraHomeTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(800);
+					getDashboard().getLblHomeTT().setVisible(true);
+					getDashboard().getLblHomeTT().setIcon(new ImageIcon(img.homeTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopHomeTT) {
+			th.stop();
+		}
+	}
+
+	// ACCEDI
+	public void chiudiAccediTT() {
+		getDashboard().getLblAccediTT().setVisible(false);
+	}
+
+	public void mostraAccediTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(800);
+					getDashboard().getLblAccediTT().setVisible(true);
+					getDashboard().getLblAccediTT().setIcon(new ImageIcon(img.accediTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopAccediTT) {
+			th.stop();
+		}
+	}
+
+	public void chiudiMostraPasswordAccessoTT() {
+		((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT().setVisible(false);
+	}
+
+	public void mostraMostraPasswordAccessoTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT().setVisible(true);
+					((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT()
+							.setIcon(new ImageIcon(img.mostraPasswordTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopMostraPasswordAccessoTT) {
+			th.stop();
+		}
+	}
+
+	public void chiudiCensuraPasswordAccessoTT() {
+		((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT().setVisible(false);
+	}
+
+	public void mostraCensuraPasswordAccessoTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT().setVisible(true);
+					((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT()
+							.setIcon(new ImageIcon(img.nascondiPasswordTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopCensuraPasswordAccessoTT) {
+			th.stop();
+		}
+	}
+
+	// REGISTRATI
+	public void chiudiRegistratiTT() {
+		getDashboard().getLblRegistratiTT().setVisible(false);
+	}
+
+	public void mostraRegistratiTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					getDashboard().getLblRegistratiTT().setVisible(true);
+					getDashboard().getLblRegistratiTT().setIcon(new ImageIcon(img.registratiTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopRegistratiTT) {
+			th.stop();
+		}
+	}
+
+	// IMPOSTAZIONI
+	public void chiudiImpostazioniTT() {
+		getDashboard().getLblImpostazioniTT().setVisible(false);
+	}
+
+	public void mostraImpostazioniTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					getDashboard().getLblImpostazioniTT().setVisible(true);
+					getDashboard().getLblImpostazioniTT().setIcon(new ImageIcon(img.impostazioniTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopImpostazioniTT) {
+			th.stop();
+		}
+	}
+
+	// ESCI
+	public void chiudiEsciTT() {
+		getDashboard().getLblEsciTT().setVisible(false);
+	}
+
+	public void mostraEsciTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					getDashboard().getLblEsciTT().setVisible(true);
+					getDashboard().getLblEsciTT().setIcon(new ImageIcon(img.esciTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopEsciTT) {
+			th.stop();
+		}
+	}
+
+	// PROFILO
+	public void chiudiProfiloTT() {
+		getDashboard().getLblProfiloTT().setVisible(false);
+	}
+
+	public void mostraProfiloTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(525);
+					getDashboard().getLblProfiloTT().setVisible(true);
+					getDashboard().getLblProfiloTT().setIcon(new ImageIcon(img.profiloTT()));
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+
+		if (stopProfiloTT) {
+			th.stop();
+		}
+	}
+
 }

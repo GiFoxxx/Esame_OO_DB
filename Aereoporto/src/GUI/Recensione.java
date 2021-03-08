@@ -221,8 +221,8 @@ public class Recensione extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//				votoInviato();
 			controllerRecensione.svuotaArea();
+			controllerRecensione.invioRecensione();
 			}
 		});
 		lblInviaRecensione.setHorizontalAlignment(SwingConstants.CENTER);
@@ -611,18 +611,6 @@ public class Recensione extends JPanel {
 	}
 
 	// METODI RIEMPIMENTO STELLE
-
-//	public void votoInviato() {
-//		if (valutazione < 18) {
-//			lblStelleSelezionate.setText("Voto non sufficiente");
-//		} else if (valutazione > 17 && valutazione < 23) {
-//			lblStelleSelezionate.setText("Voto discreto");
-//		} else if (valutazione > 23 && valutazione < 27) {
-//			lblStelleSelezionate.setText("Voto buono");
-//		} else {
-//			lblStelleSelezionate.setText("Voto ottimo");
-//		}
-//	}
 
 	public void riempimentoStella1() {
 		if (flag == 0) {

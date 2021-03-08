@@ -96,7 +96,7 @@ public class MenuInfoAccount extends JPanel {
 	public MenuInfoAccount(Controller controller) {
 		controllerMenuInfoAccount = controller;
 
-		setBounds(710, 5, 266, 148);
+		setBounds(710, 5, 265, 147);
 		setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
 		setLayout(null);
 
@@ -146,7 +146,7 @@ public class MenuInfoAccount extends JPanel {
 			}
 		});
 		panelGestioneUtente.setBackground(controllerMenuInfoAccount.trasparente);
-		panelGestioneUtente.setBounds(0, 10, 266, 46);
+		panelGestioneUtente.setBounds(0, 9, 265, 46);
 		add(panelGestioneUtente);
 		panelGestioneUtente.setLayout(null);
 
@@ -208,7 +208,7 @@ public class MenuInfoAccount extends JPanel {
 			}
 		});
 		panelComingSoon.setBackground(controllerMenuInfoAccount.trasparente);
-		panelComingSoon.setBounds(0, 56, 266, 46);
+		panelComingSoon.setBounds(0, 55, 265, 46);
 		add(panelComingSoon);
 		panelComingSoon.setLayout(null);
 
@@ -263,7 +263,7 @@ public class MenuInfoAccount extends JPanel {
 			}
 		});
 		panelLogout.setBackground(controllerMenuInfoAccount.trasparente);
-		panelLogout.setBounds(0, 102, 266, 46);
+		panelLogout.setBounds(0, 101, 265, 46);
 		add(panelLogout);
 		panelLogout.setLayout(null);
 
@@ -278,7 +278,7 @@ public class MenuInfoAccount extends JPanel {
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLayout.setIcon(new ImageIcon(img.menu()));
 
-		lblLayout.setBounds(0, 0, 266, 148);
+		lblLayout.setBounds(0, 0, 265, 147);
 		add(lblLayout);
 
 	}

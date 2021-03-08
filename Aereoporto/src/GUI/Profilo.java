@@ -168,7 +168,7 @@ public class Profilo extends JPanel {
 				if (controllerProfilo.cambioTema()) {
 					lblCambiaPassword.setForeground(controllerProfilo.clickPannelloTemaScuro);
 				} else {
-					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
+					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelEntrataTemaScuro);
 				}
 			}
 
@@ -186,7 +186,7 @@ public class Profilo extends JPanel {
 				if (controllerProfilo.cambioTema()) {
 					lblCambiaPassword.setForeground(controllerProfilo.escoPannelloTemaChiaro);
 				} else {
-					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
+					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelPressedTemaScuro);
 				}
 			}
 			@Override
