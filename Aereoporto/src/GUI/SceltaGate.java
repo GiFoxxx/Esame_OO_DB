@@ -28,6 +28,7 @@ public class SceltaGate extends JDialog {
 	JLabel lblGate;
 	JLabel lblScelta;
 	JLabel lblAnnulla;
+	JLabel lblTempisticheGate;
 
 	// GETTER E SETTER
 
@@ -103,6 +104,14 @@ public class SceltaGate extends JDialog {
 		this.lblGate = lblGate;
 	}
 
+	public JLabel getLblTempisticheGate() {
+		return lblTempisticheGate;
+	}
+
+	public void setLblTempisticheGate(JLabel lblTempisticheGate) {
+		this.lblTempisticheGate = lblTempisticheGate;
+	}
+
 	Immagini img = new Immagini();
 	Controller controllerSceltaGate;
 
@@ -161,9 +170,41 @@ public class SceltaGate extends JDialog {
 					}
 				}
 			});
+
+			lblTempisticheGate = new JLabel("");
+			lblTempisticheGate.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					controllerSceltaGate.vaiATempisticheGate();
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate2()));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate1()));
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate3()));
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate2()));
+				}
+			});
+			lblTempisticheGate.setHorizontalAlignment(SwingConstants.CENTER);
+			lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate1()));
+			lblTempisticheGate.setBounds(92, 150, 319, 36);
+			getContentPane().add(lblTempisticheGate);
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-			lblAnnulla.setBounds(92, 216, 319, 36);
+			lblAnnulla.setBounds(92, 245, 319, 36);
 			getContentPane().add(lblAnnulla);
 
 			lblGate = new JLabel("");
@@ -182,7 +223,6 @@ public class SceltaGate extends JDialog {
 						lblGate.setIcon(new ImageIcon(img.gateScelta2()));
 					}
 				}
-
 
 				@Override
 				public void mouseExited(MouseEvent e) {
@@ -214,7 +254,7 @@ public class SceltaGate extends JDialog {
 			lblGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblGate.setHorizontalAlignment(SwingConstants.CENTER);
 			lblGate.setIcon(new ImageIcon(img.gateScelta1()));
-			lblGate.setBounds(92, 111, 319, 36);
+			lblGate.setBounds(92, 103, 319, 36);
 			getContentPane().add(lblGate);
 
 			lblCodeDiImbarco = new JLabel("");
@@ -224,7 +264,7 @@ public class SceltaGate extends JDialog {
 					controllerSceltaGate.vaiAGateCodeImbarcoDaSceltaVolo();
 					controllerSceltaGate.setPannelloPrecedente(11);
 				}
-				
+
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					if (controllerSceltaGate.cambioTema()) {
@@ -264,7 +304,7 @@ public class SceltaGate extends JDialog {
 			lblCodeDiImbarco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblCodeDiImbarco.setHorizontalAlignment(SwingConstants.CENTER);
 			lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco1()));
-			lblCodeDiImbarco.setBounds(92, 163, 319, 36);
+			lblCodeDiImbarco.setBounds(92, 198, 319, 36);
 			getContentPane().add(lblCodeDiImbarco);
 
 			lblX = new JLabel("");
@@ -291,6 +331,7 @@ public class SceltaGate extends JDialog {
 						lblX.setIcon(new ImageIcon(img.X3()));
 					}
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					if (controllerSceltaGate.cambioTema()) {
@@ -299,7 +340,7 @@ public class SceltaGate extends JDialog {
 						lblX.setIcon(new ImageIcon(img.X2()));
 					}
 				}
-				
+
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					if (controllerSceltaGate.cambioTema()) {
