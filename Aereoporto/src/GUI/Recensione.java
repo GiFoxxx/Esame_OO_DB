@@ -99,8 +99,6 @@ public class Recensione extends JPanel {
 		this.valutazione = valutazione;
 	}
 
-	
-
 	public JLabel getLblCommento() {
 		return lblCommento;
 	}
@@ -221,8 +219,9 @@ public class Recensione extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			controllerRecensione.svuotaArea();
-			controllerRecensione.invioRecensione();
+				stella0();
+				controllerRecensione.svuotaArea();
+				controllerRecensione.invioRecensione();
 			}
 		});
 		lblInviaRecensione.setHorizontalAlignment(SwingConstants.CENTER);
@@ -589,24 +588,22 @@ public class Recensione extends JPanel {
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
 		lblStella30.setBounds(985, 334, 35, 35);
 		add(lblStella30);
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(44, 430, 1018, 123);
 		add(scrollPane);
-		
+
 		textArea = new JTextArea();
 		textArea.setFont(new Font("Arial", Font.PLAIN, 11));
 		textArea.setLocation(37, 0);
 		scrollPane.setViewportView(textArea);
-		
+
 		lblCommento = new JLabel("Lascia un commento e faremo il possibile per migliorare il programma!");
 		lblCommento.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCommento.setFont(controllerRecensione.fontLabel);
 		lblCommento.setForeground(controllerRecensione.coloreScritteTemaScuro);
 		lblCommento.setBounds(44, 410, 525, 19);
 		add(lblCommento);
-
-		
 
 	}
 

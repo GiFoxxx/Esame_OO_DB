@@ -35,11 +35,13 @@ import javax.swing.JComboBox;
 
 public class GestioneVoliPartenze extends JPanel {
 
-	String colonne[] = { "Codice Volo Partenze", "Compagnia Aerea", "N°Gate", "Citta di Arrivo",
-			"Data e Orario Partenza", "Apertura Gate", "Chiusura Gate", "Numero Prenotazioni", "Status Imbarco",
-			"Status Volo" };
+	String colonne[] = { "Cod. Voli Part.", "Comp. Aerea", "N°Gate", "Citta di Arrivo", "Data e Orario Partenza",
+			"Apertura Gate", "Chiusura Gate", "N° Prenotazioni", "Status Imbarco", "Status Volo" };
 	VoloPartenze[] row = new VoloPartenze[11];
-	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
+	DefaultTableModel modello = new DefaultTableModel(new Object[][] {},
+			new String[] { "Cod. Voli Part.", "Comp. Aerea", "N\u00B0Gate", "Citta di Arrivo",
+					"Data e Orario Partenza", "Apertura Gate", "Chiusura Gate", "N\u00B0 Prenotazioni",
+					"Status Imbarco", "Status Volo" });
 	List<VoloPartenze> ListaVoliPartenze = new ArrayList<>();
 	private Immagini img = new Immagini();
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -453,6 +455,36 @@ public class GestioneVoliPartenze extends JPanel {
 		});
 		modello.setColumnIdentifiers(colonne);
 		tabella.setModel(modello);
+		tabella.getColumnModel().getColumn(0).setPreferredWidth(100);
+		tabella.getColumnModel().getColumn(0).setMinWidth(60);
+		tabella.getColumnModel().getColumn(0).setMaxWidth(110);
+		tabella.getColumnModel().getColumn(1).setPreferredWidth(90);
+		tabella.getColumnModel().getColumn(1).setMinWidth(70);
+		tabella.getColumnModel().getColumn(1).setMaxWidth(100);
+		tabella.getColumnModel().getColumn(2).setPreferredWidth(50);
+		tabella.getColumnModel().getColumn(2).setMinWidth(30);
+		tabella.getColumnModel().getColumn(2).setMaxWidth(60);
+		tabella.getColumnModel().getColumn(3).setPreferredWidth(100);
+		tabella.getColumnModel().getColumn(3).setMinWidth(80);
+		tabella.getColumnModel().getColumn(3).setMaxWidth(110);
+		tabella.getColumnModel().getColumn(4).setPreferredWidth(150);
+		tabella.getColumnModel().getColumn(4).setMinWidth(100);
+		tabella.getColumnModel().getColumn(4).setMaxWidth(200);
+		tabella.getColumnModel().getColumn(5).setPreferredWidth(110);
+		tabella.getColumnModel().getColumn(5).setMinWidth(90);
+		tabella.getColumnModel().getColumn(5).setMaxWidth(120);
+		tabella.getColumnModel().getColumn(6).setPreferredWidth(110);
+		tabella.getColumnModel().getColumn(6).setMinWidth(90);
+		tabella.getColumnModel().getColumn(6).setMaxWidth(120);
+		tabella.getColumnModel().getColumn(7).setPreferredWidth(120);
+		tabella.getColumnModel().getColumn(7).setMinWidth(50);
+		tabella.getColumnModel().getColumn(7).setMaxWidth(130);
+		tabella.getColumnModel().getColumn(8).setPreferredWidth(110);
+		tabella.getColumnModel().getColumn(8).setMinWidth(90);
+		tabella.getColumnModel().getColumn(8).setMaxWidth(120);
+		tabella.getColumnModel().getColumn(9).setPreferredWidth(110);
+		tabella.getColumnModel().getColumn(9).setMinWidth(90);
+		tabella.getColumnModel().getColumn(9).setMaxWidth(120);
 		scrollPane.setViewportView(tabella);
 
 		txtCodiceVoloPartenze = new JTextField();
@@ -918,7 +950,6 @@ public class GestioneVoliPartenze extends JPanel {
 		}
 		for (String s : map.keySet()) {
 			comboBoxCittaArrivo.addItem(s);
-
 		}
 	}
 

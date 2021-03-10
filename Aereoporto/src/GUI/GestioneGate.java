@@ -488,11 +488,7 @@ public class GestioneGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblSvuota, img.svuota2TemaChiaro(), img.svuota2());
 			}
 
 			@Override

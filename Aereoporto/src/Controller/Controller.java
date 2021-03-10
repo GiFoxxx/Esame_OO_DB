@@ -3,6 +3,7 @@ package Controller;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -34,8 +35,7 @@ public class Controller {
 	private boolean stopProfiloTT = false;
 	private boolean stopImpostazioniTT = false;
 	private boolean stopEsciTT = false;
-	private boolean stopTemaChiaroTT = false;
-	private boolean stopTemaScuroTT = false;
+	private boolean stopCambioTemaTT = false;
 	private boolean stopMostraPasswordAccessoTT = false;
 	private boolean stopCensuraPasswordAccessoTT = false;
 
@@ -58,14 +58,13 @@ public class Controller {
 	public Color coloreScritteTemaChiaro = new Color(35, 39, 42);
 	public Color coloreScritteTendinaTemaChiaro = new Color(106, 110, 117);
 	public Color escoPannelloTemaChiaro = new Color(227, 229, 232);
-	public Color entroPannelloTemaChiaro = new Color(232, 234, 237);
-	public Color clickPannelloTemaChiaro = new Color(237, 239, 242);
-	public Color pannelloSceltoTemaChiaro = new Color(212, 215, 220);
+	public Color entroPannelloTemaChiaro = new Color(222, 223, 228);
+	public Color clickPannelloTemaChiaro = new Color(212, 213, 218);
+	public Color pannelloSceltoTemaChiaro = new Color(202, 203, 208);
 	public Color coloreScritturaAllertaTemaChiaro = new Color(250, 45, 45);
 	public Color coloreLabelTemaChiaro = new Color(106, 110, 117);
 	public Color coloreLabelEntrataTemaChiaro = new Color(65, 70, 74);
 	public Color coloreLabelPressedTemaChiaro = new Color(46, 51, 56);
-
 	public Color trasparente = new Color(0, 0, 0, 0);
 
 	// FONT TESTI
@@ -94,6 +93,7 @@ public class Controller {
 	private GestioneTratte gestioneTratte;
 	private GestioneGate gestioneGate;
 	private GateCodeImbarco gateCodeImbarco;
+	private UtilizzoGate utilizzoGate;
 	private SceltaGate sceltaGate;
 	private Recensione recensioni;
 	private NoClick noClick;
@@ -116,6 +116,14 @@ public class Controller {
 	CompagniaAerea compAerea;
 
 	// GETTER E SETTER
+	public boolean isStopCambioTemaTT() {
+		return stopCambioTemaTT;
+	}
+
+	public void setStopCambioTemaTT(boolean stopCambioTemaTT) {
+		this.stopCambioTemaTT = stopCambioTemaTT;
+	}
+
 	public boolean isStopHomeTT() {
 		return stopHomeTT;
 	}
@@ -162,22 +170,6 @@ public class Controller {
 
 	public void setStopEsciTT(boolean stopEsciTT) {
 		this.stopEsciTT = stopEsciTT;
-	}
-
-	public boolean isStopTemaChiaroTT() {
-		return stopTemaChiaroTT;
-	}
-
-	public void setStopTemaChiaroTT(boolean stopTemaChiaroTT) {
-		this.stopTemaChiaroTT = stopTemaChiaroTT;
-	}
-
-	public boolean isStopTemaScuroTT() {
-		return stopTemaScuroTT;
-	}
-
-	public void setStopTemaScuroTT(boolean stopTemaScuroTT) {
-		this.stopTemaScuroTT = stopTemaScuroTT;
 	}
 
 	public boolean isStopMostraPasswordAccessoTT() {
@@ -364,6 +356,14 @@ public class Controller {
 		this.gateCodeImbarco = gateCodeImbarco;
 	}
 
+	public UtilizzoGate getTempisticheGate() {
+		return utilizzoGate;
+	}
+
+	public void setTempisticheGate(UtilizzoGate utilizzoGate) {
+		this.utilizzoGate = utilizzoGate;
+	}
+
 	public SceltaGate getSceltaGate() {
 		return sceltaGate;
 	}
@@ -460,6 +460,7 @@ public class Controller {
 		gestioneTratte = new GestioneTratte(this);
 		gestioneGate = new GestioneGate(this);
 		gateCodeImbarco = new GateCodeImbarco(this);
+		utilizzoGate = new UtilizzoGate(this);
 		gestioneVoliPartenze = new GestioneVoliPartenze(this);
 		gestioneVoliArrivi = new GestioneVoliArrivi(this);
 		cambioPassword = new CambioPassword(this);
@@ -490,6 +491,16 @@ public class Controller {
 
 	}
 
+	public void controlloAccessoGiaEseguito() {
+		if (!sbloccaGestione()) {
+			accedi();
+		} else if (getEmailAccesso().equals(((Accesso) getDashboard().getAccesso()).getTxtEmail().getText())) {
+			((Accesso) getDashboard().getAccesso()).mostraGiaUtilizziAccount();
+		} else {
+			((Accesso) getDashboard().getAccesso()).mostraEseguirePrimaLogout();
+		}
+	}
+
 	@SuppressWarnings("deprecation")
 	public void accedi() {
 		String email = ((Accesso) getDashboard().getAccesso()).getTxtEmail().getText();
@@ -504,11 +515,7 @@ public class Controller {
 				mostraUtenteLoggato();
 				getDashboard().getLblFrecciaMenu().setVisible(true);
 				setPannelloPrecedente(1);
-				if (cambioTema()) {
-					getDashboard().getPanelAccedi().setBackground(escoPannelloTemaChiaro);
-				} else {
-					getDashboard().getPanelAccedi().setBackground(escoPannelloTemaScuro);
-				}
+				cambioPannelloTema(getDashboard().getPanelAccedi(), escoPannelloTemaChiaro, escoPannelloTemaScuro);
 
 				if (email.equals("luigidemarco@gmail.com") || email.equals("manuelbuonanno00@gmail.com")) {
 					entraGestioneUtenti = true;
@@ -518,9 +525,13 @@ public class Controller {
 				}
 				((Accesso) getDashboard().getAccesso()).setSbloccaHome(true);
 			} else if (controlloCampiSeVuotiAccesso()) {
+				((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setVisible(true);
 				((Accesso) getDashboard().getAccesso()).mostraInserimentoCredenziali();
+				scomparsaMessaggioErrore(((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali());
 			} else {
+				((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setVisible(true);
 				((Accesso) getDashboard().getAccesso()).mostraErroreAccesso();
+				scomparsaMessaggioErrore(((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -642,22 +653,28 @@ public class Controller {
 			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 		} else if ((!formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuotoRegistrazione()
 				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
+			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setVisible(true);
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText(
 					"Formato email inserito non valido!\n" + " Inserire l'email dal formato tipo: example@example.com");
-
+			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
 		} else if (formatoEmailInseritaErrato() && !ripetiPassword() && nessunCampoVuotoRegistrazione()
 				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
-
+			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setVisible(true);
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
 					.setText("Le passwords non corrispondono");
+			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
 
 		} else if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuotoRegistrazione()
 				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
+			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setVisible(true);
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
 					.setText("Effettuare il logout prima della registrazione");
+			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
 		} else {
+			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setVisible(true);
 			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
 					.setText("Riempire tutti i campi per continuare");
+			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
 		}
 	}
 
@@ -1403,19 +1420,45 @@ public class Controller {
 
 	// METODI DI DASHBOARD
 
+	// TEMI
+	public void chiudiCambioTemaTT() {
+		getDashboard().getLblCambioTemaTT().setVisible(false);
+	}
+
+	public void mostraCambioTemaTT() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(750);
+					getDashboard().getLblCambioTemaTT().setVisible(true);
+					if (stopCambioTemaTT) {
+						getDashboard().getLblCambioTemaTT().setVisible(false);
+					}
+					cambioImmagineTema(getDashboard().getLblCambioTemaTT(), img.temaScuroTT(), img.temaChiaroTT());
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+	}
+
 	// MENU INFO ACCOUNT
 	public void chiudiMenuTT() {
 		getDashboard().getLblMenuTT().setVisible(false);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void mostraMenuTT() {
 		Thread th = new Thread() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(525);
+					Thread.sleep(750);
 					getDashboard().getLblMenuTT().setVisible(true);
+					if (stopMenuTT) {
+						getDashboard().getLblMenuTT().setVisible(false);
+					}
 					getDashboard().getLblMenuTT().setIcon(new ImageIcon(img.menuTT()));
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
@@ -1424,10 +1467,6 @@ public class Controller {
 		};
 		th.start();
 
-		if (stopMenuTT) {
-			th.stop();
-		}
-
 	}
 
 	// PANEL HOME
@@ -1435,14 +1474,16 @@ public class Controller {
 		getDashboard().getLblHomeTT().setVisible(false);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void mostraHomeTT() {
 		Thread th = new Thread() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(800);
+					Thread.sleep(750);
 					getDashboard().getLblHomeTT().setVisible(true);
+					if (stopHomeTT) {
+						getDashboard().getLblHomeTT().setVisible(false);
+					}
 					getDashboard().getLblHomeTT().setIcon(new ImageIcon(img.homeTT()));
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
@@ -1450,10 +1491,6 @@ public class Controller {
 			}
 		};
 		th.start();
-
-		if (stopHomeTT) {
-			th.stop();
-		}
 	}
 
 	public void clickPannelloLateraleHome() {
@@ -1461,11 +1498,7 @@ public class Controller {
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getHome());
 		if (getDashboard().getHome().isVisible()) {
-			if (cambioTema()) {
-				getDashboard().getPanelHome().setBackground(pannelloSceltoTemaChiaro);
-			} else {
-				getDashboard().getPanelHome().setBackground(pannelloSceltoTemaScuro);
-			}
+			cambioPannelloTema(getDashboard().getPanelHome(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
 		}
 		chiudiTendinaIstantanea();
 	}
@@ -1475,14 +1508,16 @@ public class Controller {
 		getDashboard().getLblAccediTT().setVisible(false);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void mostraAccediTT() {
 		Thread th = new Thread() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(800);
+					Thread.sleep(750);
 					getDashboard().getLblAccediTT().setVisible(true);
+					if (stopAccediTT) {
+						getDashboard().getLblAccediTT().setVisible(false);
+					}
 					getDashboard().getLblAccediTT().setIcon(new ImageIcon(img.accediTT()));
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
@@ -1490,10 +1525,6 @@ public class Controller {
 			}
 		};
 		th.start();
-
-		if (stopAccediTT) {
-			th.stop();
-		}
 	}
 
 	public void clickPannelloLateraleAccedi() {
@@ -1501,11 +1532,8 @@ public class Controller {
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getAccesso());
 		if (getDashboard().getAccesso().isVisible()) {
-			if (cambioTema()) {
-				getDashboard().getPanelAccedi().setBackground(pannelloSceltoTemaChiaro);
-			} else {
-				getDashboard().getPanelAccedi().setBackground(pannelloSceltoTemaScuro);
-			}
+			cambioPannelloTema(getDashboard().getPanelAccedi(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
+
 		}
 		chiudiTendinaIstantanea();
 	}
@@ -1515,14 +1543,16 @@ public class Controller {
 		getDashboard().getLblRegistratiTT().setVisible(false);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void mostraRegistratiTT() {
 		Thread th = new Thread() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(525);
+					Thread.sleep(750);
 					getDashboard().getLblRegistratiTT().setVisible(true);
+					if (stopRegistratiTT) {
+						getDashboard().getLblRegistratiTT().setVisible(false);
+					}
 					getDashboard().getLblRegistratiTT().setIcon(new ImageIcon(img.registratiTT()));
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
@@ -1530,10 +1560,6 @@ public class Controller {
 			}
 		};
 		th.start();
-
-		if (stopRegistratiTT) {
-			th.stop();
-		}
 	}
 
 	public void clickPannelloLateraleRegistrati() {
@@ -1541,11 +1567,8 @@ public class Controller {
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getRegistrazione());
 		if (getDashboard().getRegistrazione().isVisible()) {
-			if (cambioTema()) {
-				getDashboard().getPanelRegistrati().setBackground(pannelloSceltoTemaChiaro);
-			} else {
-				getDashboard().getPanelRegistrati().setBackground(pannelloSceltoTemaScuro);
-			}
+			cambioPannelloTema(getDashboard().getPanelRegistrati(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
+
 		}
 		chiudiTendinaIstantanea();
 	}
@@ -1555,14 +1578,16 @@ public class Controller {
 		getDashboard().getLblProfiloTT().setVisible(false);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void mostraProfiloTT() {
 		Thread th = new Thread() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(525);
+					Thread.sleep(750);
 					getDashboard().getLblProfiloTT().setVisible(true);
+					if (stopProfiloTT) {
+						getDashboard().getLblProfiloTT().setVisible(false);
+					}
 					getDashboard().getLblProfiloTT().setIcon(new ImageIcon(img.profiloTT()));
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
@@ -1570,10 +1595,6 @@ public class Controller {
 			}
 		};
 		th.start();
-
-		if (stopProfiloTT) {
-			th.stop();
-		}
 	}
 
 	public void clickPannelloLateraleProfilo() {
@@ -1585,11 +1606,8 @@ public class Controller {
 			profiloUtenteAccessoEffettuato();
 
 			if (getDashboard().getProfilo().isVisible()) {
-				if (cambioTema()) {
-					getDashboard().getPanelProfilo().setBackground(pannelloSceltoTemaChiaro);
-				} else {
-					getDashboard().getPanelProfilo().setBackground(pannelloSceltoTemaScuro);
-				}
+				cambioPannelloTema(getDashboard().getPanelProfilo(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
+
 			}
 			chiudiTendinaIstantanea();
 		} else {
@@ -1602,14 +1620,16 @@ public class Controller {
 		getDashboard().getLblImpostazioniTT().setVisible(false);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void mostraImpostazioniTT() {
 		Thread th = new Thread() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(525);
+					Thread.sleep(750);
 					getDashboard().getLblImpostazioniTT().setVisible(true);
+					if (stopImpostazioniTT) {
+						getDashboard().getLblImpostazioniTT().setVisible(false);
+					}
 					getDashboard().getLblImpostazioniTT().setIcon(new ImageIcon(img.impostazioniTT()));
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
@@ -1618,9 +1638,6 @@ public class Controller {
 		};
 		th.start();
 
-		if (stopImpostazioniTT) {
-			th.stop();
-		}
 	}
 
 	public void clickPannelloLateraleImpostazioni() {
@@ -1628,11 +1645,8 @@ public class Controller {
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getImpostazioni());
 		if (getDashboard().getImpostazioni().isVisible()) {
-			if (cambioTema()) {
-				getDashboard().getPanelImpostazioni().setBackground(pannelloSceltoTemaChiaro);
-			} else {
-				getDashboard().getPanelImpostazioni().setBackground(pannelloSceltoTemaScuro);
-			}
+			cambioPannelloTema(getDashboard().getPanelImpostazioni(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
+
 		}
 		chiudiTendinaIstantanea();
 	}
@@ -1642,14 +1656,16 @@ public class Controller {
 		getDashboard().getLblEsciTT().setVisible(false);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void mostraEsciTT() {
 		Thread th = new Thread() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(525);
+					Thread.sleep(750);
 					getDashboard().getLblEsciTT().setVisible(true);
+					if (stopEsciTT) {
+						getDashboard().getLblEsciTT().setVisible(false);
+					}
 					getDashboard().getLblEsciTT().setIcon(new ImageIcon(img.esciTT()));
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
@@ -1657,10 +1673,6 @@ public class Controller {
 			}
 		};
 		th.start();
-
-		if (stopEsciTT) {
-			th.stop();
-		}
 	}
 
 	public void clickPannelloLateraleUscita() {
@@ -1703,6 +1715,7 @@ public class Controller {
 	@SuppressWarnings("deprecation")
 	public void apriTendina() {
 		getDashboard().getLineeApertura().setVisible(false);
+		getDashboard().getLblCambioTemaTT().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 50) {
 			getDashboard().getPannelloTendina().show();
 			getDashboard().getPannelloTendina().setSize(getDashboard().getPosizioneTendina(), 642);
@@ -1734,8 +1747,7 @@ public class Controller {
 		getDashboard().getLblImpostazioniTT().setVisible(false);
 		getDashboard().getLblEsciTT().setVisible(false);
 		getDashboard().getLblMenuTT().setVisible(false);
-//		getDashboard().getLblTemaChiaroTT().setVisible(false);
-//		getDashboard().getLblTemaScuroTT().setVisible(false);
+		getDashboard().getLblCambioTemaTT().setVisible(false);
 
 		getDashboard().getLineeChiusura().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 238) {
@@ -1770,8 +1782,7 @@ public class Controller {
 		getDashboard().getLblImpostazioniTT().setVisible(false);
 		getDashboard().getLblEsciTT().setVisible(false);
 		getDashboard().getLblMenuTT().setVisible(false);
-//		getDashboard().getLblTemaChiaroTT().setVisible(false);
-//		getDashboard().getLblTemaScuroTT().setVisible(false);
+		getDashboard().getLblCambioTemaTT().setVisible(false);
 
 		getDashboard().getLineeChiusura().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 238) {
@@ -1845,6 +1856,11 @@ public class Controller {
 		GateCodeImbarco gateCodeImbarco = new GateCodeImbarco(this);
 		return gateCodeImbarco;
 	}
+	
+	public JPanel utilizzoGate() {
+		UtilizzoGate utilizzoGate = new UtilizzoGate(this);
+        return utilizzoGate;
+    }
 
 	public JPanel gestioneTratte() {
 		GestioneTratte gestioneTratte = new GestioneTratte(this);
@@ -1916,7 +1932,7 @@ public class Controller {
 		return uscita;
 	}
 
-	public void mostraPannelli(JPanel pane) {
+	public void mostraPannelli(JPanel pannello) {
 		((Home) getDashboard().getHome()).getLblFareAccesso().setText("");
 		((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setText("");
 		((Accesso) getDashboard().getAccesso()).getLblMostraPassword().setVisible(true);
@@ -1938,6 +1954,8 @@ public class Controller {
 		getDashboard().getGestioneGate().setVisible(false);
 		svuotaCampiGestioneGate();
 		getDashboard().getGateCodeImbarco().setVisible(false);
+		getDashboard().getUtilizzoGate().setVisible(false);
+		
 		getDashboard().getGestioneTratte().setVisible(false);
 		svuotaCampiGestioneTratta();
 		getDashboard().getGestioneVoliPartenze().setVisible(false);
@@ -1957,7 +1975,7 @@ public class Controller {
 		((CambioPassword) getDashboard().getCambioPassword()).getLblMostraNuovaPassword().setVisible(true);
 		((CambioPassword) getDashboard().getCambioPassword()).getLblMostraRipetiNuovaPassword().setVisible(true);
 
-		pane.setVisible(true);
+		pannello.setVisible(true);
 	}
 
 	// METODI DI MENU INFO ACCOUNT
@@ -2065,6 +2083,13 @@ public class Controller {
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getGateCodeImbarco());
 	}
+	
+	public void vaiATempisticheGateDaSceltaVolo() {
+        getDashboard().getSceltaGate().dispose();
+        getDashboard().setEnabled(true);
+        getDashboard().setVisible(true);
+        mostraPannelli(getDashboard().getUtilizzoGate());
+    }
 
 	public void annullaSceltaGate() {
 		getDashboard().getSceltaGate().dispose();
@@ -2081,6 +2106,26 @@ public class Controller {
 		} else {
 			return false;
 		}
+	}
+
+	public void scomparsaMessaggioErrore(JLabel lbl) {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(3000);
+					lbl.setVisible(false);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		};
+		th.start();
+	}
+
+	public void mostraErroreMancatoAccesso() {
+		((Home) getDashboard().getHome()).getLblFareAccesso().setVisible(true);
+		((Home) getDashboard().getHome()).getLblFareAccesso().setText("Per continuare, effettuare prima l'accesso");
 	}
 
 	// MENU INFO ACCOUNT
@@ -2321,11 +2366,7 @@ public class Controller {
 	}
 
 	public void annullaUscita() {
-		if (cambioTema()) {
-			((Uscita) getDashboard().getUscita()).getLblX().setIcon(new ImageIcon(img.X1TemaChiaro()));
-		} else {
-			((Uscita) getDashboard().getUscita()).getLblX().setIcon(new ImageIcon(img.X1()));
-		}
+		cambioImmagineTema(((Uscita) getDashboard().getUscita()).getLblX(), img.X1TemaChiaro(), img.X1());
 		dashboard.getUscita().dispose();
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
@@ -2369,39 +2410,19 @@ public class Controller {
 
 		if (selezionePannello == 1) {
 			mostraPannelli(getDashboard().getHome());
-			if (cambioTema()) {
-				getDashboard().getPanelHome().setBackground(pannelloSceltoTemaChiaro);
-			} else {
-				getDashboard().getPanelHome().setBackground(pannelloSceltoTemaScuro);
-			}
+			cambioPannelloTema(getDashboard().getPanelHome(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
 		} else if (selezionePannello == 2) {
 			mostraPannelli(getDashboard().getAccesso());
-			if (cambioTema()) {
-				getDashboard().getPanelAccedi().setBackground(pannelloSceltoTemaChiaro);
-			} else {
-				getDashboard().getPanelAccedi().setBackground(pannelloSceltoTemaScuro);
-			}
+			cambioPannelloTema(getDashboard().getPanelAccedi(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
 		} else if (selezionePannello == 3) {
 			mostraPannelli(getDashboard().getRegistrazione());
-			if (cambioTema()) {
-				getDashboard().getPanelRegistrati().setBackground(pannelloSceltoTemaChiaro);
-			} else {
-				getDashboard().getPanelRegistrati().setBackground(pannelloSceltoTemaScuro);
-			}
+			cambioPannelloTema(getDashboard().getPanelRegistrati(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
 		} else if (selezionePannello == 4) {
 			mostraPannelli(getDashboard().getProfilo());
-			if (cambioTema()) {
-				getDashboard().getPanelProfilo().setBackground(pannelloSceltoTemaChiaro);
-			} else {
-				getDashboard().getPanelProfilo().setBackground(pannelloSceltoTemaScuro);
-			}
+			cambioPannelloTema(getDashboard().getPanelProfilo(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
 		} else if (selezionePannello == 5) {
 			mostraPannelli(getDashboard().getImpostazioni());
-			if (cambioTema()) {
-				getDashboard().getPanelImpostazioni().setBackground(pannelloSceltoTemaChiaro);
-			} else {
-				getDashboard().getPanelImpostazioni().setBackground(pannelloSceltoTemaScuro);
-			}
+			cambioPannelloTema(getDashboard().getPanelImpostazioni(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
 		} else if (selezionePannello == 6) {
 			mostraPannelli(getDashboard().getGestioneTratte());
 		} else if (selezionePannello == 7) {
@@ -2418,6 +2439,8 @@ public class Controller {
 			mostraPannelli(getDashboard().getRecensioni());
 		} else if (selezionePannello == 13) {
 			mostraPannelli(getDashboard().getCambioPassword());
+		} else if (selezionePannello == 14) {
+			mostraPannelli(getDashboard().getUtilizzoGate());
 		} else {
 			mostraPannelli(getDashboard().getHome());
 		}
@@ -2499,11 +2522,28 @@ public class Controller {
 		}
 	}
 
+	// METODI DI CAMBIO TEMA E IMMAGINI
 	public boolean cambioTema() {
 		if (flagCambioTema == 1) {
 			return true;
 		} else {
 			return false;
+		}
+	}
+	
+	public void cambioPannelloTema(JPanel pannello, Color colorTemaChiaro,  Color colorTemaScuro) {
+		if (cambioTema()) {
+			pannello.setBackground(colorTemaChiaro);
+		} else {
+			pannello.setBackground(colorTemaScuro);
+		}
+	}
+
+	public void cambioImmagineTema(JLabel lbl, Image imgTemaChiaro, Image imgTemaScuro) {
+		if (cambioTema()) {
+			lbl.setIcon(new ImageIcon(imgTemaChiaro));
+		} else {
+			lbl.setIcon(new ImageIcon(imgTemaScuro));
 		}
 	}
 
@@ -2627,7 +2667,7 @@ public class Controller {
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtBarraRicerca()
 				.setForeground(coloreScritteTemaChiaro);
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtBarraRicerca()
-				.setBackground(clickPannelloTemaChiaro);
+				.setBackground(escoPannelloTemaChiaro);
 		((GestioneTratte) getDashboard().getGestioneTratte()).getLblCompagniaAerea()
 				.setForeground(coloreLabelTemaChiaro);
 
@@ -2658,7 +2698,7 @@ public class Controller {
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtBarraRicerca()
 				.setForeground(coloreScritteTemaChiaro);
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtBarraRicerca()
-				.setBackground(clickPannelloTemaChiaro);
+				.setBackground(escoPannelloTemaChiaro);
 
 		// GESTIONE UTENTI
 		getDashboard().getGestioneUtenti().setBackground(sfondoTemaChiaro);
@@ -2687,7 +2727,7 @@ public class Controller {
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtBarraRicerca()
 				.setForeground(coloreScritteTemaChiaro);
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtBarraRicerca()
-				.setBackground(clickPannelloTemaChiaro);
+				.setBackground(escoPannelloTemaChiaro);
 
 		// GESTIONE VOLI PARTENZE
 		getDashboard().getGestioneVoliPartenze().setBackground(sfondoTemaChiaro);
@@ -2736,7 +2776,7 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtBarraRicerca()
 				.setForeground(coloreScritteTemaChiaro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtBarraRicerca()
-				.setBackground(clickPannelloTemaChiaro);
+				.setBackground(escoPannelloTemaChiaro);
 
 		// GESTIONE VOLO ARRIVI
 		getDashboard().getGestioneVoliArrivi().setBackground(sfondoTemaChiaro);
@@ -2777,7 +2817,7 @@ public class Controller {
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtBarraRicerca()
 				.setForeground(coloreScritteTemaChiaro);
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtBarraRicerca()
-				.setBackground(clickPannelloTemaChiaro);
+				.setBackground(escoPannelloTemaChiaro);
 
 		// GESTIONE GATE
 		getDashboard().getGestioneGate().setBackground(sfondoTemaChiaro);
@@ -2804,7 +2844,7 @@ public class Controller {
 		((GestioneGate) getDashboard().getGestioneGate()).getLblBarraRicerca()
 				.setIcon(new ImageIcon(img.barraRicercaTemaChiaro()));
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtBarraRicerca().setForeground(coloreScritteTemaChiaro);
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtBarraRicerca().setBackground(clickPannelloTemaChiaro);
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtBarraRicerca().setBackground(escoPannelloTemaChiaro);
 
 		// GESTIONE GATE CODA DI IMBARCO
 		getDashboard().getGateCodeImbarco().setBackground(sfondoTemaChiaro);
@@ -2828,7 +2868,7 @@ public class Controller {
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtBarraRicerca()
 				.setForeground(coloreScritteTemaChiaro);
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtBarraRicerca()
-				.setBackground(clickPannelloTemaChiaro);
+				.setBackground(escoPannelloTemaChiaro);
 
 		// RECENSIONE
 
@@ -3374,46 +3414,5 @@ public class Controller {
 		getDashboard().getLblImpostazioniTT().setVisible(false);
 		getDashboard().getLblEsciTT().setVisible(false);
 	}
-
-	// TEMI
-//	public void mostraTemaChiaroTT() {
-//	Thread th = new Thread() {
-//		@Override
-//		public void run() {
-//			try {
-//				Thread.sleep(525);
-//				getDashboard().getLblTemaChiaroTT().setVisible(true);
-//				getDashboard().getLblTemaScuroTT().setIcon(new ImageIcon(img.temaChiaroTT()));
-//			} catch (Exception e) {
-//				JOptionPane.showMessageDialog(null, e);
-//			}
-//		}
-//	};
-//	th.start();
-//
-//	if (stopTemaChiaroTT) {
-//		th.stop();
-//	}
-//}
-//
-//public void mostraTemaScuroTT() {
-//	Thread th = new Thread() {
-//		@Override
-//		public void run() {
-//			try {
-//				Thread.sleep(525);
-//				getDashboard().getLblTemaScuroTT().setVisible(true);
-//				getDashboard().getLblTemaScuroTT().setIcon(new ImageIcon(img.temaScuroTT()));
-//			} catch (Exception e) {
-//				JOptionPane.showMessageDialog(null, e);
-//			}
-//		}
-//	};
-//	th.start();
-//
-//	if (stopTemaScuroTT) {
-//		th.stop();
-//	}
-//}
 
 }

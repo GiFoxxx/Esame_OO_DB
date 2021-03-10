@@ -17,20 +17,19 @@ import Classi.*;
 
 public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 
-	ConnessioneDatabase db;
-	VoloPartenze vlprtz = new VoloPartenze();
-	Gate gt = new Gate();
-	Tratta trt = new Tratta();
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	public String statusScrittoImbarco;
+	Time tempoImbarcoStimato1;
+	Time tempoImbarcoEffettivo1;
 
 	private Connection connection;
-	private PreparedStatement getVoloPartenzePS, inserisciVoloPartenzaPS, eliminaVoloPartenzaPS, modificaVoloPartenzePS,
-			modificaStatusVoloPartenzePS;
+	private PreparedStatement stampaVoloPartenzePS, inserisciVoloPartenzaPS, eliminaVoloPartenzaPS,
+			modificaVoloPartenzePS, modificaStatusVoloPartenzePS, selezioneTempiImbarcoPerVoloModificatoPS,
+			aggiornaStatusImbarcoPartenzePS;
 
 	public VoloPartenzeImplementazionePostgresDAO(Connection connection) throws SQLException {
 		this.connection = connection;
 
-		getVoloPartenzePS = connection.prepareStatement(
+		stampaVoloPartenzePS = connection.prepareStatement(
 				"SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.dataOrariopartenza, (vp.dataOrarioPartenza - gt.tempodiimbarcostimato - gt.tempochiusuragate) AS aperturagate, (vp.dataOrarioPartenza - gt.tempochiusuragate) AS chiusuragate, vp.numeroprenotazioni, vp.statusImbarco, vp.statusVolo, vp.tempoDiImbarcoEffettivo, gt.tempoDiImbarcoStimato "
 						+ "FROM volopartenza AS vp, tratta AS tr, compagniaAerea AS ca, gate AS gt "
 						+ "WHERE (xcodiceTratta = codiceTratta) AND (xcodicegate = codiceGate) AND (xcodiceCompagniaAerea = codiceCompagniaAerea) ORDER BY dataOrariopartenza ");
@@ -41,11 +40,15 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 		modificaVoloPartenzePS = connection.prepareStatement(
 				"UPDATE voloPartenza SET dataOrarioPartenza = ?, numeroPrenotazioni = ?, tempodiimbarcoeffettivo = ?, statusVolo = ?, xcodiceGate = ?, xcodiceTratta = ? WHERE codiceVoloPartenza=?");
 		modificaStatusVoloPartenzePS = connection.prepareStatement(
-				"UPDATE voloPartenza SET statusVolo = ?, tempodiimbarcoeffettivo = ? WHERE codiceVoloPartenza=?");
+				"UPDATE voloPartenza SET statusVolo = ?, statusImbarco = ?, tempodiimbarcoeffettivo = ? WHERE codiceVoloPartenza=?");
+		selezioneTempiImbarcoPerVoloModificatoPS = connection.prepareStatement(
+				"SELECT vp.tempoDiImbarcoEffettivo, gt.tempoDiImbarcoStimato FROM volopartenza AS vp, gate AS gt WHERE (xcodicegate = codiceGate) AND codiceVoloPartenza = ?");
+		aggiornaStatusImbarcoPartenzePS = connection
+				.prepareStatement("UPDATE voloPartenza SET statusImbarco = ? WHERE codiceVoloPartenza=?");
 	}
 
 	public List<VoloPartenze> stampaVoliPartenze() throws SQLException {
-		ResultSet rs = getVoloPartenzePS.executeQuery();
+		ResultSet rs = stampaVoloPartenzePS.executeQuery();
 		List<VoloPartenze> lista = new ArrayList<VoloPartenze>();
 		while (rs.next()) {
 			VoloPartenze vp = new VoloPartenze();
@@ -53,11 +56,10 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 			Gate gt = new Gate();
 			Tratta trt = new Tratta();
 
-			String statusScrittoImbarco;
-			Time tempoImbarcoStimato1 = rs.getTime("tempoDiImbarcoStimato");
-			Time tempoImbarcoEffettivo1 = rs.getTime("tempoDiImbarcoEffettivo");
+			Time tempoImbarcoStimato = rs.getTime("tempoDiImbarcoStimato");
+			Time tempoImbarcoEffettivo = rs.getTime("tempoDiImbarcoEffettivo");
 
-			if (tempoImbarcoEffettivo1.before(tempoImbarcoStimato1)) {
+			if (tempoImbarcoEffettivo.before(tempoImbarcoStimato)) {
 				statusScrittoImbarco = "In orario";
 			} else {
 				statusScrittoImbarco = "In ritardo";
@@ -116,9 +118,24 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 	}
 
 	public int modificaStatusVoloPartenze(VoloPartenze voloPartenze) throws SQLException {
+		selezioneTempiImbarcoPerVoloModificatoPS.setString(1, voloPartenze.getCodiceVoloPartenze());
+		ResultSet rs = selezioneTempiImbarcoPerVoloModificatoPS.executeQuery();
+
+		while (rs.next()) {
+			Time tempoImbarcoStimato = rs.getTime("tempoDiImbarcoStimato");
+			Time tempoImbarcoEffettivo = rs.getTime("tempoDiImbarcoEffettivo");
+
+			if (tempoImbarcoEffettivo.after(tempoImbarcoStimato)) {
+				statusScrittoImbarco = "In orario";
+			} else {
+				statusScrittoImbarco = "In ritardo";
+			}
+		}
+
 		modificaStatusVoloPartenzePS.setString(1, voloPartenze.getStatusVolo());
-		modificaStatusVoloPartenzePS.setTime(2, voloPartenze.getTempoImbarcoEffettivo());
-		modificaStatusVoloPartenzePS.setString(3, voloPartenze.getCodiceVoloPartenze());
+		modificaStatusVoloPartenzePS.setString(2, statusScrittoImbarco);
+		modificaStatusVoloPartenzePS.setTime(3, voloPartenze.getTempoImbarcoEffettivo());
+		modificaStatusVoloPartenzePS.setString(4, voloPartenze.getCodiceVoloPartenze());
 
 		int row = modificaStatusVoloPartenzePS.executeUpdate();
 		return row;

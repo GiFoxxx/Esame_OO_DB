@@ -117,19 +117,19 @@ public class Immagini {
 		return frecciaMenu3;
 	}
 	
-	public Image frecciaMenu1Chiaro() {
+	public Image frecciaMenu1TemaChiaro() {
 		Image frecciaMenu1Chiaro = new ImageIcon(Dashboard.class.getResource("immaginiDashboardChiare/frecciaMenu1Chiaro.png")).getImage()
 				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
 		return frecciaMenu1Chiaro;
 	}
 	
-	public Image frecciaMenu2Chiaro() {
+	public Image frecciaMenu2TemaChiaro() {
 		Image frecciaMenu2Chiaro = new ImageIcon(Dashboard.class.getResource("immaginiDashboardChiare/frecciaMenu2Chiaro.png")).getImage()
 				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
 		return frecciaMenu2Chiaro;
 	}
 	
-	public Image frecciaMenu3Chiaro() {
+	public Image frecciaMenu3TemaChiaro() {
 		Image frecciaMenu3Chiaro = new ImageIcon(Dashboard.class.getResource("immaginiDashboardChiare/frecciaMenu3Chiaro.png")).getImage()
 				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
 		return frecciaMenu3Chiaro;
@@ -1036,6 +1036,28 @@ public class Immagini {
 						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return salvaModifiche3;
 	}
+	
+	//UTILIZZO GATE
+    public Image utilizzoGate1() {
+        Image utilizzoGate1 = new ImageIcon(
+                SceltaGate.class.getResource("immaginiBottoni/utilizzoGate1.png")).getImage()
+                        .getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+        return utilizzoGate1;
+    }
+
+    public Image utilizzoGate2() {
+        Image utilizzoGate2 = new ImageIcon(
+                SceltaGate.class.getResource("immaginiBottoni/utilizzoGate2.png")).getImage()
+                        .getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+        return utilizzoGate2;
+    }
+
+    public Image utilizzoGate3() {
+        Image utilizzoGate3 = new ImageIcon(
+                SceltaGate.class.getResource("immaginiBottoni/utilizzoGate3.png")).getImage()
+                        .getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+        return utilizzoGate3;
+    }
 
 	/*-----------------------------------------------------------BOTTONI TEMA CHIARO-----------------------------------------------------------*/
 
@@ -1389,6 +1411,28 @@ public class Immagini {
 			return svuota3Chiaro;
 		}
 		
+		//UTILIZZO GATE
+	    public Image utilizzoGate1TemaChiaro() {
+	        Image utilizzoGate1Chiaro = new ImageIcon(
+	                SceltaGate.class.getResource("immaginiBottoniChiare/utilizzoGate1Chiaro.png")).getImage()
+	                        .getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+	        return utilizzoGate1Chiaro;
+	    }
+
+	    public Image utilizzoGate2TemaChiaro() {
+	        Image utilizzoGate2Chiaro = new ImageIcon(
+	                SceltaGate.class.getResource("immaginiBottoniChiare/utilizzoGate2Chiaro.png")).getImage()
+	                        .getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+	        return utilizzoGate2Chiaro;
+	    }
+
+	    public Image utilizzoGate3TemaChiaro() {
+	        Image utilizzoGate3Chiaro = new ImageIcon(
+	                SceltaGate.class.getResource("immaginiBottoniChiare/utilizzoGate3Chiaro.png")).getImage()
+	                        .getScaledInstance(319, 36, Image.SCALE_SMOOTH);
+	        return utilizzoGate3Chiaro;
+	    }
+		
 		/*-----------------------------------------------------------TOOLTIP-----------------------------------------------------------*/
 		
 		public Image menuTT() {
@@ -1446,7 +1490,7 @@ public class Immagini {
 		}
 		
 		public Image temaChiaroTT() {
-			Image temaChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/temaChiaro.png")).getImage()
+			Image temaChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/temaChiaroTT.png")).getImage()
 					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
 			return temaChiaro;
 		}

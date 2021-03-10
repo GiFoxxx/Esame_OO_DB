@@ -170,38 +170,6 @@ public class SceltaGate extends JDialog {
 					}
 				}
 			});
-
-			lblTempisticheGate = new JLabel("");
-			lblTempisticheGate.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					controllerSceltaGate.vaiATempisticheGate();
-				}
-
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate2()));
-				}
-
-				@Override
-				public void mouseExited(MouseEvent e) {
-					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate1()));
-				}
-
-				@Override
-				public void mousePressed(MouseEvent e) {
-					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate3()));
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate2()));
-				}
-			});
-			lblTempisticheGate.setHorizontalAlignment(SwingConstants.CENTER);
-			lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate1()));
-			lblTempisticheGate.setBounds(92, 150, 319, 36);
-			getContentPane().add(lblTempisticheGate);
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
 			lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
 			lblAnnulla.setBounds(92, 245, 319, 36);
@@ -306,7 +274,41 @@ public class SceltaGate extends JDialog {
 			lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco1()));
 			lblCodeDiImbarco.setBounds(92, 198, 319, 36);
 			getContentPane().add(lblCodeDiImbarco);
+			
+			lblTempisticheGate = new JLabel("");
+			lblTempisticheGate.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					controllerSceltaGate.vaiATempisticheGateDaSceltaVolo();
+					controllerSceltaGate.setPannelloPrecedente(14);
+				}
 
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate2()));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate1()));
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate3()));
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate2()));
+				}
+			});
+			lblTempisticheGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			lblTempisticheGate.setHorizontalAlignment(SwingConstants.CENTER);
+			lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate1()));
+			lblTempisticheGate.setBounds(92, 150, 319, 36);
+			getContentPane().add(lblTempisticheGate);
+			
 			lblX = new JLabel("");
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override

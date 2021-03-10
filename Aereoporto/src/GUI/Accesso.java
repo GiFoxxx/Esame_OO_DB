@@ -31,10 +31,10 @@ public class Accesso extends JPanel {
 	private JLabel lblPasswordDimenticata;
 	private JLabel lblMostraPassword;
 	private JLabel lblCensuraPassword;
-	private boolean sbloccaHome = false;
 	private JLabel lblMostraPasswordAccessoTT;
 	private JLabel lblCensuraPasswordAccessoTT;
-
+	private boolean sbloccaHome = false;
+	
 	// GETTER E SETTER
 
 	public JLabel getLblCredenziali() {
@@ -139,7 +139,7 @@ public class Accesso extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controlloAccesso();
+					controllerAccesso.controlloAccessoGiaEseguito();
 				}
 			}
 		});
@@ -157,7 +157,7 @@ public class Accesso extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controlloAccesso();
+					controllerAccesso.controlloAccessoGiaEseguito();
 				}
 			}
 		});
@@ -227,44 +227,28 @@ public class Accesso extends JPanel {
 		lblAvanti = new JLabel("");
 		lblAvanti.addMouseListener(new MouseAdapter() {
 			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerAccesso.controlloAccessoGiaEseguito();
+			}
+			
+			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerAccesso.cambioTema()) {
-					lblAvanti.setIcon(new ImageIcon(img.avanti2TemaChiaro()));
-				} else {
-					lblAvanti.setIcon(new ImageIcon(img.avanti2()));
-				}
+				controllerAccesso.cambioImmagineTema(lblAvanti, img.avanti2TemaChiaro(), img.avanti2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerAccesso.cambioTema()) {
-					lblAvanti.setIcon(new ImageIcon(img.avanti1TemaChiaro()));
-				} else {
-					lblAvanti.setIcon(new ImageIcon(img.avanti1()));
-				}
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controlloAccesso();
+				controllerAccesso.cambioImmagineTema(lblAvanti, img.avanti1TemaChiaro(), img.avanti1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerAccesso.cambioTema()) {
-					lblAvanti.setIcon(new ImageIcon(img.avanti3TemaChiaro()));
-				} else {
-					lblAvanti.setIcon(new ImageIcon(img.avanti3()));
-				}
+				controllerAccesso.cambioImmagineTema(lblAvanti, img.avanti3TemaChiaro(), img.avanti3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerAccesso.cambioTema()) {
-					lblAvanti.setIcon(new ImageIcon(img.avanti1TemaChiaro()));
-				} else {
-					lblAvanti.setIcon(new ImageIcon(img.avanti1()));
-				}
+				controllerAccesso.cambioImmagineTema(lblAvanti, img.avanti1TemaChiaro(), img.avanti1());
 			}
 		});
 		lblAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -329,17 +313,6 @@ public class Accesso extends JPanel {
 	}
 
 	// METODI
-
-	private void controlloAccesso() {
-		if (!controllerAccesso.sbloccaGestione()) {
-			controllerAccesso.accedi();
-		} else if (controllerAccesso.getEmailAccesso().equals(txtEmail.getText())) {
-			mostraGiaUtilizziAccount();
-		} else {
-			mostraEseguirePrimaLogout();
-		}
-	}
-
 	public void mostraInserimentoCredenziali() {
 		lblMessaggioCredenziali.setText("Perfavore, inserisci le credenziali");
 	}

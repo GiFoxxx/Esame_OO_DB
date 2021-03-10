@@ -90,7 +90,8 @@ public class Home extends JPanel {
 					controllerHome.setPannelloPrecedente(6);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneTratte());
 				} else {
-					mostraErroreMancatoAccesso();
+					controllerHome.mostraErroreMancatoAccesso();
+					controllerHome.scomparsaMessaggioErrore(lblFareAccesso);
 				}
 			}
 			@Override
@@ -126,7 +127,8 @@ public class Home extends JPanel {
 					controllerHome.setPannelloPrecedente(7);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneCompagnieAeree());
 				} else {
-					mostraErroreMancatoAccesso();
+					controllerHome.mostraErroreMancatoAccesso();
+					controllerHome.scomparsaMessaggioErrore(lblFareAccesso);
 				}
 			}
 			@Override
@@ -159,10 +161,10 @@ public class Home extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (controllerHome.sbloccaGestione()) {
-					controllerHome.setPannelloPrecedente(8);
 					controllerHome.mostraSceltaGate();
 				} else {
-					mostraErroreMancatoAccesso();
+					controllerHome.mostraErroreMancatoAccesso();
+					controllerHome.scomparsaMessaggioErrore(lblFareAccesso);
 				}
 			}
 			@Override
@@ -197,7 +199,8 @@ public class Home extends JPanel {
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.mostraSceltaVolo();
 				} else {
-					mostraErroreMancatoAccesso();
+					controllerHome.mostraErroreMancatoAccesso();
+					controllerHome.scomparsaMessaggioErrore(lblFareAccesso);
 				}
 			}
 			@Override
@@ -223,7 +226,5 @@ public class Home extends JPanel {
 		add(lblFareAccesso);
 	}
 
-	private void mostraErroreMancatoAccesso() {
-		lblFareAccesso.setText("Per continuare, effettuare prima l'accesso");
-	}
+	
 }

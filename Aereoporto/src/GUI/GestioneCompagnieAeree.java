@@ -321,7 +321,6 @@ public class GestioneCompagnieAeree extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneCompagnieAeree.aggiungiCompagniaAerea();
-
 			}
 
 			@Override
