@@ -182,38 +182,22 @@ public class Uscita extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2()));
-					}
+					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita2TemaChiaro(), img.annullaUscita2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita1()));
-					}
+					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita1TemaChiaro(), img.annullaUscita1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita3TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita3()));
-					}
+					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita3TemaChiaro(), img.annullaUscita3());
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annullaUscita2()));
-					}
+					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita2TemaChiaro(), img.annullaUscita2());
 				}
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
@@ -231,38 +215,22 @@ public class Uscita extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblSi.setIcon(new ImageIcon(img.si2TemaChiaro()));
-					} else {
-						lblSi.setIcon(new ImageIcon(img.si2()));
-					}
+					controllerUscita.cambioImmagineTema(lblSi, img.si2TemaChiaro(), img.si2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblSi.setIcon(new ImageIcon(img.si1TemaChiaro()));
-					} else {
-						lblSi.setIcon(new ImageIcon(img.si1()));
-					}
+					controllerUscita.cambioImmagineTema(lblSi, img.si1TemaChiaro(), img.si1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblSi.setIcon(new ImageIcon(img.si3TemaChiaro()));
-					} else {
-						lblSi.setIcon(new ImageIcon(img.si3()));
-					}
+					controllerUscita.cambioImmagineTema(lblSi, img.si3TemaChiaro(), img.si3());
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblSi.setIcon(new ImageIcon(img.si2TemaChiaro()));
-					} else {
-						lblSi.setIcon(new ImageIcon(img.si2()));
-					}
+					controllerUscita.cambioImmagineTema(lblSi, img.si2TemaChiaro(), img.si2());
 				}
 			});
 			lblSi.setHorizontalAlignment(SwingConstants.CENTER);

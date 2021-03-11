@@ -65,35 +65,23 @@ public class Informazioni extends JDialog {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerInformazioni.cambioTema()) {
-					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro2TemaChiaro()));
-				} else {
-					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro2()));
-				}
+				controllerInformazioni.cambioImmagineTema(lblTornaIndietro, img.tornaIndietro2TemaChiaro(), img.tornaIndietro2());
+
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerInformazioni.cambioTema()) {
-					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro1TemaChiaro()));
-				} else {
-					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro1()));
-				}
+				controllerInformazioni.cambioImmagineTema(lblTornaIndietro, img.tornaIndietro1TemaChiaro(), img.tornaIndietro1());
+
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerInformazioni.cambioTema()) {
-					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro3TemaChiaro()));
-				} else {
-					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro3()));
-				}
+				controllerInformazioni.cambioImmagineTema(lblTornaIndietro, img.tornaIndietro3TemaChiaro(), img.tornaIndietro3());
+
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerInformazioni.cambioTema()) {
-					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro2TemaChiaro()));
-				} else {
-					lblTornaIndietro.setIcon(new ImageIcon(img.tornaIndietro2()));
-				}
+				controllerInformazioni.cambioImmagineTema(lblTornaIndietro, img.tornaIndietro2TemaChiaro(), img.tornaIndietro2());
+
 			}
 		});
 		lblTornaIndietro.setHorizontalAlignment(SwingConstants.CENTER);

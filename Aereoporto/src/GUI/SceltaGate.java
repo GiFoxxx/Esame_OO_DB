@@ -136,38 +136,26 @@ public class SceltaGate extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla2TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla2()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblAnnulla, img.annulla2TemaChiaro(), img.annulla2());
+
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla1TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblAnnulla, img.annulla1TemaChiaro(), img.annulla1());
+
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla3TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla3()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblAnnulla, img.annulla3TemaChiaro(), img.annulla3());
+
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla2TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla2()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblAnnulla, img.annulla2TemaChiaro(), img.annulla2());
+
 				}
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
@@ -185,38 +173,26 @@ public class SceltaGate extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblGate.setIcon(new ImageIcon(img.gateScelta2TemaChiaro()));
-					} else {
-						lblGate.setIcon(new ImageIcon(img.gateScelta2()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblGate, img.gateScelta2TemaChiaro(), img.gateScelta2());
+
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblGate.setIcon(new ImageIcon(img.gateScelta1TemaChiaro()));
-					} else {
-						lblGate.setIcon(new ImageIcon(img.gateScelta1()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblGate, img.gateScelta1TemaChiaro(), img.gateScelta1());
+
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblGate.setIcon(new ImageIcon(img.gateScelta3TemaChiaro()));
-					} else {
-						lblGate.setIcon(new ImageIcon(img.gateScelta3()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblGate, img.gateScelta3TemaChiaro(), img.gateScelta3());
+
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblGate.setIcon(new ImageIcon(img.gateScelta2TemaChiaro()));
-					} else {
-						lblGate.setIcon(new ImageIcon(img.gateScelta2()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblGate, img.gateScelta2TemaChiaro(), img.gateScelta2());
+
 				}
 			});
 			lblGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -235,38 +211,26 @@ public class SceltaGate extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco2TemaChiaro()));
-					} else {
-						lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco2()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco2TemaChiaro(), img.codeDiImbarco2());
+
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco1TemaChiaro()));
-					} else {
-						lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco1()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco1TemaChiaro(), img.codeDiImbarco1());
+
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco3TemaChiaro()));
-					} else {
-						lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco3()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco3TemaChiaro(), img.codeDiImbarco3());
+
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco2TemaChiaro()));
-					} else {
-						lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco2()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco2TemaChiaro(), img.codeDiImbarco2());
+
 				}
 			});
 			lblCodeDiImbarco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

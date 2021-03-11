@@ -1437,67 +1437,67 @@ public class Immagini {
 		
 		public Image menuTT() {
 			Image menuTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/menuTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(60, 31, Image.SCALE_SMOOTH);
 			return menuTT;
 		}
 		
 		public Image accediTT() {
 			Image accediTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/accediTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(60, 31, Image.SCALE_SMOOTH);
 			return accediTT;
 		}
 		
 		public Image esciTT() {
 			Image esciTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/esciTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(60, 31, Image.SCALE_SMOOTH);
 			return esciTT;
 		}
 		
 		public Image homeTT() {
 			Image homeTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/homeTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(60, 31, Image.SCALE_SMOOTH);
 			return homeTT;
 		}
 		
 		public Image impostazioniTT() {
 			Image impostazioniTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/impostazioniTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(60, 31, Image.SCALE_SMOOTH);
 			return impostazioniTT;
 		}
 		
 		public Image nascondiPasswordTT() {
 			Image nascondiPasswordTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/nascondiPasswordTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(123, 31, Image.SCALE_SMOOTH);
 			return nascondiPasswordTT;
 		}
 		
 		public Image mostraPasswordTT() {
 			Image mostraPasswordTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/mostraPasswordTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(123, 31, Image.SCALE_SMOOTH);
 			return mostraPasswordTT;
 		}
 		
 		public Image profiloTT() {
 			Image profiloTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/profiloTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(70, 31, Image.SCALE_SMOOTH);
 			return profiloTT;
 		}
 		
 		public Image registratiTT() {
 			Image registratiTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/registratiTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(91, 31, Image.SCALE_SMOOTH);
 			return registratiTT;
 		}
 		
 		public Image temaChiaroTT() {
 			Image temaChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/temaChiaroTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(110, 31, Image.SCALE_SMOOTH);
 			return temaChiaro;
 		}
 		
 		public Image temaScuroTT() {
 			Image temaScuroTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/temaScuroTT.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(110, 31, Image.SCALE_SMOOTH);
 			return temaScuroTT;
 		}
 		

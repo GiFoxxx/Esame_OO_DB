@@ -168,38 +168,22 @@ public class UtilizzoGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -313,38 +297,22 @@ public class UtilizzoGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblSvuota, img.svuota2TemaChiaro(), img.svuota2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota1TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota1()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota3TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota3()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblSvuota, img.svuota3TemaChiaro(), img.svuota3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblSvuota, img.svuota2TemaChiaro(), img.svuota2());
 			}
 		});
 		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);
@@ -362,38 +330,22 @@ public class UtilizzoGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblGiorno.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblGiorno.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblGiorno, img.svuota2TemaChiaro(), img.svuota2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblGiorno.setIcon(new ImageIcon(img.svuota1TemaChiaro()));
-				} else {
-					lblGiorno.setIcon(new ImageIcon(img.svuota1()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblGiorno, img.svuota1TemaChiaro(), img.svuota1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblGiorno.setIcon(new ImageIcon(img.svuota3TemaChiaro()));
-				} else {
-					lblGiorno.setIcon(new ImageIcon(img.svuota3()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblGiorno, img.svuota3TemaChiaro(), img.svuota3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblGiorno.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblGiorno.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblGiorno, img.svuota2TemaChiaro(), img.svuota2());
 			}
 		});
 		lblGiorno.setIcon(new ImageIcon(img.svuota1()));
@@ -410,38 +362,22 @@ public class UtilizzoGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblSettimana.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblSettimana.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblSettimana, img.svuota2TemaChiaro(), img.svuota2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblSettimana.setIcon(new ImageIcon(img.svuota1TemaChiaro()));
-				} else {
-					lblSettimana.setIcon(new ImageIcon(img.svuota1()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblSettimana, img.svuota1TemaChiaro(), img.svuota1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblSettimana.setIcon(new ImageIcon(img.svuota3TemaChiaro()));
-				} else {
-					lblSettimana.setIcon(new ImageIcon(img.svuota3()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblSettimana, img.svuota3TemaChiaro(), img.svuota3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblSettimana.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblSettimana.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblSettimana, img.svuota2TemaChiaro(), img.svuota2());
 			}
 		});
 		lblSettimana.setIcon(new ImageIcon(img.svuota1()));
@@ -458,38 +394,22 @@ public class UtilizzoGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblMese.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblMese.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblMese, img.svuota2TemaChiaro(), img.svuota2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblMese.setIcon(new ImageIcon(img.svuota1TemaChiaro()));
-				} else {
-					lblMese.setIcon(new ImageIcon(img.svuota1()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblMese, img.svuota1TemaChiaro(), img.svuota1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblMese.setIcon(new ImageIcon(img.svuota3TemaChiaro()));
-				} else {
-					lblMese.setIcon(new ImageIcon(img.svuota3()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblMese, img.svuota3TemaChiaro(), img.svuota3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerTempisticheGate.cambioTema()) {
-					lblMese.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblMese.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerTempisticheGate.cambioImmagineTema(lblMese, img.svuota2TemaChiaro(), img.svuota2());
 			}
 		});
 		lblMese.setIcon(new ImageIcon(img.svuota1()));
@@ -512,7 +432,8 @@ public class UtilizzoGate extends JPanel {
 		add(dataUtilizzo);
 
 		lblSelezionaData = new JLabel(
-				"Seleziona la data per sapere l'utilizzo stimato ed effettivo del gate selezionato");
+				"Seleziona una data per stimare l'utilizzo del gate");
+		lblSelezionaData.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSelezionaData.setBounds(368, 426, 372, 24);
 		lblSelezionaData.setForeground(controllerTempisticheGate.coloreScritteTemaScuro);
 		lblSelezionaData.setFont(controllerTempisticheGate.fontLabel);

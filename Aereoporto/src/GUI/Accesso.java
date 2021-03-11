@@ -302,12 +302,12 @@ public class Accesso extends JPanel {
 		
 		lblMostraPasswordAccessoTT = new JLabel("");
 		lblMostraPasswordAccessoTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMostraPasswordAccessoTT.setBounds(745, 349, 90, 30);
+		lblMostraPasswordAccessoTT.setBounds(741, 348, 123, 31);
 		add(lblMostraPasswordAccessoTT);
 		
 		lblCensuraPasswordAccessoTT = new JLabel("");
 		lblCensuraPasswordAccessoTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCensuraPasswordAccessoTT.setBounds(741, 357, 94, 22);
+		lblCensuraPasswordAccessoTT.setBounds(741, 348, 123, 31);
 		add(lblCensuraPasswordAccessoTT);
 
 	}

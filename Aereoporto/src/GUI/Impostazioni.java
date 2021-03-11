@@ -81,6 +81,7 @@ public class Impostazioni extends JPanel {
 		add(lblTerminiECondizioni);
 
 		lblRecensione = new JLabel("Lascia una recensione");
+		lblRecensione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRecensione.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -91,7 +92,7 @@ public class Impostazioni extends JPanel {
 		lblRecensione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRecensione.setFont(controllerImpostazioni.fontLabel);
 		lblRecensione.setForeground(controllerImpostazioni.coloreScritteTemaScuro);
-		lblRecensione.setBounds(485, 381, 180, 22);
+		lblRecensione.setBounds(455, 375, 180, 22);
 		add(lblRecensione);
 	}
 }

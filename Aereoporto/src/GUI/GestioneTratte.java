@@ -230,38 +230,22 @@ public class GestioneTratte extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -435,38 +419,22 @@ public class GestioneTratte extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi2TemaChiaro()));
-				} else {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(), img.aggiungi2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi1TemaChiaro()));
-				} else {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi3TemaChiaro()));
-				} else {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi3()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(), img.aggiungi3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi2TemaChiaro()));
-				} else {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
 			}
 
 		});
@@ -485,38 +453,22 @@ public class GestioneTratte extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblModifica.setIcon(new ImageIcon(img.modifica2TemaChiaro()));
-				} else {
-					lblModifica.setIcon(new ImageIcon(img.modifica2()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblModifica.setIcon(new ImageIcon(img.modifica1TemaChiaro()));
-				} else {
-					lblModifica.setIcon(new ImageIcon(img.modifica1()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblModifica.setIcon(new ImageIcon(img.modifica3TemaChiaro()));
-				} else {
-					lblModifica.setIcon(new ImageIcon(img.modifica3()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(), img.modifica3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblModifica.setIcon(new ImageIcon(img.modifica2TemaChiaro()));
-				} else {
-					lblModifica.setIcon(new ImageIcon(img.modifica2()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
 			}
 		});
 		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
@@ -534,38 +486,22 @@ public class GestioneTratte extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblElimina.setIcon(new ImageIcon(img.elimina2TemaChiaro()));
-				} else {
-					lblElimina.setIcon(new ImageIcon(img.elimina2()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblElimina, img.elimina2TemaChiaro(), img.elimina2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblElimina.setIcon(new ImageIcon(img.elimina1TemaChiaro()));
-				} else {
-					lblElimina.setIcon(new ImageIcon(img.elimina1()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblElimina.setIcon(new ImageIcon(img.elimina3TemaChiaro()));
-				} else {
-					lblElimina.setIcon(new ImageIcon(img.elimina3()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblElimina, img.elimina3TemaChiaro(), img.elimina3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblElimina.setIcon(new ImageIcon(img.elimina2TemaChiaro()));
-				} else {
-					lblElimina.setIcon(new ImageIcon(img.elimina2()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
 			}
 		});
 		lblElimina.setHorizontalAlignment(SwingConstants.CENTER);
@@ -583,38 +519,22 @@ public class GestioneTratte extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblSvuota, img.svuota2TemaChiaro(), img.svuota2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota1TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota1()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota3TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota3()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblSvuota, img.svuota3TemaChiaro(), img.svuota3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerGestioneTratte.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerGestioneTratte.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
 			}
 		});
 		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);

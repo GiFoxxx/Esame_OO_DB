@@ -288,20 +288,12 @@ public class Registrazione extends JPanel {
 		lblAvanti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerRegistrazione.cambioTema()) {
-					lblAvanti.setIcon(new ImageIcon(img.avanti2TemaChiaro()));
-				} else {
-					lblAvanti.setIcon(new ImageIcon(img.avanti2()));
-				}
+				controllerRegistrazione.cambioImmagineTema(lblAvanti, img.avanti2TemaChiaro(), img.avanti2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerRegistrazione.cambioTema()) {
-					lblAvanti.setIcon(new ImageIcon(img.avanti1TemaChiaro()));
-				} else {
-					lblAvanti.setIcon(new ImageIcon(img.avanti1()));
-				}
+				controllerRegistrazione.cambioImmagineTema(lblAvanti, img.avanti1TemaChiaro(), img.avanti1());
 			}
 
 			@Override
@@ -310,19 +302,12 @@ public class Registrazione extends JPanel {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerRegistrazione.cambioTema()) {
-					lblAvanti.setIcon(new ImageIcon(img.avanti3TemaChiaro()));
-				} else {
-					lblAvanti.setIcon(new ImageIcon(img.avanti3()));
-				}
+				controllerRegistrazione.cambioImmagineTema(lblAvanti, img.avanti3TemaChiaro(), img.avanti3());
 			}
+			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerRegistrazione.cambioTema()) {
-					lblAvanti.setIcon(new ImageIcon(img.avanti2TemaChiaro()));
-				} else {
-					lblAvanti.setIcon(new ImageIcon(img.avanti2()));
-				}
+				controllerRegistrazione.cambioImmagineTema(lblAvanti, img.avanti2TemaChiaro(), img.avanti2());
 			}
 		});
 		lblAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

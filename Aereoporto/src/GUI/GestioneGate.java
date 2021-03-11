@@ -207,38 +207,22 @@ public class GestioneGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro3()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2TemaChiaro()));
-				} else {
-					lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro2()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -362,28 +346,25 @@ public class GestioneGate extends JPanel {
 
 			}
 
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
-
+				controllerGestioneGate.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(), img.aggiungi2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
-
+				controllerGestioneGate.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblAggiungi.setIcon(new ImageIcon(img.aggiungi3()));
-
+				controllerGestioneGate.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(), img.aggiungi3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
-
+				controllerGestioneGate.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
 			}
 
 		});
@@ -399,41 +380,24 @@ public class GestioneGate extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneGate.modificaGate();
 			}
-
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblModifica.setIcon(new ImageIcon(img.modifica2TemaChiaro()));
-				} else {
-					lblModifica.setIcon(new ImageIcon(img.modifica2()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblModifica.setIcon(new ImageIcon(img.modifica1TemaChiaro()));
-				} else {
-					lblModifica.setIcon(new ImageIcon(img.modifica1()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblModifica.setIcon(new ImageIcon(img.modifica3TemaChiaro()));
-				} else {
-					lblModifica.setIcon(new ImageIcon(img.modifica3()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(), img.modifica3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblModifica.setIcon(new ImageIcon(img.modifica2TemaChiaro()));
-				} else {
-					lblModifica.setIcon(new ImageIcon(img.modifica2()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
 			}
 		});
 		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
@@ -451,26 +415,22 @@ public class GestioneGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblElimina.setIcon(new ImageIcon(img.elimina2()));
-
+				controllerGestioneGate.cambioImmagineTema(lblElimina, img.elimina2TemaChiaro(), img.elimina2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblElimina.setIcon(new ImageIcon(img.elimina1()));
-
+				controllerGestioneGate.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblElimina.setIcon(new ImageIcon(img.elimina3()));
-
+				controllerGestioneGate.cambioImmagineTema(lblElimina, img.elimina3TemaChiaro(), img.elimina3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblElimina.setIcon(new ImageIcon(img.elimina2()));
-
+				controllerGestioneGate.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
 			}
 		});
 		lblElimina.setHorizontalAlignment(SwingConstants.CENTER);
@@ -486,6 +446,7 @@ public class GestioneGate extends JPanel {
 				controllerGestioneGate.svuotaCampiGestioneGate();
 			}
 
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerGestioneGate.cambioImmagineTema(lblSvuota, img.svuota2TemaChiaro(), img.svuota2());
@@ -493,29 +454,17 @@ public class GestioneGate extends JPanel {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota1TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota1()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota3TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota3()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblSvuota, img.svuota3TemaChiaro(), img.svuota3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerGestioneGate.cambioTema()) {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2TemaChiaro()));
-				} else {
-					lblSvuota.setIcon(new ImageIcon(img.svuota2()));
-				}
+				controllerGestioneGate.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
 			}
 		});
 		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);

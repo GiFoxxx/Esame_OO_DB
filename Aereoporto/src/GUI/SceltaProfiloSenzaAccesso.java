@@ -112,38 +112,26 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla2TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla2()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.tornaIndietro2TemaChiaro(),
+							img.tornaIndietro2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla1TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.tornaIndietro1TemaChiaro(),
+							img.tornaIndietro1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla3TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla3()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.tornaIndietro3TemaChiaro(),
+							img.tornaIndietro3());
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla2TemaChiaro()));
-					} else {
-						lblAnnulla.setIcon(new ImageIcon(img.annulla2()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.tornaIndietro2TemaChiaro(),
+							img.tornaIndietro2());
 				}
 			});
 			lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -186,6 +174,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 						lblX.setIcon(new ImageIcon(img.X3()));
 					}
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
@@ -237,38 +226,22 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblAccedi.setIcon(new ImageIcon(img.accedi2TemaChiaro()));
-					} else {
-						lblAccedi.setIcon(new ImageIcon(img.accedi2()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi2TemaChiaro(), img.accedi2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblAccedi.setIcon(new ImageIcon(img.accedi1TemaChiaro()));
-					} else {
-						lblAccedi.setIcon(new ImageIcon(img.accedi1()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi1TemaChiaro(), img.accedi1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblAccedi.setIcon(new ImageIcon(img.accedi3TemaChiaro()));
-					} else {
-						lblAccedi.setIcon(new ImageIcon(img.accedi3()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi3TemaChiaro(), img.accedi3());
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblAccedi.setIcon(new ImageIcon(img.accedi2TemaChiaro()));
-					} else {
-						lblAccedi.setIcon(new ImageIcon(img.accedi2()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi2TemaChiaro(), img.accedi2());
 				}
 			});
 			lblAccedi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -289,38 +262,25 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblRegistrati.setIcon(new ImageIcon(img.registrati2TemaChiaro()));
-					} else {
-						lblRegistrati.setIcon(new ImageIcon(img.registrati2()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati2TemaChiaro(), img.registrati2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblRegistrati.setIcon(new ImageIcon(img.registrati1TemaChiaro()));
-					} else {
-						lblRegistrati.setIcon(new ImageIcon(img.registrati1()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati1TemaChiaro(), img.registrati1());
+
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblRegistrati.setIcon(new ImageIcon(img.registrati3TemaChiaro()));
-					} else {
-						lblRegistrati.setIcon(new ImageIcon(img.registrati3()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati3TemaChiaro(), img.registrati3());
+
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblRegistrati.setIcon(new ImageIcon(img.registrati2TemaChiaro()));
-					} else {
-						lblRegistrati.setIcon(new ImageIcon(img.registrati2()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati2TemaChiaro(), img.registrati2());
+
 				}
 			});
 			lblRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
