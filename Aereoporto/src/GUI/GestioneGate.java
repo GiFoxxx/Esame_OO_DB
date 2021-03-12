@@ -59,6 +59,7 @@ public class GestioneGate extends JPanel {
 	private JLabel lblModifica;
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
+	private JLabel lblRicaricaTabella;
 
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -249,7 +250,7 @@ public class GestioneGate extends JPanel {
 		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(876, 38, 184, 25);
+		lblBarraRicerca.setBounds(876, 35, 184, 30);
 		add(lblBarraRicerca);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -446,7 +447,6 @@ public class GestioneGate extends JPanel {
 				controllerGestioneGate.svuotaCampiGestioneGate();
 			}
 
-
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerGestioneGate.cambioImmagineTema(lblSvuota, img.svuota2TemaChiaro(), img.svuota2());
@@ -471,6 +471,39 @@ public class GestioneGate extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
+		
+		lblRicaricaTabella = new JLabel("");
+		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				caricaTabella();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+			}
+		});
+		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
+		lblRicaricaTabella.setBounds(836, 35, 30, 30);
+		add(lblRicaricaTabella);
 		
 		caricaTabella();
 

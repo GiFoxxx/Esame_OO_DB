@@ -81,7 +81,7 @@ public class TerminiECondizioni extends JDialog {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerTerminiECondizioni.cambioImmagineTema(lblAnnulla, img.tornaIndietro2TemaChiaro(), img.tornaIndietro2());
+				controllerTerminiECondizioni.cambioImmagineTema(lblAnnulla, img.tornaIndietro1TemaChiaro(), img.tornaIndietro1());
 
 			}
 		});

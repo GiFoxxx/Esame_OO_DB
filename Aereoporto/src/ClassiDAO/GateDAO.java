@@ -1,7 +1,7 @@
 package ClassiDAO;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,4 +23,10 @@ public interface GateDAO {
 	public int modificaGate(Gate gt) throws SQLException;
 	
 	public HashMap<String, String> stampaNumeroPortaInComboBox() throws SQLException;
+	
+	public List<Gate> stampaUtilizzoGiornaliero(Gate gt, Timestamp dataUtilizzo) throws SQLException;
+	
+	public List<Gate> stampaUtilizzoSettimanale(Gate gt, Timestamp dataUtilizzo) throws SQLException;
+	
+	public List<Gate> stampaUtilizzoMensile(Gate gt, Timestamp dataUtilizzo) throws SQLException;
 }

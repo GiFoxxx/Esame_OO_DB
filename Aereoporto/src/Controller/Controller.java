@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import Database.ConnessioneDatabase1;
@@ -1418,6 +1419,143 @@ public class Controller {
 		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
+	// METODI DI UTILIZZO GATE
+	public void svuotaCampiUtilizzoGate() {
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().setText("");
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtNumeroPorta().setText("");
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().setDate(null);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void caricaTabellaUtilizzoGiornaliero() {
+		Timestamp dataUtilizzo = new Timestamp(
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0, 0);
+
+		Gate gt = new Gate(((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().getText());
+
+		try {
+			((UtilizzoGate) getDashboard().getUtilizzoGate())
+					.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoGiornaliero(gt, dataUtilizzo));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
+		for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
+			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
+					.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
+							dato.getTotaleUtilizzoStimato(), dataUtilizzo });
+		}
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
+				.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
+	}
+
+	@SuppressWarnings("deprecation")
+	public void caricaTabellaUtilizzoSettimanale() {
+		Timestamp dataUtilizzo = new Timestamp(
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0, 0);
+
+		Gate gt = new Gate(((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().getText());
+		String settimana = "Settimana ";
+		int i = 1;
+
+		try {
+			((UtilizzoGate) getDashboard().getUtilizzoGate())
+					.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoSettimanale(gt, dataUtilizzo));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
+		for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
+
+			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
+					.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
+							dato.getTotaleUtilizzoStimato(), settimana.concat(String.valueOf(i)) });
+			i = i + 1;
+		}
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
+				.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
+	}
+
+	@SuppressWarnings("deprecation")
+	public void caricaTabellaUtilizzoMensile() {
+		Timestamp dataUtilizzo = new Timestamp(
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0, 0);
+
+		Gate gt = new Gate(((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().getText());
+
+		try {
+			((UtilizzoGate) getDashboard().getUtilizzoGate())
+					.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoMensile(gt, dataUtilizzo));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
+
+		for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
+			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
+					.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
+							dato.getTotaleUtilizzoStimato(), stampaMese() });
+		}
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
+				.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
+	}
+
+	@SuppressWarnings("deprecation")
+	public String stampaMese() {
+		String mese = null;
+		Timestamp dataUtilizzo = new Timestamp(
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0, 0);
+
+		switch (dataUtilizzo.getMonth() + 1) {
+		case 1:
+			mese = "Gennaio";
+			break;
+		case 2:
+			mese = "Febbraio";
+			break;
+		case 3:
+			mese = "Marzo";
+			break;
+		case 4:
+			mese = "Aprile";
+			break;
+		case 5:
+			mese = "Maggio";
+			break;
+		case 6:
+			mese = "Giugno";
+			break;
+		case 7:
+			mese = "Luglio";
+			break;
+		case 8:
+			mese = "Agosto";
+			break;
+		case 9:
+			mese = "Settembre";
+			break;
+		case 10:
+			mese = "Ottobre";
+			break;
+		case 11:
+			mese = "Novembre";
+			break;
+		case 12:
+			mese = "Dicembre";
+			break;
+		}
+		return mese;
+	}
+
 	// METODI DI DASHBOARD
 
 	// TEMI
@@ -1645,7 +1783,8 @@ public class Controller {
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getImpostazioni());
 		if (getDashboard().getImpostazioni().isVisible()) {
-			cambioPannelloTema(getDashboard().getPanelImpostazioni(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
+			cambioPannelloTema(getDashboard().getPanelImpostazioni(), pannelloSceltoTemaChiaro,
+					pannelloSceltoTemaScuro);
 
 		}
 		chiudiTendinaIstantanea();
@@ -1703,13 +1842,17 @@ public class Controller {
 
 	public void mostraUtenteLoggato() {
 		utn = new Utente(getEmailAccesso());
+		int larghezzaLbl = 0;
 		try {
 			getDashboard().getLblAccount().setText(implementazioneUtenteDAO().stampaNomeAccount(utn) + " "
 					+ implementazioneUtenteDAO().stampaCognomeAccount(utn));
+			larghezzaLbl = implementazioneUtenteDAO().stampaNomeAccount(utn).length()
+					+ implementazioneUtenteDAO().stampaCognomeAccount(utn).length();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		getDashboard().getLblAccount().setBounds(820, 7, 140, 23);
+		larghezzaLbl = larghezzaLbl * 8;
+		getDashboard().getLblAccount().setBounds(970 - larghezzaLbl , 7, larghezzaLbl, 23);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1856,11 +1999,11 @@ public class Controller {
 		GateCodeImbarco gateCodeImbarco = new GateCodeImbarco(this);
 		return gateCodeImbarco;
 	}
-	
+
 	public JPanel utilizzoGate() {
 		UtilizzoGate utilizzoGate = new UtilizzoGate(this);
-        return utilizzoGate;
-    }
+		return utilizzoGate;
+	}
 
 	public JPanel gestioneTratte() {
 		GestioneTratte gestioneTratte = new GestioneTratte(this);
@@ -1955,7 +2098,7 @@ public class Controller {
 		svuotaCampiGestioneGate();
 		getDashboard().getGateCodeImbarco().setVisible(false);
 		getDashboard().getUtilizzoGate().setVisible(false);
-		
+
 		getDashboard().getGestioneTratte().setVisible(false);
 		svuotaCampiGestioneTratta();
 		getDashboard().getGestioneVoliPartenze().setVisible(false);
@@ -2083,13 +2226,13 @@ public class Controller {
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getGateCodeImbarco());
 	}
-	
+
 	public void vaiATempisticheGateDaSceltaVolo() {
-        getDashboard().getSceltaGate().dispose();
-        getDashboard().setEnabled(true);
-        getDashboard().setVisible(true);
-        mostraPannelli(getDashboard().getUtilizzoGate());
-    }
+		getDashboard().getSceltaGate().dispose();
+		getDashboard().setEnabled(true);
+		getDashboard().setVisible(true);
+		mostraPannelli(getDashboard().getUtilizzoGate());
+	}
 
 	public void annullaSceltaGate() {
 		getDashboard().getSceltaGate().dispose();
@@ -2422,7 +2565,8 @@ public class Controller {
 			cambioPannelloTema(getDashboard().getPanelProfilo(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
 		} else if (selezionePannello == 5) {
 			mostraPannelli(getDashboard().getImpostazioni());
-			cambioPannelloTema(getDashboard().getPanelImpostazioni(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
+			cambioPannelloTema(getDashboard().getPanelImpostazioni(), pannelloSceltoTemaChiaro,
+					pannelloSceltoTemaScuro);
 		} else if (selezionePannello == 6) {
 			mostraPannelli(getDashboard().getGestioneTratte());
 		} else if (selezionePannello == 7) {
@@ -2530,12 +2674,20 @@ public class Controller {
 			return false;
 		}
 	}
-	
-	public void cambioPannelloTema(JPanel pannello, Color colorTemaChiaro,  Color colorTemaScuro) {
+
+	public void cambioPannelloTema(JPanel pannello, Color coloreTemaChiaro, Color coloreTemaScuro) {
 		if (cambioTema()) {
-			pannello.setBackground(colorTemaChiaro);
+			pannello.setBackground(coloreTemaChiaro);
 		} else {
-			pannello.setBackground(colorTemaScuro);
+			pannello.setBackground(coloreTemaScuro);
+		}
+	}
+
+	public void cambioLabelTema(JLabel lbl, Color coloreTemaChiaro, Color coloreTemaScuro) {
+		if (cambioTema()) {
+			lbl.setForeground((coloreTemaChiaro));
+		} else {
+			lbl.setForeground((coloreTemaScuro));
 		}
 	}
 

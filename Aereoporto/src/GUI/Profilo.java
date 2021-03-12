@@ -94,22 +94,21 @@ public class Profilo extends JPanel {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblLogout.setForeground(controllerProfilo.coloreLabelEntrataTemaScuro);
+				controllerProfilo.cambioLabelTema(lblLogout, controllerProfilo.coloreLabelEntrataTemaChiaro, controllerProfilo.coloreLabelEntrataTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblLogout.setForeground(controllerProfilo.coloreLabelTemaScuro);
+				controllerProfilo.cambioLabelTema(lblLogout, controllerProfilo.coloreLabelTemaChiaro, controllerProfilo.coloreLabelTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblLogout.setForeground(controllerProfilo.coloreLabelPressedTemaScuro);
+				controllerProfilo.cambioLabelTema(lblLogout, controllerProfilo.coloreLabelPressedTemaChiaro, controllerProfilo.coloreLabelPressedTemaScuro);
 			}
-
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblLogout.setForeground(controllerProfilo.coloreLabelTemaScuro);
+				controllerProfilo.cambioLabelTema(lblLogout, controllerProfilo.coloreLabelTemaChiaro, controllerProfilo.coloreLabelTemaScuro);
 			}
 		});
 		lblLogout.setHorizontalAlignment(SwingConstants.LEFT);
@@ -165,37 +164,21 @@ public class Profilo extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerProfilo.cambioTema()) {
-					lblCambiaPassword.setForeground(controllerProfilo.clickPannelloTemaScuro);
-				} else {
-					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelEntrataTemaScuro);
-				}
+				controllerProfilo.cambioLabelTema(lblCambiaPassword, controllerProfilo.coloreLabelEntrataTemaChiaro, controllerProfilo.coloreLabelEntrataTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerProfilo.cambioTema()) {
-					lblCambiaPassword.setForeground(controllerProfilo.entroPannelloTemaChiaro);
-				} else {
-					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
-				}
+				controllerProfilo.cambioLabelTema(lblCambiaPassword, controllerProfilo.coloreLabelTemaChiaro, controllerProfilo.coloreLabelTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerProfilo.cambioTema()) {
-					lblCambiaPassword.setForeground(controllerProfilo.escoPannelloTemaChiaro);
-				} else {
-					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelPressedTemaScuro);
-				}
+				controllerProfilo.cambioLabelTema(lblCambiaPassword, controllerProfilo.coloreLabelPressedTemaChiaro, controllerProfilo.coloreLabelPressedTemaScuro);
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerProfilo.cambioTema()) {
-					lblCambiaPassword.setForeground(controllerProfilo.entroPannelloTemaChiaro);
-				} else {
-					lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);
-				}
+				controllerProfilo.cambioLabelTema(lblCambiaPassword, controllerProfilo.coloreLabelTemaChiaro, controllerProfilo.coloreLabelTemaScuro);
 			}
 		});
 		lblCambiaPassword.setForeground(controllerProfilo.coloreLabelTemaScuro);

@@ -111,38 +111,22 @@ public class MenuInfoAccount extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelGestioneUtente.setBackground(controllerMenuInfoAccount.entroPannelloTemaChiaro);
-				} else {
-					panelGestioneUtente.setBackground(controllerMenuInfoAccount.entroPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente, controllerMenuInfoAccount.entroPannelloTemaChiaro, controllerMenuInfoAccount.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelGestioneUtente.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
-				} else {
-					panelGestioneUtente.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelGestioneUtente.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
-				} else {
-					panelGestioneUtente.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente, controllerMenuInfoAccount.clickPannelloTemaChiaro, controllerMenuInfoAccount.clickPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelGestioneUtente.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
-				} else {
-					panelGestioneUtente.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 		});
 		panelGestioneUtente.setBackground(controllerMenuInfoAccount.trasparente);
@@ -173,38 +157,22 @@ public class MenuInfoAccount extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelComingSoon.setBackground(controllerMenuInfoAccount.entroPannelloTemaChiaro);
-				} else {
-					panelComingSoon.setBackground(controllerMenuInfoAccount.entroPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelComingSoon, controllerMenuInfoAccount.entroPannelloTemaChiaro, controllerMenuInfoAccount.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelComingSoon.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
-				} else {
-					panelComingSoon.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelComingSoon, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelComingSoon.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
-				} else {
-					panelComingSoon.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelComingSoon, controllerMenuInfoAccount.clickPannelloTemaChiaro, controllerMenuInfoAccount.clickPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelComingSoon.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
-				} else {
-					panelComingSoon.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelComingSoon, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 		});
 		panelComingSoon.setBackground(controllerMenuInfoAccount.trasparente);
@@ -228,38 +196,22 @@ public class MenuInfoAccount extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelLogout.setBackground(controllerMenuInfoAccount.entroPannelloTemaChiaro);
-				} else {
-					panelLogout.setBackground(controllerMenuInfoAccount.entroPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelLogout, controllerMenuInfoAccount.entroPannelloTemaChiaro, controllerMenuInfoAccount.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelLogout.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
-				} else {
-					panelLogout.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelLogout, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelLogout.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
-				} else {
-					panelLogout.setBackground(controllerMenuInfoAccount.clickPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelLogout, controllerMenuInfoAccount.clickPannelloTemaChiaro, controllerMenuInfoAccount.clickPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerMenuInfoAccount.cambioTema()) {
-					panelLogout.setBackground(controllerMenuInfoAccount.escoPannelloTemaChiaro);
-				} else {
-					panelLogout.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
-				}
+				controllerMenuInfoAccount.cambioPannelloTema(panelLogout, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 		});
 		panelLogout.setBackground(controllerMenuInfoAccount.trasparente);

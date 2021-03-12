@@ -53,6 +53,7 @@ public class GestioneCompagnieAeree extends JPanel {
 	private JLabel lblModifica;
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
+	private JLabel lblRicaricaTabella;
 
 
 	// GETTER E SETTER
@@ -225,7 +226,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(876, 38, 184, 25);
+		lblBarraRicerca.setBounds(876, 35, 184, 30);
 		add(lblBarraRicerca);
 
 		scrollPane = new JScrollPane();
@@ -309,38 +310,22 @@ public class GestioneCompagnieAeree extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (controllerGestioneCompagnieAeree.cambioTema()) {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi2TemaChiaro()));
-				} else {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
-				}
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(), img.aggiungi2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (controllerGestioneCompagnieAeree.cambioTema()) {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi1TemaChiaro()));
-				} else {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
-				}
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (controllerGestioneCompagnieAeree.cambioTema()) {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi3TemaChiaro()));
-				} else {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi3()));
-				}
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(), img.aggiungi3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (controllerGestioneCompagnieAeree.cambioTema()) {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi2TemaChiaro()));
-				} else {
-					lblAggiungi.setIcon(new ImageIcon(img.aggiungi2()));
-				}
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
 			}
 
 		});
@@ -376,7 +361,7 @@ public class GestioneCompagnieAeree extends JPanel {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
 			}
 		});
 		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
@@ -449,6 +434,39 @@ public class GestioneCompagnieAeree extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
+		
+		lblRicaricaTabella = new JLabel("");
+		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				caricaTabella();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+			}
+		});
+		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
+		lblRicaricaTabella.setBounds(836, 35, 30, 30);
+		add(lblRicaricaTabella);
 		
 		caricaTabella();
 	}

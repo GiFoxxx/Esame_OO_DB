@@ -279,42 +279,28 @@ public class SceltaGate extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					controllerSceltaGate.annullaSceltaGate();
 				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					controllerSceltaGate.cambioImmagineTema(lblX, img.X2TemaChiaro(), img.X2());
+				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X1TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X1()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X3TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X3()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblX, img.X3TemaChiaro(), img.X3());
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X2()));
-					}
+					controllerSceltaGate.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					if (controllerSceltaGate.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X2()));
-					}
-				}
+				
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
 			lblX.setIcon(new ImageIcon(img.X1()));
@@ -358,7 +344,6 @@ public class SceltaGate extends JDialog {
 
 		lblLayout = new JLabel("");
 		lblLayout.setBorder(null);
-
 		lblLayout.setBounds(0, 0, 500, 300);
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLayout.setIcon(new ImageIcon(img.sfondoUscita()));

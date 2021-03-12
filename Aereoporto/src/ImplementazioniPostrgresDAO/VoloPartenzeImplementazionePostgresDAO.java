@@ -21,18 +21,14 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 	Time tempoImbarcoStimato1;
 	Time tempoImbarcoEffettivo1;
 
-	private Connection connection;
 	private PreparedStatement stampaVoloPartenzePS, inserisciVoloPartenzaPS, eliminaVoloPartenzaPS,
-			modificaVoloPartenzePS, modificaStatusVoloPartenzePS, selezioneTempiImbarcoPerVoloModificatoPS,
-			aggiornaStatusImbarcoPartenzePS;
+			modificaVoloPartenzePS, modificaStatusVoloPartenzePS, selezioneTempiImbarcoPerVoloModificatoPS;
 
 	public VoloPartenzeImplementazionePostgresDAO(Connection connection) throws SQLException {
-		this.connection = connection;
-
 		stampaVoloPartenzePS = connection.prepareStatement(
 				"SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.dataOrariopartenza, (vp.dataOrarioPartenza - gt.tempodiimbarcostimato - gt.tempochiusuragate) AS aperturagate, (vp.dataOrarioPartenza - gt.tempochiusuragate) AS chiusuragate, vp.numeroprenotazioni, vp.statusImbarco, vp.statusVolo, vp.tempoDiImbarcoEffettivo, gt.tempoDiImbarcoStimato "
 						+ "FROM volopartenza AS vp, tratta AS tr, compagniaAerea AS ca, gate AS gt "
-						+ "WHERE (xcodiceTratta = codiceTratta) AND (xcodicegate = codiceGate) AND (xcodiceCompagniaAerea = codiceCompagniaAerea) ORDER BY dataOrariopartenza ");
+						+ "WHERE (xcodiceTratta = codiceTratta) AND (xcodicegate = codiceGate) AND (xcodiceCompagniaAerea = codiceCompagniaAerea) AND dataOrariopartenza>NOW() ORDER BY dataOrariopartenza ");
 
 		inserisciVoloPartenzaPS = connection.prepareStatement(
 				"INSERT INTO voloPartenza (codiceVoloPartenza, dataOrarioPartenza, numeroPrenotazioni, tempoDiImbarcoEffettivo, statusVolo, xcodiceGate, xcodiceTratta) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -43,8 +39,7 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 				"UPDATE voloPartenza SET statusVolo = ?, statusImbarco = ?, tempodiimbarcoeffettivo = ? WHERE codiceVoloPartenza=?");
 		selezioneTempiImbarcoPerVoloModificatoPS = connection.prepareStatement(
 				"SELECT vp.tempoDiImbarcoEffettivo, gt.tempoDiImbarcoStimato FROM volopartenza AS vp, gate AS gt WHERE (xcodicegate = codiceGate) AND codiceVoloPartenza = ?");
-		aggiornaStatusImbarcoPartenzePS = connection
-				.prepareStatement("UPDATE voloPartenza SET statusImbarco = ? WHERE codiceVoloPartenza=?");
+		
 	}
 
 	public List<VoloPartenze> stampaVoliPartenze() throws SQLException {

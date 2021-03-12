@@ -80,7 +80,7 @@ public class Informazioni extends JDialog {
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerInformazioni.cambioImmagineTema(lblTornaIndietro, img.tornaIndietro2TemaChiaro(), img.tornaIndietro2());
+				controllerInformazioni.cambioImmagineTema(lblTornaIndietro, img.tornaIndietro1TemaChiaro(), img.tornaIndietro1());
 
 			}
 		});

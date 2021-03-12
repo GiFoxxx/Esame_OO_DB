@@ -37,7 +37,7 @@ public class Registrazione extends JPanel {
 	private JLabel lblCensuraPassword;
 	private JLabel lblMostraRipetiPassword;
 	private JLabel lblCensuraRipetiPassword;
-	
+
 	// GETTER E SETTER
 
 	public JLabel getLblAvanti() {
@@ -286,6 +286,12 @@ public class Registrazione extends JPanel {
 
 		lblAvanti = new JLabel("");
 		lblAvanti.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerRegistrazione.registrati();
+			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerRegistrazione.cambioImmagineTema(lblAvanti, img.avanti2TemaChiaro(), img.avanti2());
@@ -297,17 +303,13 @@ public class Registrazione extends JPanel {
 			}
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerRegistrazione.registrati();
-			}
-			@Override
 			public void mousePressed(MouseEvent e) {
 				controllerRegistrazione.cambioImmagineTema(lblAvanti, img.avanti3TemaChiaro(), img.avanti3());
 			}
-			
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerRegistrazione.cambioImmagineTema(lblAvanti, img.avanti2TemaChiaro(), img.avanti2());
+				controllerRegistrazione.cambioImmagineTema(lblAvanti, img.avanti1TemaChiaro(), img.avanti1());
 			}
 		});
 		lblAvanti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -330,5 +332,5 @@ public class Registrazione extends JPanel {
 		lblMessaggioCredenziali.setBounds(269, 526, 553, 14);
 		add(lblMessaggioCredenziali);
 	}
-	
+
 }

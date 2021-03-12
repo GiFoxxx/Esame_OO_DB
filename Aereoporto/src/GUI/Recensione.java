@@ -140,25 +140,21 @@ public class Recensione extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerRecensione.cambioImmagineTema(lblAnnulla, img.annulla2TemaChiaro(), img.annulla2());
-
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerRecensione.cambioImmagineTema(lblAnnulla, img.annulla1TemaChiaro(), img.annulla1());
-
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				controllerRecensione.cambioImmagineTema(lblAnnulla, img.annulla3TemaChiaro(), img.annulla3());
-
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.annulla2TemaChiaro(), img.annulla2());
-
+				controllerRecensione.cambioImmagineTema(lblAnnulla, img.annulla1TemaChiaro(), img.annulla1());
 			}
 		});
 		lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
@@ -171,26 +167,26 @@ public class Recensione extends JPanel {
 		lblInviaRecensione.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione2TemaChiaro(), img.inviaRecensione2());
-
+				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione2TemaChiaro(),
+						img.inviaRecensione2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione1TemaChiaro(), img.inviaRecensione1());
-
+				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione1TemaChiaro(),
+						img.inviaRecensione1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione3TemaChiaro(), img.inviaRecensione3());
-
+				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione3TemaChiaro(),
+						img.inviaRecensione3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione2TemaChiaro(), img.inviaRecensione2());
-
+				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione1TemaChiaro(),
+						img.inviaRecensione1());
 			}
 
 			@Override
@@ -577,7 +573,7 @@ public class Recensione extends JPanel {
 		lblCommento = new JLabel("Lascia un commento e faremo il possibile per migliorare il programma!");
 		lblCommento.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCommento.setFont(controllerRecensione.fontLabel);
-		lblCommento.setForeground(controllerRecensione.coloreScritteTemaScuro);
+		lblCommento.setForeground(controllerRecensione.coloreScritteSuBiancoTemaScuro);
 		lblCommento.setBounds(44, 410, 525, 19);
 		add(lblCommento);
 

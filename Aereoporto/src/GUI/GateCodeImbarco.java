@@ -60,6 +60,7 @@ public class GateCodeImbarco extends JPanel {
 	private JLabel lblModifica;
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
+	private JLabel lblRicaricaTabella;
 
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -186,13 +187,13 @@ public class GateCodeImbarco extends JPanel {
 		this.lblSvuota = lblSvuota;
 	}
 
-	Controller controllerGestioneGate;
+	Controller controllerGateCodeImbarco;
 
 	public GateCodeImbarco(Controller controller) {
-		controllerGestioneGate = controller;
+		controllerGateCodeImbarco = controller;
 
 		setBounds(0, 0, 1090, 642);
-		setBackground(controllerGestioneGate.sfondoTemaScuro);
+		setBackground(controllerGateCodeImbarco.sfondoTemaScuro);
 		setLayout(null);
 
 		lblimgfrecciaIndietro = new JLabel("");
@@ -200,28 +201,28 @@ public class GateCodeImbarco extends JPanel {
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.setPannelloPrecedente(1);
-				controllerGestioneGate.mostraPannelli(controllerGestioneGate.getDashboard().getHome());
+				controllerGateCodeImbarco.setPannelloPrecedente(1);
+				controllerGateCodeImbarco.mostraPannelli(controllerGateCodeImbarco.getDashboard().getHome());
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
+				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
+				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -237,9 +238,9 @@ public class GateCodeImbarco extends JPanel {
 				ricerca();
 			}
 		});
-		txtBarraRicerca.setBackground(controllerGestioneGate.escoPannelloTemaScuro);
-		txtBarraRicerca.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
-		txtBarraRicerca.setFont(controllerGestioneGate.fontScritteGestioni);
+		txtBarraRicerca.setBackground(controllerGateCodeImbarco.escoPannelloTemaScuro);
+		txtBarraRicerca.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
+		txtBarraRicerca.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
 		txtBarraRicerca.setBounds(888, 41, 141, 20);
 		add(txtBarraRicerca);
@@ -248,11 +249,11 @@ public class GateCodeImbarco extends JPanel {
 		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(876, 38, 184, 25);
+		lblBarraRicerca.setBounds(876, 35, 184, 30);
 		add(lblBarraRicerca);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setFont(controllerGestioneGate.fontLabel);
+		scrollPane.setFont(controllerGateCodeImbarco.fontLabel);
 		scrollPane.setEnabled(false);
 		scrollPane.setBounds(30, 85, 1030, 330);
 		add(scrollPane);
@@ -262,7 +263,7 @@ public class GateCodeImbarco extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoDelete) {
 				if (EventoDelete.getKeyCode() == KeyEvent.VK_DELETE) {
-					controllerGestioneGate.eliminaGateCodeImbarco();
+					controllerGateCodeImbarco.eliminaGateCodeImbarco();
 				}
 			}
 		});
@@ -278,8 +279,8 @@ public class GateCodeImbarco extends JPanel {
 
 		lblCodiceGate = new JLabel("Codice Gate");
 		lblCodiceGate.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCodiceGate.setFont(controllerGestioneGate.fontLabel);
-		lblCodiceGate.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
+		lblCodiceGate.setFont(controllerGateCodeImbarco.fontLabel);
+		lblCodiceGate.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
 		lblCodiceGate.setBounds(30, 461, 204, 20);
 		add(lblCodiceGate);
 
@@ -289,20 +290,20 @@ public class GateCodeImbarco extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneGate.aggiungiGateCodeImbarco();
+					controllerGateCodeImbarco.aggiungiGateCodeImbarco();
 				}
 			}
 		});
-		txtCodiceGate.setFont(controllerGestioneGate.fontScritteGestioni);
-		txtCodiceGate.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
+		txtCodiceGate.setFont(controllerGateCodeImbarco.fontScritteGestioni);
+		txtCodiceGate.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
 		txtCodiceGate.setColumns(10);
 		txtCodiceGate.setBounds(244, 461, 0, 20);
 		add(txtCodiceGate);
 
 		lblCodaImbarco = new JLabel("Coda d'Imbarco");
 		lblCodaImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCodaImbarco.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
-		lblCodaImbarco.setFont(controllerGestioneGate.fontLabel);
+		lblCodaImbarco.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
+		lblCodaImbarco.setFont(controllerGateCodeImbarco.fontLabel);
 		lblCodaImbarco.setBounds(30, 493, 204, 20);
 		add(lblCodaImbarco);
 
@@ -311,7 +312,7 @@ public class GateCodeImbarco extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				HashMap<String, String> map = null;
 				try {
-					map = controllerGestioneGate.implementazioneCodaDiImbarcoDAO().stampaCodaDiImbarcoInComboBox();
+					map = controllerGateCodeImbarco.implementazioneCodaDiImbarcoDAO().stampaCodaDiImbarcoInComboBox();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -323,8 +324,8 @@ public class GateCodeImbarco extends JPanel {
 
 		txtCodaDiImbarco = new JTextField();
 		txtCodaDiImbarco.setHorizontalAlignment(SwingConstants.LEFT);
-		txtCodaDiImbarco.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
-		txtCodaDiImbarco.setFont(controllerGestioneGate.fontScritteGestioni);
+		txtCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
+		txtCodaDiImbarco.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtCodaDiImbarco.setEditable(false);
 		txtCodaDiImbarco.setColumns(10);
 		txtCodaDiImbarco.setBounds(244, 493, 0, 20);
@@ -335,7 +336,7 @@ public class GateCodeImbarco extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				HashMap<String, String> map = null;
 				try {
-					map = controllerGestioneGate.implementazioneGateDAO().stampaNumeroPortaInComboBox();
+					map = controllerGateCodeImbarco.implementazioneGateDAO().stampaNumeroPortaInComboBox();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -350,28 +351,28 @@ public class GateCodeImbarco extends JPanel {
 		lblAggiungi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.aggiungiGateCodeImbarco();
+				controllerGateCodeImbarco.aggiungiGateCodeImbarco();
 
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(), img.aggiungi2());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(), img.aggiungi2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(), img.aggiungi3());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(), img.aggiungi3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
 			}
 
 		});
@@ -385,27 +386,27 @@ public class GateCodeImbarco extends JPanel {
 		lblModifica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.modificaGateCodeImbarco();
+				controllerGateCodeImbarco.modificaGateCodeImbarco();
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
+				controllerGateCodeImbarco.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(), img.modifica3());
+				controllerGateCodeImbarco.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(), img.modifica3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
 			}
 		});
 		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
@@ -418,27 +419,27 @@ public class GateCodeImbarco extends JPanel {
 		lblElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.eliminaGateCodeImbarco();
+				controllerGateCodeImbarco.eliminaGateCodeImbarco();
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblElimina, img.elimina2TemaChiaro(), img.elimina2());
+				controllerGateCodeImbarco.cambioImmagineTema(lblElimina, img.elimina2TemaChiaro(), img.elimina2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblElimina, img.elimina3TemaChiaro(), img.elimina3());
+				controllerGateCodeImbarco.cambioImmagineTema(lblElimina, img.elimina3TemaChiaro(), img.elimina3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
 			}
 		});
 		lblElimina.setHorizontalAlignment(SwingConstants.CENTER);
@@ -451,33 +452,66 @@ public class GateCodeImbarco extends JPanel {
 		lblSvuota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneGate.svuotaCampiGateCodeImbarco();
+				controllerGateCodeImbarco.svuotaCampiGateCodeImbarco();
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblSvuota, img.svuota2TemaChiaro(), img.svuota2());
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuota, img.svuota2TemaChiaro(), img.svuota2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblSvuota, img.svuota3TemaChiaro(), img.svuota3());
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuota, img.svuota3TemaChiaro(), img.svuota3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
 			}
 		});
 		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
+		
+		lblRicaricaTabella = new JLabel("");
+		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				caricaTabella();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+			}
+		});
+		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
+		lblRicaricaTabella.setBounds(836, 35, 30, 30);
+		add(lblRicaricaTabella);
 
 		stampaComboBoxNumeroPorta();
 		stampaComboBoxCodaDiImbarco();
@@ -490,7 +524,7 @@ public class GateCodeImbarco extends JPanel {
 	public void stampaComboBoxNumeroPorta() {
 		HashMap<String, String> map = null;
 		try {
-			map = controllerGestioneGate.implementazioneGateDAO().stampaNumeroPortaInComboBox();
+			map = controllerGateCodeImbarco.implementazioneGateDAO().stampaNumeroPortaInComboBox();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -502,7 +536,7 @@ public class GateCodeImbarco extends JPanel {
 	public void stampaComboBoxCodaDiImbarco() {
 		HashMap<String, String> map = null;
 		try {
-			map = controllerGestioneGate.implementazioneCodaDiImbarcoDAO().stampaCodaDiImbarcoInComboBox();
+			map = controllerGateCodeImbarco.implementazioneCodaDiImbarcoDAO().stampaCodaDiImbarcoInComboBox();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -513,7 +547,7 @@ public class GateCodeImbarco extends JPanel {
 
 	public void caricaTabella() {
 		try {
-			this.ListaGate = controllerGestioneGate.implementazioneGateDAO().stampaGateCodeImbarco();
+			this.ListaGate = controllerGateCodeImbarco.implementazioneGateDAO().stampaGateCodeImbarco();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -68,6 +68,7 @@ public class GestioneVoliArrivi extends JPanel {
 	private JLabel lblModifica;
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
+	private JLabel lblRicaricaTabella;
 	private JLabel lblMessaggioErrore;
 
 	// GETTER E SETTER
@@ -275,7 +276,7 @@ public class GestioneVoliArrivi extends JPanel {
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
-		lblimgfrecciaIndietro.setBounds(30, 35, 47, 30);
+		lblimgfrecciaIndietro.setBounds(30, 35, 30, 30);
 		add(lblimgfrecciaIndietro);
 
 		txtBarraRicerca = new JTextField();
@@ -289,14 +290,14 @@ public class GestioneVoliArrivi extends JPanel {
 		txtBarraRicerca.setForeground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(888, 40, 141, 20);
+		txtBarraRicerca.setBounds(888, 41, 141, 20);
 		txtBarraRicerca.setColumns(10);
 		add(txtBarraRicerca);
 
 		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(876, 38, 184, 25);
+		lblBarraRicerca.setBounds(876, 35, 184, 30);
 		add(lblBarraRicerca);
 
 		scrollPane = new JScrollPane();
@@ -540,7 +541,7 @@ public class GestioneVoliArrivi extends JPanel {
 		lblSvuota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerGestioneVoliArrivi.svuotaCampiGestioneVoloPartenze();
+				controllerGestioneVoliArrivi.svuotaCampiGestioneVoloArrivi();
 			}
 
 			@Override
@@ -567,7 +568,41 @@ public class GestioneVoliArrivi extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
+		
+		lblRicaricaTabella = new JLabel("");
+		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				caricaTabella();
+			}
 
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+			}
+		});
+		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
+		lblRicaricaTabella.setBounds(836, 35, 30, 30);
+		add(lblRicaricaTabella);
+		
+		
 		lblMessaggioErrore = new JLabel("");
 		lblMessaggioErrore.setForeground(controllerGestioneVoliArrivi.coloreScritturaAllertaTemaScuro);
 		lblMessaggioErrore.setFont(controllerGestioneVoliArrivi.fontLabel);

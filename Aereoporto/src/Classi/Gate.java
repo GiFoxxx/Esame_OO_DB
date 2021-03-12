@@ -1,5 +1,6 @@
 package Classi;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
@@ -12,6 +13,8 @@ public class Gate {
 	private String numeroPorta;
 	private Time tempoImbarcoStimato;
 	private Time tempoChiusuraGate;
+	private Time totaleUtilizzoEffettivo;
+	private Time totaleUtilizzoStimato;
 
 	// GETTER E SETTER
 
@@ -54,9 +57,24 @@ public class Gate {
 	public void setTempoChiusuraGate(Time tempoChiusuraGate) {
 		this.tempoChiusuraGate = tempoChiusuraGate;
 	}
+	
+	public Time getTotaleUtilizzoEffettivo() {
+		return totaleUtilizzoEffettivo;
+	}
+
+	public void setTotaleUtilizzoEffettivo(Time totaleUtilizzoEffettivo) {
+		this.totaleUtilizzoEffettivo = totaleUtilizzoEffettivo;
+	}
+
+	public Time getTotaleUtilizzoStimato() {
+		return totaleUtilizzoStimato;
+	}
+
+	public void setTotaleUtilizzoStimato(Time totaleUtilizzoStimato) {
+		this.totaleUtilizzoStimato = totaleUtilizzoStimato;
+	}
 
 	// COSTRUTTORI
-
 	public Gate() {
 		super();
 	}
@@ -75,8 +93,6 @@ public class Gate {
 		this.codiceGate = codiceGate;
 		this.numeroPorta = numeroPorta;
 	}
-	
-	
 
 	public Gate(String codiceGate, String numeroPorta, Time tempoImbarcoStimato, Time tempoChiusuraGate) {
 		super();

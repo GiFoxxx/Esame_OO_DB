@@ -175,7 +175,7 @@ public class SceltaVolo extends JDialog {
 					controllerSceltaVolo.vaiAVoliArriviDaSceltaVolo();
 					controllerSceltaVolo.setPannelloPrecedente(10);
 				}
-				
+
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					controllerSceltaVolo.cambioImmagineTema(lblArrivi, img.arrivi2TemaChiaro(), img.arrivi2());
@@ -196,7 +196,7 @@ public class SceltaVolo extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaVolo.cambioImmagineTema(lblArrivi, img.arrivi2TemaChiaro(), img.arrivi2());
+					controllerSceltaVolo.cambioImmagineTema(lblArrivi, img.arrivi1TemaChiaro(), img.arrivi1());
 
 				}
 			});
@@ -214,38 +214,22 @@ public class SceltaVolo extends JDialog {
 				}
 
 				@Override
+				public void mouseEntered(MouseEvent e) {
+					controllerSceltaVolo.cambioImmagineTema(lblX, img.X2TemaChiaro(), img.X2());
+				}
+
+				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerSceltaVolo.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X1TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X1()));
-					}
+					controllerSceltaVolo.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerSceltaVolo.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X3TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X3()));
-					}
+					controllerSceltaVolo.cambioImmagineTema(lblX, img.X3TemaChiaro(), img.X3());
 				}
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerSceltaVolo.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X2()));
-					}
-				}
-				
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					if (controllerSceltaVolo.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X2()));
-					}
+					controllerSceltaVolo.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);

@@ -273,22 +273,21 @@ public class CambioPassword extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblPasswordDimenticata.setForeground(controllerCambioPassword.coloreLabelEntrataTemaScuro);
+				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata, controllerCambioPassword.coloreLabelEntrataTemaChiaro, controllerCambioPassword.coloreLabelEntrataTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblPasswordDimenticata.setForeground(controllerCambioPassword.coloreLabelTemaScuro);
+				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata, controllerCambioPassword.coloreLabelTemaChiaro, controllerCambioPassword.coloreLabelTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblPasswordDimenticata.setForeground(controllerCambioPassword.coloreLabelPressedTemaScuro);
+				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata, controllerCambioPassword.coloreLabelPressedTemaChiaro, controllerCambioPassword.coloreLabelPressedTemaScuro);
 			}
-
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblPasswordDimenticata.setForeground(controllerCambioPassword.coloreLabelTemaScuro);
+				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata, controllerCambioPassword.coloreLabelTemaChiaro, controllerCambioPassword.coloreLabelTemaScuro);
 			}
 		});
 		lblPasswordDimenticata.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

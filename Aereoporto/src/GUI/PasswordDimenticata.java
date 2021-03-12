@@ -211,37 +211,21 @@ public class PasswordDimenticata extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if (controllerPasswordDimenticata.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X2()));
-					}
+					controllerPasswordDimenticata.cambioImmagineTema(lblX, img.X2TemaChiaro(), img.X2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerPasswordDimenticata.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X1TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X1()));
-					}
+					controllerPasswordDimenticata.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerPasswordDimenticata.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X3TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X3()));
-					}
+					controllerPasswordDimenticata.cambioImmagineTema(lblX, img.X3TemaChiaro(), img.X3());
 				}
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerPasswordDimenticata.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X2()));
-					}
+					controllerPasswordDimenticata.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
@@ -391,7 +375,7 @@ public class PasswordDimenticata extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerPasswordDimenticata.cambioImmagineTema(lblSalva, img.salva2TemaChiaro(), img.salva2());
+					controllerPasswordDimenticata.cambioImmagineTema(lblSalva, img.salva1TemaChiaro(), img.salva1());
 
 				}
 			});
@@ -431,7 +415,7 @@ public class PasswordDimenticata extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerPasswordDimenticata.cambioImmagineTema(lblAnnulla, img.annullaUscita2TemaChiaro(), img.annullaUscita2());
+					controllerPasswordDimenticata.cambioImmagineTema(lblAnnulla, img.annullaUscita1TemaChiaro(), img.annullaUscita1());
 
 				}
 			});

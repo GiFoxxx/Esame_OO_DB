@@ -106,7 +106,6 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 			lblAnnulla.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					pannelloSelezionatoPrecedentemente();
 					controllerSceltaProfiloSenzaAccesso.annullaSceltaProfiloSenzaAccesso();
 				}
 
@@ -144,44 +143,26 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					pannelloSelezionatoPrecedentemente();
 					controllerSceltaProfiloSenzaAccesso.annullaSceltaProfiloSenzaAccesso();
 				}
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X2()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblX, img.X2TemaChiaro(), img.X2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X1TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X1()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X3TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X3()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblX, img.X3TemaChiaro(), img.X3());
 				}
-
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerSceltaProfiloSenzaAccesso.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X2()));
-					}
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);

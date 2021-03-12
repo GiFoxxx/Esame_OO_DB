@@ -275,22 +275,21 @@ public class Accesso extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblPasswordDimenticata.setForeground(controllerAccesso.coloreLabelEntrataTemaScuro);
+				controllerAccesso.cambioLabelTema(lblPasswordDimenticata, controllerAccesso.coloreLabelEntrataTemaChiaro, controllerAccesso.coloreLabelEntrataTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblPasswordDimenticata.setForeground(controllerAccesso.coloreLabelTemaScuro);
+				controllerAccesso.cambioLabelTema(lblPasswordDimenticata, controllerAccesso.coloreLabelTemaChiaro, controllerAccesso.coloreLabelTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				lblPasswordDimenticata.setForeground(controllerAccesso.coloreLabelPressedTemaScuro);
+				controllerAccesso.cambioLabelTema(lblPasswordDimenticata, controllerAccesso.coloreLabelPressedTemaChiaro, controllerAccesso.coloreLabelPressedTemaScuro);
 			}
-
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblPasswordDimenticata.setForeground(controllerAccesso.coloreLabelTemaScuro);
+				controllerAccesso.cambioLabelTema(lblPasswordDimenticata, controllerAccesso.coloreLabelTemaChiaro, controllerAccesso.coloreLabelTemaScuro);
 			}
 		});
 		lblPasswordDimenticata.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

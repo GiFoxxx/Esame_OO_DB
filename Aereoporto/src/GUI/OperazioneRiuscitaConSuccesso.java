@@ -141,7 +141,6 @@ public class OperazioneRiuscitaConSuccesso extends JDialog {
 		}
 		lblLayout = new JLabel("");
 		lblLayout.setBorder(null);
-
 		lblLayout.setBounds(0, 0, 500, 300);
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLayout.setIcon(new ImageIcon(img.sfondoUscita()));

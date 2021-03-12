@@ -129,38 +129,22 @@ public class Uscita extends JDialog {
 				}
 
 				@Override
+				public void mouseEntered(MouseEvent e) {
+					controllerUscita.cambioImmagineTema(lblX, img.X2TemaChiaro(), img.X2());
+				}
+
+				@Override
 				public void mouseExited(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X1TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X1()));
-					}
+					controllerUscita.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X3TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X3()));
-					}
+					controllerUscita.cambioImmagineTema(lblX, img.X3TemaChiaro(), img.X3());
 				}
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X2()));
-					}
-				}
-				
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					if (controllerUscita.cambioTema()) {
-						lblX.setIcon(new ImageIcon(img.X2TemaChiaro()));
-					} else {
-						lblX.setIcon(new ImageIcon(img.X2()));
-					}
+					controllerUscita.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
