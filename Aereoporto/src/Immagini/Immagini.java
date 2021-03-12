@@ -576,7 +576,7 @@ public class Immagini {
 
 	public Image barraRicerca() {
 		Image barraRicerca = new ImageIcon(Accesso.class.getResource("immaginiInComune/barraRicerca.png")).getImage()
-				.getScaledInstance(184, 25, Image.SCALE_SMOOTH);
+				.getScaledInstance(184, 30, Image.SCALE_SMOOTH);
 		return barraRicerca;
 	}
 
@@ -603,7 +603,7 @@ public class Immagini {
 	
 	public Image barraRicercaTemaChiaro() {
 		Image barraRicercaChiara = new ImageIcon(Accesso.class.getResource("immaginiInComuneChiare/barraRicercaChiara.png")).getImage()
-				.getScaledInstance(184, 25, Image.SCALE_SMOOTH);
+				.getScaledInstance(184, 30, Image.SCALE_SMOOTH);
 		return barraRicercaChiara;
 	}
 
@@ -664,6 +664,64 @@ public class Immagini {
 	}
 
 	/*-----------------------------------------------------------BOTTONI-----------------------------------------------------------*/
+	
+	//GIORNO
+	public Image giorno1() {
+		Image giorno1 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/giorno1.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return giorno1;
+	}
+
+	public Image giorno2() {
+		Image giorno2 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/giorno2.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return giorno2;
+	}
+
+	public Image giorno3() {
+		Image giorno3 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/giorno3.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return giorno3;
+	}
+	
+	//SETTIMANA
+	public Image settimana1() {
+		Image settimana1 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/settimana1.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return settimana1;
+	}
+
+	public Image settimana2() {
+		Image settimana2 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/settimana2.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return settimana2;
+	}
+
+	public Image settimana3() {
+		Image settimana3 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/settimana3.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return settimana3;
+	}
+	
+	
+	//MESE
+	public Image mese1() {
+		Image mese1 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/mese1.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return mese1;
+	}
+
+	public Image mese2() {
+		Image mese2 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/mese2.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return mese2;
+	}
+
+	public Image mese3() {
+		Image mese3 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/mese3.png")).getImage()
+				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+		return mese3;
+	}
 
 	// TORNA INDIETRO
 	public Image tornaIndietro1TemaChiaro() {
@@ -1058,8 +1116,105 @@ public class Immagini {
                         .getScaledInstance(319, 36, Image.SCALE_SMOOTH);
         return utilizzoGate3;
     }
+    
+    //AGGIORNA
+  	public Image aggiorna1() {
+  		Image aggiorna1 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/aggiorna1.png")).getImage()
+  				.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+  		return aggiorna1;
+  	}
+
+  	public Image aggiorna2() {
+  		Image aggiorna2 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/aggiorna2.png")).getImage()
+  				.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+  		return aggiorna2;
+  	}
+  	
+  	public Image aggiorna3() {
+  		Image aggiorna3 = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoni/aggiorna3.png")).getImage()
+  				.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+  		return aggiorna3;
+  	}
 
 	/*-----------------------------------------------------------BOTTONI TEMA CHIARO-----------------------------------------------------------*/
+    
+    //AGGIORNA
+  	public Image aggiorna1TemaChiaro() {
+  		Image aggiorna1Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/aggiorna1Chiaro.png")).getImage()
+  				.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+  		return aggiorna1Chiaro;
+  	}
+
+  	public Image aggiorna2TemaChiaro() {
+  		Image aggiorna2Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/aggiorna2Chiaro.png")).getImage()
+  				.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+  		return aggiorna2Chiaro;
+  	}
+  	
+  	public Image aggiorna3TemaChiaro() {
+  		Image aggiorna3Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/aggiorna3Chiaro.png")).getImage()
+  				.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+  		return aggiorna3Chiaro;
+  	}
+  	
+  //GIORNO
+  	public Image giorno1TemaChiaro() {
+  		Image giorno1Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/giorno1Chiaro.png")).getImage()
+  				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+  		return giorno1Chiaro;
+  	}
+
+  	public Image giorno2TemaChiaro() {
+  		Image giorno2Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/giorno2Chiaro.png")).getImage()
+  				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+  		return giorno2Chiaro;
+  	}
+
+  	public Image giorno3TemaChiaro() {
+  		Image giorno3Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/giorno3Chiaro.png")).getImage()
+  				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+  		return giorno3Chiaro;
+  	}
+  	
+  	//SETTIMANA
+  	public Image settimana1TemaChiaro() {
+  		Image settimana1Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/settimana1Chiaro.png")).getImage()
+  				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+  		return settimana1Chiaro;
+  	}
+
+  	public Image settimana2TemaChiaro() {
+  		Image settimana2Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/settimana2Chiaro.png")).getImage()
+  				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+  		return settimana2Chiaro;
+  	}
+
+  	public Image settimana3TemaChiaro() {
+  		Image settimana3Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/settimana3Chiaro.png")).getImage()
+  				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+  		return settimana3Chiaro;
+  	}
+  	
+  	
+  	//MESE
+  	public Image mese1TemaChiaro() {
+  		Image mese1Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/mese1Chiaro.png")).getImage()
+  				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+  		return mese1Chiaro;
+  	}
+
+  	public Image mese2TemaChiaro() {
+  		Image mese2Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/mese2Chiaro.png")).getImage()
+  				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+  		return mese2Chiaro;
+  	}
+
+  	public Image mese3TemaChiaro() {
+  		Image mese3Chiaro = new ImageIcon(UtilizzoGate.class.getResource("immaginiBottoniChiare/mese3Chiaro.png")).getImage()
+  				.getScaledInstance(130, 36, Image.SCALE_SMOOTH);
+  		return mese3Chiaro;
+  	}
+  	
 
 	// GATE
 	public Image gateScelta1TemaChiaro() {
@@ -1443,25 +1598,25 @@ public class Immagini {
 		
 		public Image accediTT() {
 			Image accediTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/accediTT.png")).getImage()
-					.getScaledInstance(60, 31, Image.SCALE_SMOOTH);
+					.getScaledInstance(72, 31, Image.SCALE_SMOOTH);
 			return accediTT;
 		}
 		
 		public Image esciTT() {
 			Image esciTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/esciTT.png")).getImage()
-					.getScaledInstance(60, 31, Image.SCALE_SMOOTH);
+					.getScaledInstance(54, 31, Image.SCALE_SMOOTH);
 			return esciTT;
 		}
 		
 		public Image homeTT() {
 			Image homeTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/homeTT.png")).getImage()
-					.getScaledInstance(60, 31, Image.SCALE_SMOOTH);
+					.getScaledInstance(65, 31, Image.SCALE_SMOOTH);
 			return homeTT;
 		}
 		
 		public Image impostazioniTT() {
 			Image impostazioniTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/impostazioniTT.png")).getImage()
-					.getScaledInstance(60, 31, Image.SCALE_SMOOTH);
+					.getScaledInstance(110, 31, Image.SCALE_SMOOTH);
 			return impostazioniTT;
 		}
 		
@@ -1505,67 +1660,67 @@ public class Immagini {
 		
 		public Image menuTTChiaro() {
 			Image menuTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/menuTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(60, 31, Image.SCALE_SMOOTH);
 			return menuTTChiaro;
 		}
 		
 		public Image accediTTChiaro() {
 			Image accediTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/accediTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(72, 31, Image.SCALE_SMOOTH);
 			return accediTTChiaro;
 		}
 		
 		public Image esciTTChiaro() {
 			Image esciTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/esciTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(54, 31, Image.SCALE_SMOOTH);
 			return esciTTChiaro;
 		}
 		
 		public Image homeTTChiaro() {
 			Image homeTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/homeTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(65, 31, Image.SCALE_SMOOTH);
 			return homeTTChiaro;
 		}
 		
 		public Image impostazioniTTChiaro() {
 			Image impostazioniTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/impostazioniTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(110, 31, Image.SCALE_SMOOTH);
 			return impostazioniTTChiaro;
 		}
 		
 		public Image nascondiPasswordTTChiaro() {
 			Image nascondiPasswordTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/nascondiPasswordTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(123, 31, Image.SCALE_SMOOTH);
 			return nascondiPasswordTTChiaro;
 		}
 		
 		public Image mostraPasswordTTChiaro() {
 			Image mostraPasswordTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/mostraPasswordTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(123, 31, Image.SCALE_SMOOTH);
 			return mostraPasswordTTChiaro;
 		}
 		
 		public Image profiloTTChiaro() {
 			Image profiloTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/profiloTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(70, 31, Image.SCALE_SMOOTH);
 			return profiloTTChiaro;
 		}
 		
 		public Image registratiTTChiaro() {
 			Image registratiTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/registratiTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(91, 31, Image.SCALE_SMOOTH);
 			return registratiTTChiaro;
 		}
 		
 		public Image temaChiaroTTChiaro() {
 			Image temaChiaroTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/temaChiaroTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(110, 31, Image.SCALE_SMOOTH);
 			return temaChiaroTTChiaro;
 		}
 		
 		public Image temaScuroTTChiaro() {
 			Image temaScuroTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/temaScuroTTChiaro.png")).getImage()
-					.getScaledInstance(60, 37, Image.SCALE_SMOOTH);
+					.getScaledInstance(110, 31, Image.SCALE_SMOOTH);
 			return temaScuroTTChiaro;
 		}
 

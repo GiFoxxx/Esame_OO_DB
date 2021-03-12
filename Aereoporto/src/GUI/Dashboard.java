@@ -1501,7 +1501,7 @@ public class Dashboard extends JFrame {
 
 		lblCambioTemaTT = new JLabel("");
 		lblCambioTemaTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCambioTemaTT.setBounds(74, 55, 110, 31);
+		lblCambioTemaTT.setBounds(64, 40, 110, 31);
 		pannelloTendina.add(lblCambioTemaTT);
 
 		lblTendina = new JLabel("");
@@ -1516,11 +1516,11 @@ public class Dashboard extends JFrame {
 
 		lblAccediTT = new JLabel("");
 		lblAccediTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAccediTT.setBounds(10, 221, 72, 31);
+		lblAccediTT.setBounds(10, 225, 72, 31);
 
 		lblRegistratiTT = new JLabel("");
 		lblRegistratiTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegistratiTT.setBounds(10, 297, 91, 31);
+		lblRegistratiTT.setBounds(10, 295, 91, 31);
 
 		lblProfiloTT = new JLabel("");
 		lblProfiloTT.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1528,11 +1528,11 @@ public class Dashboard extends JFrame {
 
 		lblImpostazioniTT = new JLabel("");
 		lblImpostazioniTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblImpostazioniTT.setBounds(10, 432, 110, 31);
+		lblImpostazioniTT.setBounds(10, 435, 110, 31);
 
 		lblEsciTT = new JLabel("");
 		lblEsciTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEsciTT.setBounds(10, 501, 54, 31);
+		lblEsciTT.setBounds(10, 505, 54, 31);
 
 		lblMenuTT = new JLabel("");
 		lblMenuTT.setVisible(false);
