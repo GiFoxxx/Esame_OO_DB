@@ -683,6 +683,7 @@ public class Dashboard extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				controllerDashboard.setStopMenuTT(false);
 				if (menuInfoAccount.isVisible()) {
+					controllerDashboard.chiudiTendinaIstantanea();
 					controllerDashboard.chiudiMenuTT();
 					controllerDashboard.chiudiMenuInfoAccount();
 				} else {
@@ -1147,6 +1148,7 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
+					controllerDashboard.setStopProfiloTT(true);
 					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiProfiloTT();
 				}
@@ -1279,6 +1281,7 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.entroPannelloTemaChiaro, controllerDashboard.entroPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
+					controllerDashboard.setStopEsciTT(false);
 					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.mostraEsciTT();
 
@@ -1294,6 +1297,7 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
+					controllerDashboard.setStopEsciTT(true);
 					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiEsciTT();
 				}
@@ -1344,6 +1348,7 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerDashboard.chiudiTendina();
+
 			}
 
 			@Override

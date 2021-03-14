@@ -241,6 +241,12 @@ public class Immagini {
 
 	/*-----------------------------------------------------------DASHBOARD CHIARA------------------------------------------------------*/
 
+	public Image menuTemaChiaro() {
+		Image menuChiaro = new ImageIcon(Dashboard.class.getResource("immaginiDashboardChiare/menuChiaro.png")).getImage()
+				.getScaledInstance(265, 147, Image.SCALE_SMOOTH);
+		return menuChiaro;
+	}
+	
 	public Image sfondoTemaChiaro() {
 		Image imgSfondoChiaro = new ImageIcon(
 				Dashboard.class.getResource("immaginiDashboardChiare/SfondoDashboardChiaro.png")).getImage()
@@ -576,7 +582,7 @@ public class Immagini {
 
 	public Image barraRicerca() {
 		Image barraRicerca = new ImageIcon(Accesso.class.getResource("immaginiInComune/barraRicerca.png")).getImage()
-				.getScaledInstance(184, 30, Image.SCALE_SMOOTH);
+				.getScaledInstance(184, 25, Image.SCALE_SMOOTH);
 		return barraRicerca;
 	}
 

@@ -111,26 +111,26 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.tornaIndietro2TemaChiaro(),
-							img.tornaIndietro2());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.annulla2TemaChiaro(),
+							img.annulla2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.tornaIndietro1TemaChiaro(),
-							img.tornaIndietro1());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.annulla1TemaChiaro(),
+							img.annulla1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.tornaIndietro3TemaChiaro(),
-							img.tornaIndietro3());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.annulla3TemaChiaro(),
+							img.annulla3());
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.tornaIndietro2TemaChiaro(),
-							img.tornaIndietro2());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAnnulla, img.annulla2TemaChiaro(),
+							img.annulla2());
 				}
 			});
 			lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -160,6 +160,7 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 				public void mousePressed(MouseEvent e) {
 					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblX, img.X3TemaChiaro(), img.X3());
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
@@ -207,22 +208,26 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi2TemaChiaro(), img.accedi2());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi2TemaChiaro(),
+							img.accedi2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi1TemaChiaro(), img.accedi1());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi1TemaChiaro(),
+							img.accedi1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi3TemaChiaro(), img.accedi3());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi3TemaChiaro(),
+							img.accedi3());
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi2TemaChiaro(), img.accedi2());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi2TemaChiaro(),
+							img.accedi2());
 				}
 			});
 			lblAccedi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -243,24 +248,28 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati2TemaChiaro(), img.registrati2());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati2TemaChiaro(),
+							img.registrati2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati1TemaChiaro(), img.registrati1());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati1TemaChiaro(),
+							img.registrati1());
 
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati3TemaChiaro(), img.registrati3());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati3TemaChiaro(),
+							img.registrati3());
 
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati2TemaChiaro(), img.registrati2());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati2TemaChiaro(),
+							img.registrati2());
 
 				}
 			});

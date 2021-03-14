@@ -15,9 +15,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import Database.ConnessioneDatabase1;
+import Database.ConnessioneDatabase;
 
 import javax.swing.*;
+
+import org.postgresql.util.PSQLException;
+
 import Amministrazione.*;
 import Classi.*;
 import ClassiDAO.*;
@@ -496,9 +499,13 @@ public class Controller {
 		if (!sbloccaGestione()) {
 			accedi();
 		} else if (getEmailAccesso().equals(((Accesso) getDashboard().getAccesso()).getTxtEmail().getText())) {
+			((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setVisible(true);
 			((Accesso) getDashboard().getAccesso()).mostraGiaUtilizziAccount();
+			scomparsaMessaggioErrore(((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali());
 		} else {
+			((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setVisible(true);
 			((Accesso) getDashboard().getAccesso()).mostraEseguirePrimaLogout();
+			scomparsaMessaggioErrore(((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali());
 		}
 	}
 
@@ -651,7 +658,7 @@ public class Controller {
 		} else if (errorePasswordRipetuteErrate()) {
 			messaggioErroreRegistrazione("Le passwords non corrispondono");
 			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
-		} else if (erroreLoginGiàFatto()) {
+		} else if (erroreLoginGiaFatto()) {
 			messaggioErroreRegistrazione("Effettuare il logout prima della registrazione");
 			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
 		} else {
@@ -689,7 +696,7 @@ public class Controller {
 		}
 	}
 
-	private boolean erroreLoginGiàFatto() {
+	private boolean erroreLoginGiaFatto() {
 		if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuotoRegistrazione()
 				&& ((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
 			return true;
@@ -738,11 +745,11 @@ public class Controller {
 	}
 
 	public UtenteDAO implementazioneUtenteDAO() {
-		ConnessioneDatabase1 dbconn = null;
+		ConnessioneDatabase dbconn = null;
 		Connection connection = null;
 		UtenteDAO dao = null;
 		try {
-			dbconn = ConnessioneDatabase1.getInstance();
+			dbconn = ConnessioneDatabase.getInstance();
 			connection = dbconn.getConnection();
 			dao = new UtenteImplementazionePostgresDAO(connection);
 		} catch (SQLException exception) {
@@ -805,11 +812,11 @@ public class Controller {
 	}
 
 	public CompagniaAereaDAO implementazioneCompagniaAereaDAO() {
-		ConnessioneDatabase1 dbconn = null;
+		ConnessioneDatabase dbconn = null;
 		Connection connection = null;
 		CompagniaAereaDAO dao = null;
 		try {
-			dbconn = ConnessioneDatabase1.getInstance();
+			dbconn = ConnessioneDatabase.getInstance();
 			connection = dbconn.getConnection();
 			dao = new CompagniaAereaImplementazionePostgresDAO(connection);
 		} catch (SQLException exception) {
@@ -878,14 +885,16 @@ public class Controller {
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().setText("");
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().setText("");
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().setText("");
+		((GestioneTratte) getDashboard().getGestioneTratte()).getComboBoxNomeCompagniaAerea().setSelectedIndex(0);
+   
 	}
 
 	public TrattaDAO implementazioneTrattaDAO() {
-		ConnessioneDatabase1 dbconn = null;
+		ConnessioneDatabase dbconn = null;
 		Connection connection = null;
 		TrattaDAO dao = null;
 		try {
-			dbconn = ConnessioneDatabase1.getInstance();
+			dbconn = ConnessioneDatabase.getInstance();
 			connection = dbconn.getConnection();
 			dao = new TrattaImplementazionePostgresDAO(connection);
 		} catch (SQLException exception) {
@@ -972,14 +981,17 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().setText(null);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo().setText(null);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().setText(null);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxNumeroPorta().setSelectedIndex(0);
+        ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxCittaArrivo().setSelectedIndex(0);
+        ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxStatus().setSelectedIndex(0);
 	}
 
 	public VoloPartenzeDAO implementazioneVoloPartenzeDAO() {
-		ConnessioneDatabase1 dbconn = null;
+		ConnessioneDatabase dbconn = null;
 		Connection connection = null;
 		VoloPartenzeDAO dao = null;
 		try {
-			dbconn = ConnessioneDatabase1.getInstance();
+			dbconn = ConnessioneDatabase.getInstance();
 			connection = dbconn.getConnection();
 			dao = new VoloPartenzeImplementazionePostgresDAO(connection);
 		} catch (SQLException exception) {
@@ -1027,7 +1039,9 @@ public class Controller {
 
 			try {
 				implementazioneVoloPartenzeDAO().inserisciVoloPartenze(vlprtz);
-			} catch (SQLException e) {
+			} catch (PSQLException e) {
+                System.out.println("no");
+            } catch (SQLException e) {
 				e.printStackTrace();
 			}
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
@@ -1168,11 +1182,11 @@ public class Controller {
 	}
 
 	public VoloArriviDAO implementazioneVoloArriviDAO() {
-		ConnessioneDatabase1 dbconn = null;
+		ConnessioneDatabase dbconn = null;
 		Connection connection = null;
 		VoloArriviDAO dao = null;
 		try {
-			dbconn = ConnessioneDatabase1.getInstance();
+			dbconn = ConnessioneDatabase.getInstance();
 			connection = dbconn.getConnection();
 			dao = new VoloArriviImplementazionePostgresDAO(connection);
 		} catch (SQLException exception) {
@@ -1284,11 +1298,11 @@ public class Controller {
 	}
 
 	public GateDAO implementazioneGateDAO() {
-		ConnessioneDatabase1 dbconn = null;
+		ConnessioneDatabase dbconn = null;
 		Connection connection = null;
 		GateDAO dao = null;
 		try {
-			dbconn = ConnessioneDatabase1.getInstance();
+			dbconn = ConnessioneDatabase.getInstance();
 			connection = dbconn.getConnection();
 			dao = new GateImplementazionePostgresDAO(connection);
 		} catch (SQLException exception) {
@@ -1298,11 +1312,11 @@ public class Controller {
 	}
 
 	public CodaDiImbarcoDAO implementazioneCodaDiImbarcoDAO() {
-		ConnessioneDatabase1 dbconn = null;
+		ConnessioneDatabase dbconn = null;
 		Connection connection = null;
 		CodaDiImbarcoDAO dao = null;
 		try {
-			dbconn = ConnessioneDatabase1.getInstance();
+			dbconn = ConnessioneDatabase.getInstance();
 			connection = dbconn.getConnection();
 			dao = new CodaDiImbarcoImplementazionePostgresDAO(connection);
 		} catch (SQLException exception) {
@@ -1621,7 +1635,7 @@ public class Controller {
 					if (stopMenuTT) {
 						getDashboard().getLblMenuTT().setVisible(false);
 					}
-					getDashboard().getLblMenuTT().setIcon(new ImageIcon(img.menuTT()));
+					cambioImmagineTema(getDashboard().getLblMenuTT(), img.menuTTChiaro(), img.menuTT());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
@@ -1646,7 +1660,7 @@ public class Controller {
 					if (stopHomeTT) {
 						getDashboard().getLblHomeTT().setVisible(false);
 					}
-					getDashboard().getLblHomeTT().setIcon(new ImageIcon(img.homeTT()));
+					cambioImmagineTema(getDashboard().getLblHomeTT(), img.homeTTChiaro(), img.homeTT());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
@@ -1680,7 +1694,7 @@ public class Controller {
 					if (stopAccediTT) {
 						getDashboard().getLblAccediTT().setVisible(false);
 					}
-					getDashboard().getLblAccediTT().setIcon(new ImageIcon(img.accediTT()));
+					cambioImmagineTema(getDashboard().getLblAccediTT(), img.accediTTChiaro(), img.accediTT());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
@@ -1715,7 +1729,8 @@ public class Controller {
 					if (stopRegistratiTT) {
 						getDashboard().getLblRegistratiTT().setVisible(false);
 					}
-					getDashboard().getLblRegistratiTT().setIcon(new ImageIcon(img.registratiTT()));
+					cambioImmagineTema(getDashboard().getLblRegistratiTT(), img.registratiTTChiaro(),
+							img.registratiTT());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
@@ -1750,7 +1765,7 @@ public class Controller {
 					if (stopProfiloTT) {
 						getDashboard().getLblProfiloTT().setVisible(false);
 					}
-					getDashboard().getLblProfiloTT().setIcon(new ImageIcon(img.profiloTT()));
+					cambioImmagineTema(getDashboard().getLblProfiloTT(), img.profiloTTChiaro(), img.profiloTT());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
@@ -1792,7 +1807,8 @@ public class Controller {
 					if (stopImpostazioniTT) {
 						getDashboard().getLblImpostazioniTT().setVisible(false);
 					}
-					getDashboard().getLblImpostazioniTT().setIcon(new ImageIcon(img.impostazioniTT()));
+					cambioImmagineTema(getDashboard().getLblImpostazioniTT(), img.impostazioniTTChiaro(),
+							img.impostazioniTT());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
@@ -1828,7 +1844,7 @@ public class Controller {
 					if (stopEsciTT) {
 						getDashboard().getLblEsciTT().setVisible(false);
 					}
-					getDashboard().getLblEsciTT().setIcon(new ImageIcon(img.esciTT()));
+					cambioImmagineTema(getDashboard().getLblEsciTT(), img.esciTTChiaro(), img.esciTT());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
@@ -1880,6 +1896,8 @@ public class Controller {
 
 	@SuppressWarnings("deprecation")
 	public void apriTendina() {
+		getDashboard().getLblFrecciaMenu().setEnabled(false);
+		getDashboard().getLblAccount().setEnabled(false);
 		getDashboard().getLineeApertura().setVisible(false);
 		getDashboard().getLblCambioTemaTT().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 50) {
@@ -1913,6 +1931,8 @@ public class Controller {
 		getDashboard().getLblEsciTT().setVisible(false);
 		getDashboard().getLblMenuTT().setVisible(false);
 		getDashboard().getLblCambioTemaTT().setVisible(false);
+		getDashboard().getLblFrecciaMenu().setEnabled(true);
+		getDashboard().getLblAccount().setEnabled(true);
 
 		getDashboard().getLineeChiusura().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 238) {
@@ -1948,6 +1968,8 @@ public class Controller {
 		getDashboard().getLblEsciTT().setVisible(false);
 		getDashboard().getLblMenuTT().setVisible(false);
 		getDashboard().getLblCambioTemaTT().setVisible(false);
+		getDashboard().getLblFrecciaMenu().setEnabled(true);
+		getDashboard().getLblAccount().setEnabled(true);
 
 		getDashboard().getLineeChiusura().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 238) {
@@ -2764,6 +2786,25 @@ public class Controller {
 		getDashboard().getPanelImpostazioni().setBackground(escoPannelloTemaChiaro);
 		getDashboard().getPanelUscita().setBackground(escoPannelloTemaChiaro);
 
+		// MENU INFO ACCOUNT
+		getDashboard().getLblFrecciaMenu().setIcon(new ImageIcon(img.frecciaMenu1TemaChiaro()));
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblLayout()
+				.setIcon(new ImageIcon(img.menuTemaChiaro()));
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblGestioneUtenti().setBackground(sfondoTemaChiaro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblGestioneUtenti()
+				.setForeground(coloreLabelTemaChiaro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblPrestoInArrivo().setBackground(sfondoTemaChiaro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblPrestoInArrivo()
+				.setForeground(coloreLabelTemaChiaro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblLogout().setBackground(sfondoTemaChiaro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblLogout().setForeground(coloreLabelTemaChiaro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getPanelGestioneUtente()
+				.setBackground(escoPannelloTemaChiaro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getPanelLogout().setBackground(escoPannelloTemaChiaro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getPanelPrestoInArrivo()
+				.setBackground(escoPannelloTemaChiaro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).setBackground(trasparente);
+
 		// NO CLICK
 		getDashboard().getNoClick().setBackground(trasparente);
 
@@ -3203,6 +3244,25 @@ public class Controller {
 		getDashboard().getPanelProfilo().setBackground(escoPannelloTemaScuro);
 		getDashboard().getPanelImpostazioni().setBackground(escoPannelloTemaScuro);
 		getDashboard().getPanelUscita().setBackground(escoPannelloTemaScuro);
+
+		// MENU INFO ACCOUNT
+		getDashboard().getLblFrecciaMenu().setIcon(new ImageIcon(img.frecciaMenu1()));
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblLayout().setIcon(new ImageIcon(img.menuTT()));
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblGestioneUtenti()
+				.setBackground(escoPannelloTemaScuro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblGestioneUtenti()
+				.setForeground(coloreScritteTemaScuro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblPrestoInArrivo()
+				.setBackground(escoPannelloTemaScuro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblPrestoInArrivo()
+				.setForeground(coloreScritteTemaScuro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblLogout().setBackground(escoPannelloTemaScuro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblLogout().setForeground(coloreScritteTemaScuro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getPanelGestioneUtente()
+				.setBackground(escoPannelloTemaScuro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getPanelLogout().setBackground(escoPannelloTemaScuro);
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getPanelPrestoInArrivo()
+				.setBackground(escoPannelloTemaScuro);
 
 		// NO CLICK
 		getDashboard().getNoClick().setBackground(trasparente);

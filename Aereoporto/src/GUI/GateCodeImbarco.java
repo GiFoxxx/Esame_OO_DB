@@ -228,7 +228,7 @@ public class GateCodeImbarco extends JPanel {
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setForeground(Color.BLACK);
 		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
-		lblimgfrecciaIndietro.setBounds(30, 35, 47, 30);
+		lblimgfrecciaIndietro.setBounds(30, 44, 30, 30);
 		add(lblimgfrecciaIndietro);
 
 		txtBarraRicerca = new JTextField();
@@ -242,14 +242,14 @@ public class GateCodeImbarco extends JPanel {
 		txtBarraRicerca.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
 		txtBarraRicerca.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(888, 41, 141, 20);
+		txtBarraRicerca.setBounds(888, 49, 141, 21);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 
 		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(876, 35, 184, 30);
+		lblBarraRicerca.setBounds(876, 47, 184, 25);
 		add(lblBarraRicerca);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -510,7 +510,7 @@ public class GateCodeImbarco extends JPanel {
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
-		lblRicaricaTabella.setBounds(836, 35, 30, 30);
+		lblRicaricaTabella.setBounds(836, 44, 30, 30);
 		add(lblRicaricaTabella);
 
 		stampaComboBoxNumeroPorta();

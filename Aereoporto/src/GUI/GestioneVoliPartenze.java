@@ -391,7 +391,7 @@ public class GestioneVoliPartenze extends JPanel {
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
-		lblimgfrecciaIndietro.setBounds(30, 35, 47, 30);
+		lblimgfrecciaIndietro.setBounds(30, 47, 30, 30);
 		add(lblimgfrecciaIndietro);
 
 		txtBarraRicerca = new JTextField();
@@ -405,14 +405,14 @@ public class GestioneVoliPartenze extends JPanel {
 		txtBarraRicerca.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(888, 41, 141, 20);
+		txtBarraRicerca.setBounds(888, 52, 141, 21);
 		txtBarraRicerca.setColumns(10);
 		add(txtBarraRicerca);
 
 		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(876, 35, 184, 30);
+		lblBarraRicerca.setBounds(876, 47, 184, 30);
 		add(lblBarraRicerca);
 
 		scrollPane = new JScrollPane();
@@ -622,9 +622,14 @@ public class GestioneVoliPartenze extends JPanel {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
-			}
-		});
+				if (comboBoxNumeroPorta.getSelectedIndex() == 0) {
+                    txtCodiceGate.setText("");
+                } else {
+                    txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
+                }
+            }
+        });
+        comboBoxNumeroPorta.addItem("---");
 		comboBoxNumeroPorta.setBounds(223, 469, 40, 20);
 		add(comboBoxNumeroPorta);
 
@@ -637,9 +642,14 @@ public class GestioneVoliPartenze extends JPanel {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				txtCodiceTratta.setText(map.get(comboBoxCittaArrivo.getSelectedItem().toString()));
-			}
-		});
+				if (comboBoxCittaArrivo.getSelectedIndex() == 0) {
+                    txtCodiceTratta.setText("");
+                } else {
+                    txtCodiceTratta.setText(map.get(comboBoxCittaArrivo.getSelectedItem().toString()));
+                }
+            }
+        });
+        comboBoxCittaArrivo.addItem("----------");
 		comboBoxCittaArrivo.setBounds(223, 500, 95, 20);
 		add(comboBoxCittaArrivo);
 
@@ -810,7 +820,7 @@ public class GestioneVoliPartenze extends JPanel {
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
-		lblRicaricaTabella.setBounds(836, 35, 30, 30);
+		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
 
 		lblMessaggioErrore = new JLabel("");
@@ -840,21 +850,28 @@ public class GestioneVoliPartenze extends JPanel {
 		comboBoxStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (comboBoxStatus.getSelectedIndex()) {
-				case 0:
-					txtStatus.setText("In programma");
-					break;
-				case 1:
-					txtStatus.setText("In preparazione");
-					break;
-				case 2:
-					txtStatus.setText("In partenza");
-					break;
-				case 3:
-					txtStatus.setText("In ritardo");
-					break;
-				}
-			}
-		});
+                case 0:
+                    txtStatus.setText("");
+                    break;
+                case 1:
+                    txtStatus.setText("In programma");
+                    break;
+                case 2:
+                    txtStatus.setText("In preparazione");
+                    break;
+                case 3:
+                    txtStatus.setText("In partenza");
+                    break;
+                case 4:
+                    txtStatus.setText("In ritardo");
+                    break;
+                default:
+                    txtStatus.setText("In programma");
+                    break;
+                }
+            }
+        });
+        comboBoxStatus.addItem("----------");
 		comboBoxStatus.addItem("In programma");
 		comboBoxStatus.addItem("In preparazione");
 		comboBoxStatus.addItem("In partenza");

@@ -1,6 +1,7 @@
 package ImplementazioniPostrgresDAO;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,6 @@ import Amministrazione.Utente;
 import Classi.CompagniaAerea;
 import Classi.Gate;
 import ClassiDAO.CompagniaAereaDAO;
-import Database.ConnessioneDatabase;
 
 public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaDAO {
 

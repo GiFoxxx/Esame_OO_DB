@@ -1,7 +1,8 @@
 package ImplementazioniPostrgresDAO;
 
 import ClassiDAO.VoloPartenzeDAO;
-import Database.ConnessioneDatabase;
+
+
 import Classi.VoloPartenze;
 
 import java.sql.Connection;
@@ -9,9 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.postgresql.util.PSQLException;
 
 import Classi.*;
 
@@ -77,7 +79,7 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 		return lista;
 	}
 
-	public int inserisciVoloPartenze(VoloPartenze voloPartenze) throws SQLException {
+	public int inserisciVoloPartenze(VoloPartenze voloPartenze) throws SQLException, PSQLException {
 		inserisciVoloPartenzaPS.setString(1, voloPartenze.getCodiceVoloPartenze());
 		inserisciVoloPartenzaPS.setTimestamp(2, voloPartenze.getDataOrarioPartenza());
 		inserisciVoloPartenzaPS.setString(3, voloPartenze.getNumeroPrenotazioni());

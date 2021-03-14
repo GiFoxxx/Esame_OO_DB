@@ -1,7 +1,6 @@
 package ImplementazioniPostrgresDAO;
 
 import ClassiDAO.VoloArriviDAO;
-import Database.ConnessioneDatabase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

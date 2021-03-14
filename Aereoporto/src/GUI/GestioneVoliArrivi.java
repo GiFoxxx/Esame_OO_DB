@@ -276,7 +276,7 @@ public class GestioneVoliArrivi extends JPanel {
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
-		lblimgfrecciaIndietro.setBounds(30, 35, 30, 30);
+		lblimgfrecciaIndietro.setBounds(30, 47, 30, 30);
 		add(lblimgfrecciaIndietro);
 
 		txtBarraRicerca = new JTextField();
@@ -290,14 +290,14 @@ public class GestioneVoliArrivi extends JPanel {
 		txtBarraRicerca.setForeground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(888, 41, 141, 20);
+		txtBarraRicerca.setBounds(888, 52, 141, 21);
 		txtBarraRicerca.setColumns(10);
 		add(txtBarraRicerca);
 
 		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(876, 35, 184, 30);
+		lblBarraRicerca.setBounds(876, 47, 184, 30);
 		add(lblBarraRicerca);
 
 		scrollPane = new JScrollPane();
@@ -599,7 +599,7 @@ public class GestioneVoliArrivi extends JPanel {
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
-		lblRicaricaTabella.setBounds(836, 35, 30, 30);
+		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
 		
 		

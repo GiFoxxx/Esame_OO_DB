@@ -21,10 +21,10 @@ public class MenuInfoAccount extends JPanel {
 	JLabel lblLayout;
 	JLabel lblErrore;
 	JLabel lblLogout;
-	JLabel lblComingSoon;
+	JLabel lblPrestoInArrivo;
 
 	JPanel panelGestioneUtente;
-	JPanel panelComingSoon;
+	JPanel panelPrestoInArrivo;
 	JPanel panelLogout;
 
 	public JLabel getLblGestioneUtenti() {
@@ -57,22 +57,6 @@ public class MenuInfoAccount extends JPanel {
 
 	public void setLblLogout(JLabel lblLogout) {
 		this.lblLogout = lblLogout;
-	}
-
-	public JLabel getLblComingSoon() {
-		return lblComingSoon;
-	}
-
-	public void setLblComingSoon(JLabel lblBoh) {
-		this.lblComingSoon = lblBoh;
-	}
-
-	public JPanel getPanelComingSoon() {
-		return panelComingSoon;
-	}
-
-	public void setPanelComingSoon(JPanel pannello2) {
-		this.panelComingSoon = pannello2;
 	}
 
 	public JPanel getPanelLogout() {
@@ -148,8 +132,8 @@ public class MenuInfoAccount extends JPanel {
 		lblErrore.setBounds(125, 0, 139, 46);
 		panelGestioneUtente.add(lblErrore);
 
-		panelComingSoon = new JPanel();
-		panelComingSoon.addMouseListener(new MouseAdapter() {
+		panelPrestoInArrivo = new JPanel();
+		panelPrestoInArrivo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -157,35 +141,35 @@ public class MenuInfoAccount extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelComingSoon, controllerMenuInfoAccount.entroPannelloTemaChiaro, controllerMenuInfoAccount.entroPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo, controllerMenuInfoAccount.entroPannelloTemaChiaro, controllerMenuInfoAccount.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelComingSoon, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelComingSoon, controllerMenuInfoAccount.clickPannelloTemaChiaro, controllerMenuInfoAccount.clickPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo, controllerMenuInfoAccount.clickPannelloTemaChiaro, controllerMenuInfoAccount.clickPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelComingSoon, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 		});
-		panelComingSoon.setBackground(controllerMenuInfoAccount.trasparente);
-		panelComingSoon.setBounds(0, 55, 265, 46);
-		add(panelComingSoon);
-		panelComingSoon.setLayout(null);
+		panelPrestoInArrivo.setBackground(controllerMenuInfoAccount.trasparente);
+		panelPrestoInArrivo.setBounds(0, 55, 265, 46);
+		add(panelPrestoInArrivo);
+		panelPrestoInArrivo.setLayout(null);
 
-		lblComingSoon = new JLabel("Coming soon");
-		lblComingSoon.setHorizontalAlignment(SwingConstants.LEFT);
-		lblComingSoon.setForeground(controllerMenuInfoAccount.coloreLabelPressedTemaScuro);
-		lblComingSoon.setFont(controllerMenuInfoAccount.fontLabel);
-		lblComingSoon.setBounds(10, 0, 107, 46);
-		panelComingSoon.add(lblComingSoon);
+		lblPrestoInArrivo = new JLabel("Presto in arrivo");
+		lblPrestoInArrivo.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPrestoInArrivo.setForeground(controllerMenuInfoAccount.coloreLabelPressedTemaScuro);
+		lblPrestoInArrivo.setFont(controllerMenuInfoAccount.fontLabel);
+		lblPrestoInArrivo.setBounds(10, 0, 107, 46);
+		panelPrestoInArrivo.add(lblPrestoInArrivo);
 
 		panelLogout = new JPanel();
 		panelLogout.addMouseListener(new MouseAdapter() {
@@ -233,5 +217,21 @@ public class MenuInfoAccount extends JPanel {
 		lblLayout.setBounds(0, 0, 265, 147);
 		add(lblLayout);
 
+	}
+
+	public JPanel getPanelPrestoInArrivo() {
+		return panelPrestoInArrivo;
+	}
+
+	public void setPanelPrestoInArrivo(JPanel panelPrestoInArrivo) {
+		this.panelPrestoInArrivo = panelPrestoInArrivo;
+	}
+
+	public JLabel getLblPrestoInArrivo() {
+		return lblPrestoInArrivo;
+	}
+
+	public void setLblPrestoInArrivo(JLabel lblPrestoInArrivo) {
+		this.lblPrestoInArrivo = lblPrestoInArrivo;
 	}
 }

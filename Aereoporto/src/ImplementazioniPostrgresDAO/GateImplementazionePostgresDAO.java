@@ -1,6 +1,8 @@
 package ImplementazioniPostrgresDAO;
 
 import java.sql.Connection;
+
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,21 +10,12 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
-import Amministrazione.Utente;
 import Classi.CodaDiImbarco;
-import Classi.CompagniaAerea;
 import Classi.Gate;
-import Classi.VoloPartenze;
 import ClassiDAO.GateDAO;
-import Controller.Controller;
-import Database.ConnessioneDatabase;
-import GUI.GestioneVoliPartenze;
 
 public class GateImplementazionePostgresDAO implements GateDAO {
 

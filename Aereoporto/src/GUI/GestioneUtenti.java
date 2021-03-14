@@ -235,7 +235,7 @@ public class GestioneUtenti extends JPanel {
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
-		lblimgfrecciaIndietro.setBounds(25, 35, 47, 30);
+		lblimgfrecciaIndietro.setBounds(25, 47, 30, 30);
 		add(lblimgfrecciaIndietro);
 
 		txtBarraRicerca = new JTextField();
@@ -249,14 +249,14 @@ public class GestioneUtenti extends JPanel {
 		txtBarraRicerca.setForeground(controllerGestioneUtenti.coloreScritteTemaScuro);
 		txtBarraRicerca.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(888, 40, 141, 20);
+		txtBarraRicerca.setBounds(888, 52, 141, 21);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 
 		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(876, 35, 184, 30);
+		lblBarraRicerca.setBounds(871, 47, 184, 30);
 		add(lblBarraRicerca);
 
 		lblNome = new JLabel("nome");
@@ -348,7 +348,7 @@ public class GestioneUtenti extends JPanel {
 		add(txtPassword);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 85, 1030, 330);
+		scrollPane.setBounds(25, 85, 1030, 330);
 		add(scrollPane);
 
 		tabella = new JTable();
@@ -541,7 +541,7 @@ public class GestioneUtenti extends JPanel {
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
-		lblRicaricaTabella.setBounds(836, 35, 30, 30);
+		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
 		
 		caricaTabella();
