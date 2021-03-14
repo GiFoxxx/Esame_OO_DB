@@ -39,6 +39,10 @@ public class CambioPassword extends JPanel {
 	private JLabel lblSalva;
 	private JLabel lblAnnulla;
 	private JLabel lblMessaggioErrore;
+	private JLabel lblMostraNuovaPasswordTT;
+	private JLabel lblCensuraNuovaPasswordTT;
+	private JLabel lblMostraRipetiNuovaPasswordTT;
+	private JLabel lblCensuraRipetiNuovaPasswordTT;
 	
 	// GETTER E SETTER
 
@@ -137,6 +141,38 @@ public class CambioPassword extends JPanel {
 	public void setLblMessaggioErrore(JLabel lblMessaggioErrore) {
 		this.lblMessaggioErrore = lblMessaggioErrore;
 	}
+	
+	public JLabel getLblMostraNuovaPasswordTT() {
+		return lblMostraNuovaPasswordTT;
+	}
+
+	public void setLblMostraNuovaPasswordTT(JLabel lblMostraPasswordTT) {
+		this.lblMostraNuovaPasswordTT = lblMostraPasswordTT;
+	}
+
+	public JLabel getLblCensuraNuovaPasswordTT() {
+		return lblCensuraNuovaPasswordTT;
+	}
+
+	public void setLblCensuraNuovaPasswordTT(JLabel lblCensuraPasswordTT) {
+		this.lblCensuraNuovaPasswordTT = lblCensuraPasswordTT;
+	}
+
+	public JLabel getLblMostraRipetiNuovaPasswordTT() {
+		return lblMostraRipetiNuovaPasswordTT;
+	}
+
+	public void setLblMostraRipetiNuovaPasswordTT(JLabel lblMostraRipetiPasswordTT) {
+		this.lblMostraRipetiNuovaPasswordTT = lblMostraRipetiPasswordTT;
+	}
+
+	public JLabel getLblCensuraRipetiNuovaPasswordTT() {
+		return lblCensuraRipetiNuovaPasswordTT;
+	}
+
+	public void setLblCensuraRipetiNuovaPasswordTT(JLabel lblCensuraRipetiPasswordTT) {
+		this.lblCensuraRipetiNuovaPasswordTT = lblCensuraRipetiPasswordTT;
+	}
 
 	Controller controllerCambioPassword;
 	
@@ -204,8 +240,17 @@ public class CambioPassword extends JPanel {
 				lblMostraNuovaPassword.setVisible(false);
 				txtNuovaPassword.setEchoChar((char)0);
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerCambioPassword.setStopMostraPasswordTT(false);
+				controllerCambioPassword.mostraMostraPasswordTT(lblMostraNuovaPasswordTT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerCambioPassword.setStopMostraPasswordTT(true);
+				controllerCambioPassword.chiudiMostraPasswordTT(lblMostraNuovaPasswordTT);
+			}
 		});
-		lblMostraNuovaPassword.setToolTipText("Mostra password");
 		lblMostraNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblMostraNuovaPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMostraNuovaPassword.setIcon(new ImageIcon(img.censuraPassword()));
@@ -219,8 +264,17 @@ public class CambioPassword extends JPanel {
 				lblMostraNuovaPassword.setVisible(true);
 				txtNuovaPassword.setEchoChar('●');
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerCambioPassword.setStopCensuraPasswordTT(false);
+				controllerCambioPassword.mostraCensuraPasswordTT(lblCensuraNuovaPasswordTT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerCambioPassword.setStopCensuraPasswordTT(true);
+				controllerCambioPassword.chiudiCensuraPasswordTT(lblCensuraNuovaPasswordTT);
+			}
 		});
-		lblCensuraNuovaPassword.setToolTipText("Nascondi password");
 		lblCensuraNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblCensuraNuovaPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCensuraNuovaPassword.setIcon(new ImageIcon(img.mostraPassword()));
@@ -234,8 +288,17 @@ public class CambioPassword extends JPanel {
 				lblMostraRipetiNuovaPassword.setVisible(false);
 				txtRipetiNuovaPassword.setEchoChar((char)0);
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerCambioPassword.setStopMostraPasswordTT(false);
+				controllerCambioPassword.mostraMostraPasswordTT(lblMostraRipetiNuovaPasswordTT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerCambioPassword.setStopMostraPasswordTT(true);
+				controllerCambioPassword.chiudiMostraPasswordTT(lblMostraRipetiNuovaPasswordTT);
+			}
 		});
-		lblMostraRipetiNuovaPassword.setToolTipText("Mostra password");
 		lblMostraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblMostraRipetiNuovaPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMostraRipetiNuovaPassword.setIcon(new ImageIcon(img.censuraPassword()));
@@ -249,13 +312,42 @@ public class CambioPassword extends JPanel {
 				lblMostraRipetiNuovaPassword.setVisible(true);
 				txtRipetiNuovaPassword.setEchoChar('●');
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerCambioPassword.setStopCensuraPasswordTT(false);
+				controllerCambioPassword.mostraCensuraPasswordTT(lblCensuraRipetiNuovaPasswordTT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerCambioPassword.setStopCensuraPasswordTT(true);
+				controllerCambioPassword.chiudiCensuraPasswordTT(lblCensuraRipetiNuovaPasswordTT);
+			}
 		});
-		lblCensuraRipetiNuovaPassword.setToolTipText("Nascondi password");
 		lblCensuraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblCensuraRipetiNuovaPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCensuraRipetiNuovaPassword.setIcon(new ImageIcon(img.mostraPassword()));
 		lblCensuraRipetiNuovaPassword.setBounds(684, 387, 20, 20);
 		add(lblCensuraRipetiNuovaPassword);
+		
+		lblMostraNuovaPasswordTT = new JLabel("");
+		lblMostraNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMostraNuovaPasswordTT.setBounds(734, 272, 123, 31);
+		add(lblMostraNuovaPasswordTT);
+		
+		lblCensuraNuovaPasswordTT = new JLabel("");
+		lblCensuraNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCensuraNuovaPasswordTT.setBounds(734, 272, 123, 31);
+		add(lblCensuraNuovaPasswordTT);
+		
+		lblMostraRipetiNuovaPasswordTT = new JLabel("");
+		lblMostraRipetiNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMostraRipetiNuovaPasswordTT.setBounds(734, 379, 123, 31);
+		add(lblMostraRipetiNuovaPasswordTT);
+		
+		lblCensuraRipetiNuovaPasswordTT = new JLabel("");
+		lblCensuraRipetiNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCensuraRipetiNuovaPasswordTT.setBounds(734, 379, 123, 31);
+		add(lblCensuraRipetiNuovaPasswordTT);
 
 		lblCambioPassword = new JLabel("");
 		lblCambioPassword.setHorizontalAlignment(SwingConstants.CENTER);

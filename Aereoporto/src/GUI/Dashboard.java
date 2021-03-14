@@ -809,14 +809,14 @@ public class Dashboard extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				lblProfiloTT.setBounds(825, 11, 90, 23);
 				controllerDashboard.setStopProfiloTT(false);
-				controllerDashboard.chiudiTutto();
+				controllerDashboard.chiudiTuttiTT();
 				controllerDashboard.mostraProfiloTT();
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerDashboard.setStopProfiloTT(true);
-				controllerDashboard.chiudiTutto();
+				controllerDashboard.chiudiTuttiTT();
 				controllerDashboard.chiudiProfiloTT();
 			}
 		});
@@ -903,7 +903,7 @@ public class Dashboard extends JFrame {
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopHomeTT(false);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.mostraHomeTT();
 				}
 
@@ -919,7 +919,7 @@ public class Dashboard extends JFrame {
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopHomeTT(true);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiHomeTT();
 				}
 			}
@@ -978,7 +978,7 @@ public class Dashboard extends JFrame {
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopAccediTT(false);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.mostraAccediTT();
 
 				}
@@ -994,7 +994,7 @@ public class Dashboard extends JFrame {
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopAccediTT(true);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiAccediTT();
 
 				}
@@ -1055,7 +1055,7 @@ public class Dashboard extends JFrame {
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopRegistratiTT(false);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.mostraRegistratiTT();
 
 				}
@@ -1071,7 +1071,7 @@ public class Dashboard extends JFrame {
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopRegistratiTT(true);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiRegistratiTT();
 
 				}
@@ -1132,7 +1132,7 @@ public class Dashboard extends JFrame {
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopProfiloTT(false);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.mostraProfiloTT();
 
 				}
@@ -1147,7 +1147,7 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiProfiloTT();
 				}
 			}
@@ -1206,7 +1206,7 @@ public class Dashboard extends JFrame {
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopImpostazioniTT(false);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.mostraImpostazioniTT();
 				}
 			}
@@ -1221,7 +1221,7 @@ public class Dashboard extends JFrame {
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopImpostazioniTT(true);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiImpostazioniTT();
 				}
 			}
@@ -1279,8 +1279,7 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.entroPannelloTemaChiaro, controllerDashboard.entroPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
-					controllerDashboard.setStopEsciTT(false);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.mostraEsciTT();
 
 				}
@@ -1295,8 +1294,7 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
-					controllerDashboard.setStopEsciTT(true);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiEsciTT();
 				}
 			}
@@ -1422,7 +1420,7 @@ public class Dashboard extends JFrame {
 				lblCambioTemaChiaro.setIcon(new ImageIcon(img.temaChiaro2()));
 				if (getPosizioneTendina() == 238) {
 					controllerDashboard.setStopCambioTemaTT(false);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.mostraCambioTemaTT();
 				}
 			}
@@ -1438,7 +1436,7 @@ public class Dashboard extends JFrame {
 				lblCambioTemaChiaro.setIcon(new ImageIcon(img.temaChiaro1()));
 				if (getPosizioneTendina() == 238) {
 					controllerDashboard.setStopCambioTemaTT(true);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiCambioTemaTT();
 				}
 			}
@@ -1468,7 +1466,7 @@ public class Dashboard extends JFrame {
 				lblCambioTemaScuro.setIcon(new ImageIcon(img.temaScuro2()));
 				if (getPosizioneTendina() == 238) {
 					controllerDashboard.setStopCambioTemaTT(false);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.mostraCambioTemaTT();
 				}
 			}
@@ -1479,7 +1477,7 @@ public class Dashboard extends JFrame {
 				lblCambioTemaScuro.setIcon(new ImageIcon(img.temaScuro1()));
 				if (getPosizioneTendina() == 238) {
 					controllerDashboard.setStopCambioTemaTT(true);
-					controllerDashboard.chiudiTutto();
+					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiCambioTemaTT();
 				}
 			}

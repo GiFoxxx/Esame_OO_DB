@@ -27,8 +27,7 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 
 		stampaTrattePS = connection.prepareStatement(
 				"SELECT trt.codicetratta, trt.cittaPartenza, trt.cittaArrivo, ca.nome AS nomecompagniaaerea "
-						+ "FROM tratta AS trt, compagniaaerea AS ca "
-						+ "WHERE (xcodiceCompagniaAerea = codiceCompagniaAerea)");
+						+ "FROM tratta AS trt INNER JOIN compagniaaerea AS ca ON (xcodiceCompagniaAerea = codiceCompagniaAerea)");
 		aggiungiTrattaPS = connection.prepareStatement(
 				"INSERT INTO tratta (codiceTratta, cittaPartenza, cittaArrivo, xcodiceCompagniaAerea) VALUES (?,?,?,?)");
 		cancellaTrattaPS = connection.prepareStatement("DELETE FROM tratta WHERE codicetratta = ?");

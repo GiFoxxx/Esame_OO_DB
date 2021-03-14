@@ -39,8 +39,8 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 		stampaGatePS = connection.prepareStatement("SELECT DISTINCT * FROM gate AS gt ORDER BY numeroPorta");
 		stampaGateCodeImbarcoPS = connection
 				.prepareStatement("SELECT DISTINCT gt.codicegate, gt.numeroporta, cdi.nomecoda AS nomeCoda "
-						+ "FROM gate AS gt , codadiimbarco AS cdi, codadiimbarcogate AS cdigt "
-						+ "WHERE ((xcodicecodadiimbarco = codicecodadiimbarco)) AND (xcodicegate=codicegate) ORDER BY numeroporta");
+						+ "FROM ((gate AS gt INNER JOIN codadiimbarcogate AS cdigt ON (xcodicegate=codicegate)) INNER JOIN codadiimbarco AS cdi ON (xcodicecodadiimbarco = codicecodadiimbarco)) "
+						+ "ORDER BY numeroporta");
 		aggiungiGatePS = connection.prepareStatement(
 				"INSERT INTO gate (codiceGate, numeroPorta, tempodiimbarcostimato, tempoChiusuraGate) VALUES (?, ?, ?, ?)");
 		aggiungiGateInCodaDiImbarcoGatePS = connection
@@ -51,20 +51,20 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 		stampaUtilizzoGiornalieroPS = connection.prepareStatement(
 				"SELECT gt.codiceGate, extract(year from dataOrarioPartenza) AS annoUtilizzo , extract (day from dataOrarioPartenza) AS giorniUtilizzo,"
 						+ "SUM (tempoDiImbarcoEffettivo) AS totaleUtilizzoEffettivo, SUM (tempoDiImbarcoStimato) AS totaleUtilizzoStimato "
-						+ "FROM voloPartenza AS vlp, Gate AS gt "
-						+ "WHERE (CAST(vlp.dataOrarioPartenza AS date) = ?) AND (xcodiceGate=codicegate) AND (xcodiceGate = ?) "
+						+ "FROM voloPartenza AS vlp INNER JOIN Gate AS gt ON  (xcodiceGate=codicegate) "
+						+ "WHERE (CAST(vlp.dataOrarioPartenza AS date) = ?) AND (xcodiceGate = ?) "
 						+ "GROUP BY annoUtilizzo,giorniUtilizzo, codiceGate;");
 		stampaUtilizzoSettimanalePS = connection.prepareStatement(
 				"SELECT gt.codiceGate, extract(year from dataOrarioPartenza) AS annoUtilizzo , extract (week from dataOrarioPartenza) AS settimanaUtilizzo, "
 						+ "SUM (tempoDiImbarcoEffettivo) AS totaleUtilizzoEffettivo, SUM (tempoDiImbarcoStimato) AS totaleUtilizzoStimato "
-						+ "FROM voloPartenza AS vlp, Gate AS gt "
-						+ "WHERE extract (month from dataOrarioPartenza) = ? AND (xcodiceGate=codicegate) AND (xcodiceGate = ?) "
+						+ "FROM voloPartenza AS vlp INNER JOIN Gate AS gt ON  (xcodiceGate=codicegate) "
+						+ "WHERE (extract (month from dataOrarioPartenza) = ?) AND (xcodiceGate = ?) "
 						+ "GROUP BY annoUtilizzo,settimanaUtilizzo, codiceGate;");
 		stampaUtilizzoMensilePS = connection.prepareStatement(
 				"SELECT gt.codiceGate, extract(year from dataOrarioPartenza) AS annoUtilizzo , extract (month from dataOrarioPartenza) AS meseUtilizzo, "
 						+ "SUM (tempoDiImbarcoEffettivo) AS totaleUtilizzoEffettivo, SUM (tempoDiImbarcoStimato) AS totaleUtilizzoStimato "
-						+ "FROM voloPartenza AS vlp, Gate AS gt "
-						+ "WHERE extract (month from dataOrarioPartenza) = ? AND (xcodiceGate=codicegate) AND (xcodiceGate = ?) "
+						+ "FROM voloPartenza AS vlp INNER JOIN Gate AS gt ON  (xcodiceGate=codicegate) "
+						+ "WHERE (extract (month from dataOrarioPartenza) = ?) AND (xcodiceGate = ?) "
 						+ "GROUP BY annoUtilizzo,meseUtilizzo, codiceGate;");
 		stampaNumeroPortaInComboBoxPS = connection.prepareStatement("SELECT * FROM gate ORDER BY numeroPorta");
 	}

@@ -17,18 +17,16 @@ import Classi.*;
 
 public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 
-	public String statusScrittoImbarco;
-	Time tempoImbarcoStimato1;
-	Time tempoImbarcoEffettivo1;
+	private String statusScrittoImbarco;
 
 	private PreparedStatement stampaVoloPartenzePS, inserisciVoloPartenzaPS, eliminaVoloPartenzaPS,
 			modificaVoloPartenzePS, modificaStatusVoloPartenzePS, selezioneTempiImbarcoPerVoloModificatoPS;
 
 	public VoloPartenzeImplementazionePostgresDAO(Connection connection) throws SQLException {
 		stampaVoloPartenzePS = connection.prepareStatement(
-				"SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.dataOrariopartenza, (vp.dataOrarioPartenza - gt.tempodiimbarcostimato - gt.tempochiusuragate) AS aperturagate, (vp.dataOrarioPartenza - gt.tempochiusuragate) AS chiusuragate, vp.numeroprenotazioni, vp.statusImbarco, vp.statusVolo, vp.tempoDiImbarcoEffettivo, gt.tempoDiImbarcoStimato "
-						+ "FROM volopartenza AS vp, tratta AS tr, compagniaAerea AS ca, gate AS gt "
-						+ "WHERE (xcodiceTratta = codiceTratta) AND (xcodicegate = codiceGate) AND (xcodiceCompagniaAerea = codiceCompagniaAerea) AND dataOrariopartenza>NOW() ORDER BY dataOrariopartenza ");
+				"SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.dataOrariopartenza, (vp.dataOrarioPartenza - gt.tempodiimbarcostimato - gt.tempochiusuragate) AS aperturagate, (vp.dataOrarioPartenza - gt.tempochiusuragate) AS chiusuragate, vp.numeroprenotazioni, vp.statusImbarco, vp.statusVolo, vp.tempoDiImbarcoEffettivo, gt.tempoDiImbarcoStimato\r\n"
+						+ "FROM (((volopartenza AS vp INNER JOIN tratta AS tr ON (xcodiceTratta = codiceTratta)) INNER JOIN compagniaAerea AS ca ON (xcodiceCompagniaAerea = codiceCompagniaAerea)) INNER JOIN gate AS gt ON (xcodicegate = codiceGate))\r\n"
+						+ "WHERE  dataOrariopartenza>NOW() ORDER BY dataOrariopartenza; ");
 
 		inserisciVoloPartenzaPS = connection.prepareStatement(
 				"INSERT INTO voloPartenza (codiceVoloPartenza, dataOrarioPartenza, numeroPrenotazioni, tempoDiImbarcoEffettivo, statusVolo, xcodiceGate, xcodiceTratta) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -39,7 +37,7 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 				"UPDATE voloPartenza SET statusVolo = ?, statusImbarco = ?, tempodiimbarcoeffettivo = ? WHERE codiceVoloPartenza=?");
 		selezioneTempiImbarcoPerVoloModificatoPS = connection.prepareStatement(
 				"SELECT vp.tempoDiImbarcoEffettivo, gt.tempoDiImbarcoStimato FROM volopartenza AS vp, gate AS gt WHERE (xcodicegate = codiceGate) AND codiceVoloPartenza = ?");
-		
+
 	}
 
 	public List<VoloPartenze> stampaVoliPartenze() throws SQLException {

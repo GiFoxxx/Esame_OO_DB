@@ -453,25 +453,25 @@ public class UtilizzoGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblGiorno, img.svuota2TemaChiaro(), img.svuota2());
+				controllerUtilizzoGate.cambioImmagineTema(lblGiorno, img.giorno2TemaChiaro(), img.giorno2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblGiorno, img.svuota1TemaChiaro(), img.svuota1());
+				controllerUtilizzoGate.cambioImmagineTema(lblGiorno, img.giorno1TemaChiaro(), img.giorno1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblGiorno, img.svuota3TemaChiaro(), img.svuota3());
+				controllerUtilizzoGate.cambioImmagineTema(lblGiorno, img.giorno3TemaChiaro(), img.giorno3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblGiorno, img.svuota1TemaChiaro(), img.svuota1());
+				controllerUtilizzoGate.cambioImmagineTema(lblGiorno, img.giorno1TemaChiaro(), img.giorno1());
 			}
 		});
-		lblGiorno.setIcon(new ImageIcon(img.svuota1()));
+		lblGiorno.setIcon(new ImageIcon(img.giorno1()));
 		lblGiorno.setBounds(868, 464, 130, 36);
 		add(lblGiorno);
 
@@ -485,25 +485,25 @@ public class UtilizzoGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblSettimana, img.svuota2TemaChiaro(), img.svuota2());
+				controllerUtilizzoGate.cambioImmagineTema(lblSettimana, img.settimana2TemaChiaro(), img.settimana2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblSettimana, img.svuota1TemaChiaro(), img.svuota1());
+				controllerUtilizzoGate.cambioImmagineTema(lblSettimana, img.settimana1TemaChiaro(), img.settimana1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblSettimana, img.svuota3TemaChiaro(), img.svuota3());
+				controllerUtilizzoGate.cambioImmagineTema(lblSettimana, img.settimana3TemaChiaro(), img.settimana3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblSettimana, img.svuota1TemaChiaro(), img.svuota1());
+				controllerUtilizzoGate.cambioImmagineTema(lblSettimana, img.settimana1TemaChiaro(), img.settimana1());
 			}
 		});
-		lblSettimana.setIcon(new ImageIcon(img.svuota1()));
+		lblSettimana.setIcon(new ImageIcon(img.settimana1()));
 		lblSettimana.setBounds(868, 510, 130, 36);
 		add(lblSettimana);
 
@@ -517,25 +517,25 @@ public class UtilizzoGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblMese, img.svuota2TemaChiaro(), img.svuota2());
+				controllerUtilizzoGate.cambioImmagineTema(lblMese, img.mese2TemaChiaro(), img.mese2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblMese, img.svuota1TemaChiaro(), img.svuota1());
+				controllerUtilizzoGate.cambioImmagineTema(lblMese, img.mese1TemaChiaro(), img.mese1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblMese, img.svuota3TemaChiaro(), img.svuota3());
+				controllerUtilizzoGate.cambioImmagineTema(lblMese, img.mese3TemaChiaro(), img.mese3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerUtilizzoGate.cambioImmagineTema(lblMese, img.svuota1TemaChiaro(), img.svuota1());
+				controllerUtilizzoGate.cambioImmagineTema(lblMese, img.mese1TemaChiaro(), img.mese1());
 			}
 		});
-		lblMese.setIcon(new ImageIcon(img.svuota1()));
+		lblMese.setIcon(new ImageIcon(img.mese1()));
 		lblMese.setBounds(868, 556, 130, 36);
 		add(lblMese);
 

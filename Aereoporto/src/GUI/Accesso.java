@@ -31,8 +31,8 @@ public class Accesso extends JPanel {
 	private JLabel lblPasswordDimenticata;
 	private JLabel lblMostraPassword;
 	private JLabel lblCensuraPassword;
-	private JLabel lblMostraPasswordAccessoTT;
-	private JLabel lblCensuraPasswordAccessoTT;
+	private JLabel lblMostraPasswordTT;
+	private JLabel lblCensuraPasswordTT;
 	private boolean sbloccaHome = false;
 	
 	// GETTER E SETTER
@@ -109,20 +109,20 @@ public class Accesso extends JPanel {
 		this.lblCensuraPassword = lblcensuraPassword;
 	}
 
-	public JLabel getLblMostraPasswordAccessoTT() {
-		return lblMostraPasswordAccessoTT;
+	public JLabel getLblMostraPasswordTT() {
+		return lblMostraPasswordTT;
 	}
 
-	public void setLblMostraPasswordAccessoTT(JLabel lblMostraPasswordAccessoTT) {
-		this.lblMostraPasswordAccessoTT = lblMostraPasswordAccessoTT;
+	public void setLblMostraPasswordTT(JLabel lblMostraPasswordAccessoTT) {
+		this.lblMostraPasswordTT = lblMostraPasswordAccessoTT;
 	}
 
-	public JLabel getLblCensuraPasswordAccessoTT() {
-		return lblCensuraPasswordAccessoTT;
+	public JLabel getLblCensuraPasswordTT() {
+		return lblCensuraPasswordTT;
 	}
 
-	public void setLblCensuraPasswordAccessoTT(JLabel lblCensuraPasswordAccessoTT) {
-		this.lblCensuraPasswordAccessoTT = lblCensuraPasswordAccessoTT;
+	public void setLblCensuraPasswordTT(JLabel lblCensuraPasswordAccessoTT) {
+		this.lblCensuraPasswordTT = lblCensuraPasswordAccessoTT;
 	}
 
 	Controller controllerAccesso;
@@ -174,17 +174,19 @@ public class Accesso extends JPanel {
 		lblMostraPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerAccesso.chiudiMostraPasswordAccessoTT();
+				controllerAccesso.chiudiMostraPasswordTT(lblMostraPasswordTT);
 				lblMostraPassword.setVisible(false);
 				txtPassword.setEchoChar((char) 0);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerAccesso.mostraMostraPasswordAccessoTT();
+				controllerAccesso.setStopMostraPasswordTT(false);
+				controllerAccesso.mostraMostraPasswordTT(lblMostraPasswordTT);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerAccesso.chiudiMostraPasswordAccessoTT();
+				controllerAccesso.setStopMostraPasswordTT(true);
+				controllerAccesso.chiudiMostraPasswordTT(lblMostraPasswordTT);
 
 			}
 		});
@@ -198,18 +200,19 @@ public class Accesso extends JPanel {
 		lblCensuraPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerAccesso.chiudiCensuraPasswordAccessoTT();
+				controllerAccesso.chiudiCensuraPasswordTT(lblMostraPasswordTT);
 				lblMostraPassword.setVisible(true);
 				txtPassword.setEchoChar('●');
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerAccesso.mostraCensuraPasswordAccessoTT();
+				controllerAccesso.setStopCensuraPasswordTT(false);
+				controllerAccesso.mostraCensuraPasswordTT(lblCensuraPasswordTT);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerAccesso.chiudiCensuraPasswordAccessoTT();
-
+				controllerAccesso.setStopCensuraPasswordTT(true);
+				controllerAccesso.chiudiCensuraPasswordTT(lblCensuraPasswordTT);
 			}
 		});
 		lblCensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -299,15 +302,15 @@ public class Accesso extends JPanel {
 		lblPasswordDimenticata.setBounds(577, 396, 141, 14);
 		add(lblPasswordDimenticata);
 		
-		lblMostraPasswordAccessoTT = new JLabel("");
-		lblMostraPasswordAccessoTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMostraPasswordAccessoTT.setBounds(741, 348, 123, 31);
-		add(lblMostraPasswordAccessoTT);
+		lblMostraPasswordTT = new JLabel("");
+		lblMostraPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMostraPasswordTT.setBounds(741, 348, 123, 31);
+		add(lblMostraPasswordTT);
 		
-		lblCensuraPasswordAccessoTT = new JLabel("");
-		lblCensuraPasswordAccessoTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCensuraPasswordAccessoTT.setBounds(741, 348, 123, 31);
-		add(lblCensuraPasswordAccessoTT);
+		lblCensuraPasswordTT = new JLabel("");
+		lblCensuraPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCensuraPasswordTT.setBounds(741, 348, 123, 31);
+		add(lblCensuraPasswordTT);
 
 	}
 

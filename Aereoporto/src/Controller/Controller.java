@@ -37,8 +37,8 @@ public class Controller {
 	private boolean stopImpostazioniTT = false;
 	private boolean stopEsciTT = false;
 	private boolean stopCambioTemaTT = false;
-	private boolean stopMostraPasswordAccessoTT = false;
-	private boolean stopCensuraPasswordAccessoTT = false;
+	private boolean stopMostraPasswordTT = false;
+	private boolean stopCensuraPasswordTT = false;
 
 	// PALETTE COLORI TEMA SCURO
 	public Color sfondoTemaScuro = new Color(54, 57, 63);
@@ -173,20 +173,20 @@ public class Controller {
 		this.stopEsciTT = stopEsciTT;
 	}
 
-	public boolean isStopMostraPasswordAccessoTT() {
-		return stopMostraPasswordAccessoTT;
+	public boolean isStopMostraPasswordTT() {
+		return stopMostraPasswordTT;
 	}
 
-	public void setStopMostraPasswordAccessoTT(boolean stopMostraPasswordAccessoTT) {
-		this.stopMostraPasswordAccessoTT = stopMostraPasswordAccessoTT;
+	public void setStopMostraPasswordTT(boolean stopMostraPasswordAccessoTT) {
+		this.stopMostraPasswordTT = stopMostraPasswordAccessoTT;
 	}
 
-	public boolean isStopCensuraPasswordAccessoTT() {
-		return stopCensuraPasswordAccessoTT;
+	public boolean isStopCensuraPasswordTT() {
+		return stopCensuraPasswordTT;
 	}
 
-	public void setStopCensuraPasswordAccessoTT(boolean stopCensuraPasswordAccessoTT) {
-		this.stopCensuraPasswordAccessoTT = stopCensuraPasswordAccessoTT;
+	public void setStopCensuraPasswordTT(boolean stopCensuraPasswordAccessoTT) {
+		this.stopCensuraPasswordTT = stopCensuraPasswordAccessoTT;
 	}
 
 	public int getFlagCambioTema() {
@@ -550,56 +550,50 @@ public class Controller {
 		}
 	}
 
-	public void chiudiMostraPasswordAccessoTT() {
-		((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT().setVisible(false);
+	public void chiudiMostraPasswordTT(JLabel lbl) {
+		lbl.setVisible(false);
 	}
 
-	@SuppressWarnings("deprecation")
-	public void mostraMostraPasswordAccessoTT() {
+	public void mostraMostraPasswordTT(JLabel lbl) {
 		Thread th = new Thread() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(525);
-					((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT().setVisible(true);
-					((Accesso) getDashboard().getAccesso()).getLblMostraPasswordAccessoTT()
-							.setIcon(new ImageIcon(img.mostraPasswordTT()));
+					Thread.sleep(750);
+					lbl.setVisible(true);
+					if (stopMostraPasswordTT) {
+						lbl.setVisible(false);
+					}
+					cambioImmagineTema(lbl, img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
 			}
 		};
 		th.start();
-
-		if (stopMostraPasswordAccessoTT) {
-			th.stop();
-		}
 	}
 
-	public void chiudiCensuraPasswordAccessoTT() {
-		((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT().setVisible(false);
+	public void chiudiCensuraPasswordTT(JLabel lbl) {
+		lbl.setVisible(false);
 	}
 
-	@SuppressWarnings("deprecation")
-	public void mostraCensuraPasswordAccessoTT() {
+	public void mostraCensuraPasswordTT(JLabel lbl) {
 		Thread th = new Thread() {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(525);
-					((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT().setVisible(true);
-					((Accesso) getDashboard().getAccesso()).getLblCensuraPasswordAccessoTT()
-							.setIcon(new ImageIcon(img.nascondiPasswordTT()));
+					Thread.sleep(750);
+					lbl.setVisible(true);
+					if (stopCensuraPasswordTT) {
+						lbl.setVisible(false);
+					}
+					cambioImmagineTema(lbl, img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
 			}
 		};
 		th.start();
-
-		if (stopCensuraPasswordAccessoTT) {
-			th.stop();
-		}
 	}
 
 	// METODI DI REGISTRAZIONE
@@ -635,8 +629,7 @@ public class Controller {
 	@SuppressWarnings("deprecation")
 	public void registrati() {
 		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
-		if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuotoRegistrazione()
-				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
+		if (controlloRegistrazioneBuona()) {
 			Utente utn = new Utente(((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText(),
@@ -649,34 +642,65 @@ public class Controller {
 			((OperazioneRiuscitaConSuccesso) getDashboard().getOperazioneEffettuataConSuccesso()).getLblComplimenti()
 					.setText("Registrazione effettuata con successo");
 			mostraOperazioneEffettuataConSuccesso();
-
 			mostraPannelli(getDashboard().getAccesso());
 			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-		} else if ((!formatoEmailInseritaErrato() || ripetiPassword()) && nessunCampoVuotoRegistrazione()
-				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setVisible(true);
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText(
+		} else if (erroreFormatoEmail()) {
+			messaggioErroreRegistrazione(
 					"Formato email inserito non valido!\n" + " Inserire l'email dal formato tipo: example@example.com");
 			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
-		} else if (formatoEmailInseritaErrato() && !ripetiPassword() && nessunCampoVuotoRegistrazione()
-				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setVisible(true);
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
-					.setText("Le passwords non corrispondono");
+		} else if (errorePasswordRipetuteErrate()) {
+			messaggioErroreRegistrazione("Le passwords non corrispondono");
 			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
-
-		} else if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuotoRegistrazione()
-				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setVisible(true);
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
-					.setText("Effettuare il logout prima della registrazione");
+		} else if (erroreLoginGiàFatto()) {
+			messaggioErroreRegistrazione("Effettuare il logout prima della registrazione");
 			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
 		} else {
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setVisible(true);
-			((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali()
-					.setText("Riempire tutti i campi per continuare");
+			messaggioErroreRegistrazione("Riempire tutti i campi per continuare");
 			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
 		}
+	}
+
+	private boolean controlloRegistrazioneBuona() {
+		if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuotoRegistrazione()
+				&& !((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean erroreFormatoEmail() {
+		if (!formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuotoRegistrazione()
+				&& (!((Accesso) getDashboard().getAccesso()).isSbloccaHome()
+						|| ((Accesso) getDashboard().getAccesso()).isSbloccaHome())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean errorePasswordRipetuteErrate() {
+		if (formatoEmailInseritaErrato() && !ripetiPassword() && nessunCampoVuotoRegistrazione()
+				&& (!((Accesso) getDashboard().getAccesso()).isSbloccaHome()
+						|| ((Accesso) getDashboard().getAccesso()).isSbloccaHome())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean erroreLoginGiàFatto() {
+		if (formatoEmailInseritaErrato() && ripetiPassword() && nessunCampoVuotoRegistrazione()
+				&& ((Accesso) getDashboard().getAccesso()).isSbloccaHome()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void messaggioErroreRegistrazione(String s) {
+		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setVisible(true);
+		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText(s);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1775,7 +1799,6 @@ public class Controller {
 			}
 		};
 		th.start();
-
 	}
 
 	public void clickPannelloLateraleImpostazioni() {
@@ -1852,7 +1875,7 @@ public class Controller {
 			e.printStackTrace();
 		}
 		larghezzaLbl = larghezzaLbl * 8;
-		getDashboard().getLblAccount().setBounds(970 - larghezzaLbl , 7, larghezzaLbl, 23);
+		getDashboard().getLblAccount().setBounds(970 - larghezzaLbl, 7, larghezzaLbl, 23);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1882,7 +1905,6 @@ public class Controller {
 	}
 
 	public void chiudiTendina() {
-
 		getDashboard().getLblHomeTT().setVisible(false);
 		getDashboard().getLblAccediTT().setVisible(false);
 		getDashboard().getLblRegistratiTT().setVisible(false);
@@ -2131,6 +2153,7 @@ public class Controller {
 		getDashboard().getGestioneCompagnieAeree().setVisible(false);
 		getDashboard().getGestioneUtenti().setVisible(false);
 		getDashboard().getGestioneGate().setVisible(false);
+		getDashboard().getUtilizzoGate().setVisible(false);
 		getDashboard().getGateCodeImbarco().setVisible(false);
 		getDashboard().getGestioneTratte().setVisible(false);
 		getDashboard().getGestioneVoliPartenze().setVisible(false);
@@ -2152,6 +2175,7 @@ public class Controller {
 	public void mostraSceltaProfiloSenzaAccesso() {
 		svuotaCampiAccesso();
 		svuotaCampiRegistrazione();
+
 		getDashboard().setEnabled(false);
 		getDashboard().getSceltaProfiloSenzaAccesso().setVisible(true);
 	}
@@ -2387,6 +2411,7 @@ public class Controller {
 	public void mostraPasswordDimenticata() {
 		svuotaCampiAccesso();
 		svuotaCampiCambioPassword();
+		chiudiTuttiTT();
 		getDashboard().setEnabled(false);
 		getDashboard().getPasswordDimenticata().setVisible(true);
 		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMostraNuovaPassword().setVisible(true);
@@ -2458,6 +2483,7 @@ public class Controller {
 	// METODI DI REGISTRAZIONE EFFETTUATA CON SUCCESSO
 
 	public void mostraOperazioneEffettuataConSuccesso() {
+		chiudiTuttiTT();
 		dashboard.setEnabled(false);
 		dashboard.getOperazioneEffettuataConSuccesso().setVisible(true);
 	}
@@ -2470,6 +2496,7 @@ public class Controller {
 
 	// TERMINI E CONDIZIONI
 	public void mostraTerminiECondizioni() {
+		chiudiTuttiTT();
 		getDashboard().setEnabled(false);
 		getDashboard().getTerminiECondizioni().setVisible(true);
 	}
@@ -2499,6 +2526,7 @@ public class Controller {
 	public void mostraUscita() {
 		svuotaCampiAccesso();
 		svuotaCampiRegistrazione();
+		chiudiTuttiTT();
 		dashboard.setEnabled(false);
 		dashboard.getUscita().setVisible(true);
 	}
@@ -3557,7 +3585,7 @@ public class Controller {
 
 	// METODI TOOLTIP
 
-	public void chiudiTutto() {
+	public void chiudiTuttiTT() {
 		getDashboard().getLblMenuTT().setVisible(false);
 		getDashboard().getLblHomeTT().setVisible(false);
 		getDashboard().getLblAccediTT().setVisible(false);
