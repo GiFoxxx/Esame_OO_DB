@@ -19,18 +19,8 @@ public class Home extends JPanel {
 	private JLabel lblCompagniaAerea;
 	private JLabel lblGate;
 	private JLabel lblVolo;
-	private JLabel lblFareAccesso;
 
 	// GETTER E SETTER
-
-	public JLabel getLblFareAccesso() {
-		return lblFareAccesso;
-	}
-
-	public void setLblFareAccesso(JLabel lblFareAccesso) {
-		this.lblFareAccesso = lblFareAccesso;
-	}
-
 	public JLabel getLblTratte() {
 		return lblTratte;
 	}
@@ -86,12 +76,12 @@ public class Home extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.setPannelloPrecedente(6);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneTratte());
 				} else {
-					controllerHome.mostraErroreMancatoAccesso();
-					controllerHome.scomparsaMessaggioErrore(lblFareAccesso);
+					controllerHome.mostraErrore(controllerHome.erroreGeneraleHome);
 				}
 			}
 			@Override
@@ -127,8 +117,7 @@ public class Home extends JPanel {
 					controllerHome.setPannelloPrecedente(7);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneCompagnieAeree());
 				} else {
-					controllerHome.mostraErroreMancatoAccesso();
-					controllerHome.scomparsaMessaggioErrore(lblFareAccesso);
+					controllerHome.mostraErrore(controllerHome.erroreGeneraleHome);
 				}
 			}
 			@Override
@@ -163,8 +152,7 @@ public class Home extends JPanel {
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.mostraSceltaGate();
 				} else {
-					controllerHome.mostraErroreMancatoAccesso();
-					controllerHome.scomparsaMessaggioErrore(lblFareAccesso);
+					controllerHome.mostraErrore(controllerHome.erroreGeneraleHome);
 				}
 			}
 			@Override
@@ -199,8 +187,7 @@ public class Home extends JPanel {
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.mostraSceltaVolo();
 				} else {
-					controllerHome.mostraErroreMancatoAccesso();
-					controllerHome.scomparsaMessaggioErrore(lblFareAccesso);
+					controllerHome.mostraErrore(controllerHome.erroreGeneraleHome);
 				}
 			}
 			@Override
@@ -218,12 +205,7 @@ public class Home extends JPanel {
 		lblVolo.setBounds(179, 371, 276, 162);
 		add(lblVolo);
 
-		lblFareAccesso = new JLabel("");
-		lblFareAccesso.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFareAccesso.setFont(controllerHome.fontScritte);
-		lblFareAccesso.setForeground(controllerHome.coloreScritturaAllertaTemaScuro);
-		lblFareAccesso.setBounds(112, 564, 867, 28);
-		add(lblFareAccesso);
+		
 	}
 
 	

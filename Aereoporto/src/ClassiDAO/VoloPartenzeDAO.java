@@ -17,4 +17,6 @@ public interface VoloPartenzeDAO {
 	public int modificaVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
 	
 	public int modificaStatusVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
+	
+	public String risultatoStatusImbarco(VoloPartenze voloPartenze) throws SQLException;
 }

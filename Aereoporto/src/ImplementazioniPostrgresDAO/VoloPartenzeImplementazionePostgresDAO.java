@@ -2,7 +2,6 @@ package ImplementazioniPostrgresDAO;
 
 import ClassiDAO.VoloPartenzeDAO;
 
-
 import Classi.VoloPartenze;
 
 import java.sql.Connection;
@@ -31,7 +30,7 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 						+ "WHERE  dataOrariopartenza>NOW() ORDER BY dataOrariopartenza; ");
 
 		inserisciVoloPartenzaPS = connection.prepareStatement(
-				"INSERT INTO voloPartenza (codiceVoloPartenza, dataOrarioPartenza, numeroPrenotazioni, tempoDiImbarcoEffettivo, statusVolo, xcodiceGate, xcodiceTratta) VALUES (?, ?, ?, ?, ?, ?, ?)");
+				"INSERT INTO voloPartenza (codiceVoloPartenza, dataOrarioPartenza, numeroPrenotazioni, tempoDiImbarcoEffettivo, statusVolo, statusImbarco, xcodiceGate, xcodiceTratta) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 		eliminaVoloPartenzaPS = connection.prepareStatement("DELETE FROM voloPartenza WHERE codiceVoloPartenza = ?");
 		modificaVoloPartenzePS = connection.prepareStatement(
 				"UPDATE voloPartenza SET dataOrarioPartenza = ?, numeroPrenotazioni = ?, tempodiimbarcoeffettivo = ?, statusVolo = ?, xcodiceGate = ?, xcodiceTratta = ? WHERE codiceVoloPartenza=?");
@@ -85,8 +84,9 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 		inserisciVoloPartenzaPS.setString(3, voloPartenze.getNumeroPrenotazioni());
 		inserisciVoloPartenzaPS.setTime(4, voloPartenze.getTempoImbarcoEffettivo());
 		inserisciVoloPartenzaPS.setString(5, String.valueOf(voloPartenze.getStatusVolo()));
-		inserisciVoloPartenzaPS.setString(6, voloPartenze.getGt().getCodiceGate());
-		inserisciVoloPartenzaPS.setString(7, voloPartenze.getTrt().getCodiceTratta());
+		inserisciVoloPartenzaPS.setString(6, risultatoStatusImbarco(voloPartenze));
+		inserisciVoloPartenzaPS.setString(7, voloPartenze.getGt().getCodiceGate());
+		inserisciVoloPartenzaPS.setString(8, voloPartenze.getTrt().getCodiceTratta());
 
 		int row = inserisciVoloPartenzaPS.executeUpdate();
 		return row;
@@ -113,7 +113,17 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 	}
 
 	public int modificaStatusVoloPartenze(VoloPartenze voloPartenze) throws SQLException {
-		selezioneTempiImbarcoPerVoloModificatoPS.setString(1, voloPartenze.getCodiceVoloPartenze());
+		modificaStatusVoloPartenzePS.setString(1, voloPartenze.getStatusVolo());
+		modificaStatusVoloPartenzePS.setString(2, risultatoStatusImbarco(voloPartenze));
+		modificaStatusVoloPartenzePS.setTime(3, voloPartenze.getTempoImbarcoEffettivo());
+		modificaStatusVoloPartenzePS.setString(4, voloPartenze.getCodiceVoloPartenze());
+
+		int row = modificaStatusVoloPartenzePS.executeUpdate();
+		return row;
+	}
+	
+	public String risultatoStatusImbarco(VoloPartenze codice) throws SQLException {
+		selezioneTempiImbarcoPerVoloModificatoPS.setString(1, codice.getCodiceVoloPartenze());
 		ResultSet rs = selezioneTempiImbarcoPerVoloModificatoPS.executeQuery();
 
 		while (rs.next()) {
@@ -126,13 +136,6 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 				statusScrittoImbarco = "In ritardo";
 			}
 		}
-
-		modificaStatusVoloPartenzePS.setString(1, voloPartenze.getStatusVolo());
-		modificaStatusVoloPartenzePS.setString(2, statusScrittoImbarco);
-		modificaStatusVoloPartenzePS.setTime(3, voloPartenze.getTempoImbarcoEffettivo());
-		modificaStatusVoloPartenzePS.setString(4, voloPartenze.getCodiceVoloPartenze());
-
-		int row = modificaStatusVoloPartenzePS.executeUpdate();
-		return row;
+		return statusScrittoImbarco;
 	}
 }

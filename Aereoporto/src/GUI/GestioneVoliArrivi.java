@@ -604,7 +604,7 @@ public class GestioneVoliArrivi extends JPanel {
 		
 		
 		lblMessaggioErrore = new JLabel("");
-		lblMessaggioErrore.setForeground(controllerGestioneVoliArrivi.coloreScritturaAllertaTemaScuro);
+//		lblMessaggioErrore.setForeground(controllerGestioneVoliArrivi.coloreScritturaAllertaTemaScuro);
 		lblMessaggioErrore.setFont(controllerGestioneVoliArrivi.fontLabel);
 		lblMessaggioErrore.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessaggioErrore.setBounds(223, 24, 633, 14);

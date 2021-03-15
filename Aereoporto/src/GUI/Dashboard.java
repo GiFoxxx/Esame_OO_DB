@@ -20,6 +20,7 @@ public class Dashboard extends JFrame {
 	private Immagini img = new Immagini();
 
 	int posizioneTendina = 50;
+	int posizioneMessaggioErrore = 0;
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -50,6 +51,8 @@ public class Dashboard extends JFrame {
 	private JLabel lblTendina;
 	private JLabel lblCambioTemaChiaro;
 	private JLabel lblCambioTemaScuro;
+	private JLabel lblMessaggioErroreTesto;
+	private JLabel lblMessaggioErroreLayout;
 	private JLabel lblLayout;
 	private JLabel lblAccount;
 	private JLabel lblFrecciaMenu;
@@ -65,6 +68,7 @@ public class Dashboard extends JFrame {
 	private JPanel pannelloTendina;
 	private JPanel pannelloBase;
 	private JPanel pannelloDestra;
+	private JPanel pannelloErrore;
 	private JPanel noClick;
 	private JPanel panelHome;
 	private JPanel panelAccedi;
@@ -349,6 +353,14 @@ public class Dashboard extends JFrame {
 		this.posizioneTendina = posizioneTendina;
 	}
 
+	public int getPosizioneMessaggioErrore() {
+		return posizioneMessaggioErrore;
+	}
+
+	public void setPosizioneMessaggioErrore(int posizioneMessaggioErrore) {
+		this.posizioneMessaggioErrore = posizioneMessaggioErrore;
+	}
+
 	public JPanel getHome() {
 		return home;
 	}
@@ -533,6 +545,14 @@ public class Dashboard extends JFrame {
 		this.pannelloDestra = pannelloDestra;
 	}
 
+	public JPanel getPannelloErrore() {
+		return pannelloErrore;
+	}
+
+	public void setPannelloErrore(JPanel pannelloErrore) {
+		this.pannelloErrore = pannelloErrore;
+	}
+
 	public JPanel getNoClick() {
 		return noClick;
 	}
@@ -603,6 +623,22 @@ public class Dashboard extends JFrame {
 
 	public void setMenuInfoAccount(JPanel menuInfoAccount) {
 		this.menuInfoAccount = menuInfoAccount;
+	}
+
+	public JLabel getLblMessaggioErroreTesto() {
+		return lblMessaggioErroreTesto;
+	}
+
+	public void setLblMessaggioErroreTesto(JLabel lblMessaggioErroreTesto) {
+		this.lblMessaggioErroreTesto = lblMessaggioErroreTesto;
+	}
+
+	public JLabel getLblMessaggioErroreLayout() {
+		return lblMessaggioErroreLayout;
+	}
+
+	public void setLblMessaggioErroreLayout(JLabel lblMessaggioErrore) {
+		this.lblMessaggioErroreLayout = lblMessaggioErrore;
 	}
 
 	public JLabel getLblLayout() {
@@ -919,7 +955,6 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
-					controllerDashboard.setStopHomeTT(true);
 					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiHomeTT();
 				}
@@ -994,7 +1029,6 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
-					controllerDashboard.setStopAccediTT(true);
 					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiAccediTT();
 
@@ -1071,7 +1105,6 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
-					controllerDashboard.setStopRegistratiTT(true);
 					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiRegistratiTT();
 
@@ -1111,9 +1144,9 @@ public class Dashboard extends JFrame {
 		lblRegistrazione = new JLabel("");
 		lblRegistrazione.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		lblRegistrazione.setBounds(0, 0, 50, 70);
-		panelRegistrati.add(lblRegistrazione);
 		lblRegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistrazione.setIcon(new ImageIcon(img.registrati()));
+		panelRegistrati.add(lblRegistrazione);
 
 		panelProfilo = new JPanel();
 		panelProfilo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1148,7 +1181,6 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
-					controllerDashboard.setStopProfiloTT(true);
 					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiProfiloTT();
 				}
@@ -1222,7 +1254,6 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelImpostazioni, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
-					controllerDashboard.setStopImpostazioniTT(true);
 					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiImpostazioniTT();
 				}
@@ -1284,7 +1315,6 @@ public class Dashboard extends JFrame {
 					controllerDashboard.setStopEsciTT(false);
 					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.mostraEsciTT();
-
 				}
 			}
 
@@ -1297,7 +1327,6 @@ public class Dashboard extends JFrame {
 					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
-					controllerDashboard.setStopEsciTT(true);
 					controllerDashboard.chiudiTuttiTT();
 					controllerDashboard.chiudiEsciTT();
 				}
@@ -1348,7 +1377,6 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerDashboard.chiudiTendina();
-
 			}
 
 			@Override
@@ -1541,6 +1569,25 @@ public class Dashboard extends JFrame {
 		lblMenuTT.setVisible(false);
 		lblMenuTT.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenuTT.setBounds(911, 11, 60, 31);
+		
+		pannelloErrore = new JPanel();
+		pannelloErrore.setBackground(controllerDashboard.trasparente);
+		pannelloErrore.setBounds(5, 0, 1078, 0);
+		pannelloErrore.setLayout(null);
+		
+		lblMessaggioErroreTesto = new JLabel("");
+		lblMessaggioErroreTesto.setForeground(controllerDashboard.coloreScrittaErrore);
+		lblMessaggioErroreTesto.setFont(controllerDashboard.fontLabel);
+		lblMessaggioErroreTesto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessaggioErroreTesto.setText("Qualcosa è andato storto");
+		lblMessaggioErroreTesto.setBounds(5, 0, 1078, 25);
+		pannelloErrore.add(lblMessaggioErroreTesto);
+		
+		lblMessaggioErroreLayout = new JLabel("");
+		lblMessaggioErroreLayout.setIcon(new ImageIcon(img.messaggioErroreGestioni()));
+		lblMessaggioErroreLayout.setBounds(5, 0, 1078, 25);
+		pannelloErrore.add(lblMessaggioErroreLayout);
+
 
 		pannelloDestra = new JPanel();
 		pannelloDestra.setBounds(50, 0, 1093, 642);
@@ -1555,6 +1602,7 @@ public class Dashboard extends JFrame {
 		pannelloDestra.add(lblEsciTT);
 		pannelloDestra.add(lblMenuTT);
 		
+		pannelloDestra.add(pannelloErrore);
 		pannelloDestra.add(home);
 		pannelloDestra.add(accesso);
 		pannelloDestra.add(cambioPassword);
@@ -1575,7 +1623,8 @@ public class Dashboard extends JFrame {
 
 		pannelloDestra.setLayout(null);
 		pannelloBase.add(pannelloDestra);
-
+		
+		
 		lblLayout = new JLabel("");
 		lblLayout.setBounds(50, 0, 1093, 642);
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);

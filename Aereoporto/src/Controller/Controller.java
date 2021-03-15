@@ -9,10 +9,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import Database.ConnessioneDatabase;
@@ -52,7 +48,6 @@ public class Controller {
 	public Color entroPannelloTemaScuro = new Color(40, 45, 48);
 	public Color clickPannelloTemaScuro = new Color(50, 55, 58);
 	public Color pannelloSceltoTemaScuro = new Color(60, 65, 68);
-	public Color coloreScritturaAllertaTemaScuro = new Color(250, 45, 45);
 	public Color coloreLabelTemaScuro = new Color(200, 200, 200);
 	public Color coloreLabelEntrataTemaScuro = new Color(220, 220, 220);
 	public Color coloreLabelPressedTemaScuro = new Color(242, 242, 242);
@@ -69,7 +64,10 @@ public class Controller {
 	public Color coloreLabelTemaChiaro = new Color(106, 110, 117);
 	public Color coloreLabelEntrataTemaChiaro = new Color(65, 70, 74);
 	public Color coloreLabelPressedTemaChiaro = new Color(46, 51, 56);
+
+	// PALETTE COLORI IN COMUNE
 	public Color trasparente = new Color(0, 0, 0, 0);
+	public Color coloreScrittaErrore = new Color(35, 39, 42);
 
 	// FONT TESTI
 	public Font fontScritte = new Font("Arial", Font.PLAIN, 18);
@@ -79,6 +77,23 @@ public class Controller {
 	public Font fontScritteGestioni = new Font("Arial", Font.PLAIN, 13);
 	public Font fontLabel = new Font("Arial", Font.BOLD, 12);
 
+	// MESSAGGI DI ERRORE
+	public String erroreAccessoInserimentoCredenziali = "Perfavore, inserisci le credenziali";
+	public String erroreAccessoCredenzialiSbagliate = "Nome utente o password errati. Riprova";
+	public String erroreAccessoGiaUtilizziAccount = "Stai già utilizzando questo account";
+	public String erroreAccessoEseguirePrimaLogout = "Devi effettuare il logout se vuoi accedere con altre credenziali.";
+	public String erroreRegistrazioneFormatoSbagliato = "Formato email inserito non valido!"
+			+ " Inserire l'email dal formato tipo: example@example.com";
+	public String errorePasswordsNonCorrispondenti = "Le passwords non corrispondono";
+	public String erroreRegistrazioneLoginGiaEffettuato = "Effettuare il logout prima della registrazione";
+	public String erroreCampiVuoti = "Riempire tutti i campi per continuare";
+	public String erroreGestioneVoliPartenzeOrarioSbagliato = "Errore nell'inserimento dell'orario";
+	public String erroreCambioPasswordNonCorrispondenteConAttuale = "La password che hai attualmente non corrisponde con quella scritta";
+	public String errorePasswordDimenticataEmailNonRegistrata = "L'email non è nei nostri database";
+	public String erroreGeneraleHome = "Per continuare, effettuare prima l'accesso";
+	public String erroreGenericoInInserimentiCampi = "Attenzione ci sono degli errori";
+
+	// ATTRIBUTI
 	private String emailAccesso;
 	private String passwordAccesso;
 	private boolean entraGestioneUtenti = false;
@@ -499,13 +514,9 @@ public class Controller {
 		if (!sbloccaGestione()) {
 			accedi();
 		} else if (getEmailAccesso().equals(((Accesso) getDashboard().getAccesso()).getTxtEmail().getText())) {
-			((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setVisible(true);
-			((Accesso) getDashboard().getAccesso()).mostraGiaUtilizziAccount();
-			scomparsaMessaggioErrore(((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali());
+			mostraErrore(erroreAccessoGiaUtilizziAccount);
 		} else {
-			((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setVisible(true);
-			((Accesso) getDashboard().getAccesso()).mostraEseguirePrimaLogout();
-			scomparsaMessaggioErrore(((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali());
+			mostraErrore(erroreAccessoEseguirePrimaLogout);
 		}
 	}
 
@@ -533,18 +544,23 @@ public class Controller {
 				}
 				((Accesso) getDashboard().getAccesso()).setSbloccaHome(true);
 			} else if (controlloCampiSeVuotiAccesso()) {
-				((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setVisible(true);
-				((Accesso) getDashboard().getAccesso()).mostraInserimentoCredenziali();
-				scomparsaMessaggioErrore(((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali());
+				mostraErrore(erroreAccessoInserimentoCredenziali);
+				mostraIconaErroreEmailMancanteAccesso();
 			} else {
-				((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setVisible(true);
-				((Accesso) getDashboard().getAccesso()).mostraErroreAccesso();
-				scomparsaMessaggioErrore(((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali());
+				mostraErrore(erroreAccessoCredenzialiSbagliate);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void mostraIconaErroreEmailMancanteAccesso() {
+		if (((Accesso) getDashboard().getAccesso()).getTxtEmail().getText().equals("")) {
+			((Accesso) getDashboard().getAccesso()).getLblIconaErrore().setVisible(true);
+		} else {
+			((Accesso) getDashboard().getAccesso()).getLblIconaErrore().setVisible(false);
+		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -612,6 +628,31 @@ public class Controller {
 		((Registrazione) getDashboard().getRegistrazione()).getTxtRipetiPassword().setText("");
 	}
 
+	public void mostraIconaErroreEmailMancanteRegistrazione() {
+        if (((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText().equals("")) {
+            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreEmail().setVisible(true);
+        } else {
+            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreEmail().setVisible(false);
+        }
+    }
+
+    public void mostraIconaErroreNomeMancanteRegistrazione() {
+        if (((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText().equals("")) {
+            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreNome().setVisible(true);
+        } else {
+            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreNome().setVisible(false);
+        }
+    }
+
+    public void mostraIconaErroreCognomeMancanteRegistrazione() {
+        if (((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText().equals("")) {
+            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreCognome().setVisible(true);
+        } else {
+            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreCognome().setVisible(false);
+        }
+    }
+	
+	
 	public boolean formatoEmailInseritaErrato() {
 		boolean emailCorretta = controlloInserimentoEmailCorrettamenteRegistrazione(
 				((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText());
@@ -652,18 +693,16 @@ public class Controller {
 			mostraPannelli(getDashboard().getAccesso());
 			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 		} else if (erroreFormatoEmail()) {
-			messaggioErroreRegistrazione(
-					"Formato email inserito non valido!\n" + " Inserire l'email dal formato tipo: example@example.com");
-			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
+			mostraErrore(erroreRegistrazioneFormatoSbagliato);
 		} else if (errorePasswordRipetuteErrate()) {
-			messaggioErroreRegistrazione("Le passwords non corrispondono");
-			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
+			mostraErrore(errorePasswordsNonCorrispondenti);
 		} else if (erroreLoginGiaFatto()) {
-			messaggioErroreRegistrazione("Effettuare il logout prima della registrazione");
-			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
+			mostraErrore(erroreRegistrazioneLoginGiaEffettuato);
 		} else {
-			messaggioErroreRegistrazione("Riempire tutti i campi per continuare");
-			scomparsaMessaggioErrore(((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali());
+			mostraIconaErroreNomeMancanteRegistrazione();
+			mostraIconaErroreCognomeMancanteRegistrazione();
+			mostraIconaErroreEmailMancanteRegistrazione();
+			mostraErrore(erroreCampiVuoti);
 		}
 	}
 
@@ -703,11 +742,6 @@ public class Controller {
 		} else {
 			return false;
 		}
-	}
-
-	public void messaggioErroreRegistrazione(String s) {
-		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setVisible(true);
-		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText(s);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -886,7 +920,7 @@ public class Controller {
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().setText("");
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().setText("");
 		((GestioneTratte) getDashboard().getGestioneTratte()).getComboBoxNomeCompagniaAerea().setSelectedIndex(0);
-   
+
 	}
 
 	public TrattaDAO implementazioneTrattaDAO() {
@@ -982,8 +1016,8 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo().setText(null);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().setText(null);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxNumeroPorta().setSelectedIndex(0);
-        ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxCittaArrivo().setSelectedIndex(0);
-        ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxStatus().setSelectedIndex(0);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxCittaArrivo().setSelectedIndex(0);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxStatus().setSelectedIndex(0);
 	}
 
 	public VoloPartenzeDAO implementazioneVoloPartenzeDAO() {
@@ -1019,6 +1053,15 @@ public class Controller {
 
 		String status = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText();
 
+		VoloPartenze codice = new VoloPartenze(
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText());
+		String statusImbarco = null;
+		try {
+			statusImbarco = implementazioneVoloPartenzeDAO().risultatoStatusImbarco(codice);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
 		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
 			Timestamp dataTempo = new Timestamp(
@@ -1035,23 +1078,21 @@ public class Controller {
 							.getText(),
 					dataTempo, ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
 							.getTxtNumeroPrenotazioni().getText(),
-					tempoImbarcoEffettivo, trt, gt, status);
+					tempoImbarcoEffettivo, trt, gt, status, statusImbarco);
 
 			try {
 				implementazioneVoloPartenzeDAO().inserisciVoloPartenze(vlprtz);
 			} catch (PSQLException e) {
-                System.out.println("no");
-            } catch (SQLException e) {
+				System.out.println("no");
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
 					.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
 			svuotaCampiGestioneVoloPartenze();
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore().setText("");
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} else {
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore()
-					.setText("Errore nell'inserimento dell'orario");
+			mostraErrore(erroreGestioneVoliPartenzeOrarioSbagliato);
 		}
 	}
 
@@ -1090,6 +1131,15 @@ public class Controller {
 
 		String status = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText();
 
+		VoloPartenze codice = new VoloPartenze(
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText());
+		String statusImbarco = null;
+		try {
+			statusImbarco = implementazioneVoloPartenzeDAO().risultatoStatusImbarco(codice);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
 		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
 
 			Timestamp dataTempo = new Timestamp(
@@ -1106,7 +1156,7 @@ public class Controller {
 							.getText(),
 					dataTempo, ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
 							.getTxtNumeroPrenotazioni().getText(),
-					tempoImbarcoEffettivo, trt, gt, status);
+					tempoImbarcoEffettivo, trt, gt, status, statusImbarco);
 
 			try {
 				implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
@@ -1231,8 +1281,7 @@ public class Controller {
 			svuotaCampiGestioneVoloArrivi();
 			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 		} else {
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblMessaggioErrore()
-					.setText("Errore nell'inserimento dell'orario");
+			mostraErrore(erroreGestioneVoliPartenzeOrarioSbagliato);
 		}
 	}
 
@@ -1284,8 +1333,7 @@ public class Controller {
 			svuotaCampiGestioneVoloArrivi();
 			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 		} else {
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblMessaggioErrore()
-					.setText("Errore nell'inserimento dell'orario");
+			mostraErrore(erroreGestioneVoliPartenzeOrarioSbagliato);
 		}
 	}
 
@@ -1894,14 +1942,58 @@ public class Controller {
 		getDashboard().getLblAccount().setBounds(970 - larghezzaLbl, 7, larghezzaLbl, 23);
 	}
 
-	@SuppressWarnings("deprecation")
+	// METODI ERRORI GESTIONE
+	public void mostraErrore(String errore) {
+		if (getDashboard().getPosizioneMessaggioErrore() == 0) {
+			Thread th = new Thread() {
+				@Override
+				public void run() {
+					try {
+						for (int i = 0; i <= 25; i++) {
+							Thread.sleep(1, 01);
+							getDashboard().getPannelloErrore().setSize(1078, i);
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, e);
+					}
+				}
+			};
+			th.start();
+			getDashboard().getLblMessaggioErroreTesto().setText(errore);
+			getDashboard().setPosizioneMessaggioErrore(25);
+			chiudiErrore();
+		}
+	}
+
+	public void chiudiErrore() {
+		if (getDashboard().getPosizioneMessaggioErrore() == 25) {
+			getDashboard().getPannelloErrore().setSize(1078, 0);
+			Thread th = new Thread() {
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(3500);
+						for (int i = 25; i >= 0; i--) {
+							Thread.sleep(1, 01);
+							getDashboard().getPannelloErrore().setSize(1078, i);
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, e);
+					}
+				}
+			};
+			th.start();
+			getDashboard().setPosizioneMessaggioErrore(0);
+		}
+	}
+
+	// METODI TENDINA
 	public void apriTendina() {
 		getDashboard().getLblFrecciaMenu().setEnabled(false);
 		getDashboard().getLblAccount().setEnabled(false);
 		getDashboard().getLineeApertura().setVisible(false);
 		getDashboard().getLblCambioTemaTT().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 50) {
-			getDashboard().getPannelloTendina().show();
 			getDashboard().getPannelloTendina().setSize(getDashboard().getPosizioneTendina(), 642);
 			Thread th = new Thread() {
 				@Override
@@ -1935,6 +2027,7 @@ public class Controller {
 		getDashboard().getLblAccount().setEnabled(true);
 
 		getDashboard().getLineeChiusura().setVisible(false);
+
 		if (getDashboard().getPosizioneTendina() == 238) {
 			getDashboard().getPannelloTendina().setSize(50, 642);
 			Thread th = new Thread() {
@@ -2120,13 +2213,9 @@ public class Controller {
 	}
 
 	public void mostraPannelli(JPanel pannello) {
-		((Home) getDashboard().getHome()).getLblFareAccesso().setText("");
-		((Accesso) getDashboard().getAccesso()).getLblMessaggioCredenziali().setText("");
 		((Accesso) getDashboard().getAccesso()).getLblMostraPassword().setVisible(true);
-		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
 		((Registrazione) getDashboard().getRegistrazione()).getLblMostraPassword().setVisible(true);
 		((Registrazione) getDashboard().getRegistrazione()).getLblMostraRipetiPassword().setVisible(true);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore().setText("");
 		getDashboard().getHome().setVisible(false);
 		getDashboard().getAccesso().setVisible(false);
 		svuotaCampiAccesso();
@@ -2312,11 +2401,6 @@ public class Controller {
 		th.start();
 	}
 
-	public void mostraErroreMancatoAccesso() {
-		((Home) getDashboard().getHome()).getLblFareAccesso().setVisible(true);
-		((Home) getDashboard().getHome()).getLblFareAccesso().setText("Per continuare, effettuare prima l'accesso");
-	}
-
 	// MENU INFO ACCOUNT
 	public void entraInGestioneUtenti() {
 		if (sbloccaGestione()) {
@@ -2360,6 +2444,8 @@ public class Controller {
 		((CambioPassword) getDashboard().getCambioPassword()).getTxtRipetiNuovaPassword().setText("");
 	}
 
+
+	
 	@SuppressWarnings("deprecation")
 	public void cambioPasswordDaProfilo() {
 		utn = new Utente(emailAccesso,
@@ -2376,22 +2462,56 @@ public class Controller {
 			mostraOperazioneEffettuataConSuccesso();
 			logout();
 			mostraPannelli(getDashboard().getAccesso());
-
 			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-		} else if ((passwordVecchiaUgualeAllaNuova()) && !(ripetiCambioPassword())
-				&& !(controlloCampiSeVuotiCambioPassword())) {
-			((CambioPassword) getDashboard().getCambioPassword()).getLblMessaggioErrore()
-					.setText("Le password non corrispondono");
-		} else if (!(passwordVecchiaUgualeAllaNuova()) && (ripetiCambioPassword())
-				&& !(controlloCampiSeVuotiCambioPassword())) {
-			((CambioPassword) getDashboard().getCambioPassword()).getLblMessaggioErrore()
-					.setText("La password che hai non corrisponde con quella scritta");
+			
+		} else if (erroreCambioPasswordNonCorrispondenteConAttuale()) {
+			mostraErrore(erroreCambioPasswordNonCorrispondenteConAttuale);
+		} else if (errorePasswordsNonCorrispondenti()) {
+			mostraErrore(errorePasswordsNonCorrispondenti);
+		}  else if (erroriMultipliCambioPassword()){
+			mostraErrore(erroreGenericoInInserimentiCampi);
 		} else {
-			((CambioPassword) getDashboard().getCambioPassword()).getLblMessaggioErrore()
-					.setText("Riempire tutti i campi per continuare");
+			mostraIconaErroreVecchiaPasswordaMancanteCambioPassword();
+			mostraErrore(erroreCampiVuoti);
 		}
 	}
+	
+	//ERRORI CAMBIO PASSWORD
+	public void mostraIconaErroreVecchiaPasswordaMancanteCambioPassword() {
+        if (((CambioPassword) getDashboard().getCambioPassword()).getTxtVecchiaPassword().getText().equals("")) {
+            ((CambioPassword) getDashboard().getCambioPassword()).getLblIconaErroreVecchiaPassword().setVisible(true);
+        } else {
+            ((CambioPassword) getDashboard().getRegistrazione()).getLblIconaErroreVecchiaPassword().setVisible(false);
+        }
+    }
+	
+	public boolean errorePasswordsNonCorrispondenti() {
+		if ((passwordVecchiaUgualeAllaNuova()) && !(ripetiCambioPassword())
+				&& !(controlloCampiSeVuotiCambioPassword())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean erroreCambioPasswordNonCorrispondenteConAttuale() {
+		if (!(passwordVecchiaUgualeAllaNuova()) && (ripetiCambioPassword())
+				&& !(controlloCampiSeVuotiCambioPassword())) {
+			return true;
+		} else {
+			return false;
+		}
+	}	
 
+	public boolean erroriMultipliCambioPassword() {
+		if (!(passwordVecchiaUgualeAllaNuova()) && !(ripetiCambioPassword())
+				&& !(controlloCampiSeVuotiCambioPassword())) {
+			return true;
+		} else {
+			return false;
+		}
+	}	
+	
 	@SuppressWarnings("deprecation")
 	public boolean controlloCampiSeVuotiCambioPassword() {
 		if (((CambioPassword) getDashboard().getCambioPassword()).getTxtVecchiaPassword().getText().length() <= 0
@@ -2453,24 +2573,81 @@ public class Controller {
 				implementazioneUtenteDAO().passwordDimenticata(utn);
 				mostraPannelli(getDashboard().getAccesso());
 				getDashboard().getPasswordDimenticata().dispose();
+				mostraOperazioneEffettuataConSuccesso();
 				getDashboard().setEnabled(true);
 				getDashboard().setVisible(true);
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-			} else if (!ripetiPasswordDimenticata() && implementazioneUtenteDAO().esisteEmail(email)
-					&& !(controlloCampiSeVuotiPasswordDimenticata())) {
-				((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
-						.setText("Le passwords non corrispondono");
-			} else if (ripetiPasswordDimenticata()
-					&& (implementazioneUtenteDAO().esisteEmail(email) && controlloCampiSeVuotiPasswordDimenticata())) {
-				((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
-						.setText("Inserire i campi vuoti");
+			} else if (erroreRipetiPasswordDimenticata()) {
+				mostraErrore(errorePasswordsNonCorrispondenti);
+			} else if (erroriMultipliPasswordDimenticata()) {
+				mostraErrore(erroreGenericoInInserimentiCampi);
+			} else if (erroreEmailNonRegistrata())  {
+				mostraErrore(errorePasswordDimenticataEmailNonRegistrata);
 			} else {
-				((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMessaggioCredenziali()
-						.setText("L'email non esiste");
+				mostraErrore(erroreCampiVuoti);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// ERRORI PASSWORD DIMENTICATA
+	public void mostraIconaErroreEmailMancantePasswordDimenticata() {
+        if (((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText().equals("")) {
+            ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblIconaErroreEmail().setVisible(true);
+        } else {
+            ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblIconaErroreEmail().setVisible(false);
+        }
+    }
+
+	public boolean erroreRipetiPasswordDimenticata() {
+		String email = ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText();
+		boolean esisteEmail = false;
+		try {
+			esisteEmail = implementazioneUtenteDAO().esisteEmail(email);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (!ripetiPasswordDimenticata() && esisteEmail && !(controlloCampiSeVuotiPasswordDimenticata())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean erroreEmailNonRegistrata() {
+		String email = ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText();
+		boolean esisteEmail = false;
+		try {
+			esisteEmail = implementazioneUtenteDAO().esisteEmail(email);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (ripetiPasswordDimenticata() && !esisteEmail && !controlloCampiSeVuotiPasswordDimenticata()) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public boolean erroriMultipliPasswordDimenticata() {
+		String email = ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText();
+		boolean esisteEmail = false;
+		try {
+			esisteEmail = implementazioneUtenteDAO().esisteEmail(email);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (!ripetiPasswordDimenticata() && !esisteEmail && !controlloCampiSeVuotiPasswordDimenticata()) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	public boolean controlloCampiSeVuotiPasswordDimenticata() {
@@ -2639,81 +2816,6 @@ public class Controller {
 			mostraPannelli(getDashboard().getHome());
 		}
 
-	}
-
-	@SuppressWarnings("deprecation")
-	public void calcoloRitardo() {
-		Calendar ArrivoTeorico = Calendar.getInstance();
-		Calendar ArrivoEffettivo = Calendar.getInstance();
-
-		SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss");
-		Date dataCorrente = new Date(System.currentTimeMillis());
-		formatoData.format(dataCorrente);
-
-		int annoTeorico = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
-				.getDate().getYear();
-		int meseTeorico = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
-				.getDate().getMonth();
-		int giornoTeorico = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
-				.getDate().getDate();
-		int oraTeorica = Integer.parseInt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText());
-		int minutoTeorico = Integer.parseInt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText());
-
-		int annoEffettivo = dataCorrente.getYear();
-		int meseEffettivo = dataCorrente.getMonth();
-		int giornoEffettivo = dataCorrente.getDate();
-		int oraEffettiva = (int) dataCorrente.getHours();
-		int minutoEffettivo = dataCorrente.getMinutes();
-
-		ArrivoTeorico.set(Calendar.YEAR, annoTeorico);
-		ArrivoTeorico.set(Calendar.MONTH, meseTeorico);
-		ArrivoTeorico.set(Calendar.DAY_OF_MONTH, giornoTeorico);
-		ArrivoTeorico.set(Calendar.HOUR_OF_DAY, oraTeorica);
-		ArrivoTeorico.set(Calendar.MINUTE, minutoTeorico);
-
-		ArrivoEffettivo.set(Calendar.YEAR, annoEffettivo);
-		ArrivoEffettivo.set(Calendar.MONTH, meseEffettivo);
-		ArrivoEffettivo.set(Calendar.DAY_OF_MONTH, giornoEffettivo);
-		ArrivoEffettivo.set(Calendar.HOUR_OF_DAY, oraEffettiva);
-		ArrivoEffettivo.set(Calendar.MINUTE, minutoEffettivo);
-
-		long Differenza_ArrivoTeorico = ArrivoTeorico.getTimeInMillis();
-		long Differenza_ArrivoEffettivo = ArrivoEffettivo.getTimeInMillis();
-		long ritardo_Arrivo = Differenza_ArrivoEffettivo - Differenza_ArrivoTeorico;
-		long ritardoSecondo_Arrivo = ritardo_Arrivo / 1000;
-		long ritardoMinuto_Arrivo = ritardoSecondo_Arrivo / 60;
-		long ritardoOra_Arrivo = ritardoMinuto_Arrivo / 60;
-		long ritardoGiorno_Arrivo = ritardoOra_Arrivo / 24;
-		long ritardoMese_Arrivo = ritardoGiorno_Arrivo / 30;
-		long ritardoAnno_Arrivo = ritardoMese_Arrivo / 12;
-
-		if (ritardoAnno_Arrivo == 1) {
-			System.out.println("Il ritardo dell'arrivo è di: " + ritardoAnno_Arrivo + " anno.");
-		} else if (ritardoAnno_Arrivo > 1) {
-			System.out.println("Il ritardo dell'arrivo è di: " + ritardoAnno_Arrivo + " anni.");
-		} else if (ritardoMese_Arrivo == 1) {
-			System.out.println("Il ritardo dell'arrivo è di: " + ritardoMese_Arrivo + " mese.");
-		} else if (ritardoMese_Arrivo > 1) {
-			System.out.println("Il ritardo della partenze è di: " + ritardoMese_Arrivo + " mesi.");
-		} else if (ritardoGiorno_Arrivo == 1) {
-			System.out.println("Il ritardo della partenze è di: " + ritardoGiorno_Arrivo + " giorno.");
-		} else if (ritardoGiorno_Arrivo > 1) {
-			System.out.println("Il ritardo della partenze è di: " + ritardoGiorno_Arrivo + " giorni.");
-		} else if (ritardoOra_Arrivo == 1) {
-			System.out.println("Il ritardo della partenze è di: " + ritardoOra_Arrivo + " ora.");
-		} else if (ritardoOra_Arrivo > 1) {
-			System.out.println("Il ritardo della partenze è di: " + ritardoOra_Arrivo + " ore.");
-		} else if (ritardoMinuto_Arrivo == 1) {
-			System.out.println("Il ritardo della partenze è di: " + ritardoMinuto_Arrivo + " minuto.");
-		} else if (ritardoMinuto_Arrivo > 1) {
-			System.out.println("Il ritardo della partenze è di: " + ritardoMinuto_Arrivo + " minuti.");
-		} else if (ritardoSecondo_Arrivo == 1) {
-			System.out.println("Il ritardo della partenze è di: " + ritardoSecondo_Arrivo + " secondo.");
-		} else if (ritardoSecondo_Arrivo > 1) {
-			System.out.println("Il ritardo della partenze è di: " + ritardoSecondo_Arrivo + " secondi.");
-		}
 	}
 
 	// METODI DI CAMBIO TEMA E IMMAGINI

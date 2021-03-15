@@ -117,7 +117,7 @@ public class VoloPartenze {
 	}
 
 	public VoloPartenze(String codiceVoloPartenze, Timestamp dataOrarioPartenza, String numeroPrenotazioni,
-			Time tempoImbarcoEffettivo, Tratta trt, Gate gt, String statusVolo) {
+			Time tempoImbarcoEffettivo, Tratta trt, Gate gt, String statusVolo, String statusImbarco) {
 		super();
 		this.gt = gt;
 		this.trt = trt;
@@ -126,6 +126,7 @@ public class VoloPartenze {
 		this.numeroPrenotazioni = numeroPrenotazioni;
 		this.tempoImbarcoEffettivo = tempoImbarcoEffettivo;
 		this.statusVolo = statusVolo;
+		this.statusImbarco = statusImbarco;
 	}
 
 	public VoloPartenze(String codiceVoloPartenze) {
