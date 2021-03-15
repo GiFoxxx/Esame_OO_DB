@@ -676,7 +676,6 @@ public class Controller {
 
 	@SuppressWarnings("deprecation")
 	public void registrati() {
-		((Registrazione) getDashboard().getRegistrazione()).getLblMessaggioCredenziali().setText("");
 		if (controlloRegistrazioneBuona()) {
 			Utente utn = new Utente(((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText(),
 					((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText(),
@@ -2584,6 +2583,7 @@ public class Controller {
 			} else if (erroreEmailNonRegistrata())  {
 				mostraErrore(errorePasswordDimenticataEmailNonRegistrata);
 			} else {
+				mostraIconaErroreEmailMancantePasswordDimenticata();
 				mostraErrore(erroreCampiVuoti);
 			}
 		} catch (SQLException e) {

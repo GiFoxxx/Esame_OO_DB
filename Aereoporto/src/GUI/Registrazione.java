@@ -30,7 +30,6 @@ public class Registrazione extends JPanel {
 	private JTextField txtEmail;
 	private JPasswordField txtPassword;
 	private JPasswordField txtRipetiPassword;
-	private JLabel lblMessaggioCredenziali;
 	private JLabel lblAvanti;
 	private JLabel lblInserimentoCredenziali;
 	private JLabel lblMostraPassword;
@@ -41,6 +40,11 @@ public class Registrazione extends JPanel {
 	private JLabel lblCensuraPasswordTT;
 	private JLabel lblMostraRipetiPasswordTT;
 	private JLabel lblCensuraRipetiPasswordTT;
+	private JLabel lblIconaErroreNome;
+	private JLabel lblIconaErroreCognome;
+	private JLabel lblIconaErroreEmail;
+
+
 
 	// GETTER E SETTER
 
@@ -100,13 +104,7 @@ public class Registrazione extends JPanel {
 		this.txtRipetiPassword = txtRipetiPassword;
 	}
 
-	public JLabel getLblMessaggioCredenziali() {
-		return lblMessaggioCredenziali;
-	}
 
-	public void setLblMessaggioCredenziali(JLabel lblMessaggioCredenziali) {
-		this.lblMessaggioCredenziali = lblMessaggioCredenziali;
-	}
 
 	public JLabel getLblMostraPassword() {
 		return lblMostraPassword;
@@ -172,6 +170,34 @@ public class Registrazione extends JPanel {
 		this.lblCensuraRipetiPasswordTT = lblCensuraRipetiPasswordTT;
 	}
 
+
+
+	public JLabel getLblIconaErroreNome() {
+		return lblIconaErroreNome;
+	}
+
+	public void setLblIconaErroreNome(JLabel lblIconaErroreNome) {
+		this.lblIconaErroreNome = lblIconaErroreNome;
+	}
+
+	public JLabel getLblIconaErroreCognome() {
+		return lblIconaErroreCognome;
+	}
+
+	public void setLblIconaErroreCognome(JLabel lblIconaErroreCognome) {
+		this.lblIconaErroreCognome = lblIconaErroreCognome;
+	}
+
+	public JLabel getLblIconaErroreEmail() {
+		return lblIconaErroreEmail;
+	}
+
+	public void setLblIconaErroreEmail(JLabel lblIconaErroreEmail) {
+		this.lblIconaErroreEmail = lblIconaErroreEmail;
+	}
+
+
+
 	Controller controllerRegistrazione;
 
 	public Registrazione(Controller controller) {
@@ -189,13 +215,41 @@ public class Registrazione extends JPanel {
 					controllerRegistrazione.registrati();
 				}
 			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() != KeyEvent.VK_ENTER) {
+					lblIconaErroreNome.setVisible(false);
+				}
+			}
 		});
+		
+		lblIconaErroreNome = new JLabel("");
+		lblIconaErroreNome.setVisible(false);
+		lblIconaErroreNome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconaErroreNome.setIcon(new ImageIcon(img.errore()));
+		lblIconaErroreNome.setBounds(693, 66, 20, 20);
+		add(lblIconaErroreNome);
+		
+		lblIconaErroreCognome = new JLabel("");
+		lblIconaErroreCognome.setVisible(false);
+		lblIconaErroreCognome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconaErroreCognome.setIcon(new ImageIcon(img.errore()));
+		lblIconaErroreCognome.setBounds(693, 171, 20, 20);
+		add(lblIconaErroreCognome);
+		
+		lblIconaErroreEmail = new JLabel("");
+		lblIconaErroreEmail.setVisible(false);
+		lblIconaErroreEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconaErroreEmail.setIcon(new ImageIcon(img.errore()));
+		lblIconaErroreEmail.setBounds(693, 276, 20, 20);
+		add(lblIconaErroreEmail);
+		
 		txtNome.setFont(controllerRegistrazione.fontScritte);
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
 		txtNome.setBackground(controllerRegistrazione.sfondoTemaScuro);
 		txtNome.setForeground(controllerRegistrazione.coloreScritteTemaScuro);
-		txtNome.setBounds(374, 65, 340, 23);
+		txtNome.setBounds(374, 65, 310, 23);
 		add(txtNome);
 
 		txtCognome = new JTextField();
@@ -206,13 +260,19 @@ public class Registrazione extends JPanel {
 					controllerRegistrazione.registrati();
 				}
 			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() != KeyEvent.VK_ENTER) {
+					lblIconaErroreCognome.setVisible(false);
+				}
+			}
 		});
 		txtCognome.setFont(controllerRegistrazione.fontScritte);
 		txtCognome.setColumns(10);
 		txtCognome.setBorder(null);
 		txtCognome.setBackground(controllerRegistrazione.sfondoTemaScuro);
 		txtCognome.setForeground(controllerRegistrazione.coloreScritteTemaScuro);
-		txtCognome.setBounds(374, 170, 340, 23);
+		txtCognome.setBounds(374, 170, 310, 23);
 		add(txtCognome);
 
 		txtEmail = new JTextField();
@@ -223,13 +283,19 @@ public class Registrazione extends JPanel {
 					controllerRegistrazione.registrati();
 				}
 			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() != KeyEvent.VK_ENTER) {
+					lblIconaErroreEmail.setVisible(false);
+				}
+			}
 		});
 		txtEmail.setFont(controllerRegistrazione.fontScritte);
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
 		txtEmail.setBackground(controllerRegistrazione.sfondoTemaScuro);
 		txtEmail.setForeground(controllerRegistrazione.coloreScritteTemaScuro);
-		txtEmail.setBounds(374, 275, 340, 23);
+		txtEmail.setBounds(374, 275, 310, 23);
 		add(txtEmail);
 
 		txtPassword = new JPasswordField();
@@ -420,13 +486,6 @@ public class Registrazione extends JPanel {
 		lblInserimentoCredenziali.setIcon(new ImageIcon(img.credenzialiRegistrazione()));
 		lblInserimentoCredenziali.setBounds(373, 37, 344, 473);
 		add(lblInserimentoCredenziali);
-
-		lblMessaggioCredenziali = new JLabel("");
-		lblMessaggioCredenziali.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessaggioCredenziali.setFont(controllerRegistrazione.fontLabel);
-		lblMessaggioCredenziali.setForeground(controllerRegistrazione.coloreScritturaAllertaTemaScuro);
-		lblMessaggioCredenziali.setBounds(269, 526, 553, 14);
-		add(lblMessaggioCredenziali);
 	}
 
 }

@@ -38,11 +38,11 @@ public class CambioPassword extends JPanel {
 	private JLabel lblPasswordDimenticata;
 	private JLabel lblSalva;
 	private JLabel lblAnnulla;
-	private JLabel lblMessaggioErrore;
 	private JLabel lblMostraNuovaPasswordTT;
 	private JLabel lblCensuraNuovaPasswordTT;
 	private JLabel lblMostraRipetiNuovaPasswordTT;
 	private JLabel lblCensuraRipetiNuovaPasswordTT;
+	private JLabel lblIconaErroreVecchiaPassword;
 	
 	// GETTER E SETTER
 
@@ -133,14 +133,6 @@ public class CambioPassword extends JPanel {
 	public void setLblPasswordDimenticata(JLabel lblPasswordDimenticata) {
 		this.lblPasswordDimenticata = lblPasswordDimenticata;
 	}
-
-	public JLabel getLblMessaggioErrore() {
-		return lblMessaggioErrore;
-	}
-
-	public void setLblMessaggioErrore(JLabel lblMessaggioErrore) {
-		this.lblMessaggioErrore = lblMessaggioErrore;
-	}
 	
 	public JLabel getLblMostraNuovaPasswordTT() {
 		return lblMostraNuovaPasswordTT;
@@ -174,6 +166,14 @@ public class CambioPassword extends JPanel {
 		this.lblCensuraRipetiNuovaPasswordTT = lblCensuraRipetiPasswordTT;
 	}
 
+	public JLabel getLblIconaErroreVecchiaPassword() {
+		return lblIconaErroreVecchiaPassword;
+	}
+
+	public void setLblIconaErroreVecchiaPassword(JLabel lblIconaErroreVecchiaPassword) {
+		this.lblIconaErroreVecchiaPassword = lblIconaErroreVecchiaPassword;
+	}
+
 	Controller controllerCambioPassword;
 	
 
@@ -192,7 +192,20 @@ public class CambioPassword extends JPanel {
 					controllerCambioPassword.cambioPasswordDaProfilo();
 				}
 			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() != KeyEvent.VK_ENTER) {
+					lblIconaErroreVecchiaPassword.setVisible(false);
+				}
+			}
 		});
+		
+		lblIconaErroreVecchiaPassword = new JLabel("");
+		lblIconaErroreVecchiaPassword.setVisible(false);
+		lblIconaErroreVecchiaPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconaErroreVecchiaPassword.setIcon(new ImageIcon(img.errore()));
+		lblIconaErroreVecchiaPassword.setBounds(684, 176, 20, 20);
+		add(lblIconaErroreVecchiaPassword);
 		txtVecchiaPassword.setBorder(null);
 		txtVecchiaPassword.setFont(controllerCambioPassword.fontScritte);
 		txtVecchiaPassword.setBackground(controllerCambioPassword.sfondoTemaScuro);
@@ -447,13 +460,6 @@ public class CambioPassword extends JPanel {
 		});
 		lblAnnulla.setBounds(277, 79, 41, 41);
 		add(lblAnnulla);
-		
-		lblMessaggioErrore = new JLabel("");
-		lblMessaggioErrore.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessaggioErrore.setFont(controllerCambioPassword.fontLabel);
-		lblMessaggioErrore.setForeground(controllerCambioPassword.coloreScritturaAllertaTemaScuro);
-		lblMessaggioErrore.setBounds(342, 455, 380, 14);
-		add(lblMessaggioErrore);
 
 	}
 

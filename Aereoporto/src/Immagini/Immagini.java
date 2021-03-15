@@ -99,6 +99,12 @@ public class Immagini {
 		return menu;
 	}
 	
+	public Image messaggioErroreGestioni() {
+        Image messaggioErroreGestioni = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/messaggioErrore.png")).getImage()
+                .getScaledInstance(1073, 25, Image.SCALE_SMOOTH);
+        return messaggioErroreGestioni;
+    }
+	
 	public Image frecciaMenu1() {
 		Image frecciaMenu1 = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/frecciaMenu1.png")).getImage()
 				.getScaledInstance(23, 35, Image.SCALE_SMOOTH);
@@ -561,6 +567,13 @@ public class Immagini {
 	}
 
 	// IN COMUNE
+	public Image errore() {
+		Image errore = new ImageIcon(
+				Registrazione.class.getResource("immaginiInComune/errore.png")).getImage()
+						.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		return errore;
+	}
+	
 	public Image frecciaIndietro1() {
 		Image imgfrecciaIndietro1 = new ImageIcon(
 				Registrazione.class.getResource("immaginiInComune/frecciaIndietro1.png")).getImage()
@@ -1327,7 +1340,7 @@ public class Immagini {
 
 	public Image salvaModifiche3TemaChiaro() {
 		Image salvaModifiche3Chiaro = new ImageIcon(
-				CambioPassword.class.getResource("immaginiBoimmaginiBottoniChiarettoni/salvaModifiche3Chiaro.png"))
+				CambioPassword.class.getResource("immaginiBottoniChiare/salvaModifiche3Chiaro.png"))
 						.getImage().getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return salvaModifiche3Chiaro;
 	}
