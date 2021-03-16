@@ -99,10 +99,16 @@ public class Immagini {
 		return menu;
 	}
 	
-	public Image messaggioErroreGestioni() {
-        Image messaggioErroreGestioni = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/messaggioErrore.png")).getImage()
+	public Image messaggioNotifica() {
+        Image messaggioNotifica = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/messaggioNotifica.png")).getImage()
                 .getScaledInstance(1073, 25, Image.SCALE_SMOOTH);
-        return messaggioErroreGestioni;
+        return messaggioNotifica;
+    }
+	
+	public Image messaggioErrore() {
+        Image messaggioErrore = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/messaggioErrore.png")).getImage()
+                .getScaledInstance(1073, 25, Image.SCALE_SMOOTH);
+        return messaggioErrore;
     }
 	
 	public Image frecciaMenu1() {
@@ -195,12 +201,6 @@ public class Immagini {
 		Image _3 = new ImageIcon(Accesso.class.getResource("immaginiDashboard/_3.png")).getImage().getScaledInstance(51,
 				35, Image.SCALE_SMOOTH);
 		return _3;
-	}
-
-	public Image titolo() {
-		Image titolo = new ImageIcon(Accesso.class.getResource("immaginiDashboard/titolo.png")).getImage()
-				.getScaledInstance(217, 18, Image.SCALE_SMOOTH);
-		return titolo;
 	}
 
 	public Image imgSfondoFull() {
@@ -567,6 +567,13 @@ public class Immagini {
 	}
 
 	// IN COMUNE
+	public Image titolo() {
+		Image titolo = new ImageIcon(
+				Dashboard.class.getResource("immaginiInComune/titolo.png")).getImage()
+						.getScaledInstance(234, 21, Image.SCALE_SMOOTH);
+		return titolo;
+	}
+	
 	public Image errore() {
 		Image errore = new ImageIcon(
 				Registrazione.class.getResource("immaginiInComune/errore.png")).getImage()

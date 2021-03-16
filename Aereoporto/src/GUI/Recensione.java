@@ -167,25 +167,25 @@ public class Recensione extends JPanel {
 		lblInviaRecensione.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione2TemaChiaro(),
+				controllerRecensione.cambioImmagineTema(lblInviaRecensione, img.inviaRecensione2TemaChiaro(),
 						img.inviaRecensione2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione1TemaChiaro(),
+				controllerRecensione.cambioImmagineTema(lblInviaRecensione, img.inviaRecensione1TemaChiaro(),
 						img.inviaRecensione1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione3TemaChiaro(),
+				controllerRecensione.cambioImmagineTema(lblInviaRecensione, img.inviaRecensione3TemaChiaro(),
 						img.inviaRecensione3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.inviaRecensione1TemaChiaro(),
+				controllerRecensione.cambioImmagineTema(lblInviaRecensione, img.inviaRecensione1TemaChiaro(),
 						img.inviaRecensione1());
 			}
 
@@ -566,15 +566,16 @@ public class Recensione extends JPanel {
 		add(scrollPane);
 
 		textArea = new JTextArea();
-		textArea.setFont(new Font("Arial", Font.PLAIN, 11));
+		textArea.setFont(controllerRecensione.fontLabel);
+		textArea.setForeground(controllerRecensione.coloreLabelTemaScuro);
 		textArea.setLocation(37, 0);
 		scrollPane.setViewportView(textArea);
 
-		lblCommento = new JLabel("Lascia un commento e faremo il possibile per migliorare il programma!");
+		lblCommento = new JLabel("Lascia una recensione!");
 		lblCommento.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCommento.setForeground(controllerRecensione.coloreLabelTemaScuro);
 		lblCommento.setFont(controllerRecensione.fontLabel);
-		lblCommento.setForeground(controllerRecensione.coloreScritteSuBiancoTemaScuro);
-		lblCommento.setBounds(44, 410, 525, 19);
+		lblCommento.setBounds(44, 410, 389, 19);
 		add(lblCommento);
 
 	}

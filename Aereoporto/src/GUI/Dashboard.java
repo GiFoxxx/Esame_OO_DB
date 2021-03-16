@@ -719,8 +719,8 @@ public class Dashboard extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				controllerDashboard.setStopMenuTT(false);
 				if (menuInfoAccount.isVisible()) {
-					controllerDashboard.chiudiTendinaIstantanea();
 					controllerDashboard.chiudiMenuTT();
+					controllerDashboard.chiudiTendinaIstantanea();
 					controllerDashboard.chiudiMenuInfoAccount();
 				} else {
 					controllerDashboard.cambioImmagineTema(lblFrecciaMenu, img.frecciaMenu3TemaChiaro(), img.frecciaMenu3());
@@ -761,9 +761,10 @@ public class Dashboard extends JFrame {
 		lblFrecciaMenu.setBounds(980, 0, 23, 35);
 		contentPane.add(lblFrecciaMenu);
 
-		lblTitolo = new JLabel("AIRPORT MANAGEMENT");
-		lblTitolo.setBounds(0, 0, 238, 37);
+		lblTitolo = new JLabel("");
+		lblTitolo.setBounds(5, 8, 234, 21);
 		lblTitolo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitolo.setIcon(new ImageIcon(img.titolo()));
 		lblTitolo.setForeground(controllerDashboard.coloreScritteTemaScuro);
 		lblTitolo.setFont(controllerDashboard.fontTitolo);
 		contentPane.add(lblTitolo);
@@ -1376,6 +1377,7 @@ public class Dashboard extends JFrame {
 		lineeChiusura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controllerDashboard.chiudiTuttiTT();
 				controllerDashboard.chiudiTendina();
 			}
 
@@ -1584,7 +1586,7 @@ public class Dashboard extends JFrame {
 		pannelloErrore.add(lblMessaggioErroreTesto);
 		
 		lblMessaggioErroreLayout = new JLabel("");
-		lblMessaggioErroreLayout.setIcon(new ImageIcon(img.messaggioErroreGestioni()));
+		lblMessaggioErroreLayout.setIcon(new ImageIcon(img.messaggioErrore()));
 		lblMessaggioErroreLayout.setBounds(5, 0, 1078, 25);
 		pannelloErrore.add(lblMessaggioErroreLayout);
 
