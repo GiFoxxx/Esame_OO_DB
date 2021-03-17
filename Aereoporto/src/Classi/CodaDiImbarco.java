@@ -1,5 +1,7 @@
 package Classi;
 
+import java.sql.Time;
+
 public class CodaDiImbarco {
 
 	Gate gate;
@@ -7,7 +9,7 @@ public class CodaDiImbarco {
 	// ATTRIBUTI
 	String codiceCodaDiImbarco;
 	String nomeCoda;
-	int tempoImbarcoStimato = 0;
+	Time tempoImbarcoStimato;
 
 	// GETTER E SETTER
 
@@ -27,6 +29,14 @@ public class CodaDiImbarco {
 		this.nomeCoda = nomeCoda;
 	}
 
+	public Time getTempoImbarcoStimato() {
+		return tempoImbarcoStimato;
+	}
+
+	public void setTempoImbarcoStimato(Time tempoImbarcoStimato) {
+		this.tempoImbarcoStimato = tempoImbarcoStimato;
+	}
+
 	// COSTRUTTORE
 	public CodaDiImbarco(String codiceCodaDiImbarco) {
 		super();
@@ -39,7 +49,7 @@ public class CodaDiImbarco {
 		this.nomeCoda = nomeCoda;
 	}
 
-	public CodaDiImbarco(String codiceCodaDiImbarco, String nomeCoda, int tempoImbarcoStimato) {
+	public CodaDiImbarco(String codiceCodaDiImbarco, String nomeCoda, Time tempoImbarcoStimato) {
 		super();
 		this.codiceCodaDiImbarco = codiceCodaDiImbarco;
 		this.nomeCoda = nomeCoda;

@@ -280,7 +280,6 @@ public class Accesso extends JPanel {
 		add(lblAvanti);
 
 		lblPasswordDimenticata = new JLabel("Password dimenticata?");
-
 		lblPasswordDimenticata.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

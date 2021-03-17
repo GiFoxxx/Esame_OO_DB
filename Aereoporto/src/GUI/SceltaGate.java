@@ -168,7 +168,6 @@ public class SceltaGate extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerSceltaGate.vaiAGateDaSceltaGate();
-					controllerSceltaGate.setPannelloPrecedente(8);
 				}
 
 				@Override
@@ -206,7 +205,6 @@ public class SceltaGate extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerSceltaGate.vaiAGateCodeImbarcoDaSceltaVolo();
-					controllerSceltaGate.setPannelloPrecedente(11);
 				}
 
 				@Override
@@ -244,7 +242,6 @@ public class SceltaGate extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerSceltaGate.vaiATempisticheGateDaSceltaVolo();
-					controllerSceltaGate.setPannelloPrecedente(14);
 				}
 
 				@Override

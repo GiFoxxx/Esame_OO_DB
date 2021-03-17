@@ -414,7 +414,7 @@ public class GestioneTratte extends JPanel {
 				if (comboBoxNomeCompagniaAerea.getSelectedIndex() == 0) {
                     txtCodiceTratta.setText("");
                 } else {
-                txtCodiceCompagniaAerea.setText(map.get(comboBoxNomeCompagniaAerea.getSelectedItem().toString()));
+                	txtCodiceCompagniaAerea.setText(map.get(comboBoxNomeCompagniaAerea.getSelectedItem().toString()));
                 }
             }
         });
@@ -561,7 +561,7 @@ public class GestioneTratte extends JPanel {
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				caricaTabella();
+				aggiorna();
 			}
 
 			@Override
@@ -614,6 +614,7 @@ public class GestioneTratte extends JPanel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		for (String s : map.keySet()) {
 			comboBoxNomeCompagniaAerea.addItem(s);
 		}
@@ -625,5 +626,12 @@ public class GestioneTratte extends JPanel {
 		TableRowSorter<DefaultTableModel> trm = new TableRowSorter<DefaultTableModel>(table);
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
+	}
+	
+	private void aggiorna() {
+		caricaTabella();
+		controllerGestioneTratte.rimuoviElementiComboBox(comboBoxNomeCompagniaAerea);
+		stampaComboBoxNomeCompagniaAerea();
+		comboBoxNomeCompagniaAerea.removeItemAt(0);
 	}
 }

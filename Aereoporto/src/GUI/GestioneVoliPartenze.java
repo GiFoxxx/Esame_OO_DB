@@ -39,9 +39,8 @@ public class GestioneVoliPartenze extends JPanel {
 			"Apertura Gate", "Chiusura Gate", "N° Prenotazioni", "Status Imbarco", "Status Volo" };
 	VoloPartenze[] row = new VoloPartenze[11];
 	DefaultTableModel modello = new DefaultTableModel(new Object[][] {},
-			new String[] { "Cod. Voli Part.", "Comp. Aerea", "N\u00B0Gate", "Citta di Arrivo",
-					"Data e Orario Partenza", "Apertura Gate", "Chiusura Gate", "N\u00B0 Prenotazioni",
-					"Status Imbarco", "Status Volo" });
+			new String[] { "Cod. Voli Part.", "Comp. Aerea", "N\u00B0Gate", "Citta di Arrivo", "Data e Orario Partenza",
+					"Apertura Gate", "Chiusura Gate", "N\u00B0 Prenotazioni", "Status Imbarco", "Status Volo" });
 	List<VoloPartenze> ListaVoliPartenze = new ArrayList<>();
 	private Immagini img = new Immagini();
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -371,22 +370,26 @@ public class GestioneVoliPartenze extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblimgfrecciaIndietro,
+						img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblimgfrecciaIndietro,
+						img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblimgfrecciaIndietro,
+						img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblimgfrecciaIndietro,
+						img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -484,7 +487,7 @@ public class GestioneVoliPartenze extends JPanel {
 		txtCodiceVoloPartenze.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		txtCodiceVoloPartenze.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		txtCodiceVoloPartenze.setColumns(10);
-		txtCodiceVoloPartenze.setBounds(223, 438, 82, 20);
+		txtCodiceVoloPartenze.setBounds(223, 438, 80, 20);
 		add(txtCodiceVoloPartenze);
 
 		lblCodiceVoloPartenze = new JLabel("Codice Volo Partenze");
@@ -616,6 +619,7 @@ public class GestioneVoliPartenze extends JPanel {
 		comboBoxNumeroPorta = new JComboBox<String>();
 		comboBoxNumeroPorta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				HashMap<String, String> map = null;
 				try {
 					map = controllerGestioneVoliPartenze.implementazioneGateDAO().stampaNumeroPortaInComboBox();
@@ -623,13 +627,13 @@ public class GestioneVoliPartenze extends JPanel {
 					e1.printStackTrace();
 				}
 				if (comboBoxNumeroPorta.getSelectedIndex() == 0) {
-                    txtCodiceGate.setText("");
-                } else {
-                    txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
-                }
-            }
-        });
-        comboBoxNumeroPorta.addItem("---");
+					txtCodiceGate.setText("");
+				} else {
+					txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
+				}
+			}
+		});
+
 		comboBoxNumeroPorta.setBounds(223, 469, 40, 20);
 		add(comboBoxNumeroPorta);
 
@@ -643,13 +647,12 @@ public class GestioneVoliPartenze extends JPanel {
 					e1.printStackTrace();
 				}
 				if (comboBoxCittaArrivo.getSelectedIndex() == 0) {
-                    txtCodiceTratta.setText("");
-                } else {
-                    txtCodiceTratta.setText(map.get(comboBoxCittaArrivo.getSelectedItem().toString()));
-                }
-            }
-        });
-        comboBoxCittaArrivo.addItem("----------");
+					txtCodiceTratta.setText("");
+				} else {
+					txtCodiceTratta.setText(map.get(comboBoxCittaArrivo.getSelectedItem().toString()));
+				}
+			}
+		});
 		comboBoxCittaArrivo.setBounds(223, 500, 95, 20);
 		add(comboBoxCittaArrivo);
 
@@ -664,22 +667,26 @@ public class GestioneVoliPartenze extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(), img.aggiungi2());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(),
+						img.aggiungi2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(),
+						img.aggiungi1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(), img.aggiungi3());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(),
+						img.aggiungi3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(),
+						img.aggiungi1());
 			}
 		});
 		lblAggiungi.setHorizontalAlignment(SwingConstants.CENTER);
@@ -701,22 +708,26 @@ public class GestioneVoliPartenze extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(),
+						img.modifica2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(),
+						img.modifica1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(), img.modifica3());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(),
+						img.modifica3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(),
+						img.modifica1());
 			}
 		});
 		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
@@ -789,46 +800,43 @@ public class GestioneVoliPartenze extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
-		
+
 		lblRicaricaTabella = new JLabel("");
 		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				caricaTabella();
+				aggiorna();
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(),
+						img.aggiorna2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(),
+						img.aggiorna3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneVoliPartenze.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
 		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
-
-		lblMessaggioErrore = new JLabel("");
-//		lblMessaggioErrore.setForeground(controllerGestioneVoliPartenze.coloreScritturaAllertaTemaScuro);
-		lblMessaggioErrore.setFont(controllerGestioneVoliPartenze.fontLabel);
-		lblMessaggioErrore.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessaggioErrore.setBounds(223, 24, 633, 14);
-		add(lblMessaggioErrore);
 
 		lblStatus = new JLabel("Status Volo");
 		lblStatus.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -850,28 +858,28 @@ public class GestioneVoliPartenze extends JPanel {
 		comboBoxStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (comboBoxStatus.getSelectedIndex()) {
-                case 0:
-                    txtStatus.setText("");
-                    break;
-                case 1:
-                    txtStatus.setText("In programma");
-                    break;
-                case 2:
-                    txtStatus.setText("In preparazione");
-                    break;
-                case 3:
-                    txtStatus.setText("In partenza");
-                    break;
-                case 4:
-                    txtStatus.setText("In ritardo");
-                    break;
-                default:
-                    txtStatus.setText("In programma");
-                    break;
-                }
-            }
-        });
-        comboBoxStatus.addItem("----------");
+				case 0:
+					txtStatus.setText("");
+					break;
+				case 1:
+					txtStatus.setText("In programma");
+					break;
+				case 2:
+					txtStatus.setText("In preparazione");
+					break;
+				case 3:
+					txtStatus.setText("In partenza");
+					break;
+				case 4:
+					txtStatus.setText("In ritardo");
+					break;
+				default:
+					txtStatus.setText("In programma");
+					break;
+				}
+			}
+		});
+		comboBoxStatus.addItem("----------");
 		comboBoxStatus.addItem("In programma");
 		comboBoxStatus.addItem("In preparazione");
 		comboBoxStatus.addItem("In partenza");
@@ -895,7 +903,6 @@ public class GestioneVoliPartenze extends JPanel {
 
 		stampaComboBoxNumeroPorta();
 		stampaComboBoxCittaArrivo();
-
 		caricaTabella();
 	}
 
@@ -906,18 +913,21 @@ public class GestioneVoliPartenze extends JPanel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		comboBoxNumeroPorta.addItem("---");
 		for (String s : map.keySet()) {
 			comboBoxNumeroPorta.addItem(s);
 		}
 	}
 
 	public void stampaComboBoxCittaArrivo() {
+
 		HashMap<String, String> map = null;
 		try {
 			map = controllerGestioneVoliPartenze.implementazioneTrattaDAO().stampaCittaArrivoInComboBox();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		comboBoxCittaArrivo.addItem("----------");
 		for (String s : map.keySet()) {
 			comboBoxCittaArrivo.addItem(s);
 		}
@@ -947,12 +957,15 @@ public class GestioneVoliPartenze extends JPanel {
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
-
-	public String getDateDataPartenzaDateFormatString() {
-		return dateDataPartenza.getDateFormatString();
+	
+	private void aggiorna() {
+		caricaTabella();
+		controllerGestioneVoliPartenze.rimuoviElementiComboBox(comboBoxNumeroPorta);
+		stampaComboBoxNumeroPorta();
+		comboBoxNumeroPorta.removeItemAt(0);
+		controllerGestioneVoliPartenze.rimuoviElementiComboBox(comboBoxCittaArrivo);
+		stampaComboBoxCittaArrivo();
+		comboBoxCittaArrivo.removeItemAt(0);
 	}
-
-	public void setDateDataPartenzaDateFormatString(String dateFormatString) {
-		dateDataPartenza.setDateFormatString(dateFormatString);
-	}
+	
 }

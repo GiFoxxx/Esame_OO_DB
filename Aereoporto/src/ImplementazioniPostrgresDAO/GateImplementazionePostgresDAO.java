@@ -2,7 +2,6 @@ package ImplementazioniPostrgresDAO;
 
 import java.sql.Connection;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,8 +22,8 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 
 	private Connection connection;
 	private PreparedStatement stampaGatePS, stampaGateCodeImbarcoPS, aggiungiGatePS, aggiungiGateInCodaDiImbarcoGatePS,
-			cancellaGatePS, modificaGatePS, stampaUtilizzoGiornalieroPS, stampaUtilizzoSettimanalePS,
-			stampaUtilizzoMensilePS, stampaNumeroPortaInComboBoxPS;
+			cancellaGatePS, cancellaGateInCodaDiImbarcoGatePS, modificaGatePS, stampaUtilizzoGiornalieroPS,
+			stampaUtilizzoSettimanalePS, stampaUtilizzoMensilePS, stampaNumeroPortaInComboBoxPS;
 
 	public GateImplementazionePostgresDAO(Connection connection) throws SQLException {
 		this.connection = connection;
@@ -34,13 +33,15 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 				.prepareStatement("SELECT DISTINCT gt.codicegate, gt.numeroporta, cdi.nomecoda AS nomeCoda "
 						+ "FROM ((gate AS gt INNER JOIN codadiimbarcogate AS cdigt ON (xcodicegate=codicegate)) INNER JOIN codadiimbarco AS cdi ON (xcodicecodadiimbarco = codicecodadiimbarco)) "
 						+ "ORDER BY numeroporta");
-		aggiungiGatePS = connection.prepareStatement(
-				"INSERT INTO gate (codiceGate, numeroPorta, tempodiimbarcostimato, tempoChiusuraGate) VALUES (?, ?, ?, ?)");
+		aggiungiGatePS = connection
+				.prepareStatement("INSERT INTO gate (codiceGate, numeroPorta, tempoChiusuraGate) VALUES (?, ?,  ?)");
 		aggiungiGateInCodaDiImbarcoGatePS = connection
 				.prepareStatement("INSERT INTO codadiimbarcogate (xcodiceGate, xcodicecodaDiImbarco) VALUES (?, ?)");
 		cancellaGatePS = connection.prepareStatement("DELETE FROM gate WHERE codiceGate = ?");
+		cancellaGateInCodaDiImbarcoGatePS = connection
+				.prepareStatement("DELETE FROM codadiimbarcogate WHERE xcodiceGate = ? AND xcodiceCodadiimbarco = ?");
 		modificaGatePS = connection.prepareStatement(
-				"UPDATE gate SET numeroporta = ?, tempodiimbarcostimato = ?, tempoChiusuraGate = ? WHERE codiceGate = ?");
+				"UPDATE gate SET numeroporta = ?, tempoChiusuraGate = ? WHERE codiceGate = ?");
 		stampaUtilizzoGiornalieroPS = connection.prepareStatement(
 				"SELECT gt.codiceGate, extract(year from dataOrarioPartenza) AS annoUtilizzo , extract (day from dataOrarioPartenza) AS giorniUtilizzo,"
 						+ "SUM (tempoDiImbarcoEffettivo) AS totaleUtilizzoEffettivo, SUM (tempoDiImbarcoStimato) AS totaleUtilizzoStimato "
@@ -97,14 +98,13 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 	public int aggiungiGate(Gate gt) throws SQLException {
 		aggiungiGatePS.setString(1, gt.getCodiceGate());
 		aggiungiGatePS.setString(2, gt.getNumeroPorta());
-		aggiungiGatePS.setTime(3, gt.getTempoImbarcoStimato());
-		aggiungiGatePS.setTime(4, gt.getTempoChiusuraGate());
+		aggiungiGatePS.setTime(3, gt.getTempoChiusuraGate());
 
 		int row = aggiungiGatePS.executeUpdate();
 		return row;
 	}
 
-	public int aggiungiGateInCodaDiImbarcoGate(Gate gt, CodaDiImbarco codaImbarco) throws SQLException {
+	public int aggiungiGateInCodaDiImbarco(Gate gt, CodaDiImbarco codaImbarco) throws SQLException {
 		aggiungiGateInCodaDiImbarcoGatePS.setString(1, gt.getCodiceGate());
 		aggiungiGateInCodaDiImbarcoGatePS.setString(2, codaImbarco.getCodiceCodaDiImbarco());
 
@@ -118,12 +118,19 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 		int row = cancellaGatePS.executeUpdate();
 		return row;
 	}
+	
+	public int cancellaGateInCodaDiImbarco(Gate gt, CodaDiImbarco codaImbarco) throws SQLException {
+		cancellaGateInCodaDiImbarcoGatePS.setString(1, gt.getCodiceGate());
+		cancellaGateInCodaDiImbarcoGatePS.setString(2, codaImbarco.getCodiceCodaDiImbarco());
+		
+		int row = cancellaGateInCodaDiImbarcoGatePS.executeUpdate();
+		return row;
+	}
 
 	public int modificaGate(Gate gt) throws SQLException {
 		modificaGatePS.setString(1, gt.getNumeroPorta());
-		modificaGatePS.setTime(2, gt.getTempoImbarcoStimato());
-		modificaGatePS.setTime(3, gt.getTempoChiusuraGate());
-		modificaGatePS.setString(4, gt.getCodiceGate());
+		modificaGatePS.setTime(2, gt.getTempoChiusuraGate());
+		modificaGatePS.setString(3, gt.getCodiceGate());
 
 		int row = modificaGatePS.executeUpdate();
 		return row;
@@ -153,7 +160,7 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 
 	@SuppressWarnings("deprecation")
 	public List<Gate> stampaUtilizzoSettimanale(Gate gt, Timestamp dataUtilizzo) throws SQLException {
-		stampaUtilizzoSettimanalePS.setInt(1, dataUtilizzo.getMonth()+1);
+		stampaUtilizzoSettimanalePS.setInt(1, dataUtilizzo.getMonth() + 1);
 		stampaUtilizzoSettimanalePS.setString(2, gt.getCodiceGate());
 
 		ResultSet rs = stampaUtilizzoSettimanalePS.executeQuery();
@@ -176,7 +183,7 @@ public class GateImplementazionePostgresDAO implements GateDAO {
 
 	@SuppressWarnings("deprecation")
 	public List<Gate> stampaUtilizzoMensile(Gate gt, Timestamp dataUtilizzo) throws SQLException {
-		stampaUtilizzoMensilePS.setInt(1, dataUtilizzo.getMonth()+1);
+		stampaUtilizzoMensilePS.setInt(1, dataUtilizzo.getMonth() + 1);
 		stampaUtilizzoMensilePS.setString(2, gt.getCodiceGate());
 
 		ResultSet rs = stampaUtilizzoMensilePS.executeQuery();

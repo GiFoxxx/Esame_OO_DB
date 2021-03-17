@@ -53,7 +53,6 @@ public class GestioneGate extends JPanel {
 	private JLabel lblBarraRicerca;
 	private JLabel lblNumeroPorta;
 	private JLabel lblCodiceGate;
-	private JLabel lblTempoImbarcoStimato;
 	
 	private JLabel lblAggiungi;
 	private JLabel lblModifica;
@@ -137,23 +136,7 @@ public class GestioneGate extends JPanel {
 	public void setTabella(JTable table) {
 		this.tabella = table;
 	}
-
-	public JLabel getLblTempoImbarcoStimato() {
-		return lblTempoImbarcoStimato;
-	}
-
-	public void setLblTempoImbarcoStimato(JLabel lblTempoImbarcoStimato) {
-		this.lblTempoImbarcoStimato = lblTempoImbarcoStimato;
-	}
-
-	public JTextField getTxtTempoImbarcoStimato() {
-		return txtTempoImbarcoStimato;
-	}
-
-	public void setTxtTempoImbarcoStimato(JTextField txtTempoImbarcoStimato) {
-		this.txtTempoImbarcoStimato = txtTempoImbarcoStimato;
-	}
-
+	
 	public JLabel getLblAggiungi() {
 		return lblAggiungi;
 	}
@@ -187,7 +170,6 @@ public class GestioneGate extends JPanel {
 	}
 
 	Controller controllerGestioneGate;
-	private JTextField txtTempoImbarcoStimato;
 	
 
 	public GestioneGate(Controller controller) {
@@ -323,20 +305,6 @@ public class GestioneGate extends JPanel {
 		txtCodiceGate.setColumns(10);
 		txtCodiceGate.setBounds(244, 461, 180, 20);
 		add(txtCodiceGate);
-		
-		txtTempoImbarcoStimato = new JTextField();
-		txtTempoImbarcoStimato.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
-		txtTempoImbarcoStimato.setFont(controllerGestioneGate.fontScritteGestioni);
-		txtTempoImbarcoStimato.setColumns(10);
-		txtTempoImbarcoStimato.setBounds(244, 527, 180, 20);
-		add(txtTempoImbarcoStimato);
-		
-		lblTempoImbarcoStimato = new JLabel("Tempo di Imbarco Stimato");
-		lblTempoImbarcoStimato.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTempoImbarcoStimato.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
-		lblTempoImbarcoStimato.setFont(controllerGestioneGate.fontLabel);
-		lblTempoImbarcoStimato.setBounds(30, 527, 204, 20);
-		add(lblTempoImbarcoStimato);
 		
 		lblAggiungi = new JLabel("");
 		lblAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -477,7 +445,7 @@ public class GestioneGate extends JPanel {
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				caricaTabella();
+				aggiorna();
 			}
 
 			@Override
@@ -529,5 +497,9 @@ public class GestioneGate extends JPanel {
 		TableRowSorter<DefaultTableModel> trm = new TableRowSorter<DefaultTableModel>(table);
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
+	}
+	
+	private void aggiorna() {
+		caricaTabella();
 	}
 }

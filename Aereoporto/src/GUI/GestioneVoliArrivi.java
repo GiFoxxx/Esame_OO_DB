@@ -574,7 +574,7 @@ public class GestioneVoliArrivi extends JPanel {
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				caricaTabella();
+				aggiorna();
 			}
 
 			@Override
@@ -602,13 +602,6 @@ public class GestioneVoliArrivi extends JPanel {
 		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
 		
-		
-		lblMessaggioErrore = new JLabel("");
-//		lblMessaggioErrore.setForeground(controllerGestioneVoliArrivi.coloreScritturaAllertaTemaScuro);
-		lblMessaggioErrore.setFont(controllerGestioneVoliArrivi.fontLabel);
-		lblMessaggioErrore.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessaggioErrore.setBounds(223, 24, 633, 14);
-		add(lblMessaggioErrore);
 
 		caricaTabella();
 	}
@@ -633,5 +626,9 @@ public class GestioneVoliArrivi extends JPanel {
 		TableRowSorter<DefaultTableModel> trm = new TableRowSorter<DefaultTableModel>(table);
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
+	}
+	
+	private void aggiorna() {
+		caricaTabella();
 	}
 }

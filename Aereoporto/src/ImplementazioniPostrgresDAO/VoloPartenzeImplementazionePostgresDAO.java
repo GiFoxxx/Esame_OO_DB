@@ -27,7 +27,7 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 		stampaVoloPartenzePS = connection.prepareStatement(
 				"SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.dataOrariopartenza, (vp.dataOrarioPartenza - gt.tempodiimbarcostimato - gt.tempochiusuragate) AS aperturagate, (vp.dataOrarioPartenza - gt.tempochiusuragate) AS chiusuragate, vp.numeroprenotazioni, vp.statusImbarco, vp.statusVolo, vp.tempoDiImbarcoEffettivo, gt.tempoDiImbarcoStimato\r\n"
 						+ "FROM (((volopartenza AS vp INNER JOIN tratta AS tr ON (xcodiceTratta = codiceTratta)) INNER JOIN compagniaAerea AS ca ON (xcodiceCompagniaAerea = codiceCompagniaAerea)) INNER JOIN gate AS gt ON (xcodicegate = codiceGate))\r\n"
-						+ "WHERE  dataOrariopartenza>NOW() ORDER BY dataOrariopartenza; ");
+						+ "WHERE dataOrariopartenza>NOW() ORDER BY dataOrariopartenza; ");
 
 		inserisciVoloPartenzaPS = connection.prepareStatement(
 				"INSERT INTO voloPartenza (codiceVoloPartenza, dataOrarioPartenza, numeroPrenotazioni, tempoDiImbarcoEffettivo, statusVolo, statusImbarco, xcodiceGate, xcodiceTratta) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import Classi.CodaDiImbarco;
 import Classi.Gate;
 import Controller.Controller;
 import Immagini.Immagini;
@@ -36,19 +37,36 @@ import javax.swing.JComboBox;
 
 public class GateCodeImbarco extends JPanel {
 
-	String colonne[] = { "Codice Gate", "Numero Porta", "Coda D'Imbarco" };
-	Gate[] row = new Gate[4];
-	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
+	String colonneTabellaAssociazione[] = { "Codice Gate", "Coda D'Imbarco" };
+	String colonneTabellaCodaDiImbarco[] = { "Codice Coda D'Imbarco", "Nome Coda D'Imbarco",
+			"Tempo di Imbarco Stimato" };
+
+	Gate[] rigaAssociazione = new Gate[4];
+	CodaDiImbarco[] rigaCodaDiImbarco = new CodaDiImbarco[4];
+
+	DefaultTableModel modelloTabellaAssociazione = new DefaultTableModel(colonneTabellaAssociazione, 0);
+	DefaultTableModel modelloTabellaCodaDiImbarco = new DefaultTableModel(colonneTabellaCodaDiImbarco, 0);
+
 	List<Gate> ListaGate = new ArrayList<Gate>();
+	List<CodaDiImbarco> ListaCodaDiImbarco = new ArrayList<CodaDiImbarco>();
+
 	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceGate;
 	private JTextField txtCodaDiImbarco;
 
+	private JTextField txtCodiceCodaDiImbarco;
+	private JTextField txtTempoDiImbarcoStimato;
+	private JTextField txtNomeCodaDiImbarco;
+
+	private JScrollPane scrollPaneTabellaAssociazioni;
+	private JScrollPane scrollPaneTabellaCodaDiImbarco;
+
 	private JComboBox<String> comboBoxCodaDiImbarco;
 	private JComboBox<String> comboBoxNumeroPorta;
 
-	private JTable tabella;
+	private JTable tabellaAssociazioni;
+	private JTable tabellaCodaDiImbarco;
 	private JTextField txtBarraRicerca;
 
 	private JLabel lblimgfrecciaIndietro;
@@ -56,23 +74,83 @@ public class GateCodeImbarco extends JPanel {
 	private JLabel lblCodiceGate;
 	private JLabel lblCodaImbarco;
 
-	private JLabel lblAggiungi;
-	private JLabel lblModifica;
-	private JLabel lblElimina;
-	private JLabel lblSvuota;
-	private JLabel lblRicaricaTabella;
+	private JLabel lblNomeCodaDiImbarco;
+	private JLabel lblCodiceCodaDiImbarco;
+	private JLabel lblTempoDiImbarcoStimato;
+
+	private JLabel lblAggiungiAssociazione;
+	private JLabel lblEliminaAssociazione;
+	private JLabel lblSvuotaAssociazione;
+	private JLabel lblAggiungiCodaImbarco;
+	private JLabel lblEliminaCodaImbarco;
+	private JLabel lblModificaCodaImbarco;
+	private JLabel lblSvuotaCodaImbarco;
+	private JLabel lblRicaricaTabelle;
 
 	// GETTER E SETTER
-	public DefaultTableModel getModello() {
-		return modello;
+
+	public CodaDiImbarco[] getRigaCodaDiImbarco() {
+		return rigaCodaDiImbarco;
 	}
 
-	public void setModello(DefaultTableModel modello) {
-		this.modello = modello;
+	public void setRigaCodaDiImbarco(CodaDiImbarco[] rigaCodaDiImbarco) {
+		this.rigaCodaDiImbarco = rigaCodaDiImbarco;
 	}
 
-	public Object[] getRow() {
-		return row;
+	public DefaultTableModel getModelloTabellaAssociazione() {
+		return modelloTabellaAssociazione;
+	}
+
+	public void setModelloTabellaAssociazione(DefaultTableModel modelloTabellaAssociazione) {
+		this.modelloTabellaAssociazione = modelloTabellaAssociazione;
+	}
+
+	public DefaultTableModel getModelloTabellaCodaDiImbarco() {
+		return modelloTabellaCodaDiImbarco;
+	}
+
+	public void setModelloTabellaCodaDiImbarco(DefaultTableModel modelloTabellaCodaDiImbarco) {
+		this.modelloTabellaCodaDiImbarco = modelloTabellaCodaDiImbarco;
+	}
+
+	public List<Gate> getListaGate() {
+		return ListaGate;
+	}
+
+	public void setListaGate(List<Gate> listaGate) {
+		ListaGate = listaGate;
+	}
+
+	public List<CodaDiImbarco> getListaCodaDiImbarco() {
+		return ListaCodaDiImbarco;
+	}
+
+	public void setListaCodaDiImbarco(List<CodaDiImbarco> listaCodaDiImbarco) {
+		ListaCodaDiImbarco = listaCodaDiImbarco;
+	}
+
+	public JComboBox<String> getComboBoxNumeroPorta() {
+		return comboBoxNumeroPorta;
+	}
+
+	public void setComboBoxNumeroPorta(JComboBox<String> comboBoxNumeroPorta) {
+		this.comboBoxNumeroPorta = comboBoxNumeroPorta;
+	}
+
+	public JLabel getLblRicaricaTabelle() {
+		return lblRicaricaTabelle;
+	}
+
+	public void setLblRicaricaTabelle(JLabel lblRicaricaTabella) {
+		this.lblRicaricaTabelle = lblRicaricaTabella;
+	}
+
+	public void setRigaAssociazione(Gate[] rigaAssociazione) {
+		this.rigaAssociazione = rigaAssociazione;
+	}
+
+	public Object[] getRigaAssociazione() {
+		return rigaAssociazione;
 	}
 
 	public JTextField getTxtBarraRicerca() {
@@ -131,12 +209,12 @@ public class GateCodeImbarco extends JPanel {
 		this.comboBoxCodaDiImbarco = comboBoxCodaDiImbarco1;
 	}
 
-	public JTable getTabella() {
-		return tabella;
+	public JTable getTabellaAssociazioni() {
+		return tabellaAssociazioni;
 	}
 
-	public void setTabella(JTable table) {
-		this.tabella = table;
+	public void setTabellaAssociazioni(JTable table) {
+		this.tabellaAssociazioni = table;
 	}
 
 	public JTextField getTxtCodaDiImbarco() {
@@ -155,36 +233,116 @@ public class GateCodeImbarco extends JPanel {
 		this.lblCodaImbarco = lblCodaImbarco;
 	}
 
-	public JLabel getLblAggiungi() {
-		return lblAggiungi;
+	public JLabel getLblAggiungiAssociazione() {
+		return lblAggiungiAssociazione;
 	}
 
-	public void setLblAggiungi(JLabel lblAggiungi) {
-		this.lblAggiungi = lblAggiungi;
+	public void setLblAggiungiAssociazione(JLabel lblAggiungi) {
+		this.lblAggiungiAssociazione = lblAggiungi;
 	}
 
-	public JLabel getLblModifica() {
-		return lblModifica;
+	public JLabel getLblEliminaAssociazione() {
+		return lblEliminaAssociazione;
 	}
 
-	public void setLblModifica(JLabel lblModifica) {
-		this.lblModifica = lblModifica;
+	public void setLblEliminaAssociazione(JLabel lblElimina) {
+		this.lblEliminaAssociazione = lblElimina;
 	}
 
-	public JLabel getLblElimina() {
-		return lblElimina;
+	public JLabel getLblSvuotaAssociazione() {
+		return lblSvuotaAssociazione;
 	}
 
-	public void setLblElimina(JLabel lblElimina) {
-		this.lblElimina = lblElimina;
+	public void setLblSvuotaAssociazione(JLabel lblSvuota) {
+		this.lblSvuotaAssociazione = lblSvuota;
 	}
 
-	public JLabel getLblSvuota() {
-		return lblSvuota;
+	public JTextField getTxtCodiceCodaDiImbarco() {
+		return txtCodiceCodaDiImbarco;
 	}
 
-	public void setLblSvuota(JLabel lblSvuota) {
-		this.lblSvuota = lblSvuota;
+	public void setTxtCodiceCodaDiImbarco(JTextField txtCodiceCodaDiImbarco) {
+		this.txtCodiceCodaDiImbarco = txtCodiceCodaDiImbarco;
+	}
+
+	public JTextField getTxtTempoDiImbarcoStimato() {
+		return txtTempoDiImbarcoStimato;
+	}
+
+	public void setTxtTempoDiImbarcoStimato(JTextField txtTempoDiImbarcoStimato) {
+		this.txtTempoDiImbarcoStimato = txtTempoDiImbarcoStimato;
+	}
+
+	public JTextField getTxtNomeCodaDiImbarco() {
+		return txtNomeCodaDiImbarco;
+	}
+
+	public void setTxtNomeCodaDiImbarco(JTextField txtNomeCodaDiImbarco) {
+		this.txtNomeCodaDiImbarco = txtNomeCodaDiImbarco;
+	}
+
+	public JTable getTabellaCodaDiImbarco() {
+		return tabellaCodaDiImbarco;
+	}
+
+	public void setTabellaCodaDiImbarco(JTable tabellaCodaDiImbarco) {
+		this.tabellaCodaDiImbarco = tabellaCodaDiImbarco;
+	}
+
+	public JLabel getLblNomeCodaDiImbarco() {
+		return lblNomeCodaDiImbarco;
+	}
+
+	public void setLblNomeCodaDiImbarco(JLabel lblNomeCodaDiImbarco) {
+		this.lblNomeCodaDiImbarco = lblNomeCodaDiImbarco;
+	}
+
+	public JLabel getLblCodiceCodaDiImbarco() {
+		return lblCodiceCodaDiImbarco;
+	}
+
+	public void setLblCodiceCodaDiImbarco(JLabel lblCodiceCodaDiImbarco) {
+		this.lblCodiceCodaDiImbarco = lblCodiceCodaDiImbarco;
+	}
+
+	public JLabel getLblTempoDiImbarcoStimato() {
+		return lblTempoDiImbarcoStimato;
+	}
+
+	public void setLblTempoDiImbarcoStimato(JLabel lblTempoDiImbarcoStimato) {
+		this.lblTempoDiImbarcoStimato = lblTempoDiImbarcoStimato;
+	}
+
+	public JLabel getLblAggiungiCodaImbarco() {
+		return lblAggiungiCodaImbarco;
+	}
+
+	public void setLblAggiungiCodaImbarco(JLabel lblAggiungiCodaImbarco) {
+		this.lblAggiungiCodaImbarco = lblAggiungiCodaImbarco;
+	}
+
+	public JLabel getLblEliminaCodaImbarco() {
+		return lblEliminaCodaImbarco;
+	}
+
+	public void setLblEliminaCodaImbarco(JLabel lblEliminaCodaImbarco) {
+		this.lblEliminaCodaImbarco = lblEliminaCodaImbarco;
+	}
+
+	public JLabel getLblModificaCodaImbarco() {
+		return lblModificaCodaImbarco;
+	}
+
+	public void setLblModificaCodaImbarco(JLabel lblModificaCodaImbarco) {
+		this.lblModificaCodaImbarco = lblModificaCodaImbarco;
+	}
+
+	public JLabel getLblSvuotaCodaImbarco() {
+		return lblSvuotaCodaImbarco;
+	}
+
+	public void setLblSvuotaCodaImbarco(JLabel lblSvuotaCodaImbarco) {
+		this.lblSvuotaCodaImbarco = lblSvuotaCodaImbarco;
 	}
 
 	Controller controllerGateCodeImbarco;
@@ -207,22 +365,26 @@ public class GateCodeImbarco extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
+				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(),
+						img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
+				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(),
+						img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -252,14 +414,14 @@ public class GateCodeImbarco extends JPanel {
 		lblBarraRicerca.setBounds(876, 47, 184, 25);
 		add(lblBarraRicerca);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setFont(controllerGateCodeImbarco.fontLabel);
-		scrollPane.setEnabled(false);
-		scrollPane.setBounds(30, 85, 1030, 330);
-		add(scrollPane);
+		scrollPaneTabellaAssociazioni = new JScrollPane();
+		scrollPaneTabellaAssociazioni.setFont(controllerGateCodeImbarco.fontLabel);
+		scrollPaneTabellaAssociazioni.setEnabled(false);
+		scrollPaneTabellaAssociazioni.setBounds(30, 85, 300, 330);
+		add(scrollPaneTabellaAssociazioni);
 
-		tabella = new JTable();
-		tabella.addKeyListener(new KeyAdapter() {
+		tabellaAssociazioni = new JTable();
+		tabellaAssociazioni.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoDelete) {
 				if (EventoDelete.getKeyCode() == KeyEvent.VK_DELETE) {
@@ -267,21 +429,15 @@ public class GateCodeImbarco extends JPanel {
 				}
 			}
 		});
-		tabella.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int t = tabella.getSelectedRow();
-			}
-		});
-		modello.setColumnIdentifiers(colonne);
-		tabella.setModel(modello);
-		scrollPane.setViewportView(tabella);
+		modelloTabellaAssociazione.setColumnIdentifiers(colonneTabellaAssociazione);
+		tabellaAssociazioni.setModel(modelloTabellaAssociazione);
+		scrollPaneTabellaAssociazioni.setViewportView(tabellaAssociazioni);
 
 		lblCodiceGate = new JLabel("Codice Gate");
 		lblCodiceGate.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceGate.setFont(controllerGateCodeImbarco.fontLabel);
 		lblCodiceGate.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
-		lblCodiceGate.setBounds(30, 461, 204, 20);
+		lblCodiceGate.setBounds(30, 426, 130, 20);
 		add(lblCodiceGate);
 
 		txtCodiceGate = new JTextField();
@@ -297,14 +453,29 @@ public class GateCodeImbarco extends JPanel {
 		txtCodiceGate.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtCodiceGate.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
 		txtCodiceGate.setColumns(10);
-		txtCodiceGate.setBounds(244, 461, 0, 20);
+		txtCodiceGate.setBounds(170, 426, 0, 20);
 		add(txtCodiceGate);
+
+		comboBoxNumeroPorta = new JComboBox<String>();
+		comboBoxNumeroPorta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HashMap<String, String> map = null;
+				try {
+					map = controllerGateCodeImbarco.implementazioneGateDAO().stampaNumeroPortaInComboBox();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
+			}
+		});
+		comboBoxNumeroPorta.setBounds(170, 426, 47, 20);
+		add(comboBoxNumeroPorta);
 
 		lblCodaImbarco = new JLabel("Coda d'Imbarco");
 		lblCodaImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodaImbarco.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
 		lblCodaImbarco.setFont(controllerGateCodeImbarco.fontLabel);
-		lblCodaImbarco.setBounds(30, 493, 204, 20);
+		lblCodaImbarco.setBounds(30, 473, 130, 20);
 		add(lblCodaImbarco);
 
 		comboBoxCodaDiImbarco = new JComboBox<String>();
@@ -319,7 +490,7 @@ public class GateCodeImbarco extends JPanel {
 				txtCodaDiImbarco.setText(map.get(comboBoxCodaDiImbarco.getSelectedItem().toString()));
 			}
 		});
-		comboBoxCodaDiImbarco.setBounds(244, 493, 95, 20);
+		comboBoxCodaDiImbarco.setBounds(170, 473, 141, 20);
 		add(comboBoxCodaDiImbarco);
 
 		txtCodaDiImbarco = new JTextField();
@@ -328,95 +499,50 @@ public class GateCodeImbarco extends JPanel {
 		txtCodaDiImbarco.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtCodaDiImbarco.setEditable(false);
 		txtCodaDiImbarco.setColumns(10);
-		txtCodaDiImbarco.setBounds(244, 493, 0, 20);
+		txtCodaDiImbarco.setBounds(170, 473, 0, 20);
 		add(txtCodaDiImbarco);
 
-		comboBoxNumeroPorta = new JComboBox<String>();
-		comboBoxNumeroPorta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				HashMap<String, String> map = null;
-				try {
-					map = controllerGateCodeImbarco.implementazioneGateDAO().stampaNumeroPortaInComboBox();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
-			}
-		});
-		comboBoxNumeroPorta.setBounds(244, 461, 47, 20);
-		add(comboBoxNumeroPorta);
-
-		lblAggiungi = new JLabel("");
-		lblAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblAggiungi.addMouseListener(new MouseAdapter() {
+		lblAggiungiAssociazione = new JLabel("");
+		lblAggiungiAssociazione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAggiungiAssociazione.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGateCodeImbarco.aggiungiGateCodeImbarco();
-
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(), img.aggiungi2());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungiAssociazione, img.aggiungi2TemaChiaro(),
+						img.aggiungi2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungiAssociazione, img.aggiungi1TemaChiaro(),
+						img.aggiungi1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(), img.aggiungi3());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungiAssociazione, img.aggiungi3TemaChiaro(),
+						img.aggiungi3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungiAssociazione, img.aggiungi1TemaChiaro(),
+						img.aggiungi1());
 			}
 
 		});
-		lblAggiungi.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
-		lblAggiungi.setBounds(358, 569, 130, 36);
-		add(lblAggiungi);
+		lblAggiungiAssociazione.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAggiungiAssociazione.setIcon(new ImageIcon(img.aggiungi1()));
+		lblAggiungiAssociazione.setBounds(30, 520, 130, 36);
+		add(lblAggiungiAssociazione);
 
-		lblModifica = new JLabel("");
-		lblModifica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblModifica.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGateCodeImbarco.modificaGateCodeImbarco();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(), img.modifica3());
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
-			}
-		});
-		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
-		lblModifica.setIcon(new ImageIcon(img.modifica1()));
-		lblModifica.setBounds(114, 569, 130, 36);
-		add(lblModifica);
-
-		lblElimina = new JLabel("");
-		lblElimina.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblElimina.addMouseListener(new MouseAdapter() {
+		lblEliminaAssociazione = new JLabel("");
+		lblEliminaAssociazione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblEliminaAssociazione.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGateCodeImbarco.eliminaGateCodeImbarco();
@@ -424,32 +550,36 @@ public class GateCodeImbarco extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblElimina, img.elimina2TemaChiaro(), img.elimina2());
+				controllerGateCodeImbarco.cambioImmagineTema(lblEliminaAssociazione, img.elimina2TemaChiaro(),
+						img.elimina2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblEliminaAssociazione, img.elimina1TemaChiaro(),
+						img.elimina1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblElimina, img.elimina3TemaChiaro(), img.elimina3());
+				controllerGateCodeImbarco.cambioImmagineTema(lblEliminaAssociazione, img.elimina3TemaChiaro(),
+						img.elimina3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblEliminaAssociazione, img.elimina1TemaChiaro(),
+						img.elimina1());
 			}
 		});
-		lblElimina.setHorizontalAlignment(SwingConstants.CENTER);
-		lblElimina.setIcon(new ImageIcon(img.elimina1()));
-		lblElimina.setBounds(837, 569, 130, 36);
-		add(lblElimina);
+		lblEliminaAssociazione.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEliminaAssociazione.setIcon(new ImageIcon(img.elimina1()));
+		lblEliminaAssociazione.setBounds(200, 520, 130, 36);
+		add(lblEliminaAssociazione);
 
-		lblSvuota = new JLabel("");
-		lblSvuota.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblSvuota.addMouseListener(new MouseAdapter() {
+		lblSvuotaAssociazione = new JLabel("");
+		lblSvuotaAssociazione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblSvuotaAssociazione.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGateCodeImbarco.svuotaCampiGateCodeImbarco();
@@ -457,66 +587,292 @@ public class GateCodeImbarco extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblSvuota, img.svuota2TemaChiaro(), img.svuota2());
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuotaAssociazione, img.svuota2TemaChiaro(),
+						img.svuota2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuotaAssociazione, img.svuota1TemaChiaro(),
+						img.svuota1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblSvuota, img.svuota3TemaChiaro(), img.svuota3());
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuotaAssociazione, img.svuota3TemaChiaro(),
+						img.svuota3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblSvuota, img.svuota1TemaChiaro(), img.svuota1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuotaAssociazione, img.svuota1TemaChiaro(),
+						img.svuota1());
 			}
 		});
-		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
-		lblSvuota.setBounds(602, 569, 130, 36);
-		add(lblSvuota);
-		
-		lblRicaricaTabella = new JLabel("");
-		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
+		lblSvuotaAssociazione.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSvuotaAssociazione.setIcon(new ImageIcon(img.svuota1()));
+		lblSvuotaAssociazione.setBounds(115, 567, 130, 36);
+		add(lblSvuotaAssociazione);
+
+		scrollPaneTabellaCodaDiImbarco = new JScrollPane();
+		scrollPaneTabellaCodaDiImbarco.setFont(controllerGateCodeImbarco.fontLabel);
+		scrollPaneTabellaCodaDiImbarco.setEnabled(false);
+		scrollPaneTabellaCodaDiImbarco.setBounds(350, 86, 710, 330);
+		add(scrollPaneTabellaCodaDiImbarco);
+
+		tabellaCodaDiImbarco = new JTable();
+		tabellaCodaDiImbarco.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent EventoDelete) {
+				if (EventoDelete.getKeyCode() == KeyEvent.VK_DELETE) {
+
+				}
+			}
+		});
+		tabellaCodaDiImbarco.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				caricaTabella();
+				int t = tabellaCodaDiImbarco.getSelectedRow();
+				txtCodiceCodaDiImbarco.setText(modelloTabellaCodaDiImbarco.getValueAt(t, 0).toString());
+				txtNomeCodaDiImbarco.setText(modelloTabellaCodaDiImbarco.getValueAt(t, 1).toString());
+			}
+		});
+		modelloTabellaCodaDiImbarco.setColumnIdentifiers(colonneTabellaCodaDiImbarco);
+		tabellaCodaDiImbarco.setModel(modelloTabellaCodaDiImbarco);
+		scrollPaneTabellaCodaDiImbarco.setViewportView(tabellaCodaDiImbarco);
+
+		lblNomeCodaDiImbarco = new JLabel("Nome Coda di Imbarco");
+		lblNomeCodaDiImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNomeCodaDiImbarco.setFont(controllerGateCodeImbarco.fontLabel);
+		lblNomeCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
+		lblNomeCodaDiImbarco.setBounds(475, 473, 175, 20);
+		add(lblNomeCodaDiImbarco);
+
+		lblCodiceCodaDiImbarco = new JLabel("Codice Coda di Imbarco");
+		lblCodiceCodaDiImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCodiceCodaDiImbarco.setFont(controllerGateCodeImbarco.fontLabel);
+		lblCodiceCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
+		lblCodiceCodaDiImbarco.setBounds(475, 426, 175, 20);
+		add(lblCodiceCodaDiImbarco);
+
+		lblTempoDiImbarcoStimato = new JLabel("Tempo di Imbarco Stimato");
+		lblTempoDiImbarcoStimato.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTempoDiImbarcoStimato.setFont(controllerGateCodeImbarco.fontLabel);
+		lblTempoDiImbarcoStimato.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
+		lblTempoDiImbarcoStimato.setBounds(475, 520, 175, 20);
+		add(lblTempoDiImbarcoStimato);
+
+		txtCodiceCodaDiImbarco = new JTextField();
+		txtCodiceCodaDiImbarco.setFont(controllerGateCodeImbarco.fontScritteGestioni);
+		txtCodiceCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
+		txtCodiceCodaDiImbarco.setBounds(660, 426, 150, 20);
+		add(txtCodiceCodaDiImbarco);
+		txtCodiceCodaDiImbarco.setColumns(10);
+
+		txtTempoDiImbarcoStimato = new JTextField();
+		txtTempoDiImbarcoStimato.setFont(controllerGateCodeImbarco.fontScritteGestioni);
+		txtTempoDiImbarcoStimato.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
+		txtTempoDiImbarcoStimato.setBounds(660, 520, 150, 20);
+		add(txtTempoDiImbarcoStimato);
+		txtTempoDiImbarcoStimato.setColumns(10);
+
+		txtNomeCodaDiImbarco = new JTextField();
+		txtNomeCodaDiImbarco.setFont(controllerGateCodeImbarco.fontScritteGestioni);
+		txtNomeCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
+		txtNomeCodaDiImbarco.setBounds(660, 473, 150, 20);
+		add(txtNomeCodaDiImbarco);
+		txtNomeCodaDiImbarco.setColumns(10);
+
+		lblAggiungiCodaImbarco = new JLabel("");
+		lblAggiungiCodaImbarco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblAggiungiCodaImbarco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGateCodeImbarco.aggiungiCodaDiImbarco();
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungiCodaImbarco, img.aggiungi2TemaChiaro(),
+						img.aggiungi2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungiCodaImbarco, img.aggiungi1TemaChiaro(),
+						img.aggiungi1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungiCodaImbarco, img.aggiungi3TemaChiaro(),
+						img.aggiungi3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGateCodeImbarco.cambioImmagineTema(lblAggiungiCodaImbarco, img.aggiungi1TemaChiaro(),
+						img.aggiungi1());
+			}
+
+		});
+		lblAggiungiCodaImbarco.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAggiungiCodaImbarco.setIcon(new ImageIcon(img.aggiungi1()));
+		lblAggiungiCodaImbarco.setBounds(876, 426, 130, 36);
+		add(lblAggiungiCodaImbarco);
+
+		lblEliminaCodaImbarco = new JLabel("");
+		lblEliminaCodaImbarco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblEliminaCodaImbarco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGateCodeImbarco.eliminaCodaDiImbarco();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblEliminaCodaImbarco, img.elimina2TemaChiaro(),
+						img.elimina2());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblEliminaCodaImbarco, img.elimina1TemaChiaro(),
+						img.elimina1());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblEliminaCodaImbarco, img.elimina3TemaChiaro(),
+						img.elimina3());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblEliminaCodaImbarco, img.elimina1TemaChiaro(),
+						img.elimina1());
 			}
 		});
-		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
-		lblRicaricaTabella.setBounds(836, 44, 30, 30);
-		add(lblRicaricaTabella);
+		lblEliminaCodaImbarco.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEliminaCodaImbarco.setIcon(new ImageIcon(img.elimina1()));
+		lblEliminaCodaImbarco.setBounds(876, 520, 130, 36);
+		add(lblEliminaCodaImbarco);
+
+		lblModificaCodaImbarco = new JLabel("");
+		lblModificaCodaImbarco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblModificaCodaImbarco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGateCodeImbarco.modificaCodaDiImbarco();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblModificaCodaImbarco, img.modifica2TemaChiaro(),
+						img.modifica2());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblModificaCodaImbarco, img.modifica1TemaChiaro(),
+						img.modifica1());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblModificaCodaImbarco, img.modifica3TemaChiaro(),
+						img.modifica3());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblModificaCodaImbarco, img.modifica1TemaChiaro(),
+						img.modifica1());
+			}
+		});
+		lblModificaCodaImbarco.setHorizontalAlignment(SwingConstants.CENTER);
+		lblModificaCodaImbarco.setIcon(new ImageIcon(img.modifica1()));
+		lblModificaCodaImbarco.setBounds(876, 473, 130, 36);
+		add(lblModificaCodaImbarco);
+
+		lblSvuotaCodaImbarco = new JLabel("");
+		lblSvuotaCodaImbarco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblSvuotaCodaImbarco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGateCodeImbarco.svuotaCampiCodaDiImbarco();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuotaCodaImbarco, img.svuota2TemaChiaro(),
+						img.svuota2());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuotaCodaImbarco, img.svuota1TemaChiaro(),
+						img.svuota1());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuotaCodaImbarco, img.svuota3TemaChiaro(),
+						img.svuota3());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblSvuotaCodaImbarco, img.svuota1TemaChiaro(),
+						img.svuota1());
+			}
+		});
+		lblSvuotaCodaImbarco.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSvuotaCodaImbarco.setIcon(new ImageIcon(img.svuota1()));
+		lblSvuotaCodaImbarco.setBounds(876, 567, 130, 36);
+		add(lblSvuotaCodaImbarco);
+
+		lblRicaricaTabelle = new JLabel("");
+		lblRicaricaTabelle.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRicaricaTabelle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				aggiorna();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabelle, img.aggiorna2TemaChiaro(),
+						img.aggiorna2());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabelle, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabelle, img.aggiorna3TemaChiaro(),
+						img.aggiorna3());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				controllerGateCodeImbarco.cambioImmagineTema(lblRicaricaTabelle, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
+			}
+		});
+		lblRicaricaTabelle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRicaricaTabelle.setIcon(new ImageIcon(img.aggiorna1()));
+		lblRicaricaTabelle.setBounds(836, 44, 30, 30);
+		add(lblRicaricaTabelle);
 
 		stampaComboBoxNumeroPorta();
 		stampaComboBoxCodaDiImbarco();
-		caricaTabella();
-
+		caricaTabellaAssociazione();
+		caricaTabellaCodaDiImbarco();
 	}
 
 	// METODI
@@ -528,6 +884,7 @@ public class GateCodeImbarco extends JPanel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		comboBoxNumeroPorta.addItem("---");
 		for (String s : map.keySet()) {
 			comboBoxNumeroPorta.addItem(s);
 		}
@@ -540,29 +897,56 @@ public class GateCodeImbarco extends JPanel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		comboBoxCodaDiImbarco.addItem("----------");
 		for (String s : map.keySet()) {
 			comboBoxCodaDiImbarco.addItem(s);
 		}
 	}
 
-	public void caricaTabella() {
+	public void caricaTabellaAssociazione() {
 		try {
 			this.ListaGate = controllerGateCodeImbarco.implementazioneGateDAO().stampaGateCodeImbarco();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		modello.setNumRows(0);
+		modelloTabellaAssociazione.setNumRows(0);
 		for (Gate dato : this.ListaGate) {
-			this.modello.addRow(new Object[] { dato.getCodiceGate(), dato.getNumeroPorta(), dato.getCodeDiImbarco().getNomeCoda() });
+			this.modelloTabellaAssociazione
+					.addRow(new Object[] { dato.getCodiceGate(), dato.getCodeDiImbarco().getNomeCoda() });
 		}
-		tabella.setModel(modello);
+		tabellaAssociazioni.setModel(modelloTabellaAssociazione);
+	}
+
+	public void caricaTabellaCodaDiImbarco() {
+		try {
+			this.ListaCodaDiImbarco = controllerGateCodeImbarco.implementazioneCodaDiImbarcoDAO().stampaCodaDiImbarco();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		modelloTabellaCodaDiImbarco.setNumRows(0);
+		for (CodaDiImbarco dato : this.ListaCodaDiImbarco) {
+			this.modelloTabellaCodaDiImbarco.addRow(
+					new Object[] { dato.getCodiceCodaDiImbarco(), dato.getNomeCoda(), dato.getTempoImbarcoStimato() });
+		}
+		tabellaCodaDiImbarco.setModel(modelloTabellaCodaDiImbarco);
 	}
 
 	private void ricerca() {
-		DefaultTableModel table = (DefaultTableModel) tabella.getModel();
+		DefaultTableModel table = (DefaultTableModel) tabellaAssociazioni.getModel();
 		String ricerca = txtBarraRicerca.getText();
 		TableRowSorter<DefaultTableModel> trm = new TableRowSorter<DefaultTableModel>(table);
-		tabella.setRowSorter(trm);
+		tabellaAssociazioni.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
+	}
+
+	private void aggiorna() {
+		caricaTabellaAssociazione();
+		caricaTabellaCodaDiImbarco();
+		controllerGateCodeImbarco.rimuoviElementiComboBox(comboBoxNumeroPorta);
+		stampaComboBoxNumeroPorta();
+		comboBoxNumeroPorta.removeItemAt(0);
+		controllerGateCodeImbarco.rimuoviElementiComboBox(comboBoxCodaDiImbarco);
+		stampaComboBoxCodaDiImbarco();
+		comboBoxCodaDiImbarco.removeItemAt(0);
 	}
 }

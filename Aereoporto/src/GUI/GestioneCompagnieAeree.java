@@ -440,7 +440,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				caricaTabella();
+				aggiorna();
 			}
 
 			@Override
@@ -492,8 +492,8 @@ public class GestioneCompagnieAeree extends JPanel {
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
+	
+	private void aggiorna() {
+		caricaTabella();
+	}
 }
-
-
-
-

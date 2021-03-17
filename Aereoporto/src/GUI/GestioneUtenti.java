@@ -516,7 +516,7 @@ public class GestioneUtenti extends JPanel {
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				caricaTabella();
+				aggiorna();
 			}
 
 			@Override
@@ -566,6 +566,10 @@ public class GestioneUtenti extends JPanel {
 		TableRowSorter<DefaultTableModel> trm = new TableRowSorter<DefaultTableModel>(table);
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
+	}
+	
+	private void aggiorna() {
+		caricaTabella();
 	}
 
 }

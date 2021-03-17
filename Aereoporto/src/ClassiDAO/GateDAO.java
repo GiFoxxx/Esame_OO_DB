@@ -16,9 +16,11 @@ public interface GateDAO {
 	
 	public int aggiungiGate(Gate gt) throws SQLException;
 
-	public int aggiungiGateInCodaDiImbarcoGate(Gate gt, CodaDiImbarco codaImbarco) throws SQLException;
+	public int aggiungiGateInCodaDiImbarco(Gate gt, CodaDiImbarco codaImbarco) throws SQLException;
 
 	public int cancellaGate(Gate gt) throws SQLException;
+	
+	public int cancellaGateInCodaDiImbarco(Gate gt, CodaDiImbarco codaImbarco) throws SQLException;
 
 	public int modificaGate(Gate gt) throws SQLException;
 	

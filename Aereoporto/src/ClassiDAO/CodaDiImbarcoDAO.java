@@ -10,6 +10,12 @@ import Classi.CodaDiImbarco;
 public interface CodaDiImbarcoDAO {
 
 	public List<CodaDiImbarco> stampaCodaDiImbarco() throws SQLException;
+	
+	public int aggiungiCodaDiImbarco(CodaDiImbarco cdi) throws SQLException;
+	
+	public int cancellaCodaDiImbarco(CodaDiImbarco cdi) throws SQLException;
+	
+	public int modificaCodaDiImbarco(CodaDiImbarco cdi) throws SQLException;
 
 	HashMap<String, String> stampaCodaDiImbarcoInComboBox() throws SQLException;
 

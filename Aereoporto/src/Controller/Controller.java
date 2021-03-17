@@ -62,8 +62,8 @@ public class Controller {
 	public Color pannelloSceltoTemaChiaro = new Color(202, 203, 208);
 	public Color coloreScritturaAllertaTemaChiaro = new Color(250, 45, 45);
 	public Color coloreLabelTemaChiaro = new Color(106, 110, 117);
-	public Color coloreLabelEntrataTemaChiaro = new Color(65, 70, 74);
-	public Color coloreLabelPressedTemaChiaro = new Color(46, 51, 56);
+	public Color coloreLabelEntrataTemaChiaro = new Color(86, 90, 97);
+	public Color coloreLabelPressedTemaChiaro = new Color(64, 68, 75);
 
 	// PALETTE COLORI IN COMUNE
 	public Color trasparente = new Color(0, 0, 0, 0);
@@ -77,7 +77,7 @@ public class Controller {
 	public Font fontScritteGestioni = new Font("Arial", Font.PLAIN, 13);
 	public Font fontLabel = new Font("Arial", Font.BOLD, 12);
 
-	// MESSAGGI DI ERRORE
+	// MESSAGGI DI ERRORE E NOTIFICA
 	public String erroreAccessoInserimentoCredenziali = "Perfavore, inserisci le credenziali";
 	public String erroreAccessoCredenzialiSbagliate = "Nome utente o password errati. Riprova";
 	public String erroreAccessoGiaUtilizziAccount = "Stai già utilizzando questo account";
@@ -92,6 +92,13 @@ public class Controller {
 	public String errorePasswordDimenticataEmailNonRegistrata = "L'email non è nei nostri database";
 	public String erroreGeneraleHome = "Per continuare, effettuare prima l'accesso";
 	public String erroreGenericoInInserimentiCampi = "Attenzione ci sono degli errori";
+	
+	public String registrazioneCompletata = "Registrazione effettuata con successo";
+    public String passwordCambiata = "Password cambiata con successo";
+    public String accessoEffettuato = "Accesso effettuato";
+    public String invioRecensione = "Recensione inviata con successo";
+    public String logout = "Logout avvenuto con successo";
+    public String gestioni = "Operazione riuscita con successo";
 
 	// ATTRIBUTI
 	private String emailAccesso;
@@ -130,7 +137,7 @@ public class Controller {
 	VoloPartenze vlprtz;
 	VoloArrivi vlarr;
 	Gate gt;
-	CodaDiImbarco codaImbarco;
+	CodaDiImbarco cdi;
 	Tratta trt;
 	CompagniaAerea compAerea;
 
@@ -498,9 +505,7 @@ public class Controller {
 	}
 
 	public void invioRecensione() {
-		((OperazioneRiuscitaConSuccesso) getDashboard().getOperazioneEffettuataConSuccesso()).getLblComplimenti()
-				.setText("Grazie per aver lasciato un commento!");
-		mostraOperazioneEffettuataConSuccesso();
+		mostraNotifica(invioRecensione, img.messaggioNotifica());
 	}
 
 	// METODI DI ACCESSO
@@ -514,9 +519,9 @@ public class Controller {
 		if (!sbloccaGestione()) {
 			accedi();
 		} else if (getEmailAccesso().equals(((Accesso) getDashboard().getAccesso()).getTxtEmail().getText())) {
-			mostraErrore(erroreAccessoGiaUtilizziAccount);
+			mostraNotifica(erroreAccessoGiaUtilizziAccount, img.messaggioErrore());
 		} else {
-			mostraErrore(erroreAccessoEseguirePrimaLogout);
+			mostraNotifica(erroreAccessoEseguirePrimaLogout, img.messaggioErrore());
 		}
 	}
 
@@ -530,10 +535,11 @@ public class Controller {
 		try {
 			if (implementazioneUtenteDAO().accessoUtente(email, password)) {
 				mostraPannelli(getDashboard().getHome());
-
+				setPannelloPrecedente(1);
+				mostraNotifica(accessoEffettuato, img.messaggioNotifica());
 				mostraUtenteLoggato();
 				getDashboard().getLblFrecciaMenu().setVisible(true);
-				setPannelloPrecedente(1);
+				
 				cambioPannelloTema(getDashboard().getPanelAccedi(), escoPannelloTemaChiaro, escoPannelloTemaScuro);
 
 				if (email.equals("luigidemarco@gmail.com") || email.equals("manuelbuonanno00@gmail.com")) {
@@ -544,10 +550,10 @@ public class Controller {
 				}
 				((Accesso) getDashboard().getAccesso()).setSbloccaHome(true);
 			} else if (controlloCampiSeVuotiAccesso()) {
-				mostraErrore(erroreAccessoInserimentoCredenziali);
+				mostraNotifica(erroreAccessoInserimentoCredenziali, img.messaggioErrore());
 				mostraIconaErroreEmailMancanteAccesso();
 			} else {
-				mostraErrore(erroreAccessoCredenzialiSbagliate);
+				mostraNotifica(erroreAccessoCredenzialiSbagliate, img.messaggioErrore());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -629,30 +635,29 @@ public class Controller {
 	}
 
 	public void mostraIconaErroreEmailMancanteRegistrazione() {
-        if (((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText().equals("")) {
-            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreEmail().setVisible(true);
-        } else {
-            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreEmail().setVisible(false);
-        }
-    }
+		if (((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText().equals("")) {
+			((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreEmail().setVisible(true);
+		} else {
+			((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreEmail().setVisible(false);
+		}
+	}
 
-    public void mostraIconaErroreNomeMancanteRegistrazione() {
-        if (((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText().equals("")) {
-            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreNome().setVisible(true);
-        } else {
-            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreNome().setVisible(false);
-        }
-    }
+	public void mostraIconaErroreNomeMancanteRegistrazione() {
+		if (((Registrazione) getDashboard().getRegistrazione()).getTxtNome().getText().equals("")) {
+			((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreNome().setVisible(true);
+		} else {
+			((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreNome().setVisible(false);
+		}
+	}
 
-    public void mostraIconaErroreCognomeMancanteRegistrazione() {
-        if (((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText().equals("")) {
-            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreCognome().setVisible(true);
-        } else {
-            ((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreCognome().setVisible(false);
-        }
-    }
-	
-	
+	public void mostraIconaErroreCognomeMancanteRegistrazione() {
+		if (((Registrazione) getDashboard().getRegistrazione()).getTxtCognome().getText().equals("")) {
+			((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreCognome().setVisible(true);
+		} else {
+			((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreCognome().setVisible(false);
+		}
+	}
+
 	public boolean formatoEmailInseritaErrato() {
 		boolean emailCorretta = controlloInserimentoEmailCorrettamenteRegistrazione(
 				((Registrazione) getDashboard().getRegistrazione()).getTxtEmail().getText());
@@ -686,22 +691,21 @@ public class Controller {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			((OperazioneRiuscitaConSuccesso) getDashboard().getOperazioneEffettuataConSuccesso()).getLblComplimenti()
-					.setText("Registrazione effettuata con successo");
-			mostraOperazioneEffettuataConSuccesso();
+			mostraNotifica(registrazioneCompletata, img.messaggioNotifica());
 			mostraPannelli(getDashboard().getAccesso());
+			setPannelloPrecedente(2);
 			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 		} else if (erroreFormatoEmail()) {
-			mostraErrore(erroreRegistrazioneFormatoSbagliato);
+			mostraNotifica(erroreRegistrazioneFormatoSbagliato, img.messaggioErrore());
 		} else if (errorePasswordRipetuteErrate()) {
-			mostraErrore(errorePasswordsNonCorrispondenti);
+			mostraNotifica(errorePasswordsNonCorrispondenti, img.messaggioErrore());
 		} else if (erroreLoginGiaFatto()) {
-			mostraErrore(erroreRegistrazioneLoginGiaEffettuato);
+			mostraNotifica(erroreRegistrazioneLoginGiaEffettuato, img.messaggioErrore());
 		} else {
 			mostraIconaErroreNomeMancanteRegistrazione();
 			mostraIconaErroreCognomeMancanteRegistrazione();
 			mostraIconaErroreEmailMancanteRegistrazione();
-			mostraErrore(erroreCampiVuoti);
+			mostraNotifica(erroreCampiVuoti, img.messaggioErrore());
 		}
 	}
 
@@ -1091,7 +1095,7 @@ public class Controller {
 			svuotaCampiGestioneVoloPartenze();
 			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} else {
-			mostraErrore(erroreGestioneVoliPartenzeOrarioSbagliato);
+			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore());
 		}
 	}
 
@@ -1280,7 +1284,7 @@ public class Controller {
 			svuotaCampiGestioneVoloArrivi();
 			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 		} else {
-			mostraErrore(erroreGestioneVoliPartenzeOrarioSbagliato);
+			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore());
 		}
 	}
 
@@ -1332,7 +1336,7 @@ public class Controller {
 			svuotaCampiGestioneVoloArrivi();
 			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 		} else {
-			mostraErrore(erroreGestioneVoliPartenzeOrarioSbagliato);
+			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore());
 		}
 	}
 
@@ -1341,7 +1345,6 @@ public class Controller {
 	public void svuotaCampiGestioneGate() {
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setText("");
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setText("");
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().setText("");
 	}
 
 	public GateDAO implementazioneGateDAO() {
@@ -1375,16 +1378,13 @@ public class Controller {
 	@SuppressWarnings("deprecation")
 	public void aggiungiGate() {
 		int ora = 0;
-		int minuto = Integer
-				.parseInt(((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().getText());
 		int minutoChiusuraGate = 20;
 		int secondo = 0;
 
-		Time tempo = new Time(ora, minuto, secondo);
 		Time chiusuraGate = new Time(ora, minutoChiusuraGate, secondo);
 
 		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
-				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), tempo, chiusuraGate);
+				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), chiusuraGate);
 
 		try {
 			implementazioneGateDAO().aggiungiGate(gt);
@@ -1414,16 +1414,13 @@ public class Controller {
 	@SuppressWarnings("deprecation")
 	public void modificaGate() {
 		int ora = 0;
-		int minuto = Integer
-				.parseInt(((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato().getText());
 		int minutoChiusuraGate = 20;
 		int secondo = 0;
 
-		Time tempo = new Time(ora, minuto, secondo);
 		Time chiusuraGate = new Time(ora, minutoChiusuraGate, secondo);
 
 		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
-				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), tempo, chiusuraGate);
+				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), chiusuraGate);
 
 		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
 
@@ -1445,63 +1442,42 @@ public class Controller {
 	public void svuotaCampiGateCodeImbarco() {
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().setText("");
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().setText("");
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxCodaDiImbarco().setSelectedIndex(0);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxNumeroPorta().setSelectedIndex(0);
 	}
 
 	public void aggiungiGateCodeImbarco() {
-		codaImbarco = new CodaDiImbarco(
+		cdi = new CodaDiImbarco(
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText());
 
-		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText());
+		gt = new Gate(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
 
 		try {
-			implementazioneGateDAO().aggiungiGateInCodaDiImbarcoGate(gt, codaImbarco);
+			implementazioneGateDAO().aggiungiGateInCodaDiImbarco(gt, cdi);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello()
-				.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRow());
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione()
+				.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaAssociazione());
 		svuotaCampiGateCodeImbarco();
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabella();
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
 	}
 
 	public void eliminaGateCodeImbarco() {
-		CodaDiImbarco codaImbarco = new CodaDiImbarco(
+		cdi = new CodaDiImbarco(
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText());
 
-		gt = new Gate(codaImbarco,
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
+		gt = new Gate(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
 
-		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabella().getSelectedRow();
+		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabellaAssociazioni().getSelectedRow();
 		try {
-			implementazioneGateDAO().cancellaGate(gt);
+			implementazioneGateDAO().cancellaGateInCodaDiImbarco(gt, cdi);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello().removeRow(t);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione().removeRow(t);
 		svuotaCampiGestioneGate();
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabella();
-	}
-
-	public void modificaGateCodeImbarco() {
-		CodaDiImbarco codaImbarco = new CodaDiImbarco(
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText());
-
-		gt = new Gate(codaImbarco,
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
-		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabella().getSelectedRow();
-
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello()
-				.setValueAt(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText(), t, 0);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModello().setValueAt(
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText(), t, 1);
-
-		try {
-			implementazioneGateDAO().modificaGate(gt);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		svuotaCampiGestioneGate();
-		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
 	}
 
 	// METODI DI UTILIZZO GATE
@@ -1641,6 +1617,87 @@ public class Controller {
 		return mese;
 	}
 
+	// METODI DI CODA DI IMBARCO
+
+	public void svuotaCampiCodaDiImbarco() {
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().setText(null);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().setText(null);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().setText(null);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void aggiungiCodaDiImbarco() {
+		int ora = 0;
+		int minutoImbarcoStimato = Integer.parseInt(
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().getText());
+		;
+		int secondo = 0;
+
+		Time tempoDiImbarcoStimato = new Time(ora, minutoImbarcoStimato, secondo);
+
+		cdi = new CodaDiImbarco(
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText(),
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().getText(),
+				tempoDiImbarcoStimato);
+
+		try {
+			implementazioneCodaDiImbarcoDAO().aggiungiCodaDiImbarco(cdi);
+		} catch (SQLException e) {
+			mostraNotifica(erroreGeneraleHome, img.messaggioErrore());
+		}
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco()
+				.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaCodaDiImbarco());
+		svuotaCampiCodaDiImbarco();
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
+	}
+
+	public void eliminaCodaDiImbarco() {
+		cdi = new CodaDiImbarco(
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText());
+
+		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabellaCodaDiImbarco().getSelectedRow();
+		try {
+			implementazioneCodaDiImbarcoDAO().cancellaCodaDiImbarco(cdi);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco().removeRow(t);
+		svuotaCampiCodaDiImbarco();
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
+	}
+
+	@SuppressWarnings("deprecation")
+	public void modificaCodaDiImbarco() {
+		int ora = 0;
+		int minutoImbarcoStimato = Integer.parseInt(
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().getText());
+		;
+		int secondo = 0;
+
+		Time tempoDiImbarcoStimato = new Time(ora, minutoImbarcoStimato, secondo);
+
+		cdi = new CodaDiImbarco(
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText(),
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().getText(),
+				tempoDiImbarcoStimato);
+		try {
+			implementazioneCodaDiImbarcoDAO().modificaCodaDiImbarco(cdi);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		svuotaCampiCodaDiImbarco();
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
+	}
+
+	// METODI DI GESTIONE GENERALI
+
+	public void rimuoviElementiComboBox(JComboBox<String> comboBox) {
+		for (int i = comboBox.getItemCount() - 1; i > 0; i--) {
+			comboBox.removeItemAt(i);
+		}
+
+	}
+
 	// METODI DI DASHBOARD
 
 	// TEMI
@@ -1717,9 +1774,9 @@ public class Controller {
 	}
 
 	public void clickPannelloLateraleHome() {
-		setPannelloPrecedente(1);
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getHome());
+		setPannelloPrecedente(1);
 		if (getDashboard().getHome().isVisible()) {
 			cambioPannelloTema(getDashboard().getPanelHome(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
 		}
@@ -1751,9 +1808,9 @@ public class Controller {
 	}
 
 	public void clickPannelloLateraleAccedi() {
-		setPannelloPrecedente(2);
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getAccesso());
+		setPannelloPrecedente(2);
 		if (getDashboard().getAccesso().isVisible()) {
 			cambioPannelloTema(getDashboard().getPanelAccedi(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
 
@@ -1787,9 +1844,9 @@ public class Controller {
 	}
 
 	public void clickPannelloLateraleRegistrati() {
-		setPannelloPrecedente(3);
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getRegistrazione());
+		setPannelloPrecedente(3);
 		if (getDashboard().getRegistrazione().isVisible()) {
 			cambioPannelloTema(getDashboard().getPanelRegistrati(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
 
@@ -1824,9 +1881,9 @@ public class Controller {
 	public void clickPannelloLateraleProfilo() {
 		chiudiTendinaIstantanea();
 		if (sbloccaGestione()) {
-			setPannelloPrecedente(4);
 			pannelloLateraleSelezionato();
 			mostraPannelli(getDashboard().getProfilo());
+			setPannelloPrecedente(4);
 			profiloUtenteAccessoEffettuato();
 
 			if (getDashboard().getProfilo().isVisible()) {
@@ -1865,9 +1922,9 @@ public class Controller {
 	}
 
 	public void clickPannelloLateraleImpostazioni() {
-		setPannelloPrecedente(5);
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getImpostazioni());
+		setPannelloPrecedente(5);
 		if (getDashboard().getImpostazioni().isVisible()) {
 			cambioPannelloTema(getDashboard().getPanelImpostazioni(), pannelloSceltoTemaChiaro,
 					pannelloSceltoTemaScuro);
@@ -1942,7 +1999,8 @@ public class Controller {
 	}
 
 	// METODI ERRORI GESTIONE
-	public void mostraErrore(String errore) {
+	public void mostraNotifica(String errore, Image immagine) {
+		getDashboard().getLblMessaggioErroreLayout().setIcon(new ImageIcon(immagine));
 		if (getDashboard().getPosizioneMessaggioErrore() == 0) {
 			Thread th = new Thread() {
 				@Override
@@ -2295,6 +2353,7 @@ public class Controller {
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getAccesso());
+		setPannelloPrecedente(2);
 	}
 
 	public void vaiARegistrazioneDaSceltaProfiloSenzaAccesso() {
@@ -2302,6 +2361,7 @@ public class Controller {
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getRegistrazione());
+		setPannelloPrecedente(3);
 	}
 
 	public void annullaSceltaProfiloSenzaAccesso() {
@@ -2324,6 +2384,7 @@ public class Controller {
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getGestioneVoliPartenze());
+		setPannelloPrecedente(9);
 	}
 
 	public void vaiAVoliArriviDaSceltaVolo() {
@@ -2331,6 +2392,7 @@ public class Controller {
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getGestioneVoliArrivi());
+		setPannelloPrecedente(10);
 	}
 
 	public void annullaSceltaVolo() {
@@ -2352,6 +2414,7 @@ public class Controller {
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getGestioneGate());
+		setPannelloPrecedente(8);
 	}
 
 	public void vaiAGateCodeImbarcoDaSceltaVolo() {
@@ -2359,6 +2422,7 @@ public class Controller {
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getGateCodeImbarco());
+		setPannelloPrecedente(11);
 	}
 
 	public void vaiATempisticheGateDaSceltaVolo() {
@@ -2366,6 +2430,7 @@ public class Controller {
 		getDashboard().setEnabled(true);
 		getDashboard().setVisible(true);
 		mostraPannelli(getDashboard().getUtilizzoGate());
+		setPannelloPrecedente(14);
 	}
 
 	public void annullaSceltaGate() {
@@ -2403,19 +2468,21 @@ public class Controller {
 	// MENU INFO ACCOUNT
 	public void entraInGestioneUtenti() {
 		if (sbloccaGestione()) {
-			setPannelloPrecedente(8);
 			mostraPannelli(getDashboard().getGestioneUtenti());
+			setPannelloPrecedente(8);
 		}
 	}
 
 	public void logout() {
 		getDashboard().getLblAccount().setBounds(760, 7, 216, 23);
+		mostraNotifica(logout, img.messaggioNotifica());
 		getDashboard().getLblAccount().setText("Nessun accesso effettuato");
 		getDashboard().getLblFrecciaMenu().setVisible(false);
 		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblErrore().setText("");
 		entraGestioneUtenti = false;
 		((Accesso) getDashboard().getAccesso()).setSbloccaHome(false);
 		mostraPannelli(getDashboard().getAccesso());
+		setPannelloPrecedente(2);
 	}
 
 	// METODI DI PROFILO
@@ -2443,8 +2510,6 @@ public class Controller {
 		((CambioPassword) getDashboard().getCambioPassword()).getTxtRipetiNuovaPassword().setText("");
 	}
 
-
-	
 	@SuppressWarnings("deprecation")
 	public void cambioPasswordDaProfilo() {
 		utn = new Utente(emailAccesso,
@@ -2456,34 +2521,32 @@ public class Controller {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			((OperazioneRiuscitaConSuccesso) getDashboard().getOperazioneEffettuataConSuccesso()).getLblComplimenti()
-					.setText("Operazione avvenuta con successo");
-			mostraOperazioneEffettuataConSuccesso();
 			logout();
+			mostraNotifica(passwordCambiata, img.messaggioNotifica());
 			mostraPannelli(getDashboard().getAccesso());
-			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-			
+			setPannelloPrecedente(2);
+
 		} else if (erroreCambioPasswordNonCorrispondenteConAttuale()) {
-			mostraErrore(erroreCambioPasswordNonCorrispondenteConAttuale);
+			mostraNotifica(erroreCambioPasswordNonCorrispondenteConAttuale, img.messaggioErrore());
 		} else if (errorePasswordsNonCorrispondenti()) {
-			mostraErrore(errorePasswordsNonCorrispondenti);
-		}  else if (erroriMultipliCambioPassword()){
-			mostraErrore(erroreGenericoInInserimentiCampi);
+			mostraNotifica(errorePasswordsNonCorrispondenti, img.messaggioErrore());
+		} else if (erroriMultipliCambioPassword()) {
+			mostraNotifica(erroreGenericoInInserimentiCampi, img.messaggioErrore());
 		} else {
 			mostraIconaErroreVecchiaPasswordaMancanteCambioPassword();
-			mostraErrore(erroreCampiVuoti);
+			mostraNotifica(erroreCampiVuoti, img.messaggioErrore());
 		}
 	}
-	
-	//ERRORI CAMBIO PASSWORD
+
+	// ERRORI CAMBIO PASSWORD
 	public void mostraIconaErroreVecchiaPasswordaMancanteCambioPassword() {
-        if (((CambioPassword) getDashboard().getCambioPassword()).getTxtVecchiaPassword().getText().equals("")) {
-            ((CambioPassword) getDashboard().getCambioPassword()).getLblIconaErroreVecchiaPassword().setVisible(true);
-        } else {
-            ((CambioPassword) getDashboard().getRegistrazione()).getLblIconaErroreVecchiaPassword().setVisible(false);
-        }
-    }
-	
+		if (((CambioPassword) getDashboard().getCambioPassword()).getTxtVecchiaPassword().getText().equals("")) {
+			((CambioPassword) getDashboard().getCambioPassword()).getLblIconaErroreVecchiaPassword().setVisible(true);
+		} else {
+			((CambioPassword) getDashboard().getRegistrazione()).getLblIconaErroreVecchiaPassword().setVisible(false);
+		}
+	}
+
 	public boolean errorePasswordsNonCorrispondenti() {
 		if ((passwordVecchiaUgualeAllaNuova()) && !(ripetiCambioPassword())
 				&& !(controlloCampiSeVuotiCambioPassword())) {
@@ -2492,7 +2555,7 @@ public class Controller {
 			return false;
 		}
 	}
-	
+
 	public boolean erroreCambioPasswordNonCorrispondenteConAttuale() {
 		if (!(passwordVecchiaUgualeAllaNuova()) && (ripetiCambioPassword())
 				&& !(controlloCampiSeVuotiCambioPassword())) {
@@ -2500,7 +2563,7 @@ public class Controller {
 		} else {
 			return false;
 		}
-	}	
+	}
 
 	public boolean erroriMultipliCambioPassword() {
 		if (!(passwordVecchiaUgualeAllaNuova()) && !(ripetiCambioPassword())
@@ -2509,8 +2572,8 @@ public class Controller {
 		} else {
 			return false;
 		}
-	}	
-	
+	}
+
 	@SuppressWarnings("deprecation")
 	public boolean controlloCampiSeVuotiCambioPassword() {
 		if (((CambioPassword) getDashboard().getCambioPassword()).getTxtVecchiaPassword().getText().length() <= 0
@@ -2571,34 +2634,35 @@ public class Controller {
 					&& !(controlloCampiSeVuotiPasswordDimenticata())) {
 				implementazioneUtenteDAO().passwordDimenticata(utn);
 				mostraPannelli(getDashboard().getAccesso());
+				setPannelloPrecedente(2);
 				getDashboard().getPasswordDimenticata().dispose();
-				mostraOperazioneEffettuataConSuccesso();
+				mostraNotifica(passwordCambiata, img.messaggioNotifica());
 				getDashboard().setEnabled(true);
 				getDashboard().setVisible(true);
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 			} else if (erroreRipetiPasswordDimenticata()) {
-				mostraErrore(errorePasswordsNonCorrispondenti);
+				mostraNotifica(errorePasswordsNonCorrispondenti, img.messaggioErrore());
 			} else if (erroriMultipliPasswordDimenticata()) {
-				mostraErrore(erroreGenericoInInserimentiCampi);
-			} else if (erroreEmailNonRegistrata())  {
-				mostraErrore(errorePasswordDimenticataEmailNonRegistrata);
+				mostraNotifica(erroreGenericoInInserimentiCampi, img.messaggioErrore());
+			} else if (erroreEmailNonRegistrata()) {
+				mostraNotifica(errorePasswordDimenticataEmailNonRegistrata, img.messaggioErrore());
 			} else {
 				mostraIconaErroreEmailMancantePasswordDimenticata();
-				mostraErrore(erroreCampiVuoti);
+				mostraNotifica(erroreCampiVuoti, img.messaggioErrore());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// ERRORI PASSWORD DIMENTICATA
 	public void mostraIconaErroreEmailMancantePasswordDimenticata() {
-        if (((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText().equals("")) {
-            ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblIconaErroreEmail().setVisible(true);
-        } else {
-            ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblIconaErroreEmail().setVisible(false);
-        }
-    }
+		if (((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText().equals("")) {
+			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblIconaErroreEmail().setVisible(true);
+		} else {
+			((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblIconaErroreEmail().setVisible(false);
+		}
+	}
 
 	public boolean erroreRipetiPasswordDimenticata() {
 		String email = ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText();
@@ -2615,7 +2679,7 @@ public class Controller {
 			return false;
 		}
 	}
-	
+
 	public boolean erroreEmailNonRegistrata() {
 		String email = ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText();
 		boolean esisteEmail = false;
@@ -3146,13 +3210,9 @@ public class Controller {
 		getDashboard().getGestioneGate().setBackground(sfondoTemaChiaro);
 		((GestioneGate) getDashboard().getGestioneGate()).getLblCodiceGate().setForeground(coloreLabelTemaChiaro);
 		((GestioneGate) getDashboard().getGestioneGate()).getLblNumeroPorta().setForeground(coloreLabelTemaChiaro);
-		((GestioneGate) getDashboard().getGestioneGate()).getLblTempoImbarcoStimato()
-				.setForeground(coloreLabelTemaChiaro);
 
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setForeground(coloreScritteTemaChiaro);
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setForeground(coloreScritteTemaChiaro);
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato()
-				.setForeground(coloreScritteTemaChiaro);
 
 		((GestioneGate) getDashboard().getGestioneGate()).getLblModifica()
 				.setIcon(new ImageIcon(img.modifica1TemaChiaro()));
@@ -3175,13 +3235,11 @@ public class Controller {
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblCodaImbarco()
 				.setForeground(coloreLabelTemaChiaro);
 
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblModifica()
-				.setIcon(new ImageIcon(img.modifica1TemaChiaro()));
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblAggiungi()
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblAggiungiAssociazione()
 				.setIcon(new ImageIcon(img.aggiungi1TemaChiaro()));
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblElimina()
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblEliminaAssociazione()
 				.setIcon(new ImageIcon(img.elimina1TemaChiaro()));
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblSvuota()
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblSvuotaAssociazione()
 				.setIcon(new ImageIcon(img.svuota1TemaChiaro()));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblimgfrecciaIndietro()
 				.setIcon(new ImageIcon(img.frecciaIndietro1TemaChiaro()));
@@ -3593,13 +3651,9 @@ public class Controller {
 		getDashboard().getGestioneGate().setBackground(sfondoTemaScuro);
 		((GestioneGate) getDashboard().getGestioneGate()).getLblCodiceGate().setForeground(coloreLabelTemaScuro);
 		((GestioneGate) getDashboard().getGestioneGate()).getLblNumeroPorta().setForeground(coloreLabelTemaScuro);
-		((GestioneGate) getDashboard().getGestioneGate()).getLblTempoImbarcoStimato()
-				.setForeground(coloreLabelTemaScuro);
 
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setForeground(coloreScritteTemaScuro);
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setForeground(coloreScritteTemaScuro);
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtTempoImbarcoStimato()
-				.setForeground(coloreScritteTemaScuro);
 
 		((GestioneGate) getDashboard().getGestioneGate()).getLblModifica().setIcon(new ImageIcon(img.modifica1()));
 		((GestioneGate) getDashboard().getGestioneGate()).getLblAggiungi().setIcon(new ImageIcon(img.aggiungi1()));
@@ -3617,12 +3671,12 @@ public class Controller {
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblCodiceGate().setForeground(coloreLabelTemaScuro);
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblCodaImbarco().setForeground(coloreLabelTemaScuro);
 
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblModifica()
-				.setIcon(new ImageIcon(img.modifica1()));
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblAggiungi()
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblAggiungiAssociazione()
 				.setIcon(new ImageIcon(img.aggiungi1()));
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblElimina().setIcon(new ImageIcon(img.elimina1()));
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblSvuota().setIcon(new ImageIcon(img.svuota1()));
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblEliminaAssociazione()
+				.setIcon(new ImageIcon(img.elimina1()));
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblSvuotaAssociazione()
+				.setIcon(new ImageIcon(img.svuota1()));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblimgfrecciaIndietro()
 				.setIcon(new ImageIcon(img.frecciaIndietro1()));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblBarraRicerca()

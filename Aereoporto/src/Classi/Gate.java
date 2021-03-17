@@ -94,11 +94,10 @@ public class Gate {
 		this.numeroPorta = numeroPorta;
 	}
 
-	public Gate(String codiceGate, String numeroPorta, Time tempoImbarcoStimato, Time tempoChiusuraGate) {
+	public Gate(String codiceGate, String numeroPorta,  Time tempoChiusuraGate) {
 		super();
 		this.codiceGate = codiceGate;
 		this.numeroPorta = numeroPorta;
-		this.tempoImbarcoStimato = tempoImbarcoStimato;
 		this.tempoChiusuraGate = tempoChiusuraGate;
 	}
 

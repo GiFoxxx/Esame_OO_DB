@@ -139,7 +139,6 @@ public class SceltaVolo extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerSceltaVolo.vaiAVoliPartenzeDaSceltaVolo();
-					controllerSceltaVolo.setPannelloPrecedente(9);
 				}
 
 				@Override
@@ -173,7 +172,6 @@ public class SceltaVolo extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerSceltaVolo.vaiAVoliArriviDaSceltaVolo();
-					controllerSceltaVolo.setPannelloPrecedente(10);
 				}
 
 				@Override

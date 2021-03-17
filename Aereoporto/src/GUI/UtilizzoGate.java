@@ -43,6 +43,7 @@ public class UtilizzoGate extends JPanel {
 
 	List<Gate> ListaGate = new ArrayList<Gate>();
 	List<Gate> ListaUtilizzoGate = new ArrayList<Gate>();
+	
 	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceGate;
