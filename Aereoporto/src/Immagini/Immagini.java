@@ -32,13 +32,13 @@ public class Immagini {
 	/*-----------------------------------------------------------VARIO-----------------------------------------------------------*/
 
 	public Image stellaVuota() {
-		Image stellaVuota = new ImageIcon(Recensione.class.getResource("immaginiRecensione/stellaVuota.png")).getImage()
+		Image stellaVuota = new ImageIcon(Recensione.class.getResource("immaginiInComuneTraTemi/stellaVuota.png")).getImage()
 				.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
 		return stellaVuota;
 	}
 
 	public Image stellaPiena() {
-		Image stellaPiena = new ImageIcon(Recensione.class.getResource("immaginiRecensione/stellaPiena.png")).getImage()
+		Image stellaPiena = new ImageIcon(Recensione.class.getResource("immaginiInComuneTraTemi/stellaPiena.png")).getImage()
 				.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
 		return stellaPiena;
 	}
@@ -100,13 +100,13 @@ public class Immagini {
 	}
 	
 	public Image messaggioNotifica() {
-        Image messaggioNotifica = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/messaggioNotifica.png")).getImage()
+        Image messaggioNotifica = new ImageIcon(Dashboard.class.getResource("immaginiInComuneTraTemi/messaggioNotifica.png")).getImage()
                 .getScaledInstance(1073, 25, Image.SCALE_SMOOTH);
         return messaggioNotifica;
     }
 	
 	public Image messaggioErrore() {
-        Image messaggioErrore = new ImageIcon(Dashboard.class.getResource("immaginiDashboard/messaggioErrore.png")).getImage()
+        Image messaggioErrore = new ImageIcon(Dashboard.class.getResource("immaginiInComuneTraTemi/messaggioErrore.png")).getImage()
                 .getScaledInstance(1073, 25, Image.SCALE_SMOOTH);
         return messaggioErrore;
     }
@@ -569,14 +569,14 @@ public class Immagini {
 	// IN COMUNE
 	public Image titolo() {
 		Image titolo = new ImageIcon(
-				Dashboard.class.getResource("immaginiInComune/titolo.png")).getImage()
+				Dashboard.class.getResource("immaginiInComuneTraTemi/titolo.png")).getImage()
 						.getScaledInstance(234, 21, Image.SCALE_SMOOTH);
 		return titolo;
 	}
 	
 	public Image errore() {
 		Image errore = new ImageIcon(
-				Registrazione.class.getResource("immaginiInComune/errore.png")).getImage()
+				Registrazione.class.getResource("immaginiInComuneTraTemi/errore.png")).getImage()
 						.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		return errore;
 	}
@@ -629,7 +629,7 @@ public class Immagini {
 	
 	public Image barraRicercaTemaChiaro() {
 		Image barraRicercaChiara = new ImageIcon(Accesso.class.getResource("immaginiInComuneChiare/barraRicercaChiara.png")).getImage()
-				.getScaledInstance(184, 30, Image.SCALE_SMOOTH);
+				.getScaledInstance(184, 25, Image.SCALE_SMOOTH);
 		return barraRicercaChiara;
 	}
 
@@ -1676,11 +1676,6 @@ public class Immagini {
 			return temaChiaro;
 		}
 		
-		public Image temaScuroTT() {
-			Image temaScuroTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/temaScuroTT.png")).getImage()
-					.getScaledInstance(110, 31, Image.SCALE_SMOOTH);
-			return temaScuroTT;
-		}
 		
 /*-----------------------------------------------------------TOOLTIP TEMA CHIARO-----------------------------------------------------------*/
 		
@@ -1736,12 +1731,6 @@ public class Immagini {
 			Image registratiTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/registratiTTChiaro.png")).getImage()
 					.getScaledInstance(91, 31, Image.SCALE_SMOOTH);
 			return registratiTTChiaro;
-		}
-		
-		public Image temaChiaroTTChiaro() {
-			Image temaChiaroTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/temaChiaroTTChiaro.png")).getImage()
-					.getScaledInstance(110, 31, Image.SCALE_SMOOTH);
-			return temaChiaroTTChiaro;
 		}
 		
 		public Image temaScuroTTChiaro() {

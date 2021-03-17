@@ -191,6 +191,7 @@ public class Recensione extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+	
 				stella0();
 				controllerRecensione.svuotaArea();
 				controllerRecensione.invioRecensione();

@@ -23,12 +23,13 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-import Amministrazione.Utente;
 import Classi.CompagniaAerea;
+import Classi.Utente;
 import Controller.Controller;
 import Immagini.Immagini;
 
 import javax.swing.JButton;
+import javax.swing.border.LineBorder;
 
 public class GestioneCompagnieAeree extends JPanel {
 
@@ -165,6 +166,14 @@ public class GestioneCompagnieAeree extends JPanel {
 		return row;
 	}
 
+	public JLabel getLblRicaricaTabella() {
+		return lblRicaricaTabella;
+	}
+
+	public void setLblRicaricaTabella(JLabel lblRicaricaTabella) {
+		this.lblRicaricaTabella = lblRicaricaTabella;
+	}
+
 	Controller controllerGestioneCompagnieAeree;
 	
 
@@ -230,6 +239,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		add(lblBarraRicerca);
 
 		scrollPane = new JScrollPane();
+		scrollPane.setBorder(new LineBorder(controllerGestioneCompagnieAeree.bordi));
 		scrollPane.setBounds(25, 85, 1030, 330);
 		add(scrollPane);
 
@@ -257,6 +267,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		scrollPane.setViewportView(tabella);
 
 		txtCodiceCompagniaAerea = new JTextField();
+		txtCodiceCompagniaAerea.setBorder(new LineBorder(controllerGestioneCompagnieAeree.bordi));
 		txtCodiceCompagniaAerea.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -279,6 +290,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		add(lblNome);
 
 		txtNome = new JTextField();
+		txtNome.setBorder(new LineBorder(controllerGestioneCompagnieAeree.bordi));
 		txtNome.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {

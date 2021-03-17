@@ -16,7 +16,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-import Amministrazione.Utente;
+import Classi.Utente;
 import Controller.Controller;
 import Immagini.Immagini;
 
@@ -25,6 +25,8 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class GestioneUtenti extends JPanel {
 
@@ -48,8 +50,6 @@ public class GestioneUtenti extends JPanel {
 	private JLabel lblCognome;
 	private JLabel lblEmail;
 	private JLabel lblPassword;
-	
-	private JLabel lblAggiungi;
 	private JLabel lblModifica;
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
@@ -160,14 +160,6 @@ public class GestioneUtenti extends JPanel {
 		this.tabella = table;
 	}
 
-	public JLabel getLblAggiungi() {
-		return lblAggiungi;
-	}
-
-	public void setLblAggiungi(JLabel lblAggiungi) {
-		this.lblAggiungi = lblAggiungi;
-	}
-
 	public JLabel getLblModifica() {
 		return lblModifica;
 	}
@@ -190,6 +182,14 @@ public class GestioneUtenti extends JPanel {
 
 	public void setLblSvuota(JLabel lblSvuota) {
 		this.lblSvuota = lblSvuota;
+	}
+
+	public JLabel getLblRicaricaTabella() {
+		return lblRicaricaTabella;
+	}
+
+	public void setLblRicaricaTabella(JLabel lblRicaricaTabella) {
+		this.lblRicaricaTabella = lblRicaricaTabella;
 	}
 
 	public Utente[] getRow() {
@@ -267,14 +267,7 @@ public class GestioneUtenti extends JPanel {
 		add(lblNome);
 
 		txtNome = new JTextField();
-		txtNome.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneUtenti.aggiungiUtente();
-				}
-			}
-		});
+		txtNome.setBorder(new LineBorder(controllerGestioneUtenti.bordi));
 		txtNome.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtNome.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtNome.setBounds(215, 451, 133, 20);
@@ -289,14 +282,7 @@ public class GestioneUtenti extends JPanel {
 		add(lblCognome);
 
 		txtCognome = new JTextField();
-		txtCognome.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneUtenti.aggiungiUtente();
-				}
-			}
-		});
+		txtCognome.setBorder(new LineBorder(controllerGestioneUtenti.bordi));
 		txtCognome.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtCognome.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtCognome.setBounds(215, 482, 133, 20);
@@ -311,14 +297,7 @@ public class GestioneUtenti extends JPanel {
 		add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneUtenti.aggiungiUtente();
-				}
-			}
-		});
+		txtEmail.setBorder(new LineBorder(controllerGestioneUtenti.bordi));
 		txtEmail.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtEmail.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtEmail.setBounds(529, 450, 133, 20);
@@ -333,14 +312,7 @@ public class GestioneUtenti extends JPanel {
 		add(lblPassword);
 
 		txtPassword = new JTextField();
-		txtPassword.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent EventoInvio) {
-				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-					controllerGestioneUtenti.aggiungiUtente();
-				}
-			}
-		});
+		txtPassword.setBorder(new LineBorder(controllerGestioneUtenti.bordi));
 		txtPassword.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtPassword.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtPassword.setBounds(529, 482, 133, 20);
@@ -348,6 +320,7 @@ public class GestioneUtenti extends JPanel {
 		add(txtPassword);
 
 		scrollPane = new JScrollPane();
+		scrollPane.setBorder(new LineBorder(controllerGestioneUtenti.bordi));
 		scrollPane.setBounds(25, 85, 1030, 330);
 		add(scrollPane);
 
@@ -374,42 +347,6 @@ public class GestioneUtenti extends JPanel {
 		tabella.setModel(modello);
 
 		scrollPane.setViewportView(tabella);
-		
-		lblAggiungi = new JLabel("");
-		lblAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblAggiungi.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				controllerGestioneUtenti.aggiungiUtente();
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(), img.aggiungi2());
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(), img.aggiungi3());
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
-			
-			}
-
-		});
-		lblAggiungi.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAggiungi.setIcon(new ImageIcon(img.aggiungi1()));
-		lblAggiungi.setBounds(358, 569, 130, 36);
-		add(lblAggiungi);
 
 		lblModifica = new JLabel("");
 		lblModifica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -442,7 +379,7 @@ public class GestioneUtenti extends JPanel {
 		});
 		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
 		lblModifica.setIcon(new ImageIcon(img.modifica1()));
-		lblModifica.setBounds(114, 569, 130, 36);
+		lblModifica.setBounds(175, 568, 130, 36);
 		add(lblModifica);
 
 		lblElimina = new JLabel("");
@@ -475,7 +412,7 @@ public class GestioneUtenti extends JPanel {
 		});
 		lblElimina.setHorizontalAlignment(SwingConstants.CENTER);
 		lblElimina.setIcon(new ImageIcon(img.elimina1()));
-		lblElimina.setBounds(846, 569, 130, 36);
+		lblElimina.setBounds(480, 568, 130, 36);
 		add(lblElimina);
 
 		lblSvuota = new JLabel("");
@@ -508,7 +445,7 @@ public class GestioneUtenti extends JPanel {
 		});
 		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
-		lblSvuota.setBounds(602, 569, 130, 36);
+		lblSvuota.setBounds(785, 568, 130, 36);
 		add(lblSvuota);
 		
 		lblRicaricaTabella = new JLabel("");

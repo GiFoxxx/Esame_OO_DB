@@ -33,6 +33,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;
+import javax.swing.border.LineBorder;
 
 public class GestioneGate extends JPanel {
 
@@ -169,6 +170,14 @@ public class GestioneGate extends JPanel {
 		this.lblSvuota = lblSvuota;
 	}
 
+	public JLabel getLblRicaricaTabella() {
+		return lblRicaricaTabella;
+	}
+
+	public void setLblRicaricaTabella(JLabel lblRicaricaTabella) {
+		this.lblRicaricaTabella = lblRicaricaTabella;
+	}
+
 	Controller controllerGestioneGate;
 	
 
@@ -236,6 +245,7 @@ public class GestioneGate extends JPanel {
 		add(lblBarraRicerca);
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(new LineBorder(controllerGestioneGate.bordi));
 		scrollPane.setFont(controllerGestioneGate.fontLabel);
 		scrollPane.setEnabled(false);
 		scrollPane.setBounds(30, 85, 1030, 330);
@@ -270,6 +280,7 @@ public class GestioneGate extends JPanel {
 		add(lblNumeroPorta);
 
 		txtNumeroPorta = new JTextField();
+		txtNumeroPorta.setBorder(new LineBorder(controllerGestioneGate.bordi));
 		txtNumeroPorta.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -292,6 +303,7 @@ public class GestioneGate extends JPanel {
 		add(lblCodiceGate);
 
 		txtCodiceGate = new JTextField();
+		txtCodiceGate.setBorder(new LineBorder(controllerGestioneGate.bordi));
 		txtCodiceGate.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {

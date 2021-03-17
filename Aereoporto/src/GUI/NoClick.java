@@ -9,10 +9,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class NoClick extends JPanel {
-
 	
 	Controller controllerNoClick;
-
 	
 	public NoClick(Controller controller) {
 		addMouseListener(new MouseAdapter() {
@@ -27,9 +25,7 @@ public class NoClick extends JPanel {
 
 		controllerNoClick = controller;
 		
-		setBounds(300, 0, 905, 642);
-		setBackground(new Color(0, 0, 0, 20));
+		setBackground(controllerNoClick.trasparente);
 		setLayout(null);
 	}
-
 }

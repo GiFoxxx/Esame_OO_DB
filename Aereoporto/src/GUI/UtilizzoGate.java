@@ -247,6 +247,14 @@ public class UtilizzoGate extends JPanel {
 		this.lblMese = lblMese;
 	}
 
+	public JLabel getLblRicaricaTabella() {
+		return lblRicaricaTabella;
+	}
+
+	public void setLblRicaricaTabella(JLabel lblRicaricaTabella) {
+		this.lblRicaricaTabella = lblRicaricaTabella;
+	}
+
 	Controller controllerUtilizzoGate;
 
 	public UtilizzoGate(Controller controller) {
@@ -544,7 +552,7 @@ public class UtilizzoGate extends JPanel {
 		dataUtilizzo.setDateFormatString("dd/MM/yyyy");
 		dataUtilizzo.setForeground(controllerUtilizzoGate.coloreScritteSuBiancoTemaScuro);
 		dataUtilizzo.setFont(controllerUtilizzoGate.fontScritteGestioni);
-		dataUtilizzo.setBounds(500, 461, 121, 20);
+		dataUtilizzo.setBounds(494, 461, 121, 20);
 		add(dataUtilizzo);
 
 		lblSelezionaData = new JLabel("Seleziona una data per stimare l'utilizzo del gate");

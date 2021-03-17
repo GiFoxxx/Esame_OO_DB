@@ -700,7 +700,6 @@ public class Dashboard extends JFrame {
 		recensioni = controllerDashboard.recensione();
 		noClick = controllerDashboard.noClick();
 		menuInfoAccount = controllerDashboard.menuInfoAccount();
-		operazioneEffettuataConSuccesso = controllerDashboard.registrazioneEffettuataConSuccesso();
 		terminiECondizioni = controllerDashboard.terminiECondizioni();
 		informazioni = controllerDashboard.informazioni();
 		uscita = controllerDashboard.uscita();

@@ -28,8 +28,10 @@ public class Registrazione extends JPanel {
 	private JTextField txtNome;
 	private JTextField txtCognome;
 	private JTextField txtEmail;
+	
 	private JPasswordField txtPassword;
 	private JPasswordField txtRipetiPassword;
+	
 	private JLabel lblAvanti;
 	private JLabel lblInserimentoCredenziali;
 	private JLabel lblMostraPassword;

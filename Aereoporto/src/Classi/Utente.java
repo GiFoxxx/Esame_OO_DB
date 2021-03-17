@@ -1,4 +1,4 @@
-package Amministrazione;
+package Classi;
 
 public class Utente {
 	

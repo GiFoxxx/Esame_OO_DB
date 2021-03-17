@@ -38,6 +38,7 @@ import Classi.Tratta;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.border.LineBorder;
 
 public class GestioneTratte extends JPanel {
 
@@ -219,6 +220,14 @@ public class GestioneTratte extends JPanel {
 		this.comboBoxNomeCompagniaAerea = comboBoxNomeCompagniaAerea;
 	}
 
+	public JLabel getLblRicaricaTabella() {
+		return lblRicaricaTabella;
+	}
+
+	public void setLblRicaricaTabella(JLabel lblRicaricaTabella) {
+		this.lblRicaricaTabella = lblRicaricaTabella;
+	}
+
 	Controller controllerGestioneTratte;
 
 	public GestioneTratte(Controller controller) {
@@ -284,6 +293,7 @@ public class GestioneTratte extends JPanel {
 		add(lblBarraRicerca);
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(new LineBorder(controllerGestioneTratte.bordi));
 		scrollPane.setBounds(25, 85, 1030, 330);
 		add(scrollPane);
 
@@ -310,6 +320,7 @@ public class GestioneTratte extends JPanel {
 		scrollPane.setViewportView(tabella);
 
 		txtCodiceTratta = new JTextField();
+		txtCodiceTratta.setBorder(new LineBorder(controllerGestioneTratte.bordi));
 		txtCodiceTratta.setHorizontalAlignment(SwingConstants.LEFT);
 		txtCodiceTratta.addKeyListener(new KeyAdapter() {
 			@Override
@@ -340,6 +351,7 @@ public class GestioneTratte extends JPanel {
 		add(lblCittaPartenza);
 
 		txtCittaPartenza = new JTextField();
+		txtCittaPartenza.setBorder(new LineBorder(controllerGestioneTratte.bordi));
 		txtCittaPartenza.setHorizontalAlignment(SwingConstants.LEFT);
 		txtCittaPartenza.addKeyListener(new KeyAdapter() {
 			@Override
@@ -356,6 +368,7 @@ public class GestioneTratte extends JPanel {
 		add(txtCittaPartenza);
 
 		txtCittaArrivo = new JTextField();
+		txtCittaArrivo.setBorder(new LineBorder(controllerGestioneTratte.bordi));
 		txtCittaArrivo.setHorizontalAlignment(SwingConstants.LEFT);
 		txtCittaArrivo.addKeyListener(new KeyAdapter() {
 			@Override
@@ -402,6 +415,7 @@ public class GestioneTratte extends JPanel {
 		add(txtCodiceCompagniaAerea);
 
 		comboBoxNomeCompagniaAerea = new JComboBox<String>();
+		comboBoxNomeCompagniaAerea.setBorder(new LineBorder(controllerGestioneTratte.bordi));
 		comboBoxNomeCompagniaAerea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HashMap<String, String> map = null;

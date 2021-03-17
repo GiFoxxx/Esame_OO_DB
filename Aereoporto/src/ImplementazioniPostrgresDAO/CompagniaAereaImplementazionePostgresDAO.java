@@ -11,9 +11,9 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import Amministrazione.Utente;
 import Classi.CompagniaAerea;
 import Classi.Gate;
+import Classi.Utente;
 import ClassiDAO.CompagniaAereaDAO;
 
 public class CompagniaAereaImplementazionePostgresDAO implements CompagniaAereaDAO {

@@ -38,6 +38,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JComboBox;
+import javax.swing.border.LineBorder;
 
 public class GestioneVoliArrivi extends JPanel {
 
@@ -236,6 +237,14 @@ public class GestioneVoliArrivi extends JPanel {
 		this.lblSvuota = lblSvuota;
 	}
 
+	public JLabel getLblRicaricaTabella() {
+		return lblRicaricaTabella;
+	}
+
+	public void setLblRicaricaTabella(JLabel lblRicaricaTabella) {
+		this.lblRicaricaTabella = lblRicaricaTabella;
+	}
+
 	Controller controllerGestioneVoliArrivi;
 
 	public GestioneVoliArrivi(Controller controller) {
@@ -301,6 +310,7 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblBarraRicerca);
 
 		scrollPane = new JScrollPane();
+		scrollPane.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
 		scrollPane.setBounds(30, 85, 1030, 330);
 		add(scrollPane);
 
@@ -326,6 +336,7 @@ public class GestioneVoliArrivi extends JPanel {
 		scrollPane.setViewportView(tabella);
 
 		txtCodiceVoloArrivi = new JTextField();
+		txtCodiceVoloArrivi.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
 		txtCodiceVoloArrivi.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -355,6 +366,7 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblCittaPartenza);
 
 		txtCittaPartenza = new JTextField();
+		txtCittaPartenza.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
 		txtCittaPartenza.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -377,6 +389,7 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblDataArrivo);
 
 		dateDataArrivo = new JDateChooser();
+		dateDataArrivo.getCalendarButton().setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
 		dateDataArrivo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -399,6 +412,7 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblOrarioArrivo);
 
 		txtOraArrivo = new JTextField();
+		txtOraArrivo.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
 		txtOraArrivo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -414,6 +428,7 @@ public class GestioneVoliArrivi extends JPanel {
 		add(txtOraArrivo);
 
 		txtMinutoArrivo = new JTextField();
+		txtMinutoArrivo.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
 		txtMinutoArrivo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -432,7 +447,7 @@ public class GestioneVoliArrivi extends JPanel {
 		lblDuePuntiArrivo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDuePuntiArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
 		lblDuePuntiArrivo.setFont(controllerGestioneVoliArrivi.fontLabel);
-		lblDuePuntiArrivo.setBounds(729, 478, 10, 14);
+		lblDuePuntiArrivo.setBounds(725, 478, 10, 14);
 		add(lblDuePuntiArrivo);
 
 		lblAggiungi = new JLabel("");

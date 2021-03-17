@@ -1,4 +1,4 @@
-package Amministrazione;
+package ImplementazioniPostrgresDAO;
 
 import Database.*;
 import GUI.Accesso;
@@ -10,7 +10,9 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+import Classi.Utente;
 import Classi.VoloPartenze;
+import ClassiDAO.UtenteDAO;
 
 public class UtenteImplementazionePostgresDAO implements UtenteDAO {
 

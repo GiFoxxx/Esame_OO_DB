@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.JPanel;
 
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -17,7 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import Amministrazione.*;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

@@ -246,22 +246,22 @@ public class SceltaGate extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate2()));
+					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate2TemaChiaro(), img.utilizzoGate2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate1()));
+					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate1TemaChiaro(), img.utilizzoGate1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate3()));
+					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate3TemaChiaro(), img.utilizzoGate3());
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate2()));
+					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate2TemaChiaro(), img.utilizzoGate2());
 				}
 			});
 			lblTempisticheGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
