@@ -28,6 +28,7 @@ import java.awt.Cursor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.border.LineBorder;
 
 public class UtilizzoGate extends JPanel {
 
@@ -300,7 +301,7 @@ public class UtilizzoGate extends JPanel {
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimgfrecciaIndietro.setForeground(Color.BLACK);
 		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
-		lblimgfrecciaIndietro.setBounds(30, 35, 47, 30);
+		lblimgfrecciaIndietro.setBounds(30, 47, 30, 30);
 		add(lblimgfrecciaIndietro);
 
 		txtBarraRicerca = new JTextField();
@@ -314,17 +315,18 @@ public class UtilizzoGate extends JPanel {
 		txtBarraRicerca.setForeground(controllerUtilizzoGate.coloreScritteTemaScuro);
 		txtBarraRicerca.setFont(controllerUtilizzoGate.fontScritteGestioni);
 		txtBarraRicerca.setBorder(null);
-		txtBarraRicerca.setBounds(888, 41, 141, 20);
+		txtBarraRicerca.setBounds(888, 52, 141, 21);
 		add(txtBarraRicerca);
 		txtBarraRicerca.setColumns(10);
 
 		lblBarraRicerca = new JLabel("");
 		lblBarraRicerca.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraRicerca.setIcon(new ImageIcon(img.barraRicerca()));
-		lblBarraRicerca.setBounds(876, 38, 184, 25);
+		lblBarraRicerca.setBounds(871, 47, 184, 30);
 		add(lblBarraRicerca);
 
 		scrollPaneTabellaGate = new JScrollPane();
+		scrollPaneTabellaGate.setBorder(new LineBorder(controllerUtilizzoGate.bordi));
 		scrollPaneTabellaGate.setFont(controllerUtilizzoGate.fontLabel);
 		scrollPaneTabellaGate.setEnabled(false);
 		scrollPaneTabellaGate.setBounds(30, 85, 318, 330);
@@ -344,6 +346,7 @@ public class UtilizzoGate extends JPanel {
 		scrollPaneTabellaGate.setViewportView(tabellaGate);
 
 		scrollPaneTabellaUtilizzi = new JScrollPane();
+		scrollPaneTabellaUtilizzi.setBorder(new LineBorder(controllerUtilizzoGate.bordi));
 		scrollPaneTabellaUtilizzi.setFont(controllerUtilizzoGate.fontLabel);
 		scrollPaneTabellaUtilizzi.setEnabled(false);
 		scrollPaneTabellaUtilizzi.setBounds(358, 85, 702, 330);
@@ -358,28 +361,30 @@ public class UtilizzoGate extends JPanel {
 		lblNumeroPorta.setFont(controllerUtilizzoGate.fontLabel);
 		lblNumeroPorta.setForeground(controllerUtilizzoGate.coloreScritteTemaScuro);
 		lblNumeroPorta.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNumeroPorta.setBounds(30, 493, 130, 20);
+		lblNumeroPorta.setBounds(30, 493, 93, 20);
 		add(lblNumeroPorta);
 
 		txtNumeroPorta = new JTextField();
+		txtNumeroPorta.setBorder(new LineBorder(controllerUtilizzoGate.bordi));
 		txtNumeroPorta.setFont(controllerUtilizzoGate.fontScritteGestioni);
 		txtNumeroPorta.setForeground(controllerUtilizzoGate.coloreScritteSuBiancoTemaScuro);
 		txtNumeroPorta.setColumns(10);
-		txtNumeroPorta.setBounds(170, 493, 178, 20);
+		txtNumeroPorta.setBounds(133, 493, 45, 20);
 		add(txtNumeroPorta);
 
 		lblCodiceGate = new JLabel("Codice Gate");
 		lblCodiceGate.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceGate.setFont(controllerUtilizzoGate.fontLabel);
 		lblCodiceGate.setForeground(controllerUtilizzoGate.coloreScritteTemaScuro);
-		lblCodiceGate.setBounds(30, 461, 130, 20);
+		lblCodiceGate.setBounds(30, 461, 93, 20);
 		add(lblCodiceGate);
 
 		txtCodiceGate = new JTextField();
+		txtCodiceGate.setBorder(new LineBorder(controllerUtilizzoGate.bordi));
 		txtCodiceGate.setFont(controllerUtilizzoGate.fontScritteGestioni);
 		txtCodiceGate.setForeground(controllerUtilizzoGate.coloreScritteSuBiancoTemaScuro);
 		txtCodiceGate.setColumns(10);
-		txtCodiceGate.setBounds(170, 462, 178, 20);
+		txtCodiceGate.setBounds(133, 461, 75, 20);
 		add(txtCodiceGate);
 
 		lblSvuota = new JLabel("");
@@ -412,7 +417,7 @@ public class UtilizzoGate extends JPanel {
 		});
 		lblSvuota.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
-		lblSvuota.setBounds(194, 556, 130, 36);
+		lblSvuota.setBounds(124, 556, 130, 36);
 		add(lblSvuota);
 
 		lblRicaricaTabella = new JLabel("");
@@ -449,7 +454,7 @@ public class UtilizzoGate extends JPanel {
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
-		lblRicaricaTabella.setBounds(836, 35, 30, 30);
+		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
 
 		lblGiorno = new JLabel("");
@@ -549,15 +554,16 @@ public class UtilizzoGate extends JPanel {
 		add(lblMese);
 
 		dataUtilizzo = new JDateChooser();
+		dataUtilizzo.getCalendarButton().setBorder(new LineBorder(controllerUtilizzoGate.bordi));
 		dataUtilizzo.setDateFormatString("dd/MM/yyyy");
 		dataUtilizzo.setForeground(controllerUtilizzoGate.coloreScritteSuBiancoTemaScuro);
 		dataUtilizzo.setFont(controllerUtilizzoGate.fontScritteGestioni);
-		dataUtilizzo.setBounds(494, 461, 121, 20);
+		dataUtilizzo.setBounds(578, 461, 121, 20);
 		add(dataUtilizzo);
 
 		lblSelezionaData = new JLabel("Seleziona una data per stimare l'utilizzo del gate");
 		lblSelezionaData.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSelezionaData.setBounds(368, 426, 372, 24);
+		lblSelezionaData.setBounds(452, 426, 372, 24);
 		lblSelezionaData.setForeground(controllerUtilizzoGate.coloreScritteTemaScuro);
 		lblSelezionaData.setFont(controllerUtilizzoGate.fontLabel);
 		add(lblSelezionaData);
