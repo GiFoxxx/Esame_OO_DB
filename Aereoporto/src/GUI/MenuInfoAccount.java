@@ -127,7 +127,7 @@ public class MenuInfoAccount extends JPanel {
 
 		lblErrore = new JLabel("");
 		lblErrore.setFont(controllerMenuInfoAccount.fontLabel);
-//		lblErrore.setForeground(controllerMenuInfoAccount.coloreScritturaAllertaTemaScuro);
+		lblErrore.setForeground(controllerMenuInfoAccount.coloreScrittaErroreInMenuInfo);
 		lblErrore.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblErrore.setBounds(125, 0, 139, 46);
 		panelGestioneUtente.add(lblErrore);

@@ -161,7 +161,7 @@ public class Accesso extends JPanel {
 		txtEmail.setForeground(controllerAccesso.coloreScritteTemaScuro);
 		txtEmail.setFont(controllerAccesso.fontScritte);
 		txtEmail.setHorizontalAlignment(SwingConstants.LEFT);
-		txtEmail.setBounds(375, 253, 320, 22);
+		txtEmail.setBounds(377, 253, 318, 22);
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
 		add(txtEmail);
@@ -180,7 +180,7 @@ public class Accesso extends JPanel {
 		txtPassword.setHorizontalAlignment(SwingConstants.LEFT);
 		txtPassword.setFont(controllerAccesso.fontScritte);
 		txtPassword.setForeground(controllerAccesso.coloreScritteTemaScuro);
-		txtPassword.setBounds(375, 357, 320, 22);
+		txtPassword.setBounds(377, 357, 318, 22);
 		txtPassword.setBorder(null);
 		add(txtPassword);
 
@@ -324,7 +324,7 @@ public class Accesso extends JPanel {
 
 		lblCensuraPasswordTT = new JLabel("");
 		lblCensuraPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCensuraPasswordTT.setBounds(741, 348, 123, 31);
+		lblCensuraPasswordTT.setBounds(741, 348, 130, 31);
 		add(lblCensuraPasswordTT);
 
 	}

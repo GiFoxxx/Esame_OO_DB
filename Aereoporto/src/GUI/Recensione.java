@@ -22,7 +22,9 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
 public class Recensione extends JPanel {
-
+	
+	Immagini img = new Immagini();
+	
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -31,8 +33,10 @@ public class Recensione extends JPanel {
 	int y;
 	int flag = 0;
 	int valutazione = 0;
-
-	JLabel lblAnnulla;
+	
+	private JScrollPane scrollPane;
+	private JTextArea textArea;
+	private JLabel lblimgfrecciaIndietro;
 	JLabel lblStella1;
 	JLabel lblStella2;
 	JLabel lblStella3;
@@ -63,26 +67,17 @@ public class Recensione extends JPanel {
 	JLabel lblStella28;
 	JLabel lblStella29;
 	JLabel lblStella30;
-	JLabel lblInviaRecensione;
 	JLabel lblCommento;
+	JLabel lblInviaRecensione;	
 
 	// GETTER E SETTER
-	public JLabel getLblAnnulla() {
-		return lblAnnulla;
+	public JLabel getLblimgfrecciaIndietro() {
+		return lblimgfrecciaIndietro;
 	}
 
-	public void setLblAnnulla(JLabel lblAnnulla) {
-		this.lblAnnulla = lblAnnulla;
+	public void setLblimgfrecciaIndietro(JLabel lblimgfrecciaIndietro) {
+		this.lblimgfrecciaIndietro = lblimgfrecciaIndietro;
 	}
-
-//	public JLabel getLblStelleSelezionate() {
-//		return lblStelleSelezionate;
-//	}
-//
-//	public void setLblStelleSelezionate(JLabel lblStelleSelezionate) {
-//		this.lblStelleSelezionate = lblStelleSelezionate;
-//	}
-
 	public JLabel getLblInviaRecensione() {
 		return lblInviaRecensione;
 	}
@@ -115,52 +110,49 @@ public class Recensione extends JPanel {
 		this.textArea = textArea;
 	}
 
-	Immagini img = new Immagini();
 	Controller controllerRecensione;
-	private JTextArea textArea;
-	private JScrollPane scrollPane;
-
+	
 	public Recensione(Controller controller) {
 		controllerRecensione = controller;
 
 		setBounds(0, 0, 1090, 642);
 		setBackground(controllerRecensione.sfondoTemaScuro);
 		setLayout(null);
-
-		lblAnnulla = new JLabel("");
-		lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblAnnulla.addMouseListener(new MouseAdapter() {
+		
+		lblimgfrecciaIndietro = new JLabel("");
+		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerRecensione.setPannelloPrecedente(5);
 				controllerRecensione.mostraPannelli(controllerRecensione.getDashboard().getImpostazioni());
-				stella0();
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.annulla2TemaChiaro(), img.annulla2());
+				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.annulla1TemaChiaro(), img.annulla1());
+				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.annulla3TemaChiaro(), img.annulla3());
+				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblAnnulla, img.annulla1TemaChiaro(), img.annulla1());
+				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 		});
-		lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAnnulla.setIcon(new ImageIcon(img.annulla1()));
-		lblAnnulla.setBounds(150, 590, 319, 36);
-		add(lblAnnulla);
+		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblimgfrecciaIndietro.setForeground(Color.BLACK);
+		lblimgfrecciaIndietro.setIcon(new ImageIcon(img.frecciaIndietro1()));
+		lblimgfrecciaIndietro.setBounds(20, 30, 30, 30);
+		add(lblimgfrecciaIndietro);
 
 		lblInviaRecensione = new JLabel("");
 		lblInviaRecensione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -191,15 +183,12 @@ public class Recensione extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-	
-				stella0();
-				controllerRecensione.svuotaArea();
 				controllerRecensione.invioRecensione();
 			}
 		});
 		lblInviaRecensione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInviaRecensione.setIcon(new ImageIcon(img.inviaRecensione1()));
-		lblInviaRecensione.setBounds(619, 590, 319, 36);
+		lblInviaRecensione.setBounds(334, 576, 319, 36);
 		add(lblInviaRecensione);
 
 		lblStella1 = new JLabel("");
@@ -211,7 +200,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella1.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella1.setBounds(67, 84, 35, 35);
+		lblStella1.setBounds(68, 70, 35, 35);
 		add(lblStella1);
 
 		lblStella2 = new JLabel("");
@@ -223,7 +212,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella2.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella2.setBounds(169, 84, 35, 35);
+		lblStella2.setBounds(170, 70, 35, 35);
 		add(lblStella2);
 
 		lblStella3 = new JLabel("");
@@ -235,7 +224,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella3.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella3.setBounds(271, 84, 35, 35);
+		lblStella3.setBounds(272, 70, 35, 35);
 		add(lblStella3);
 
 		lblStella4 = new JLabel("");
@@ -247,7 +236,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella4.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella4.setBounds(373, 84, 35, 35);
+		lblStella4.setBounds(374, 70, 35, 35);
 		add(lblStella4);
 
 		lblStella5 = new JLabel("");
@@ -259,7 +248,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella5.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella5.setBounds(475, 84, 35, 35);
+		lblStella5.setBounds(476, 70, 35, 35);
 		add(lblStella5);
 
 		lblStella6 = new JLabel("");
@@ -271,7 +260,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella6.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella6.setBounds(577, 84, 35, 35);
+		lblStella6.setBounds(578, 70, 35, 35);
 		add(lblStella6);
 
 		lblStella7 = new JLabel("");
@@ -283,7 +272,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella7.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella7.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella7.setBounds(679, 84, 35, 35);
+		lblStella7.setBounds(680, 70, 35, 35);
 		add(lblStella7);
 
 		lblStella8 = new JLabel("");
@@ -295,7 +284,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella8.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella8.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella8.setBounds(781, 84, 35, 35);
+		lblStella8.setBounds(782, 70, 35, 35);
 		add(lblStella8);
 
 		lblStella9 = new JLabel("");
@@ -307,7 +296,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella9.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella9.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella9.setBounds(883, 84, 35, 35);
+		lblStella9.setBounds(884, 70, 35, 35);
 		add(lblStella9);
 
 		lblStella10 = new JLabel("");
@@ -319,7 +308,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella10.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella10.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella10.setBounds(985, 84, 35, 35);
+		lblStella10.setBounds(986, 70, 35, 35);
 		add(lblStella10);
 
 		lblStella11 = new JLabel("");
@@ -331,7 +320,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella11.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella11.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella11.setBounds(67, 209, 35, 35);
+		lblStella11.setBounds(68, 195, 35, 35);
 		add(lblStella11);
 
 		lblStella12 = new JLabel("");
@@ -343,7 +332,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella12.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella12.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella12.setBounds(169, 209, 35, 35);
+		lblStella12.setBounds(170, 195, 35, 35);
 		add(lblStella12);
 
 		lblStella13 = new JLabel("");
@@ -355,7 +344,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella13.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella13.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella13.setBounds(271, 209, 35, 35);
+		lblStella13.setBounds(272, 195, 35, 35);
 		add(lblStella13);
 
 		lblStella14 = new JLabel("");
@@ -367,7 +356,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella14.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella14.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella14.setBounds(373, 209, 35, 35);
+		lblStella14.setBounds(374, 195, 35, 35);
 		add(lblStella14);
 
 		lblStella15 = new JLabel("");
@@ -379,7 +368,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella15.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella15.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella15.setBounds(475, 209, 35, 35);
+		lblStella15.setBounds(476, 195, 35, 35);
 		add(lblStella15);
 
 		lblStella16 = new JLabel("");
@@ -391,7 +380,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella16.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella16.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella16.setBounds(577, 209, 35, 35);
+		lblStella16.setBounds(578, 195, 35, 35);
 		add(lblStella16);
 
 		lblStella17 = new JLabel("");
@@ -403,7 +392,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella17.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella17.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella17.setBounds(679, 209, 35, 35);
+		lblStella17.setBounds(680, 195, 35, 35);
 		add(lblStella17);
 
 		lblStella18 = new JLabel("");
@@ -415,7 +404,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella18.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella18.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella18.setBounds(781, 209, 35, 35);
+		lblStella18.setBounds(782, 195, 35, 35);
 		add(lblStella18);
 
 		lblStella19 = new JLabel("");
@@ -427,7 +416,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella19.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella19.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella19.setBounds(883, 209, 35, 35);
+		lblStella19.setBounds(884, 195, 35, 35);
 		add(lblStella19);
 
 		lblStella20 = new JLabel("");
@@ -439,7 +428,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella20.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella20.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella20.setBounds(985, 209, 35, 35);
+		lblStella20.setBounds(986, 195, 35, 35);
 		add(lblStella20);
 
 		lblStella21 = new JLabel("");
@@ -451,7 +440,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella21.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella21.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella21.setBounds(67, 334, 35, 35);
+		lblStella21.setBounds(68, 320, 35, 35);
 		add(lblStella21);
 
 		lblStella22 = new JLabel("");
@@ -463,7 +452,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella22.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella22.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella22.setBounds(169, 334, 35, 35);
+		lblStella22.setBounds(170, 320, 35, 35);
 		add(lblStella22);
 
 		lblStella23 = new JLabel("");
@@ -475,7 +464,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella23.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella23.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella23.setBounds(271, 334, 35, 35);
+		lblStella23.setBounds(272, 320, 35, 35);
 		add(lblStella23);
 
 		lblStella24 = new JLabel("");
@@ -487,7 +476,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella24.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella24.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella24.setBounds(373, 334, 35, 35);
+		lblStella24.setBounds(374, 320, 35, 35);
 		add(lblStella24);
 
 		lblStella25 = new JLabel("");
@@ -499,7 +488,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella25.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella25.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella25.setBounds(475, 334, 35, 35);
+		lblStella25.setBounds(476, 320, 35, 35);
 		add(lblStella25);
 
 		lblStella26 = new JLabel("");
@@ -511,7 +500,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella26.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella26.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella26.setBounds(577, 334, 35, 35);
+		lblStella26.setBounds(578, 320, 35, 35);
 		add(lblStella26);
 
 		lblStella27 = new JLabel("");
@@ -523,7 +512,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella27.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella27.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella27.setBounds(679, 334, 35, 35);
+		lblStella27.setBounds(680, 320, 35, 35);
 		add(lblStella27);
 
 		lblStella28 = new JLabel("");
@@ -535,7 +524,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella28.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella28.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella28.setBounds(781, 334, 35, 35);
+		lblStella28.setBounds(782, 320, 35, 35);
 		add(lblStella28);
 
 		lblStella29 = new JLabel("");
@@ -547,7 +536,7 @@ public class Recensione extends JPanel {
 		});
 		lblStella29.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella29.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella29.setBounds(883, 334, 35, 35);
+		lblStella29.setBounds(884, 320, 35, 35);
 		add(lblStella29);
 
 		lblStella30 = new JLabel("");
@@ -559,24 +548,24 @@ public class Recensione extends JPanel {
 		});
 		lblStella30.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStella30.setIcon(new ImageIcon(img.stellaVuota()));
-		lblStella30.setBounds(985, 334, 35, 35);
+		lblStella30.setBounds(986, 320, 35, 35);
 		add(lblStella30);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(44, 430, 1018, 123);
+		scrollPane.setBounds(45, 416, 1018, 123);
 		add(scrollPane);
 
 		textArea = new JTextArea();
 		textArea.setFont(controllerRecensione.fontLabel);
 		textArea.setForeground(controllerRecensione.coloreLabelTemaScuro);
-		textArea.setLocation(37, 0);
+		textArea.setLocation(-15, 0);
 		scrollPane.setViewportView(textArea);
 
 		lblCommento = new JLabel("Lascia una recensione!");
 		lblCommento.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCommento.setForeground(controllerRecensione.coloreLabelTemaScuro);
+		lblCommento.setForeground(controllerRecensione.coloreScritteSuBiancoTemaScuro);
 		lblCommento.setFont(controllerRecensione.fontLabel);
-		lblCommento.setBounds(44, 410, 389, 19);
+		lblCommento.setBounds(45, 396, 389, 19);
 		add(lblCommento);
 
 	}

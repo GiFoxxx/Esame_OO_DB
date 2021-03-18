@@ -349,7 +349,7 @@ public class CambioPassword extends JPanel {
 		
 		lblCensuraNuovaPasswordTT = new JLabel("");
 		lblCensuraNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCensuraNuovaPasswordTT.setBounds(734, 272, 123, 31);
+		lblCensuraNuovaPasswordTT.setBounds(734, 272, 130, 31);
 		add(lblCensuraNuovaPasswordTT);
 		
 		lblMostraRipetiNuovaPasswordTT = new JLabel("");
@@ -359,7 +359,7 @@ public class CambioPassword extends JPanel {
 		
 		lblCensuraRipetiNuovaPasswordTT = new JLabel("");
 		lblCensuraRipetiNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCensuraRipetiNuovaPasswordTT.setBounds(734, 379, 123, 31);
+		lblCensuraRipetiNuovaPasswordTT.setBounds(734, 379, 130, 31);
 		add(lblCensuraRipetiNuovaPasswordTT);
 
 		lblCambioPassword = new JLabel("");

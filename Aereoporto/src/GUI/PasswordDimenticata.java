@@ -449,7 +449,7 @@ public class PasswordDimenticata extends JDialog {
 
 			lblCensuraNuovaPasswordTT = new JLabel("");
 			lblCensuraNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCensuraNuovaPasswordTT.setBounds(350, 158, 123, 31);
+			lblCensuraNuovaPasswordTT.setBounds(350, 158, 130, 31);
 			getContentPane().add(lblCensuraNuovaPasswordTT);
 
 			lblMostraRipetiNuovaPasswordTT = new JLabel("");
@@ -459,7 +459,7 @@ public class PasswordDimenticata extends JDialog {
 
 			lblCensuraRipetiNuovaPasswordTT = new JLabel("");
 			lblCensuraRipetiNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCensuraRipetiNuovaPasswordTT.setBounds(350, 262, 123, 31);
+			lblCensuraRipetiNuovaPasswordTT.setBounds(350, 262, 130, 31);
 			getContentPane().add(lblCensuraRipetiNuovaPasswordTT);
 
 			lblSalva = new JLabel("");

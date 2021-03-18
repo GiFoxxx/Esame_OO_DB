@@ -67,6 +67,20 @@ public class Immagini {
 						.getScaledInstance(500, 469, Image.SCALE_SMOOTH);
 		return sfondoPasswordDimenticata;
 	}
+	
+	public Image sfondoTerminiECondizioni() {
+		Image sfondoTerminiECondizioni = new ImageIcon(
+				TerminiECondizioni.class.getResource("immaginiDashboard/sfondoUscita.png")).getImage()
+						.getScaledInstance(450, 642, Image.SCALE_SMOOTH);
+		return sfondoTerminiECondizioni;
+	}
+	
+	public Image sfondoInformazioni() {
+		Image sfondoInformazioni = new ImageIcon(
+				Informazioni.class.getResource("immaginiDashboard/sfondoUscita.png")).getImage()
+						.getScaledInstance(350, 642, Image.SCALE_SMOOTH);
+		return sfondoInformazioni;
+	}
 
 	/*-----------------------------------------------------------VARIO CHIARO-----------------------------------------------------------*/
 
@@ -88,6 +102,20 @@ public class Immagini {
 				PasswordDimenticata.class.getResource("immaginiDashboardChiare/SfondoUscitaChiaro.png")).getImage()
 						.getScaledInstance(500, 469, Image.SCALE_SMOOTH);
 		return sfondoPasswordDimenticata;
+	}
+	
+	public Image sfondoTerminiECondizioniTemaChiaro() {
+		Image sfondoTerminiECondizioni = new ImageIcon(
+				TerminiECondizioni.class.getResource("immaginiDashboardChiare/SfondoUscitaChiaro.png")).getImage()
+						.getScaledInstance(450, 642, Image.SCALE_SMOOTH);
+		return sfondoTerminiECondizioni;
+	}
+	
+	public Image sfondoInformazioniTemaChiaro() {
+		Image sfondoInformazioni = new ImageIcon(
+				Informazioni.class.getResource("immaginiDashboardChiare/SfondoUscitaChiaro.png")).getImage()
+						.getScaledInstance(350, 642, Image.SCALE_SMOOTH);
+		return sfondoInformazioni;
 	}
 
 	/*-----------------------------------------------------------DASHBOARD-----------------------------------------------------------*/
@@ -914,7 +942,7 @@ public class Immagini {
 
 	public Image tornaIndietro2() {
 		Image tornaIndietro1 = new ImageIcon(
-				PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro1.png")).getImage()
+				PasswordDimenticata.class.getResource("immaginiBottoni/tornaIndietro2.png")).getImage()
 						.getScaledInstance(319, 36, Image.SCALE_SMOOTH);
 		return tornaIndietro1;
 	}
@@ -1648,7 +1676,7 @@ public class Immagini {
 		
 		public Image nascondiPasswordTT() {
 			Image nascondiPasswordTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/nascondiPasswordTT.png")).getImage()
-					.getScaledInstance(123, 31, Image.SCALE_SMOOTH);
+					.getScaledInstance(130, 31, Image.SCALE_SMOOTH);
 			return nascondiPasswordTT;
 		}
 		
@@ -1711,7 +1739,7 @@ public class Immagini {
 		
 		public Image nascondiPasswordTTChiaro() {
 			Image nascondiPasswordTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/nascondiPasswordTTChiaro.png")).getImage()
-					.getScaledInstance(123, 31, Image.SCALE_SMOOTH);
+					.getScaledInstance(130, 31, Image.SCALE_SMOOTH);
 			return nascondiPasswordTTChiaro;
 		}
 		

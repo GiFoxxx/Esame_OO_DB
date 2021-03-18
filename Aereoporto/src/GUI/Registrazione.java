@@ -353,7 +353,7 @@ public class Registrazione extends JPanel {
 		lblMostraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblMostraPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMostraPassword.setIcon(new ImageIcon(img.censuraPassword()));
-		lblMostraPassword.setBounds(693, 395, 20, 20);
+		lblMostraPassword.setBounds(693, 396, 20, 20);
 		add(lblMostraPassword);
 
 		lblCensuraPassword = new JLabel("");
@@ -401,7 +401,7 @@ public class Registrazione extends JPanel {
 		lblMostraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblMostraRipetiPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMostraRipetiPassword.setIcon(new ImageIcon(img.censuraPassword()));
-		lblMostraRipetiPassword.setBounds(693, 500, 20, 20);
+		lblMostraRipetiPassword.setBounds(693, 501, 20, 20);
 		add(lblMostraRipetiPassword);
 
 		lblCensuraRipetiPassword = new JLabel("");
@@ -470,7 +470,7 @@ public class Registrazione extends JPanel {
 		
 		lblCensuraPasswordTT = new JLabel("");
 		lblCensuraPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCensuraPasswordTT.setBounds(743, 387, 123, 31);
+		lblCensuraPasswordTT.setBounds(743, 387, 130, 31);
 		add(lblCensuraPasswordTT);
 		
 		lblMostraRipetiPasswordTT = new JLabel("");
@@ -480,7 +480,7 @@ public class Registrazione extends JPanel {
 		
 		lblCensuraRipetiPasswordTT = new JLabel("");
 		lblCensuraRipetiPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCensuraRipetiPasswordTT.setBounds(743, 492, 123, 31);
+		lblCensuraRipetiPasswordTT.setBounds(743, 492, 130, 31);
 		add(lblCensuraRipetiPasswordTT);
 
 		lblInserimentoCredenziali = new JLabel("");

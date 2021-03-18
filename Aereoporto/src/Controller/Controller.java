@@ -27,9 +27,9 @@ import ImplementazioniPostrgresDAO.*;
 public class Controller {
 
 	Immagini img = new Immagini();
-	
+
 	private int flagCambioTema = 0;
-	
+
 	private boolean stopMenuTT = false;
 	private boolean stopHomeTT = false;
 	private boolean stopAccediTT = false;
@@ -42,19 +42,18 @@ public class Controller {
 	private boolean stopCensuraPasswordTT = false;
 
 	// PALETTE COLORI TEMA SCURO
+	public Color bordi = new Color(35, 39, 42);
 	public Color sfondoTemaScuro = new Color(54, 57, 63);
 	public Color coloreBianco = new Color(255, 255, 255);
 	public Color coloreScritteTemaScuro = new Color(242, 242, 242);
 	public Color coloreScritteSuBiancoTemaScuro = new Color(35, 39, 42);
 	public Color escoPannelloTemaScuro = new Color(35, 39, 42);
-	public Color bordi = new Color(35, 39, 42);
 	public Color entroPannelloTemaScuro = new Color(40, 45, 48);
 	public Color clickPannelloTemaScuro = new Color(50, 55, 58);
 	public Color pannelloSceltoTemaScuro = new Color(60, 65, 68);
 	public Color coloreLabelTemaScuro = new Color(200, 200, 200);
 	public Color coloreLabelEntrataTemaScuro = new Color(220, 220, 220);
 	public Color coloreLabelPressedTemaScuro = new Color(242, 242, 242);
-	
 
 	// PALETTE COLORI TEMA CHIARO
 	public Color sfondoTemaChiaro = new Color(255, 255, 255);
@@ -72,6 +71,7 @@ public class Controller {
 	// PALETTE COLORI IN COMUNE
 	public Color trasparente = new Color(0, 0, 0, 0);
 	public Color coloreScrittaErrore = new Color(35, 39, 42);
+	public Color coloreScrittaErroreInMenuInfo = new Color(201, 22, 22);
 
 	// FONT TESTI
 	public Font fontScritte = new Font("Arial", Font.PLAIN, 18);
@@ -84,7 +84,7 @@ public class Controller {
 	// MESSAGGI DI ERRORE E NOTIFICA
 	public String erroreAccessoInserimentoCredenziali = "Inserire le credenziali";
 	public String erroreAccessoCredenzialiSbagliate = "Nome utente o password errati. Riprova";
-	public String erroreAccessoGiaUtilizziAccount = "Stai già utilizzando questo account";
+	public String erroreAccessoGiaUtilizziAccount = "Stai giÃ  utilizzando questo account";
 	public String erroreAccessoEseguirePrimaLogout = "Devi effettuare il logout se vuoi accedere con altre credenziali.";
 	public String erroreRegistrazioneFormatoSbagliato = "Formato email inserito non valido!"
 			+ " Inserire l'email dal formato tipo: example@example.com";
@@ -93,9 +93,10 @@ public class Controller {
 	public String erroreCampiVuoti = "Riempire tutti i campi per continuare";
 	public String erroreGestioneVoliPartenzeOrarioSbagliato = "Errore nell'inserimento dell'orario";
 	public String erroreCambioPasswordNonCorrispondenteConAttuale = "La password che hai attualmente non corrisponde con quella scritta";
-	public String errorePasswordDimenticataEmailNonRegistrata = "L'email non è nei nostri database";
+	public String errorePasswordDimenticataEmailNonRegistrata = "L'email non Ã¨ nei nostri database";
 	public String erroreGeneraleHome = "Per continuare, effettuare prima l'accesso";
 	public String erroreGenericoInInserimentiCampi = "Attenzione ci sono degli errori";
+	public String erroreRecensioneMancataValutazione = "Attenzione selezionare il voto";
 
 	public String registrazioneCompletata = "Registrazione effettuata con successo";
 	public String passwordCambiata = "Password cambiata con successo";
@@ -103,7 +104,7 @@ public class Controller {
 	public String invioRecensione = "Recensione inviata con successo";
 	public String logout = "Logout avvenuto con successo";
 	public String gestioni = "Operazione riuscita con successo";
-	public String rigaNonSelezionata  = "Nessuna riga della tabella è stata selezionata";
+	public String rigaNonSelezionata = "Nessuna riga della tabella ï¿½ stata selezionata";
 
 	// ATTRIBUTI
 	private String emailAccesso;
@@ -493,15 +494,6 @@ public class Controller {
 		noClick = new NoClick(this);
 		menuInfoAccount = new MenuInfoAccount(this);
 		dashboard.setVisible(true);
-	}
-
-	// RECENSIONE
-	public void svuotaArea() {
-		((Recensione) getDashboard().getRecensioni()).getTextArea().setText("");
-	}
-
-	public void invioRecensione() {
-		mostraNotifica(invioRecensione, img.messaggioNotifica());
 	}
 
 	// METODI DI ACCESSO
@@ -1700,79 +1692,37 @@ public class Controller {
 
 	// METODI DI DASHBOARD
 
-	// TEMI
-	public void chiudiCambioTemaTT() {
-		getDashboard().getLblCambioTemaTT().setVisible(false);
+	// METODI TOOLTIP
+
+	Thread th;
+
+	public void chiudiTT(JLabel lbl, boolean flag) {
+		lbl.setVisible(false);
+		if (flag) {
+			th.interrupt();
+		}
 	}
 
-	public void mostraCambioTemaTT() {
-		Thread th = new Thread() {
+	public void mostraTT(JLabel lbl, boolean flag, Image imgTemaChiaro, Image imgTemaScuro) {
+		th = new Thread() {
 			@Override
 			public void run() {
 				try {
 					Thread.sleep(750);
-					getDashboard().getLblCambioTemaTT().setVisible(true);
-					if (stopCambioTemaTT) {
-						getDashboard().getLblCambioTemaTT().setVisible(false);
+					lbl.setVisible(true);
+					if (flag) {
+						lbl.setVisible(false);
 					}
-					cambioImmagineTema(getDashboard().getLblCambioTemaTT(), img.temaScuroTTChiaro(), img.temaChiaroTT());
+					cambioImmagineTema(lbl, imgTemaChiaro, imgTemaScuro);
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
+
 				}
 			}
 		};
 		th.start();
-	}
-
-	// MENU INFO ACCOUNT
-	public void chiudiMenuTT() {
-		getDashboard().getLblMenuTT().setVisible(false);
-	}
-
-	public void mostraMenuTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(750);
-					getDashboard().getLblMenuTT().setVisible(true);
-					if (stopMenuTT) {
-						getDashboard().getLblMenuTT().setVisible(false);
-					}
-					cambioImmagineTema(getDashboard().getLblMenuTT(), img.menuTTChiaro(), img.menuTT());
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-
 	}
 
 	// PANEL HOME
-	public void chiudiHomeTT() {
-		getDashboard().getLblHomeTT().setVisible(false);
-	}
-
-	public void mostraHomeTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(750);
-					getDashboard().getLblHomeTT().setVisible(true);
-					if (stopHomeTT) {
-						getDashboard().getLblHomeTT().setVisible(false);
-					}
-					cambioImmagineTema(getDashboard().getLblHomeTT(), img.homeTTChiaro(), img.homeTT());
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-	}
-
 	public void clickPannelloLateraleHome() {
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getHome());
@@ -1784,29 +1734,6 @@ public class Controller {
 	}
 
 	// PANEL ACCEDI
-	public void chiudiAccediTT() {
-		getDashboard().getLblAccediTT().setVisible(false);
-	}
-
-	public void mostraAccediTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(750);
-					getDashboard().getLblAccediTT().setVisible(true);
-					if (stopAccediTT) {
-						getDashboard().getLblAccediTT().setVisible(false);
-					}
-					cambioImmagineTema(getDashboard().getLblAccediTT(), img.accediTTChiaro(), img.accediTT());
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-	}
-
 	public void clickPannelloLateraleAccedi() {
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getAccesso());
@@ -1819,30 +1746,6 @@ public class Controller {
 	}
 
 	// PANEL REGISTRATI
-	public void chiudiRegistratiTT() {
-		getDashboard().getLblRegistratiTT().setVisible(false);
-	}
-
-	public void mostraRegistratiTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(750);
-					getDashboard().getLblRegistratiTT().setVisible(true);
-					if (stopRegistratiTT) {
-						getDashboard().getLblRegistratiTT().setVisible(false);
-					}
-					cambioImmagineTema(getDashboard().getLblRegistratiTT(), img.registratiTTChiaro(),
-							img.registratiTT());
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-	}
-
 	public void clickPannelloLateraleRegistrati() {
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getRegistrazione());
@@ -1855,29 +1758,6 @@ public class Controller {
 	}
 
 	// PANEL PROFILO
-	public void chiudiProfiloTT() {
-		getDashboard().getLblProfiloTT().setVisible(false);
-	}
-
-	public void mostraProfiloTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(750);
-					getDashboard().getLblProfiloTT().setVisible(true);
-					if (stopProfiloTT) {
-						getDashboard().getLblProfiloTT().setVisible(false);
-					}
-					cambioImmagineTema(getDashboard().getLblProfiloTT(), img.profiloTTChiaro(), img.profiloTT());
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-	}
-
 	public void clickPannelloLateraleProfilo() {
 		chiudiTendinaIstantanea();
 		if (sbloccaGestione()) {
@@ -1897,30 +1777,6 @@ public class Controller {
 	}
 
 	// PANEL IMPOSTAZIONI
-	public void chiudiImpostazioniTT() {
-		getDashboard().getLblImpostazioniTT().setVisible(false);
-	}
-
-	public void mostraImpostazioniTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(750);
-					getDashboard().getLblImpostazioniTT().setVisible(true);
-					if (stopImpostazioniTT) {
-						getDashboard().getLblImpostazioniTT().setVisible(false);
-					}
-					cambioImmagineTema(getDashboard().getLblImpostazioniTT(), img.impostazioniTTChiaro(),
-							img.impostazioniTT());
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-	}
-
 	public void clickPannelloLateraleImpostazioni() {
 		pannelloLateraleSelezionato();
 		mostraPannelli(getDashboard().getImpostazioni());
@@ -1934,29 +1790,6 @@ public class Controller {
 	}
 
 	// PANEL ESCI
-	public void chiudiEsciTT() {
-		getDashboard().getLblEsciTT().setVisible(false);
-	}
-
-	public void mostraEsciTT() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(750);
-					getDashboard().getLblEsciTT().setVisible(true);
-					if (stopEsciTT) {
-						getDashboard().getLblEsciTT().setVisible(false);
-					}
-					cambioImmagineTema(getDashboard().getLblEsciTT(), img.esciTTChiaro(), img.esciTT());
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-	}
-
 	public void clickPannelloLateraleUscita() {
 		pannelloLateraleSelezionato();
 		chiudiTendinaIstantanea();
@@ -2046,8 +1879,9 @@ public class Controller {
 
 	// METODI TENDINA
 	public void apriTendina() {
-		getDashboard().getLblFrecciaMenu().setEnabled(false);
-		getDashboard().getLblAccount().setEnabled(false);
+		chiudiTuttiTT();
+		pannelloPrecedentementeSelezionato(pannelloPrecedente);
+		getDashboard().getNoClick().setVisible(true);
 		getDashboard().getLineeApertura().setVisible(false);
 		getDashboard().getLblCambioTemaTT().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 50) {
@@ -2056,9 +1890,9 @@ public class Controller {
 				@Override
 				public void run() {
 					try {
-						for (int i = 50; i <= getDashboard().getPosizioneTendina(); i = i+5) {
-							Thread.sleep(0,01);
-							getDashboard().getPannelloTendina().setSize(i, 642);
+						for (int i = 50; i <= 240; i = i + 5) {
+							Thread.sleep(0, 01);
+							getDashboard().getPannelloTendina().setSize(i - 2, 642);
 						}
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e);
@@ -2068,32 +1902,23 @@ public class Controller {
 			};
 			th.start();
 			getDashboard().setPosizioneTendina(238);
-			pannelloPrecedentementeSelezionato(getPannelloPrecedente());
+
 		}
 	}
 
 	public void chiudiTendina() {
-		getDashboard().getLblHomeTT().setVisible(false);
-		getDashboard().getLblAccediTT().setVisible(false);
-		getDashboard().getLblRegistratiTT().setVisible(false);
-		getDashboard().getLblProfiloTT().setVisible(false);
-		getDashboard().getLblImpostazioniTT().setVisible(false);
-		getDashboard().getLblEsciTT().setVisible(false);
-		getDashboard().getLblMenuTT().setVisible(false);
-		getDashboard().getLblCambioTemaTT().setVisible(false);
-		getDashboard().getLblFrecciaMenu().setEnabled(true);
-		getDashboard().getLblAccount().setEnabled(true);
-
+		chiudiTuttiTT();
 		getDashboard().getLineeChiusura().setVisible(false);
-
 		if (getDashboard().getPosizioneTendina() == 238) {
 			getDashboard().getPannelloTendina().setSize(50, 642);
 			Thread th = new Thread() {
+				int i;
+
 				@Override
 				public void run() {
 					try {
-						for (int i = 238; i >= 50; i = i-5) {
-							Thread.sleep(0,01);
+						for (i = 240; i >= 50; i = i - 5) {
+							Thread.sleep(0, 01);
 							getDashboard().getPannelloTendina().setSize(i, 642);
 						}
 					} catch (Exception e) {
@@ -2110,17 +1935,7 @@ public class Controller {
 	}
 
 	public void chiudiTendinaIstantanea() {
-
-		getDashboard().getLblHomeTT().setVisible(false);
-		getDashboard().getLblAccediTT().setVisible(false);
-		getDashboard().getLblRegistratiTT().setVisible(false);
-		getDashboard().getLblProfiloTT().setVisible(false);
-		getDashboard().getLblImpostazioniTT().setVisible(false);
-		getDashboard().getLblEsciTT().setVisible(false);
-		getDashboard().getLblMenuTT().setVisible(false);
-		getDashboard().getLblCambioTemaTT().setVisible(false);
-		getDashboard().getLblFrecciaMenu().setEnabled(true);
-		getDashboard().getLblAccount().setEnabled(true);
+		chiudiTuttiTT();
 
 		getDashboard().getLineeChiusura().setVisible(false);
 		if (getDashboard().getPosizioneTendina() == 238) {
@@ -2129,7 +1944,7 @@ public class Controller {
 				@Override
 				public void run() {
 					try {
-						for (int i = 238; i >= 50; i = i - 8) {
+						for (int i = 240; i >= 50; i = i - 10) {
 							Thread.sleep(1);
 							getDashboard().getPannelloTendina().setSize(i, 642);
 						}
@@ -2270,6 +2085,11 @@ public class Controller {
 		((Accesso) getDashboard().getAccesso()).getLblMostraPassword().setVisible(true);
 		((Registrazione) getDashboard().getRegistrazione()).getLblMostraPassword().setVisible(true);
 		((Registrazione) getDashboard().getRegistrazione()).getLblMostraRipetiPassword().setVisible(true);
+		((Accesso) getDashboard().getAccesso()).getLblIconaErrore().setVisible(false);
+		((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreNome().setVisible(false);
+		((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreCognome().setVisible(false);
+		((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreEmail().setVisible(false);
+		((CambioPassword) getDashboard().getCambioPassword()).getLblIconaErroreVecchiaPassword().setVisible(false);
 		getDashboard().getHome().setVisible(false);
 		getDashboard().getAccesso().setVisible(false);
 		svuotaCampiAccesso();
@@ -2309,6 +2129,19 @@ public class Controller {
 	}
 
 	// METODI DI MENU INFO ACCOUNT
+	public void clickFrecciaMenuInfoAccount() {
+		setStopMenuTT(true);
+		if (((MenuInfoAccount) getDashboard().getMenuInfoAccount()).isVisible()) {
+			chiudiTT(getDashboard().getLblMenuTT(), isStopMenuTT());
+			chiudiTendinaIstantanea();
+			chiudiMenuInfoAccount();
+		} else {
+			cambioImmagineTema(getDashboard().getLblFrecciaMenu(), img.frecciaMenu3TemaChiaro(), img.frecciaMenu3());
+			chiudiTT(getDashboard().getLblMenuTT(), isStopMenuTT());
+			mostraMenuInfoAccount();
+		}
+	}
+
 	public void mostraMenuInfoAccount() {
 		getDashboard().getHome().setVisible(false);
 		getDashboard().getAccesso().setVisible(false);
@@ -2340,7 +2173,6 @@ public class Controller {
 	public void mostraSceltaProfiloSenzaAccesso() {
 		svuotaCampiAccesso();
 		svuotaCampiRegistrazione();
-
 		getDashboard().setEnabled(false);
 		getDashboard().getSceltaProfiloSenzaAccesso().setVisible(true);
 	}
@@ -2373,9 +2205,9 @@ public class Controller {
 
 	public void mostraSceltaVolo() {
 		getDashboard().setEnabled(false);
-		if(cambioTema()) {
+		if (cambioTema()) {
 			ripristinoImmaginiSceltaVoloTemaChiaro();
-		}else {
+		} else {
 			ripristinoImmaginiSceltaVolo();
 		}
 		getDashboard().getSceltaVolo().setVisible(true);
@@ -2403,15 +2235,16 @@ public class Controller {
 		getDashboard().setVisible(true);
 		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
-	
+
 	public void ripristinoImmaginiSceltaVolo() {
 		((SceltaVolo) getDashboard().getSceltaVolo()).getLblPartenze().setIcon(new ImageIcon(img.partenze1()));
 		((SceltaVolo) getDashboard().getSceltaVolo()).getLblArrivi().setIcon(new ImageIcon(img.arrivi1()));
 		((SceltaVolo) getDashboard().getSceltaVolo()).getLblAnnulla().setIcon(new ImageIcon(img.annulla1()));
 	}
-	
+
 	public void ripristinoImmaginiSceltaVoloTemaChiaro() {
-		((SceltaVolo) getDashboard().getSceltaVolo()).getLblPartenze().setIcon(new ImageIcon(img.partenze1TemaChiaro()));
+		((SceltaVolo) getDashboard().getSceltaVolo()).getLblPartenze()
+				.setIcon(new ImageIcon(img.partenze1TemaChiaro()));
 		((SceltaVolo) getDashboard().getSceltaVolo()).getLblArrivi().setIcon(new ImageIcon(img.arrivi1TemaChiaro()));
 		((SceltaVolo) getDashboard().getSceltaVolo()).getLblAnnulla().setIcon(new ImageIcon(img.annulla1TemaChiaro()));
 	}
@@ -2420,9 +2253,9 @@ public class Controller {
 
 	public void mostraSceltaGate() {
 		getDashboard().setEnabled(false);
-		if(cambioTema()) {
+		if (cambioTema()) {
 			ripristinoImmaginiSceltaGateTemaChiaro();
-		}else {
+		} else {
 			ripristinoImmaginiSceltaGate();
 
 		}
@@ -2459,18 +2292,22 @@ public class Controller {
 		getDashboard().setVisible(true);
 		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
-	
+
 	public void ripristinoImmaginiSceltaGate() {
 		((SceltaGate) getDashboard().getSceltaGate()).getLblGate().setIcon(new ImageIcon(img.gateScelta1()));
-		((SceltaGate) getDashboard().getSceltaGate()).getLblTempisticheGate().setIcon(new ImageIcon(img.utilizzoGate1()));
-		((SceltaGate) getDashboard().getSceltaGate()).getLblCodeDiImbarco().setIcon(new ImageIcon(img.codeDiImbarco1()));
+		((SceltaGate) getDashboard().getSceltaGate()).getLblTempisticheGate()
+				.setIcon(new ImageIcon(img.utilizzoGate1()));
+		((SceltaGate) getDashboard().getSceltaGate()).getLblCodeDiImbarco()
+				.setIcon(new ImageIcon(img.codeDiImbarco1()));
 		((SceltaGate) getDashboard().getSceltaGate()).getLblAnnulla().setIcon(new ImageIcon(img.annulla1()));
 	}
-	
+
 	public void ripristinoImmaginiSceltaGateTemaChiaro() {
 		((SceltaGate) getDashboard().getSceltaGate()).getLblGate().setIcon(new ImageIcon(img.gateScelta1TemaChiaro()));
-		((SceltaGate) getDashboard().getSceltaGate()).getLblTempisticheGate().setIcon(new ImageIcon(img.utilizzoGate1TemaChiaro()));
-		((SceltaGate) getDashboard().getSceltaGate()).getLblCodeDiImbarco().setIcon(new ImageIcon(img.codeDiImbarco1TemaChiaro()));
+		((SceltaGate) getDashboard().getSceltaGate()).getLblTempisticheGate()
+				.setIcon(new ImageIcon(img.utilizzoGate1TemaChiaro()));
+		((SceltaGate) getDashboard().getSceltaGate()).getLblCodeDiImbarco()
+				.setIcon(new ImageIcon(img.codeDiImbarco1TemaChiaro()));
 		((SceltaGate) getDashboard().getSceltaGate()).getLblAnnulla().setIcon(new ImageIcon(img.annulla1TemaChiaro()));
 	}
 
@@ -2483,7 +2320,6 @@ public class Controller {
 			return false;
 		}
 	}
-
 
 	// MENU INFO ACCOUNT
 	public void entraInGestioneUtenti() {
@@ -2634,10 +2470,12 @@ public class Controller {
 
 	public void mostraPasswordDimenticata() {
 		svuotaCampiAccesso();
+
 		svuotaCampiCambioPassword();
 		chiudiTuttiTT();
 		getDashboard().setEnabled(false);
 		getDashboard().getPasswordDimenticata().setVisible(true);
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblIconaErroreEmail().setVisible(false);
 		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMostraNuovaPassword().setVisible(true);
 		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMostraRipetiNuovaPassword()
 				.setVisible(true);
@@ -2803,6 +2641,41 @@ public class Controller {
 		getDashboard().setVisible(true);
 		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
+	
+	// RECENSIONE
+		public void svuotaAreaRecensione() {
+			((Recensione) getDashboard().getRecensioni()).getTextArea().setText("");
+		}
+
+		public void invioRecensione() {
+			if (lasciaRecensione()) {
+				((Recensione) getDashboard().getRecensioni()).stella0();
+				svuotaAreaRecensione();
+				mostraNotifica(invioRecensione, img.messaggioNotifica());
+			} else if (erroreMancataValutazione()) {
+				mostraNotifica(erroreRecensioneMancataValutazione, img.messaggioErrore());
+			} else {
+				mostraNotifica(erroreGeneraleHome, img.messaggioErrore());
+			}
+		}
+
+		public boolean lasciaRecensione() {
+			if (((Accesso) getDashboard().getAccesso()).isSbloccaHome()
+					&& ((Recensione) getDashboard().getRecensioni()).getValutazione() > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public boolean erroreMancataValutazione() {
+			if (((Accesso) getDashboard().getAccesso()).isSbloccaHome()
+					&& ((Recensione) getDashboard().getRecensioni()).getValutazione() <= 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 
 	// METODI DI USCITA
 
@@ -3307,7 +3180,8 @@ public class Controller {
 
 		((Recensione) getDashboard().getRecensioni()).getLblCommento().setForeground(coloreScritteTemaChiaro);
 
-		((Recensione) getDashboard().getRecensioni()).getLblAnnulla().setIcon(new ImageIcon(img.annulla1TemaChiaro()));
+		((Recensione) getDashboard().getRecensioni()).getLblimgfrecciaIndietro()
+				.setIcon(new ImageIcon(img.frecciaIndietro1TemaChiaro()));
 		((Recensione) getDashboard().getRecensioni()).getLblInviaRecensione()
 				.setIcon(new ImageIcon(img.inviaRecensione1TemaChiaro()));
 
@@ -3763,7 +3637,8 @@ public class Controller {
 
 		// RECENSIONE
 		getDashboard().getRecensioni().setBackground(sfondoTemaScuro);
-		((Recensione) getDashboard().getRecensioni()).getLblAnnulla().setIcon(new ImageIcon(img.annulla1()));
+		((Recensione) getDashboard().getRecensioni()).getLblimgfrecciaIndietro()
+				.setIcon(new ImageIcon(img.frecciaIndietro1()));
 		((Recensione) getDashboard().getRecensioni()).getLblInviaRecensione()
 				.setIcon(new ImageIcon(img.inviaRecensione1()));
 		((Recensione) getDashboard().getRecensioni()).getLblCommento().setForeground(coloreLabelTemaScuro);
@@ -3880,6 +3755,6 @@ public class Controller {
 		getDashboard().getLblProfiloTT().setVisible(false);
 		getDashboard().getLblImpostazioniTT().setVisible(false);
 		getDashboard().getLblEsciTT().setVisible(false);
+		getDashboard().getLblCambioTemaTT().setVisible(false);
 	}
-
 }
