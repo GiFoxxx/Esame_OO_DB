@@ -55,10 +55,10 @@ public class GateCodeImbarco extends JPanel {
 
 	private JTextField txtCodiceGate;
 	private JTextField txtCodaDiImbarco;
-
 	private JTextField txtCodiceCodaDiImbarco;
 	private JTextField txtTempoDiImbarcoStimato;
 	private JTextField txtNomeCodaDiImbarco;
+	private JTextField txtBarraRicerca;
 
 	private JScrollPane scrollPaneTabellaAssociazioni;
 	private JScrollPane scrollPaneTabellaCodaDiImbarco;
@@ -68,17 +68,14 @@ public class GateCodeImbarco extends JPanel {
 
 	private JTable tabellaAssociazioni;
 	private JTable tabellaCodaDiImbarco;
-	private JTextField txtBarraRicerca;
 
 	private JLabel lblimgfrecciaIndietro;
 	private JLabel lblBarraRicerca;
 	private JLabel lblCodiceGate;
 	private JLabel lblCodaImbarco;
-
 	private JLabel lblNomeCodaDiImbarco;
 	private JLabel lblCodiceCodaDiImbarco;
 	private JLabel lblTempoDiImbarcoStimato;
-
 	private JLabel lblAggiungiAssociazione;
 	private JLabel lblEliminaAssociazione;
 	private JLabel lblSvuotaAssociazione;
@@ -439,7 +436,7 @@ public class GateCodeImbarco extends JPanel {
 		lblCodiceGate.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceGate.setFont(controllerGateCodeImbarco.fontLabel);
 		lblCodiceGate.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
-		lblCodiceGate.setBounds(30, 426, 130, 20);
+		lblCodiceGate.setBounds(30, 442, 105, 20);
 		add(lblCodiceGate);
 
 		txtCodiceGate = new JTextField();
@@ -472,14 +469,14 @@ public class GateCodeImbarco extends JPanel {
 				txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
 			}
 		});
-		comboBoxNumeroPorta.setBounds(169, 426, 47, 20);
+		comboBoxNumeroPorta.setBounds(145, 442, 45, 20);
 		add(comboBoxNumeroPorta);
 
 		lblCodaImbarco = new JLabel("Coda d'Imbarco");
 		lblCodaImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodaImbarco.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
 		lblCodaImbarco.setFont(controllerGateCodeImbarco.fontLabel);
-		lblCodaImbarco.setBounds(30, 473, 130, 20);
+		lblCodaImbarco.setBounds(30, 473, 105, 20);
 		add(lblCodaImbarco);
 
 		comboBoxCodaDiImbarco = new JComboBox<String>();
@@ -496,7 +493,7 @@ public class GateCodeImbarco extends JPanel {
 				txtCodaDiImbarco.setText(map.get(comboBoxCodaDiImbarco.getSelectedItem().toString()));
 			}
 		});
-		comboBoxCodaDiImbarco.setBounds(170, 473, 141, 20);
+		comboBoxCodaDiImbarco.setBounds(145, 473, 133, 20);
 		add(comboBoxCodaDiImbarco);
 
 		txtCodaDiImbarco = new JTextField();
@@ -617,7 +614,7 @@ public class GateCodeImbarco extends JPanel {
 		});
 		lblSvuotaAssociazione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSvuotaAssociazione.setIcon(new ImageIcon(img.svuota1()));
-		lblSvuotaAssociazione.setBounds(115, 567, 130, 36);
+		lblSvuotaAssociazione.setBounds(115, 578, 130, 36);
 		add(lblSvuotaAssociazione);
 
 		scrollPaneTabellaCodaDiImbarco = new JScrollPane();
@@ -652,28 +649,28 @@ public class GateCodeImbarco extends JPanel {
 		lblNomeCodaDiImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNomeCodaDiImbarco.setFont(controllerGateCodeImbarco.fontLabel);
 		lblNomeCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
-		lblNomeCodaDiImbarco.setBounds(477, 516, 175, 20);
+		lblNomeCodaDiImbarco.setBounds(477, 473, 175, 20);
 		add(lblNomeCodaDiImbarco);
 
 		lblCodiceCodaDiImbarco = new JLabel("Codice Coda di Imbarco");
 		lblCodiceCodaDiImbarco.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceCodaDiImbarco.setFont(controllerGateCodeImbarco.fontLabel);
 		lblCodiceCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
-		lblCodiceCodaDiImbarco.setBounds(477, 484, 175, 20);
+		lblCodiceCodaDiImbarco.setBounds(477, 442, 175, 20);
 		add(lblCodiceCodaDiImbarco);
 
 		lblTempoDiImbarcoStimato = new JLabel("Tempo di Imbarco Stimato");
 		lblTempoDiImbarcoStimato.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTempoDiImbarcoStimato.setFont(controllerGateCodeImbarco.fontLabel);
 		lblTempoDiImbarcoStimato.setForeground(controllerGateCodeImbarco.coloreScritteTemaScuro);
-		lblTempoDiImbarcoStimato.setBounds(477, 547, 175, 20);
+		lblTempoDiImbarcoStimato.setBounds(477, 504, 175, 20);
 		add(lblTempoDiImbarcoStimato);
 
 		txtCodiceCodaDiImbarco = new JTextField();
 		txtCodiceCodaDiImbarco.setBorder(new LineBorder(controllerGateCodeImbarco.bordi));
 		txtCodiceCodaDiImbarco.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtCodiceCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
-		txtCodiceCodaDiImbarco.setBounds(660, 484, 150, 20);
+		txtCodiceCodaDiImbarco.setBounds(660, 442, 75, 20);
 		add(txtCodiceCodaDiImbarco);
 		txtCodiceCodaDiImbarco.setColumns(10);
 
@@ -681,7 +678,7 @@ public class GateCodeImbarco extends JPanel {
 		txtTempoDiImbarcoStimato.setBorder(new LineBorder(controllerGateCodeImbarco.bordi));
 		txtTempoDiImbarcoStimato.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtTempoDiImbarcoStimato.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
-		txtTempoDiImbarcoStimato.setBounds(660, 547, 150, 20);
+		txtTempoDiImbarcoStimato.setBounds(660, 504, 45, 20);
 		add(txtTempoDiImbarcoStimato);
 		txtTempoDiImbarcoStimato.setColumns(10);
 
@@ -689,7 +686,7 @@ public class GateCodeImbarco extends JPanel {
 		txtNomeCodaDiImbarco.setBorder(new LineBorder(controllerGateCodeImbarco.bordi));
 		txtNomeCodaDiImbarco.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtNomeCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
-		txtNomeCodaDiImbarco.setBounds(660, 516, 150, 20);
+		txtNomeCodaDiImbarco.setBounds(660, 473, 133, 20);
 		add(txtNomeCodaDiImbarco);
 		txtNomeCodaDiImbarco.setColumns(10);
 

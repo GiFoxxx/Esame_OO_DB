@@ -50,13 +50,16 @@ public class GestioneVoliArrivi extends JPanel {
 
 	private JTextField txtCodiceVoloArrivi;
 	private JTextField txtCittaPartenza;
-	private JDateChooser dateDataArrivo;
 	private JTextField txtOraArrivo;
 	private JTextField txtMinutoArrivo;
-	private JScrollPane scrollPane;
-	private JTable tabella;
 	private JTextField txtBarraRicerca;
+	
+	private JDateChooser dateDataArrivo;
 
+	private JScrollPane scrollPane;
+	
+	private JTable tabella;
+	
 	private JLabel lblimgfrecciaIndietro;
 	private JLabel lblBarraRicerca;
 	private JLabel lblCodiceVoloArrivi;
@@ -64,7 +67,6 @@ public class GestioneVoliArrivi extends JPanel {
 	private JLabel lblDataArrivo;
 	private JLabel lblOrarioArrivo;
 	private JLabel lblDuePuntiArrivo;
-
 	private JLabel lblAggiungi;
 	private JLabel lblModifica;
 	private JLabel lblElimina;
@@ -348,21 +350,21 @@ public class GestioneVoliArrivi extends JPanel {
 		txtCodiceVoloArrivi.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtCodiceVoloArrivi.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtCodiceVoloArrivi.setColumns(10);
-		txtCodiceVoloArrivi.setBounds(240, 438, 133, 20);
+		txtCodiceVoloArrivi.setBounds(170, 438, 75, 20);
 		add(txtCodiceVoloArrivi);
 
 		lblCodiceVoloArrivi = new JLabel("Codice Volo Arrivi");
 		lblCodiceVoloArrivi.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceVoloArrivi.setFont(controllerGestioneVoliArrivi.fontLabel);
 		lblCodiceVoloArrivi.setForeground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
-		lblCodiceVoloArrivi.setBounds(30, 438, 200, 20);
+		lblCodiceVoloArrivi.setBounds(30, 438, 130, 20);
 		add(lblCodiceVoloArrivi);
 
 		lblCittaPartenza = new JLabel("Citta Partenza");
 		lblCittaPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCittaPartenza.setFont(controllerGestioneVoliArrivi.fontLabel);
 		lblCittaPartenza.setForeground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
-		lblCittaPartenza.setBounds(30, 475, 200, 20);
+		lblCittaPartenza.setBounds(30, 475, 130, 20);
 		add(lblCittaPartenza);
 
 		txtCittaPartenza = new JTextField();
@@ -378,14 +380,14 @@ public class GestioneVoliArrivi extends JPanel {
 		txtCittaPartenza.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtCittaPartenza.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtCittaPartenza.setColumns(10);
-		txtCittaPartenza.setBounds(240, 475, 133, 20);
+		txtCittaPartenza.setBounds(170, 475, 133, 20);
 		add(txtCittaPartenza);
 
 		lblDataArrivo = new JLabel("Data Arrivo");
 		lblDataArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDataArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
 		lblDataArrivo.setFont(controllerGestioneVoliArrivi.fontLabel);
-		lblDataArrivo.setBounds(479, 438, 200, 20);
+		lblDataArrivo.setBounds(329, 438, 91, 20);
 		add(lblDataArrivo);
 
 		dateDataArrivo = new JDateChooser();
@@ -401,14 +403,14 @@ public class GestioneVoliArrivi extends JPanel {
 		dateDataArrivo.setDateFormatString("dd/MM/yyyy");
 		dateDataArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		dateDataArrivo.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
-		dateDataArrivo.setBounds(689, 438, 133, 20);
+		dateDataArrivo.setBounds(430, 438, 133, 20);
 		add(dateDataArrivo);
 
 		lblOrarioArrivo = new JLabel("Orario Arrivo");
 		lblOrarioArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblOrarioArrivo.setFont(controllerGestioneVoliArrivi.fontLabel);
 		lblOrarioArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
-		lblOrarioArrivo.setBounds(479, 475, 200, 20);
+		lblOrarioArrivo.setBounds(329, 475, 91, 20);
 		add(lblOrarioArrivo);
 
 		txtOraArrivo = new JTextField();
@@ -424,7 +426,7 @@ public class GestioneVoliArrivi extends JPanel {
 		txtOraArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtOraArrivo.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtOraArrivo.setColumns(10);
-		txtOraArrivo.setBounds(689, 475, 30, 20);
+		txtOraArrivo.setBounds(430, 475, 30, 20);
 		add(txtOraArrivo);
 
 		txtMinutoArrivo = new JTextField();
@@ -440,14 +442,14 @@ public class GestioneVoliArrivi extends JPanel {
 		txtMinutoArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtMinutoArrivo.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtMinutoArrivo.setColumns(10);
-		txtMinutoArrivo.setBounds(743, 475, 30, 20);
+		txtMinutoArrivo.setBounds(488, 475, 30, 20);
 		add(txtMinutoArrivo);
 
 		lblDuePuntiArrivo = new JLabel(":");
 		lblDuePuntiArrivo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDuePuntiArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteTemaScuro);
 		lblDuePuntiArrivo.setFont(controllerGestioneVoliArrivi.fontLabel);
-		lblDuePuntiArrivo.setBounds(725, 478, 10, 14);
+		lblDuePuntiArrivo.setBounds(470, 478, 10, 14);
 		add(lblDuePuntiArrivo);
 
 		lblAggiungi = new JLabel("");

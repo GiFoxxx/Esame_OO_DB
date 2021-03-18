@@ -45,16 +45,14 @@ public class GestioneGate extends JPanel {
 
 	private JTextField txtCodiceGate;
 	private JTextField txtNumeroPorta;
-
+	private JTextField txtBarraRicerca;
 
 	private JTable tabella;
-	private JTextField txtBarraRicerca;
 
 	private JLabel lblimgfrecciaIndietro;
 	private JLabel lblBarraRicerca;
 	private JLabel lblNumeroPorta;
 	private JLabel lblCodiceGate;
-	
 	private JLabel lblAggiungi;
 	private JLabel lblModifica;
 	private JLabel lblElimina;
@@ -276,7 +274,7 @@ public class GestioneGate extends JPanel {
 		lblNumeroPorta.setFont(controllerGestioneGate.fontLabel);
 		lblNumeroPorta.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
 		lblNumeroPorta.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNumeroPorta.setBounds(30, 493, 204, 20);
+		lblNumeroPorta.setBounds(30, 493, 106, 20);
 		add(lblNumeroPorta);
 
 		txtNumeroPorta = new JTextField();
@@ -292,14 +290,14 @@ public class GestioneGate extends JPanel {
 		txtNumeroPorta.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtNumeroPorta.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
 		txtNumeroPorta.setColumns(10);
-		txtNumeroPorta.setBounds(244, 493, 180, 20);
+		txtNumeroPorta.setBounds(146, 493, 45, 20);
 		add(txtNumeroPorta);
 
 		lblCodiceGate = new JLabel("Codice Gate");
 		lblCodiceGate.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceGate.setFont(controllerGestioneGate.fontLabel);
 		lblCodiceGate.setForeground(controllerGestioneGate.coloreScritteTemaScuro);
-		lblCodiceGate.setBounds(30, 461, 204, 20);
+		lblCodiceGate.setBounds(30, 461, 106, 20);
 		add(lblCodiceGate);
 
 		txtCodiceGate = new JTextField();
@@ -315,7 +313,7 @@ public class GestioneGate extends JPanel {
 		txtCodiceGate.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtCodiceGate.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
 		txtCodiceGate.setColumns(10);
-		txtCodiceGate.setBounds(244, 461, 180, 20);
+		txtCodiceGate.setBounds(146, 461, 75, 20);
 		add(txtCodiceGate);
 		
 		lblAggiungi = new JLabel("");

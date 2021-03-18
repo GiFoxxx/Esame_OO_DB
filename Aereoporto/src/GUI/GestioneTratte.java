@@ -52,9 +52,9 @@ public class GestioneTratte extends JPanel {
 	private JTextField txtCittaPartenza;
 	private JTextField txtCittaArrivo;
 	private JTextField txtCodiceCompagniaAerea;
+	private JTextField txtBarraRicerca;
 	
 	private JTable tabella;
-	private JTextField txtBarraRicerca;
 
 	private JLabel lblimgfrecciaIndietro;
 	private JLabel lblCompagniaAerea;
@@ -62,7 +62,6 @@ public class GestioneTratte extends JPanel {
 	private JLabel lblCodiceTratta;
 	private JLabel lblCittaPartenza;
 	private JLabel lblCittaArrivo;
-	
 	private JLabel lblAggiungi;
 	private JLabel lblModifica;
 	private JLabel lblElimina;
@@ -333,21 +332,21 @@ public class GestioneTratte extends JPanel {
 		txtCodiceTratta.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCodiceTratta.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCodiceTratta.setColumns(10);
-		txtCodiceTratta.setBounds(233, 445, 133, 20);
+		txtCodiceTratta.setBounds(176, 445, 75, 20);
 		add(txtCodiceTratta);
 
 		lblCodiceTratta = new JLabel("Codice Tratta");
 		lblCodiceTratta.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceTratta.setFont(controllerGestioneTratte.fontLabel);
 		lblCodiceTratta.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblCodiceTratta.setBounds(37, 445, 186, 20);
+		lblCodiceTratta.setBounds(25, 445, 141, 20);
 		add(lblCodiceTratta);
 
 		lblCittaPartenza = new JLabel("Citta Partenza");
 		lblCittaPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCittaPartenza.setFont(controllerGestioneTratte.fontLabel);
 		lblCittaPartenza.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblCittaPartenza.setBounds(536, 445, 114, 20);
+		lblCittaPartenza.setBounds(292, 445, 114, 20);
 		add(lblCittaPartenza);
 
 		txtCittaPartenza = new JTextField();
@@ -364,7 +363,7 @@ public class GestioneTratte extends JPanel {
 		txtCittaPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCittaPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCittaPartenza.setColumns(10);
-		txtCittaPartenza.setBounds(660, 445, 133, 20);
+		txtCittaPartenza.setBounds(416, 445, 133, 20);
 		add(txtCittaPartenza);
 
 		txtCittaArrivo = new JTextField();
@@ -381,21 +380,21 @@ public class GestioneTratte extends JPanel {
 		txtCittaArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCittaArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCittaArrivo.setColumns(10);
-		txtCittaArrivo.setBounds(660, 485, 133, 20);
+		txtCittaArrivo.setBounds(416, 485, 133, 20);
 		add(txtCittaArrivo);
 
 		lblCittaArrivo = new JLabel("Citta Arrivo");
 		lblCittaArrivo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCittaArrivo.setFont(controllerGestioneTratte.fontLabel);
 		lblCittaArrivo.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblCittaArrivo.setBounds(536, 485, 114, 20);
+		lblCittaArrivo.setBounds(292, 485, 114, 20);
 		add(lblCittaArrivo);
 
 		lblCompagniaAerea = new JLabel("Codice Compagnia Aerea");
 		lblCompagniaAerea.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCompagniaAerea.setFont(controllerGestioneTratte.fontLabel);
 		lblCompagniaAerea.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblCompagniaAerea.setBounds(40, 485, 183, 20);
+		lblCompagniaAerea.setBounds(25, 485, 141, 20);
 		add(lblCompagniaAerea);
 
 		txtCodiceCompagniaAerea = new JTextField();
@@ -432,8 +431,7 @@ public class GestioneTratte extends JPanel {
                 }
             }
         });
-        comboBoxNomeCompagniaAerea.addItem("----------");
-		comboBoxNomeCompagniaAerea.setBounds(243, 485, 95, 20);
+		comboBoxNomeCompagniaAerea.setBounds(176, 485, 75, 20);
 		add(comboBoxNomeCompagniaAerea);
 		
 		lblAggiungi = new JLabel("");
@@ -629,6 +627,8 @@ public class GestioneTratte extends JPanel {
 			e.printStackTrace();
 		}
 		
+        comboBoxNomeCompagniaAerea.addItem("----------");
+
 		for (String s : map.keySet()) {
 			comboBoxNomeCompagniaAerea.addItem(s);
 		}

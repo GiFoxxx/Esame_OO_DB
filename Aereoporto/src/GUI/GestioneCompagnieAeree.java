@@ -41,15 +41,16 @@ public class GestioneCompagnieAeree extends JPanel {
 
 	private JTextField txtCodiceCompagniaAerea;
 	private JTextField txtNome;
-	private JScrollPane scrollPane;
-	private JTable tabella;
 	private JTextField txtBarraRicerca;
+
+	private JScrollPane scrollPane;
+	
+	private JTable tabella;
 	
 	private JLabel lblimgfrecciaIndietro;
 	private JLabel lblBarraRicerca;
 	private JLabel lblNome;
 	private JLabel lblCodiceCompagniaAerea;
-	
 	private JLabel lblAggiungi;
 	private JLabel lblModifica;
 	private JLabel lblElimina;
@@ -279,14 +280,14 @@ public class GestioneCompagnieAeree extends JPanel {
 		txtCodiceCompagniaAerea.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBiancoTemaScuro);
 		txtCodiceCompagniaAerea.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtCodiceCompagniaAerea.setColumns(10);
-		txtCodiceCompagniaAerea.setBounds(304, 459, 133, 20);
+		txtCodiceCompagniaAerea.setBounds(195, 459, 75, 20);
 		add(txtCodiceCompagniaAerea);
 
 		lblNome = new JLabel("Nome");
 		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNome.setForeground(controllerGestioneCompagnieAeree.coloreScritteTemaScuro);
 		lblNome.setFont(controllerGestioneCompagnieAeree.fontLabel);
-		lblNome.setBounds(53, 490, 221, 20);
+		lblNome.setBounds(94, 490, 91, 20);
 		add(lblNome);
 
 		txtNome = new JTextField();
@@ -302,14 +303,14 @@ public class GestioneCompagnieAeree extends JPanel {
 		txtNome.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBiancoTemaScuro);
 		txtNome.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtNome.setColumns(10);
-		txtNome.setBounds(304, 490, 133, 20);
+		txtNome.setBounds(195, 490, 133, 20);
 		add(txtNome);
 
 		lblCodiceCompagniaAerea = new JLabel("Codice Compagnia Aerea");
 		lblCodiceCompagniaAerea.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceCompagniaAerea.setForeground(controllerGestioneCompagnieAeree.coloreScritteTemaScuro);
 		lblCodiceCompagniaAerea.setFont(controllerGestioneCompagnieAeree.fontLabel);
-		lblCodiceCompagniaAerea.setBounds(53, 459, 221, 20);
+		lblCodiceCompagniaAerea.setBounds(25, 459, 160, 20);
 		add(lblCodiceCompagniaAerea);
 
 		lblAggiungi = new JLabel("");
