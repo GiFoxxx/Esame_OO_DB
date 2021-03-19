@@ -21,7 +21,7 @@ public class Dashboard extends JFrame {
 	private Immagini img = new Immagini();
 
 	int posizioneTendina = 50;
-	int posizioneMessaggioErrore = 0;
+	int posizioneMessaggioNotifica = 0;
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -53,8 +53,8 @@ public class Dashboard extends JFrame {
 	private JLabel lblTendina;
 	private JLabel lblCambioTemaChiaro;
 	private JLabel lblCambioTemaScuro;
-	private JLabel lblMessaggioErroreTesto;
-	private JLabel lblMessaggioErroreLayout;
+	private JLabel lblMessaggioNotificaTesto;
+	private JLabel lblMessaggioNotificaLayout;
 	private JLabel lblLayout;
 	private JLabel lblAccount;
 	private JLabel lblFrecciaMenu;
@@ -362,12 +362,12 @@ public class Dashboard extends JFrame {
 		this.posizioneTendina = posizioneTendina;
 	}
 
-	public int getPosizioneMessaggioErrore() {
-		return posizioneMessaggioErrore;
+	public int getPosizioneMessaggioNotifica() {
+		return posizioneMessaggioNotifica;
 	}
 
-	public void setPosizioneMessaggioErrore(int posizioneMessaggioErrore) {
-		this.posizioneMessaggioErrore = posizioneMessaggioErrore;
+	public void setPosizioneMessaggioNotifica(int posizioneMessaggioErrore) {
+		this.posizioneMessaggioNotifica = posizioneMessaggioErrore;
 	}
 
 	public JPanel getHome() {
@@ -634,20 +634,20 @@ public class Dashboard extends JFrame {
 		this.menuInfoAccount = menuInfoAccount;
 	}
 
-	public JLabel getLblMessaggioErroreTesto() {
-		return lblMessaggioErroreTesto;
+	public JLabel getLblMessaggioNotificaTesto() {
+		return lblMessaggioNotificaTesto;
 	}
 
-	public void setLblMessaggioErroreTesto(JLabel lblMessaggioErroreTesto) {
-		this.lblMessaggioErroreTesto = lblMessaggioErroreTesto;
+	public void setLblMessaggioNotificaTesto(JLabel lblMessaggioErroreTesto) {
+		this.lblMessaggioNotificaTesto = lblMessaggioErroreTesto;
 	}
 
-	public JLabel getLblMessaggioErroreLayout() {
-		return lblMessaggioErroreLayout;
+	public JLabel getLblMessaggioNotificaLayout() {
+		return lblMessaggioNotificaLayout;
 	}
 
-	public void setLblMessaggioErroreLayout(JLabel lblMessaggioErrore) {
-		this.lblMessaggioErroreLayout = lblMessaggioErrore;
+	public void setLblMessaggioNotificaLayout(JLabel lblMessaggioErrore) {
+		this.lblMessaggioNotificaLayout = lblMessaggioErrore;
 	}
 
 	public JLabel getLblLayout() {
@@ -862,7 +862,7 @@ public class Dashboard extends JFrame {
 		lblAccount.setFont(controllerDashboard.fontLabel);
 		lblAccount.setBorder(null);
 		lblAccount.setBackground(controllerDashboard.trasparente);
-		lblAccount.setBounds(760, 7, 216, 23);
+		lblAccount.setBounds(806, 7, 170, 23);
 		contentPane.add(lblAccount);
 
 		lblSpostaDashboard = new JLabel("");
@@ -1532,9 +1532,9 @@ public class Dashboard extends JFrame {
 		lblCambioTemaTT.setBounds(64, 40, 110, 31);
 		pannelloTendina.add(lblCambioTemaTT);
 		
-		lblVersione = new JLabel("v. (...)");
+		lblVersione = new JLabel("v 1.00");
 		lblVersione.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblVersione.setBounds(138, 606, 90, 22);
+		lblVersione.setBounds(138, 618, 90, 22);
 		lblVersione.setFont(controllerDashboard.fontLabel);
 		lblVersione.setForeground(controllerDashboard.coloreScritteTemaScuro);
 		pannelloTendina.add(lblVersione);
@@ -1579,18 +1579,18 @@ public class Dashboard extends JFrame {
 		pannelloErrore.setBounds(5, 0, 1078, 0);
 		pannelloErrore.setLayout(null);
 		
-		lblMessaggioErroreTesto = new JLabel("");
-		lblMessaggioErroreTesto.setForeground(controllerDashboard.coloreScrittaErrore);
-		lblMessaggioErroreTesto.setFont(controllerDashboard.fontLabel);
-		lblMessaggioErroreTesto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessaggioErroreTesto.setText("Qualcosa è andato storto");
-		lblMessaggioErroreTesto.setBounds(5, 0, 1078, 25);
-		pannelloErrore.add(lblMessaggioErroreTesto);
+		lblMessaggioNotificaTesto = new JLabel("");
+		lblMessaggioNotificaTesto.setForeground(controllerDashboard.coloreScrittaErrore);
+		lblMessaggioNotificaTesto.setFont(controllerDashboard.fontLabel);
+		lblMessaggioNotificaTesto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessaggioNotificaTesto.setText("Qualcosa è andato storto");
+		lblMessaggioNotificaTesto.setBounds(5, 0, 1078, 25);
+		pannelloErrore.add(lblMessaggioNotificaTesto);
 		
-		lblMessaggioErroreLayout = new JLabel("");
-		lblMessaggioErroreLayout.setIcon(new ImageIcon(img.messaggioErrore()));
-		lblMessaggioErroreLayout.setBounds(5, 0, 1078, 25);
-		pannelloErrore.add(lblMessaggioErroreLayout);
+		lblMessaggioNotificaLayout = new JLabel("");
+		lblMessaggioNotificaLayout.setIcon(new ImageIcon(img.messaggioErrore()));
+		lblMessaggioNotificaLayout.setBounds(5, 0, 1078, 25);
+		pannelloErrore.add(lblMessaggioNotificaLayout);
 
 
 		pannelloDestra = new JPanel();

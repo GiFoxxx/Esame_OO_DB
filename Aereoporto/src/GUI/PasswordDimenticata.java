@@ -349,13 +349,13 @@ public class PasswordDimenticata extends JDialog {
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					controllerPasswordDimenticata.setStopMostraPasswordTT(false);
-					controllerPasswordDimenticata.mostraMostraPasswordTT(lblMostraNuovaPasswordTT);
+					controllerPasswordDimenticata.mostraTT(lblMostraNuovaPasswordTT, controllerPasswordDimenticata.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
 					controllerPasswordDimenticata.setStopMostraPasswordTT(true);
-					controllerPasswordDimenticata.chiudiMostraPasswordTT(lblMostraNuovaPasswordTT);
+					controllerPasswordDimenticata.chiudiTT(lblMostraNuovaPasswordTT, controllerPasswordDimenticata.isStopMostraPasswordTT());
 				}
 			});
 			lblMostraNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -375,13 +375,13 @@ public class PasswordDimenticata extends JDialog {
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					controllerPasswordDimenticata.setStopCensuraPasswordTT(false);
-					controllerPasswordDimenticata.mostraCensuraPasswordTT(lblCensuraNuovaPasswordTT);
+					controllerPasswordDimenticata.mostraTT(lblCensuraNuovaPasswordTT, controllerPasswordDimenticata.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
 					controllerPasswordDimenticata.setStopCensuraPasswordTT(true);
-					controllerPasswordDimenticata.chiudiCensuraPasswordTT(lblCensuraNuovaPasswordTT);
+					controllerPasswordDimenticata.chiudiTT(lblCensuraNuovaPasswordTT, controllerPasswordDimenticata.isStopCensuraPasswordTT());
 				}
 			});
 			lblCensuraNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -401,13 +401,13 @@ public class PasswordDimenticata extends JDialog {
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					controllerPasswordDimenticata.setStopMostraPasswordTT(false);
-					controllerPasswordDimenticata.mostraMostraPasswordTT(lblMostraRipetiNuovaPasswordTT);
+					controllerPasswordDimenticata.mostraTT(lblMostraRipetiNuovaPasswordTT, controllerPasswordDimenticata.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
 					controllerPasswordDimenticata.setStopMostraPasswordTT(true);
-					controllerPasswordDimenticata.chiudiMostraPasswordTT(lblMostraRipetiNuovaPasswordTT);
+					controllerPasswordDimenticata.chiudiTT(lblMostraRipetiNuovaPasswordTT, controllerPasswordDimenticata.isStopMostraPasswordTT());
 				}
 			});
 			lblMostraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -427,13 +427,13 @@ public class PasswordDimenticata extends JDialog {
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					controllerPasswordDimenticata.setStopCensuraPasswordTT(false);
-					controllerPasswordDimenticata.mostraCensuraPasswordTT(lblCensuraRipetiNuovaPasswordTT);
+					controllerPasswordDimenticata.mostraTT(lblCensuraRipetiNuovaPasswordTT, controllerPasswordDimenticata.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
 					controllerPasswordDimenticata.setStopCensuraPasswordTT(true);
-					controllerPasswordDimenticata.chiudiCensuraPasswordTT(lblCensuraRipetiNuovaPasswordTT);
+					controllerPasswordDimenticata.chiudiTT(lblCensuraRipetiNuovaPasswordTT, controllerPasswordDimenticata.isStopCensuraPasswordTT());
 				}
 			});
 			lblCensuraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

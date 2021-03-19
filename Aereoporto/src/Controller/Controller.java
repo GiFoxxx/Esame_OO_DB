@@ -30,6 +30,9 @@ public class Controller {
 
 	private int flagCambioTema = 0;
 
+	private boolean erroreMostrato = false;
+	private boolean successoMostrato = false;
+
 	private boolean stopMenuTT = false;
 	private boolean stopHomeTT = false;
 	private boolean stopAccediTT = false;
@@ -87,7 +90,8 @@ public class Controller {
 	public String erroreAccessoGiaUtilizziAccount = "Stai già utilizzando questo account";
 	public String erroreAccessoEseguirePrimaLogout = "Devi effettuare il logout se vuoi accedere con altre credenziali.";
 	public String erroreRegistrazioneFormatoSbagliato = "Formato email inserito non valido!"
-			+ " Inserire l'email dal formato tipo: example@example.com";
+			+ " Inserire l'email dal formato tipo: exp@example.com";
+	public String erroreRegistrazioneEmailEsistente = "Email già esistente";
 	public String errorePasswordsNonCorrispondenti = "Le passwords non corrispondono";
 	public String erroreRegistrazioneLoginGiaEffettuato = "Effettuare il logout prima della registrazione";
 	public String erroreCampiVuoti = "Riempire tutti i campi per continuare";
@@ -97,14 +101,15 @@ public class Controller {
 	public String erroreGeneraleHome = "Per continuare, effettuare prima l'accesso";
 	public String erroreGenericoInInserimentiCampi = "Attenzione ci sono degli errori";
 	public String erroreRecensioneMancataValutazione = "Attenzione selezionare il voto";
+	public String erroreGestioniNessunaRigaSelezionata = "Nessuna riga della tabella � stata selezionata";
+	public String erroreGestioniGenerale = "Ops, qualcosa è andato storto";
 
 	public String registrazioneCompletata = "Registrazione effettuata con successo";
 	public String passwordCambiata = "Password cambiata con successo";
 	public String accessoEffettuato = "Accesso effettuato";
 	public String invioRecensione = "Recensione inviata con successo";
 	public String logout = "Logout avvenuto con successo";
-	public String gestioni = "Operazione riuscita con successo";
-	public String rigaNonSelezionata = "Nessuna riga della tabella � stata selezionata";
+	public String operazioneRiuscitaInGestioni = "Operazione riuscita con successo";
 
 	// ATTRIBUTI
 	private String emailAccesso;
@@ -147,6 +152,22 @@ public class Controller {
 	CompagniaAerea compAerea;
 
 	// GETTER E SETTER
+	public boolean isErroreMostrato() {
+		return erroreMostrato;
+	}
+
+	public void setErroreMostrato(boolean notificaMostrata) {
+		this.erroreMostrato = notificaMostrata;
+	}
+
+	public boolean isSuccessoMostrato() {
+		return successoMostrato;
+	}
+
+	public void setSuccessoMostrato(boolean successoMostrato) {
+		this.successoMostrato = successoMostrato;
+	}
+
 	public boolean isStopCambioTemaTT() {
 		return stopCambioTemaTT;
 	}
@@ -507,9 +528,9 @@ public class Controller {
 		if (!sbloccaGestione()) {
 			accedi();
 		} else if (getEmailAccesso().equals(((Accesso) getDashboard().getAccesso()).getTxtEmail().getText())) {
-			mostraNotifica(erroreAccessoGiaUtilizziAccount, img.messaggioErrore());
+			mostraNotifica(erroreAccessoGiaUtilizziAccount, img.messaggioErrore(), erroreMostrato);
 		} else {
-			mostraNotifica(erroreAccessoEseguirePrimaLogout, img.messaggioErrore());
+			mostraNotifica(erroreAccessoEseguirePrimaLogout, img.messaggioErrore(), erroreMostrato);
 		}
 	}
 
@@ -524,7 +545,7 @@ public class Controller {
 			if (implementazioneUtenteDAO().accessoUtente(email, password)) {
 				mostraPannelli(getDashboard().getHome());
 				setPannelloPrecedente(1);
-				mostraNotifica(accessoEffettuato, img.messaggioNotifica());
+				mostraNotifica(accessoEffettuato, img.messaggioNotifica(), successoMostrato);
 				mostraUtenteLoggato();
 				getDashboard().getLblFrecciaMenu().setVisible(true);
 
@@ -538,10 +559,10 @@ public class Controller {
 				}
 				((Accesso) getDashboard().getAccesso()).setSbloccaHome(true);
 			} else if (controlloCampiSeVuotiAccesso()) {
-				mostraNotifica(erroreAccessoInserimentoCredenziali, img.messaggioErrore());
+				mostraNotifica(erroreAccessoInserimentoCredenziali, img.messaggioErrore(), erroreMostrato);
 				mostraIconaErroreEmailMancanteAccesso();
 			} else {
-				mostraNotifica(erroreAccessoCredenzialiSbagliate, img.messaggioErrore());
+				mostraNotifica(erroreAccessoCredenzialiSbagliate, img.messaggioErrore(), erroreMostrato);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -676,24 +697,25 @@ public class Controller {
 					((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText());
 			try {
 				implementazioneUtenteDAO().registrazioneUtente(utn);
+				mostraNotifica(registrazioneCompletata, img.messaggioNotifica(), successoMostrato);
+				mostraPannelli(getDashboard().getAccesso());
+				setPannelloPrecedente(2);
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
 			}
-			mostraNotifica(registrazioneCompletata, img.messaggioNotifica());
-			mostraPannelli(getDashboard().getAccesso());
-			setPannelloPrecedente(2);
-			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 		} else if (erroreFormatoEmail()) {
-			mostraNotifica(erroreRegistrazioneFormatoSbagliato, img.messaggioErrore());
+			mostraNotifica(erroreRegistrazioneFormatoSbagliato, img.messaggioErrore(), erroreMostrato);
+			((Registrazione) getDashboard().getRegistrazione()).getLblIconaErroreEmail().setVisible(true);
 		} else if (errorePasswordRipetuteErrate()) {
-			mostraNotifica(errorePasswordsNonCorrispondenti, img.messaggioErrore());
+			mostraNotifica(errorePasswordsNonCorrispondenti, img.messaggioErrore(), erroreMostrato);
 		} else if (erroreLoginGiaFatto()) {
-			mostraNotifica(erroreRegistrazioneLoginGiaEffettuato, img.messaggioErrore());
+			mostraNotifica(erroreRegistrazioneLoginGiaEffettuato, img.messaggioErrore(), erroreMostrato);
 		} else {
 			mostraIconaErroreNomeMancanteRegistrazione();
 			mostraIconaErroreCognomeMancanteRegistrazione();
 			mostraIconaErroreEmailMancanteRegistrazione();
-			mostraNotifica(erroreCampiVuoti, img.messaggioErrore());
+			mostraNotifica(erroreCampiVuoti, img.messaggioErrore(), erroreMostrato);
 		}
 	}
 
@@ -791,13 +813,14 @@ public class Controller {
 		int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTabella().getSelectedRow();
 		try {
 			implementazioneUtenteDAO().cancellaUtente(utn);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().removeRow(t);
+			svuotaCampiGestioneUtenti();
+			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().removeRow(t);
-		svuotaCampiGestioneUtenti();
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
+
 	}
 
 	public void modificaUtente() {
@@ -807,12 +830,12 @@ public class Controller {
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
 		try {
 			implementazioneUtenteDAO().modificaUtente(utn);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			svuotaCampiGestioneUtenti();
+			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		svuotaCampiGestioneUtenti();
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 	}
 
 	// METODI GESTIONE COMPAGNIA AEREA
@@ -843,14 +866,14 @@ public class Controller {
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
 		try {
 			implementazioneCompagniaAereaDAO().aggiungiCompagniaAerea(compAerea);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
+					.addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
+			svuotaCampiGestioneCompagniaAerea();
+			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
-				.addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
-		svuotaCampiGestioneCompagniaAerea();
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 	}
 
 	public void eliminaCompagniaAerea() {
@@ -861,13 +884,13 @@ public class Controller {
 		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
 		try {
 			implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
+			svuotaCampiGestioneCompagniaAerea();
+			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
-		svuotaCampiGestioneCompagniaAerea();
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 	}
 
 	public void modificaCompagniaAerea() {
@@ -885,12 +908,12 @@ public class Controller {
 
 		try {
 			implementazioneCompagniaAereaDAO().modificaCompagniaAerea(compAerea);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			svuotaCampiGestioneCompagniaAerea();
+			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		svuotaCampiGestioneCompagniaAerea();
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 	}
 
 	// METODI GESTIONE TRATTE
@@ -929,14 +952,15 @@ public class Controller {
 
 		try {
 			implementazioneTrattaDAO().aggiungiTratta(trt);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
+					.addRow(((GestioneTratte) getDashboard().getGestioneTratte()).getRow());
+			svuotaCampiGestioneTratta();
+			((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
-				.addRow(((GestioneTratte) getDashboard().getGestioneTratte()).getRow());
-		svuotaCampiGestioneTratta();
-		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
+
 	}
 
 	public void eliminaTratta() {
@@ -949,13 +973,13 @@ public class Controller {
 		int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().getSelectedRow();
 		try {
 			implementazioneTrattaDAO().cancellaTratta(trt);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GestioneTratte) getDashboard().getGestioneTratte()).getModello().removeRow(t);
+			svuotaCampiGestioneTratta();
+			((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().removeRow(t);
-		svuotaCampiGestioneTratta();
-		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 	}
 
 	public void modificaTratta() {
@@ -978,12 +1002,12 @@ public class Controller {
 
 		try {
 			implementazioneTrattaDAO().modificaTratta(trt);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			svuotaCampiGestioneTratta();
+			((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		svuotaCampiGestioneTratta();
-		((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 	}
 
 	// METODI GESTIONE VOLI PARTENZE
@@ -1065,18 +1089,18 @@ public class Controller {
 
 			try {
 				implementazioneVoloPartenzeDAO().inserisciVoloPartenze(vlprtz);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
+						.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
+				svuotaCampiGestioneVoloPartenze();
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 			} catch (PSQLException e) {
-				System.out.println("no");
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			mostraNotifica(gestioni, img.messaggioNotifica());
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
-					.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
-			svuotaCampiGestioneVoloPartenze();
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} else {
-			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore());
+			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
 		}
 	}
 
@@ -1087,13 +1111,13 @@ public class Controller {
 		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
 		try {
 			implementazioneVoloPartenzeDAO().cancellaVoloPartenze(vlprtz);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().removeRow(t);
+			svuotaCampiGestioneVoloPartenze();
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().removeRow(t);
-		svuotaCampiGestioneVoloPartenze();
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1145,15 +1169,14 @@ public class Controller {
 
 			try {
 				implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				svuotaCampiGestioneVoloPartenze();
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			mostraNotifica(gestioni, img.messaggioNotifica());
-			svuotaCampiGestioneVoloPartenze();
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} else {
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblMessaggioErrore()
-					.setText("Errore nell'inserimento dell'orario");
+			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
 		}
 	}
 
@@ -1178,12 +1201,12 @@ public class Controller {
 
 		try {
 			implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			svuotaCampiGestioneVoloPartenze();
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		svuotaCampiGestioneVoloPartenze();
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1201,12 +1224,12 @@ public class Controller {
 
 		try {
 			implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			svuotaCampiGestioneVoloPartenze();
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		svuotaCampiGestioneVoloPartenze();
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 	}
 
 	// METODI GESTIONE VOLI ARRIVI
@@ -1260,16 +1283,16 @@ public class Controller {
 
 			try {
 				implementazioneVoloArriviDAO().aggiungiVoloArrivi(vlarr);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello()
+						.addRow(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getRow());
+				svuotaCampiGestioneVoloArrivi();
+				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			mostraNotifica(gestioni, img.messaggioNotifica());
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello()
-					.addRow(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getRow());
-			svuotaCampiGestioneVoloArrivi();
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 		} else {
-			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore());
+			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
 		}
 	}
 
@@ -1280,13 +1303,13 @@ public class Controller {
 		int t = ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTabella().getSelectedRow();
 		try {
 			implementazioneVoloArriviDAO().cancellaVoloArrivi(vlarr);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().removeRow(t);
+			svuotaCampiGestioneVoloArrivi();
+			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().removeRow(t);
-		svuotaCampiGestioneVoloArrivi();
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1316,14 +1339,14 @@ public class Controller {
 					dataTempo);
 			try {
 				implementazioneVoloArriviDAO().modificaVoloArrivi(vlarr);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				svuotaCampiGestioneVoloArrivi();
+				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			mostraNotifica(gestioni, img.messaggioNotifica());
-			svuotaCampiGestioneVoloArrivi();
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 		} else {
-			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore());
+			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
 		}
 	}
 
@@ -1374,14 +1397,14 @@ public class Controller {
 
 		try {
 			implementazioneGateDAO().aggiungiGate(gt);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GestioneGate) getDashboard().getGestioneGate()).getModello()
+					.addRow(((GestioneGate) getDashboard().getGestioneGate()).getRow());
+			svuotaCampiGestioneGate();
+			((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GestioneGate) getDashboard().getGestioneGate()).getModello()
-				.addRow(((GestioneGate) getDashboard().getGestioneGate()).getRow());
-		svuotaCampiGestioneGate();
-		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
 	public void eliminaGate() {
@@ -1390,13 +1413,13 @@ public class Controller {
 		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
 		try {
 			implementazioneGateDAO().cancellaGate(gt);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GestioneGate) getDashboard().getGestioneGate()).getModello().removeRow(t);
+			svuotaCampiGestioneGate();
+			((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GestioneGate) getDashboard().getGestioneGate()).getModello().removeRow(t);
-		svuotaCampiGestioneGate();
-		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1419,12 +1442,12 @@ public class Controller {
 
 		try {
 			implementazioneGateDAO().modificaGate(gt);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			svuotaCampiGestioneGate();
+			((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		svuotaCampiGestioneGate();
-		((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 	}
 
 	// METODI DI GATE CODE DI IMBARCO
@@ -1443,13 +1466,14 @@ public class Controller {
 
 		try {
 			implementazioneGateDAO().aggiungiGateInCodaDiImbarco(gt, cdi);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione()
+					.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaAssociazione());
+			svuotaCampiGateCodeImbarco();
+			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione()
-				.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaAssociazione());
-		svuotaCampiGateCodeImbarco();
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
 	}
 
 	public void eliminaGateCodeImbarco() {
@@ -1461,13 +1485,13 @@ public class Controller {
 		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabellaAssociazioni().getSelectedRow();
 		try {
 			implementazioneGateDAO().cancellaGateInCodaDiImbarco(gt, cdi);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione().removeRow(t);
+			svuotaCampiGestioneGate();
+			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione().removeRow(t);
-		svuotaCampiGestioneGate();
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
 	}
 
 	// METODI DI UTILIZZO GATE
@@ -1489,17 +1513,17 @@ public class Controller {
 		try {
 			((UtilizzoGate) getDashboard().getUtilizzoGate())
 					.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoGiornaliero(gt, dataUtilizzo));
+			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
+			for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
+						.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
+								dato.getTotaleUtilizzoStimato(), dataUtilizzo });
+			}
+			((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
+					.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
-		for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
-			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
-					.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
-							dato.getTotaleUtilizzoStimato(), dataUtilizzo });
-		}
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
-				.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1516,20 +1540,20 @@ public class Controller {
 		try {
 			((UtilizzoGate) getDashboard().getUtilizzoGate())
 					.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoSettimanale(gt, dataUtilizzo));
+			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
+			for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
+
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
+						.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
+								dato.getTotaleUtilizzoStimato(), settimana.concat(String.valueOf(i)) });
+				i = i + 1;
+			}
+			((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
+					.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
-		for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
-
-			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
-					.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
-							dato.getTotaleUtilizzoStimato(), settimana.concat(String.valueOf(i)) });
-			i = i + 1;
-		}
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
-				.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1544,18 +1568,18 @@ public class Controller {
 		try {
 			((UtilizzoGate) getDashboard().getUtilizzoGate())
 					.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoMensile(gt, dataUtilizzo));
+			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
+
+			for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
+						.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
+								dato.getTotaleUtilizzoStimato(), stampaMese() });
+			}
+			((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
+					.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
-
-		for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
-			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
-					.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
-							dato.getTotaleUtilizzoStimato(), stampaMese() });
-		}
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
-				.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1632,14 +1656,14 @@ public class Controller {
 
 		try {
 			implementazioneCodaDiImbarcoDAO().aggiungiCodaDiImbarco(cdi);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco()
+					.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaCodaDiImbarco());
+			svuotaCampiCodaDiImbarco();
+			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
 		} catch (SQLException e) {
-			mostraNotifica(erroreGeneraleHome, img.messaggioErrore());
+			mostraNotifica(erroreGeneraleHome, img.messaggioErrore(), erroreMostrato);
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco()
-				.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaCodaDiImbarco());
-		svuotaCampiCodaDiImbarco();
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
 	}
 
 	public void eliminaCodaDiImbarco() {
@@ -1649,13 +1673,13 @@ public class Controller {
 		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabellaCodaDiImbarco().getSelectedRow();
 		try {
 			implementazioneCodaDiImbarcoDAO().cancellaCodaDiImbarco(cdi);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco().removeRow(t);
+			svuotaCampiCodaDiImbarco();
+			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco().removeRow(t);
-		svuotaCampiCodaDiImbarco();
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1674,12 +1698,12 @@ public class Controller {
 				tempoDiImbarcoStimato);
 		try {
 			implementazioneCodaDiImbarcoDAO().modificaCodaDiImbarco(cdi);
+			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+			svuotaCampiCodaDiImbarco();
+			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		mostraNotifica(gestioni, img.messaggioNotifica());
-		svuotaCampiCodaDiImbarco();
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
 	}
 
 	// AGGIORNAMENTO COMBOBOX
@@ -1831,32 +1855,35 @@ public class Controller {
 		getDashboard().getLblAccount().setBounds(970 - larghezzaLbl, 7, larghezzaLbl, 23);
 	}
 
-	// METODI ERRORI GESTIONE
-	public void mostraNotifica(String errore, Image immagine) {
-		getDashboard().getLblMessaggioErroreLayout().setIcon(new ImageIcon(immagine));
-		if (getDashboard().getPosizioneMessaggioErrore() == 0) {
-			Thread th = new Thread() {
-				@Override
-				public void run() {
-					try {
-						for (int i = 0; i <= 25; i++) {
-							Thread.sleep(1, 01);
-							getDashboard().getPannelloErrore().setSize(1078, i);
+	// METODI ERRORI
+	public void mostraNotifica(String errore, Image immagine, boolean bool) {
+		if (!bool) {
+			getDashboard().getLblMessaggioNotificaLayout().setIcon(new ImageIcon(immagine));
+			if (getDashboard().getPosizioneMessaggioNotifica() == 0) {
+				Thread th = new Thread() {
+					@Override
+					public void run() {
+						try {
+							for (int i = 0; i <= 25; i++) {
+								Thread.sleep(1, 01);
+								getDashboard().getPannelloErrore().setSize(1078, i);
+							}
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null, e);
 						}
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, e);
 					}
-				}
-			};
-			th.start();
-			getDashboard().getLblMessaggioErroreTesto().setText(errore);
-			getDashboard().setPosizioneMessaggioErrore(25);
-			chiudiNotifica();
+				};
+				th.start();
+				getDashboard().getLblMessaggioNotificaTesto().setText(errore);
+				getDashboard().setPosizioneMessaggioNotifica(25);
+				erroreMostrato = true;
+				chiudiNotifica();
+			}
 		}
 	}
 
 	public void chiudiNotifica() {
-		if (getDashboard().getPosizioneMessaggioErrore() == 25) {
+		if (getDashboard().getPosizioneMessaggioNotifica() == 25) {
 			getDashboard().getPannelloErrore().setSize(1078, 0);
 			Thread th = new Thread() {
 				@Override
@@ -1867,13 +1894,14 @@ public class Controller {
 							Thread.sleep(1, 01);
 							getDashboard().getPannelloErrore().setSize(1078, i);
 						}
+						erroreMostrato = false;
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e);
 					}
 				}
 			};
 			th.start();
-			getDashboard().setPosizioneMessaggioErrore(0);
+			getDashboard().setPosizioneMessaggioNotifica(0);
 		}
 	}
 
@@ -2173,7 +2201,25 @@ public class Controller {
 	public void mostraSceltaProfiloSenzaAccesso() {
 		svuotaCampiAccesso();
 		svuotaCampiRegistrazione();
+		setStopProfiloTT(true);
+		chiudiTT(getDashboard().getLblProfiloTT(), isStopProfiloTT());
 		getDashboard().setEnabled(false);
+		if (cambioTema()) {
+			((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblAccedi()
+					.setIcon(new ImageIcon(img.accedi1TemaChiaro()));
+			((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblRegistrati()
+					.setIcon(new ImageIcon(img.registrati1TemaChiaro()));
+			((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblAnnulla()
+					.setIcon(new ImageIcon(img.annulla1TemaChiaro()));
+		} else {
+			((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblAccedi()
+					.setIcon(new ImageIcon(img.accedi1()));
+			((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblRegistrati()
+					.setIcon(new ImageIcon(img.registrati1()));
+			((SceltaProfiloSenzaAccesso) getDashboard().getSceltaProfiloSenzaAccesso()).getLblAnnulla()
+					.setIcon(new ImageIcon(img.annulla1()));
+		}
+
 		getDashboard().getSceltaProfiloSenzaAccesso().setVisible(true);
 	}
 
@@ -2331,8 +2377,9 @@ public class Controller {
 
 	public void logout() {
 		getDashboard().getLblAccount().setBounds(760, 7, 216, 23);
-		mostraNotifica(logout, img.messaggioNotifica());
+		mostraNotifica(logout, img.messaggioNotifica(), successoMostrato);
 		getDashboard().getLblAccount().setText("Nessun accesso effettuato");
+		getDashboard().getLblAccount().setBounds(970 - 170, 7, 170, 23);
 		getDashboard().getLblFrecciaMenu().setVisible(false);
 		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblErrore().setText("");
 		entraGestioneUtenti = false;
@@ -2378,19 +2425,19 @@ public class Controller {
 				e.printStackTrace();
 			}
 			logout();
-			mostraNotifica(passwordCambiata, img.messaggioNotifica());
+			mostraNotifica(passwordCambiata, img.messaggioNotifica(), successoMostrato);
 			mostraPannelli(getDashboard().getAccesso());
 			setPannelloPrecedente(2);
 
 		} else if (erroreCambioPasswordNonCorrispondenteConAttuale()) {
-			mostraNotifica(erroreCambioPasswordNonCorrispondenteConAttuale, img.messaggioErrore());
+			mostraNotifica(erroreCambioPasswordNonCorrispondenteConAttuale, img.messaggioErrore(), erroreMostrato);
 		} else if (errorePasswordsNonCorrispondenti()) {
-			mostraNotifica(errorePasswordsNonCorrispondenti, img.messaggioErrore());
+			mostraNotifica(errorePasswordsNonCorrispondenti, img.messaggioErrore(), erroreMostrato);
 		} else if (erroriMultipliCambioPassword()) {
-			mostraNotifica(erroreGenericoInInserimentiCampi, img.messaggioErrore());
+			mostraNotifica(erroreGenericoInInserimentiCampi, img.messaggioErrore(), erroreMostrato);
 		} else {
 			mostraIconaErroreVecchiaPasswordaMancanteCambioPassword();
-			mostraNotifica(erroreCampiVuoti, img.messaggioErrore());
+			mostraNotifica(erroreCampiVuoti, img.messaggioErrore(), erroreMostrato);
 		}
 	}
 
@@ -2494,19 +2541,19 @@ public class Controller {
 				mostraPannelli(getDashboard().getAccesso());
 				setPannelloPrecedente(2);
 				getDashboard().getPasswordDimenticata().dispose();
-				mostraNotifica(passwordCambiata, img.messaggioNotifica());
+				mostraNotifica(passwordCambiata, img.messaggioNotifica(), successoMostrato);
 				getDashboard().setEnabled(true);
 				getDashboard().setVisible(true);
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 			} else if (erroreRipetiPasswordDimenticata()) {
-				mostraNotifica(errorePasswordsNonCorrispondenti, img.messaggioErrore());
+				mostraNotifica(errorePasswordsNonCorrispondenti, img.messaggioErrore(), erroreMostrato);
 			} else if (erroriMultipliPasswordDimenticata()) {
-				mostraNotifica(erroreGenericoInInserimentiCampi, img.messaggioErrore());
+				mostraNotifica(erroreGenericoInInserimentiCampi, img.messaggioErrore(), erroreMostrato);
 			} else if (erroreEmailNonRegistrata()) {
-				mostraNotifica(errorePasswordDimenticataEmailNonRegistrata, img.messaggioErrore());
+				mostraNotifica(errorePasswordDimenticataEmailNonRegistrata, img.messaggioErrore(), erroreMostrato);
 			} else {
 				mostraIconaErroreEmailMancantePasswordDimenticata();
-				mostraNotifica(erroreCampiVuoti, img.messaggioErrore());
+				mostraNotifica(erroreCampiVuoti, img.messaggioErrore(), erroreMostrato);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -2641,48 +2688,49 @@ public class Controller {
 		getDashboard().setVisible(true);
 		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
-	
+
 	// RECENSIONE
-		public void svuotaAreaRecensione() {
-			((Recensione) getDashboard().getRecensioni()).getTextArea().setText("");
-		}
+	public void svuotaAreaRecensione() {
+		((Recensione) getDashboard().getRecensioni()).getTextArea().setText("");
+	}
 
-		public void invioRecensione() {
-			if (lasciaRecensione()) {
-				((Recensione) getDashboard().getRecensioni()).stella0();
-				svuotaAreaRecensione();
-				mostraNotifica(invioRecensione, img.messaggioNotifica());
-			} else if (erroreMancataValutazione()) {
-				mostraNotifica(erroreRecensioneMancataValutazione, img.messaggioErrore());
-			} else {
-				mostraNotifica(erroreGeneraleHome, img.messaggioErrore());
-			}
+	public void invioRecensione() {
+		if (lasciaRecensione()) {
+			((Recensione) getDashboard().getRecensioni()).stella0();
+			svuotaAreaRecensione();
+			mostraNotifica(invioRecensione, img.messaggioNotifica(), successoMostrato);
+		} else if (erroreMancataValutazione()) {
+			mostraNotifica(erroreRecensioneMancataValutazione, img.messaggioErrore(), erroreMostrato);
+		} else {
+			mostraNotifica(erroreGeneraleHome, img.messaggioErrore(), erroreMostrato);
 		}
+	}
 
-		public boolean lasciaRecensione() {
-			if (((Accesso) getDashboard().getAccesso()).isSbloccaHome()
-					&& ((Recensione) getDashboard().getRecensioni()).getValutazione() > 0) {
-				return true;
-			} else {
-				return false;
-			}
+	public boolean lasciaRecensione() {
+		if (((Accesso) getDashboard().getAccesso()).isSbloccaHome()
+				&& ((Recensione) getDashboard().getRecensioni()).getValutazione() > 0) {
+			return true;
+		} else {
+			return false;
 		}
+	}
 
-		public boolean erroreMancataValutazione() {
-			if (((Accesso) getDashboard().getAccesso()).isSbloccaHome()
-					&& ((Recensione) getDashboard().getRecensioni()).getValutazione() <= 0) {
-				return true;
-			} else {
-				return false;
-			}
+	public boolean erroreMancataValutazione() {
+		if (((Accesso) getDashboard().getAccesso()).isSbloccaHome()
+				&& ((Recensione) getDashboard().getRecensioni()).getValutazione() <= 0) {
+			return true;
+		} else {
+			return false;
 		}
+	}
 
 	// METODI DI USCITA
 
 	public void mostraUscita() {
 		svuotaCampiAccesso();
 		svuotaCampiRegistrazione();
-		chiudiTuttiTT();
+		setStopEsciTT(true);
+		chiudiTT(getDashboard().getLblEsciTT(), isStopEsciTT());
 		dashboard.setEnabled(false);
 		dashboard.getUscita().setVisible(true);
 	}

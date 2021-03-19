@@ -651,7 +651,8 @@ public class GestioneVoliPartenze extends JPanel {
 				}
 			}
 		});
-
+		comboBoxNumeroPorta.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
+		comboBoxNumeroPorta.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		comboBoxNumeroPorta.setBounds(156, 469, 45, 20);
 		add(comboBoxNumeroPorta);
 
@@ -672,6 +673,8 @@ public class GestioneVoliPartenze extends JPanel {
 				}
 			}
 		});
+		comboBoxCittaArrivo.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
+		comboBoxCittaArrivo.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		comboBoxCittaArrivo.setBounds(156, 500, 75, 20);
 		add(comboBoxCittaArrivo);
 
@@ -904,6 +907,8 @@ public class GestioneVoliPartenze extends JPanel {
 		comboBoxStatus.addItem("In preparazione");
 		comboBoxStatus.addItem("In partenza");
 		comboBoxStatus.addItem("In ritardo");
+		comboBoxStatus.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
+		comboBoxStatus.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		comboBoxStatus.setBounds(718, 469, 133, 20);
 		add(comboBoxStatus);
 

@@ -256,12 +256,13 @@ public class CambioPassword extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerCambioPassword.setStopMostraPasswordTT(false);
-				controllerCambioPassword.mostraMostraPasswordTT(lblMostraNuovaPasswordTT);
+				controllerCambioPassword.mostraTT(lblMostraNuovaPasswordTT, controllerCambioPassword.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
+
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerCambioPassword.setStopMostraPasswordTT(true);
-				controllerCambioPassword.chiudiMostraPasswordTT(lblMostraNuovaPasswordTT);
+				controllerCambioPassword.chiudiTT(lblMostraNuovaPasswordTT, controllerCambioPassword.isStopMostraPasswordTT());
 			}
 		});
 		lblMostraNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -280,12 +281,12 @@ public class CambioPassword extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerCambioPassword.setStopCensuraPasswordTT(false);
-				controllerCambioPassword.mostraCensuraPasswordTT(lblCensuraNuovaPasswordTT);
+				controllerCambioPassword.mostraTT(lblCensuraNuovaPasswordTT, controllerCambioPassword.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerCambioPassword.setStopCensuraPasswordTT(true);
-				controllerCambioPassword.chiudiCensuraPasswordTT(lblCensuraNuovaPasswordTT);
+				controllerCambioPassword.chiudiTT(lblCensuraNuovaPasswordTT, controllerCambioPassword.isStopCensuraPasswordTT());
 			}
 		});
 		lblCensuraNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -304,12 +305,12 @@ public class CambioPassword extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerCambioPassword.setStopMostraPasswordTT(false);
-				controllerCambioPassword.mostraMostraPasswordTT(lblMostraRipetiNuovaPasswordTT);
+				controllerCambioPassword.mostraTT(lblMostraRipetiNuovaPasswordTT, controllerCambioPassword.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerCambioPassword.setStopMostraPasswordTT(true);
-				controllerCambioPassword.chiudiMostraPasswordTT(lblMostraRipetiNuovaPasswordTT);
+				controllerCambioPassword.chiudiTT(lblMostraRipetiNuovaPasswordTT, controllerCambioPassword.isStopMostraPasswordTT());
 			}
 		});
 		lblMostraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -328,12 +329,12 @@ public class CambioPassword extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerCambioPassword.setStopCensuraPasswordTT(false);
-				controllerCambioPassword.mostraCensuraPasswordTT(lblCensuraRipetiNuovaPasswordTT);
+				controllerCambioPassword.mostraTT(lblCensuraRipetiNuovaPasswordTT, controllerCambioPassword.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerCambioPassword.setStopCensuraPasswordTT(true);
-				controllerCambioPassword.chiudiCensuraPasswordTT(lblCensuraRipetiNuovaPasswordTT);
+				controllerCambioPassword.chiudiTT(lblCensuraRipetiNuovaPasswordTT, controllerCambioPassword.isStopCensuraPasswordTT());
 			}
 		});
 		lblCensuraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

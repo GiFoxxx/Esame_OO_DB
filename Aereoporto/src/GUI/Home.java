@@ -81,7 +81,7 @@ public class Home extends JPanel {
 					controllerHome.setPannelloPrecedente(6);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneTratte());
 				} else {
-					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore());
+					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(), controllerHome.isErroreMostrato());
 				}
 			}
 			@Override
@@ -117,7 +117,7 @@ public class Home extends JPanel {
 					controllerHome.setPannelloPrecedente(7);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneCompagnieAeree());
 				} else {
-					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore());
+					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(), controllerHome.isErroreMostrato());
 				}
 			}
 			@Override
@@ -152,7 +152,7 @@ public class Home extends JPanel {
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.mostraSceltaGate();
 				} else {
-					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore());
+					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(), controllerHome.isErroreMostrato());
 				}
 			}
 			@Override
@@ -187,7 +187,7 @@ public class Home extends JPanel {
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.mostraSceltaVolo();
 				} else {
-					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore());
+					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(), controllerHome.isErroreMostrato());
 				}
 			}
 			@Override

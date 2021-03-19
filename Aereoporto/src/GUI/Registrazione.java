@@ -342,12 +342,12 @@ public class Registrazione extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerRegistrazione.setStopMostraPasswordTT(false);
-				controllerRegistrazione.mostraMostraPasswordTT(lblMostraPasswordTT);
-			}
+				controllerRegistrazione.mostraTT(lblMostraPasswordTT, controllerRegistrazione.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
+				}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerRegistrazione.setStopMostraPasswordTT(true);
-				controllerRegistrazione.chiudiMostraPasswordTT(lblMostraPasswordTT);
+				controllerRegistrazione.chiudiTT(lblMostraPasswordTT, controllerRegistrazione.isStopMostraPasswordTT());
 			}
 		});
 		lblMostraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -366,12 +366,12 @@ public class Registrazione extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerRegistrazione.setStopCensuraPasswordTT(false);
-				controllerRegistrazione.mostraCensuraPasswordTT(lblCensuraPasswordTT);
-			}
+				controllerRegistrazione.mostraTT(lblCensuraPasswordTT, controllerRegistrazione.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
+}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerRegistrazione.setStopCensuraPasswordTT(true);
-				controllerRegistrazione.chiudiCensuraPasswordTT(lblCensuraPasswordTT);
+				controllerRegistrazione.chiudiTT(lblCensuraPasswordTT, controllerRegistrazione.isStopCensuraPasswordTT());
 			}
 		});
 		lblCensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -390,12 +390,13 @@ public class Registrazione extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerRegistrazione.setStopMostraPasswordTT(false);
-				controllerRegistrazione.mostraMostraPasswordTT(lblMostraRipetiPasswordTT);
+				controllerRegistrazione.mostraTT(lblMostraRipetiPasswordTT, controllerRegistrazione.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
+
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerRegistrazione.setStopMostraPasswordTT(true);
-				controllerRegistrazione.chiudiMostraPasswordTT(lblMostraRipetiPasswordTT);
+				controllerRegistrazione.chiudiTT(lblMostraRipetiPasswordTT, controllerRegistrazione.isStopMostraPasswordTT());
 			}
 		});
 		lblMostraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -414,12 +415,12 @@ public class Registrazione extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerRegistrazione.setStopCensuraPasswordTT(false);
-				controllerRegistrazione.mostraCensuraPasswordTT(lblCensuraRipetiPasswordTT);
+				controllerRegistrazione.mostraTT(lblCensuraRipetiPasswordTT, controllerRegistrazione.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerRegistrazione.setStopCensuraPasswordTT(true);
-				controllerRegistrazione.chiudiCensuraPasswordTT(lblCensuraRipetiPasswordTT);
+				controllerRegistrazione.chiudiTT(lblCensuraRipetiPasswordTT, controllerRegistrazione.isStopCensuraPasswordTT());
 			}
 		});
 		lblCensuraRipetiPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -196,13 +196,13 @@ public class Accesso extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerAccesso.setStopMostraPasswordTT(false);
-				controllerAccesso.mostraMostraPasswordTT(lblMostraPasswordTT);
+				controllerAccesso.mostraTT(lblMostraPasswordTT, controllerAccesso.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerAccesso.setStopMostraPasswordTT(true);
-				controllerAccesso.chiudiMostraPasswordTT(lblMostraPasswordTT);
+				controllerAccesso.chiudiTT(lblMostraPasswordTT, controllerAccesso.isStopMostraPasswordTT());
 
 			}
 		});
@@ -224,13 +224,13 @@ public class Accesso extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerAccesso.setStopCensuraPasswordTT(false);
-				controllerAccesso.mostraCensuraPasswordTT(lblCensuraPasswordTT);
+				controllerAccesso.mostraTT(lblCensuraPasswordTT, controllerAccesso.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerAccesso.setStopCensuraPasswordTT(true);
-				controllerAccesso.chiudiCensuraPasswordTT(lblCensuraPasswordTT);
+				controllerAccesso.chiudiTT(lblCensuraPasswordTT, controllerAccesso.isStopCensuraPasswordTT());
 			}
 		});
 		lblCensuraPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

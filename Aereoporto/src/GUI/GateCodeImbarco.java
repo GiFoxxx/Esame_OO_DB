@@ -469,6 +469,8 @@ public class GateCodeImbarco extends JPanel {
 				txtCodiceGate.setText(map.get(comboBoxNumeroPorta.getSelectedItem().toString()));
 			}
 		});
+		comboBoxNumeroPorta.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
+		comboBoxNumeroPorta.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		comboBoxNumeroPorta.setBounds(145, 442, 45, 20);
 		add(comboBoxNumeroPorta);
 
@@ -493,6 +495,8 @@ public class GateCodeImbarco extends JPanel {
 				txtCodaDiImbarco.setText(map.get(comboBoxCodaDiImbarco.getSelectedItem().toString()));
 			}
 		});
+		comboBoxCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
+		comboBoxCodaDiImbarco.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		comboBoxCodaDiImbarco.setBounds(145, 473, 133, 20);
 		add(comboBoxCodaDiImbarco);
 

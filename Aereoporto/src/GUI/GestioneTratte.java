@@ -431,6 +431,8 @@ public class GestioneTratte extends JPanel {
                 }
             }
         });
+		comboBoxNomeCompagniaAerea.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
+		comboBoxNomeCompagniaAerea.setFont(controllerGestioneTratte.fontScritteGestioni);
 		comboBoxNomeCompagniaAerea.setBounds(176, 485, 75, 20);
 		add(comboBoxNomeCompagniaAerea);
 		
