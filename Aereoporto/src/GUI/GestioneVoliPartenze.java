@@ -500,21 +500,21 @@ public class GestioneVoliPartenze extends JPanel {
 		txtCodiceVoloPartenze.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		txtCodiceVoloPartenze.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		txtCodiceVoloPartenze.setColumns(10);
-		txtCodiceVoloPartenze.setBounds(156, 438, 75, 20);
+		txtCodiceVoloPartenze.setBounds(176, 438, 75, 20);
 		add(txtCodiceVoloPartenze);
 
 		lblCodiceVoloPartenze = new JLabel("Codice Volo Partenze");
 		lblCodiceVoloPartenze.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceVoloPartenze.setFont(controllerGestioneVoliPartenze.fontLabel);
 		lblCodiceVoloPartenze.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
-		lblCodiceVoloPartenze.setBounds(30, 438, 116, 20);
+		lblCodiceVoloPartenze.setBounds(30, 438, 136, 20);
 		add(lblCodiceVoloPartenze);
 
 		lblDataPartenza = new JLabel("Data Partenza");
 		lblDataPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDataPartenza.setFont(controllerGestioneVoliPartenze.fontLabel);
 		lblDataPartenza.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
-		lblDataPartenza.setBounds(287, 438, 125, 20);
+		lblDataPartenza.setBounds(331, 438, 125, 20);
 		add(lblDataPartenza);
 
 		dateDataPartenza = new JDateChooser();
@@ -530,14 +530,14 @@ public class GestioneVoliPartenze extends JPanel {
 		dateDataPartenza.setDateFormatString("dd/MM/yyyy");
 		dateDataPartenza.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		dateDataPartenza.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
-		dateDataPartenza.setBounds(422, 438, 133, 20);
+		dateDataPartenza.setBounds(466, 438, 133, 20);
 		add(dateDataPartenza);
 
 		lblOrarioPartenza = new JLabel("Orario Partenza");
 		lblOrarioPartenza.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblOrarioPartenza.setFont(controllerGestioneVoliPartenze.fontLabel);
 		lblOrarioPartenza.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
-		lblOrarioPartenza.setBounds(287, 469, 125, 20);
+		lblOrarioPartenza.setBounds(331, 469, 125, 20);
 		add(lblOrarioPartenza);
 
 		txtOraPartenza = new JTextField();
@@ -553,7 +553,7 @@ public class GestioneVoliPartenze extends JPanel {
 		txtOraPartenza.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		txtOraPartenza.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		txtOraPartenza.setColumns(10);
-		txtOraPartenza.setBounds(422, 469, 30, 20);
+		txtOraPartenza.setBounds(466, 469, 30, 20);
 		add(txtOraPartenza);
 
 		txtMinutoPartenza = new JTextField();
@@ -569,21 +569,21 @@ public class GestioneVoliPartenze extends JPanel {
 		txtMinutoPartenza.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		txtMinutoPartenza.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		txtMinutoPartenza.setColumns(10);
-		txtMinutoPartenza.setBounds(482, 469, 30, 20);
+		txtMinutoPartenza.setBounds(526, 469, 30, 20);
 		add(txtMinutoPartenza);
 
 		lblDuePuntiPartenza = new JLabel(":");
 		lblDuePuntiPartenza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDuePuntiPartenza.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
 		lblDuePuntiPartenza.setFont(controllerGestioneVoliPartenze.fontLabel);
-		lblDuePuntiPartenza.setBounds(462, 471, 10, 14);
+		lblDuePuntiPartenza.setBounds(506, 471, 10, 14);
 		add(lblDuePuntiPartenza);
 
 		lblNumeroPrenotazioni = new JLabel("Numero Prenotazioni");
 		lblNumeroPrenotazioni.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNumeroPrenotazioni.setFont(controllerGestioneVoliPartenze.fontLabel);
 		lblNumeroPrenotazioni.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
-		lblNumeroPrenotazioni.setBounds(587, 438, 121, 20);
+		lblNumeroPrenotazioni.setBounds(623, 438, 121, 20);
 		add(lblNumeroPrenotazioni);
 
 		txtNumeroPrenotazioni = new JTextField();
@@ -599,14 +599,14 @@ public class GestioneVoliPartenze extends JPanel {
 		txtNumeroPrenotazioni.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		txtNumeroPrenotazioni.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		txtNumeroPrenotazioni.setColumns(10);
-		txtNumeroPrenotazioni.setBounds(718, 438, 45, 20);
+		txtNumeroPrenotazioni.setBounds(754, 438, 45, 20);
 		add(txtNumeroPrenotazioni);
 
 		lblCodiceTratta = new JLabel("Codice Tratta");
 		lblCodiceTratta.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceTratta.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
 		lblCodiceTratta.setFont(controllerGestioneVoliPartenze.fontLabel);
-		lblCodiceTratta.setBounds(30, 500, 116, 20);
+		lblCodiceTratta.setBounds(50, 500, 116, 20);
 		add(lblCodiceTratta);
 
 		txtCodiceTratta = new JTextField();
@@ -622,7 +622,7 @@ public class GestioneVoliPartenze extends JPanel {
 		lblGate.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblGate.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
 		lblGate.setFont(controllerGestioneVoliPartenze.fontLabel);
-		lblGate.setBounds(30, 469, 116, 20);
+		lblGate.setBounds(50, 469, 116, 20);
 		add(lblGate);
 
 		txtCodiceGate = new JTextField();
@@ -651,9 +651,14 @@ public class GestioneVoliPartenze extends JPanel {
 				}
 			}
 		});
+<<<<<<< HEAD
 		comboBoxNumeroPorta.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		comboBoxNumeroPorta.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		comboBoxNumeroPorta.setBounds(156, 469, 45, 20);
+=======
+
+		comboBoxNumeroPorta.setBounds(178, 469, 45, 20);
+>>>>>>> branch 'master' of https://github.com/GiFoxxx/Esame_OO_DB.git
 		add(comboBoxNumeroPorta);
 
 		comboBoxCittaArrivo = new JComboBox<String>();
@@ -673,9 +678,13 @@ public class GestioneVoliPartenze extends JPanel {
 				}
 			}
 		});
+<<<<<<< HEAD
 		comboBoxCittaArrivo.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		comboBoxCittaArrivo.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		comboBoxCittaArrivo.setBounds(156, 500, 75, 20);
+=======
+		comboBoxCittaArrivo.setBounds(176, 500, 75, 20);
+>>>>>>> branch 'master' of https://github.com/GiFoxxx/Esame_OO_DB.git
 		add(comboBoxCittaArrivo);
 
 		lblAggiungi = new JLabel("");
@@ -864,7 +873,7 @@ public class GestioneVoliPartenze extends JPanel {
 		lblStatus.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblStatus.setFont(controllerGestioneVoliPartenze.fontLabel);
 		lblStatus.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
-		lblStatus.setBounds(587, 469, 121, 20);
+		lblStatus.setBounds(623, 469, 121, 20);
 		add(lblStatus);
 
 		txtStatus = new JTextField();
@@ -907,16 +916,20 @@ public class GestioneVoliPartenze extends JPanel {
 		comboBoxStatus.addItem("In preparazione");
 		comboBoxStatus.addItem("In partenza");
 		comboBoxStatus.addItem("In ritardo");
+<<<<<<< HEAD
 		comboBoxStatus.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		comboBoxStatus.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		comboBoxStatus.setBounds(718, 469, 133, 20);
+=======
+		comboBoxStatus.setBounds(754, 469, 133, 20);
+>>>>>>> branch 'master' of https://github.com/GiFoxxx/Esame_OO_DB.git
 		add(comboBoxStatus);
 
 		lblTempoDiImbarcoEffettivo = new JLabel("Tempo Di Imbarco Effettivo");
 		lblTempoDiImbarcoEffettivo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTempoDiImbarcoEffettivo.setForeground(controllerGestioneVoliPartenze.coloreScritteTemaScuro);
 		lblTempoDiImbarcoEffettivo.setFont(controllerGestioneVoliPartenze.fontLabel);
-		lblTempoDiImbarcoEffettivo.setBounds(271, 500, 141, 20);
+		lblTempoDiImbarcoEffettivo.setBounds(296, 500, 160, 20);
 		add(lblTempoDiImbarcoEffettivo);
 
 		txtTempoDiImbarcoEffettivo = new JTextField();
@@ -924,7 +937,7 @@ public class GestioneVoliPartenze extends JPanel {
 		txtTempoDiImbarcoEffettivo.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		txtTempoDiImbarcoEffettivo.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		txtTempoDiImbarcoEffettivo.setColumns(10);
-		txtTempoDiImbarcoEffettivo.setBounds(422, 500, 45, 20);
+		txtTempoDiImbarcoEffettivo.setBounds(466, 500, 45, 20);
 		add(txtTempoDiImbarcoEffettivo);
 
 		stampaComboBoxNumeroPorta();

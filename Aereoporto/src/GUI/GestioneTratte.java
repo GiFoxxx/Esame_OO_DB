@@ -332,14 +332,14 @@ public class GestioneTratte extends JPanel {
 		txtCodiceTratta.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCodiceTratta.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCodiceTratta.setColumns(10);
-		txtCodiceTratta.setBounds(176, 445, 75, 20);
+		txtCodiceTratta.setBounds(187, 445, 75, 20);
 		add(txtCodiceTratta);
 
 		lblCodiceTratta = new JLabel("Codice Tratta");
 		lblCodiceTratta.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodiceTratta.setFont(controllerGestioneTratte.fontLabel);
 		lblCodiceTratta.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblCodiceTratta.setBounds(25, 445, 141, 20);
+		lblCodiceTratta.setBounds(25, 445, 152, 20);
 		add(lblCodiceTratta);
 
 		lblCittaPartenza = new JLabel("Citta Partenza");
@@ -394,7 +394,7 @@ public class GestioneTratte extends JPanel {
 		lblCompagniaAerea.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCompagniaAerea.setFont(controllerGestioneTratte.fontLabel);
 		lblCompagniaAerea.setForeground(controllerGestioneTratte.coloreScritteTemaScuro);
-		lblCompagniaAerea.setBounds(25, 485, 141, 20);
+		lblCompagniaAerea.setBounds(25, 485, 152, 20);
 		add(lblCompagniaAerea);
 
 		txtCodiceCompagniaAerea = new JTextField();
@@ -431,9 +431,13 @@ public class GestioneTratte extends JPanel {
                 }
             }
         });
+<<<<<<< HEAD
 		comboBoxNomeCompagniaAerea.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		comboBoxNomeCompagniaAerea.setFont(controllerGestioneTratte.fontScritteGestioni);
 		comboBoxNomeCompagniaAerea.setBounds(176, 485, 75, 20);
+=======
+		comboBoxNomeCompagniaAerea.setBounds(187, 485, 75, 20);
+>>>>>>> branch 'master' of https://github.com/GiFoxxx/Esame_OO_DB.git
 		add(comboBoxNomeCompagniaAerea);
 		
 		lblAggiungi = new JLabel("");

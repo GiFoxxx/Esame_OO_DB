@@ -181,7 +181,7 @@ public class Uscita extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita2TemaChiaro(), img.annullaUscita2());
+					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita1TemaChiaro(), img.annullaUscita1());
 				}
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
@@ -214,7 +214,7 @@ public class Uscita extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerUscita.cambioImmagineTema(lblSi, img.si2TemaChiaro(), img.si2());
+					controllerUscita.cambioImmagineTema(lblSi, img.si1TemaChiaro(), img.si1());
 				}
 			});
 			lblSi.setHorizontalAlignment(SwingConstants.CENTER);

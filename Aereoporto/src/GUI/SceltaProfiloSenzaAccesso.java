@@ -226,8 +226,8 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi2TemaChiaro(),
-							img.accedi2());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblAccedi, img.accedi1TemaChiaro(),
+							img.accedi1());
 				}
 			});
 			lblAccedi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -268,8 +268,8 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati2TemaChiaro(),
-							img.registrati2());
+					controllerSceltaProfiloSenzaAccesso.cambioImmagineTema(lblRegistrati, img.registrati1TemaChiaro(),
+							img.registrati1());
 
 				}
 			});

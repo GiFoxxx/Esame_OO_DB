@@ -126,7 +126,7 @@ public class SceltaVolo extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaVolo.cambioImmagineTema(lblAnnulla, img.annulla2TemaChiaro(), img.annulla2());
+					controllerSceltaVolo.cambioImmagineTema(lblAnnulla, img.annulla1TemaChiaro(), img.annulla1());
 				}
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
@@ -158,7 +158,7 @@ public class SceltaVolo extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaVolo.cambioImmagineTema(lblPartenze, img.partenze2TemaChiaro(), img.partenze2());
+					controllerSceltaVolo.cambioImmagineTema(lblPartenze, img.partenze1TemaChiaro(), img.partenze1());
 				}
 			});
 			lblPartenze.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
