@@ -651,14 +651,9 @@ public class GestioneVoliPartenze extends JPanel {
 				}
 			}
 		});
-<<<<<<< HEAD
 		comboBoxNumeroPorta.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		comboBoxNumeroPorta.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
-		comboBoxNumeroPorta.setBounds(156, 469, 45, 20);
-=======
-
 		comboBoxNumeroPorta.setBounds(178, 469, 45, 20);
->>>>>>> branch 'master' of https://github.com/GiFoxxx/Esame_OO_DB.git
 		add(comboBoxNumeroPorta);
 
 		comboBoxCittaArrivo = new JComboBox<String>();
@@ -678,13 +673,9 @@ public class GestioneVoliPartenze extends JPanel {
 				}
 			}
 		});
-<<<<<<< HEAD
 		comboBoxCittaArrivo.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		comboBoxCittaArrivo.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
-		comboBoxCittaArrivo.setBounds(156, 500, 75, 20);
-=======
 		comboBoxCittaArrivo.setBounds(176, 500, 75, 20);
->>>>>>> branch 'master' of https://github.com/GiFoxxx/Esame_OO_DB.git
 		add(comboBoxCittaArrivo);
 
 		lblAggiungi = new JLabel("");
@@ -916,13 +907,9 @@ public class GestioneVoliPartenze extends JPanel {
 		comboBoxStatus.addItem("In preparazione");
 		comboBoxStatus.addItem("In partenza");
 		comboBoxStatus.addItem("In ritardo");
-<<<<<<< HEAD
 		comboBoxStatus.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		comboBoxStatus.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
-		comboBoxStatus.setBounds(718, 469, 133, 20);
-=======
 		comboBoxStatus.setBounds(754, 469, 133, 20);
->>>>>>> branch 'master' of https://github.com/GiFoxxx/Esame_OO_DB.git
 		add(comboBoxStatus);
 
 		lblTempoDiImbarcoEffettivo = new JLabel("Tempo Di Imbarco Effettivo");

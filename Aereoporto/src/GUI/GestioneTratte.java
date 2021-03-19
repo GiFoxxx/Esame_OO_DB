@@ -431,13 +431,9 @@ public class GestioneTratte extends JPanel {
                 }
             }
         });
-<<<<<<< HEAD
 		comboBoxNomeCompagniaAerea.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		comboBoxNomeCompagniaAerea.setFont(controllerGestioneTratte.fontScritteGestioni);
-		comboBoxNomeCompagniaAerea.setBounds(176, 485, 75, 20);
-=======
 		comboBoxNomeCompagniaAerea.setBounds(187, 485, 75, 20);
->>>>>>> branch 'master' of https://github.com/GiFoxxx/Esame_OO_DB.git
 		add(comboBoxNomeCompagniaAerea);
 		
 		lblAggiungi = new JLabel("");
