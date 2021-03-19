@@ -188,7 +188,7 @@ public class Recensione extends JPanel {
 		});
 		lblInviaRecensione.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInviaRecensione.setIcon(new ImageIcon(img.inviaRecensione1()));
-		lblInviaRecensione.setBounds(334, 576, 319, 36);
+		lblInviaRecensione.setBounds(386, 576, 319, 36);
 		add(lblInviaRecensione);
 
 		lblStella1 = new JLabel("");

@@ -154,7 +154,7 @@ public class SceltaGate extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblAnnulla, img.annulla2TemaChiaro(), img.annulla2());
+					controllerSceltaGate.cambioImmagineTema(lblAnnulla, img.annulla1TemaChiaro(), img.annulla1());
 
 				}
 			});
@@ -190,7 +190,7 @@ public class SceltaGate extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblGate, img.gateScelta2TemaChiaro(), img.gateScelta2());
+					controllerSceltaGate.cambioImmagineTema(lblGate, img.gateScelta1TemaChiaro(), img.gateScelta1());
 
 				}
 			});
@@ -227,7 +227,7 @@ public class SceltaGate extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco2TemaChiaro(), img.codeDiImbarco2());
+					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco1TemaChiaro(), img.codeDiImbarco1());
 
 				}
 			});
@@ -261,7 +261,7 @@ public class SceltaGate extends JDialog {
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate2TemaChiaro(), img.utilizzoGate2());
+					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate1TemaChiaro(), img.utilizzoGate1());
 				}
 			});
 			lblTempisticheGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
