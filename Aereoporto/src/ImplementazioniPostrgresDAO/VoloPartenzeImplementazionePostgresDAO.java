@@ -20,7 +20,7 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 
 	private String statusScrittoImbarco;
 
-	private PreparedStatement stampaVoloPartenzePS, inserisciVoloPartenzaPS, eliminaVoloPartenzaPS,
+	private PreparedStatement stampaVoloPartenzePS, stampaRegistroVoloPartenzePS, inserisciVoloPartenzaPS, eliminaVoloPartenzaPS,
 			modificaVoloPartenzePS, modificaStatusVoloPartenzePS, selezioneTempiImbarcoPerVoloModificatoPS;
 
 	public VoloPartenzeImplementazionePostgresDAO(Connection connection) throws SQLException {
@@ -28,7 +28,10 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 				"SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.dataOrariopartenza, (vp.dataOrarioPartenza - gt.tempodiimbarcostimato - gt.tempochiusuragate) AS aperturagate, (vp.dataOrarioPartenza - gt.tempochiusuragate) AS chiusuragate, vp.numeroprenotazioni, vp.statusImbarco, vp.statusVolo, vp.tempoDiImbarcoEffettivo, gt.tempoDiImbarcoStimato\r\n"
 						+ "FROM (((volopartenza AS vp INNER JOIN tratta AS tr ON (xcodiceTratta = codiceTratta)) INNER JOIN compagniaAerea AS ca ON (xcodiceCompagniaAerea = codiceCompagniaAerea)) INNER JOIN gate AS gt ON (xcodicegate = codiceGate))\r\n"
 						+ "WHERE dataOrariopartenza>NOW() ORDER BY dataOrariopartenza; ");
-
+		stampaRegistroVoloPartenzePS = connection.prepareStatement(
+				"SELECT vp.codiceVoloPartenza, ca.nome AS nomecompagniaaerea, gt.numeroporta, tr.cittaarrivo, vp.dataOrariopartenza, (vp.dataOrarioPartenza - gt.tempodiimbarcostimato - gt.tempochiusuragate) AS aperturagate, (vp.dataOrarioPartenza - gt.tempochiusuragate) AS chiusuragate, vp.numeroprenotazioni, vp.statusImbarco, vp.statusVolo, vp.tempoDiImbarcoEffettivo, gt.tempoDiImbarcoStimato\r\n"
+						+ "FROM (((volopartenza AS vp INNER JOIN tratta AS tr ON (xcodiceTratta = codiceTratta)) INNER JOIN compagniaAerea AS ca ON (xcodiceCompagniaAerea = codiceCompagniaAerea)) INNER JOIN gate AS gt ON (xcodicegate = codiceGate))\r\n"
+						+ "WHERE dataOrariopartenza<NOW() ORDER BY dataOrariopartenza; ");
 		inserisciVoloPartenzaPS = connection.prepareStatement(
 				"INSERT INTO voloPartenza (codiceVoloPartenza, dataOrarioPartenza, numeroPrenotazioni, tempoDiImbarcoEffettivo, statusVolo, statusImbarco, xcodiceGate, xcodiceTratta) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 		eliminaVoloPartenzaPS = connection.prepareStatement("DELETE FROM voloPartenza WHERE codiceVoloPartenza = ?");
@@ -43,6 +46,43 @@ public class VoloPartenzeImplementazionePostgresDAO implements VoloPartenzeDAO {
 
 	public List<VoloPartenze> stampaVoliPartenze() throws SQLException {
 		ResultSet rs = stampaVoloPartenzePS.executeQuery();
+		List<VoloPartenze> lista = new ArrayList<VoloPartenze>();
+		while (rs.next()) {
+			VoloPartenze vp = new VoloPartenze();
+			CompagniaAerea compAerea = new CompagniaAerea();
+			Gate gt = new Gate();
+			Tratta trt = new Tratta();
+
+			Time tempoImbarcoStimato = rs.getTime("tempoDiImbarcoStimato");
+			Time tempoImbarcoEffettivo = rs.getTime("tempoDiImbarcoEffettivo");
+
+			if (tempoImbarcoEffettivo.before(tempoImbarcoStimato)) {
+				statusScrittoImbarco = "In orario";
+			} else {
+				statusScrittoImbarco = "In ritardo";
+			}
+
+			vp.setCodiceVoloPartenze(rs.getString("codiceVoloPartenza"));
+			compAerea.setNome(rs.getString("nomecompagniaaerea"));
+			vp.setCompAerea(compAerea);
+			gt.setNumeroPorta(rs.getString("numeroporta"));
+			vp.setGt(gt);
+			trt.setCittaArrivo(rs.getString("cittaarrivo"));
+			vp.setTrt(trt);
+			vp.setDataOrarioPartenza(rs.getTimestamp("dataOrariopartenza"));
+			vp.setAperturaGate(rs.getTime("aperturaGate"));
+			vp.setChiusuraGate(rs.getTime("chiusuraGate"));
+			vp.setNumeroPrenotazioni(rs.getString("numeroprenotazioni"));
+			vp.setStatusImbarco(statusScrittoImbarco);
+			vp.setStatusVolo(rs.getString("statusVolo"));
+			lista.add(vp);
+		}
+		rs.close();
+		return lista;
+	}
+	
+	public List<VoloPartenze> stampaRegistroVoliPartenze() throws SQLException {
+		ResultSet rs = stampaRegistroVoloPartenzePS.executeQuery();
 		List<VoloPartenze> lista = new ArrayList<VoloPartenze>();
 		while (rs.next()) {
 			VoloPartenze vp = new VoloPartenze();

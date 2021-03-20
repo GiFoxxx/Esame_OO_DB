@@ -17,7 +17,7 @@ public interface CodaDiImbarcoDAO {
 	
 	public int modificaCodaDiImbarco(CodaDiImbarco cdi) throws SQLException;
 
-	HashMap<String, String> stampaCodaDiImbarcoInComboBox() throws SQLException;
+	public HashMap<String, String> stampaCodaDiImbarcoInComboBox() throws SQLException;
 
 	
 	

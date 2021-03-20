@@ -77,7 +77,7 @@ public class Controller {
 	public Color trasparente = new Color(0, 0, 0, 0);
 	public Color coloreScrittaErrore = new Color(35, 39, 42);
 	public Color coloreScrittaErroreInMenuInfo = new Color(201, 22, 22);
-	public Color temaNC = new Color(0, 0, 0, 30);
+	public Color temaNC = new Color(0, 0, 0, 50);
 
 	// FONT TESTI
 	public Font fontScritte = new Font("Arial", Font.PLAIN, 18);
@@ -94,7 +94,7 @@ public class Controller {
 	public String erroreAccessoEseguirePrimaLogout = "Devi effettuare il logout se vuoi accedere con altre credenziali.";
 	public String erroreRegistrazioneFormatoSbagliato = "Formato email inserito non valido!"
 			+ " Inserire l'email dal formato tipo: exp@example.com";
-	public String erroreRegistrazioneEmailEsistente = "Email gi\u00E0  esistente";
+	public String erroreRegistrazioneEmailEsistente = "Email gi\u00E0ï¿½ esistente";
 	public String errorePasswordsNonCorrispondenti = "Le passwords non corrispondono";
 	public String erroreRegistrazioneLoginGiaEffettuato = "Effettuare il logout prima della registrazione";
 	public String erroreCampiVuoti = "Riempire tutti i campi per continuare";
@@ -128,6 +128,7 @@ public class Controller {
 	private Registrazione registrazione;
 	private Profilo profilo;
 	private GestioneVoliPartenze gestioneVoliPartenze;
+	private RegistroVoliPartenze registroVoliPartenze;
 	private GestioneVoliArrivi gestioneVoliArrivi;
 	private GestioneUtenti gestioneUtenti;
 	private GestioneCompagnieAeree gestioneCompagnieAeree;
@@ -364,6 +365,14 @@ public class Controller {
 		this.gestioneVoliPartenze = gestioneVoliPartenze;
 	}
 
+	public RegistroVoliPartenze getRegistroVoliPartenze() {
+		return registroVoliPartenze;
+	}
+
+	public void setRegistroVoliPartenze(RegistroVoliPartenze registroVoliPartenze) {
+		this.registroVoliPartenze = registroVoliPartenze;
+	}
+
 	public GestioneVoliArrivi getGestioneVoliArrivi() {
 		return gestioneVoliArrivi;
 	}
@@ -510,6 +519,7 @@ public class Controller {
 		gateCodeImbarco = new GateCodeImbarco(this);
 		utilizzoGate = new UtilizzoGate(this);
 		gestioneVoliPartenze = new GestioneVoliPartenze(this);
+		registroVoliPartenze = new RegistroVoliPartenze(this);
 		gestioneVoliArrivi = new GestioneVoliArrivi(this);
 		cambioPassword = new CambioPassword(this);
 		sceltaProfiloSenzaAccesso = new SceltaProfiloSenzaAccesso(this);
@@ -525,7 +535,6 @@ public class Controller {
 	public void svuotaCampiAccesso() {
 		((Accesso) getDashboard().getAccesso()).getTxtEmail().setText("");
 		((Accesso) getDashboard().getAccesso()).getTxtPassword().setText("");
-
 	}
 
 	public void controlloAccessoGiaEseguito() {
@@ -2062,6 +2071,11 @@ public class Controller {
 		return gestioneVoliParternze;
 	}
 
+	public JPanel registroVoliPartenze() {
+		RegistroVoliPartenze registroVoliPartenze = new RegistroVoliPartenze(this);
+		return registroVoliPartenze;
+	}
+
 	public JPanel gestioneVoliArrivi() {
 		GestioneVoliArrivi gestioneVoliArrivi = new GestioneVoliArrivi(this);
 		return gestioneVoliArrivi;
@@ -2130,8 +2144,9 @@ public class Controller {
 		((CambioPassword) getDashboard().getCambioPassword()).getLblMostraRipetiNuovaPassword().setVisible(true);
 		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblIconaErroreEmail().setVisible(false);
 		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMostraNuovaPassword().setVisible(true);
-		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMostraRipetiNuovaPassword().setVisible(true);
-		
+		((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getLblMostraRipetiNuovaPassword()
+				.setVisible(true);
+
 		getDashboard().getHome().setVisible(false);
 		getDashboard().getAccesso().setVisible(false);
 		getDashboard().getRegistrazione().setVisible(false);
@@ -2144,10 +2159,11 @@ public class Controller {
 		getDashboard().getUtilizzoGate().setVisible(false);
 		getDashboard().getGestioneTratte().setVisible(false);
 		getDashboard().getGestioneVoliPartenze().setVisible(false);
+		getDashboard().getRegistroVoliPartenze().setVisible(false);
 		getDashboard().getGestioneVoliArrivi().setVisible(false);
 		getDashboard().getCambioPassword().setVisible(false);
 		getDashboard().getRecensioni().setVisible(false);
-		
+
 		svuotaCampiAccesso();
 		svuotaCampiRegistrazione();
 		svuotaCampiGestioneUtenti();
@@ -2160,7 +2176,7 @@ public class Controller {
 		svuotaCampiGestioneVoloPartenze();
 		svuotaCampiGestioneVoloArrivi();
 		svuotaCampiCambioPassword();
-	
+
 		getDashboard().getNoClick().setBounds(0, 0, 1093, 642);
 		getDashboard().getNoClick().setVisible(false);
 		getDashboard().getMenuInfoAccount().setVisible(false);
@@ -2199,8 +2215,12 @@ public class Controller {
 		getDashboard().getCambioPassword().setVisible(false);
 		getDashboard().getMenuInfoAccount().setVisible(false);
 
-		getDashboard().getNoClick().setVisible(true);
-		getDashboard().getNoClick().setBounds(0, 0, 1093, 642);
+		if (getDashboard().getPosizioneTendina() == 238) {
+			getDashboard().getNoClick().setBounds(185, 0, 908, 642);
+		} else {
+			getDashboard().getNoClick().setVisible(true);
+			getDashboard().getNoClick().setBounds(0, 0, 1093, 642);
+		}
 		getDashboard().getMenuInfoAccount().setVisible(true);
 	}
 
@@ -2826,6 +2846,8 @@ public class Controller {
 			mostraPannelli(getDashboard().getUtilizzoGate());
 		} else if (selezionePannello == 15) {
 			mostraPannelli(getDashboard().getGestioneUtenti());
+		} else if (selezionePannello == 16) {
+			mostraPannelli(getDashboard().getRegistroVoliPartenze());
 		} else {
 			mostraPannelli(getDashboard().getHome());
 		}
@@ -2905,8 +2927,8 @@ public class Controller {
 
 		// MENU INFO ACCOUNT
 		getDashboard().getLblFrecciaMenu().setIcon(new ImageIcon(img.frecciaMenu1TemaChiaro()));
-		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblLayout()
-				.setIcon(new ImageIcon(img.menuTemaChiaro()));
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblFrecciaInAlto()
+				.setIcon(new ImageIcon(img.frecciaInSuTemaChiaro()));
 
 		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).setBackground(trasparente);
 		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblGestioneUtenti().setBackground(sfondoTemaChiaro);
@@ -2989,17 +3011,16 @@ public class Controller {
 		getDashboard().getGestioneTratte().setBackground(sfondoTemaChiaro);
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtBarraRicerca()
 				.setBackground(escoPannelloTemaChiaro);
-		
+
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneTratte) getDashboard().getGestioneTratte()).getComboBoxNomeCompagniaAerea()
-		.setBorder(new LineBorder(bordiTemaChiaro));
-		((GestioneTratte) getDashboard().getGestioneTratte()).getTabella()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().setBorder(new LineBorder(bordiTemaChiaro));
 
 		((GestioneTratte) getDashboard().getGestioneTratte()).getLblCodiceTratta().setForeground(coloreLabelTemaChiaro);
 		((GestioneTratte) getDashboard().getGestioneTratte()).getLblCittaPartenza()
@@ -3037,13 +3058,13 @@ public class Controller {
 		getDashboard().getGestioneCompagnieAeree().setBackground(sfondoTemaChiaro);
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtBarraRicerca()
 				.setBackground(escoPannelloTemaChiaro);
-		
+
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getLblCodiceCompagniaAerea()
 				.setForeground(coloreLabelTemaChiaro);
@@ -3082,6 +3103,18 @@ public class Controller {
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblPassword().setForeground(coloreLabelTemaChiaro);
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtBarraRicerca()
 				.setForeground(coloreScritteTemaChiaro);
+
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().setForeground(coloreScritteTemaChiaro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().setForeground(coloreScritteTemaChiaro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().setForeground(coloreScritteTemaChiaro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().setForeground(coloreScritteTemaChiaro);
+
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().setBorder(new LineBorder(bordiTemaChiaro));
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome()
+				.setBorder(new LineBorder(bordiTemaChiaro));
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().setBorder(new LineBorder(bordiTemaChiaro));
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword()
+				.setBorder(new LineBorder(bordiTemaChiaro));
 
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblModifica()
 				.setIcon(new ImageIcon(img.modifica1TemaChiaro()));
@@ -3137,28 +3170,27 @@ public class Controller {
 				.setForeground(coloreLabelTemaChiaro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxStatus()
 				.setForeground(coloreLabelTemaChiaro);
-		
+
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxNumeroPorta()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxCittaArrivo()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxStatus()
-		.setBorder(new LineBorder(bordiTemaChiaro));
-	
+				.setBorder(new LineBorder(bordiTemaChiaro));
 
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblModifica()
 				.setIcon(new ImageIcon(img.modifica1TemaChiaro()));
@@ -3168,6 +3200,8 @@ public class Controller {
 				.setIcon(new ImageIcon(img.elimina1TemaChiaro()));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblSvuota()
 				.setIcon(new ImageIcon(img.svuota1TemaChiaro()));
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRegistroVoli()
+				.setIcon(new ImageIcon(img.registroVoli1TemaChiaro()));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblimgfrecciaIndietro()
 				.setIcon(new ImageIcon(img.frecciaIndietro1TemaChiaro()));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblBarraRicerca()
@@ -3178,6 +3212,19 @@ public class Controller {
 				.setBackground(escoPannelloTemaChiaro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRicaricaTabella()
 				.setIcon(new ImageIcon(img.aggiorna1TemaChiaro()));
+
+		// REGISTRO VOLI PARTENZE
+		getDashboard().getRegistroVoliPartenze().setBackground(sfondoTemaChiaro);
+		((RegistroVoliPartenze) getDashboard().getRegistroVoliPartenze()).getLblRicaricaTabella()
+				.setIcon(new ImageIcon(img.aggiorna1TemaChiaro()));
+		((RegistroVoliPartenze) getDashboard().getRegistroVoliPartenze()).getLblimgfrecciaIndietro()
+				.setIcon(new ImageIcon(img.frecciaIndietro1TemaChiaro()));
+		((RegistroVoliPartenze) getDashboard().getRegistroVoliPartenze()).getLblBarraRicerca()
+				.setIcon(new ImageIcon(img.barraRicercaTemaChiaro()));
+		((RegistroVoliPartenze) getDashboard().getRegistroVoliPartenze()).getTxtBarraRicerca()
+				.setBackground(escoPannelloTemaChiaro);
+		((RegistroVoliPartenze) getDashboard().getRegistroVoliPartenze()).getTxtBarraRicerca()
+				.setForeground(coloreScritteTemaChiaro);
 
 		// GESTIONE VOLO ARRIVI
 		getDashboard().getGestioneVoliArrivi().setBackground(sfondoTemaChiaro);
@@ -3205,16 +3252,15 @@ public class Controller {
 				.setForeground(coloreScritteTemaChiaro);
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo()
 				.setForeground(coloreScritteTemaChiaro);
-		
+
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo()
-		.setBorder(new LineBorder(bordiTemaChiaro));
-	
+				.setBorder(new LineBorder(bordiTemaChiaro));
 
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblModifica()
 				.setIcon(new ImageIcon(img.modifica1TemaChiaro()));
@@ -3242,11 +3288,10 @@ public class Controller {
 		((GestioneGate) getDashboard().getGestioneGate()).getLblNumeroPorta().setForeground(coloreLabelTemaChiaro);
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtBarraRicerca().setForeground(coloreScritteTemaChiaro);
 
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta()
-		.setBorder(new LineBorder(bordiTemaChiaro));
-		
+				.setBorder(new LineBorder(bordiTemaChiaro));
+
 		((GestioneGate) getDashboard().getGestioneGate()).getLblRicaricaTabella()
 				.setIcon(new ImageIcon(img.aggiorna1TemaChiaro()));
 		((GestioneGate) getDashboard().getGestioneGate()).getLblModifica()
@@ -3282,17 +3327,17 @@ public class Controller {
 				.setForeground(coloreLabelTemaChiaro);
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtBarraRicerca()
 				.setForeground(coloreScritteTemaChiaro);
-		
+
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxNumeroPorta()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxCodaDiImbarco()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco()
 				.setForeground(coloreScritteTemaChiaro);
@@ -3460,16 +3505,15 @@ public class Controller {
 		((UtilizzoGate) getDashboard().getUtilizzoGate()).getLblNumeroPorta().setForeground(coloreLabelTemaChiaro);
 		((UtilizzoGate) getDashboard().getUtilizzoGate()).getLblCalcolaUtilizzo().setForeground(coloreLabelTemaChiaro);
 
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().setBorder(new LineBorder(bordiTemaChiaro));
 		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtNumeroPorta()
-		.setBorder(new LineBorder(bordiTemaChiaro));
-		
+				.setBorder(new LineBorder(bordiTemaChiaro));
+
 		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtNumeroPorta()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtNumeroPorta()
-		.setBorder(new LineBorder(bordiTemaChiaro));
-		
+				.setBorder(new LineBorder(bordiTemaChiaro));
+
 		((UtilizzoGate) getDashboard().getUtilizzoGate()).getLblimgfrecciaIndietro()
 				.setIcon(new ImageIcon(img.frecciaIndietro1TemaChiaro()));
 		((UtilizzoGate) getDashboard().getUtilizzoGate()).getLblRicaricaTabella()
@@ -3526,7 +3570,8 @@ public class Controller {
 
 		// MENU INFO ACCOUNT
 		getDashboard().getLblFrecciaMenu().setIcon(new ImageIcon(img.frecciaMenu1()));
-		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblLayout().setIcon(new ImageIcon(img.menuTT()));
+		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblFrecciaInAlto()
+				.setIcon(new ImageIcon(img.frecciaInSu()));
 		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblGestioneUtenti()
 				.setBackground(escoPannelloTemaScuro);
 		((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblGestioneUtenti()
@@ -3616,15 +3661,14 @@ public class Controller {
 				.setForeground(coloreScritteTemaScuro);
 
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneTratte) getDashboard().getGestioneTratte()).getComboBoxNomeCompagniaAerea()
-		.setBorder(new LineBorder(bordiTemaScuro));
-		((GestioneTratte) getDashboard().getGestioneTratte()).getTabella()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().setBorder(new LineBorder(bordiTemaScuro));
 
 		((GestioneTratte) getDashboard().getGestioneTratte()).getLblModifica().setIcon(new ImageIcon(img.modifica1()));
 		((GestioneTratte) getDashboard().getGestioneTratte()).getLblAggiungi().setIcon(new ImageIcon(img.aggiungi1()));
@@ -3662,14 +3706,14 @@ public class Controller {
 				.setIcon(new ImageIcon(img.barraRicerca()));
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtBarraRicerca()
 				.setForeground(coloreScritteTemaScuro);
-	
+
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella()
-		.setBorder(new LineBorder(bordiTemaScuro));
-		
+				.setBorder(new LineBorder(bordiTemaScuro));
+
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getLblRicaricaTabella()
 				.setIcon(new ImageIcon(img.aggiorna1()));
 		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtBarraRicerca()
@@ -3687,6 +3731,21 @@ public class Controller {
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().setForeground(coloreScritteTemaScuro);
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().setForeground(coloreScritteTemaScuro);
 
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().setBorder(new LineBorder(bordiTemaScuro));
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().setBorder(new LineBorder(bordiTemaScuro));
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().setBorder(new LineBorder(bordiTemaScuro));
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword()
+				.setBorder(new LineBorder(bordiTemaScuro));
+
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblModifica().setIcon(new ImageIcon(img.modifica1()));
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblElimina().setIcon(new ImageIcon(img.elimina1()));
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblSvuota().setIcon(new ImageIcon(img.svuota1()));
@@ -3696,7 +3755,6 @@ public class Controller {
 				.setIcon(new ImageIcon(img.barraRicerca()));
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtBarraRicerca()
 				.setForeground(coloreScritteTemaScuro);
-
 
 		((GestioneUtenti) getDashboard().getGestioneUtenti()).getLblRicaricaTabella()
 				.setIcon(new ImageIcon(img.aggiorna1()));
@@ -3722,28 +3780,28 @@ public class Controller {
 				.setForeground(coloreScritteTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblStatus()
 				.setForeground(coloreScritteTemaScuro);
-		
+
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni()
-		.setBorder(new LineBorder(bordiTemaScuro));
-		
+				.setBorder(new LineBorder(bordiTemaScuro));
+
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxNumeroPorta()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxCittaArrivo()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxStatus()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
 				.setForeground(coloreScritteSuBiancoTemaScuro);
@@ -3756,15 +3814,13 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni()
 				.setForeground(coloreScritteSuBiancoTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo()
-		.setForeground(coloreScritteSuBiancoTemaScuro);
-		
+				.setForeground(coloreScritteSuBiancoTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxNumeroPorta()
-		.setForeground(coloreScritteSuBiancoTemaScuro);
+				.setForeground(coloreScritteSuBiancoTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxCittaArrivo()
-		.setForeground(coloreScritteSuBiancoTemaScuro);
+				.setForeground(coloreScritteSuBiancoTemaScuro);
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxStatus()
-		.setForeground(coloreScritteSuBiancoTemaScuro);
-		
+				.setForeground(coloreScritteSuBiancoTemaScuro);
 
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblModifica()
 				.setIcon(new ImageIcon(img.modifica1()));
@@ -3774,6 +3830,8 @@ public class Controller {
 				.setIcon(new ImageIcon(img.elimina1()));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblSvuota()
 				.setIcon(new ImageIcon(img.svuota1()));
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRegistroVoli()
+				.setIcon(new ImageIcon(img.registroVoli1()));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblimgfrecciaIndietro()
 				.setIcon(new ImageIcon(img.frecciaIndietro1()));
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblBarraRicerca()
@@ -3786,27 +3844,38 @@ public class Controller {
 		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtBarraRicerca()
 				.setBackground(escoPannelloTemaScuro);
 
+		// REGISTRO VOLI PARTENZE
+		getDashboard().getRegistroVoliPartenze().setBackground(sfondoTemaScuro);
+		((RegistroVoliPartenze) getDashboard().getRegistroVoliPartenze()).getLblRicaricaTabella()
+				.setIcon(new ImageIcon(img.aggiorna1()));
+		((RegistroVoliPartenze) getDashboard().getRegistroVoliPartenze()).getLblimgfrecciaIndietro()
+				.setIcon(new ImageIcon(img.frecciaIndietro1()));
+		((RegistroVoliPartenze) getDashboard().getRegistroVoliPartenze()).getLblBarraRicerca()
+				.setIcon(new ImageIcon(img.barraRicerca()));
+		((RegistroVoliPartenze) getDashboard().getRegistroVoliPartenze()).getTxtBarraRicerca()
+				.setBackground(escoPannelloTemaScuro);
+		((RegistroVoliPartenze) getDashboard().getRegistroVoliPartenze()).getTxtBarraRicerca()
+				.setForeground(coloreScritteTemaScuro);
+
 		// GESTIONE VOLO ARRIVI
 		getDashboard().getGestioneVoliArrivi().setBackground(sfondoTemaScuro);
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblCodiceVoloArrivi()
 				.setForeground(bordiTemaScuro);
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblCittaPartenza()
 				.setForeground(bordiTemaScuro);
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblDataArrivo()
-				.setForeground(bordiTemaScuro);
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblOraArrivo()
-				.setForeground(bordiTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblDataArrivo().setForeground(bordiTemaScuro);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblOraArrivo().setForeground(bordiTemaScuro);
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getLblDuePuntiArrivo()
 				.setForeground(bordiTemaScuro);
-		
+
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo()
-		.setBorder(new LineBorder(bordiTemaChiaro));
+				.setBorder(new LineBorder(bordiTemaChiaro));
 
 		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi()
 				.setForeground(coloreScritteSuBiancoTemaScuro);
@@ -3843,14 +3912,14 @@ public class Controller {
 		getDashboard().getGestioneGate().setBackground(sfondoTemaScuro);
 		((GestioneGate) getDashboard().getGestioneGate()).getLblCodiceGate().setForeground(coloreScritteTemaScuro);
 		((GestioneGate) getDashboard().getGestioneGate()).getLblNumeroPorta().setForeground(coloreScritteTemaScuro);
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setForeground(coloreScritteSuBiancoTemaScuro);
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setForeground(coloreScritteSuBiancoTemaScuro);
-
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setForeground(coloreScritteSuBiancoTemaScuro);
 		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta()
-		.setBorder(new LineBorder(bordiTemaScuro));
-		
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setBorder(new LineBorder(bordiTemaScuro));
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setBorder(new LineBorder(bordiTemaScuro));
+
 		((GestioneGate) getDashboard().getGestioneGate()).getLblModifica().setIcon(new ImageIcon(img.modifica1()));
 		((GestioneGate) getDashboard().getGestioneGate()).getLblAggiungi().setIcon(new ImageIcon(img.aggiungi1()));
 		((GestioneGate) getDashboard().getGestioneGate()).getLblElimina().setIcon(new ImageIcon(img.elimina1()));
@@ -3868,33 +3937,49 @@ public class Controller {
 		// GESTIONE GATE CODA DI IMBARCO
 		getDashboard().getGateCodeImbarco().setBackground(sfondoTemaScuro);
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtBarraRicerca()
-		.setBackground(escoPannelloTemaScuro);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtBarraRicerca().setBackground(escoPannelloTemaScuro);
+				.setBackground(escoPannelloTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtBarraRicerca()
+				.setBackground(escoPannelloTemaScuro);
 
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblCodiceGate().setForeground(coloreScritteTemaScuro);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblCodaImbarco().setForeground(coloreScritteTemaScuro);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblNomeCodaDiImbarco().setForeground(coloreScritteTemaScuro);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblCodiceCodaDiImbarco().setForeground(coloreScritteTemaScuro);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblTempoDiImbarcoStimato().setForeground(coloreScritteTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblCodiceGate()
+				.setForeground(coloreScritteTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblCodaImbarco()
+				.setForeground(coloreScritteTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblNomeCodaDiImbarco()
+				.setForeground(coloreScritteTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblCodiceCodaDiImbarco()
+				.setForeground(coloreScritteTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblTempoDiImbarcoStimato()
+				.setForeground(coloreScritteTemaScuro);
 
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtBarraRicerca().setForeground(coloreScritteTemaScuro);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().setForeground(coloreScritteSuBiancoTemaScuro);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().setForeground(coloreScritteSuBiancoTemaScuro);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().setForeground(coloreScritteSuBiancoTemaScuro);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().setForeground(coloreScritteSuBiancoTemaScuro);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().setForeground(coloreScritteSuBiancoTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtBarraRicerca()
+				.setForeground(coloreScritteTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxNumeroPorta()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxCodaDiImbarco()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
 
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxNumeroPorta()
-		.setBorder(new LineBorder(bordiTemaScuro));
+				.setBorder(new LineBorder(bordiTemaScuro));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxCodaDiImbarco()
-		.setBorder(new LineBorder(bordiTemaScuro));
-		
+				.setBorder(new LineBorder(bordiTemaScuro));
+
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblAggiungiAssociazione()
 				.setIcon(new ImageIcon(img.aggiungi1()));
 		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getLblEliminaAssociazione()
@@ -3936,16 +4021,14 @@ public class Controller {
 		((UtilizzoGate) getDashboard().getUtilizzoGate()).getLblNumeroPorta().setForeground(coloreScritteTemaScuro);
 		((UtilizzoGate) getDashboard().getUtilizzoGate()).getLblSelezionaData().setForeground(coloreScritteTemaScuro);
 		((UtilizzoGate) getDashboard().getUtilizzoGate()).getLblCalcolaUtilizzo().setForeground(coloreScritteTemaScuro);
-		
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate()
-		.setBorder(new LineBorder(bordiTemaScuro));
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtNumeroPorta()
-		.setBorder(new LineBorder(bordiTemaScuro));
-		
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().setForeground(coloreScritteSuBiancoTemaScuro);
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtNumeroPorta().setForeground(coloreScritteSuBiancoTemaScuro);
 
-		
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().setBorder(new LineBorder(bordiTemaScuro));
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtNumeroPorta().setBorder(new LineBorder(bordiTemaScuro));
+
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtNumeroPorta()
+				.setForeground(coloreScritteSuBiancoTemaScuro);
 
 		// RECENSIONE
 		getDashboard().getRecensioni().setBackground(sfondoTemaScuro);

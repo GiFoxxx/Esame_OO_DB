@@ -77,21 +77,14 @@ public class GestioneVoliPartenze extends JPanel {
 	private JLabel lblModifica;
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
+	private JLabel lblRegistroVoli;
 	private JLabel lblRicaricaTabella;
-	private JLabel lblMessaggioErrore;
 
 	private JComboBox<String> comboBoxStatus;
 	private JComboBox<String> comboBoxNumeroPorta;
 	private JComboBox<String> comboBoxCittaArrivo;
 
 	// GETTER E SETTER
-	public JLabel getLblMessaggioErrore() {
-		return lblMessaggioErrore;
-	}
-
-	public void setLblMessaggioErrore(JLabel lblMessaggioErrore) {
-		this.lblMessaggioErrore = lblMessaggioErrore;
-	}
 
 	public DefaultTableModel getModello() {
 		return modello;
@@ -353,6 +346,14 @@ public class GestioneVoliPartenze extends JPanel {
 		this.txtStatus = txtStatus;
 	}
 
+	public JLabel getLblRegistroVoli() {
+		return lblRegistroVoli;
+	}
+
+	public void setLblRegistroVoli(JLabel lblRegistroVoli) {
+		this.lblRegistroVoli = lblRegistroVoli;
+	}
+
 	public JLabel getLblRicaricaTabella() {
 		return lblRicaricaTabella;
 	}
@@ -362,6 +363,7 @@ public class GestioneVoliPartenze extends JPanel {
 	}
 
 	Controller controllerGestioneVoliPartenze;
+	
 
 	public GestioneVoliPartenze(Controller controller) {
 		controllerGestioneVoliPartenze = controller;
@@ -926,6 +928,42 @@ public class GestioneVoliPartenze extends JPanel {
 		txtTempoDiImbarcoEffettivo.setColumns(10);
 		txtTempoDiImbarcoEffettivo.setBounds(466, 500, 45, 20);
 		add(txtTempoDiImbarcoEffettivo);
+		
+		lblRegistroVoli = new JLabel("");
+		lblRegistroVoli.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controllerGestioneVoliPartenze.setPannelloPrecedente(16);
+				controllerGestioneVoliPartenze.mostraPannelli(controllerGestioneVoliPartenze.getDashboard().getRegistroVoliPartenze());
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblRegistroVoli, img.registroVoli2TemaChiaro(),
+						img.registroVoli2());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblRegistroVoli, img.registroVoli1TemaChiaro(),
+						img.registroVoli1());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblRegistroVoli, img.registroVoli3TemaChiaro(),
+						img.registroVoli3());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				controllerGestioneVoliPartenze.cambioImmagineTema(lblRegistroVoli, img.registroVoli1TemaChiaro(),
+						img.registroVoli1());
+			}
+		});
+		lblRegistroVoli.setIcon(new ImageIcon(img.registroVoli1()));
+		lblRegistroVoli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblRegistroVoli.setBounds(795, 47, 25, 30);
+		add(lblRegistroVoli);
 
 		stampaComboBoxNumeroPorta();
 		stampaComboBoxCittaArrivo();

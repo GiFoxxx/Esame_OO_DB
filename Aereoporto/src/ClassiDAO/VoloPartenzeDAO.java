@@ -10,6 +10,8 @@ public interface VoloPartenzeDAO {
 	
 	public List<VoloPartenze> stampaVoliPartenze() throws SQLException;
 	
+	public List<VoloPartenze> stampaRegistroVoliPartenze() throws SQLException;
+	
 	public int inserisciVoloPartenze(VoloPartenze voloPartenze) throws SQLException;
 	
 	public int cancellaVoloPartenze(VoloPartenze voloPartenze) throws SQLException;

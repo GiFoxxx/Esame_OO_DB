@@ -18,15 +18,17 @@ public class MenuInfoAccount extends JPanel {
 	private Immagini img = new Immagini();
 
 	JLabel lblGestioneUtenti;
-	JLabel lblLayout;
 	JLabel lblErrore;
 	JLabel lblLogout;
 	JLabel lblPrestoInArrivo;
+	JLabel lblFrecciaInAlto;
 
 	JPanel panelGestioneUtente;
 	JPanel panelPrestoInArrivo;
 	JPanel panelLogout;
 
+	
+	// GETTER E SETTER
 	public JLabel getLblGestioneUtenti() {
 		return lblGestioneUtenti;
 	}
@@ -35,12 +37,12 @@ public class MenuInfoAccount extends JPanel {
 		this.lblGestioneUtenti = lblGestioneUtenti;
 	}
 
-	public JLabel getLblLayout() {
-		return lblLayout;
+	public JLabel getLblFrecciaInAlto() {
+		return lblFrecciaInAlto;
 	}
 
-	public void setLblLayout(JLabel lblLayout) {
-		this.lblLayout = lblLayout;
+	public void setLblFrecciaInAlto(JLabel lblFrecciaInAlto) {
+		this.lblFrecciaInAlto = lblFrecciaInAlto;
 	}
 
 	public JLabel getLblErrore() {
@@ -81,7 +83,7 @@ public class MenuInfoAccount extends JPanel {
 		controllerMenuInfoAccount = controller;
 
 		setBounds(710, 5, 265, 147);
-		setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
+		setBackground(controllerMenuInfoAccount.trasparente);
 		setLayout(null);
 
 		panelGestioneUtente = new JPanel();
@@ -113,7 +115,7 @@ public class MenuInfoAccount extends JPanel {
 				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 		});
-		panelGestioneUtente.setBackground(controllerMenuInfoAccount.trasparente);
+		panelGestioneUtente.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
 		panelGestioneUtente.setBounds(0, 9, 265, 46);
 		add(panelGestioneUtente);
 		panelGestioneUtente.setLayout(null);
@@ -159,7 +161,7 @@ public class MenuInfoAccount extends JPanel {
 				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 		});
-		panelPrestoInArrivo.setBackground(controllerMenuInfoAccount.trasparente);
+		panelPrestoInArrivo.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
 		panelPrestoInArrivo.setBounds(0, 55, 265, 46);
 		add(panelPrestoInArrivo);
 		panelPrestoInArrivo.setLayout(null);
@@ -198,7 +200,7 @@ public class MenuInfoAccount extends JPanel {
 				controllerMenuInfoAccount.cambioPannelloTema(panelLogout, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 		});
-		panelLogout.setBackground(controllerMenuInfoAccount.trasparente);
+		panelLogout.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
 		panelLogout.setBounds(0, 101, 265, 46);
 		add(panelLogout);
 		panelLogout.setLayout(null);
@@ -209,13 +211,18 @@ public class MenuInfoAccount extends JPanel {
 		lblLogout.setFont(controllerMenuInfoAccount.fontLabel);
 		lblLogout.setBounds(10, 0, 107, 46);
 		panelLogout.add(lblLogout);
+		
+		lblFrecciaInAlto = new JLabel("");
+		lblFrecciaInAlto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		lblFrecciaInAlto.setIcon(new ImageIcon(img.frecciaInSu()));
+		lblFrecciaInAlto.setBounds(224, 0, 15, 10);
+		add(lblFrecciaInAlto);
 
-		lblLayout = new JLabel("");
-		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLayout.setIcon(new ImageIcon(img.menu()));
-
-		lblLayout.setBounds(0, 0, 265, 147);
-		add(lblLayout);
 
 	}
 

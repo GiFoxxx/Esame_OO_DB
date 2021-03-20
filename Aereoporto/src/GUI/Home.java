@@ -58,7 +58,7 @@ public class Home extends JPanel {
 	public Home(Controller controller) {
 		controllerHome = controller;
 
-		setBounds(0, 0, 1090, 642);
+		setBounds(0, 0, 1093, 642);
 		setBackground(controllerHome.sfondoTemaScuro);
 		setLayout(null);
 

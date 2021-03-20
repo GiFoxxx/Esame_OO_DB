@@ -87,6 +87,7 @@ public class Dashboard extends JFrame {
 	private JPanel gestioneUtenti;
 	private JPanel gestioneCompagnieAeree;
 	private JPanel gestioneVoliPartenze;
+	private JPanel registroVoliPartenze;
 	private JPanel gestioneVoliArrivi;
 	private JPanel gestioneGate;
 	private JPanel gateCodeImbarco;
@@ -441,7 +442,7 @@ public class Dashboard extends JFrame {
 	public void setGateCodeImbarco(JPanel gateCodeImbarco) {
 		this.gateCodeImbarco = gateCodeImbarco;
 	}
-	
+
 	public JPanel getUtilizzoGate() {
 		return utilizzoGate;
 	}
@@ -464,6 +465,14 @@ public class Dashboard extends JFrame {
 
 	public void setGestioneVoliPartenze(JPanel gestioneVoliPartenze) {
 		this.gestioneVoliPartenze = gestioneVoliPartenze;
+	}
+
+	public JPanel getRegistroVoliPartenze() {
+		return registroVoliPartenze;
+	}
+
+	public void setRegistroVoliPartenze(JPanel registroVoliPartenze) {
+		this.registroVoliPartenze = registroVoliPartenze;
 	}
 
 	public JPanel getGestioneTratte() {
@@ -701,6 +710,7 @@ public class Dashboard extends JFrame {
 		utilizzoGate = controllerDashboard.utilizzoGate();
 		gestioneTratte = controllerDashboard.gestioneTratte();
 		gestioneVoliPartenze = controllerDashboard.gestioneVoliPartenze();
+		registroVoliPartenze = controllerDashboard.registroVoliPartenze();
 		gestioneVoliArrivi = controllerDashboard.gestioneVoliArrivi();
 		sceltaProfiloSenzaAccesso = controllerDashboard.sceltaProfiloSenzaAccesso();
 		PasswordDimenticata = controllerDashboard.passwordDimenticata();
@@ -731,27 +741,32 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerDashboard.setStopMenuTT(false);
-				controllerDashboard.cambioImmagineTema(lblFrecciaMenu, img.frecciaMenu2TemaChiaro(), img.frecciaMenu2());
+				controllerDashboard.cambioImmagineTema(lblFrecciaMenu, img.frecciaMenu2TemaChiaro(),
+						img.frecciaMenu2());
 				if (!menuInfoAccount.isVisible()) {
-					controllerDashboard.mostraTT(lblMenuTT, controllerDashboard.isStopMenuTT(), img.menuTTChiaro(), img.menuTT());
+					controllerDashboard.mostraTT(lblMenuTT, controllerDashboard.isStopMenuTT(), img.menuTTChiaro(),
+							img.menuTT());
 				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerDashboard.setStopMenuTT(true);
-				controllerDashboard.cambioImmagineTema(lblFrecciaMenu, img.frecciaMenu1TemaChiaro(), img.frecciaMenu1());
+				controllerDashboard.cambioImmagineTema(lblFrecciaMenu, img.frecciaMenu1TemaChiaro(),
+						img.frecciaMenu1());
 				controllerDashboard.chiudiTT(lblMenuTT, controllerDashboard.isStopMenuTT());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerDashboard.cambioImmagineTema(lblFrecciaMenu, img.frecciaMenu3TemaChiaro(), img.frecciaMenu3());
+				controllerDashboard.cambioImmagineTema(lblFrecciaMenu, img.frecciaMenu3TemaChiaro(),
+						img.frecciaMenu3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerDashboard.cambioImmagineTema(lblFrecciaMenu, img.frecciaMenu1TemaChiaro(), img.frecciaMenu1());
+				controllerDashboard.cambioImmagineTema(lblFrecciaMenu, img.frecciaMenu1TemaChiaro(),
+						img.frecciaMenu1());
 			}
 		});
 		lblFrecciaMenu.setVisible(false);
@@ -825,7 +840,7 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				controllerDashboard.cambioImmagineTema(lblMinimizza, img.minimizza1TemaChiaro(), img.minimizza1());
-				}
+			}
 		});
 
 		lblMinimizza.setHorizontalAlignment(SwingConstants.CENTER);
@@ -847,7 +862,8 @@ public class Dashboard extends JFrame {
 				lblProfiloTT.setBounds(825, 11, 90, 23);
 				controllerDashboard.setStopProfiloTT(false);
 				controllerDashboard.chiudiTuttiTT();
-				controllerDashboard.mostraTT(lblProfiloTT, controllerDashboard.isStopProfiloTT(), img.profiloTTChiaro(), img.profiloTT());
+				controllerDashboard.mostraTT(lblProfiloTT, controllerDashboard.isStopProfiloTT(), img.profiloTTChiaro(),
+						img.profiloTT());
 			}
 
 			@Override
@@ -934,14 +950,17 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (home.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.entroPannelloTemaChiaro, controllerDashboard.entroPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.entroPannelloTemaChiaro,
+							controllerDashboard.entroPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopHomeTT(false);
 					controllerDashboard.chiudiTuttiTT();
-					controllerDashboard.mostraTT(lblHomeTT, controllerDashboard.isStopHomeTT(), img.homeTTChiaro(), img.homeTT());
+					controllerDashboard.mostraTT(lblHomeTT, controllerDashboard.isStopHomeTT(), img.homeTTChiaro(),
+							img.homeTT());
 				}
 
 			}
@@ -950,9 +969,11 @@ public class Dashboard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				controllerDashboard.setStopHomeTT(true);
 				if (home.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.escoPannelloTemaChiaro,
+							controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.chiudiTuttiTT();
@@ -963,18 +984,22 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (home.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.clickPannelloTemaChiaro, controllerDashboard.clickPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.clickPannelloTemaChiaro,
+							controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (home.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelHome, controllerDashboard.escoPannelloTemaChiaro,
+							controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 		});
@@ -1008,14 +1033,17 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (accesso.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.entroPannelloTemaChiaro, controllerDashboard.entroPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.entroPannelloTemaChiaro,
+							controllerDashboard.entroPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopAccediTT(false);
 					controllerDashboard.chiudiTuttiTT();
-					controllerDashboard.mostraTT(lblAccediTT, controllerDashboard.isStopAccediTT(), img.accediTTChiaro(), img.accediTT());
+					controllerDashboard.mostraTT(lblAccediTT, controllerDashboard.isStopAccediTT(),
+							img.accediTTChiaro(), img.accediTT());
 				}
 			}
 
@@ -1023,9 +1051,11 @@ public class Dashboard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				controllerDashboard.setStopAccediTT(true);
 				if (accesso.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.escoPannelloTemaChiaro,
+							controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.chiudiTuttiTT();
@@ -1037,18 +1067,22 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (accesso.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.clickPannelloTemaChiaro, controllerDashboard.clickPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.clickPannelloTemaChiaro,
+							controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (accesso.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelAccedi, controllerDashboard.escoPannelloTemaChiaro,
+							controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 		});
@@ -1083,14 +1117,17 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (registrazione.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelRegistrati,
+							controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.entroPannelloTemaChiaro, controllerDashboard.entroPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.entroPannelloTemaChiaro,
+							controllerDashboard.entroPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopRegistratiTT(false);
 					controllerDashboard.chiudiTuttiTT();
-					controllerDashboard.mostraTT(lblRegistratiTT, controllerDashboard.isStopRegistratiTT(), img.registratiTTChiaro(), img.registratiTT());
+					controllerDashboard.mostraTT(lblRegistratiTT, controllerDashboard.isStopRegistratiTT(),
+							img.registratiTTChiaro(), img.registratiTT());
 
 				}
 			}
@@ -1099,9 +1136,11 @@ public class Dashboard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				controllerDashboard.setStopRegistratiTT(true);
 				if (registrazione.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelRegistrati,
+							controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.escoPannelloTemaChiaro,
+							controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.chiudiTuttiTT();
@@ -1113,18 +1152,22 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (registrazione.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelRegistrati,
+							controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.clickPannelloTemaChiaro, controllerDashboard.clickPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.clickPannelloTemaChiaro,
+							controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (registrazione.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelRegistrati,
+							controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelRegistrati, controllerDashboard.escoPannelloTemaChiaro,
+							controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 		});
@@ -1159,14 +1202,17 @@ public class Dashboard extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				lblProfiloTT.setBounds(10, 365, 90, 23);
 				if (profilo.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.entroPannelloTemaChiaro, controllerDashboard.entroPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.entroPannelloTemaChiaro,
+							controllerDashboard.entroPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopProfiloTT(false);
 					controllerDashboard.chiudiTuttiTT();
-					controllerDashboard.mostraTT(lblProfiloTT, controllerDashboard.isStopProfiloTT(), img.profiloTTChiaro(), img.profiloTT());
+					controllerDashboard.mostraTT(lblProfiloTT, controllerDashboard.isStopProfiloTT(),
+							img.profiloTTChiaro(), img.profiloTT());
 				}
 			}
 
@@ -1174,9 +1220,11 @@ public class Dashboard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				controllerDashboard.setStopProfiloTT(true);
 				if (profilo.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.escoPannelloTemaChiaro,
+							controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.chiudiTuttiTT();
@@ -1187,18 +1235,22 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (profilo.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.clickPannelloTemaChiaro, controllerDashboard.clickPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.clickPannelloTemaChiaro,
+							controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (profilo.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelProfilo, controllerDashboard.escoPannelloTemaChiaro,
+							controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 		});
@@ -1232,14 +1284,17 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (impostazioni.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelImpostazioni, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelImpostazioni,
+							controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelImpostazioni, controllerDashboard.entroPannelloTemaChiaro, controllerDashboard.entroPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelImpostazioni,
+							controllerDashboard.entroPannelloTemaChiaro, controllerDashboard.entroPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopImpostazioniTT(false);
 					controllerDashboard.chiudiTuttiTT();
-					controllerDashboard.mostraTT(lblImpostazioniTT, controllerDashboard.isStopImpostazioniTT(), img.impostazioniTTChiaro(), img.impostazioniTT());
+					controllerDashboard.mostraTT(lblImpostazioniTT, controllerDashboard.isStopImpostazioniTT(),
+							img.impostazioniTTChiaro(), img.impostazioniTT());
 				}
 			}
 
@@ -1247,9 +1302,11 @@ public class Dashboard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				controllerDashboard.setStopImpostazioniTT(true);
 				if (impostazioni.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelImpostazioni, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelImpostazioni,
+							controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelImpostazioni, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelImpostazioni,
+							controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.chiudiTuttiTT();
@@ -1260,18 +1317,22 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (impostazioni.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelImpostazioni, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelImpostazioni,
+							controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelImpostazioni, controllerDashboard.clickPannelloTemaChiaro, controllerDashboard.clickPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelImpostazioni,
+							controllerDashboard.clickPannelloTemaChiaro, controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (impostazioni.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelImpostazioni, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelImpostazioni,
+							controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelImpostazioni, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelImpostazioni,
+							controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 		});
@@ -1305,14 +1366,17 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (uscita.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.entroPannelloTemaChiaro, controllerDashboard.entroPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.entroPannelloTemaChiaro,
+							controllerDashboard.entroPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.setStopEsciTT(false);
 					controllerDashboard.chiudiTuttiTT();
-					controllerDashboard.mostraTT(lblEsciTT, controllerDashboard.isStopEsciTT(), img.esciTTChiaro(), img.esciTT());
+					controllerDashboard.mostraTT(lblEsciTT, controllerDashboard.isStopEsciTT(), img.esciTTChiaro(),
+							img.esciTT());
 				}
 			}
 
@@ -1320,9 +1384,11 @@ public class Dashboard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				controllerDashboard.setStopEsciTT(true);
 				if (uscita.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.escoPannelloTemaChiaro,
+							controllerDashboard.escoPannelloTemaScuro);
 				}
 				if (getPosizioneTendina() == 50) {
 					controllerDashboard.chiudiTuttiTT();
@@ -1333,18 +1399,22 @@ public class Dashboard extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (uscita.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.clickPannelloTemaChiaro, controllerDashboard.clickPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.clickPannelloTemaChiaro,
+							controllerDashboard.clickPannelloTemaScuro);
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (uscita.isVisible()) {
-					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.pannelloSceltoTemaChiaro, controllerDashboard.pannelloSceltoTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.pannelloSceltoTemaChiaro,
+							controllerDashboard.pannelloSceltoTemaScuro);
 				} else {
-					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.escoPannelloTemaChiaro, controllerDashboard.escoPannelloTemaScuro);
+					controllerDashboard.cambioPannelloTema(panelUscita, controllerDashboard.escoPannelloTemaChiaro,
+							controllerDashboard.escoPannelloTemaScuro);
 				}
 			}
 		});
@@ -1380,22 +1450,26 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerDashboard.cambioImmagineTema(lineeChiusura, img.lineeChiusura2TemaChiaro(), img.lineeChiusura2());
+				controllerDashboard.cambioImmagineTema(lineeChiusura, img.lineeChiusura2TemaChiaro(),
+						img.lineeChiusura2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerDashboard.cambioImmagineTema(lineeChiusura, img.lineeChiusura1TemaChiaro(), img.lineeChiusura1());
+				controllerDashboard.cambioImmagineTema(lineeChiusura, img.lineeChiusura1TemaChiaro(),
+						img.lineeChiusura1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerDashboard.cambioImmagineTema(lineeChiusura, img.lineeChiusura3TemaChiaro(), img.lineeChiusura3());
+				controllerDashboard.cambioImmagineTema(lineeChiusura, img.lineeChiusura3TemaChiaro(),
+						img.lineeChiusura3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerDashboard.cambioImmagineTema(lineeChiusura, img.lineeChiusura1TemaChiaro(), img.lineeChiusura1());
+				controllerDashboard.cambioImmagineTema(lineeChiusura, img.lineeChiusura1TemaChiaro(),
+						img.lineeChiusura1());
 			}
 		});
 		lineeChiusura.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1412,22 +1486,26 @@ public class Dashboard extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerDashboard.cambioImmagineTema(lineeApertura, img.lineeApertura2TemaChiaro(), img.lineeApertura2());
+				controllerDashboard.cambioImmagineTema(lineeApertura, img.lineeApertura2TemaChiaro(),
+						img.lineeApertura2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerDashboard.cambioImmagineTema(lineeApertura, img.lineeApertura1TemaChiaro(), img.lineeApertura1());
+				controllerDashboard.cambioImmagineTema(lineeApertura, img.lineeApertura1TemaChiaro(),
+						img.lineeApertura1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerDashboard.cambioImmagineTema(lineeApertura, img.lineeApertura3TemaChiaro(), img.lineeApertura3());
+				controllerDashboard.cambioImmagineTema(lineeApertura, img.lineeApertura3TemaChiaro(),
+						img.lineeApertura3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerDashboard.cambioImmagineTema(lineeApertura, img.lineeApertura1TemaChiaro(), img.lineeApertura1());
+				controllerDashboard.cambioImmagineTema(lineeApertura, img.lineeApertura1TemaChiaro(),
+						img.lineeApertura1());
 			}
 		});
 		lineeApertura.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1452,7 +1530,8 @@ public class Dashboard extends JFrame {
 				if (getPosizioneTendina() == 238) {
 					controllerDashboard.setStopCambioTemaTT(false);
 					controllerDashboard.chiudiTuttiTT();
-					controllerDashboard.mostraTT(lblCambioTemaTT, controllerDashboard.isStopCambioTemaTT(), img.temaScuroTTChiaro(), img.temaChiaroTT());
+					controllerDashboard.mostraTT(lblCambioTemaTT, controllerDashboard.isStopCambioTemaTT(),
+							img.temaScuroTTChiaro(), img.temaChiaroTT());
 				}
 			}
 
@@ -1498,7 +1577,8 @@ public class Dashboard extends JFrame {
 				if (getPosizioneTendina() == 238) {
 					controllerDashboard.setStopCambioTemaTT(false);
 					controllerDashboard.chiudiTuttiTT();
-					controllerDashboard.mostraTT(lblCambioTemaTT, controllerDashboard.isStopCambioTemaTT(), img.temaScuroTTChiaro(), img.temaChiaroTT());
+					controllerDashboard.mostraTT(lblCambioTemaTT, controllerDashboard.isStopCambioTemaTT(),
+							img.temaScuroTTChiaro(), img.temaChiaroTT());
 				}
 			}
 
@@ -1512,6 +1592,7 @@ public class Dashboard extends JFrame {
 					controllerDashboard.chiudiTT(lblCambioTemaTT, controllerDashboard.isStopCambioTemaTT());
 				}
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				lblCambioTemaScuro.setIcon(new ImageIcon(img.temaScuro3()));
@@ -1531,7 +1612,7 @@ public class Dashboard extends JFrame {
 		lblCambioTemaTT.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCambioTemaTT.setBounds(64, 40, 110, 31);
 		pannelloTendina.add(lblCambioTemaTT);
-		
+
 		lblVersione = new JLabel("v 1.00");
 		lblVersione.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblVersione.setBounds(138, 618, 90, 22);
@@ -1573,25 +1654,23 @@ public class Dashboard extends JFrame {
 		lblMenuTT.setVisible(false);
 		lblMenuTT.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenuTT.setBounds(911, 11, 60, 31);
-		
+
 		pannelloErrore = new JPanel();
 		pannelloErrore.setBackground(controllerDashboard.trasparente);
-		pannelloErrore.setBounds(5, 0, 1078, 0);
+		pannelloErrore.setBounds(240, 0, 613, 0);
 		pannelloErrore.setLayout(null);
-		
+
 		lblMessaggioNotificaTesto = new JLabel("");
 		lblMessaggioNotificaTesto.setForeground(controllerDashboard.coloreScrittaErrore);
 		lblMessaggioNotificaTesto.setFont(controllerDashboard.fontLabel);
 		lblMessaggioNotificaTesto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessaggioNotificaTesto.setText("Qualcosa è andato storto");
-		lblMessaggioNotificaTesto.setBounds(5, 0, 1078, 25);
+		lblMessaggioNotificaTesto.setBounds(5, 0, 613, 25);
 		pannelloErrore.add(lblMessaggioNotificaTesto);
-		
+
 		lblMessaggioNotificaLayout = new JLabel("");
 		lblMessaggioNotificaLayout.setIcon(new ImageIcon(img.messaggioErrore()));
-		lblMessaggioNotificaLayout.setBounds(5, 0, 1078, 25);
+		lblMessaggioNotificaLayout.setBounds(5, 0, 613, 25);
 		pannelloErrore.add(lblMessaggioNotificaLayout);
-
 
 		pannelloDestra = new JPanel();
 		pannelloDestra.setBounds(50, 0, 1093, 642);
@@ -1605,7 +1684,7 @@ public class Dashboard extends JFrame {
 		pannelloDestra.add(lblImpostazioniTT);
 		pannelloDestra.add(lblEsciTT);
 		pannelloDestra.add(lblMenuTT);
-		
+
 		pannelloDestra.add(menuInfoAccount);
 		pannelloDestra.add(noClick);
 		pannelloDestra.add(pannelloErrore);
@@ -1622,14 +1701,13 @@ public class Dashboard extends JFrame {
 		pannelloDestra.add(gestioneCompagnieAeree);
 		pannelloDestra.add(gestioneTratte);
 		pannelloDestra.add(gestioneVoliPartenze);
+		pannelloDestra.add(registroVoliPartenze);
 		pannelloDestra.add(gestioneVoliArrivi);
 		pannelloDestra.add(recensioni);
-		
-		
 
 		pannelloDestra.setLayout(null);
 		pannelloBase.add(pannelloDestra);
-				
+
 		lblLayout = new JLabel("");
 		lblLayout.setBounds(50, 0, 1093, 642);
 		lblLayout.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1656,6 +1734,7 @@ public class Dashboard extends JFrame {
 		utilizzoGate.setVisible(false);
 		gestioneTratte.setVisible(false);
 		gestioneVoliPartenze.setVisible(false);
+		registroVoliPartenze.setVisible(false);
 		gestioneVoliArrivi.setVisible(false);
 		cambioPassword.setVisible(false);
 		menuInfoAccount.setVisible(false);
