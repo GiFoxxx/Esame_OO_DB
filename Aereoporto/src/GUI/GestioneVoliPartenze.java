@@ -430,7 +430,7 @@ public class GestioneVoliPartenze extends JPanel {
 		add(lblBarraRicerca);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordi));
+		scrollPane.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordiTemaScuro));
 		scrollPane.setBounds(30, 85, 1030, 330);
 		add(scrollPane);
 
@@ -488,7 +488,7 @@ public class GestioneVoliPartenze extends JPanel {
 		scrollPane.setViewportView(tabella);
 
 		txtCodiceVoloPartenze = new JTextField();
-		txtCodiceVoloPartenze.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordi));
+		txtCodiceVoloPartenze.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordiTemaScuro));
 		txtCodiceVoloPartenze.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -518,7 +518,7 @@ public class GestioneVoliPartenze extends JPanel {
 		add(lblDataPartenza);
 
 		dateDataPartenza = new JDateChooser();
-		dateDataPartenza.getCalendarButton().setBorder(new LineBorder(controllerGestioneVoliPartenze.bordi));
+		dateDataPartenza.getCalendarButton().setBorder(new LineBorder(controllerGestioneVoliPartenze.bordiTemaScuro));
 		dateDataPartenza.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -541,7 +541,7 @@ public class GestioneVoliPartenze extends JPanel {
 		add(lblOrarioPartenza);
 
 		txtOraPartenza = new JTextField();
-		txtOraPartenza.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordi));
+		txtOraPartenza.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordiTemaScuro));
 		txtOraPartenza.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -557,7 +557,7 @@ public class GestioneVoliPartenze extends JPanel {
 		add(txtOraPartenza);
 
 		txtMinutoPartenza = new JTextField();
-		txtMinutoPartenza.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordi));
+		txtMinutoPartenza.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordiTemaScuro));
 		txtMinutoPartenza.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -587,7 +587,7 @@ public class GestioneVoliPartenze extends JPanel {
 		add(lblNumeroPrenotazioni);
 
 		txtNumeroPrenotazioni = new JTextField();
-		txtNumeroPrenotazioni.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordi));
+		txtNumeroPrenotazioni.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordiTemaScuro));
 		txtNumeroPrenotazioni.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -634,7 +634,7 @@ public class GestioneVoliPartenze extends JPanel {
 		add(txtCodiceGate);
 
 		comboBoxNumeroPorta = new JComboBox<String>();
-		comboBoxNumeroPorta.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordi));
+		comboBoxNumeroPorta.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordiTemaScuro));
 		comboBoxNumeroPorta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -657,7 +657,7 @@ public class GestioneVoliPartenze extends JPanel {
 		add(comboBoxNumeroPorta);
 
 		comboBoxCittaArrivo = new JComboBox<String>();
-		comboBoxCittaArrivo.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordi));
+		comboBoxCittaArrivo.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordiTemaScuro));
 		comboBoxCittaArrivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HashMap<String, String> map = null;
@@ -877,7 +877,7 @@ public class GestioneVoliPartenze extends JPanel {
 		add(txtStatus);
 
 		comboBoxStatus = new JComboBox<String>();
-		comboBoxStatus.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordi));
+		comboBoxStatus.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordiTemaScuro));
 		comboBoxStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (comboBoxStatus.getSelectedIndex()) {
@@ -920,7 +920,7 @@ public class GestioneVoliPartenze extends JPanel {
 		add(lblTempoDiImbarcoEffettivo);
 
 		txtTempoDiImbarcoEffettivo = new JTextField();
-		txtTempoDiImbarcoEffettivo.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordi));
+		txtTempoDiImbarcoEffettivo.setBorder(new LineBorder(controllerGestioneVoliPartenze.bordiTemaScuro));
 		txtTempoDiImbarcoEffettivo.setForeground(controllerGestioneVoliPartenze.coloreScritteSuBiancoTemaScuro);
 		txtTempoDiImbarcoEffettivo.setFont(controllerGestioneVoliPartenze.fontScritteGestioni);
 		txtTempoDiImbarcoEffettivo.setColumns(10);

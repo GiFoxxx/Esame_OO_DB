@@ -413,7 +413,7 @@ public class GateCodeImbarco extends JPanel {
 		add(lblBarraRicerca);
 
 		scrollPaneTabellaAssociazioni = new JScrollPane();
-		scrollPaneTabellaAssociazioni.setBorder(new LineBorder(controllerGateCodeImbarco.bordi));
+		scrollPaneTabellaAssociazioni.setBorder(new LineBorder(controllerGateCodeImbarco.bordiTemaScuro));
 		scrollPaneTabellaAssociazioni.setFont(controllerGateCodeImbarco.fontLabel);
 		scrollPaneTabellaAssociazioni.setEnabled(false);
 		scrollPaneTabellaAssociazioni.setBounds(30, 85, 300, 330);
@@ -456,7 +456,7 @@ public class GateCodeImbarco extends JPanel {
 		add(txtCodiceGate);
 
 		comboBoxNumeroPorta = new JComboBox<String>();
-		comboBoxNumeroPorta.setBorder(new LineBorder(controllerGateCodeImbarco.bordi));
+		comboBoxNumeroPorta.setBorder(new LineBorder(controllerGateCodeImbarco.bordiTemaScuro));
 		comboBoxNumeroPorta.setFont(new Font("Arial", Font.PLAIN, 11));
 		comboBoxNumeroPorta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -482,7 +482,7 @@ public class GateCodeImbarco extends JPanel {
 		add(lblCodaImbarco);
 
 		comboBoxCodaDiImbarco = new JComboBox<String>();
-		comboBoxCodaDiImbarco.setBorder(new LineBorder(controllerGateCodeImbarco.bordi));
+		comboBoxCodaDiImbarco.setBorder(new LineBorder(controllerGateCodeImbarco.bordiTemaScuro));
 		comboBoxCodaDiImbarco.setFont(new Font("Arial", Font.PLAIN, 11));
 		comboBoxCodaDiImbarco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -622,7 +622,7 @@ public class GateCodeImbarco extends JPanel {
 		add(lblSvuotaAssociazione);
 
 		scrollPaneTabellaCodaDiImbarco = new JScrollPane();
-		scrollPaneTabellaCodaDiImbarco.setBorder(new LineBorder(controllerGateCodeImbarco.bordi));
+		scrollPaneTabellaCodaDiImbarco.setBorder(new LineBorder(controllerGateCodeImbarco.bordiTemaScuro));
 		scrollPaneTabellaCodaDiImbarco.setFont(controllerGateCodeImbarco.fontLabel);
 		scrollPaneTabellaCodaDiImbarco.setEnabled(false);
 		scrollPaneTabellaCodaDiImbarco.setBounds(350, 86, 710, 330);
@@ -671,7 +671,7 @@ public class GateCodeImbarco extends JPanel {
 		add(lblTempoDiImbarcoStimato);
 
 		txtCodiceCodaDiImbarco = new JTextField();
-		txtCodiceCodaDiImbarco.setBorder(new LineBorder(controllerGateCodeImbarco.bordi));
+		txtCodiceCodaDiImbarco.setBorder(new LineBorder(controllerGateCodeImbarco.bordiTemaScuro));
 		txtCodiceCodaDiImbarco.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtCodiceCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
 		txtCodiceCodaDiImbarco.setBounds(660, 442, 75, 20);
@@ -679,7 +679,7 @@ public class GateCodeImbarco extends JPanel {
 		txtCodiceCodaDiImbarco.setColumns(10);
 
 		txtTempoDiImbarcoStimato = new JTextField();
-		txtTempoDiImbarcoStimato.setBorder(new LineBorder(controllerGateCodeImbarco.bordi));
+		txtTempoDiImbarcoStimato.setBorder(new LineBorder(controllerGateCodeImbarco.bordiTemaScuro));
 		txtTempoDiImbarcoStimato.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtTempoDiImbarcoStimato.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
 		txtTempoDiImbarcoStimato.setBounds(660, 504, 45, 20);
@@ -687,7 +687,7 @@ public class GateCodeImbarco extends JPanel {
 		txtTempoDiImbarcoStimato.setColumns(10);
 
 		txtNomeCodaDiImbarco = new JTextField();
-		txtNomeCodaDiImbarco.setBorder(new LineBorder(controllerGateCodeImbarco.bordi));
+		txtNomeCodaDiImbarco.setBorder(new LineBorder(controllerGateCodeImbarco.bordiTemaScuro));
 		txtNomeCodaDiImbarco.setFont(controllerGateCodeImbarco.fontScritteGestioni);
 		txtNomeCodaDiImbarco.setForeground(controllerGateCodeImbarco.coloreScritteSuBiancoTemaScuro);
 		txtNomeCodaDiImbarco.setBounds(660, 473, 133, 20);

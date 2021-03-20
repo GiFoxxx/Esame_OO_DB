@@ -24,7 +24,7 @@ public class NoClick extends JPanel {
 
 		controllerNoClick = controller;
 		
-		setBackground(new Color(0, 0, 0, 50));
+		setBackground(controllerNoClick.temaNC);
 		setLayout(null);
 	}
 }

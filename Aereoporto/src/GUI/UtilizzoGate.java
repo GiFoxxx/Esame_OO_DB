@@ -326,7 +326,7 @@ public class UtilizzoGate extends JPanel {
 		add(lblBarraRicerca);
 
 		scrollPaneTabellaGate = new JScrollPane();
-		scrollPaneTabellaGate.setBorder(new LineBorder(controllerUtilizzoGate.bordi));
+		scrollPaneTabellaGate.setBorder(new LineBorder(controllerUtilizzoGate.bordiTemaScuro));
 		scrollPaneTabellaGate.setFont(controllerUtilizzoGate.fontLabel);
 		scrollPaneTabellaGate.setEnabled(false);
 		scrollPaneTabellaGate.setBounds(30, 85, 318, 330);
@@ -346,7 +346,7 @@ public class UtilizzoGate extends JPanel {
 		scrollPaneTabellaGate.setViewportView(tabellaGate);
 
 		scrollPaneTabellaUtilizzi = new JScrollPane();
-		scrollPaneTabellaUtilizzi.setBorder(new LineBorder(controllerUtilizzoGate.bordi));
+		scrollPaneTabellaUtilizzi.setBorder(new LineBorder(controllerUtilizzoGate.bordiTemaScuro));
 		scrollPaneTabellaUtilizzi.setFont(controllerUtilizzoGate.fontLabel);
 		scrollPaneTabellaUtilizzi.setEnabled(false);
 		scrollPaneTabellaUtilizzi.setBounds(358, 85, 702, 330);
@@ -365,7 +365,7 @@ public class UtilizzoGate extends JPanel {
 		add(lblNumeroPorta);
 
 		txtNumeroPorta = new JTextField();
-		txtNumeroPorta.setBorder(new LineBorder(controllerUtilizzoGate.bordi));
+		txtNumeroPorta.setBorder(new LineBorder(controllerUtilizzoGate.bordiTemaScuro));
 		txtNumeroPorta.setFont(controllerUtilizzoGate.fontScritteGestioni);
 		txtNumeroPorta.setForeground(controllerUtilizzoGate.coloreScritteSuBiancoTemaScuro);
 		txtNumeroPorta.setColumns(10);
@@ -380,7 +380,7 @@ public class UtilizzoGate extends JPanel {
 		add(lblCodiceGate);
 
 		txtCodiceGate = new JTextField();
-		txtCodiceGate.setBorder(new LineBorder(controllerUtilizzoGate.bordi));
+		txtCodiceGate.setBorder(new LineBorder(controllerUtilizzoGate.bordiTemaScuro));
 		txtCodiceGate.setFont(controllerUtilizzoGate.fontScritteGestioni);
 		txtCodiceGate.setForeground(controllerUtilizzoGate.coloreScritteSuBiancoTemaScuro);
 		txtCodiceGate.setColumns(10);
@@ -554,7 +554,7 @@ public class UtilizzoGate extends JPanel {
 		add(lblMese);
 
 		dataUtilizzo = new JDateChooser();
-		dataUtilizzo.getCalendarButton().setBorder(new LineBorder(controllerUtilizzoGate.bordi));
+		dataUtilizzo.getCalendarButton().setBorder(new LineBorder(controllerUtilizzoGate.bordiTemaScuro));
 		dataUtilizzo.setDateFormatString("dd/MM/yyyy");
 		dataUtilizzo.setForeground(controllerUtilizzoGate.coloreScritteSuBiancoTemaScuro);
 		dataUtilizzo.setFont(controllerUtilizzoGate.fontScritteGestioni);

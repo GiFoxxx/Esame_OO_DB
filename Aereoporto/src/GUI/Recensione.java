@@ -561,7 +561,7 @@ public class Recensione extends JPanel {
 		textArea.setLocation(-15, 0);
 		scrollPane.setViewportView(textArea);
 
-		lblCommento = new JLabel("Lascia una recensione!");
+		lblCommento = new JLabel("Lascia un commento!");
 		lblCommento.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCommento.setForeground(controllerRecensione.coloreScritteSuBiancoTemaScuro);
 		lblCommento.setFont(controllerRecensione.fontLabel);

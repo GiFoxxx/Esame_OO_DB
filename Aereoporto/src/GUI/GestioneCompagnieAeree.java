@@ -240,7 +240,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		add(lblBarraRicerca);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBorder(new LineBorder(controllerGestioneCompagnieAeree.bordi));
+		scrollPane.setBorder(new LineBorder(controllerGestioneCompagnieAeree.bordiTemaScuro));
 		scrollPane.setBounds(25, 85, 1030, 330);
 		add(scrollPane);
 
@@ -268,7 +268,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		scrollPane.setViewportView(tabella);
 
 		txtCodiceCompagniaAerea = new JTextField();
-		txtCodiceCompagniaAerea.setBorder(new LineBorder(controllerGestioneCompagnieAeree.bordi));
+		txtCodiceCompagniaAerea.setBorder(new LineBorder(controllerGestioneCompagnieAeree.bordiTemaScuro));
 		txtCodiceCompagniaAerea.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -291,7 +291,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		add(lblNome);
 
 		txtNome = new JTextField();
-		txtNome.setBorder(new LineBorder(controllerGestioneCompagnieAeree.bordi));
+		txtNome.setBorder(new LineBorder(controllerGestioneCompagnieAeree.bordiTemaScuro));
 		txtNome.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {

@@ -312,7 +312,7 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblBarraRicerca);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
+		scrollPane.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordiTemaScuro));
 		scrollPane.setBounds(30, 85, 1030, 330);
 		add(scrollPane);
 
@@ -338,7 +338,7 @@ public class GestioneVoliArrivi extends JPanel {
 		scrollPane.setViewportView(tabella);
 
 		txtCodiceVoloArrivi = new JTextField();
-		txtCodiceVoloArrivi.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
+		txtCodiceVoloArrivi.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordiTemaScuro));
 		txtCodiceVoloArrivi.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -368,7 +368,7 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblCittaPartenza);
 
 		txtCittaPartenza = new JTextField();
-		txtCittaPartenza.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
+		txtCittaPartenza.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordiTemaScuro));
 		txtCittaPartenza.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -391,7 +391,7 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblDataArrivo);
 
 		dateDataArrivo = new JDateChooser();
-		dateDataArrivo.getCalendarButton().setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
+		dateDataArrivo.getCalendarButton().setBorder(new LineBorder(controllerGestioneVoliArrivi.bordiTemaScuro));
 		dateDataArrivo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -414,7 +414,7 @@ public class GestioneVoliArrivi extends JPanel {
 		add(lblOrarioArrivo);
 
 		txtOraArrivo = new JTextField();
-		txtOraArrivo.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
+		txtOraArrivo.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordiTemaScuro));
 		txtOraArrivo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -430,7 +430,7 @@ public class GestioneVoliArrivi extends JPanel {
 		add(txtOraArrivo);
 
 		txtMinutoArrivo = new JTextField();
-		txtMinutoArrivo.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordi));
+		txtMinutoArrivo.setBorder(new LineBorder(controllerGestioneVoliArrivi.bordiTemaScuro));
 		txtMinutoArrivo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {

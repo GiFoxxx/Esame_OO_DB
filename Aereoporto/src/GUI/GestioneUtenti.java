@@ -269,7 +269,7 @@ public class GestioneUtenti extends JPanel {
 		add(lblNome);
 
 		txtNome = new JTextField();
-		txtNome.setBorder(new LineBorder(controllerGestioneUtenti.bordi));
+		txtNome.setBorder(new LineBorder(controllerGestioneUtenti.bordiTemaScuro));
 		txtNome.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtNome.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtNome.setBounds(125, 451, 133, 20);
@@ -284,7 +284,7 @@ public class GestioneUtenti extends JPanel {
 		add(lblCognome);
 
 		txtCognome = new JTextField();
-		txtCognome.setBorder(new LineBorder(controllerGestioneUtenti.bordi));
+		txtCognome.setBorder(new LineBorder(controllerGestioneUtenti.bordiTemaScuro));
 		txtCognome.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtCognome.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtCognome.setBounds(125, 482, 133, 20);
@@ -299,7 +299,7 @@ public class GestioneUtenti extends JPanel {
 		add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setBorder(new LineBorder(controllerGestioneUtenti.bordi));
+		txtEmail.setBorder(new LineBorder(controllerGestioneUtenti.bordiTemaScuro));
 		txtEmail.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtEmail.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtEmail.setBounds(401, 451, 133, 20);
@@ -314,7 +314,7 @@ public class GestioneUtenti extends JPanel {
 		add(lblPassword);
 
 		txtPassword = new JTextField();
-		txtPassword.setBorder(new LineBorder(controllerGestioneUtenti.bordi));
+		txtPassword.setBorder(new LineBorder(controllerGestioneUtenti.bordiTemaScuro));
 		txtPassword.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtPassword.setFont(controllerGestioneUtenti.fontScritteGestioni);
 		txtPassword.setBounds(401, 482, 133, 20);
@@ -322,7 +322,7 @@ public class GestioneUtenti extends JPanel {
 		add(txtPassword);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBorder(new LineBorder(controllerGestioneUtenti.bordi));
+		scrollPane.setBorder(new LineBorder(controllerGestioneUtenti.bordiTemaScuro));
 		scrollPane.setBounds(25, 85, 1030, 330);
 		add(scrollPane);
 

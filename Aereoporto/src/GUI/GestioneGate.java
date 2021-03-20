@@ -243,7 +243,7 @@ public class GestioneGate extends JPanel {
 		add(lblBarraRicerca);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBorder(new LineBorder(controllerGestioneGate.bordi));
+		scrollPane.setBorder(new LineBorder(controllerGestioneGate.bordiTemaScuro));
 		scrollPane.setFont(controllerGestioneGate.fontLabel);
 		scrollPane.setEnabled(false);
 		scrollPane.setBounds(30, 85, 1030, 330);
@@ -278,7 +278,7 @@ public class GestioneGate extends JPanel {
 		add(lblNumeroPorta);
 
 		txtNumeroPorta = new JTextField();
-		txtNumeroPorta.setBorder(new LineBorder(controllerGestioneGate.bordi));
+		txtNumeroPorta.setBorder(new LineBorder(controllerGestioneGate.bordiTemaScuro));
 		txtNumeroPorta.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
@@ -301,7 +301,7 @@ public class GestioneGate extends JPanel {
 		add(lblCodiceGate);
 
 		txtCodiceGate = new JTextField();
-		txtCodiceGate.setBorder(new LineBorder(controllerGestioneGate.bordi));
+		txtCodiceGate.setBorder(new LineBorder(controllerGestioneGate.bordiTemaScuro));
 		txtCodiceGate.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {

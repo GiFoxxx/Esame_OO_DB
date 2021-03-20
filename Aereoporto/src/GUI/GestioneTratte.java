@@ -292,7 +292,7 @@ public class GestioneTratte extends JPanel {
 		add(lblBarraRicerca);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBorder(new LineBorder(controllerGestioneTratte.bordi));
+		scrollPane.setBorder(new LineBorder(controllerGestioneTratte.bordiTemaScuro));
 		scrollPane.setBounds(25, 85, 1030, 330);
 		add(scrollPane);
 
@@ -319,7 +319,7 @@ public class GestioneTratte extends JPanel {
 		scrollPane.setViewportView(tabella);
 
 		txtCodiceTratta = new JTextField();
-		txtCodiceTratta.setBorder(new LineBorder(controllerGestioneTratte.bordi));
+		txtCodiceTratta.setBorder(new LineBorder(controllerGestioneTratte.bordiTemaScuro));
 		txtCodiceTratta.setHorizontalAlignment(SwingConstants.LEFT);
 		txtCodiceTratta.addKeyListener(new KeyAdapter() {
 			@Override
@@ -350,7 +350,7 @@ public class GestioneTratte extends JPanel {
 		add(lblCittaPartenza);
 
 		txtCittaPartenza = new JTextField();
-		txtCittaPartenza.setBorder(new LineBorder(controllerGestioneTratte.bordi));
+		txtCittaPartenza.setBorder(new LineBorder(controllerGestioneTratte.bordiTemaScuro));
 		txtCittaPartenza.setHorizontalAlignment(SwingConstants.LEFT);
 		txtCittaPartenza.addKeyListener(new KeyAdapter() {
 			@Override
@@ -367,7 +367,7 @@ public class GestioneTratte extends JPanel {
 		add(txtCittaPartenza);
 
 		txtCittaArrivo = new JTextField();
-		txtCittaArrivo.setBorder(new LineBorder(controllerGestioneTratte.bordi));
+		txtCittaArrivo.setBorder(new LineBorder(controllerGestioneTratte.bordiTemaScuro));
 		txtCittaArrivo.setHorizontalAlignment(SwingConstants.LEFT);
 		txtCittaArrivo.addKeyListener(new KeyAdapter() {
 			@Override
@@ -414,7 +414,7 @@ public class GestioneTratte extends JPanel {
 		add(txtCodiceCompagniaAerea);
 
 		comboBoxNomeCompagniaAerea = new JComboBox<String>();
-		comboBoxNomeCompagniaAerea.setBorder(new LineBorder(controllerGestioneTratte.bordi));
+		comboBoxNomeCompagniaAerea.setBorder(new LineBorder(controllerGestioneTratte.bordiTemaScuro));
 		comboBoxNomeCompagniaAerea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HashMap<String, String> map = null;
