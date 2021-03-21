@@ -4,14 +4,13 @@ import javax.swing.JPanel;
 
 import Controller.Controller;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
 
 public class Impostazioni extends JPanel {
+
 	private JLabel lblInformazioni;
 	private JLabel lblTerminiECondizioni;
 	private JLabel lblRecensione;
@@ -58,7 +57,7 @@ public class Impostazioni extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerImpostazioni.mostraInformazioni();
-				
+
 			}
 		});
 		lblInformazioni.setFont(controllerImpostazioni.fontLabel);

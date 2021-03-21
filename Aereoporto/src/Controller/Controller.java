@@ -168,8 +168,8 @@ public class Controller {
 		return erroreMostrato;
 	}
 
-	public void setErroreMostrato(boolean notificaMostrata) {
-		this.erroreMostrato = notificaMostrata;
+	public void setErroreMostrato(boolean erroreMostrato) {
+		this.erroreMostrato = erroreMostrato;
 	}
 
 	public boolean isSuccessoMostrato() {
@@ -1995,8 +1995,6 @@ public class Controller {
 			try {
 				implementazioneCodaDiImbarcoDAO().aggiungiCodaDiImbarco(cdi);
 				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco()
-						.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaCodaDiImbarco());
 				svuotaCampiCodaDiImbarco();
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
 			} catch (SQLException e) {
@@ -2014,13 +2012,8 @@ public class Controller {
 			cdi = new CodaDiImbarco(
 					((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText());
 
-			int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabellaCodaDiImbarco().getSelectedRow();
-
 			try {
 				implementazioneCodaDiImbarcoDAO().cancellaCodaDiImbarco(cdi);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco().removeRow(t);
-				svuotaCampiCodaDiImbarco();
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2085,8 +2078,6 @@ public class Controller {
 			try {
 				implementazioneCompagniaAereaDAO().aggiungiCompagniaAerea(compAerea);
 				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
-						.addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
 				svuotaCampiGestioneCompagniaAerea();
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 			} catch (SQLException e) {
@@ -2102,14 +2093,9 @@ public class Controller {
 				.getTxtCodiceCompagniaAerea().getText())) {
 			compAerea = new CompagniaAerea(
 					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
-							.getText(),
-					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
-			int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
+							.getText());
 			try {
 				implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
-				svuotaCampiGestioneCompagniaAerea();
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2125,13 +2111,6 @@ public class Controller {
 					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
 							.getText(),
 					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
-			int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
-
-			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
-					.setValueAt(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree())
-							.getTxtCodiceCompagniaAerea().getText(), t, 0);
-			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(
-					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText(), t, 1);
 
 			try {
 				implementazioneCompagniaAereaDAO().modificaCompagniaAerea(compAerea);
@@ -2179,8 +2158,6 @@ public class Controller {
 			try {
 				implementazioneGateDAO().aggiungiGate(gt);
 				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneGate) getDashboard().getGestioneGate()).getModello()
-						.addRow(((GestioneGate) getDashboard().getGestioneGate()).getRow());
 				svuotaCampiGestioneGate();
 				((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 			} catch (SQLException e) {
@@ -2195,17 +2172,13 @@ public class Controller {
 		if (campoCodiceVuoto(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText())) {
 			gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText());
 
-			int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
 			try {
 				implementazioneGateDAO().cancellaGate(gt);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneGate) getDashboard().getGestioneGate()).getModello().removeRow(t);
-				svuotaCampiGestioneGate();
 				((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 			} catch (SQLException e) {
-				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+				mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
 			}
-		} else {
+		} else{
 			mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
 		}
 	}
@@ -2221,13 +2194,6 @@ public class Controller {
 
 			gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
 					((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), chiusuraGate);
-
-			int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
-
-			((GestioneGate) getDashboard().getGestioneGate()).getModello()
-					.setValueAt(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(), t, 0);
-			((GestioneGate) getDashboard().getGestioneGate()).getModello()
-					.setValueAt(((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), t, 1);
 
 			try {
 				implementazioneGateDAO().modificaGate(gt);
@@ -2270,8 +2236,6 @@ public class Controller {
 			try {
 				implementazioneGateDAO().aggiungiGateInCodaDiImbarco(gt, cdi);
 				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione()
-						.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaAssociazione());
 				svuotaCampiGateCodeImbarco();
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
 			} catch (SQLException e) {
@@ -2289,12 +2253,8 @@ public class Controller {
 
 			gt = new Gate(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
 
-			int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabellaAssociazioni().getSelectedRow();
 			try {
 				implementazioneGateDAO().cancellaGateInCodaDiImbarco(gt, cdi);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione().removeRow(t);
-				svuotaCampiGestioneGate();
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2497,8 +2457,6 @@ public class Controller {
 			try {
 				implementazioneTrattaDAO().aggiungiTratta(trt);
 				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
-						.addRow(((GestioneTratte) getDashboard().getGestioneTratte()).getRow());
 				svuotaCampiGestioneTratta();
 				((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 			} catch (SQLException e) {
@@ -2516,12 +2474,8 @@ public class Controller {
 
 			trt = new Tratta(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText());
 
-			int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().getSelectedRow();
 			try {
 				implementazioneTrattaDAO().cancellaTratta(trt);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneTratte) getDashboard().getGestioneTratte()).getModello().removeRow(t);
-				svuotaCampiGestioneTratta();
 				((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2605,8 +2559,6 @@ public class Controller {
 				try {
 					implementazioneVoloArriviDAO().aggiungiVoloArrivi(vlarr);
 					mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello()
-							.addRow(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getRow());
 					svuotaCampiGestioneVoloArrivi();
 					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 				} catch (SQLException e) {
@@ -2626,12 +2578,8 @@ public class Controller {
 			vlarr = new VoloArrivi(
 					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText());
 
-			int t = ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTabella().getSelectedRow();
 			try {
 				implementazioneVoloArriviDAO().cancellaVoloArrivi(vlarr);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().removeRow(t);
-				svuotaCampiGestioneVoloArrivi();
 				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2767,8 +2715,6 @@ public class Controller {
 				try {
 					implementazioneVoloPartenzeDAO().inserisciVoloPartenze(vlprtz);
 					mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
-							.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
 					svuotaCampiGestioneVoloPartenze();
 					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 				} catch (PSQLException e) {
@@ -2790,12 +2736,8 @@ public class Controller {
 			vlprtz = new VoloPartenze(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
 					.getTxtCodiceVoloPartenze().getText());
 
-			int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
 			try {
 				implementazioneVoloPartenzeDAO().cancellaVoloPartenze(vlprtz);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().removeRow(t);
-				svuotaCampiGestioneVoloPartenze();
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2880,14 +2822,6 @@ public class Controller {
 
 			vlprtz = new VoloPartenze(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
 					.getTxtCodiceVoloPartenze().getText(), tempoImbarcoEffettivo);
-
-			int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
-
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
-					.setValueAt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-							.getTxtCodiceVoloPartenze().getText(), t, 0);
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText(), t, 8);
 
 			try {
 				implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
@@ -2987,12 +2921,8 @@ public class Controller {
 	public void eliminaUtente() {
 		if (campoCodiceVuoto(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText())) {
 			utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText());
-			int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTabella().getSelectedRow();
 			try {
 				implementazioneUtenteDAO().cancellaUtente(utn);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().removeRow(t);
-				svuotaCampiGestioneUtenti();
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);

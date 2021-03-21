@@ -8,17 +8,13 @@ import Immagini.Immagini;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import javax.swing.JTextField;
 
 public class Profilo extends JPanel {
-
-	private Immagini img = new Immagini();
+	Immagini img = new Immagini();
 
 	private JLabel lblLogout;
 	private JLabel lblDatiAccount;

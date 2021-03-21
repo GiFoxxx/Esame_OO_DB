@@ -1,7 +1,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -19,7 +18,6 @@ import Classi.Gate;
 import Controller.Controller;
 import Immagini.Immagini;
 
-import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -37,6 +35,7 @@ import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 
 public class GateCodeImbarco extends JPanel {
+	Immagini img = new Immagini();
 
 	String colonneTabellaAssociazione[] = { "Codice Gate", "Coda D'Imbarco" };
 	String colonneTabellaCodaDiImbarco[] = { "Codice Coda D'Imbarco", "Nome Coda D'Imbarco",
@@ -50,8 +49,6 @@ public class GateCodeImbarco extends JPanel {
 
 	List<Gate> ListaGate = new ArrayList<Gate>();
 	List<CodaDiImbarco> ListaCodaDiImbarco = new ArrayList<CodaDiImbarco>();
-
-	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceGate;
 	private JTextField txtCodaDiImbarco;

@@ -1,22 +1,15 @@
 package GUI;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import Controller.Controller;
 import Immagini.Immagini;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.Cursor;
-import java.awt.Font;
-import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;

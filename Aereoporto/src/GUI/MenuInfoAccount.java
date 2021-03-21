@@ -8,14 +8,11 @@ import Immagini.Immagini;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Cursor;
 
 public class MenuInfoAccount extends JPanel {
-
-	private Immagini img = new Immagini();
+	Immagini img = new Immagini();
 
 	JLabel lblGestioneUtenti;
 	JLabel lblErrore;

@@ -13,7 +13,8 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.Cursor;
 
 public class SceltaVolo extends JDialog {
-
+	Immagini img = new Immagini();
+	
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -87,7 +88,7 @@ public class SceltaVolo extends JDialog {
 		this.lblAnnulla = lblAnnulla;
 	}
 
-	Immagini img = new Immagini();
+	
 	Controller controllerSceltaVolo;
 
 	public SceltaVolo(Controller controller) {

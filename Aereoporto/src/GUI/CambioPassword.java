@@ -23,8 +23,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class CambioPassword extends JPanel {
-
-	private Immagini img = new Immagini();
+	Immagini img = new Immagini();
 
 	private JTextField txtVecchiaPassword;
 	private JPasswordField txtNuovaPassword;

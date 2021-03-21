@@ -1,10 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,8 +10,6 @@ import Controller.Controller;
 import Immagini.Immagini;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.JList;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.event.MouseAdapter;
@@ -22,7 +17,6 @@ import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 
 public class TerminiECondizioni extends JDialog {
-
 	Immagini img = new Immagini();
 
 	private JPanel contentPanel = new JPanel();

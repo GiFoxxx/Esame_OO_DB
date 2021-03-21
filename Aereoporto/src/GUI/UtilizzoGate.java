@@ -1,36 +1,35 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+
+import com.toedter.calendar.JDateChooser;
 
 import Classi.Gate;
 import Controller.Controller;
 import Immagini.Immagini;
 
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.RowFilter;
-
-import javax.swing.SwingConstants;
-import javax.swing.JTable;
-import java.awt.Cursor;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import com.toedter.calendar.JDateChooser;
-import javax.swing.border.LineBorder;
-
 public class UtilizzoGate extends JPanel {
+	Immagini img = new Immagini();
 
 	String colonneTabellaGate[] = { "Codice Gate", "Numero Porta" };
 	String colonneTabellaUtilizzi[] = { "Gate Selezionato", "Utilizzo Effettivo", "Utilizzo Stimato",
@@ -44,8 +43,6 @@ public class UtilizzoGate extends JPanel {
 
 	List<Gate> ListaGate = new ArrayList<Gate>();
 	List<Gate> ListaUtilizzoGate = new ArrayList<Gate>();
-	
-	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceGate;
 	private JTextField txtNumeroPorta;

@@ -18,8 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
 public class Accesso extends JPanel {
-
-	private Immagini img = new Immagini();
+	Immagini img = new Immagini();
 
 	private JTextField txtEmail;
 	private JPasswordField txtPassword;

@@ -1,12 +1,10 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -18,30 +16,25 @@ import Classi.Gate;
 import Controller.Controller;
 import Immagini.Immagini;
 
-import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 
-import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import java.awt.Cursor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 
 public class GestioneGate extends JPanel {
+	Immagini img = new Immagini();
 
-	String colonne[] = { "Codice Gate", "Numero Porta","Tempo Di Imbarco Stimato"};
+	String colonne[] = { "Codice Gate", "Numero Porta", "Tempo Di Imbarco Stimato" };
 	Gate[] row = new Gate[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	List<Gate> ListaGate = new ArrayList<Gate>();
-	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceGate;
 	private JTextField txtNumeroPorta;
@@ -135,7 +128,7 @@ public class GestioneGate extends JPanel {
 	public void setTabella(JTable table) {
 		this.tabella = table;
 	}
-	
+
 	public JLabel getLblAggiungi() {
 		return lblAggiungi;
 	}
@@ -177,7 +170,6 @@ public class GestioneGate extends JPanel {
 	}
 
 	Controller controllerGestioneGate;
-	
 
 	public GestioneGate(Controller controller) {
 		controllerGestioneGate = controller;
@@ -197,22 +189,26 @@ public class GestioneGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
+				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(),
+						img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
+				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(),
+						img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneGate.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -315,7 +311,7 @@ public class GestioneGate extends JPanel {
 		txtCodiceGate.setColumns(10);
 		txtCodiceGate.setBounds(146, 461, 75, 20);
 		add(txtCodiceGate);
-		
+
 		lblAggiungi = new JLabel("");
 		lblAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblAggiungi.addMouseListener(new MouseAdapter() {
@@ -324,7 +320,6 @@ public class GestioneGate extends JPanel {
 				controllerGestioneGate.aggiungiGate();
 
 			}
-
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -359,6 +354,7 @@ public class GestioneGate extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneGate.modificaGate();
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerGestioneGate.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
@@ -449,7 +445,7 @@ public class GestioneGate extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
-		
+
 		lblRicaricaTabella = new JLabel("");
 		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
@@ -460,29 +456,33 @@ public class GestioneGate extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(),
+						img.aggiorna2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(),
+						img.aggiorna3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneGate.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
 		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
-		
+
 		caricaTabella();
 
 	}
@@ -496,7 +496,8 @@ public class GestioneGate extends JPanel {
 		}
 		modello.setNumRows(0);
 		for (Gate dato : this.ListaGate) {
-			this.modello.addRow(new Object[] {dato.getCodiceGate(), dato.getNumeroPorta(), dato.getTempoImbarcoStimato()});
+			this.modello.addRow(
+					new Object[] { dato.getCodiceGate(), dato.getNumeroPorta(), dato.getTempoImbarcoStimato() });
 		}
 		tabella.setModel(modello);
 	}
@@ -508,7 +509,7 @@ public class GestioneGate extends JPanel {
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
-	
+
 	private void aggiorna() {
 		caricaTabella();
 	}

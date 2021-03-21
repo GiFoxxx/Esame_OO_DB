@@ -1,10 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,7 +16,6 @@ import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 
 public class Informazioni extends JDialog {
-
 	Immagini img = new Immagini();
 
 	private JPanel contentPanel = new JPanel();

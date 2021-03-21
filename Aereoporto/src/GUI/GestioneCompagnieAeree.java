@@ -1,9 +1,6 @@
 package GUI;
 
-import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -24,29 +21,27 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 import Classi.CompagniaAerea;
-import Classi.Utente;
 import Controller.Controller;
 import Immagini.Immagini;
 
-import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 public class GestioneCompagnieAeree extends JPanel {
+	Immagini img = new Immagini();
 
 	String colonne[] = { "Codice Compagnia aerea", "Nome" };
 	CompagniaAerea[] row = new CompagniaAerea[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	List<CompagniaAerea> ListaCompagnieAeree = new ArrayList<CompagniaAerea>();
-	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceCompagniaAerea;
 	private JTextField txtNome;
 	private JTextField txtBarraRicerca;
 
 	private JScrollPane scrollPane;
-	
+
 	private JTable tabella;
-	
+
 	private JLabel lblimgfrecciaIndietro;
 	private JLabel lblBarraRicerca;
 	private JLabel lblNome;
@@ -56,7 +51,6 @@ public class GestioneCompagnieAeree extends JPanel {
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
 	private JLabel lblRicaricaTabella;
-
 
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
@@ -176,7 +170,6 @@ public class GestioneCompagnieAeree extends JPanel {
 	}
 
 	Controller controllerGestioneCompagnieAeree;
-	
 
 	public GestioneCompagnieAeree(Controller controller) {
 		controllerGestioneCompagnieAeree = controller;
@@ -191,26 +184,32 @@ public class GestioneCompagnieAeree extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneCompagnieAeree.setPannelloPrecedente(1);
-				controllerGestioneCompagnieAeree.mostraPannelli(controllerGestioneCompagnieAeree.getDashboard().getHome());
+				controllerGestioneCompagnieAeree
+						.mostraPannelli(controllerGestioneCompagnieAeree.getDashboard().getHome());
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblimgfrecciaIndietro,
+						img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblimgfrecciaIndietro,
+						img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblimgfrecciaIndietro,
+						img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblimgfrecciaIndietro,
+						img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -323,22 +322,26 @@ public class GestioneCompagnieAeree extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(), img.aggiungi2());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(),
+						img.aggiungi2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(),
+						img.aggiungi1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(), img.aggiungi3());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(),
+						img.aggiungi3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(),
+						img.aggiungi1());
 			}
 
 		});
@@ -357,24 +360,28 @@ public class GestioneCompagnieAeree extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(),
+						img.modifica2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(),
+						img.modifica1());
 
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(), img.modifica3());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(),
+						img.modifica3());
 
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(),
+						img.modifica1());
 			}
 		});
 		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
@@ -392,22 +399,26 @@ public class GestioneCompagnieAeree extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblElimina, img.elimina2TemaChiaro(), img.elimina2());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblElimina, img.elimina2TemaChiaro(),
+						img.elimina2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(),
+						img.elimina1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblElimina, img.elimina3TemaChiaro(), img.elimina3());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblElimina, img.elimina3TemaChiaro(),
+						img.elimina3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(), img.elimina1());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblElimina, img.elimina1TemaChiaro(),
+						img.elimina1());
 			}
 		});
 		lblElimina.setHorizontalAlignment(SwingConstants.CENTER);
@@ -447,7 +458,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
-		
+
 		lblRicaricaTabella = new JLabel("");
 		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
@@ -458,29 +469,33 @@ public class GestioneCompagnieAeree extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(),
+						img.aggiorna2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(),
+						img.aggiorna3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneCompagnieAeree.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
 		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
-		
+
 		caricaTabella();
 	}
 
@@ -493,7 +508,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		}
 		modello.setNumRows(0);
 		for (CompagniaAerea dato : this.ListaCompagnieAeree) {
-			this.modello.addRow(new Object[] {dato.getCodiceCompagniaAerea(), dato.getNome()});
+			this.modello.addRow(new Object[] { dato.getCodiceCompagniaAerea(), dato.getNome() });
 		}
 		tabella.setModel(modello);
 	}
@@ -505,7 +520,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
-	
+
 	private void aggiorna() {
 		caricaTabella();
 	}

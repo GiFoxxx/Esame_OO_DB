@@ -12,8 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Home extends JPanel {
-
-	private Immagini img = new Immagini();
+	Immagini img = new Immagini();
 
 	private JLabel lblTratte;
 	private JLabel lblCompagniaAerea;

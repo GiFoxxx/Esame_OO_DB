@@ -10,9 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -20,21 +25,13 @@ import Classi.Utente;
 import Controller.Controller;
 import Immagini.Immagini;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.RowFilter;
-
-import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-
 public class GestioneUtenti extends JPanel {
+	Immagini img = new Immagini();
 
 	String colonne[] = { "Nome", "Cognome", "Email", "Password" };
 	Utente[] row = new Utente[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	List<Utente> ListaUtenti = new ArrayList<Utente>();
-	private Immagini img = new Immagini();
 
 	private JTextField txtNome;
 	private JTextField txtCognome;
@@ -43,9 +40,9 @@ public class GestioneUtenti extends JPanel {
 	private JTextField txtBarraRicerca;
 
 	private JScrollPane scrollPane;
-	
+
 	private JTable tabella;
-	
+
 	private JLabel lblimgfrecciaIndietro;
 	private JLabel lblBarraRicerca;
 	private JLabel lblNome;
@@ -56,7 +53,7 @@ public class GestioneUtenti extends JPanel {
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
 	private JLabel lblRicaricaTabella;
-	
+
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
 		return modello;
@@ -215,24 +212,29 @@ public class GestioneUtenti extends JPanel {
 				controllerGestioneUtenti.setPannelloPrecedente(1);
 				controllerGestioneUtenti.mostraPannelli(controllerGestioneUtenti.getDashboard().getHome());
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
+				controllerGestioneUtenti.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(),
+						img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneUtenti.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
+				controllerGestioneUtenti.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(),
+						img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneUtenti.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -358,7 +360,6 @@ public class GestioneUtenti extends JPanel {
 				controllerGestioneUtenti.modificaUtente();
 			}
 
-
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerGestioneUtenti.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
@@ -449,7 +450,7 @@ public class GestioneUtenti extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(785, 568, 130, 36);
 		add(lblSvuota);
-		
+
 		lblRicaricaTabella = new JLabel("");
 		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
@@ -460,29 +461,33 @@ public class GestioneUtenti extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+				controllerGestioneUtenti.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(),
+						img.aggiorna2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneUtenti.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+				controllerGestioneUtenti.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(),
+						img.aggiorna3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneUtenti.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneUtenti.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
 		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
-		
+
 		caricaTabella();
 	}
 
@@ -494,11 +499,11 @@ public class GestioneUtenti extends JPanel {
 		}
 		modello.setNumRows(0);
 		for (Utente dato : this.ListaUtenti) {
-			modello.addRow(new Object[] {dato.getNome(), dato.getCognome(), dato.getEmail(), dato.getPassword()});
+			modello.addRow(new Object[] { dato.getNome(), dato.getCognome(), dato.getEmail(), dato.getPassword() });
 		}
 		tabella.setModel(modello);
 	}
-	
+
 	private void ricerca() {
 		DefaultTableModel table = (DefaultTableModel) tabella.getModel();
 		String ricerca = txtBarraRicerca.getText();
@@ -506,7 +511,7 @@ public class GestioneUtenti extends JPanel {
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
-	
+
 	private void aggiorna() {
 		caricaTabella();
 	}

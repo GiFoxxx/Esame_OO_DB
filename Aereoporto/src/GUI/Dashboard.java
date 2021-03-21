@@ -1,7 +1,5 @@
 package GUI;
 
-import java.awt.Color;
-
 import javax.swing.*;
 
 import Controller.Controller;
@@ -13,12 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.Font;
-import java.awt.Image;
 
 public class Dashboard extends JFrame {
-
-	private Immagini img = new Immagini();
+	Immagini img = new Immagini();
 
 	int posizioneTendina = 50;
 	int posizioneMessaggioNotifica = 0;

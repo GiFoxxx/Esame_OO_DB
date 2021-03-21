@@ -6,8 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +28,6 @@ import Controller.Controller;
 import Immagini.Immagini;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 
@@ -55,10 +52,10 @@ public class GestioneVoliPartenze extends JPanel {
 	private JTextField txtTempoDiImbarcoEffettivo;
 	private JTextField txtBarraRicerca;
 	private JDateChooser dateDataPartenza;
-	
+
 	private JScrollPane scrollPane;
 	private JTable tabella;
-	
+
 	private JLabel lblimgfrecciaIndietro;
 	private JLabel lblBarraRicerca;
 	private JLabel lblCodiceVoloPartenze;
@@ -369,7 +366,6 @@ public class GestioneVoliPartenze extends JPanel {
 	}
 
 	Controller controllerGestioneVoliPartenze;
-	
 
 	public GestioneVoliPartenze(Controller controller) {
 		controllerGestioneVoliPartenze = controller;
@@ -934,18 +930,22 @@ public class GestioneVoliPartenze extends JPanel {
 		txtTempoDiImbarcoEffettivo.setColumns(10);
 		txtTempoDiImbarcoEffettivo.setBounds(466, 500, 45, 20);
 		add(txtTempoDiImbarcoEffettivo);
-		
+
 		lblRegistroVoli = new JLabel("");
 		lblRegistroVoli.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerGestioneVoliPartenze.setPannelloPrecedente(16);
-				controllerGestioneVoliPartenze.mostraPannelli(controllerGestioneVoliPartenze.getDashboard().getRegistroVoliPartenze());
+				controllerGestioneVoliPartenze
+						.mostraPannelli(controllerGestioneVoliPartenze.getDashboard().getRegistroVoliPartenze());
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerGestioneVoliPartenze.setStopRegistroVoliTT(false);
-				controllerGestioneVoliPartenze.mostraTT(lblRegistroVoliTT, controllerGestioneVoliPartenze.isStopRegistroVoliTT(), img.registroVoliTTTemaChiaro(),  img.registroVoliTT());
+				controllerGestioneVoliPartenze.mostraTT(lblRegistroVoliTT,
+						controllerGestioneVoliPartenze.isStopRegistroVoliTT(), img.registroVoliTTTemaChiaro(),
+						img.registroVoliTT());
 				controllerGestioneVoliPartenze.cambioImmagineTema(lblRegistroVoli, img.registroVoli2TemaChiaro(),
 						img.registroVoli2());
 			}
@@ -953,7 +953,8 @@ public class GestioneVoliPartenze extends JPanel {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerGestioneVoliPartenze.setStopRegistroVoliTT(true);
-				controllerGestioneVoliPartenze.chiudiTT(lblRegistroVoliTT, controllerGestioneVoliPartenze.isStopRegistroVoliTT());
+				controllerGestioneVoliPartenze.chiudiTT(lblRegistroVoliTT,
+						controllerGestioneVoliPartenze.isStopRegistroVoliTT());
 				controllerGestioneVoliPartenze.cambioImmagineTema(lblRegistroVoli, img.registroVoli1TemaChiaro(),
 						img.registroVoli1());
 			}
@@ -974,7 +975,7 @@ public class GestioneVoliPartenze extends JPanel {
 		lblRegistroVoli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRegistroVoli.setBounds(795, 50, 22, 25);
 		add(lblRegistroVoli);
-		
+
 		lblRegistroVoliTT = new JLabel("");
 		lblRegistroVoliTT.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistroVoliTT.setBounds(757, 11, 100, 30);
@@ -1036,7 +1037,7 @@ public class GestioneVoliPartenze extends JPanel {
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
-	
+
 	private void aggiorna() {
 		caricaTabella();
 		controllerGestioneVoliPartenze.rimuoviElementiComboBox(comboBoxNumeroPorta);

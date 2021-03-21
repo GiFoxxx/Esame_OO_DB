@@ -13,7 +13,8 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.Cursor;
 
 public class SceltaGate extends JDialog {
-
+	Immagini img = new Immagini();
+	
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -21,14 +22,14 @@ public class SceltaGate extends JDialog {
 	int x;
 	int y;
 
-	JLabel lblLayout;
-	JLabel lblSpostaSceltaVolo;
-	JLabel lblX;
-	JLabel lblCodeDiImbarco;
-	JLabel lblGate;
-	JLabel lblScelta;
-	JLabel lblAnnulla;
-	JLabel lblTempisticheGate;
+	private JLabel lblLayout;
+	private JLabel lblSpostaSceltaVolo;
+	private JLabel lblX;
+	private JLabel lblCodeDiImbarco;
+	private JLabel lblGate;
+	private JLabel lblScelta;
+	private JLabel lblAnnulla;
+	private JLabel lblTempisticheGate;
 
 	// GETTER E SETTER
 
@@ -112,7 +113,7 @@ public class SceltaGate extends JDialog {
 		this.lblTempisticheGate = lblTempisticheGate;
 	}
 
-	Immagini img = new Immagini();
+	
 	Controller controllerSceltaGate;
 
 	public SceltaGate(Controller controller) {

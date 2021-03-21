@@ -13,7 +13,8 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.Cursor;
 
 public class SceltaProfiloSenzaAccesso extends JDialog {
-
+	Immagini img = new Immagini();
+	
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -87,7 +88,6 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 		this.lblSpostaSceltaProfiloSenzaAccesso = lblSpostaSceltaProfiloSenzaAccesso;
 	}
 
-	Immagini img = new Immagini();
 	Controller controllerSceltaProfiloSenzaAccesso;
 
 	public SceltaProfiloSenzaAccesso(Controller controller) {
@@ -299,22 +299,6 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 		getContentPane().add(lblLayout);
 
 		controllerSceltaProfiloSenzaAccesso.centramentoJDialog(this);
-	}
-
-	public void pannelloSelezionatoPrecedentemente() {
-		if (controllerSceltaProfiloSenzaAccesso.getDashboard().getAccesso().isVisible()) {
-			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelAccedi()
-					.setBackground(controllerSceltaProfiloSenzaAccesso.pannelloSceltoTemaScuro);
-		} else if (controllerSceltaProfiloSenzaAccesso.getDashboard().getRegistrazione().isVisible()) {
-			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelRegistrati()
-					.setBackground(controllerSceltaProfiloSenzaAccesso.pannelloSceltoTemaScuro);
-		} else if (controllerSceltaProfiloSenzaAccesso.getDashboard().getHome().isVisible()) {
-			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelHome()
-					.setBackground(controllerSceltaProfiloSenzaAccesso.pannelloSceltoTemaScuro);
-		} else if (controllerSceltaProfiloSenzaAccesso.getDashboard().getImpostazioni().isVisible()) {
-			controllerSceltaProfiloSenzaAccesso.getDashboard().getPanelImpostazioni()
-					.setBackground(controllerSceltaProfiloSenzaAccesso.pannelloSceltoTemaScuro);
-		}
 	}
 
 }

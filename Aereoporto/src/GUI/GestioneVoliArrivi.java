@@ -6,25 +6,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
-import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -34,32 +25,28 @@ import com.toedter.calendar.JDateChooser;
 import Classi.VoloArrivi;
 import Controller.Controller;
 import Immagini.Immagini;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 
 public class GestioneVoliArrivi extends JPanel {
+	Immagini img = new Immagini();
 
 	String colonne[] = { "Codice Volo Arrivi", "Citta di Partenza", "Data e Orario Arrivo" };
 	VoloArrivi[] row = new VoloArrivi[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	List<VoloArrivi> ListaVoliArrivi = new ArrayList<VoloArrivi>();
-	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceVoloArrivi;
 	private JTextField txtCittaPartenza;
 	private JTextField txtOraArrivo;
 	private JTextField txtMinutoArrivo;
 	private JTextField txtBarraRicerca;
-	
+
 	private JDateChooser dateDataArrivo;
 
 	private JScrollPane scrollPane;
-	
+
 	private JTable tabella;
-	
+
 	private JLabel lblimgfrecciaIndietro;
 	private JLabel lblBarraRicerca;
 	private JLabel lblCodiceVoloArrivi;
@@ -267,22 +254,26 @@ public class GestioneVoliArrivi extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(),
+						img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(),
+						img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -463,22 +454,26 @@ public class GestioneVoliArrivi extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(), img.aggiungi2());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblAggiungi, img.aggiungi2TemaChiaro(),
+						img.aggiungi2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(),
+						img.aggiungi1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(), img.aggiungi3());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblAggiungi, img.aggiungi3TemaChiaro(),
+						img.aggiungi3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(), img.aggiungi1());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblAggiungi, img.aggiungi1TemaChiaro(),
+						img.aggiungi1());
 			}
 
 		});
@@ -497,22 +492,26 @@ public class GestioneVoliArrivi extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(), img.modifica2());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblModifica, img.modifica2TemaChiaro(),
+						img.modifica2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(),
+						img.modifica1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(), img.modifica3());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblModifica, img.modifica3TemaChiaro(),
+						img.modifica3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(), img.modifica1());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblModifica, img.modifica1TemaChiaro(),
+						img.modifica1());
 			}
 		});
 		lblModifica.setHorizontalAlignment(SwingConstants.CENTER);
@@ -585,7 +584,7 @@ public class GestioneVoliArrivi extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
-		
+
 		lblRicaricaTabella = new JLabel("");
 		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
@@ -596,29 +595,32 @@ public class GestioneVoliArrivi extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(),
+						img.aggiorna2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(),
+						img.aggiorna3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneVoliArrivi.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
 		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
-		
 
 		caricaTabella();
 	}
@@ -644,7 +646,7 @@ public class GestioneVoliArrivi extends JPanel {
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
-	
+
 	private void aggiorna() {
 		caricaTabella();
 	}

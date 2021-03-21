@@ -3,10 +3,6 @@ package GUI;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.Color;
 import java.awt.Cursor;
 
 import javax.swing.SwingConstants;
@@ -22,8 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Registrazione extends JPanel {
-
-	private Immagini img = new Immagini();
+	Immagini img = new Immagini();
 
 	private JTextField txtNome;
 	private JTextField txtCognome;

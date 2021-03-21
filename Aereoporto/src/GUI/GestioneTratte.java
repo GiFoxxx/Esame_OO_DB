@@ -1,9 +1,6 @@
 package GUI;
 
-import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -11,8 +8,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,29 +26,25 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import com.toedter.calendar.JDateChooser;
-
-import Classi.CompagniaAerea;
 import Classi.Tratta;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 
 public class GestioneTratte extends JPanel {
+	Immagini img = new Immagini();
 
 	String colonne[] = { "Codice Tratta", "Citta Partenza", "Citta Arrivo", "Nome Compagnia Aerea" };
 	Tratta[] row = new Tratta[4];
 	DefaultTableModel modello = new DefaultTableModel(colonne, 0);
 	List<Tratta> ListaTratte = new ArrayList<Tratta>();
-	private Immagini img = new Immagini();
 
 	private JTextField txtCodiceTratta;
 	private JTextField txtCittaPartenza;
 	private JTextField txtCittaArrivo;
 	private JTextField txtCodiceCompagniaAerea;
 	private JTextField txtBarraRicerca;
-	
+
 	private JTable tabella;
 
 	private JLabel lblimgfrecciaIndietro;
@@ -67,9 +58,9 @@ public class GestioneTratte extends JPanel {
 	private JLabel lblElimina;
 	private JLabel lblSvuota;
 	private JLabel lblRicaricaTabella;
-	
+
 	private JComboBox<String> comboBoxNomeCompagniaAerea;
-	
+
 	// GETTER E SETTER
 	public DefaultTableModel getModello() {
 		return modello;
@@ -247,22 +238,26 @@ public class GestioneTratte extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
+				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(),
+						img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
+				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(),
+						img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerGestioneTratte.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -425,17 +420,17 @@ public class GestioneTratte extends JPanel {
 					e1.printStackTrace();
 				}
 				if (comboBoxNomeCompagniaAerea.getSelectedIndex() == 0) {
-                    txtCodiceTratta.setText("");
-                } else {
-                	txtCodiceCompagniaAerea.setText(map.get(comboBoxNomeCompagniaAerea.getSelectedItem().toString()));
-                }
-            }
-        });
+					txtCodiceTratta.setText("");
+				} else {
+					txtCodiceCompagniaAerea.setText(map.get(comboBoxNomeCompagniaAerea.getSelectedItem().toString()));
+				}
+			}
+		});
 		comboBoxNomeCompagniaAerea.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		comboBoxNomeCompagniaAerea.setFont(controllerGestioneTratte.fontScritteGestioni);
 		comboBoxNomeCompagniaAerea.setBounds(187, 485, 75, 20);
 		add(comboBoxNomeCompagniaAerea);
-		
+
 		lblAggiungi = new JLabel("");
 		lblAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblAggiungi.addMouseListener(new MouseAdapter() {
@@ -569,7 +564,7 @@ public class GestioneTratte extends JPanel {
 		lblSvuota.setIcon(new ImageIcon(img.svuota1()));
 		lblSvuota.setBounds(602, 569, 130, 36);
 		add(lblSvuota);
-		
+
 		lblRicaricaTabella = new JLabel("");
 		lblRicaricaTabella.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRicaricaTabella.addMouseListener(new MouseAdapter() {
@@ -580,29 +575,33 @@ public class GestioneTratte extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerGestioneTratte.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(), img.aggiorna2());
+				controllerGestioneTratte.cambioImmagineTema(lblRicaricaTabella, img.aggiorna2TemaChiaro(),
+						img.aggiorna2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerGestioneTratte.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneTratte.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerGestioneTratte.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(), img.aggiorna3());
+				controllerGestioneTratte.cambioImmagineTema(lblRicaricaTabella, img.aggiorna3TemaChiaro(),
+						img.aggiorna3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerGestioneTratte.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(), img.aggiorna1());
+				controllerGestioneTratte.cambioImmagineTema(lblRicaricaTabella, img.aggiorna1TemaChiaro(),
+						img.aggiorna1());
 			}
 		});
 		lblRicaricaTabella.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRicaricaTabella.setIcon(new ImageIcon(img.aggiorna1()));
 		lblRicaricaTabella.setBounds(830, 47, 30, 30);
 		add(lblRicaricaTabella);
-		
+
 		stampaComboBoxNomeCompagniaAerea();
 		caricaTabella();
 	}
@@ -615,7 +614,8 @@ public class GestioneTratte extends JPanel {
 		}
 		modello.setNumRows(0);
 		for (Tratta dato : this.ListaTratte) {
-			this.modello.addRow(new Object[] {dato.getCodiceTratta(), dato.getCittaPartenza(), dato.getCittaArrivo(), dato.getCompagniaAerea().getCodiceCompagniaAerea()});
+			this.modello.addRow(new Object[] { dato.getCodiceTratta(), dato.getCittaPartenza(), dato.getCittaArrivo(),
+					dato.getCompagniaAerea().getCodiceCompagniaAerea() });
 		}
 		tabella.setModel(modello);
 	}
@@ -623,13 +623,12 @@ public class GestioneTratte extends JPanel {
 	public void stampaComboBoxNomeCompagniaAerea() {
 		HashMap<String, String> map = null;
 		try {
-			map = controllerGestioneTratte.implementazioneCompagniaAereaDAO()
-					.stampaNomeCompagniaAereaInComboBox();
+			map = controllerGestioneTratte.implementazioneCompagniaAereaDAO().stampaNomeCompagniaAereaInComboBox();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-        comboBoxNomeCompagniaAerea.addItem("----------");
+
+		comboBoxNomeCompagniaAerea.addItem("----------");
 
 		for (String s : map.keySet()) {
 			comboBoxNomeCompagniaAerea.addItem(s);
@@ -643,7 +642,7 @@ public class GestioneTratte extends JPanel {
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
-	
+
 	private void aggiorna() {
 		caricaTabella();
 		controllerGestioneTratte.rimuoviElementiComboBox(comboBoxNomeCompagniaAerea);
