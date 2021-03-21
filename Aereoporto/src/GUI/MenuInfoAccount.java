@@ -77,6 +77,22 @@ public class MenuInfoAccount extends JPanel {
 		this.panelGestioneUtente = pannello1;
 	}
 
+	public JPanel getPanelPrestoInArrivo() {
+		return panelPrestoInArrivo;
+	}
+
+	public void setPanelPrestoInArrivo(JPanel panelPrestoInArrivo) {
+		this.panelPrestoInArrivo = panelPrestoInArrivo;
+	}
+
+	public JLabel getLblPrestoInArrivo() {
+		return lblPrestoInArrivo;
+	}
+
+	public void setLblPrestoInArrivo(JLabel lblPrestoInArrivo) {
+		this.lblPrestoInArrivo = lblPrestoInArrivo;
+	}
+
 	Controller controllerMenuInfoAccount;
 
 	public MenuInfoAccount(Controller controller) {
@@ -222,23 +238,5 @@ public class MenuInfoAccount extends JPanel {
 		lblFrecciaInAlto.setIcon(new ImageIcon(img.frecciaInSu()));
 		lblFrecciaInAlto.setBounds(224, 0, 15, 10);
 		add(lblFrecciaInAlto);
-
-
-	}
-
-	public JPanel getPanelPrestoInArrivo() {
-		return panelPrestoInArrivo;
-	}
-
-	public void setPanelPrestoInArrivo(JPanel panelPrestoInArrivo) {
-		this.panelPrestoInArrivo = panelPrestoInArrivo;
-	}
-
-	public JLabel getLblPrestoInArrivo() {
-		return lblPrestoInArrivo;
-	}
-
-	public void setLblPrestoInArrivo(JLabel lblPrestoInArrivo) {
-		this.lblPrestoInArrivo = lblPrestoInArrivo;
 	}
 }

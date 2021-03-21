@@ -12,10 +12,6 @@ public class Immagini {
 
 	private Image immagine;
 
-	public Immagini() {
-
-	}
-
 	// METODI PER RIDIMENSIONAMENTO
 	public int dimensioneSchermoX() {
 		Toolkit tk = Toolkit.getDefaultToolkit();

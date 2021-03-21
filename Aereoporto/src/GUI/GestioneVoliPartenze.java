@@ -35,6 +35,7 @@ import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 
 public class GestioneVoliPartenze extends JPanel {
+	Immagini img = new Immagini();
 
 	String colonne[] = { "Cod. Voli Part.", "Comp. Aerea", "N°Gate", "Citta di Arrivo", "Data e Orario Partenza",
 			"Apertura Gate", "Chiusura Gate", "N° Prenotazioni", "Status Imbarco", "Status Volo" };
@@ -43,8 +44,6 @@ public class GestioneVoliPartenze extends JPanel {
 			new String[] { "Cod. Voli Part.", "Comp. Aerea", "N\u00B0Gate", "Citta di Arrivo", "Data e Orario Partenza",
 					"Apertura Gate", "Chiusura Gate", "N\u00B0 Prenotazioni", "Status Imbarco", "Status Volo" });
 	List<VoloPartenze> ListaVoliPartenze = new ArrayList<>();
-	private Immagini img = new Immagini();
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 	private JTextField txtCodiceVoloPartenze;
 	private JTextField txtCodiceTratta;
@@ -55,13 +54,11 @@ public class GestioneVoliPartenze extends JPanel {
 	private JTextField txtStatus;
 	private JTextField txtTempoDiImbarcoEffettivo;
 	private JTextField txtBarraRicerca;
+	private JDateChooser dateDataPartenza;
 	
 	private JScrollPane scrollPane;
-	
 	private JTable tabella;
 	
-	private JDateChooser dateDataPartenza;
-
 	private JLabel lblimgfrecciaIndietro;
 	private JLabel lblBarraRicerca;
 	private JLabel lblCodiceVoloPartenze;

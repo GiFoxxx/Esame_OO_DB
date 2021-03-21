@@ -46,7 +46,6 @@ public class Controller {
 	private boolean stopCensuraPasswordTT = false;
 	private boolean stopRegistroVoliTT = false;
 
-
 	// PALETTE COLORI TEMA SCURO
 	public Color bordiTemaScuro = new Color(35, 39, 42);
 	public Color sfondoTemaScuro = new Color(54, 57, 63);
@@ -96,7 +95,7 @@ public class Controller {
 	public String erroreAccessoEseguirePrimaLogout = "Devi effettuare il logout se vuoi accedere con altre credenziali.";
 	public String erroreRegistrazioneFormatoSbagliato = "Formato email inserito non valido!"
 			+ " Inserire l'email dal formato tipo: exp@example.com";
-	public String erroreRegistrazioneEmailEsistente = "Email gi\u00E0� esistente";
+	public String erroreRegistrazioneEmailEsistente = "Email gi\u00E0 esistente";
 	public String errorePasswordsNonCorrispondenti = "Le passwords non corrispondono";
 	public String erroreRegistrazioneLoginGiaEffettuato = "Effettuare il logout prima della registrazione";
 	public String erroreCampiVuoti = "Riempire tutti i campi per continuare";
@@ -107,8 +106,14 @@ public class Controller {
 	public String erroreGenericoInInserimentiCampi = "Attenzione, ci sono degli errori";
 	public String erroreRecensioneMancataValutazione = "Dare una votazione per continuare";
 	public String erroreGestioniNessunaRigaSelezionata = "Nessuna riga della tabella \u00E8 stata selezionata";
-	public String erroreGestioniGenerale = "Ops...qualcosa \u00E8 andato storto";
+	public String erroreGestioniGenerale = "Ops...qualcosa \u00E8 andato storto. Controllare tutti i campi di inserimento";
+	public String erroreGestioniEliminazione = "Ops...qualcosa \u00E8 andato storto. Controllare il codice per l'eliminazione";
 	public String errorePasswordCorta = "La password deve essere minimo di 8 caratteri";
+	public String erroreConnessioneDatabase = "Errore durante la connessione necessario intervento";
+	public String erroreVoloPerGateEsistente = "Questo gate è gi\u00E0 occupato in questa fascia oraria";
+	public String erroreUtilizzoGate = "Errore nel calcolo di utilizzo. Necessario intervento";
+	public String erroreVoloPartenzeAggiornaStatus = "Controllare che i campi status e tempo di imbarco siano pieni";
+	public String erroreVoloPartenzeAggiornaStatusImbarco = "Controllare che il campo tempo di imbarco sia pieno";
 
 	public String registrazioneCompletata = "Registrazione effettuata con successo";
 	public String passwordCambiata = "Password cambiata con successo";
@@ -588,9 +593,8 @@ public class Controller {
 				mostraNotifica(erroreAccessoCredenzialiSbagliate, img.messaggioErrore(), erroreMostrato);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
 		}
-
 	}
 
 	public void mostraIconaErroreEmailMancanteAccesso() {
@@ -609,52 +613,6 @@ public class Controller {
 		} else {
 			return false;
 		}
-	}
-
-	public void chiudiMostraPasswordTT(JLabel lbl) {
-		lbl.setVisible(false);
-	}
-
-	public void mostraMostraPasswordTT(JLabel lbl) {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(750);
-					lbl.setVisible(true);
-					if (stopMostraPasswordTT) {
-						lbl.setVisible(false);
-					}
-					cambioImmagineTema(lbl, img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
-	}
-
-	public void chiudiCensuraPasswordTT(JLabel lbl) {
-		lbl.setVisible(false);
-	}
-
-	public void mostraCensuraPasswordTT(JLabel lbl) {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(750);
-					lbl.setVisible(true);
-					if (stopCensuraPasswordTT) {
-						lbl.setVisible(false);
-					}
-					cambioImmagineTema(lbl, img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e);
-				}
-			}
-		};
-		th.start();
 	}
 
 	// METODI DI REGISTRAZIONE
@@ -724,8 +682,14 @@ public class Controller {
 				mostraPannelli(getDashboard().getAccesso());
 				setPannelloPrecedente(2);
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
+			} catch (PSQLException e) {
+				if (((Registrazione) getDashboard().getRegistrazione()).getTxtPassword().getText().length() > 7) {
+					mostraNotifica(erroreRegistrazioneEmailEsistente, img.messaggioErrore(), erroreMostrato);
+				} else {
+					mostraNotifica(errorePasswordCorta, img.messaggioErrore(), erroreMostrato);
+				}
 			} catch (SQLException e) {
-				mostraNotifica(errorePasswordCorta, img.messaggioErrore(), erroreMostrato);
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
 			}
 		} else if (erroreFormatoEmail()) {
 			mostraNotifica(erroreRegistrazioneFormatoSbagliato, img.messaggioErrore(), erroreMostrato);
@@ -806,941 +770,6 @@ public class Controller {
 		return matchFound && matchFoundPlus;
 	}
 
-	// METODI GESTIONE UTENTI
-	public void svuotaCampiGestioneUtenti() {
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().setText("");
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().setText("");
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().setText("");
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().setText("");
-		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtBarraRicerca().setText("");
-	}
-
-	public UtenteDAO implementazioneUtenteDAO() {
-		ConnessioneDatabase dbconn = null;
-		Connection connection = null;
-		UtenteDAO dao = null;
-		try {
-			dbconn = ConnessioneDatabase.getInstance();
-			connection = dbconn.getConnection();
-			dao = new UtenteImplementazionePostgresDAO(connection);
-		} catch (SQLException exception) {
-			System.out.println("SQLException: " + exception.getMessage());
-		}
-		return dao;
-	}
-
-	public void eliminaUtente() {
-		utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(),
-				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
-				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(),
-				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
-		int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTabella().getSelectedRow();
-		try {
-			implementazioneUtenteDAO().cancellaUtente(utn);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().removeRow(t);
-			svuotaCampiGestioneUtenti();
-			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public void modificaUtente() {
-		utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(),
-				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
-				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(),
-				((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
-		try {
-			implementazioneUtenteDAO().modificaUtente(utn);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			svuotaCampiGestioneUtenti();
-			((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// METODI GESTIONE COMPAGNIA AEREA
-	public void svuotaCampiGestioneCompagniaAerea() {
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().setText("");
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().setText("");
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtBarraRicerca().setText("");
-
-	}
-
-	public CompagniaAereaDAO implementazioneCompagniaAereaDAO() {
-		ConnessioneDatabase dbconn = null;
-		Connection connection = null;
-		CompagniaAereaDAO dao = null;
-		try {
-			dbconn = ConnessioneDatabase.getInstance();
-			connection = dbconn.getConnection();
-			dao = new CompagniaAereaImplementazionePostgresDAO(connection);
-		} catch (SQLException exception) {
-			System.out.println("SQLException: " + exception.getMessage());
-		}
-		return dao;
-	}
-
-	public void aggiungiCompagniaAerea() {
-		compAerea = new CompagniaAerea(
-				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
-						.getText(),
-				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
-		try {
-			implementazioneCompagniaAereaDAO().aggiungiCompagniaAerea(compAerea);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
-					.addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
-			svuotaCampiGestioneCompagniaAerea();
-			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void eliminaCompagniaAerea() {
-		compAerea = new CompagniaAerea(
-				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
-						.getText(),
-				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
-		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
-		try {
-			implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
-			svuotaCampiGestioneCompagniaAerea();
-			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void modificaCompagniaAerea() {
-		compAerea = new CompagniaAerea(
-				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
-						.getText(),
-				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
-		int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
-
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
-				.setValueAt(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree())
-						.getTxtCodiceCompagniaAerea().getText(), t, 0);
-		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(
-				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText(), t, 1);
-
-		try {
-			implementazioneCompagniaAereaDAO().modificaCompagniaAerea(compAerea);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			svuotaCampiGestioneCompagniaAerea();
-			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// METODI GESTIONE TRATTE
-	public void svuotaCampiGestioneTratta() {
-		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().setText("");
-		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().setText("");
-		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().setText("");
-		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtBarraRicerca().setText("");
-		((GestioneTratte) getDashboard().getGestioneTratte()).getComboBoxNomeCompagniaAerea().setSelectedIndex(0);
-	}
-
-	public TrattaDAO implementazioneTrattaDAO() {
-		ConnessioneDatabase dbconn = null;
-		Connection connection = null;
-		TrattaDAO dao = null;
-		try {
-			dbconn = ConnessioneDatabase.getInstance();
-			connection = dbconn.getConnection();
-			dao = new TrattaImplementazionePostgresDAO(connection);
-		} catch (SQLException exception) {
-			System.out.println("SQLException: " + exception.getMessage());
-		}
-		return dao;
-	}
-
-	public void aggiungiTratta() {
-
-		compAerea = new CompagniaAerea(
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceCompagniaAerea().getText());
-
-		trt = new Tratta(compAerea,
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(),
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText());
-
-		try {
-			implementazioneTrattaDAO().aggiungiTratta(trt);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
-					.addRow(((GestioneTratte) getDashboard().getGestioneTratte()).getRow());
-			svuotaCampiGestioneTratta();
-			((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
-		} catch (SQLException e) {
-			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
-		}
-
-	}
-
-	public void eliminaTratta() {
-
-		compAerea = new CompagniaAerea(
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceCompagniaAerea().getText());
-
-		trt = new Tratta(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText());
-
-		int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().getSelectedRow();
-		try {
-			implementazioneTrattaDAO().cancellaTratta(trt);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GestioneTratte) getDashboard().getGestioneTratte()).getModello().removeRow(t);
-			svuotaCampiGestioneTratta();
-			((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void modificaTratta() {
-		compAerea = new CompagniaAerea(
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceCompagniaAerea().getText());
-
-		trt = new Tratta(compAerea,
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(),
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText());
-
-		int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().getSelectedRow();
-
-		((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
-				.setValueAt(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(), t, 0);
-		((GestioneTratte) getDashboard().getGestioneTratte()).getModello().setValueAt(
-				((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(), t, 1);
-		((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
-				.setValueAt(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText(), t, 2);
-
-		try {
-			implementazioneTrattaDAO().modificaTratta(trt);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			svuotaCampiGestioneTratta();
-			((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// METODI GESTIONE VOLI PARTENZE
-	public void svuotaCampiGestioneVoloPartenze() {
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtBarraRicerca().setText("");
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().setText("");
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().setText("");
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().setText("");
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().setDate(null);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().setText("");
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().setText("");
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().setText(null);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo().setText(null);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().setText(null);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxNumeroPorta().setSelectedIndex(0);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxCittaArrivo().setSelectedIndex(0);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxStatus().setSelectedIndex(0);
-	}
-
-	public VoloPartenzeDAO implementazioneVoloPartenzeDAO() {
-		ConnessioneDatabase dbconn = null;
-		Connection connection = null;
-		VoloPartenzeDAO dao = null;
-		try {
-			dbconn = ConnessioneDatabase.getInstance();
-			connection = dbconn.getConnection();
-			dao = new VoloPartenzeImplementazionePostgresDAO(connection);
-		} catch (SQLException exception) {
-			System.out.println("SQLException: " + exception.getMessage());
-		}
-		return dao;
-	}
-
-	@SuppressWarnings("deprecation")
-	public void aggiungiVoloPartenze() {
-		gt = new Gate(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText());
-		trt = new Tratta(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
-
-		int ora = Integer.parseInt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText());
-		int minuto = Integer.parseInt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText());
-		int secondo = 0;
-		Time tempo = new Time(ora, minuto, secondo);
-		int minutoTempoImbarcoEffettivo = Integer
-				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-						.getTxtTempoDiImbarcoEffettivo().getText());
-		Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarcoEffettivo, 0);
-
-		String status = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText();
-
-		VoloPartenze codice = new VoloPartenze(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText());
-		String statusImbarco = null;
-		try {
-			statusImbarco = implementazioneVoloPartenzeDAO().risultatoStatusImbarco(codice);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-
-		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
-
-			Timestamp dataTempo = new Timestamp(
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
-							.getYear(),
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
-							.getMonth(),
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
-							.getDate(),
-					tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
-
-			vlprtz = new VoloPartenze(
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
-							.getText(),
-					dataTempo, ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-							.getTxtNumeroPrenotazioni().getText(),
-					tempoImbarcoEffettivo, trt, gt, status, statusImbarco);
-
-			try {
-				implementazioneVoloPartenzeDAO().inserisciVoloPartenze(vlprtz);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
-						.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
-				svuotaCampiGestioneVoloPartenze();
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
-			} catch (PSQLException e) {
-				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
-		}
-	}
-
-	public void eliminaVoloPartenze() {
-		vlprtz = new VoloPartenze(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText());
-
-		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
-		try {
-			implementazioneVoloPartenzeDAO().cancellaVoloPartenze(vlprtz);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().removeRow(t);
-			svuotaCampiGestioneVoloPartenze();
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void modificaVoloPartenze() {
-		gt = new Gate(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText());
-		trt = new Tratta(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
-
-		int ora = Integer.parseInt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText());
-		int minuto = Integer.parseInt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText());
-		int secondo = 0;
-
-		Time tempo = new Time(ora, minuto, secondo);
-		int minutoTempoImbarcoEffettivo = Integer
-				.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-						.getTxtTempoDiImbarcoEffettivo().getText());
-		Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarcoEffettivo, 0);
-
-		String status = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText();
-
-		VoloPartenze codice = new VoloPartenze(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText());
-		String statusImbarco = null;
-		try {
-			statusImbarco = implementazioneVoloPartenzeDAO().risultatoStatusImbarco(codice);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-
-		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
-
-			Timestamp dataTempo = new Timestamp(
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
-							.getYear(),
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
-							.getMonth(),
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
-							.getDate(),
-					tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
-
-			vlprtz = new VoloPartenze(
-					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
-							.getText(),
-					dataTempo, ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-							.getTxtNumeroPrenotazioni().getText(),
-					tempoImbarcoEffettivo, trt, gt, status, statusImbarco);
-
-			try {
-				implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				svuotaCampiGestioneVoloPartenze();
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void modificaStatusImbarcoVoloPartenze() {
-		int minutoTempoImbarco = Integer.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-				.getTxtTempoDiImbarcoEffettivo().getText());
-
-		Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarco, 0);
-
-		vlprtz = new VoloPartenze(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
-				tempoImbarcoEffettivo);
-
-		int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
-
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
-				t, 0);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText(), t, 8);
-
-		try {
-			implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			svuotaCampiGestioneVoloPartenze();
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void modificaStatusVoloPartenze() {
-		String statusVolo = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText();
-
-		int minutoImbarcoEffettivo = Integer.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
-				.getTxtTempoDiImbarcoEffettivo().getText());
-
-		Time tempoImbarcoEffettivo = new Time(0, minutoImbarcoEffettivo, 0);
-
-		vlprtz = new VoloPartenze(
-				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText(),
-				statusVolo, tempoImbarcoEffettivo);
-
-		try {
-			implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			svuotaCampiGestioneVoloPartenze();
-			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// METODI GESTIONE VOLI ARRIVI
-	public void svuotaCampiGestioneVoloArrivi() {
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().setText("");
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().setText("");
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().setDate(null);
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().setText("");
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().setText("");
-		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtBarraRicerca().setText("");
-	}
-
-	public VoloArriviDAO implementazioneVoloArriviDAO() {
-		ConnessioneDatabase dbconn = null;
-		Connection connection = null;
-		VoloArriviDAO dao = null;
-		try {
-			dbconn = ConnessioneDatabase.getInstance();
-			connection = dbconn.getConnection();
-			dao = new VoloArriviImplementazionePostgresDAO(connection);
-		} catch (SQLException exception) {
-			System.out.println("SQLException: " + exception.getMessage());
-		}
-		return dao;
-	}
-
-	@SuppressWarnings("deprecation")
-	public void aggiungiVoloArrivi() {
-		int ora = Integer
-				.parseInt(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText());
-		int minuto = Integer
-				.parseInt(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().getText());
-		int secondo = 0;
-
-		Time tempo = new Time(ora, minuto, secondo);
-
-		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
-
-			Timestamp dataTempo = new Timestamp(
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
-							.getYear(),
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
-							.getMonth(),
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
-							.getDate(),
-					tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
-
-			vlarr = new VoloArrivi(
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(),
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(),
-					dataTempo);
-
-			try {
-				implementazioneVoloArriviDAO().aggiungiVoloArrivi(vlarr);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello()
-						.addRow(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getRow());
-				svuotaCampiGestioneVoloArrivi();
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
-		}
-	}
-
-	public void eliminaVoloArrivi() {
-		vlarr = new VoloArrivi(
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText());
-
-		int t = ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTabella().getSelectedRow();
-		try {
-			implementazioneVoloArriviDAO().cancellaVoloArrivi(vlarr);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().removeRow(t);
-			svuotaCampiGestioneVoloArrivi();
-			((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void modificaVoloArrivi() {
-		int ora = Integer
-				.parseInt(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText());
-		int minuto = Integer
-				.parseInt(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().getText());
-		int secondo = 0;
-
-		Time tempo = new Time(ora, minuto, secondo);
-
-		if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
-
-			Timestamp dataTempo = new Timestamp(
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
-							.getYear(),
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
-							.getMonth(),
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
-							.getDate(),
-					tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
-
-			vlarr = new VoloArrivi(
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText(),
-					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(),
-					dataTempo);
-			try {
-				implementazioneVoloArriviDAO().modificaVoloArrivi(vlarr);
-				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-				svuotaCampiGestioneVoloArrivi();
-				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
-		}
-	}
-
-	// METODI GESTIONE GATE
-	public void svuotaCampiGestioneGate() {
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setText("");
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setText("");
-		((GestioneGate) getDashboard().getGestioneGate()).getTxtBarraRicerca().setText("");
-	}
-
-	public GateDAO implementazioneGateDAO() {
-		ConnessioneDatabase dbconn = null;
-		Connection connection = null;
-		GateDAO dao = null;
-		try {
-			dbconn = ConnessioneDatabase.getInstance();
-			connection = dbconn.getConnection();
-			dao = new GateImplementazionePostgresDAO(connection);
-		} catch (SQLException exception) {
-			System.out.println("SQLException: " + exception.getMessage());
-		}
-		return dao;
-	}
-
-	public CodaDiImbarcoDAO implementazioneCodaDiImbarcoDAO() {
-		ConnessioneDatabase dbconn = null;
-		Connection connection = null;
-		CodaDiImbarcoDAO dao = null;
-		try {
-			dbconn = ConnessioneDatabase.getInstance();
-			connection = dbconn.getConnection();
-			dao = new CodaDiImbarcoImplementazionePostgresDAO(connection);
-		} catch (SQLException exception) {
-			System.out.println("SQLException: " + exception.getMessage());
-		}
-		return dao;
-	}
-
-	@SuppressWarnings("deprecation")
-	public void aggiungiGate() {
-		int ora = 0;
-		int minutoChiusuraGate = 20;
-		int secondo = 0;
-
-		Time chiusuraGate = new Time(ora, minutoChiusuraGate, secondo);
-
-		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
-				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), chiusuraGate);
-
-		try {
-			implementazioneGateDAO().aggiungiGate(gt);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GestioneGate) getDashboard().getGestioneGate()).getModello()
-					.addRow(((GestioneGate) getDashboard().getGestioneGate()).getRow());
-			svuotaCampiGestioneGate();
-			((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void eliminaGate() {
-		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText());
-
-		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
-		try {
-			implementazioneGateDAO().cancellaGate(gt);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GestioneGate) getDashboard().getGestioneGate()).getModello().removeRow(t);
-			svuotaCampiGestioneGate();
-			((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void modificaGate() {
-		int ora = 0;
-		int minutoChiusuraGate = 20;
-		int secondo = 0;
-
-		Time chiusuraGate = new Time(ora, minutoChiusuraGate, secondo);
-
-		gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
-				((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), chiusuraGate);
-
-		int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
-
-		((GestioneGate) getDashboard().getGestioneGate()).getModello()
-				.setValueAt(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(), t, 0);
-		((GestioneGate) getDashboard().getGestioneGate()).getModello()
-				.setValueAt(((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), t, 1);
-
-		try {
-			implementazioneGateDAO().modificaGate(gt);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			svuotaCampiGestioneGate();
-			((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// METODI DI GATE CODE DI IMBARCO
-	public void svuotaCampiGateCodeImbarco() {
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().setText("");
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().setText("");
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtBarraRicerca().setText("");
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxCodaDiImbarco().setSelectedIndex(0);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxNumeroPorta().setSelectedIndex(0);
-	}
-
-	public void aggiungiGateCodeImbarco() {
-		cdi = new CodaDiImbarco(
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText());
-
-		gt = new Gate(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
-
-		try {
-			implementazioneGateDAO().aggiungiGateInCodaDiImbarco(gt, cdi);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione()
-					.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaAssociazione());
-			svuotaCampiGateCodeImbarco();
-			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void eliminaGateCodeImbarco() {
-		cdi = new CodaDiImbarco(
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText());
-
-		gt = new Gate(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
-
-		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabellaAssociazioni().getSelectedRow();
-		try {
-			implementazioneGateDAO().cancellaGateInCodaDiImbarco(gt, cdi);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione().removeRow(t);
-			svuotaCampiGestioneGate();
-			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// METODI DI UTILIZZO GATE
-	public void svuotaCampiUtilizzoGate() {
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().setText("");
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtNumeroPorta().setText("");
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtBarraRicerca().setText("");
-		((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().setDate(null);
-	}
-
-	@SuppressWarnings("deprecation")
-	public void caricaTabellaUtilizzoGiornaliero() {
-		Timestamp dataUtilizzo = new Timestamp(
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0, 0);
-
-		Gate gt = new Gate(((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().getText());
-
-		try {
-			((UtilizzoGate) getDashboard().getUtilizzoGate())
-					.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoGiornaliero(gt, dataUtilizzo));
-			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
-			for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
-						.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
-								dato.getTotaleUtilizzoStimato(), dataUtilizzo });
-			}
-			((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
-					.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void caricaTabellaUtilizzoSettimanale() {
-		Timestamp dataUtilizzo = new Timestamp(
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0, 0);
-
-		Gate gt = new Gate(((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().getText());
-		String settimana = "Settimana ";
-		int i = 1;
-
-		try {
-			((UtilizzoGate) getDashboard().getUtilizzoGate())
-					.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoSettimanale(gt, dataUtilizzo));
-			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
-			for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
-
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
-						.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
-								dato.getTotaleUtilizzoStimato(), settimana.concat(String.valueOf(i)) });
-				i = i + 1;
-			}
-			((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
-					.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@SuppressWarnings("deprecation")
-	public void caricaTabellaUtilizzoMensile() {
-		Timestamp dataUtilizzo = new Timestamp(
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0, 0);
-
-		Gate gt = new Gate(((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().getText());
-
-		try {
-			((UtilizzoGate) getDashboard().getUtilizzoGate())
-					.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoMensile(gt, dataUtilizzo));
-			((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
-
-			for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
-						.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
-								dato.getTotaleUtilizzoStimato(), stampaMese() });
-			}
-			((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
-					.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public String stampaMese() {
-		String mese = null;
-		Timestamp dataUtilizzo = new Timestamp(
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
-				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0, 0);
-
-		switch (dataUtilizzo.getMonth() + 1) {
-		case 1:
-			mese = "Gennaio";
-			break;
-		case 2:
-			mese = "Febbraio";
-			break;
-		case 3:
-			mese = "Marzo";
-			break;
-		case 4:
-			mese = "Aprile";
-			break;
-		case 5:
-			mese = "Maggio";
-			break;
-		case 6:
-			mese = "Giugno";
-			break;
-		case 7:
-			mese = "Luglio";
-			break;
-		case 8:
-			mese = "Agosto";
-			break;
-		case 9:
-			mese = "Settembre";
-			break;
-		case 10:
-			mese = "Ottobre";
-			break;
-		case 11:
-			mese = "Novembre";
-			break;
-		case 12:
-			mese = "Dicembre";
-			break;
-		}
-		return mese;
-	}
-
-	// METODI DI CODA DI IMBARCO
-	public void svuotaCampiCodaDiImbarco() {
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().setText(null);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().setText(null);
-		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().setText(null);
-	}
-
-	@SuppressWarnings("deprecation")
-	public void aggiungiCodaDiImbarco() {
-		int ora = 0;
-		int minutoImbarcoStimato = Integer.parseInt(
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().getText());
-		;
-		int secondo = 0;
-
-		Time tempoDiImbarcoStimato = new Time(ora, minutoImbarcoStimato, secondo);
-
-		cdi = new CodaDiImbarco(
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText(),
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().getText(),
-				tempoDiImbarcoStimato);
-
-		try {
-			implementazioneCodaDiImbarcoDAO().aggiungiCodaDiImbarco(cdi);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco()
-					.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaCodaDiImbarco());
-			svuotaCampiCodaDiImbarco();
-			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
-		} catch (SQLException e) {
-			mostraNotifica(erroreGeneraleHome, img.messaggioErrore(), erroreMostrato);
-		}
-	}
-
-	public void eliminaCodaDiImbarco() {
-		cdi = new CodaDiImbarco(
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText());
-
-		int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabellaCodaDiImbarco().getSelectedRow();
-		try {
-			implementazioneCodaDiImbarcoDAO().cancellaCodaDiImbarco(cdi);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco().removeRow(t);
-			svuotaCampiCodaDiImbarco();
-			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void modificaCodaDiImbarco() {
-		int ora = 0;
-		int minutoImbarcoStimato = Integer.parseInt(
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().getText());
-		;
-		int secondo = 0;
-
-		Time tempoDiImbarcoStimato = new Time(ora, minutoImbarcoStimato, secondo);
-
-		cdi = new CodaDiImbarco(
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText(),
-				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().getText(),
-				tempoDiImbarcoStimato);
-		try {
-			implementazioneCodaDiImbarcoDAO().modificaCodaDiImbarco(cdi);
-			mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
-			svuotaCampiCodaDiImbarco();
-			((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// AGGIORNAMENTO COMBOBOX
-	public void rimuoviElementiComboBox(JComboBox<String> comboBox) {
-		for (int i = comboBox.getItemCount() - 1; i > 0; i--) {
-			comboBox.removeItemAt(i);
-		}
-
-	}
-
 	// METODI DI DASHBOARD
 
 	// METODI TOOLTIP
@@ -1773,6 +802,18 @@ public class Controller {
 		th.start();
 	}
 
+	public void chiudiTuttiTT() {
+		getDashboard().getLblMenuTT().setVisible(false);
+		getDashboard().getLblHomeTT().setVisible(false);
+		getDashboard().getLblAccediTT().setVisible(false);
+		getDashboard().getLblRegistratiTT().setVisible(false);
+		getDashboard().getLblProfiloTT().setVisible(false);
+		getDashboard().getLblImpostazioniTT().setVisible(false);
+		getDashboard().getLblEsciTT().setVisible(false);
+		getDashboard().getLblCambioTemaTT().setVisible(false);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRegistroVoliTT().setVisible(false);
+	}
+
 	// PANEL HOME
 	public void clickPannelloLateraleHome() {
 		pannelloLateraleSelezionato();
@@ -1791,7 +832,6 @@ public class Controller {
 		setPannelloPrecedente(2);
 		if (getDashboard().getAccesso().isVisible()) {
 			cambioPannelloTema(getDashboard().getPanelAccedi(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
-
 		}
 		chiudiTendinaIstantanea();
 	}
@@ -1803,7 +843,6 @@ public class Controller {
 		setPannelloPrecedente(3);
 		if (getDashboard().getRegistrazione().isVisible()) {
 			cambioPannelloTema(getDashboard().getPanelRegistrati(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
-
 		}
 		chiudiTendinaIstantanea();
 	}
@@ -1819,7 +858,6 @@ public class Controller {
 
 			if (getDashboard().getProfilo().isVisible()) {
 				cambioPannelloTema(getDashboard().getPanelProfilo(), pannelloSceltoTemaChiaro, pannelloSceltoTemaScuro);
-
 			}
 			chiudiTendinaIstantanea();
 		} else {
@@ -1835,7 +873,6 @@ public class Controller {
 		if (getDashboard().getImpostazioni().isVisible()) {
 			cambioPannelloTema(getDashboard().getPanelImpostazioni(), pannelloSceltoTemaChiaro,
 					pannelloSceltoTemaScuro);
-
 		}
 		chiudiTendinaIstantanea();
 	}
@@ -1876,7 +913,7 @@ public class Controller {
 			larghezzaLbl = implementazioneUtenteDAO().stampaNomeAccount(utn).length()
 					+ implementazioneUtenteDAO().stampaCognomeAccount(utn).length();
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 		larghezzaLbl = larghezzaLbl * 8;
 		getDashboard().getLblAccount().setBounds(970 - larghezzaLbl, 7, larghezzaLbl, 23);
@@ -2439,7 +1476,7 @@ public class Controller {
 			((Profilo) getDashboard().getProfilo()).getTxtEmail()
 					.setText(implementazioneUtenteDAO().stampaEmailAccount(utn));
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 	}
 
@@ -2459,7 +1496,7 @@ public class Controller {
 			try {
 				implementazioneUtenteDAO().cambioPasswordDB(utn);
 			} catch (SQLException e) {
-				e.printStackTrace();
+
 			}
 			logout();
 			mostraNotifica(passwordCambiata, img.messaggioNotifica(), successoMostrato);
@@ -2566,7 +1603,7 @@ public class Controller {
 		svuotaCampiPasswordDimenticata();
 	}
 
-	public void accessoPasswordDimenticata() {
+	public void cambioPasswordDimenticata() {
 		Utente utn = new Utente(((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText(),
 				((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtNuovaPassword().getText());
 		String email = ((PasswordDimenticata) getDashboard().getPasswordDimenticata()).getTxtEmail().getText();
@@ -2593,7 +1630,7 @@ public class Controller {
 				mostraNotifica(erroreCampiVuoti, img.messaggioErrore(), erroreMostrato);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 	}
 
@@ -2612,7 +1649,7 @@ public class Controller {
 		try {
 			esisteEmail = implementazioneUtenteDAO().esisteEmail(email);
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 
 		if (!ripetiPasswordDimenticata() && esisteEmail && !(controlloCampiSeVuotiPasswordDimenticata())) {
@@ -2628,7 +1665,7 @@ public class Controller {
 		try {
 			esisteEmail = implementazioneUtenteDAO().esisteEmail(email);
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 
 		if (ripetiPasswordDimenticata() && !esisteEmail && !controlloCampiSeVuotiPasswordDimenticata()) {
@@ -2645,7 +1682,7 @@ public class Controller {
 		try {
 			esisteEmail = implementazioneUtenteDAO().esisteEmail(email);
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 
 		if (!ripetiPasswordDimenticata() && !esisteEmail && !controlloCampiSeVuotiPasswordDimenticata()) {
@@ -2785,38 +1822,7 @@ public class Controller {
 		pannelloPrecedentementeSelezionato(getPannelloPrecedente());
 	}
 
-	// METODI PER RIDIMENSIONAMENTO
-	public int dimensioneSchermoX() {
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		int xSize = ((int) tk.getScreenSize().getHeight());
-		return xSize;
-	}
-
-	public int dimensioneSchermoY() {
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		int ySize = ((int) tk.getScreenSize().getWidth());
-		return ySize;
-	}
-
-	// RIMOZIONE BACKGROUND JAVA E ADATTAMENTO AL CENTRO DELLO SCHERMO
-	public Dimension centramentoJFrame(JFrame frame) {
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
-		frame.setBackground(new Color(0, 0, 0, 0));
-
-		return dim;
-	}
-
-	public Dimension centramentoJDialog(JDialog option) {
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		option.setLocation(dim.width / 2 - option.getSize().width / 2, dim.height / 2 - option.getSize().height / 2);
-		option.setUndecorated(true);
-
-		return dim;
-	}
-
 	// METODI DI NOCLICK
-
 	public void pannelloPrecedentementeSelezionato(int PanelSelected) {
 		int selezionePannello = PanelSelected;
 
@@ -2862,6 +1868,1184 @@ public class Controller {
 			mostraPannelli(getDashboard().getHome());
 		}
 
+	}
+
+	// CONNESSIONI PER CLASSI
+
+	public CodaDiImbarcoDAO implementazioneCodaDiImbarcoDAO() {
+		ConnessioneDatabase dbconn = null;
+		Connection connection = null;
+		CodaDiImbarcoDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase.getInstance();
+			connection = dbconn.getConnection();
+			dao = new CodaDiImbarcoImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			mostraNotifica(erroreConnessioneDatabase, img.messaggioErrore(), erroreMostrato);
+		}
+		return dao;
+	}
+
+	public CompagniaAereaDAO implementazioneCompagniaAereaDAO() {
+		ConnessioneDatabase dbconn = null;
+		Connection connection = null;
+		CompagniaAereaDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase.getInstance();
+			connection = dbconn.getConnection();
+			dao = new CompagniaAereaImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			mostraNotifica(erroreConnessioneDatabase, img.messaggioErrore(), erroreMostrato);
+		}
+		return dao;
+	}
+
+	public GateDAO implementazioneGateDAO() {
+		ConnessioneDatabase dbconn = null;
+		Connection connection = null;
+		GateDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase.getInstance();
+			connection = dbconn.getConnection();
+			dao = new GateImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			mostraNotifica(erroreConnessioneDatabase, img.messaggioErrore(), erroreMostrato);
+		}
+		return dao;
+	}
+
+	public TrattaDAO implementazioneTrattaDAO() {
+		ConnessioneDatabase dbconn = null;
+		Connection connection = null;
+		TrattaDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase.getInstance();
+			connection = dbconn.getConnection();
+			dao = new TrattaImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			mostraNotifica(erroreConnessioneDatabase, img.messaggioErrore(), erroreMostrato);
+		}
+		return dao;
+	}
+
+	public UtenteDAO implementazioneUtenteDAO() {
+		ConnessioneDatabase dbconn = null;
+		Connection connection = null;
+		UtenteDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase.getInstance();
+			connection = dbconn.getConnection();
+			dao = new UtenteImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			mostraNotifica(erroreConnessioneDatabase, img.messaggioErrore(), erroreMostrato);
+		}
+		return dao;
+	}
+
+	public VoloArriviDAO implementazioneVoloArriviDAO() {
+		ConnessioneDatabase dbconn = null;
+		Connection connection = null;
+		VoloArriviDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase.getInstance();
+			connection = dbconn.getConnection();
+			dao = new VoloArriviImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			mostraNotifica(erroreConnessioneDatabase, img.messaggioErrore(), erroreMostrato);
+		}
+		return dao;
+	}
+
+	public VoloPartenzeDAO implementazioneVoloPartenzeDAO() {
+		ConnessioneDatabase dbconn = null;
+		Connection connection = null;
+		VoloPartenzeDAO dao = null;
+		try {
+			dbconn = ConnessioneDatabase.getInstance();
+			connection = dbconn.getConnection();
+			dao = new VoloPartenzeImplementazionePostgresDAO(connection);
+		} catch (SQLException exception) {
+			mostraNotifica(erroreConnessioneDatabase, img.messaggioErrore(), erroreMostrato);
+		}
+		return dao;
+	}
+
+	// METODI DI CODA DI IMBARCO
+	public void svuotaCampiCodaDiImbarco() {
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().setText(null);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().setText(null);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().setText(null);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void aggiungiCodaDiImbarco() {
+		if (nessunCampoVuotoCodeDiImbarco()) {
+			int ora = 0;
+			int minutoImbarcoStimato = Integer.parseInt(
+					((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().getText());
+			int secondo = 0;
+
+			Time tempoDiImbarcoStimato = new Time(ora, minutoImbarcoStimato, secondo);
+
+			cdi = new CodaDiImbarco(
+					((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText(),
+					((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().getText(),
+					tempoDiImbarcoStimato);
+
+			try {
+				implementazioneCodaDiImbarcoDAO().aggiungiCodaDiImbarco(cdi);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco()
+						.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaCodaDiImbarco());
+				svuotaCampiCodaDiImbarco();
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+
+		}
+	}
+
+	public void eliminaCodaDiImbarco() {
+		if (campoCodiceVuoto(
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText())) {
+			cdi = new CodaDiImbarco(
+					((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText());
+
+			int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabellaCodaDiImbarco().getSelectedRow();
+
+			try {
+				implementazioneCodaDiImbarcoDAO().cancellaCodaDiImbarco(cdi);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaCodaDiImbarco().removeRow(t);
+				svuotaCampiCodaDiImbarco();
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public void modificaCodaDiImbarco() {
+		if (nessunCampoVuotoCodeDiImbarco()) {
+			int ora = 0;
+			int minutoImbarcoStimato = Integer.parseInt(
+					((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().getText());
+			int secondo = 0;
+
+			Time tempoDiImbarcoStimato = new Time(ora, minutoImbarcoStimato, secondo);
+
+			cdi = new CodaDiImbarco(
+					((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText(),
+					((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().getText(),
+					tempoDiImbarcoStimato);
+			try {
+				implementazioneCodaDiImbarcoDAO().modificaCodaDiImbarco(cdi);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				svuotaCampiCodaDiImbarco();
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public boolean nessunCampoVuotoCodeDiImbarco() {
+		if (((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceCodaDiImbarco().getText().length() > 0
+				&& ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtNomeCodaDiImbarco().getText()
+						.length() > 0
+				&& ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtTempoDiImbarcoStimato().getText()
+						.length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// METODI GESTIONE COMPAGNIA AEREA
+	public void svuotaCampiGestioneCompagniaAerea() {
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().setText("");
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().setText("");
+		((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtBarraRicerca().setText("");
+	}
+
+	public void aggiungiCompagniaAerea() {
+		if (nessunCampoVuotoCompagniaAerea()) {
+			compAerea = new CompagniaAerea(
+					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
+							.getText(),
+					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
+			try {
+				implementazioneCompagniaAereaDAO().aggiungiCompagniaAerea(compAerea);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
+						.addRow(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getRow());
+				svuotaCampiGestioneCompagniaAerea();
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public void eliminaCompagniaAerea() {
+		if (campoCodiceVuoto(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree())
+				.getTxtCodiceCompagniaAerea().getText())) {
+			compAerea = new CompagniaAerea(
+					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
+							.getText(),
+					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
+			int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
+			try {
+				implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().removeRow(t);
+				svuotaCampiGestioneCompagniaAerea();
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public void modificaCompagniaAerea() {
+		if (nessunCampoVuotoCompagniaAerea()) {
+			compAerea = new CompagniaAerea(
+					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
+							.getText(),
+					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText());
+			int t = ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTabella().getSelectedRow();
+
+			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello()
+					.setValueAt(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree())
+							.getTxtCodiceCompagniaAerea().getText(), t, 0);
+			((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getModello().setValueAt(
+					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText(), t, 1);
+
+			try {
+				implementazioneCompagniaAereaDAO().modificaCompagniaAerea(compAerea);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				svuotaCampiGestioneCompagniaAerea();
+				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public boolean nessunCampoVuotoCompagniaAerea() {
+		if (((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea().getText()
+				.length() > 0
+				&& ((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtNome().getText()
+						.length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// METODI GESTIONE GATE
+	public void svuotaCampiGestioneGate() {
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().setText("");
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().setText("");
+		((GestioneGate) getDashboard().getGestioneGate()).getTxtBarraRicerca().setText("");
+	}
+
+	@SuppressWarnings("deprecation")
+	public void aggiungiGate() {
+		if (nessunCampoVuotoGate()) {
+			int ora = 0;
+			int minutoChiusuraGate = 20;
+			int secondo = 0;
+
+			Time chiusuraGate = new Time(ora, minutoChiusuraGate, secondo);
+
+			gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
+					((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), chiusuraGate);
+
+			try {
+				implementazioneGateDAO().aggiungiGate(gt);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneGate) getDashboard().getGestioneGate()).getModello()
+						.addRow(((GestioneGate) getDashboard().getGestioneGate()).getRow());
+				svuotaCampiGestioneGate();
+				((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public void eliminaGate() {
+		if (campoCodiceVuoto(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText())) {
+			gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText());
+
+			int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
+			try {
+				implementazioneGateDAO().cancellaGate(gt);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneGate) getDashboard().getGestioneGate()).getModello().removeRow(t);
+				svuotaCampiGestioneGate();
+				((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public void modificaGate() {
+		if (nessunCampoVuotoGate()) {
+			int ora = 0;
+			int minutoChiusuraGate = 20;
+			int secondo = 0;
+
+			Time chiusuraGate = new Time(ora, minutoChiusuraGate, secondo);
+
+			gt = new Gate(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(),
+					((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), chiusuraGate);
+
+			int t = ((GestioneGate) getDashboard().getGestioneGate()).getTabella().getSelectedRow();
+
+			((GestioneGate) getDashboard().getGestioneGate()).getModello()
+					.setValueAt(((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText(), t, 0);
+			((GestioneGate) getDashboard().getGestioneGate()).getModello()
+					.setValueAt(((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText(), t, 1);
+
+			try {
+				implementazioneGateDAO().modificaGate(gt);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				svuotaCampiGestioneGate();
+				((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public boolean nessunCampoVuotoGate() {
+		if (((GestioneGate) getDashboard().getGestioneGate()).getTxtCodiceGate().getText().length() > 0
+				&& ((GestioneGate) getDashboard().getGestioneGate()).getTxtNumeroPorta().getText().length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// METODI DI GATE CODE DI IMBARCO
+	public void svuotaCampiGateCodeImbarco() {
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().setText("");
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().setText("");
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtBarraRicerca().setText("");
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxCodaDiImbarco().setSelectedIndex(0);
+		((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getComboBoxNumeroPorta().setSelectedIndex(0);
+	}
+
+	public void aggiungiGateCodeImbarco() {
+		if (nessunCampoVuotoGateCodeImbarco()) {
+			cdi = new CodaDiImbarco(
+					((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText());
+
+			gt = new Gate(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
+
+			try {
+				implementazioneGateDAO().aggiungiGateInCodaDiImbarco(gt, cdi);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione()
+						.addRow(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getRigaAssociazione());
+				svuotaCampiGateCodeImbarco();
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public void eliminaGateCodeImbarco() {
+		if (campoCodiceVuoto(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText())) {
+			cdi = new CodaDiImbarco(
+					((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText());
+
+			gt = new Gate(((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText());
+
+			int t = ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTabellaAssociazioni().getSelectedRow();
+			try {
+				implementazioneGateDAO().cancellaGateInCodaDiImbarco(gt, cdi);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getModelloTabellaAssociazione().removeRow(t);
+				svuotaCampiGestioneGate();
+				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public boolean nessunCampoVuotoGateCodeImbarco() {
+		if (((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodaDiImbarco().getText().length() > 0
+				&& ((GateCodeImbarco) getDashboard().getGateCodeImbarco()).getTxtCodiceGate().getText().length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// METODI DI UTILIZZO GATE
+	public void svuotaCampiUtilizzoGate() {
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().setText("");
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtNumeroPorta().setText("");
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtBarraRicerca().setText("");
+		((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().setDate(null);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void caricaTabellaUtilizzoGiornaliero() {
+		if (nessunCampoVuotoUtilizzoGate()) {
+			Timestamp dataUtilizzo = new Timestamp(
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0,
+					0);
+
+			Gate gt = new Gate(((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().getText());
+
+			try {
+				((UtilizzoGate) getDashboard().getUtilizzoGate())
+						.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoGiornaliero(gt, dataUtilizzo));
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
+				for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
+							.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
+									dato.getTotaleUtilizzoStimato(), dataUtilizzo });
+				}
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
+						.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
+			} catch (SQLException e) {
+				mostraNotifica(erroreUtilizzoGate, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public void caricaTabellaUtilizzoSettimanale() {
+		if (nessunCampoVuotoUtilizzoGate()) {
+			Timestamp dataUtilizzo = new Timestamp(
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0,
+					0);
+
+			Gate gt = new Gate(((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().getText());
+			String settimana = "Settimana ";
+			int i = 1;
+
+			try {
+				((UtilizzoGate) getDashboard().getUtilizzoGate())
+						.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoSettimanale(gt, dataUtilizzo));
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
+				for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
+
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
+							.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
+									dato.getTotaleUtilizzoStimato(), settimana.concat(String.valueOf(i)) });
+					i = i + 1;
+				}
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
+						.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
+			} catch (SQLException e) {
+				mostraNotifica(erroreUtilizzoGate, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+
+	}
+
+	@SuppressWarnings("deprecation")
+	public void caricaTabellaUtilizzoMensile() {
+		if (nessunCampoVuotoUtilizzoGate()) {
+			Timestamp dataUtilizzo = new Timestamp(
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0,
+					0);
+
+			Gate gt = new Gate(((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().getText());
+
+			try {
+				((UtilizzoGate) getDashboard().getUtilizzoGate())
+						.setListaUtilizzoGate(implementazioneGateDAO().stampaUtilizzoMensile(gt, dataUtilizzo));
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi().setNumRows(0);
+
+				for (Gate dato : ((UtilizzoGate) getDashboard().getUtilizzoGate()).getListaUtilizzoGate()) {
+					((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi()
+							.addRow(new Object[] { dato.getCodiceGate(), dato.getTotaleUtilizzoEffettivo(),
+									dato.getTotaleUtilizzoStimato(), stampaMese() });
+				}
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getTabellaUtilizzi()
+						.setModel(((UtilizzoGate) getDashboard().getUtilizzoGate()).getModelloTabellaUtilizzi());
+			} catch (SQLException e) {
+				mostraNotifica(erroreUtilizzoGate, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public String stampaMese() {
+		String mese = null;
+		Timestamp dataUtilizzo = new Timestamp(
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getYear(),
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getMonth(),
+				((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getDate(), 0, 0, 0, 0);
+
+		switch (dataUtilizzo.getMonth() + 1) {
+		case 1:
+			mese = "Gennaio";
+			break;
+		case 2:
+			mese = "Febbraio";
+			break;
+		case 3:
+			mese = "Marzo";
+			break;
+		case 4:
+			mese = "Aprile";
+			break;
+		case 5:
+			mese = "Maggio";
+			break;
+		case 6:
+			mese = "Giugno";
+			break;
+		case 7:
+			mese = "Luglio";
+			break;
+		case 8:
+			mese = "Agosto";
+			break;
+		case 9:
+			mese = "Settembre";
+			break;
+		case 10:
+			mese = "Ottobre";
+			break;
+		case 11:
+			mese = "Novembre";
+			break;
+		case 12:
+			mese = "Dicembre";
+			break;
+		}
+		return mese;
+	}
+
+	public boolean nessunCampoVuotoUtilizzoGate() {
+		if (((UtilizzoGate) getDashboard().getUtilizzoGate()).getTxtCodiceGate().getText().length() > 0
+				&& ((UtilizzoGate) getDashboard().getUtilizzoGate()).getDataUtilizzo().getDate().getTime() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// METODI GESTIONE TRATTE
+	public void svuotaCampiGestioneTratta() {
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().setText("");
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().setText("");
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().setText("");
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtBarraRicerca().setText("");
+		((GestioneTratte) getDashboard().getGestioneTratte()).getComboBoxNomeCompagniaAerea().setSelectedIndex(0);
+	}
+
+	public void aggiungiTratta() {
+		if (nessunCampoVuotoTratte()) {
+			compAerea = new CompagniaAerea(
+					((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceCompagniaAerea().getText());
+
+			trt = new Tratta(compAerea,
+					((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(),
+					((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
+					((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText());
+
+			try {
+				implementazioneTrattaDAO().aggiungiTratta(trt);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneTratte) getDashboard().getGestioneTratte()).getModello()
+						.addRow(((GestioneTratte) getDashboard().getGestioneTratte()).getRow());
+				svuotaCampiGestioneTratta();
+				((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public void eliminaTratta() {
+		if (campoCodiceVuoto(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText())) {
+			compAerea = new CompagniaAerea(
+					((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceCompagniaAerea().getText());
+
+			trt = new Tratta(((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText());
+
+			int t = ((GestioneTratte) getDashboard().getGestioneTratte()).getTabella().getSelectedRow();
+			try {
+				implementazioneTrattaDAO().cancellaTratta(trt);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneTratte) getDashboard().getGestioneTratte()).getModello().removeRow(t);
+				svuotaCampiGestioneTratta();
+				((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public void modificaTratta() {
+		if (nessunCampoVuotoTratte()) {
+			compAerea = new CompagniaAerea(
+					((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceCompagniaAerea().getText());
+
+			trt = new Tratta(compAerea,
+					((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText(),
+					((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText(),
+					((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText());
+			try {
+				implementazioneTrattaDAO().modificaTratta(trt);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				svuotaCampiGestioneTratta();
+				((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public boolean nessunCampoVuotoTratte() {
+		if (((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceCompagniaAerea().getText().length() > 0
+				&& ((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceTratta().getText().length() > 0
+				&& ((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().getText().length() > 0
+				&& ((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().getText().length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// METODI GESTIONE VOLI ARRIVI
+	public void svuotaCampiGestioneVoloArrivi() {
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().setText("");
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().setText("");
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().setDate(null);
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().setText("");
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().setText("");
+		((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtBarraRicerca().setText("");
+	}
+
+	@SuppressWarnings("deprecation")
+	public void aggiungiVoloArrivi() {
+		if (nessunCampoVuotoVoloArrivi()) {
+			int ora = Integer.parseInt(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText());
+			int minuto = Integer.parseInt(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().getText());
+			int secondo = 0;
+
+			Time tempo = new Time(ora, minuto, secondo);
+
+			if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
+
+				Timestamp dataTempo = new Timestamp(
+						((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+								.getYear(),
+						((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+								.getMonth(),
+						((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+								.getDate(),
+						tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
+
+				vlarr = new VoloArrivi(
+						((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi()
+								.getText(),
+						((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(),
+						dataTempo);
+
+				try {
+					implementazioneVoloArriviDAO().aggiungiVoloArrivi(vlarr);
+					mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello()
+							.addRow(((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getRow());
+					svuotaCampiGestioneVoloArrivi();
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
+				} catch (SQLException e) {
+					mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+				}
+			} else {
+				mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public void eliminaVoloArrivi() {
+		if (campoCodiceVuoto(
+				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText())) {
+			vlarr = new VoloArrivi(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText());
+
+			int t = ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTabella().getSelectedRow();
+			try {
+				implementazioneVoloArriviDAO().cancellaVoloArrivi(vlarr);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getModello().removeRow(t);
+				svuotaCampiGestioneVoloArrivi();
+				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+		}
+
+	}
+
+	@SuppressWarnings("deprecation")
+	public void modificaVoloArrivi() {
+		if (nessunCampoVuotoVoloArrivi()) {
+			int ora = Integer.parseInt(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText());
+			int minuto = Integer.parseInt(
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().getText());
+			int secondo = 0;
+
+			Time tempo = new Time(ora, minuto, secondo);
+
+			if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
+
+				Timestamp dataTempo = new Timestamp(
+						((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+								.getYear(),
+						((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+								.getMonth(),
+						((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getDateDataArrivo().getDate()
+								.getDate(),
+						tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
+
+				vlarr = new VoloArrivi(
+						((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi()
+								.getText(),
+						((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText(),
+						dataTempo);
+				try {
+					implementazioneVoloArriviDAO().modificaVoloArrivi(vlarr);
+					mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+					svuotaCampiGestioneVoloArrivi();
+					((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
+				} catch (SQLException e) {
+					mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+				}
+			} else {
+				mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public boolean nessunCampoVuotoVoloArrivi() {
+		if (((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtOraArrivo().getText().length() > 0
+				&& ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtMinutoArrivo().getText()
+						.length() > 0
+				&& ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCodiceVoloArrivi().getText()
+						.length() > 0
+				&& ((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).getTxtCittaPartenza().getText()
+						.length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// METODI GESTIONE VOLI PARTENZE
+	public void svuotaCampiGestioneVoloPartenze() {
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtBarraRicerca().setText("");
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().setText("");
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().setText("");
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().setText("");
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().setDate(null);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().setText("");
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().setText("");
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni().setText(null);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo().setText(null);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().setText(null);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxNumeroPorta().setSelectedIndex(0);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxCittaArrivo().setSelectedIndex(0);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getComboBoxStatus().setSelectedIndex(0);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void aggiungiVoloPartenze() {
+		if (nessunCampoVuotoVoloPartenze()) {
+			gt = new Gate(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText());
+			trt = new Tratta(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
+
+			int ora = Integer.parseInt(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText());
+			int minuto = Integer.parseInt(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText());
+			int secondo = 0;
+			Time tempo = new Time(ora, minuto, secondo);
+			int minutoTempoImbarcoEffettivo = Integer
+					.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+							.getTxtTempoDiImbarcoEffettivo().getText());
+			Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarcoEffettivo, 0);
+
+			String status = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText();
+
+			VoloPartenze codice = new VoloPartenze(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+					.getTxtCodiceVoloPartenze().getText());
+			String statusImbarco = null;
+			try {
+				statusImbarco = implementazioneVoloPartenzeDAO().risultatoStatusImbarco(codice);
+			} catch (SQLException e1) {
+
+			}
+
+			if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
+
+				Timestamp dataTempo = new Timestamp(
+						((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
+								.getDate().getYear(),
+						((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
+								.getDate().getMonth(),
+						((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
+								.getDate().getDate(),
+						tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
+
+				vlprtz = new VoloPartenze(
+						((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
+								.getText(),
+						dataTempo, ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+								.getTxtNumeroPrenotazioni().getText(),
+						tempoImbarcoEffettivo, trt, gt, status, statusImbarco);
+
+				try {
+					implementazioneVoloPartenzeDAO().inserisciVoloPartenze(vlprtz);
+					mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
+							.addRow(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getRow());
+					svuotaCampiGestioneVoloPartenze();
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+				} catch (PSQLException e) {
+					mostraNotifica(erroreVoloPerGateEsistente, img.messaggioErrore(), erroreMostrato);
+				} catch (SQLException e) {
+					mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+				}
+			} else {
+				mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public void eliminaVoloPartenze() {
+		if (campoCodiceVuoto(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+				.getTxtCodiceVoloPartenze().getText())) {
+			vlprtz = new VoloPartenze(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+					.getTxtCodiceVoloPartenze().getText());
+
+			int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
+			try {
+				implementazioneVoloPartenzeDAO().cancellaVoloPartenze(vlprtz);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().removeRow(t);
+				svuotaCampiGestioneVoloPartenze();
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public void modificaVoloPartenze() {
+		if (nessunCampoVuotoVoloPartenze()) {
+			gt = new Gate(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText());
+			trt = new Tratta(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText());
+
+			int ora = Integer.parseInt(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText());
+			int minuto = Integer.parseInt(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText());
+			int secondo = 0;
+
+			Time tempo = new Time(ora, minuto, secondo);
+			int minutoTempoImbarcoEffettivo = Integer
+					.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+							.getTxtTempoDiImbarcoEffettivo().getText());
+			Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarcoEffettivo, 0);
+
+			String status = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText();
+
+			VoloPartenze codice = new VoloPartenze(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+					.getTxtCodiceVoloPartenze().getText());
+			String statusImbarco = null;
+			try {
+				statusImbarco = implementazioneVoloPartenzeDAO().risultatoStatusImbarco(codice);
+			} catch (SQLException e1) {
+
+			}
+
+			if ((ora < 24 && ora > -1) && (minuto < 60 && minuto > -1)) {
+
+				Timestamp dataTempo = new Timestamp(
+						((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
+								.getDate().getYear(),
+						((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
+								.getDate().getMonth(),
+						((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza()
+								.getDate().getDate(),
+						tempo.getHours(), tempo.getMinutes(), tempo.getSeconds(), 0);
+
+				vlprtz = new VoloPartenze(
+						((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze()
+								.getText(),
+						dataTempo, ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+								.getTxtNumeroPrenotazioni().getText(),
+						tempoImbarcoEffettivo, trt, gt, status, statusImbarco);
+
+				try {
+					implementazioneVoloPartenzeDAO().modificaVoloPartenze(vlprtz);
+					mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+					svuotaCampiGestioneVoloPartenze();
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+				} catch (SQLException e) {
+					mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+				}
+			} else {
+				mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public void modificaStatusImbarcoVoloPartenze() {
+		if (campoTempoImbarcoPieno()) {
+			int minutoTempoImbarco = Integer.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+					.getTxtTempoDiImbarcoEffettivo().getText());
+
+			Time tempoImbarcoEffettivo = new Time(0, minutoTempoImbarco, 0);
+
+			vlprtz = new VoloPartenze(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+					.getTxtCodiceVoloPartenze().getText(), tempoImbarcoEffettivo);
+
+			int t = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTabella().getSelectedRow();
+
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello()
+					.setValueAt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+							.getTxtCodiceVoloPartenze().getText(), t, 0);
+			((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getModello().setValueAt(
+					((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText(), t, 8);
+
+			try {
+				implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				svuotaCampiGestioneVoloPartenze();
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreVoloPartenzeAggiornaStatusImbarco, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public void modificaStatusVoloPartenze() {
+		if (campiStatusETempoPieni()) {
+			String statusVolo = ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus()
+					.getText();
+
+			int minutoImbarcoEffettivo = Integer
+					.parseInt(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+							.getTxtTempoDiImbarcoEffettivo().getText());
+
+			Time tempoImbarcoEffettivo = new Time(0, minutoImbarcoEffettivo, 0);
+
+			vlprtz = new VoloPartenze(((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze())
+					.getTxtCodiceVoloPartenze().getText(), statusVolo, tempoImbarcoEffettivo);
+
+			try {
+				implementazioneVoloPartenzeDAO().modificaStatusVoloPartenze(vlprtz);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				svuotaCampiGestioneVoloPartenze();
+				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreVoloPartenzeAggiornaStatus, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public boolean nessunCampoVuotoVoloPartenze() {
+		if (((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceVoloPartenze().getText()
+				.length() > 0
+				&& ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceGate().getText()
+						.length() > 0
+				&& ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtCodiceTratta().getText()
+						.length() > 0
+				&& ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getDateDataPartenza().getDate()
+						.getTime() > 0
+				&& ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtOraPartenza().getText()
+						.length() > 0
+				&& ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtMinutoPartenza().getText()
+						.length() > 0
+				&& ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo()
+						.getText().length() > 0
+				&& ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtNumeroPrenotazioni()
+						.getText().length() > 0
+				&& ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText()
+						.length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean campoTempoImbarcoPieno() {
+		if (((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo().getText()
+				.length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean campiStatusETempoPieni() {
+		if (((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtTempoDiImbarcoEffettivo().getText()
+				.length() > 0
+				&& ((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getTxtStatus().getText()
+						.length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// METODI GESTIONE UTENTI
+	public void svuotaCampiGestioneUtenti() {
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().setText("");
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().setText("");
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().setText("");
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().setText("");
+		((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtBarraRicerca().setText("");
+	}
+
+	public void eliminaUtente() {
+		if (campoCodiceVuoto(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText())) {
+			utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText());
+			int t = ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTabella().getSelectedRow();
+			try {
+				implementazioneUtenteDAO().cancellaUtente(utn);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).getModello().removeRow(t);
+				svuotaCampiGestioneUtenti();
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public void modificaUtente() {
+		if (nessunCampoVuotoUtenti()) {
+			utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText(),
+					((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText(),
+					((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText(),
+					((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText());
+			try {
+				implementazioneUtenteDAO().modificaUtente(utn);
+				mostraNotifica(operazioneRiuscitaInGestioni, img.messaggioNotifica(), successoMostrato);
+				svuotaCampiGestioneUtenti();
+				((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
+			} catch (SQLException e) {
+				mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+			}
+		} else {
+			mostraNotifica(erroreGestioniGenerale, img.messaggioErrore(), erroreMostrato);
+		}
+	}
+
+	public boolean nessunCampoVuotoUtenti() {
+		if (((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtNome().getText().length() > 0
+				&& ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtCognome().getText().length() > 0
+				&& ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText().length() > 0
+				&& ((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtPassword().getText().length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// CONTROLLO CODICE GESTIONI
+	public boolean campoCodiceVuoto(String s) {
+		if (s.length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// AGGIORNAMENTO COMBOBOX
+	public void rimuoviElementiComboBox(JComboBox<String> comboBox) {
+		for (int i = comboBox.getItemCount() - 1; i > 0; i--) {
+			comboBox.removeItemAt(i);
+		}
 	}
 
 	// METODI DI CAMBIO TEMA E IMMAGINI
@@ -4151,16 +4335,33 @@ public class Controller {
 
 	}
 
-	// METODI TOOLTIP
-	public void chiudiTuttiTT() {
-		getDashboard().getLblMenuTT().setVisible(false);
-		getDashboard().getLblHomeTT().setVisible(false);
-		getDashboard().getLblAccediTT().setVisible(false);
-		getDashboard().getLblRegistratiTT().setVisible(false);
-		getDashboard().getLblProfiloTT().setVisible(false);
-		getDashboard().getLblImpostazioniTT().setVisible(false);
-		getDashboard().getLblEsciTT().setVisible(false);
-		getDashboard().getLblCambioTemaTT().setVisible(false);
-		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRegistroVoliTT().setVisible(false);
+	// METODI PER RIDIMENSIONAMENTO
+	public int dimensioneSchermoX() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int xSize = ((int) tk.getScreenSize().getHeight());
+		return xSize;
+	}
+
+	public int dimensioneSchermoY() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int ySize = ((int) tk.getScreenSize().getWidth());
+		return ySize;
+	}
+
+	// RIMOZIONE BACKGROUND JAVA E ADATTAMENTO AL CENTRO DELLO SCHERMO
+	public Dimension centramentoJFrame(JFrame frame) {
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
+		frame.setBackground(new Color(0, 0, 0, 0));
+
+		return dim;
+	}
+
+	public Dimension centramentoJDialog(JDialog option) {
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		option.setLocation(dim.width / 2 - option.getSize().width / 2, dim.height / 2 - option.getSize().height / 2);
+		option.setUndecorated(true);
+
+		return dim;
 	}
 }

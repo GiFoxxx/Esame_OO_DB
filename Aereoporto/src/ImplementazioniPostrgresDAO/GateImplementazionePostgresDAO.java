@@ -18,8 +18,6 @@ import ClassiDAO.GateDAO;
 
 public class GateImplementazionePostgresDAO implements GateDAO {
 
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
 	private Connection connection;
 	private PreparedStatement stampaGatePS, stampaGateCodeImbarcoPS, aggiungiGatePS, aggiungiGateInCodaDiImbarcoGatePS,
 			cancellaGatePS, cancellaGateInCodaDiImbarcoGatePS, modificaGatePS, stampaUtilizzoGiornalieroPS,

@@ -287,7 +287,7 @@ public class PasswordDimenticata extends JDialog {
 				@Override
 				public void keyPressed(KeyEvent EventoInvio) {
 					if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-						controllerPasswordDimenticata.accessoPasswordDimenticata();
+						controllerPasswordDimenticata.cambioPasswordDimenticata();
 					}
 				}
 
@@ -311,7 +311,7 @@ public class PasswordDimenticata extends JDialog {
 				@Override
 				public void keyPressed(KeyEvent EventoInvio) {
 					if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-						controllerPasswordDimenticata.accessoPasswordDimenticata();
+						controllerPasswordDimenticata.cambioPasswordDimenticata();
 					}
 				}
 			});
@@ -327,7 +327,7 @@ public class PasswordDimenticata extends JDialog {
 				@Override
 				public void keyPressed(KeyEvent EventoInvio) {
 					if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-						controllerPasswordDimenticata.accessoPasswordDimenticata();
+						controllerPasswordDimenticata.cambioPasswordDimenticata();
 					}
 				}
 			});
@@ -467,7 +467,7 @@ public class PasswordDimenticata extends JDialog {
 			lblSalva.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					controllerPasswordDimenticata.accessoPasswordDimenticata();
+					controllerPasswordDimenticata.cambioPasswordDimenticata();
 				}
 
 				@Override

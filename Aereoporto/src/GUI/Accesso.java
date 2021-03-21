@@ -188,7 +188,7 @@ public class Accesso extends JPanel {
 		lblMostraPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerAccesso.chiudiMostraPasswordTT(lblMostraPasswordTT);
+				controllerAccesso.chiudiTT(lblMostraPasswordTT, controllerAccesso.isStopMostraPasswordTT());
 				lblMostraPassword.setVisible(false);
 				txtPassword.setEchoChar((char) 0);
 			}
@@ -216,7 +216,7 @@ public class Accesso extends JPanel {
 		lblCensuraPassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controllerAccesso.chiudiCensuraPasswordTT(lblMostraPasswordTT);
+				controllerAccesso.chiudiTT(lblCensuraPasswordTT, controllerAccesso.isStopCensuraPasswordTT());
 				lblMostraPassword.setVisible(true);
 				txtPassword.setEchoChar('●');
 			}

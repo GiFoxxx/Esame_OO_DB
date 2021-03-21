@@ -7,8 +7,6 @@ import java.util.Date;
 
 public class VoloArrivi {
 
-	CompagniaAerea compagniaAerea = new CompagniaAerea();
-	Tratta trt = new Tratta();
 
 	// ATTRIBUTI
 	private String codiceVoloArrivi;
@@ -57,12 +55,7 @@ public class VoloArrivi {
 		this.codiceVoloArrivi = codiceVoloArrivi;
 	}
 
-	@Override
-	public String toString() {
-		return "VoloArrivi [compagniaAerea=" + compagniaAerea + ", trt=" + trt + ", codiceVoloArrivi="
-				+ codiceVoloArrivi + ", cittaPartenza=" + cittaPartenza + ", dataOrarioPartenza=" + dataOrarioPartenza
-				+ "]";
-	}
+	
 
 	
 
