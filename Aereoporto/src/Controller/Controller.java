@@ -44,6 +44,8 @@ public class Controller {
 	private boolean stopCambioTemaTT = false;
 	private boolean stopMostraPasswordTT = false;
 	private boolean stopCensuraPasswordTT = false;
+	private boolean stopRegistroVoliTT = false;
+
 
 	// PALETTE COLORI TEMA SCURO
 	public Color bordiTemaScuro = new Color(35, 39, 42);
@@ -243,6 +245,14 @@ public class Controller {
 
 	public void setStopCensuraPasswordTT(boolean stopCensuraPasswordAccessoTT) {
 		this.stopCensuraPasswordTT = stopCensuraPasswordAccessoTT;
+	}
+
+	public boolean isStopRegistroVoliTT() {
+		return stopRegistroVoliTT;
+	}
+
+	public void setStopRegistroVoliTT(boolean stopRegistroVoliTT) {
+		this.stopRegistroVoliTT = stopRegistroVoliTT;
 	}
 
 	public int getFlagCambioTema() {
@@ -4151,5 +4161,6 @@ public class Controller {
 		getDashboard().getLblImpostazioniTT().setVisible(false);
 		getDashboard().getLblEsciTT().setVisible(false);
 		getDashboard().getLblCambioTemaTT().setVisible(false);
+		((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).getLblRegistroVoliTT().setVisible(false);
 	}
 }

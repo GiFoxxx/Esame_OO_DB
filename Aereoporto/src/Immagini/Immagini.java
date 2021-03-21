@@ -1698,6 +1698,13 @@ public class Immagini {
 	}
 
 	/*-----------------------------------------------------------TOOLTIP-----------------------------------------------------------*/
+	
+	public Image registroVoliTT() {
+		Image registroVoliTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/registroVoliTT.png")).getImage()
+				.getScaledInstance(100, 30, Image.SCALE_SMOOTH);
+		return registroVoliTT;
+	}
+	
 
 	public Image menuTT() {
 		Image menuTT = new ImageIcon(Dashboard.class.getResource("immaginiToolTip/menuTT.png")).getImage()
@@ -1761,6 +1768,12 @@ public class Immagini {
 
 	/*-----------------------------------------------------------TOOLTIP TEMA CHIARO-----------------------------------------------------------*/
 
+	public Image registroVoliTTTemaChiaro() {
+		Image registroVoliTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/registroVoliTTChiaro.png")).getImage()
+				.getScaledInstance(100, 30, Image.SCALE_SMOOTH);
+		return registroVoliTTChiaro;
+	}
+	
 	public Image menuTTChiaro() {
 		Image menuTTChiaro = new ImageIcon(Dashboard.class.getResource("immaginiToolTipChiare/menuTTChiaro.png"))
 				.getImage().getScaledInstance(60, 31, Image.SCALE_SMOOTH);
