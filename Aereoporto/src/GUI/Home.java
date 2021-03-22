@@ -75,18 +75,21 @@ public class Home extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.setPannelloPrecedente(6);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneTratte());
 				} else {
-					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(), controllerHome.isErroreMostrato());
+					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(),
+							controllerHome.isErroreMostrato());
 				}
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				lblTratte.setIcon(new ImageIcon(img.tratte3()));
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				lblTratte.setIcon(new ImageIcon(img.tratte2()));
@@ -116,13 +119,16 @@ public class Home extends JPanel {
 					controllerHome.setPannelloPrecedente(7);
 					controllerHome.mostraPannelli(controllerHome.getDashboard().getGestioneCompagnieAeree());
 				} else {
-					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(), controllerHome.isErroreMostrato());
+					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(),
+							controllerHome.isErroreMostrato());
 				}
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				lblCompagniaAerea.setIcon(new ImageIcon(img.compagnieAeree3()));
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				lblCompagniaAerea.setIcon(new ImageIcon(img.compagnieAeree1()));
@@ -151,13 +157,16 @@ public class Home extends JPanel {
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.mostraSceltaGate();
 				} else {
-					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(), controllerHome.isErroreMostrato());
+					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(),
+							controllerHome.isErroreMostrato());
 				}
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				lblGate.setIcon(new ImageIcon(img.gate3()));
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				lblGate.setIcon(new ImageIcon(img.gate1()));
@@ -186,13 +195,16 @@ public class Home extends JPanel {
 				if (controllerHome.sbloccaGestione()) {
 					controllerHome.mostraSceltaVolo();
 				} else {
-					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(), controllerHome.isErroreMostrato());
+					controllerHome.mostraNotifica(controllerHome.erroreGeneraleHome, img.messaggioErrore(),
+							controllerHome.isErroreMostrato());
 				}
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				lblVolo.setIcon(new ImageIcon(img.voli3()));
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				lblVolo.setIcon(new ImageIcon(img.voli1()));
@@ -204,8 +216,6 @@ public class Home extends JPanel {
 		lblVolo.setBounds(179, 371, 276, 162);
 		add(lblVolo);
 
-		
 	}
 
-	
 }

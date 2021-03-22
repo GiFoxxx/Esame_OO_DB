@@ -14,7 +14,7 @@ import java.awt.Cursor;
 
 public class SceltaProfiloSenzaAccesso extends JDialog {
 	Immagini img = new Immagini();
-	
+
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -31,7 +31,6 @@ public class SceltaProfiloSenzaAccesso extends JDialog {
 	private JLabel lblContinuare;
 
 	// GETTER E SETTER
-
 	public JLabel getLblAnnulla() {
 		return lblAnnulla;
 	}

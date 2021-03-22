@@ -14,7 +14,7 @@ import java.awt.Cursor;
 
 public class SceltaGate extends JDialog {
 	Immagini img = new Immagini();
-	
+
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -113,7 +113,6 @@ public class SceltaGate extends JDialog {
 		this.lblTempisticheGate = lblTempisticheGate;
 	}
 
-	
 	Controller controllerSceltaGate;
 
 	public SceltaGate(Controller controller) {
@@ -210,25 +209,29 @@ public class SceltaGate extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco2TemaChiaro(), img.codeDiImbarco2());
+					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco2TemaChiaro(),
+							img.codeDiImbarco2());
 
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco1TemaChiaro(), img.codeDiImbarco1());
+					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco1TemaChiaro(),
+							img.codeDiImbarco1());
 
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco3TemaChiaro(), img.codeDiImbarco3());
+					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco3TemaChiaro(),
+							img.codeDiImbarco3());
 
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco1TemaChiaro(), img.codeDiImbarco1());
+					controllerSceltaGate.cambioImmagineTema(lblCodeDiImbarco, img.codeDiImbarco1TemaChiaro(),
+							img.codeDiImbarco1());
 
 				}
 			});
@@ -237,7 +240,7 @@ public class SceltaGate extends JDialog {
 			lblCodeDiImbarco.setIcon(new ImageIcon(img.codeDiImbarco1()));
 			lblCodeDiImbarco.setBounds(92, 198, 319, 36);
 			getContentPane().add(lblCodeDiImbarco);
-			
+
 			lblTempisticheGate = new JLabel("");
 			lblTempisticheGate.addMouseListener(new MouseAdapter() {
 				@Override
@@ -247,22 +250,26 @@ public class SceltaGate extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate2TemaChiaro(), img.utilizzoGate2());
+					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate2TemaChiaro(),
+							img.utilizzoGate2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate1TemaChiaro(), img.utilizzoGate1());
+					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate1TemaChiaro(),
+							img.utilizzoGate1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate3TemaChiaro(), img.utilizzoGate3());
+					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate3TemaChiaro(),
+							img.utilizzoGate3());
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate1TemaChiaro(), img.utilizzoGate1());
+					controllerSceltaGate.cambioImmagineTema(lblTempisticheGate, img.utilizzoGate1TemaChiaro(),
+							img.utilizzoGate1());
 				}
 			});
 			lblTempisticheGate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -270,14 +277,14 @@ public class SceltaGate extends JDialog {
 			lblTempisticheGate.setIcon(new ImageIcon(img.utilizzoGate1()));
 			lblTempisticheGate.setBounds(92, 150, 319, 36);
 			getContentPane().add(lblTempisticheGate);
-			
+
 			lblX = new JLabel("");
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					controllerSceltaGate.annullaSceltaGate();
 				}
-				
+
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					controllerSceltaGate.cambioImmagineTema(lblX, img.X2TemaChiaro(), img.X2());
@@ -298,7 +305,6 @@ public class SceltaGate extends JDialog {
 					controllerSceltaGate.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
 				}
 
-				
 			});
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
 			lblX.setIcon(new ImageIcon(img.X1()));

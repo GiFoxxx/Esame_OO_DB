@@ -14,7 +14,7 @@ import java.awt.Cursor;
 
 public class Uscita extends JDialog {
 	Immagini img = new Immagini();
-	
+
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -135,6 +135,7 @@ public class Uscita extends JDialog {
 				public void mousePressed(MouseEvent e) {
 					controllerUscita.cambioImmagineTema(lblX, img.X3TemaChiaro(), img.X3());
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					controllerUscita.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());
@@ -159,22 +160,26 @@ public class Uscita extends JDialog {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita2TemaChiaro(), img.annullaUscita2());
+					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita2TemaChiaro(),
+							img.annullaUscita2());
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita1TemaChiaro(), img.annullaUscita1());
+					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita1TemaChiaro(),
+							img.annullaUscita1());
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita3TemaChiaro(), img.annullaUscita3());
+					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita3TemaChiaro(),
+							img.annullaUscita3());
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita1TemaChiaro(), img.annullaUscita1());
+					controllerUscita.cambioImmagineTema(lblAnnulla, img.annullaUscita1TemaChiaro(),
+							img.annullaUscita1());
 				}
 			});
 			lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);

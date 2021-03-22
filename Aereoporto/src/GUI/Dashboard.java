@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.*;
 
+
 import Controller.Controller;
 import Immagini.Immagini;
 
@@ -1715,7 +1716,6 @@ public class Dashboard extends JFrame {
 	}
 
 	// METODI DI START
-
 	private void startVisibili() {
 		home.setVisible(true);
 		accesso.setVisible(false);

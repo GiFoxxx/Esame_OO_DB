@@ -35,11 +35,10 @@ public class RegistroVoliPartenze extends JPanel {
 			new String[] { "Cod. Voli Part.", "Comp. Aerea", "N\u00B0Gate", "Citta di Arrivo", "Data e Orario Partenza",
 					"Apertura Gate", "Chiusura Gate", "N\u00B0 Prenotazioni", "Status Imbarco", "Status Volo" });
 	List<VoloPartenze> ListaVoliPartenze = new ArrayList<>();
-	
-	
+
 	private JTextField txtBarraRicerca;
 	private JScrollPane scrollPane;
-	
+
 	private JTable tabella;
 
 	private JLabel lblimgfrecciaIndietro;
@@ -114,7 +113,8 @@ public class RegistroVoliPartenze extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerRegistroVoliPartenza.setPannelloPrecedente(9);
-				controllerRegistroVoliPartenza.mostraPannelli(controllerRegistroVoliPartenza.getDashboard().getGestioneVoliPartenze());
+				controllerRegistroVoliPartenza
+						.mostraPannelli(controllerRegistroVoliPartenza.getDashboard().getGestioneVoliPartenze());
 			}
 
 			@Override
@@ -272,9 +272,9 @@ public class RegistroVoliPartenze extends JPanel {
 		tabella.setRowSorter(trm);
 		trm.setRowFilter(RowFilter.regexFilter(ricerca));
 	}
-	
+
 	private void aggiorna() {
 		caricaTabella();
 	}
-	
+
 }

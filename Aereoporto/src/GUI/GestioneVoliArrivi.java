@@ -341,7 +341,7 @@ public class GestioneVoliArrivi extends JPanel {
 		txtCodiceVoloArrivi.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtCodiceVoloArrivi.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtCodiceVoloArrivi.setColumns(10);
-		txtCodiceVoloArrivi.setBounds(170, 438, 75, 20);
+		txtCodiceVoloArrivi.setBounds(170, 437, 75, 22);
 		add(txtCodiceVoloArrivi);
 
 		lblCodiceVoloArrivi = new JLabel("Codice Volo Arrivi");
@@ -371,7 +371,7 @@ public class GestioneVoliArrivi extends JPanel {
 		txtCittaPartenza.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtCittaPartenza.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtCittaPartenza.setColumns(10);
-		txtCittaPartenza.setBounds(170, 475, 133, 20);
+		txtCittaPartenza.setBounds(170, 474, 133, 22);
 		add(txtCittaPartenza);
 
 		lblDataArrivo = new JLabel("Data Arrivo");
@@ -394,7 +394,7 @@ public class GestioneVoliArrivi extends JPanel {
 		dateDataArrivo.setDateFormatString("dd/MM/yyyy");
 		dateDataArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		dateDataArrivo.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
-		dateDataArrivo.setBounds(430, 438, 133, 20);
+		dateDataArrivo.setBounds(430, 437, 133, 22);
 		add(dateDataArrivo);
 
 		lblOrarioArrivo = new JLabel("Orario Arrivo");
@@ -417,7 +417,7 @@ public class GestioneVoliArrivi extends JPanel {
 		txtOraArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtOraArrivo.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtOraArrivo.setColumns(10);
-		txtOraArrivo.setBounds(430, 475, 30, 20);
+		txtOraArrivo.setBounds(430, 474, 30, 22);
 		add(txtOraArrivo);
 
 		txtMinutoArrivo = new JTextField();
@@ -433,7 +433,7 @@ public class GestioneVoliArrivi extends JPanel {
 		txtMinutoArrivo.setForeground(controllerGestioneVoliArrivi.coloreScritteSuBiancoTemaScuro);
 		txtMinutoArrivo.setFont(controllerGestioneVoliArrivi.fontScritteGestioni);
 		txtMinutoArrivo.setColumns(10);
-		txtMinutoArrivo.setBounds(488, 475, 30, 20);
+		txtMinutoArrivo.setBounds(488, 474, 30, 22);
 		add(txtMinutoArrivo);
 
 		lblDuePuntiArrivo = new JLabel(":");

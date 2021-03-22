@@ -32,7 +32,7 @@ public class TrattaImplementazionePostgresDAO implements TrattaDAO {
 				"INSERT INTO tratta (codiceTratta, cittaPartenza, cittaArrivo, xcodiceCompagniaAerea) VALUES (?,?,?,?)");
 		cancellaTrattaPS = connection.prepareStatement("DELETE FROM tratta WHERE codicetratta = ?");
 		modificaTrattaPS = connection.prepareStatement(
-				"UPDATE tratta SET cittapartenza=?, cittaarrivo=? xcodiceCompagniaAerea=? WHERE codicetratta=?");
+				"UPDATE tratta SET cittapartenza=?, cittaarrivo=?, xcodiceCompagniaAerea=? WHERE codicetratta=?");
 		stampaCittaArrivoInComboBoxPS = connection
 				.prepareStatement("SELECT codiceTratta, cittaArrivo FROM tratta ORDER BY codicetratta ASC");
 	}

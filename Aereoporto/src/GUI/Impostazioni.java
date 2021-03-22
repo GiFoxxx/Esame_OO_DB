@@ -86,6 +86,8 @@ public class Impostazioni extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				controllerImpostazioni.mostraPannelli(controllerImpostazioni.getDashboard().getRecensioni());
 				controllerImpostazioni.setPannelloPrecedente(12);
+				((Recensione) controllerImpostazioni.getDashboard().getRecensioni()).stella0();
+				controllerImpostazioni.svuotaAreaRecensione();
 			}
 		});
 		lblRecensione.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

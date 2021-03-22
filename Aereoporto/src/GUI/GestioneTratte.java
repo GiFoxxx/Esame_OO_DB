@@ -327,7 +327,7 @@ public class GestioneTratte extends JPanel {
 		txtCodiceTratta.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCodiceTratta.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCodiceTratta.setColumns(10);
-		txtCodiceTratta.setBounds(187, 445, 75, 20);
+		txtCodiceTratta.setBounds(187, 444, 75, 22);
 		add(txtCodiceTratta);
 
 		lblCodiceTratta = new JLabel("Codice Tratta");
@@ -358,7 +358,7 @@ public class GestioneTratte extends JPanel {
 		txtCittaPartenza.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCittaPartenza.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCittaPartenza.setColumns(10);
-		txtCittaPartenza.setBounds(416, 445, 133, 20);
+		txtCittaPartenza.setBounds(416, 444, 133, 22);
 		add(txtCittaPartenza);
 
 		txtCittaArrivo = new JTextField();
@@ -375,7 +375,7 @@ public class GestioneTratte extends JPanel {
 		txtCittaArrivo.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		txtCittaArrivo.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCittaArrivo.setColumns(10);
-		txtCittaArrivo.setBounds(416, 485, 133, 20);
+		txtCittaArrivo.setBounds(416, 484, 133, 22);
 		add(txtCittaArrivo);
 
 		lblCittaArrivo = new JLabel("Citta Arrivo");
@@ -405,7 +405,7 @@ public class GestioneTratte extends JPanel {
 		txtCodiceCompagniaAerea.setFont(controllerGestioneTratte.fontScritteGestioni);
 		txtCodiceCompagniaAerea.setEditable(false);
 		txtCodiceCompagniaAerea.setColumns(10);
-		txtCodiceCompagniaAerea.setBounds(233, 485, 0, 20);
+		txtCodiceCompagniaAerea.setBounds(187, 485, 0, 20);
 		add(txtCodiceCompagniaAerea);
 
 		comboBoxNomeCompagniaAerea = new JComboBox<String>();
@@ -428,7 +428,7 @@ public class GestioneTratte extends JPanel {
 		});
 		comboBoxNomeCompagniaAerea.setForeground(controllerGestioneTratte.coloreScritteSuBiancoTemaScuro);
 		comboBoxNomeCompagniaAerea.setFont(controllerGestioneTratte.fontScritteGestioni);
-		comboBoxNomeCompagniaAerea.setBounds(187, 485, 75, 20);
+		comboBoxNomeCompagniaAerea.setBounds(187, 484, 75, 22);
 		add(comboBoxNomeCompagniaAerea);
 
 		lblAggiungi = new JLabel("");

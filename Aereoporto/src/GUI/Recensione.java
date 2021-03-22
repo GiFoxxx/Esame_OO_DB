@@ -15,9 +15,9 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
 public class Recensione extends JPanel {
-	
+
 	Immagini img = new Immagini();
-	
+
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -26,7 +26,7 @@ public class Recensione extends JPanel {
 	int y;
 	int flag = 0;
 	int valutazione = 0;
-	
+
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
 	private JLabel lblimgfrecciaIndietro;
@@ -61,7 +61,7 @@ public class Recensione extends JPanel {
 	JLabel lblStella29;
 	JLabel lblStella30;
 	JLabel lblCommento;
-	JLabel lblInviaRecensione;	
+	JLabel lblInviaRecensione;
 
 	// GETTER E SETTER
 	public JLabel getLblimgfrecciaIndietro() {
@@ -71,6 +71,7 @@ public class Recensione extends JPanel {
 	public void setLblimgfrecciaIndietro(JLabel lblimgfrecciaIndietro) {
 		this.lblimgfrecciaIndietro = lblimgfrecciaIndietro;
 	}
+
 	public JLabel getLblInviaRecensione() {
 		return lblInviaRecensione;
 	}
@@ -104,14 +105,14 @@ public class Recensione extends JPanel {
 	}
 
 	Controller controllerRecensione;
-	
+
 	public Recensione(Controller controller) {
 		controllerRecensione = controller;
 
 		setBounds(0, 0, 1090, 642);
 		setBackground(controllerRecensione.sfondoTemaScuro);
 		setLayout(null);
-		
+
 		lblimgfrecciaIndietro = new JLabel("");
 		lblimgfrecciaIndietro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblimgfrecciaIndietro.addMouseListener(new MouseAdapter() {
@@ -123,22 +124,26 @@ public class Recensione extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
+				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro2TemaChiaro(),
+						img.frecciaIndietro2());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
+				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro3TemaChiaro(),
+						img.frecciaIndietro3());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerRecensione.cambioImmagineTema(lblimgfrecciaIndietro, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 		});
 		lblimgfrecciaIndietro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -556,7 +561,7 @@ public class Recensione extends JPanel {
 
 		lblCommento = new JLabel("Lascia un commento!");
 		lblCommento.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCommento.setForeground(controllerRecensione.coloreScritteSuBiancoTemaScuro);
+		lblCommento.setForeground(controllerRecensione.coloreScritteTemaScuro);
 		lblCommento.setFont(controllerRecensione.fontLabel);
 		lblCommento.setBounds(45, 396, 389, 19);
 		add(lblCommento);

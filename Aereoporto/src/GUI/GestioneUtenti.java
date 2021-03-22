@@ -274,7 +274,7 @@ public class GestioneUtenti extends JPanel {
 		txtNome.setBorder(new LineBorder(controllerGestioneUtenti.bordiTemaScuro));
 		txtNome.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtNome.setFont(controllerGestioneUtenti.fontScritteGestioni);
-		txtNome.setBounds(125, 451, 133, 20);
+		txtNome.setBounds(125, 450, 133, 22);
 		txtNome.setColumns(10);
 		add(txtNome);
 
@@ -289,7 +289,7 @@ public class GestioneUtenti extends JPanel {
 		txtCognome.setBorder(new LineBorder(controllerGestioneUtenti.bordiTemaScuro));
 		txtCognome.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtCognome.setFont(controllerGestioneUtenti.fontScritteGestioni);
-		txtCognome.setBounds(125, 482, 133, 20);
+		txtCognome.setBounds(125, 481, 133, 22);
 		txtCognome.setColumns(10);
 		add(txtCognome);
 
@@ -304,7 +304,7 @@ public class GestioneUtenti extends JPanel {
 		txtEmail.setBorder(new LineBorder(controllerGestioneUtenti.bordiTemaScuro));
 		txtEmail.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtEmail.setFont(controllerGestioneUtenti.fontScritteGestioni);
-		txtEmail.setBounds(401, 451, 133, 20);
+		txtEmail.setBounds(401, 450, 133, 22);
 		txtEmail.setColumns(10);
 		add(txtEmail);
 
@@ -319,7 +319,7 @@ public class GestioneUtenti extends JPanel {
 		txtPassword.setBorder(new LineBorder(controllerGestioneUtenti.bordiTemaScuro));
 		txtPassword.setForeground(controllerGestioneUtenti.coloreScritteSuBiancoTemaScuro);
 		txtPassword.setFont(controllerGestioneUtenti.fontScritteGestioni);
-		txtPassword.setBounds(401, 482, 133, 20);
+		txtPassword.setBounds(401, 481, 133, 22);
 		txtPassword.setColumns(10);
 		add(txtPassword);
 

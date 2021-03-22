@@ -286,7 +286,7 @@ public class GestioneGate extends JPanel {
 		txtNumeroPorta.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtNumeroPorta.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
 		txtNumeroPorta.setColumns(10);
-		txtNumeroPorta.setBounds(146, 493, 45, 20);
+		txtNumeroPorta.setBounds(146, 492, 45, 22);
 		add(txtNumeroPorta);
 
 		lblCodiceGate = new JLabel("Codice Gate");
@@ -309,7 +309,7 @@ public class GestioneGate extends JPanel {
 		txtCodiceGate.setFont(controllerGestioneGate.fontScritteGestioni);
 		txtCodiceGate.setForeground(controllerGestioneGate.coloreScritteSuBiancoTemaScuro);
 		txtCodiceGate.setColumns(10);
-		txtCodiceGate.setBounds(146, 461, 75, 20);
+		txtCodiceGate.setBounds(146, 460, 75, 22);
 		add(txtCodiceGate);
 
 		lblAggiungi = new JLabel("");

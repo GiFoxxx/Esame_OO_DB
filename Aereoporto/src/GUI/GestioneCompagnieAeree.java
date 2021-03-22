@@ -279,7 +279,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		txtCodiceCompagniaAerea.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBiancoTemaScuro);
 		txtCodiceCompagniaAerea.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtCodiceCompagniaAerea.setColumns(10);
-		txtCodiceCompagniaAerea.setBounds(195, 459, 75, 20);
+		txtCodiceCompagniaAerea.setBounds(195, 458, 75, 22);
 		add(txtCodiceCompagniaAerea);
 
 		lblNome = new JLabel("Nome");
@@ -302,7 +302,7 @@ public class GestioneCompagnieAeree extends JPanel {
 		txtNome.setForeground(controllerGestioneCompagnieAeree.coloreScritteSuBiancoTemaScuro);
 		txtNome.setFont(controllerGestioneCompagnieAeree.fontScritteGestioni);
 		txtNome.setColumns(10);
-		txtNome.setBounds(195, 490, 133, 20);
+		txtNome.setBounds(195, 489, 133, 22);
 		add(txtNome);
 
 		lblCodiceCompagniaAerea = new JLabel("Codice Compagnia Aerea");

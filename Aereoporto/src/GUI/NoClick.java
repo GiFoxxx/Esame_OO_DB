@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 import Controller.Controller;
 
 public class NoClick extends JPanel {
-	
+
 	Controller controllerNoClick;
-	
+
 	public NoClick(Controller controller) {
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -22,7 +22,7 @@ public class NoClick extends JPanel {
 		});
 
 		controllerNoClick = controller;
-		
+
 		setBackground(controllerNoClick.temaNC);
 		setLayout(null);
 	}

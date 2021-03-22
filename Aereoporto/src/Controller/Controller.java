@@ -2014,6 +2014,7 @@ public class Controller {
 
 			try {
 				implementazioneCodaDiImbarcoDAO().cancellaCodaDiImbarco(cdi);
+				svuotaCampiCodaDiImbarco();
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaCodaDiImbarco();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2096,6 +2097,7 @@ public class Controller {
 							.getText());
 			try {
 				implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
+				svuotaCampiGestioneCompagniaAerea();
 				((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2174,6 +2176,7 @@ public class Controller {
 
 			try {
 				implementazioneGateDAO().cancellaGate(gt);
+				svuotaCampiGestioneGate();
 				((GestioneGate) getDashboard().getGestioneGate()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
@@ -2255,6 +2258,7 @@ public class Controller {
 
 			try {
 				implementazioneGateDAO().cancellaGateInCodaDiImbarco(gt, cdi);
+				svuotaCampiGateCodeImbarco();
 				((GateCodeImbarco) getDashboard().getGateCodeImbarco()).caricaTabellaAssociazione();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2441,6 +2445,7 @@ public class Controller {
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaPartenza().setText("");
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCittaArrivo().setText("");
 		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtBarraRicerca().setText("");
+		((GestioneTratte) getDashboard().getGestioneTratte()).getTxtCodiceCompagniaAerea().setText("");
 		((GestioneTratte) getDashboard().getGestioneTratte()).getComboBoxNomeCompagniaAerea().setSelectedIndex(0);
 	}
 
@@ -2476,6 +2481,7 @@ public class Controller {
 
 			try {
 				implementazioneTrattaDAO().cancellaTratta(trt);
+				svuotaCampiGestioneTratta();
 				((GestioneTratte) getDashboard().getGestioneTratte()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2580,6 +2586,7 @@ public class Controller {
 
 			try {
 				implementazioneVoloArriviDAO().cancellaVoloArrivi(vlarr);
+				svuotaCampiGestioneVoloArrivi();
 				((GestioneVoliArrivi) getDashboard().getGestioneVoliArrivi()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2738,6 +2745,7 @@ public class Controller {
 
 			try {
 				implementazioneVoloPartenzeDAO().cancellaVoloPartenze(vlprtz);
+				svuotaCampiGestioneVoloPartenze();
 				((GestioneVoliPartenze) getDashboard().getGestioneVoliPartenze()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
@@ -2923,6 +2931,7 @@ public class Controller {
 			utn = new Utente(((GestioneUtenti) getDashboard().getGestioneUtenti()).getTxtEmail().getText());
 			try {
 				implementazioneUtenteDAO().cancellaUtente(utn);
+				svuotaCampiGestioneUtenti();
 				((GestioneUtenti) getDashboard().getGestioneUtenti()).caricaTabella();
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);

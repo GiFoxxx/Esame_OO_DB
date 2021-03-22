@@ -366,7 +366,7 @@ public class UtilizzoGate extends JPanel {
 		txtNumeroPorta.setFont(controllerUtilizzoGate.fontScritteGestioni);
 		txtNumeroPorta.setForeground(controllerUtilizzoGate.coloreScritteSuBiancoTemaScuro);
 		txtNumeroPorta.setColumns(10);
-		txtNumeroPorta.setBounds(133, 493, 45, 20);
+		txtNumeroPorta.setBounds(133, 492, 45, 22);
 		add(txtNumeroPorta);
 
 		lblCodiceGate = new JLabel("Codice Gate");
@@ -381,7 +381,7 @@ public class UtilizzoGate extends JPanel {
 		txtCodiceGate.setFont(controllerUtilizzoGate.fontScritteGestioni);
 		txtCodiceGate.setForeground(controllerUtilizzoGate.coloreScritteSuBiancoTemaScuro);
 		txtCodiceGate.setColumns(10);
-		txtCodiceGate.setBounds(133, 461, 75, 20);
+		txtCodiceGate.setBounds(133, 460, 75, 22);
 		add(txtCodiceGate);
 
 		lblSvuota = new JLabel("");
@@ -555,7 +555,7 @@ public class UtilizzoGate extends JPanel {
 		dataUtilizzo.setDateFormatString("dd/MM/yyyy");
 		dataUtilizzo.setForeground(controllerUtilizzoGate.coloreScritteSuBiancoTemaScuro);
 		dataUtilizzo.setFont(controllerUtilizzoGate.fontScritteGestioni);
-		dataUtilizzo.setBounds(578, 461, 121, 20);
+		dataUtilizzo.setBounds(578, 460, 121, 22);
 		add(dataUtilizzo);
 
 		lblSelezionaData = new JLabel("Seleziona una data per stimare l'utilizzo del gate");

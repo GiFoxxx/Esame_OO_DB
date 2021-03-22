@@ -24,7 +24,6 @@ public class MenuInfoAccount extends JPanel {
 	JPanel panelPrestoInArrivo;
 	JPanel panelLogout;
 
-	
 	// GETTER E SETTER
 	public JLabel getLblGestioneUtenti() {
 		return lblGestioneUtenti;
@@ -110,22 +109,30 @@ public class MenuInfoAccount extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente, controllerMenuInfoAccount.entroPannelloTemaChiaro, controllerMenuInfoAccount.entroPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente,
+						controllerMenuInfoAccount.entroPannelloTemaChiaro,
+						controllerMenuInfoAccount.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente,
+						controllerMenuInfoAccount.escoPannelloTemaChiaro,
+						controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente, controllerMenuInfoAccount.clickPannelloTemaChiaro, controllerMenuInfoAccount.clickPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente,
+						controllerMenuInfoAccount.clickPannelloTemaChiaro,
+						controllerMenuInfoAccount.clickPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelGestioneUtente,
+						controllerMenuInfoAccount.escoPannelloTemaChiaro,
+						controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 		});
 		panelGestioneUtente.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
@@ -151,27 +158,35 @@ public class MenuInfoAccount extends JPanel {
 		panelPrestoInArrivo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo, controllerMenuInfoAccount.entroPannelloTemaChiaro, controllerMenuInfoAccount.entroPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo,
+						controllerMenuInfoAccount.entroPannelloTemaChiaro,
+						controllerMenuInfoAccount.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo,
+						controllerMenuInfoAccount.escoPannelloTemaChiaro,
+						controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo, controllerMenuInfoAccount.clickPannelloTemaChiaro, controllerMenuInfoAccount.clickPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo,
+						controllerMenuInfoAccount.clickPannelloTemaChiaro,
+						controllerMenuInfoAccount.clickPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelPrestoInArrivo,
+						controllerMenuInfoAccount.escoPannelloTemaChiaro,
+						controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 		});
 		panelPrestoInArrivo.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
@@ -195,22 +210,30 @@ public class MenuInfoAccount extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelLogout, controllerMenuInfoAccount.entroPannelloTemaChiaro, controllerMenuInfoAccount.entroPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelLogout,
+						controllerMenuInfoAccount.entroPannelloTemaChiaro,
+						controllerMenuInfoAccount.entroPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelLogout, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelLogout,
+						controllerMenuInfoAccount.escoPannelloTemaChiaro,
+						controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelLogout, controllerMenuInfoAccount.clickPannelloTemaChiaro, controllerMenuInfoAccount.clickPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelLogout,
+						controllerMenuInfoAccount.clickPannelloTemaChiaro,
+						controllerMenuInfoAccount.clickPannelloTemaScuro);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerMenuInfoAccount.cambioPannelloTema(panelLogout, controllerMenuInfoAccount.escoPannelloTemaChiaro, controllerMenuInfoAccount.escoPannelloTemaScuro);
+				controllerMenuInfoAccount.cambioPannelloTema(panelLogout,
+						controllerMenuInfoAccount.escoPannelloTemaChiaro,
+						controllerMenuInfoAccount.escoPannelloTemaScuro);
 			}
 		});
 		panelLogout.setBackground(controllerMenuInfoAccount.escoPannelloTemaScuro);
@@ -224,12 +247,12 @@ public class MenuInfoAccount extends JPanel {
 		lblLogout.setFont(controllerMenuInfoAccount.fontLabel);
 		lblLogout.setBounds(10, 0, 107, 46);
 		panelLogout.add(lblLogout);
-		
+
 		lblFrecciaInAlto = new JLabel("");
 		lblFrecciaInAlto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 			}
 		});
 		lblFrecciaInAlto.setIcon(new ImageIcon(img.frecciaInSu()));

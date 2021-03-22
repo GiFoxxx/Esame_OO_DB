@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.JPanel;
 
+
 import Controller.Controller;
 import Immagini.Immagini;
 
@@ -143,7 +144,7 @@ public class Accesso extends JPanel {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() != KeyEvent.VK_ENTER) {
+				if (e.getKeyCode() != KeyEvent.VK_ENTER) {
 					lblIconaErrore.setVisible(false);
 				}
 			}
@@ -195,7 +196,8 @@ public class Accesso extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerAccesso.setStopMostraPasswordTT(false);
-				controllerAccesso.mostraTT(lblMostraPasswordTT, controllerAccesso.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
+				controllerAccesso.mostraTT(lblMostraPasswordTT, controllerAccesso.isStopMostraPasswordTT(),
+						img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
 			}
 
 			@Override
@@ -223,7 +225,8 @@ public class Accesso extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerAccesso.setStopCensuraPasswordTT(false);
-				controllerAccesso.mostraTT(lblCensuraPasswordTT, controllerAccesso.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
+				controllerAccesso.mostraTT(lblCensuraPasswordTT, controllerAccesso.isStopCensuraPasswordTT(),
+						img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
 			}
 
 			@Override
@@ -327,6 +330,5 @@ public class Accesso extends JPanel {
 		add(lblCensuraPasswordTT);
 
 	}
-
 
 }

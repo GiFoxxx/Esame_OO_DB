@@ -14,7 +14,7 @@ import java.awt.Cursor;
 
 public class SceltaVolo extends JDialog {
 	Immagini img = new Immagini();
-	
+
 	int xMouse;
 	int yMouse;
 	int xMouseSuSchermo;
@@ -31,7 +31,6 @@ public class SceltaVolo extends JDialog {
 	JLabel lblAnnulla;
 
 	// GETTER E SETTER
-
 	public JLabel getLblLayout() {
 		return lblLayout;
 	}
@@ -88,7 +87,6 @@ public class SceltaVolo extends JDialog {
 		this.lblAnnulla = lblAnnulla;
 	}
 
-	
 	Controller controllerSceltaVolo;
 
 	public SceltaVolo(Controller controller) {
@@ -226,6 +224,7 @@ public class SceltaVolo extends JDialog {
 				public void mousePressed(MouseEvent e) {
 					controllerSceltaVolo.cambioImmagineTema(lblX, img.X3TemaChiaro(), img.X3());
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					controllerSceltaVolo.cambioImmagineTema(lblX, img.X1TemaChiaro(), img.X1());

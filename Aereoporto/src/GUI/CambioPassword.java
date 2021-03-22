@@ -2,7 +2,6 @@ package GUI;
 
 import javax.swing.JPanel;
 
-
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -14,11 +13,9 @@ import Controller.Controller;
 import Immagini.Immagini;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -28,7 +25,7 @@ public class CambioPassword extends JPanel {
 	private JTextField txtVecchiaPassword;
 	private JPasswordField txtNuovaPassword;
 	private JPasswordField txtRipetiNuovaPassword;
-	
+
 	private JLabel lblMostraNuovaPassword;
 	private JLabel lblCensuraNuovaPassword;
 	private JLabel lblMostraRipetiNuovaPassword;
@@ -42,7 +39,7 @@ public class CambioPassword extends JPanel {
 	private JLabel lblMostraRipetiNuovaPasswordTT;
 	private JLabel lblCensuraRipetiNuovaPasswordTT;
 	private JLabel lblIconaErroreVecchiaPassword;
-	
+
 	// GETTER E SETTER
 
 	public JLabel getLblSalva() {
@@ -124,7 +121,7 @@ public class CambioPassword extends JPanel {
 	public void setTxtRipetiNuovaPassword(JPasswordField txtRipetiNuovaPassword) {
 		this.txtRipetiNuovaPassword = txtRipetiNuovaPassword;
 	}
-	
+
 	public JLabel getLblPasswordDimenticata() {
 		return lblPasswordDimenticata;
 	}
@@ -132,7 +129,7 @@ public class CambioPassword extends JPanel {
 	public void setLblPasswordDimenticata(JLabel lblPasswordDimenticata) {
 		this.lblPasswordDimenticata = lblPasswordDimenticata;
 	}
-	
+
 	public JLabel getLblMostraNuovaPasswordTT() {
 		return lblMostraNuovaPasswordTT;
 	}
@@ -174,7 +171,6 @@ public class CambioPassword extends JPanel {
 	}
 
 	Controller controllerCambioPassword;
-	
 
 	public CambioPassword(Controller controller) {
 		controllerCambioPassword = controller;
@@ -191,14 +187,15 @@ public class CambioPassword extends JPanel {
 					controllerCambioPassword.cambioPasswordDaProfilo();
 				}
 			}
+
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() != KeyEvent.VK_ENTER) {
+				if (e.getKeyCode() != KeyEvent.VK_ENTER) {
 					lblIconaErroreVecchiaPassword.setVisible(false);
 				}
 			}
 		});
-		
+
 		lblIconaErroreVecchiaPassword = new JLabel("");
 		lblIconaErroreVecchiaPassword.setVisible(false);
 		lblIconaErroreVecchiaPassword.setHorizontalAlignment(SwingConstants.CENTER);
@@ -218,7 +215,7 @@ public class CambioPassword extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-				controllerCambioPassword.cambioPasswordDaProfilo();
+					controllerCambioPassword.cambioPasswordDaProfilo();
 				}
 			}
 		});
@@ -234,7 +231,7 @@ public class CambioPassword extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent EventoInvio) {
 				if (EventoInvio.getKeyCode() == KeyEvent.VK_ENTER) {
-				controllerCambioPassword.cambioPasswordDaProfilo();
+					controllerCambioPassword.cambioPasswordDaProfilo();
 				}
 			}
 		});
@@ -250,18 +247,23 @@ public class CambioPassword extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblMostraNuovaPassword.setVisible(false);
-				txtNuovaPassword.setEchoChar((char)0);
+				txtNuovaPassword.setEchoChar((char) 0);
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerCambioPassword.setStopMostraPasswordTT(false);
-				controllerCambioPassword.mostraTT(lblMostraNuovaPasswordTT, controllerCambioPassword.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
+				controllerCambioPassword.mostraTT(lblMostraNuovaPasswordTT,
+						controllerCambioPassword.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(),
+						img.mostraPasswordTT());
 
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerCambioPassword.setStopMostraPasswordTT(true);
-				controllerCambioPassword.chiudiTT(lblMostraNuovaPasswordTT, controllerCambioPassword.isStopMostraPasswordTT());
+				controllerCambioPassword.chiudiTT(lblMostraNuovaPasswordTT,
+						controllerCambioPassword.isStopMostraPasswordTT());
 			}
 		});
 		lblMostraNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -277,15 +279,20 @@ public class CambioPassword extends JPanel {
 				lblMostraNuovaPassword.setVisible(true);
 				txtNuovaPassword.setEchoChar('●');
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerCambioPassword.setStopCensuraPasswordTT(false);
-				controllerCambioPassword.mostraTT(lblCensuraNuovaPasswordTT, controllerCambioPassword.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
+				controllerCambioPassword.mostraTT(lblCensuraNuovaPasswordTT,
+						controllerCambioPassword.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(),
+						img.nascondiPasswordTT());
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerCambioPassword.setStopCensuraPasswordTT(true);
-				controllerCambioPassword.chiudiTT(lblCensuraNuovaPasswordTT, controllerCambioPassword.isStopCensuraPasswordTT());
+				controllerCambioPassword.chiudiTT(lblCensuraNuovaPasswordTT,
+						controllerCambioPassword.isStopCensuraPasswordTT());
 			}
 		});
 		lblCensuraNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -299,17 +306,22 @@ public class CambioPassword extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblMostraRipetiNuovaPassword.setVisible(false);
-				txtRipetiNuovaPassword.setEchoChar((char)0);
+				txtRipetiNuovaPassword.setEchoChar((char) 0);
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerCambioPassword.setStopMostraPasswordTT(false);
-				controllerCambioPassword.mostraTT(lblMostraRipetiNuovaPasswordTT, controllerCambioPassword.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(), img.mostraPasswordTT());
+				controllerCambioPassword.mostraTT(lblMostraRipetiNuovaPasswordTT,
+						controllerCambioPassword.isStopMostraPasswordTT(), img.mostraPasswordTTChiaro(),
+						img.mostraPasswordTT());
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerCambioPassword.setStopMostraPasswordTT(true);
-				controllerCambioPassword.chiudiTT(lblMostraRipetiNuovaPasswordTT, controllerCambioPassword.isStopMostraPasswordTT());
+				controllerCambioPassword.chiudiTT(lblMostraRipetiNuovaPasswordTT,
+						controllerCambioPassword.isStopMostraPasswordTT());
 			}
 		});
 		lblMostraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -325,15 +337,20 @@ public class CambioPassword extends JPanel {
 				lblMostraRipetiNuovaPassword.setVisible(true);
 				txtRipetiNuovaPassword.setEchoChar('●');
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				controllerCambioPassword.setStopCensuraPasswordTT(false);
-				controllerCambioPassword.mostraTT(lblCensuraRipetiNuovaPasswordTT, controllerCambioPassword.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(), img.nascondiPasswordTT());
+				controllerCambioPassword.mostraTT(lblCensuraRipetiNuovaPasswordTT,
+						controllerCambioPassword.isStopCensuraPasswordTT(), img.nascondiPasswordTTChiaro(),
+						img.nascondiPasswordTT());
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				controllerCambioPassword.setStopCensuraPasswordTT(true);
-				controllerCambioPassword.chiudiTT(lblCensuraRipetiNuovaPasswordTT, controllerCambioPassword.isStopCensuraPasswordTT());
+				controllerCambioPassword.chiudiTT(lblCensuraRipetiNuovaPasswordTT,
+						controllerCambioPassword.isStopCensuraPasswordTT());
 			}
 		});
 		lblCensuraRipetiNuovaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -341,22 +358,22 @@ public class CambioPassword extends JPanel {
 		lblCensuraRipetiNuovaPassword.setIcon(new ImageIcon(img.mostraPassword()));
 		lblCensuraRipetiNuovaPassword.setBounds(684, 387, 20, 20);
 		add(lblCensuraRipetiNuovaPassword);
-		
+
 		lblMostraNuovaPasswordTT = new JLabel("");
 		lblMostraNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMostraNuovaPasswordTT.setBounds(734, 272, 123, 31);
 		add(lblMostraNuovaPasswordTT);
-		
+
 		lblCensuraNuovaPasswordTT = new JLabel("");
 		lblCensuraNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCensuraNuovaPasswordTT.setBounds(734, 272, 130, 31);
 		add(lblCensuraNuovaPasswordTT);
-		
+
 		lblMostraRipetiNuovaPasswordTT = new JLabel("");
 		lblMostraRipetiNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMostraRipetiNuovaPasswordTT.setBounds(734, 379, 123, 31);
 		add(lblMostraRipetiNuovaPasswordTT);
-		
+
 		lblCensuraRipetiNuovaPasswordTT = new JLabel("");
 		lblCensuraRipetiNuovaPasswordTT.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCensuraRipetiNuovaPasswordTT.setBounds(734, 379, 130, 31);
@@ -367,7 +384,7 @@ public class CambioPassword extends JPanel {
 		lblCambioPassword.setIcon(new ImageIcon(img.cambioPassword()));
 		lblCambioPassword.setBounds(360, 146, 344, 263);
 		add(lblCambioPassword);
-		
+
 		lblPasswordDimenticata = new JLabel("Password dimenticata?");
 		lblPasswordDimenticata.setForeground(Color.LIGHT_GRAY);
 		lblPasswordDimenticata.addMouseListener(new MouseAdapter() {
@@ -378,21 +395,28 @@ public class CambioPassword extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata, controllerCambioPassword.coloreLabelEntrataTemaChiaro, controllerCambioPassword.coloreLabelEntrataTemaScuro);
+				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata,
+						controllerCambioPassword.coloreLabelEntrataTemaChiaro,
+						controllerCambioPassword.coloreLabelEntrataTemaScuro);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata, controllerCambioPassword.coloreLabelTemaChiaro, controllerCambioPassword.coloreLabelTemaScuro);
+				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata,
+						controllerCambioPassword.coloreLabelTemaChiaro, controllerCambioPassword.coloreLabelTemaScuro);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata, controllerCambioPassword.coloreLabelPressedTemaChiaro, controllerCambioPassword.coloreLabelPressedTemaScuro);
+				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata,
+						controllerCambioPassword.coloreLabelPressedTemaChiaro,
+						controllerCambioPassword.coloreLabelPressedTemaScuro);
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata, controllerCambioPassword.coloreLabelTemaChiaro, controllerCambioPassword.coloreLabelTemaScuro);
+				controllerCambioPassword.cambioLabelTema(lblPasswordDimenticata,
+						controllerCambioPassword.coloreLabelTemaChiaro, controllerCambioPassword.coloreLabelTemaScuro);
 			}
 		});
 		lblPasswordDimenticata.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -401,7 +425,7 @@ public class CambioPassword extends JPanel {
 		lblPasswordDimenticata.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPasswordDimenticata.setBounds(563, 418, 141, 14);
 		add(lblPasswordDimenticata);
-		
+
 		lblSalva = new JLabel("");
 		lblSalva.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblSalva.setHorizontalAlignment(SwingConstants.CENTER);
@@ -410,28 +434,36 @@ public class CambioPassword extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controllerCambioPassword.cambioPasswordDaProfilo();
-				
+
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerCambioPassword.cambioImmagineTema(lblSalva, img.salvaModifiche2TemaChiaro(), img.salvaModifiche2());
+				controllerCambioPassword.cambioImmagineTema(lblSalva, img.salvaModifiche2TemaChiaro(),
+						img.salvaModifiche2());
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerCambioPassword.cambioImmagineTema(lblSalva, img.salvaModifiche1TemaChiaro(), img.salvaModifiche1());
+				controllerCambioPassword.cambioImmagineTema(lblSalva, img.salvaModifiche1TemaChiaro(),
+						img.salvaModifiche1());
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerCambioPassword.cambioImmagineTema(lblSalva, img.salvaModifiche3TemaChiaro(), img.salvaModifiche3());
+				controllerCambioPassword.cambioImmagineTema(lblSalva, img.salvaModifiche3TemaChiaro(),
+						img.salvaModifiche3());
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerCambioPassword.cambioImmagineTema(lblSalva, img.salvaModifiche1TemaChiaro(), img.salvaModifiche1());
+				controllerCambioPassword.cambioImmagineTema(lblSalva, img.salvaModifiche1TemaChiaro(),
+						img.salvaModifiche1());
 			}
 		});
 		lblSalva.setBounds(373, 494, 319, 36);
 		add(lblSalva);
-		
+
 		lblAnnulla = new JLabel("");
 		lblAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblAnnulla.setHorizontalAlignment(SwingConstants.CENTER);
@@ -441,21 +473,29 @@ public class CambioPassword extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				controllerCambioPassword.mostraPannelli(controllerCambioPassword.getDashboard().getProfilo());
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				controllerCambioPassword.cambioImmagineTema(lblAnnulla, img.frecciaIndietro2TemaChiaro(), img.frecciaIndietro2());
+				controllerCambioPassword.cambioImmagineTema(lblAnnulla, img.frecciaIndietro2TemaChiaro(),
+						img.frecciaIndietro2());
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
-				controllerCambioPassword.cambioImmagineTema(lblAnnulla, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerCambioPassword.cambioImmagineTema(lblAnnulla, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
-				controllerCambioPassword.cambioImmagineTema(lblAnnulla, img.frecciaIndietro3TemaChiaro(), img.frecciaIndietro3());
+				controllerCambioPassword.cambioImmagineTema(lblAnnulla, img.frecciaIndietro3TemaChiaro(),
+						img.frecciaIndietro3());
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				controllerCambioPassword.cambioImmagineTema(lblAnnulla, img.frecciaIndietro1TemaChiaro(), img.frecciaIndietro1());
+				controllerCambioPassword.cambioImmagineTema(lblAnnulla, img.frecciaIndietro1TemaChiaro(),
+						img.frecciaIndietro1());
 			}
 		});
 		lblAnnulla.setBounds(277, 79, 41, 41);

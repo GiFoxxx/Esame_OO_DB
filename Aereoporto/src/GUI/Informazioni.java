@@ -60,7 +60,7 @@ public class Informazioni extends JDialog {
 		txtInformazioni.setBounds(10, 11, 330, 503);
 		txtInformazioni.setEditable(false);
 		txtInformazioni.setText(
-				"Sviluppatori: \r\nBuonanno Manuel\r\nDe Marco Luigi\r\n\r\nSoftware utilizzati:\r\nAdobe XD\r\nPichon\r\nGitHub\r\npgAdmin\r\n\r\nVersione: v.1.00");
+				"Sviluppatori: \r\nBuonanno Manuel\r\nDe Marco Luigi\r\n\r\nSoftware utilizzati:\r\nAdobe XD\r\nIcons8 Pichon\r\nGitHub\r\npgAdmin\r\nEclipse IDE\r\n\r\nVersione: v.1.00");
 		contentPanel.add(txtInformazioni);
 
 		lblTornaIndietro = new JLabel("");
