@@ -55,11 +55,5 @@ public class Utente {
 			this.email = email;
 			this.password = password;
 		}
-		
-		@Override
-		public String toString() {
-			return "Utente [nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", password=" + password
-					+ "]";
-		}
 
 }

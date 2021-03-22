@@ -37,7 +37,7 @@ import javax.swing.border.LineBorder;
 public class GateCodeImbarco extends JPanel {
 	Immagini img = new Immagini();
 
-	String colonneTabellaAssociazione[] = { "Codice Gate", "Coda D'Imbarco" };
+	String colonneTabellaAssociazione[] = { "Codice Gate", "Numero Porta", "Coda D'Imbarco" };
 	String colonneTabellaCodaDiImbarco[] = { "Codice Coda D'Imbarco", "Nome Coda D'Imbarco",
 			"Tempo di Imbarco Stimato" };
 
@@ -417,6 +417,14 @@ public class GateCodeImbarco extends JPanel {
 		add(scrollPaneTabellaAssociazioni);
 
 		tabellaAssociazioni = new JTable();
+		tabellaAssociazioni.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int t = tabellaAssociazioni.getSelectedRow();
+				comboBoxNumeroPorta.setSelectedItem(modelloTabellaAssociazione.getValueAt(t, 1).toString());
+				comboBoxCodaDiImbarco.setSelectedItem(modelloTabellaAssociazione.getValueAt(t, 2).toString());
+			}
+		});
 		tabellaAssociazioni.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent EventoDelete) {
@@ -920,7 +928,7 @@ public class GateCodeImbarco extends JPanel {
 		modelloTabellaAssociazione.setNumRows(0);
 		for (Gate dato : this.ListaGate) {
 			this.modelloTabellaAssociazione
-					.addRow(new Object[] { dato.getCodiceGate(), dato.getCodeDiImbarco().getNomeCoda() });
+					.addRow(new Object[] { dato.getCodiceGate(), dato.getNumeroPorta(), dato.getCodeDiImbarco().getNomeCoda() });
 		}
 		tabellaAssociazioni.setModel(modelloTabellaAssociazione);
 	}

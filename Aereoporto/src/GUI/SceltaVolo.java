@@ -254,7 +254,6 @@ public class SceltaVolo extends JDialog {
 
 					xMouse = prendiPosizioneMouse.getX();
 					yMouse = prendiPosizioneMouse.getY();
-
 				}
 			});
 			lblSpostaSceltaVolo.setBounds(1, 0, 498, 37);
@@ -268,7 +267,6 @@ public class SceltaVolo extends JDialog {
 				lblScelta.setBounds(2, 55, 498, 37);
 				getContentPane().add(lblScelta);
 			}
-
 		}
 
 		lblLayout = new JLabel("");

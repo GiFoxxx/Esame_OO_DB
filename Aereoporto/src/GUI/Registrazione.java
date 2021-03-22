@@ -498,5 +498,4 @@ public class Registrazione extends JPanel {
 		lblInserimentoCredenziali.setBounds(373, 52, 344, 473);
 		add(lblInserimentoCredenziali);
 	}
-
 }

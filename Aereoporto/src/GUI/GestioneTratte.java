@@ -307,6 +307,8 @@ public class GestioneTratte extends JPanel {
 				txtCodiceTratta.setText(modello.getValueAt(t, 0).toString());
 				txtCittaPartenza.setText(modello.getValueAt(t, 1).toString());
 				txtCittaArrivo.setText(modello.getValueAt(t, 2).toString());
+				txtCodiceCompagniaAerea.setText(modello.getValueAt(t, 3).toString());
+				comboBoxNomeCompagniaAerea.setSelectedItem(modello.getValueAt(t, 3).toString());
 			}
 		});
 		modello.setColumnIdentifiers(colonne);

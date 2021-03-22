@@ -1,12 +1,7 @@
 package Classi;
 
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Date;
-
 public class Tratta {
 
-	
 	CompagniaAerea compagniaAerea;
 
 	// ATTRIBUTI

@@ -2092,9 +2092,8 @@ public class Controller {
 	public void eliminaCompagniaAerea() {
 		if (campoCodiceVuoto(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree())
 				.getTxtCodiceCompagniaAerea().getText())) {
-			compAerea = new CompagniaAerea(
-					((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree()).getTxtCodiceCompagniaAerea()
-							.getText());
+			compAerea = new CompagniaAerea(((GestioneCompagnieAeree) getDashboard().getGestioneCompagnieAeree())
+					.getTxtCodiceCompagniaAerea().getText());
 			try {
 				implementazioneCompagniaAereaDAO().cancellaCompagniaAerea(compAerea);
 				svuotaCampiGestioneCompagniaAerea();
@@ -2181,7 +2180,7 @@ public class Controller {
 			} catch (SQLException e) {
 				mostraNotifica(erroreGestioneVoliPartenzeOrarioSbagliato, img.messaggioErrore(), erroreMostrato);
 			}
-		} else{
+		} else {
 			mostraNotifica(erroreGestioniEliminazione, img.messaggioErrore(), erroreMostrato);
 		}
 	}

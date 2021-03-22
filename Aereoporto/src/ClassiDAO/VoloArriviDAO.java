@@ -3,7 +3,6 @@ package ClassiDAO;
 import java.sql.SQLException;
 import java.util.List;
 
-import Classi.CompagniaAerea;
 import Classi.VoloArrivi;
 
 public interface VoloArriviDAO {
@@ -15,7 +14,4 @@ public interface VoloArriviDAO {
 	public int cancellaVoloArrivi(VoloArrivi vlArr) throws SQLException;
 	
 	public int modificaVoloArrivi(VoloArrivi vlArr) throws SQLException;
-	
-	
-	
 }

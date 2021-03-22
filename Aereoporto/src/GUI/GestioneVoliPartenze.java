@@ -454,7 +454,11 @@ public class GestioneVoliPartenze extends JPanel {
 				txtCodiceVoloPartenze.setText(modello.getValueAt(t, 0).toString());
 				txtCodiceGate.setText(modello.getValueAt(t, 2).toString());
 				txtCodiceTratta.setText(modello.getValueAt(t, 3).toString());
+				comboBoxNumeroPorta.setSelectedItem(modello.getValueAt(t, 2).toString());
+				comboBoxCittaArrivo.setSelectedItem(modello.getValueAt(t, 3).toString());
 				txtNumeroPrenotazioni.setText(modello.getValueAt(t, 7).toString());
+				txtStatus.setText(modello.getValueAt(t, 9).toString());
+				comboBoxStatus.setSelectedItem(modello.getValueAt(t, 9).toString());
 			}
 		});
 		modello.setColumnIdentifiers(colonne);

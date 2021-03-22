@@ -8,8 +8,6 @@ public class CompagniaAerea {
 	private String codiceCompagniaAerea;
 	private String nome;
 	
-
-	
 	//GETTER E SETTER
 	public String getNome() {
 		return nome;
@@ -42,20 +40,5 @@ public class CompagniaAerea {
 	public CompagniaAerea() {
 		super();
 	}
-
-	@Override
-	public String toString() {
-		return "CompagniaAerea [codiceCompagniaAerea=" + codiceCompagniaAerea + ", nome=" + nome + "]";
-	}
-
-	
-
-	
-
-
-
-	
-	
-	
 
 }

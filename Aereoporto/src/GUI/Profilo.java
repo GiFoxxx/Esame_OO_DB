@@ -183,9 +183,5 @@ public class Profilo extends JPanel {
 		lblCambiaPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCambiaPassword.setBounds(584, 430, 129, 14);
 		add(lblCambiaPassword);
-
 	}
-
-	
-	
 }

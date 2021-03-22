@@ -1,12 +1,8 @@
 package Classi;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class VoloArrivi {
-
 
 	// ATTRIBUTI
 	private String codiceVoloArrivi;
@@ -54,9 +50,4 @@ public class VoloArrivi {
 		super();
 		this.codiceVoloArrivi = codiceVoloArrivi;
 	}
-
-	
-
-	
-
 }
