@@ -219,7 +219,7 @@ public class Accesso extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				controllerAccesso.chiudiTT(lblCensuraPasswordTT, controllerAccesso.isStopCensuraPasswordTT());
 				lblMostraPassword.setVisible(true);
-				txtPassword.setEchoChar('‚óè');
+				txtPassword.setEchoChar('ï');
 			}
 
 			@Override

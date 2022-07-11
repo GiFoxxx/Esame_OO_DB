@@ -354,7 +354,7 @@ public class Registrazione extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblMostraPassword.setVisible(true);
-				txtPassword.setEchoChar('‚óè');
+				txtPassword.setEchoChar('ï');
 			}
 
 			@Override
@@ -413,7 +413,7 @@ public class Registrazione extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblMostraRipetiPassword.setVisible(true);
-				txtRipetiPassword.setEchoChar('‚óè');
+				txtRipetiPassword.setEchoChar('ï');
 			}
 
 			@Override

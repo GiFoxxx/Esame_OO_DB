@@ -365,7 +365,7 @@ public class PasswordDimenticata extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					lblMostraNuovaPassword.setVisible(true);
-					txtNuovaPassword.setEchoChar('‚óè');
+					txtNuovaPassword.setEchoChar('ï');
 				}
 
 				@Override
@@ -423,7 +423,7 @@ public class PasswordDimenticata extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					lblMostraRipetiNuovaPassword.setVisible(true);
-					txtRipetiNuovaPassword.setEchoChar('‚óè');
+					txtRipetiNuovaPassword.setEchoChar('ï');
 				}
 
 				@Override

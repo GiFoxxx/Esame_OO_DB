@@ -579,7 +579,7 @@ public class Controller {
 
 				cambioPannelloTema(getDashboard().getPanelAccedi(), escoPannelloTemaChiaro, escoPannelloTemaScuro);
 
-				if (email.equals("luigidemarco@gmail.com") || email.equals("manuelbuonanno00@gmail.com")) {
+				if (email.equals("luigdemarco@gmail.com") || email.equals("manuelbuonanno00@gmail.com")) {
 					entraGestioneUtenti = true;
 				} else {
 					((MenuInfoAccount) getDashboard().getMenuInfoAccount()).getLblErrore()

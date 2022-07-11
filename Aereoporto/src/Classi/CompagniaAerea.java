@@ -1,7 +1,5 @@
 package Classi;
 
-import java.util.ArrayList;
-
 public class CompagniaAerea {
 	
 	//ATTRIBUTI

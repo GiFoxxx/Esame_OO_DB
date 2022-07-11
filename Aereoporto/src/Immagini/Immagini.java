@@ -5,12 +5,9 @@ import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 
-import Controller.Controller;
 import GUI.*;
 
 public class Immagini {
-
-	private Image immagine;
 
 	// METODI PER RIDIMENSIONAMENTO
 	public int dimensioneSchermoX() {

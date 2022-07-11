@@ -8,8 +8,8 @@ public class ConnessioneDatabase {
 	private static ConnessioneDatabase instance;
 	private Connection connection = null;
 	private String nome = "postgres";
-	private String password = "admin";
-	private String url = "jdbc:postgresql://localhost:5432/Progetto_Aeroporto";
+	private String password = "postgres";
+	private String url = "jdbc:postgresql://localhost:5432/Aeroporto";
 	private String driver = "org.postgresql.Driver";
 
 	// COSTRUTTORE
